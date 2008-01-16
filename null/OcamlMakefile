@@ -1,0 +1,418 @@
+###########################################################################
+#                           OcamlMakefile
+#                 Copyright (C) 1999  Markus Mottl
+#           Free to copy and modify! USE AT YOUR OWN RISK!
+#
+#                         For updates see:
+#      http://miss.wu-wien.ac.at/~mottl/ocaml_sources/intro.html
+#
+# $Id: OcamlMakefile,v 1.1.1.1 2005/09/28 19:46:04 stratula Exp $
+#
+###########################################################################
+
+
+# Set these variables to the names of the sources to be processed and
+# the result variable. Order matters during linkage!
+
+export SOURCES
+export RESULT
+
+export BCSUFFIX
+export NCSUFFIX
+export TOPSUFFIX
+
+# Eventually set include- and library-paths, libraries to link,
+# additional compilation-, link- and ocamlyacc-flags
+# Path- and library information needs not be written with "-I" and such...
+# Define THREADS if you need it, otherwise leave it unset!
+
+export THREADS
+
+export INCDIRS
+export LIBDIRS
+export OCAML_DEFAULT_DIRS
+
+export LIBS
+export PLIBS
+export CLIBS
+
+export OCAMLFLAGS
+export OCAMLNCFLAGS
+export OCAMLBCFLAGS
+
+export OCAMLLDFLAGS
+export OCAMLNLDFLAGS
+export OCAMLBLDFLAGS
+
+OCAMLLIBPATH	= /usr/local/lib/ocaml
+#OCAMLLIBPATH	= /cygdrive/c/ocamlmgw/lib
+INCDIRS		= $(OCAMLLIBPATH)/caml $(OCAMLLIBPATH)
+
+ifndef OCAMLCPFLAGS
+  OCAMLCPFLAGS = a
+endif
+
+export OCAMLCPFLAGS
+
+export YFLAGS
+export IDLFLAGS
+
+export CC
+export CFLAGS
+export LDFLAGS
+
+# Add a list of optional trash files that should be deleted by "make clean"
+export TRASH
+
+####################  variables depending on your Ocaml-installation
+
+BCRESULT = $(addsuffix $(BCSUFFIX), $(RESULT))
+NCRESULT = $(addsuffix $(NCSUFFIX), $(RESULT))
+TOPRESULT = $(addsuffix $(TOPSUFFIX), $(RESULT))
+
+ifndef OCAMLLIBPATH
+  OCAMLLIBPATH = 
+endif
+
+export OCAMLLIBPATH
+
+ifndef OCAMLC
+  OCAMLC = ocamlc.opt
+endif
+
+export OCAMLC
+
+ifndef OCAMLOPT
+  OCAMLOPT = ocamlopt.opt
+endif
+
+export OCAMLOPT
+
+ifndef OCAMLCP
+  OCAMLCP = ocamlcp
+endif
+
+export OCAMLCP
+
+ifndef OCAMLDEP
+  OCAMLDEP = ocamldep
+endif
+
+export OCAMLDEP
+
+ifndef OCAMLLEX
+  OCAMLLEX = ocamllex
+endif
+
+export OCAMLLEX
+
+ifndef OCAMLYACC
+  OCAMLYACC = ocamlyacc
+endif
+
+export OCAMLMKTOP
+
+ifndef OCAMLMKTOP
+  OCAMLMKTOP = ocamlmktop
+endif
+
+ifndef OCAMLIDL
+  CAMLIDL = camlidl
+endif
+
+export OCAMLIDL
+
+ifndef NOIDLHEADER
+  MAYBE_IDL_HEADER = -header
+endif
+
+export NOIDLHEADER
+
+ifndef OCAMLMAKEFILE
+  OCAMLMAKEFILE = OcamlMakefile
+endif
+
+export OCAMLMAKEFILE
+
+###########################################################################
+
+####################  change following sections only if
+####################    you know what you are doing!
+
+SHELL    = /bin/sh
+
+FILTERED     := $(filter %.mli %.ml %.mll %.mly %.idl %.c, $(SOURCES))
+
+FILTERED_ML  := $(filter %.ml, $(FILTERED))
+DEP_ML       := $(FILTERED_ML:.ml=.d)
+
+FILTERED_MLI := $(filter %.mli, $(FILTERED))
+DEP_MLI      := $(FILTERED_MLI:.mli=.mli_d)
+
+FILTERED_MLL := $(filter %.mll, $(FILTERED))
+DEP_MLL      := $(FILTERED_MLL:.mll=.d)
+AUTO_MLL     := $(FILTERED_MLL:.mll=.ml)
+
+FILTERED_MLY := $(filter %.mly, $(FILTERED))
+DEP_MLY      := $(FILTERED_MLY:.mly=.d)   $(FILTERED_MLY:.mly=.mli_d)
+AUTO_MLY     := $(FILTERED_MLY:.mly=.mli) $(FILTERED_MLY:.mly=.ml)
+
+FILTERED_IDL := $(filter %.idl, $(FILTERED))
+DEP_IDL      := $(FILTERED_IDL:.idl=.d)   $(FILTERED_IDL:.idl=.mli_d)
+C_IDL        := $(FILTERED_IDL:%.idl=%_idl.c) $(FILTERED_IDL:.idl=.h)
+OBJ_C_IDL    := $(FILTERED_IDL:%.idl=%_idl.o)
+AUTO_IDL     := $(FILTERED_IDL:.idl=.mli) $(FILTERED_IDL:.idl=.ml) $(C_IDL)
+
+FILTERED_C   := $(filter %.c, $(FILTERED))
+OBJ_C        := $(FILTERED_C:.c=.o)
+
+AUTO_TARGETS := $(AUTO_MLL) $(AUTO_MLY) $(AUTO_IDL)
+
+MAKE_DEPS    := $(DEP_ML) $(DEP_MLI) $(DEP_MLL) $(DEP_MLY) $(DEP_IDL)
+
+ALLML        := $(filter %.mli %.ml %.mll %.mly %.idl, $(FILTERED))
+
+IMPLO_INTF_1 := $(ALLML:%.mli=%.cmi)
+IMPLO_INTF_2 := $(IMPLO_INTF_1:%.ml=%._pre)
+IMPLO_INTF_3 := $(IMPLO_INTF_2:%.mll=%._pre)
+IMPLO_INTF_4 := $(IMPLO_INTF_3:%.mly=%._pre)
+IMPLO_INTF_5 := $(IMPLO_INTF_4:%.idl=%._pre)
+IMPLO_INTF   := \
+  $(shell echo $(IMPLO_INTF_5) | sed -e "s/\([^ ]*\)\._pre/\1.cmi \1.cmo/g")
+
+IMPLX_INTF   := $(IMPLO_INTF:.cmo=.cmx)
+
+INTF         := $(filter %.cmi, $(IMPLO_INTF))
+IMPL_CMO     := $(filter %.cmo, $(IMPLO_INTF))
+IMPL_CMX     := $(IMPL_CMO:.cmo=.cmx)
+IMPL         := $(IMPL_CMO) $(IMPL_CMX)
+
+OBJ_LINK     := $(OBJ_C_IDL) $(OBJ_C)
+OBJ_FILES    := $(IMPL_CMO:.cmo=.o) $(OBJ_LINK)
+
+TARGETS      := $(sort $(BCRESULT) $(NCRESULT) $(INTF) $(IMPL) $(OBJ_FILES) \
+			$(AUTO_TARGETS) $(BCRESULT).cma $(NCRESULT).cmxa \
+			$(NCRESULT).a $(MAKE_DEPS))
+
+# If there are IDL-files
+ifneq "$(strip $(FILTERED_IDL))" ""
+  MAYBE_IDL = -cclib -lcamlidl
+endif
+
+INCFLAGS = $(patsubst %,-I %, $(OCAML_DEFAULT_DIRS)) \
+		$(patsubst %,-I %, $(INCDIRS))
+CINCFLAGS = $(patsubst %,-I%, $(OCAML_DEFAULT_DIRS)) \
+		$(patsubst %,-I%, $(INCDIRS))
+
+ifndef PROFILING
+  INTF_OCAMLC := $(OCAMLC)
+else
+  INTF_OCAMLC := $(OCAMLCP) -p $(OCAMLCPFLAGS)
+endif
+
+# If we have to make byte-code
+ifndef REAL_OCAMLC
+  SPECIAL_OCAMLFLAGS := $(OCAMLBCFLAGS)
+
+  REAL_OCAMLC := $(INTF_OCAMLC)
+
+  REAL_IMPL := $(IMPL_CMO)
+  REAL_IMPL_INTF := $(IMPLO_INTF)
+  IMPL_SUF := .cmo
+
+  ifndef THREADS
+    ifdef LIBS
+      ALL_LDFLAGS_2 = -custom 
+    endif
+    ifneq "$(strip $(OBJ_LINK))" ""
+      ALL_LDFLAGS_2 = -custom 
+    endif
+    ifdef CLIBS
+      ALL_LDFLAGS_2 = -custom 
+    endif
+  endif
+
+  ALL_LDFLAGS_1 = $(ALL_LDFLAGS_2) $(INCFLAGS) $(OCAMLLDFLAGS) $(OCAMLBLDFLAGS) \
+	  $(patsubst %,-ccopt %, $(LDFLAGS)) \
+	  $(patsubst %,-ccopt -L%, $(OCAML_DEFAULT_DIRS)) \
+	  $(patsubst %,-ccopt -L%, $(LIBDIRS)) \
+	  $(patsubst %,-cclib -l%, $(CLIBS)) \
+	  $(patsubst %,-cclib -l%, $(LIBS)) \
+	  $(MAYBE_IDL) \
+	  $(patsubst %,%.cma, $(LIBS)) \
+	  $(patsubst %,%.cma, $(PLIBS))
+
+  ifdef THREADS
+    ALL_LDFLAGS = $(ALL_LDFLAGS_1) -thread -custom -cclib -lthreads \
+		  -cclib -lunix -cclib -lpthread unix.cma threads.cma
+    THREAD_FLAG := -thread
+  else
+    ALL_LDFLAGS = $(ALL_LDFLAGS_1)
+  endif
+else
+  ifndef PROFILING
+    SPECIAL_OCAMLFLAGS := $(OCAMLNCFLAGS)
+    PLDFLAGS :=
+  else
+    SPECIAL_OCAMLFLAGS := -p $(OCAMLNCFLAGS)
+    PLDFLAGS := -p
+  endif
+
+  REAL_IMPL := $(IMPL_CMX)
+  REAL_IMPL_INTF := $(IMPLX_INTF)
+  IMPL_SUF := .cmx
+
+  ALL_LDFLAGS_1 = $(PLDFLAGS) $(INCFLAGS) $(OCAMLLDFLAGS) $(OCAMLNLDFLAGS) \
+	  $(patsubst %,-ccopt %, $(LDFLAGS)) \
+	  $(patsubst %,-ccopt -L%, $(OCAML_DEFAULT_DIRS)) \
+	  $(patsubst %,-ccopt -L%, $(LIBDIRS)) \
+	  $(patsubst %,-cclib -l%, $(CLIBS)) \
+	  $(patsubst %,-cclib -l%, $(LIBS)) \
+	  $(MAYBE_IDL) \
+	  $(patsubst %,%.cmxa, $(LIBS)) \
+	  $(patsubst %,%.cmxa, $(PLIBS))
+
+  ifdef THREADS
+    ALL_LDFLAGS = -thread -cclib -lthreadsnat -cclib -lunix \
+		  -cclib -lpthread $(ALL_LDFLAGS_1) \
+		  unix.cmxa threads.cmxa
+    THREAD_FLAG := -thread
+  else
+    ALL_LDFLAGS = $(ALL_LDFLAGS_1)
+  endif
+endif
+
+ALL_OCAMLCFLAGS = $(THREAD_FLAG) $(OCAMLFLAGS) $(INCFLAGS) $(SPECIAL_OCAMLFLAGS)
+
+ifdef make_deps
+  -include $(MAKE_DEPS)
+  AUTO_TARGETS :=
+endif
+
+###########################################################################
+# USER RULES
+
+# generates byte-code (default)
+byte-code:		$(AUTO_TARGETS)
+			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(BCRESULT) \
+				REAL_RESULT="$(BCRESULT)" REAL_OCAMLC_LINK="$(OCAMLC)" make_deps=yes
+bc:	byte-code
+
+# generates native-code
+
+native-code:		$(AUTO_TARGETS)
+			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(NCRESULT) \
+				REAL_RESULT="$(NCRESULT)" \
+				REAL_OCAMLC="$(OCAMLOPT)" \
+				REAL_OCAMLC_LINK="$(OCAMLOPT)" \
+				make_deps=yes
+nc:	native-code
+
+# generates byte-code libraries
+byte-code-library:	$(AUTO_TARGETS)
+			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(BCRESULT).cma \
+				REAL_RESULT="$(BCRESULT)" \
+				make_deps=yes
+bcl:	byte-code-library
+
+# generates native-code libraries
+native-code-library:	$(AUTO_TARGETS)
+			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(NCRESULT).cmxa \
+				REAL_RESULT="$(NCRESULT)" \
+				REAL_OCAMLC="$(OCAMLOPT)" \
+				make_deps=yes
+ncl:	native-code-library
+
+# generates byte-code for profiling
+profiling-byte-code:		$(AUTO_TARGETS)
+			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(BCRESULT) \
+				REAL_RESULT="$(BCRESULT)" PROFILING="y" \
+				make_deps=yes
+pbc:	profiling-byte-code
+
+# generates native-code
+
+profiling-native-code:		$(AUTO_TARGETS)
+			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(NCRESULT) \
+				REAL_RESULT="$(NCRESULT)" \
+				REAL_OCAMLC="$(OCAMLOPT)" \
+				PROFILING="y" \
+				make_deps=yes
+pnc:	profiling-native-code
+
+# generates byte-code libraries
+profiling-byte-code-library:	$(AUTO_TARGETS)
+			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(BCRESULT).cma \
+				REAL_RESULT="$(BCRESULT)" PROFILING="y" \
+				make_deps=yes
+pbcl:	profiling-byte-code-library
+
+# generates native-code libraries
+profiling-native-code-library:	$(AUTO_TARGETS)
+			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(NCRESULT).cmxa \
+				REAL_RESULT="$(NCRESULT)" PROFILING="y" \
+				REAL_OCAMLC="$(OCAMLOPT)" \
+				make_deps=yes
+pncl:	profiling-native-code-library
+
+###########################################################################
+# LOW LEVEL RULES
+
+$(REAL_RESULT):		$(REAL_IMPL_INTF) $(OBJ_LINK)
+			$(REAL_OCAMLC_LINK) $(OBJ_LINK) $(ALL_LDFLAGS) -o $@ \
+				$(REAL_IMPL)
+
+.SUFFIXES:		.mli .ml .cmi .cmo .cmx .cma .cmxa .o \
+                        .mly .mli_d .d .a .idl .c .h
+
+%.cma:			$(REAL_IMPL_INTF)
+			$(REAL_OCAMLC) -a $(INCFLAGS) $(OCAMLLDFLAGS) -o $@ \
+				$(OCAMLBLDFLAGS) $(REAL_IMPL)
+
+%.cmxa %.a:		$(REAL_IMPL_INTF) $(OBJ_LINK)
+			$(OCAMLOPT) -a $(PLDFLAGS) $(INCFLAGS) $(OBJ_LINK) \
+			$(OCAMLLDFLAGS) $(OCAMLNLDFLAGS) -o $@ $(REAL_IMPL)
+
+.mli.cmi:
+			$(INTF_OCAMLC) -c $(THREAD_FLAG) $(OCAMLFLAGS) \
+				$(INCFLAGS) $<
+
+.ml.cmi .ml.o .ml.cmx .ml.cmo:
+			$(REAL_OCAMLC) -c $(ALL_OCAMLCFLAGS) $<
+
+.PRECIOUS:		%.ml
+%.ml:			%.mll
+			$(OCAMLLEX) $<
+
+.PRECIOUS:		%.ml %.mli
+%.ml %.mli:		%.mly
+			$(OCAMLYACC) $(YFLAGS) $<
+
+.PRECIOUS:		%.ml %.mli %_idl.c %.h
+%.ml %.mli %_idl.c %.h:		%.idl
+			$(CAMLIDL) $(MAYBE_IDL_HEADER) $(IDLFLAGS) \
+				$(CAMLIDLFLAGS) $<
+			mv $*.c $*_idl.c
+
+.c.o:
+			$(CC) -c $(CFLAGS) -I$(OCAMLLIBPATH) $(CINCFLAGS) $<
+
+.mli.mli_d:
+			@echo making $@ from $<
+			@$(OCAMLDEP) $(INCFLAGS) $< | \
+			  sed -e "s/\.cmo/\.cmi/g"  > $@
+
+.ml.d:
+			@echo making $@ from $<
+			@$(OCAMLDEP) $(INCFLAGS) $< > $@
+
+###########################################################################
+# MAINTAINANCE RULES
+
+.PHONY:	clean
+clean:
+	rm -f $(TARGETS) $(TRASH)
+
+.PHONY: nobackup
+nobackup:
+	rm -f *.bak *~ *.dup
