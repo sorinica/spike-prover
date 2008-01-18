@@ -7,7 +7,7 @@
 
 # read the infos from /home/sorin/ocaml/ocaml_make/README to know hwo to work with OcamlMakefile
 
-OCAMLBCFLAGS 	= -custom -w A
+OCAMLBCFLAGS 	= -custom -w A -dtypes
 CC		= gcc
 INCFLAGS	= -i
 LIBS		= unix str
