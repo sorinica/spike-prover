@@ -18,8 +18,8 @@ exception Inconsistent
   (* the arguments of any ac function are sorted in decreasing order  *)
 let preprocess_ac t = 
   let rec fn t = match t#content with
-      Var_exist _ as v -> t
-    | Var_univ _ as v -> t
+      Var_exist _  -> t
+    | Var_univ _  -> t
     | Term (f, l, s) -> 
 	let l' = List.map fn l in
 	if symbol_is_ac f then 
@@ -30,7 +30,7 @@ let preprocess_ac t =
   in
   fn t
 
-let rec well_founded (i:int) list = 
+let rec well_founded (_:int) list = 
   let peano_sort = if !nat_specif_defined then id_sort_nat else
     id_sort_int in
   match list with
@@ -45,7 +45,7 @@ let rec well_founded (i:int) list =
 
   (* for s(..s(x)) returns the number of s and the term x  *)
 let rec count_s term = match term#content with  
-    Term (symb, l, _) as t -> 
+    Term (symb, l, _) -> 
       if symb = id_symbol_s then begin
 	assert (List.length l = 1);
       	let count_l, term_l = count_s (List.hd l) in 
@@ -58,7 +58,7 @@ let rec count_s term = match term#content with
 
   (* for p(..p(x)) returns the number of p and the term x  *)
 let rec count_p term = match term#content with  
-    Term (symb, l, _) as t -> 
+    Term (symb, l, _) -> 
       if !int_specif_defined && symb = id_symbol_p then begin
 	assert (List.length l = 1);
       	let count_l, term_l = count_p (List.hd l) in 
@@ -122,7 +122,7 @@ let rec normalize_monom_list l =
   in
   let const, treated_monoms = treat_monoms l in
   let no_null = elim_null_monoms treated_monoms in 
-  let sorted_monoms = Sort.list (fun (c1, t1) (c2, t2) -> heavier 
+  let sorted_monoms = Sort.list (fun (_, t1) (_, t2) -> heavier 
       t1 t2) no_null in 
   const, sorted_monoms
 and process_monom (c,m) =  

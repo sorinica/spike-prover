@@ -17,7 +17,7 @@ open Polynoms
 open Diverse
 
   (* defined but not used   *)
-let get_strat_by_name = ref (fun (s : string) -> true)
+let get_strat_by_name = ref (fun (_ : string) -> true)
 
 (* Ad hoc function for computation of capital d's (i.e. the global depth) of a rewrite system.
    We have sorted lists of (sort * depth). All sorts featured in the first list are also in the second.
@@ -54,7 +54,7 @@ exception MyExit of string
   (* system of clauses  *)
 class ['a] system (ini_l: 'a list) =
 
-  object (self)
+  object (_)
 
     val mutable content = ini_l
 
@@ -166,8 +166,7 @@ class ['a] system (ini_l: 'a list) =
   (* used for lemmas system *)
 class ['a] l_system (ini_l : 'a list) =
 
-  object (self)
-
+  object (_)
     inherit ['a] system ini_l
 
     method append els =
@@ -302,7 +301,7 @@ variant for " ^  c#string)
 	
     (* Compute induction positions of a rewrite system r. Puts them in the dictionary *)
     method compute_induction_positions_v1 =
-      let max_depth ((d, s) as v) ((d', s') as v') = if d > d' then v else v' in
+      let max_depth ((d, _) as v) ((d', _) as v') = if d > d' then v else v' in
       let fn (p, ds) = dico_ind_positions_v1#apply_f max_depth p ds in
       let fn2 c =
         let lhs = c#lefthand_side in
@@ -571,8 +570,8 @@ let literalize (p: polynom) =
     
 let peano_literal_tautology = new peano_literal (Peano_equal (term_true, term_true))
 
-let oracle_a = ref (fun (c: int)
-  (p: Polynoms.polynom) (pl: Polynoms.polynom list) c cr g l ->
+let oracle_a = ref (fun (_: int)
+  (_: Polynoms.polynom) (_: Polynoms.polynom list) _ _ _ _ ->
     ([]:peano_literal list))
 
   (* computes the normal form of trm by using a list of rewrite rules r *)
@@ -904,7 +903,7 @@ class peano_context  (negs: literal list) (poss: literal list) cr g l =
   (* to be modified. We still don't treat the sets of polynoms *)
     method a_2_l =
       let l, l' = List.partition (fun x -> x#is_pi) cx_a
-      and p, ie = cx_l in
+      and p, _ = cx_l in
       let () = cx_a <- l' in (* update cx_a *)
       let () = if !maximal_output then print_indent_string ( " the status is " ^ self#compute_string)       
       in
@@ -1115,7 +1114,7 @@ class ['peano] clause c_v hist =
         Undefined ->
           let s = self#compute_peano_context in
           peano_context <- Defined s
-      | Defined s -> ()
+      | Defined _ -> ()
 
     method cachedstring = string_of_bool (match string with Undefined -> false | Defined _ -> true) (* TODO *)
 
@@ -1268,7 +1267,7 @@ class ['peano] clause c_v hist =
       with 
 	  (Failure "last_el") -> 0
       in
-      let lc_history = List.map (fun (s, c) -> let lv = c#variables in let vs = List.flatten (List.map (fun (i, t) -> t#variables)
+      let lc_history = List.map (fun (s, c) -> let lv = c#variables in let vs = List.flatten (List.map (fun (_, t) -> t#variables)
       s) in lv @ vs) history in
       List.fold_right (fun lv_c max_l -> let n = fn lv_c in max (abs n) (abs max_l)) (variables ::  lc_history) 0
 
@@ -1296,7 +1295,7 @@ class ['peano] clause c_v hist =
     (* Equality modulo bijective renaming and AC properties *)
     method equal (c: 'a) =
       try
-        let ren = self#bijective_renaming [] c in
+        let _ = self#bijective_renaming [] c in
         true
       with (Failure "bijective_renaming") | (Failure "ac_eq") ->
         false
@@ -1305,7 +1304,7 @@ class ['peano] clause c_v hist =
 
     method positive_lits = snd content
 
-    method is_unit = match content with ([], [h]) -> true | _ -> false
+    method is_unit = match content with ([], [_]) -> true | _ -> false
 
     method lit_at_position (b, n) =
       try
@@ -1412,9 +1411,7 @@ class ['peano] clause c_v hist =
       let n, p = content in
       let n' = List.map (fun x -> x#flatten) n
       and p' = List.map (fun x -> x#flatten) p in
-      let nv = generic_merge_set_of_lists (List.map (fun x -> x#variables) n')
-      and pv = generic_merge_set_of_lists (List.map (fun x -> x#variables) p') in
-      {< content = (n', p') ;
+       {< content = (n', p') ;
         string = Undefined >}
 
     (* proceed_fun: position -> substitution -> bool -> bool *)
@@ -1485,14 +1482,14 @@ class ['peano] clause c_v hist =
       List.for_all (fun x -> x#is_boolean) n && List.for_all (fun x -> x#is_boolean) p
 
     method rename =
-      let v' = List.map (fun (x, s, b) -> x, newvar (), b) variables
-      and ls = List.map (fun (x, s, b) -> s) variables
+      let v' = List.map (fun (x, _, b) -> x, newvar (), b) variables
+      and ls = List.map (fun (_, s, _) -> s) variables
       and n, p = content in
-      let v = List.map (fun (x, x', b) -> x, x') v' in
+      let v = List.map (fun (x, x', _) -> x, x') v' in
       let n' = List.map (fun x -> x#rename_core v) n
       and p' = List.map (fun x -> x#rename_core v) p in
       {< content = (n', p') ;
-        variables = List.map2 (fun (x, x', b) s -> (x', s, b)) v' ls;
+        variables = List.map2 (fun (_, x', b) s -> (x', s, b)) v' ls;
         string = Undefined ;
         maximal_terms = Undefined >}
 
@@ -1511,8 +1508,7 @@ class ['peano] clause c_v hist =
       let n, p = content in
       let n1, n2 = List.partition (fun x -> x#is_boolean) n
       and p1, p2 = List.partition (fun x -> x#is_boolean) p in
-      let n'1 = List.map (fun x -> x#revert_boolean) n1
-      and p'1 = List.map (fun x -> x#revert_boolean) p1
+      let p'1 = List.map (fun x -> x#revert_boolean) p1
       in
       match p2 with
         [] ->
@@ -1536,8 +1532,8 @@ class ['peano] clause c_v hist =
        Beware, a true copy of the clause is not performed. *)
     method expand =
       let n, p = content in
-      let n1, n2 = List.partition (fun x -> x#is_boolean) n
-      and p1, p2 = List.partition (fun x -> x#is_boolean) p in
+      let n1, _ = List.partition (fun x -> x#is_boolean) n
+      and p1, _ = List.partition (fun x -> x#is_boolean) p in
       let n'1 = List.map (fun x -> x#revert_boolean) n1
       and p'1 = List.map (fun x -> x#revert_boolean) p1 in
       {< content = (n @ p'1, p @ n'1)(*  ; string = Defined self#string *) >}
@@ -1929,7 +1925,6 @@ let rec expand_nullary lt  =
     if !res = [] then failwith ("expand_nullary: failure finding constructors for sort " ^ (sprint_sort s)) (* it should be at least one constructor *)
     else 
       let id_x, profile_x = List.hd !res in
-      let sort_x = List.hd profile_x in
       let lvar = List.map (fun s -> new term (Var_univ (newvar (), s))) (List.tl profile_x) in
       let trm = new term (Term (id_x, lvar, s)) in
       trm, [(i, trm)]
@@ -1939,7 +1934,7 @@ let rec expand_nullary lt  =
     | t :: tl -> 
 	(
 	  match t#content with
-	      Var_exist (i, s) -> failwith "expand_nullary" 
+	      Var_exist (_, _) -> failwith "expand_nullary" 
 	    | Var_univ  (i, s) -> 
 
 		if is_nullary_sort s then 
@@ -2087,7 +2082,7 @@ let print_history fn_norm c =
   in 
   let () = print_string ("\n The history of " ^ c#string) in
   try 
-    let (s, c_orig) = List.hd c#history in
+    let (_, c_orig) = List.hd c#history in
     (* computing an instance  *)
     let c_inst = fn c#history c_orig in
     let () = buffered_output ("\n\n The corresponding instance is \n\t" ^ c_inst#string) in
@@ -2116,7 +2111,7 @@ let print_history_instance c =
   in 
   let () = print_string ("\n The history of " ^ c#string) in
   try 
-    let (s, c_orig) = List.hd c#history in
+    let (_, c_orig) = List.hd c#history in
   (* computing an instance  *)
     let c_inst = fn c#history c_orig in
     let () = buffered_output ("\n\n The corresponding instance is \n\t" ^ c_inst#string) in
@@ -2134,7 +2129,7 @@ let compute_string_clause_caml c =
       | _ -> (sprint_list " /\\ " f l) ^ " => " ^ (sprint_list " \\/ " f r))
       ^ " ;"
 
-let oracle_g = ref (fun (c: peano_context clause) (g: peano_literal list) -> peano_literal_tautology)
+let oracle_g = ref (fun (_: peano_context clause) (_: peano_literal list) -> peano_literal_tautology)
 
 (* Convert a symbolic system list to its concrete representation as a horn clause list *)
  let concrete_system_list l (cxt1, cxt2) = 

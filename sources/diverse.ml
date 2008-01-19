@@ -226,7 +226,7 @@ let setminus equiv_f inf_f l l' =
     function
       l, [] -> l
     | [], _ -> failwith "setminus"
-    | (h :: t as l), (h' :: t' as l') ->
+    | h :: t, (h' :: t' as l') ->
         if inf_f h h' then h :: fn (t, l')
         else if equiv_f h h' then fn (t, t')
         else failwith "setminus"
@@ -521,7 +521,7 @@ let rec list_group eq_f =
   | h :: t ->
       match list_group eq_f t with
         [] -> [[h]]
-      | (hd :: tl as l) :: tl2 ->
+      | (hd :: _ as l) :: tl2 ->
           if eq_f h hd then (h :: l) :: tl2 else [h] :: l :: tl2
       | [] :: tl -> [h] :: tl
 ;;
@@ -601,7 +601,7 @@ let ac_eq matchfun ex =
 
 Defined but not used
 *)
-let check_on_subsets proceed_fun =
+let check_on_subsets _ =
   let rec fn l1 l2 =
     function
       [] -> invalid_arg "check_on_subsets"
@@ -707,7 +707,7 @@ assert (extract [1; 2; 3] = [1, [2; 3]; 2, [1; 3]; 3, [1; 2]]);;
 let all_couples_from_list l =
   let rec fn =
     function
-      x, [] -> invalid_arg "all_couples_from_list"
+      _, [] -> invalid_arg "all_couples_from_list"
     | x, l -> List.map (fun y -> x, y) l
   in
   List.flatten (List.map fn (extract l))
@@ -720,7 +720,7 @@ assert
 let rec all_combinations_from_list = 
   function 
       [] -> []
-    | [x] -> []
+    | [_] -> []
     | h :: t -> (List.map (fun x -> (h, x)) t) @
 	all_combinations_from_list t
 ;;
@@ -739,7 +739,7 @@ let rec last_el =
 let rec list_all_but_last_el =
   function
     [] -> invalid_arg "list_all_but_last_el"
-  | [h] -> []
+  | [_] -> []
   | h :: t -> h :: list_all_but_last_el t
 ;;
 
@@ -749,7 +749,7 @@ let list_all_but i l =
   let rec fn =
     function
       _, [] -> failwith "list_all_but"
-    | 0, h :: t -> t
+    | 0, _ :: t -> t
     | i, h :: t -> h :: fn (i - 1, t)
   in
   if i < 0 then invalid_arg "list_all_but" else fn (i, l)
@@ -783,7 +783,7 @@ let last_n l n =
       match l, i with
 	  _, 0 -> l
 	| [], _ -> failwith "last_n"
-	| h :: t, n -> fn t (n - 1)
+	| _ :: t, n -> fn t (n - 1)
     in fn l (size - n)
 ;;
 
@@ -838,7 +838,7 @@ let megamix =
   let rec fn =
     function
       [] -> []
-    | [] :: t -> []
+    | [] :: _ -> []
     | (hd :: tl) :: t -> fn2 hd t @ fn (tl :: t)
   and fn2 hd =
     function
@@ -983,7 +983,7 @@ let list_is_suffix l l' =
   let rec chop_n_first n l =
     match n, l with
       0, _ -> l
-    | _, h :: t -> chop_n_first (n - 1) t
+    | _, _ :: t -> chop_n_first (n - 1) t
     | _ -> failwith "chop_n_first"
   in
   let len = List.length l
@@ -1346,10 +1346,11 @@ let eprint      x = eprinter_of_pprinter pprinter x     (* flush *)
   (* END PRETTY PRINTING FUNCTIONS  *)
 
 class virtual generic =
-  object ((self : 'a)) method virtual equal : 'a -> bool end;;
+  object ((_ : 'a)) 
+	method virtual equal : 'a -> bool end;;
 
 class virtual printable_object =
-  object ((self : 'a))
+  object (self : 'a)
     val mutable string = (Undefined : string pointer)
     method string =
       match string with
@@ -1371,7 +1372,7 @@ let subset l l' =
   List.for_all (fun x -> fn x l') l
 ;;
 
-let do_nothing (s : string) = ();;
+let do_nothing (_ : string) = ();;
 
 let syntactic_equal x = x#syntactic_equal;;
 

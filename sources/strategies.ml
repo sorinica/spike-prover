@@ -267,14 +267,14 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 			      with (Failure "total_case_rewriting") -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Partial_case_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
-    | Generate (b, lpos) ->
+    | Generate (_, _) ->
 	if cxt2 <> empty_cxt then 
 	  (try
 	    generate verbose cxt1 cxt2 c is_strict 
 	  with (Failure "generate") -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Generate rule cannot exist in a list of reasoning modules"
-    | Generate_eq (b, lpos) ->
+    | Generate_eq (_, _) ->
 	if cxt2 <> empty_cxt then 
 	  (try
 	    generate_eq verbose cxt1 cxt2 c is_strict 
@@ -480,7 +480,6 @@ class strategy (cs: concrete_strategy) =
 		      | Id_st rm -> 
 			  let empty_cxt = ([],[]) in 
 			  let dummy_st = (new strategy (Try_ [])) in 
-			  let dummy_strict = false in
 			  (
 			    try 
 			      (* 				let () = write_pos_clause phi in  *)
@@ -568,7 +567,7 @@ class strategy (cs: concrete_strategy) =
 		  in
                   st#apply_at_pos verbose pp (level + 1) cxt is_strict
 	      | Query -> (!spike_parse_strategy (try dico_st#find name_strat_query with Not_found -> failwith "raising Not_found in apply_at_pos") ())#apply_at_pos verbose pp (level + 1) cxt is_strict
-	      | Print_goals (b, hist) ->
+	      | Print_goals (_, hist) ->
                   if verbose && not !pgoals
                   then
 		    let () = print_goals hist in
@@ -582,7 +581,7 @@ class strategy (cs: concrete_strategy) =
 	raise (MyExit "strategies4")
 
     (* For contextual rewriting and total case rewriting *)
-    method apply_to_subgoals verbose (c: (peano_context) clause) (hyps: (peano_context) clause list) (goals: (peano_context) clause list) (is_strict: bool) =
+    method apply_to_subgoals verbose (_: (peano_context) clause) (hyps: (peano_context) clause list) (goals: (peano_context) clause list) (is_strict: bool) =
 
       let e, h, l = (conjectures_system#content, hypotheses_system#content, lemmas_system#content) in
       let () = hypotheses_system#init hyps in 

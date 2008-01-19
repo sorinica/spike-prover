@@ -272,17 +272,15 @@ let build_equalities lst =
   all_comb l_eqcl'
 
 
-let congruence_closure verbose c level = 
+let congruence_closure _ c level = 
 
   if c#has_bit congruence_closure_bit then failwith "congruence_closure" 
   else 
     let n', p' = c#content in
     let n = List.map (fun x ->(x#copy)#update_pos) n' in
     let p = List.map (fun x ->(x#copy)#update_pos) p' in
-    
-    let all_clits = n @ p in
-    let nd, ne = List.partition (fun x -> x#is_diff) n in
-    let pd, pe = List.partition (fun x -> x#is_diff) p in
+    let _, ne = List.partition (fun x -> x#is_diff) n in
+    let pd, _ = List.partition (fun x -> x#is_diff) p in
 (*     let lpos =  List.map (fun x -> x#both_sides) (pe @ nd) in *)
     let lneg = List.map (fun x -> x#both_sides) (pd @ ne) in
     

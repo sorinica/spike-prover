@@ -46,7 +46,7 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
           Pos_defined (b, n, p) ->
             begin
               match p with
-		  0::p' ->
+		  0::_ ->
                     begin
                       try let _ = c#subterm_at_position (b, n, p) in Pos_defined (b, n, p)
                       with (Failure "subterm_at_position") ->
@@ -115,9 +115,7 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
 
   (* 7: Make a conjunction of these conditions for a given rewrite rule. *)
   let all_conditions type_system nr_cxt rw_r =
-    let l_2_r = List.hd rw_r#positive_lits
-    and gamma = rw_r#negative_lits 
-    in
+    let l_2_r = List.hd rw_r#positive_lits in
     let other_conditions (b, n, p) sigma kept_or =
       let rw_r' = rw_r#substitute_and_rename sigma max_var in
       let l_2_r = List.hd rw_r'#positive_lits
@@ -182,7 +180,7 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
       else failwith "matching" 
     in
     try
-      let (b, n, p), sigma, kept_or = condition_1 other_conditions l_2_r in
+      let (_, _, _), _, _ = condition_1 other_conditions l_2_r in
       true
     with (Failure "matching") -> false 
   in
@@ -233,7 +231,8 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
     match c_pos with
       Pos_defined p ->
         begin (* Discards second level PM *)
-          try let cs = c#subterm_at_position p in c_pos
+          try 
+						let _ = c#subterm_at_position p in c_pos
           with (Failure "subterm_at_position") ->
             print_string "Invalid position" ;
             buffered_output "" ;
@@ -257,7 +256,7 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
     let c_ref = c#build [] [l_2_r] in
     let c_ref_sigma = c_ref#substitute_and_rename sigma max_var in
     let fst = (List.hd c_ref_sigma#positive_lits) in
-    let lhs', rhs' = fst#both_sides_w_or kept_or in
+    let _, rhs' = fst#both_sides_w_or kept_or in
     let new_cl = c#replace_subterm_at_pos p rhs' in
 (*     let () = buffered_output ("the clause " ^ c#string ^ " is replaced by " ^ new_cl#string) in *)
 (*     let () = buffered_output ("is_less is " ^ (string_of_bool is_less) ^ " and the comparison is " ^  (string_of_bool (clause_geq false c c_ref_sigma)) ) in *)
@@ -354,11 +353,10 @@ let all_terms_pos c =
       all_pos c in
   let pos_subterms = (List.map (fun p -> (p, c#subterm_at_position p)) all_pos_c) in
   let pos_sorted = order_terms pos_subterms false in
-  List.filter (fun (p', t') ->  if t'#is_constructor_term then false else if is_constructor t'#head then false else  true) pos_sorted  
+  List.filter (fun (_, t') ->  if t'#is_constructor_term then false else if is_constructor t'#head then false else  true) pos_sorted  
 
-let reduce_clause fn_rewrite arg_sl verbose c cxt =
+let reduce_clause fn_rewrite arg_sl _ c cxt =
   
-  let res_str = ref "" in
   let rec fn lpos cl = 
     match lpos with
 	[] -> "", cl

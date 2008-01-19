@@ -86,12 +86,12 @@ let rec fn i s =
 
 (* generate all contexts to depth d of sort s *)
 let generate_all_contexts_CC0 d s = 
- let generate_contexts_from_term t = List.map (fun (v,s,_) -> new context t#content v) t#variables in
+ let generate_contexts_from_term t = List.map (fun (v,_,_) -> new context t#content v) t#variables in
  List.flatten (List.map generate_contexts_from_term (generate_all_terms_CC0 d s ))
 
 (* generate all contexts to depth d of sort s having all variables at depth d *) 
 let generate_all_contexts_T0 d s = 
- let generate_contexts_from_term t = List.map (fun (v,s,_) -> new context t#content v) t#variables in
+ let generate_contexts_from_term t = List.map (fun (v,_,_) -> new context t#content v) t#variables in
  List.flatten (List.map generate_contexts_from_term (generate_all_terms_T0 d s ))
 
 (* all instances of a context by terms of test set, the contextual var is not instanciated *)
@@ -139,7 +139,7 @@ if not !flag_crit_context then
 begin
   let () = buffered_output "Computing critical contexts" in
 (* initializing cc0 *)
-  let fn s n = 
+  let fn _ n = 
     let s1 = try dico_sort_string#find_key n with Failure "find_key" -> failwith "compute_critical context0" in
     let all_CC0 = generate_all_contexts_CC0 (Clauses.rewrite_system#depth - 1)  s1   in
     let all_CC0_wo_obs_subcont = List.filter (fun c -> c#has_no_obs_strict_subcontext) all_CC0 in
@@ -151,7 +151,7 @@ begin
 
 (* initializing t0 *)
     let fn1 s n =
-      try let nom = dico_obs_sort#find  s in () 
+      try let _ = dico_obs_sort#find  s in () 
       with Not_found ->
 	let s1 = try dico_sort_string#find_key n with Failure "find_key" -> failwith "compute_critical context1" in
 	let all_T0 = generate_all_contexts_T0 (Clauses.rewrite_system#depth - 1) s1  in 
@@ -166,9 +166,6 @@ begin
 (* main loop *)   
    while not(!stop) do
         let set_to_add_remove = ref ([],[]) in
-        let set_to_add = ref [] in
-        let set_to_remove = ref [] in
-       
         let verify cont = 
             let exists = ref false in
             let () = List.iter (fun cobs -> 

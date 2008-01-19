@@ -45,8 +45,8 @@ let def_sort_id s = match s with
 
 let rec is_abstract s' = match s' with
     Abstr_sort0 _  -> true
-  | Abstr_sort1 (_, s) -> false (* is_abstract s *)
-  | Abstr_sort2 (_, s1, s2) -> false (* is_abstract s1 or is_abstract s2 *)
+  | Abstr_sort1 (_, _) -> false (* is_abstract s *)
+  | Abstr_sort2 (_, _, _) -> false (* is_abstract s1 or is_abstract s2 *)
   | Def_sort _ -> false
 	
 let sprint_var x s is_univ =
@@ -195,8 +195,8 @@ let new_clause_number () =
 let rec occurs_str str s =
   match s with 
     | Abstr_sort0 str' -> str = str' 
-    | Abstr_sort1 (i, s') -> occurs_str str s'
-    | Abstr_sort2 (i, s', s'') -> (occurs_str str s') or (occurs_str str s'')
+    | Abstr_sort1 (_, s') -> occurs_str str s'
+    | Abstr_sort2 (_, s', s'') -> (occurs_str str s') or (occurs_str str s'')
     | Def_sort _ -> false
 
 
@@ -308,7 +308,7 @@ let rec expand_sorts s =
 let dico_obs_sort = (new bijective_dictionary 101: (sort, string) bijective_dictionary)
 
 (*let is_obs_sort s = let name = dico_sort_string#find s in try let r = dico_obs_sort#find_key name in true with _ -> false*)
-let is_obs_sort s = try let r = dico_obs_sort#find s in true with _ -> false
+let is_obs_sort s = try let _ = dico_obs_sort#find s in true with _ -> false
 
 let print_dico_obs_sort () =
   buffered_output "dico_obs_sort:" ;
@@ -504,8 +504,8 @@ let compute_sort_nullarity l_profiles =
 and fn2 l =
       function
 	  [] -> invalid_arg "compute_sort_nullarity"
-	| [h] -> true
-	| h :: t -> List.for_all (fn l) t
+	| [_] -> true
+	| _ :: t -> List.for_all (fn l) t
   in
   fn []
 ;;

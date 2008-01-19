@@ -21,7 +21,7 @@ type concrete_literal =
 let print_both_terms c_l =
   let str =
     match c_l with 
-	Lit_rule (lhs,rhs)  -> " -> " |  Lit_equal (lhs,rhs)  -> " = " | Lit_diff (lhs,rhs) -> " <> " 
+	Lit_rule (_,_)  -> " -> " |  Lit_equal (_,_)  -> " = " | Lit_diff (_,_) -> " <> " 
   in
   match c_l with 
       Lit_rule (lhs,rhs) |  Lit_equal (lhs,rhs) | Lit_diff (lhs,rhs) -> lhs#string ^ str ^ rhs#string
@@ -446,16 +446,16 @@ class literal c_l =
       match content with
           Lit_equal (t, t') -> fn t t'
       	| Lit_diff (t, t') -> fn t t'
-      	| Lit_rule (t, t') ->
+      	| Lit_rule (t, _) ->
             !rpos_greater false t lhs && !rpos_greater false t rhs
 
     method compute_pi =
       let peano_sort = if !nat_specif_defined then id_sort_nat else
 	id_sort_int in
       match content with
-        Lit_equal (t, t') -> t#sort = peano_sort
-      | Lit_rule (t, t') -> t#sort = peano_sort
-      | Lit_diff (t, t') -> t#sort = peano_sort
+        Lit_equal (t, _) -> t#sort = peano_sort
+      | Lit_rule (t, _) -> t#sort = peano_sort
+      | Lit_diff (t, _) -> t#sort = peano_sort
 
     method is_subterm (t : term) =
       let lhs, rhs = self#both_sides in

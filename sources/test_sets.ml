@@ -283,7 +283,7 @@ let induction_variables_v0 los (tr: term) =
   match tr#content with
       Var_exist (x, s) -> [(x, s, false)]
     |  Var_univ (x, s) -> [(x, s, true)]
-    | Term (f, l, s) ->
+    | Term (_, _, _) ->
 	let l' = fn [] tr in
 	if !exclude_nullary_mode
 	then l'
@@ -298,7 +298,7 @@ let induction_variables_v0 los (tr: term) =
 let induction_variables_v1 los (t:term) =
   let rec fn = function
       [] -> []
-    | ((x, s, b), p)::t ->
+    | ((x, s, _), p)::t ->
         if not !exclude_nullary_mode && is_nullary_sort s
         then
           let d = fst (try dico_nullary_individuals#find s with Not_found -> failwith "induction_variables_v1") in
@@ -316,7 +316,7 @@ let induction_variables_v1 los (t:term) =
    We return the variable, and the associated key in the dictionary.
    Check is done w.r.t. dico_test_set_v2 (no sharing in this case) *)
 let induction_variables_v2 (t:term) =
-  let v = List.map (fun ((x, s, b), p) -> x, p) t#variable_paths
+  let v = List.map (fun ((x, _, _), p) -> x, p) t#variable_paths
   and l = ref [] in
   let fn x vp ip _ =
     if list_is_suffix vp ip
@@ -403,7 +403,7 @@ let have_same_induction_variables = ref have_same_induction_variables_v0
 
 (* Generate test substitutions *)
 let generate_test_substitutions_core_v0 v =
-  let fn (x, s, b) =
+  let fn (x, s, _) =
     try
       let ts = dico_test_set_v0#find s in
       let ts' = List.map (fun x -> x#rename) ts in
@@ -452,7 +452,7 @@ let generate_test_substitutions_for_clause_v1 los c =
   | Ind_pos_void | Ind_pos_position _ -> failwith "generate_test_substitutions_for_clause_v1"
 
 let induction_sets los (t:term) =
-  let v = List.map (fun ((x, s, b), p) -> x, p) t#variable_paths
+  let v = List.map (fun ((x, _, _), p) -> x, p) t#variable_paths
   and l = ref [] in
   let fn x vp ip ts =
     if vp = ip && (* generic_list_sorted_mem (fst (List.hd vp)) los *) List.mem vp los
@@ -524,4 +524,4 @@ let update_test_set_version = function
       and () = print_dico_test_set := print_dico_test_set_v2 in
       ()
   | _ -> raise (Arg.Bad "test sets version must be 0, 1, or 2")
-1
+ 

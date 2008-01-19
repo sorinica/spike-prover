@@ -41,7 +41,7 @@ let true_by_strategy n1 c_sigma c_ref cxt =
 
   (* is_conservative tests if multiplicands are included in p, lp, cr, 
    g, l or are smaller than the maximal multiplicand of the polynomial*)
-let is_conservative max_poly multiplicands cr g l = 
+let is_conservative max_poly multiplicands _ _ l = 
   let p, ie = l in
   let fn_poly multiplicand poly = (rpo_greater false max_poly multiplicand) or
     (list_member (fun x y -> x#syntactic_equal y) multiplicand poly#multiplicands)
@@ -116,7 +116,7 @@ let augment_polynom counter p lp reference cr g l =
 	      	  in
 	      	  let n1, p1 = c_sigma#content in 
 		  
-		  let n1', p1' = c_reference#content in
+		  let n1', _ = c_reference#content in
 		  let c_sigma' = c_reference#build (n1 @ n1') p1 in
 
 	      	  let () = print_indent_string ("\n c_sigma' = " ^ c_sigma'#string) in

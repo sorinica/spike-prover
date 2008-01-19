@@ -17,15 +17,14 @@ open Dummies
 open Terms
 
 
-let auto_simplification verbose c is_strict level =
+let auto_simplification verbose c _ level =
   
   
   (* 0: displa
 y *)
   
-  let n1, p1 = c#content in
+  let n1, _ = c#content in
   let size_n1 = List.length n1 in
-  let size_p1 = List.length p1 in
 
   (* store of rewriting rules  *)
   
@@ -88,9 +87,9 @@ y *)
       
       let fn_greater t t' = 
 	match t#content, t'#content with
-	    Term (f, l, s), Term (f', l', s')  -> (!rpos_greater false t t') (* or ((not t#is_constructor_term) && t'#is_constructor_term) *)
+	    Term (_, _, _), Term (_, _, _)  -> (!rpos_greater false t t') (* or ((not t#is_constructor_term) && t'#is_constructor_term) *)
 	  | Var_exist _ , Term _ | Var_univ _ , Term _  | Var_exist _, Var_univ _ -> true
-	  | Var_exist(i, s), Var_exist(i', s') | Var_univ(i, s), Var_univ(i', s') -> i > i'
+	  | Var_exist(i, _), Var_exist(i', _) | Var_univ(i, _), Var_univ(i', _) -> i > i'
 	  | Var_univ _, Var_exist _| Term _, Var_univ _| Term _, Var_exist _ -> false
       in
       
