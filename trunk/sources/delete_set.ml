@@ -82,7 +82,7 @@ let subsumption_init_array c =
       (* Retrieve all equivalence classes from d *)
 let subsumption_retrieve_equivalence_classes d =
   let l = ref [] in
-  let fn k v = l := v::!l in
+  let fn _ v = l := v::!l in
   let () = d#iter fn in
   !l
 
@@ -131,14 +131,13 @@ let fn_vare c =
 
 
 (* Subsumption test of two clauses: does c' subsume c ? *)
-let subsumption_subsumes verbose system_string c' c orig_c level =
+let subsumption_subsumes _ system_string c' c orig_c _ =
   
   (*   let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ orig_c#string ^ "\n with clause [" ^ *)
   (*   (string_of_int c#number) ^ "]"); flush stdout  in *)
   (*     let lsymb_c' = fn_symb c' in *)
   let lsymb_c = fn_symb c in
   let lvare_c = fn_vare c in
-  let lvare_c' = fn_vare c' in
   
   let fn_filter t = 
     (* filters only terms which are not related to lvare_c and lsymb_c  *)
@@ -223,7 +222,7 @@ let subsumption verbose c los (cxt1,cxt2) level =
   in
   
   let () = incr subsumption_counter in
-  let fn c (cx1,cx2) = 
+  let fn c (_,_) = 
     let c' = c#expand in
     let apply ss x = 
       if c#number = x#number or c#subsumption_has_failed x#number then false 
@@ -360,7 +359,7 @@ let augmentation verbose c los (cxt1,cxt2) level =
   
   let () = incr augmentation_counter in
   let success_lc = ref [] in 
-  let fn c (cx1,cx2) = 
+  let fn c (_,_) = 
     let max_var = c#greatest_varcode + 1 in
     let lneg', lpos' = c#content in 
     let c_exp = c#expand in
@@ -369,7 +368,7 @@ let augmentation verbose c los (cxt1,cxt2) level =
 (*       let () = buffered_output ("\n augmentation : treating x = " ^ x#string) in  *)
       let x = x1#substitute_and_rename [] max_var in
       if not (c#augmentation_has_failed x#number) then 
-	let lneg, lpos = x#content in
+	let lneg, _ = x#content in
 	if (* x#is_horn &&  *) lneg <> [] then 
 	  (* take x and extract its negative part  *)
 	  let x' = new clause (lneg, []) [] in

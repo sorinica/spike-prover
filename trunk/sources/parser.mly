@@ -48,32 +48,6 @@ let introduce_var_exist c =
 
 (* If no ordering is specified in the specification file, we use a total ordering based on symbol codes *)
 let default_fill_order_dico () =
-  let fn c = 
-    let ldef_symb = all_nonvariable_symbols c in
-    let head_symbol = 
-      try 
-	(match (c#lefthand_side)#content with
-	    Term (f, l, s) -> f
-	  | Var_exist _| Var_univ _ -> failwith "default_fill_order_dico"
-	)
-      with Horn -> failwith "default_fill_order_dico"
-    in
-    let r_cond_symb = try 
-      remove_el ( = ) head_symbol ldef_symb 
-    with Failure "remove_el" -> failwith "default_fill_order_dico"
-    in
-    let () = if !debug_mode then 
-      let () = buffered_output c#string in
-      let () = print_string "\n" in
-      let () = print_int head_symbol in
-      let () = print_string "\n" in
-      let () = print_list ", " print_int r_cond_symb in
-      let () = print_string "\n" in
-      let () = flush stdout in
-      ()
-    in
-    List.iter (dico_order#add_couple head_symbol) r_cond_symb
-  in
   let () = buffered_output "Setting default greater order for symbols" in
   let () = flush stdout in
   let axioms = List.map (fun (_, _, x) -> x) !yy_axioms in
@@ -83,7 +57,6 @@ let default_fill_order_dico () =
     let () = print_dico_const_string () in
     ()
   in
-  let l = List.iter fn axioms in
   let () = 
     try
       dico_order#merge_equivalence_relation dico_equivalence ;
@@ -98,7 +71,7 @@ let default_fill_order_dico () =
 let share_variables s s' = 
   let rec fn s = 
     match s with
-	Def_sort x -> []
+	Def_sort _ -> []
       | Abstr_sort0 str -> [str]
       | Abstr_sort1 (_, sort) -> fn sort
       | Abstr_sort2 (_, s1, s2) -> (fn s1) @ (fn s2)
@@ -407,7 +380,7 @@ let rec typecheck_incomplete_tree ps t =
         and a' = List.tl p' in
         let () = match ps with
             Actual_sort s'' ->
-              (try let dummy = unify_sorts ps s' in () with Failure "unify_sorts" -> 
+              (try let _ = unify_sorts ps s' in () with Failure "unify_sorts" -> 
 (* 		let () = if !debug_mode then print_string ("\ncall of unify_sorts in parser.mly:  the list yy_tmp_param_sorts before application is : " ^ *)
 (* 		(List.fold_right (fun (x, s) y -> (x ^ " has associated the sort " ^ (sprint_sort s) ^ ", " ^ y)) !yy_tmp_param_sorts "")) else () in  *)
 		parse_failwith ("\n Error: sort " ^ (sprint_sort s'') ^ " is not unifiable with " ^ (sprint_sort s')) )
@@ -658,7 +631,7 @@ spec_ordering:
           with (Failure "orient") ->
             parsed_gfile := f ;
             linenumber := l ;
-	    let concl = List.hd ((fun (n, p) -> p) c#content) in
+	    let concl = List.hd ((fun (_, p) -> p) c#content) in
 	    match concl#content with
 		Lit_equal _ 
 	      | Lit_rule _ -> 
@@ -774,7 +747,7 @@ opt_specif_use:
   { 
     let rec fn = function
       [] -> ()
-    | h::t ->
+    | h::_ ->
         try
           add_predefined_specif h
         with (Failure "add_predefined_specif") ->
@@ -1032,7 +1005,7 @@ specif_equiv:
   list_of_symbols TOK_SEMICOLUMN
   { match $1 with
       [] -> failwith "I'm bewildered"
-    | h::t -> dico_equivalence#fill (fun x y -> true) $1 }
+    | _::_ -> dico_equivalence#fill (fun _ _ -> true) $1 }
 
 opt_specif_status:
   TOK_STATUS TOK_COLUMN list_of_statuses
@@ -1522,7 +1495,7 @@ specif_literal:
 		if x < 0 then ((new term (Var_exist (x, new_t'#sort))), new_t')
 		else ((new term (Var_univ (x, new_t'#sort))), new_t')
             end
-	| Iterm (x, l) -> (* t is a term *)
+	| Iterm (x, _) -> (* t is a term *)
             let s = try dico_const_sort#find x with Not_found -> failwith "raising Not_found in specif_literal" in
 	    let s' = List.hd (update_profile [s]) in (* the abstract sorts are renamed *)
             ((typecheck_incomplete_tree (Actual_sort s') t), typecheck_incomplete_tree (Actual_sort s')  t')

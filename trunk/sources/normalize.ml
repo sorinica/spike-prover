@@ -25,26 +25,6 @@ let rec rewrite rw_r (tr:term) c_ref str cxt i =
 (*   let () = buffered_output ("\n Rewrite " ^ tr#string) in *)
   let max_var = c_ref#greatest_varcode + 1 in
   let str_ref = ref str in
-  let fn s l =
-    match l with
-	[] -> s
-      | _ ->
-	  let () = incr_indent norm_string in
-          let l' = List.map (fun x -> x#substitute s) l in
-          let l'' = List.map (fun x -> x#both_sides) l' in
-          let l''' = List.map (fun (x, y) -> 
-	    let str', x' = normalize rw_r x c_ref !str_ref cxt i in 
-	    let str'', y' =  normalize rw_r y c_ref str' cxt i in 
-	    let () = str_ref := str'' in 
-	    x', y') 
-	    l'' 
-	  in
-          let () = decr_indent norm_string in
-          if List.for_all (fun (x, y) -> x#equal y) l'''
-          then s
-          else failwith "matching" 
-  in
-
   let rec fn2 t_p pos l = 
 	  
     match l with
@@ -140,7 +120,7 @@ let rec rewrite rw_r (tr:term) c_ref str cxt i =
   let lpat' = List.map (fun x -> ("R", x)) lpat in  
   let l' = if List.mem R rw_r then try remove_el (=) R rw_r with Failure "remove_el" -> failwith "rewrite: remove_el" else rw_r in
   let lres = concrete_system_list l' cxt in
-  let lres' = List.filter (fun (los, c) -> c#is_horn) lres in
+  let lres' = List.filter (fun (_, c) -> c#is_horn) lres in
   let rw_r' = (lpat' @ lres') in
   
   let res = try fn2 tr [] rw_r' with Failure "fn2" -> failwith "rewrite" in

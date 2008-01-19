@@ -74,7 +74,7 @@ let rec multiset_greater is_total equiv_f greater_f l l'  =
       List.for_all f l2
 
 (* Multiset extension to an order *)
-let rec multiset_geq is_total equiv_f greater_f l l' =
+let rec multiset_geq is_total _ greater_f l l' =
   let l1, l2 = remove_common_elements (fun x -> x#syntactic_equal) l l' in
   match l1, l2 with
     [], [] -> true
@@ -95,7 +95,7 @@ let extended_greater is_total equiv_f greater_f status_v l l' =
 let rec rpo_equivalent t t' =
   let res = 
     match t#content, t'#content with
-	Term (f, l, s), Term (f', l', s') ->
+	Term (f, l, _), Term (f', l', _) ->
 	  let st = get_status f in
 	  equivalent f f' && List.length l = List.length l' &&
 	      ((st = Multiset && check_on_permutations rpo_equivalent l l')
@@ -116,7 +116,7 @@ let rec rpo_greater is_total (t: term) (t': term) =
   with Not_found -> 
     let res = 
       match t#content, t'#content with
-	  Term (f, l, s), Term (f', l', s') ->
+	  Term (f, l, _), Term (f', l', _) ->
 	    begin
       	      let st = get_status f in
       	      (greater is_total f f' && multiset_greater is_total rpo_equivalent rpo_greater [t] l')
@@ -222,7 +222,7 @@ let ac_distribute_ac_ac f g t =
     | h::t ->
         match h#content with
           Var_exist _ | Var_univ _ -> [h]::fn2 t
-        | Term (g', l, s') ->
+        | Term (g', l, _) ->
             if const_equal g g'
             then
               let t' = try fn2 t with (Failure "fn2") -> List.map (fun x -> [x]) t in
@@ -259,7 +259,7 @@ let ac_distribute_un t f =
         then
           match a#content with
             Var_exist _ | Var_univ _ -> t
-          | Term (g', [a'], s') ->
+          | Term (g', [a'], _) ->
               if const_equal g' f
               then new term (Term (f, [a'], s))
               else t
@@ -276,7 +276,7 @@ let ac_distribute_ac_un h f t =
     | Term (g, l, s) ->
         if const_equal g h
         then
-          let i, l' = fn2 l in
+          let i, _ = fn2 l in
           match i with
             0 -> t
           | _ -> make_unary_term h f l s i
@@ -287,7 +287,7 @@ let ac_distribute_ac_un h f t =
         let i, t' = fn2 t in
         match h#content with
           Var_exist _ | Var_univ _ -> i, h::t'
-        | Term (f', l', s') ->
+        | Term (f', l', _) ->
             if const_equal f' f
             then i + 1, l' @ t'
             else i, h::t' in
@@ -407,7 +407,7 @@ let determine_ac_category () =
       match l' with
         [] -> false
       | [_] -> false
-      | h1::(h2::t as tl) ->
+      | h1::(h2::_ as tl) ->
           let h_n = 
 	    try last_el l' 
 	    with (Failure "last_el") -> failwith "determine_ac_category"

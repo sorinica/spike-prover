@@ -185,7 +185,7 @@ and inclusions = parse
 | comment                               { inclusions lexbuf }
 | filename_ident +                      { let infile =
                                             try openin (Lexing.lexeme lexbuf)
-                                            with Sys_error err ->
+                                            with Sys_error _ ->
 					      raise (MyExit "lexer1")
                                           in let () = Stack.push (!parsed_gfile, !linenumber, lexbuf) lexbuf_stack
                                           in let () = parsed_gfile := infile 

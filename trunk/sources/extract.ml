@@ -14,7 +14,7 @@ let filedefault : out_channel ref = ref stdout;;
 
 let appended_file s =
   try let _, res = openin s in res
-    with Sys_error err -> 
+    with Sys_error _ -> 
       raise (MyExit ("cannot open " ^ s))
  
 (* initialization function *)
@@ -75,8 +75,8 @@ let rec extract_specification ls =
       match s with 
 	  Def_sort _ -> [s]
 	| Abstr_sort0 _ -> []
-	| Abstr_sort1 (id, s') -> fn s'
-	| Abstr_sort2 (id, s', s'') -> (fn s') @ (fn s'')
+	| Abstr_sort1 (_, s') -> fn s'
+	| Abstr_sort2 (_, s', s'') -> (fn s') @ (fn s'')
     in
     fn s1
   in

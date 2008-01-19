@@ -187,7 +187,7 @@ let sprint_lit l =
 let sprint_or_and lst con =
   match List.length lst with
   | 1 -> (sprint_lit (List.hd lst))
-  | n ->
+  | _ ->
       let lst_strs = List.map sprint_lit lst in
       "(" ^ (String.concat con lst_strs) ^ ")"
 ;;
@@ -249,7 +249,7 @@ let regenerate_clause_numbers () =
 ;;
 
 let remove_clause_number () =
-  let iterator (spi_num, (coq_num, last)) =
+  let iterator (spi_num, (coq_num, _)) =
     if conjectures_system#exists (fun clause -> clause#number = spi_num)
     then () else begin
       let () = clause_numbers := List.remove_assoc spi_num !clause_numbers in
@@ -290,7 +290,7 @@ let renumber_clauses () =
       reassign_clause_number ()
     else remove_clause_number ()
   in
-  let fold_fun str (sp_num, (coq_num, last)) =
+  let fold_fun str (sp_num, (coq_num, _)) =
     str ^ "(" ^ (string_of_int coq_num) ^ ":" ^ (string_of_int sp_num) ^ ") "
   in
   let str = List.fold_left fold_fun "  (* Conjs: " !clause_numbers in

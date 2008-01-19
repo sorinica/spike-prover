@@ -72,7 +72,7 @@ let eliminate_trivial_literal verbose c level =
 
   let rec vars_term t = 
     match t#content with
-	Term (i, l, s) -> List.flatten (List.map vars_term l)
+	Term (_, l, _) -> List.flatten (List.map vars_term l)
       | Var_exist _| Var_univ _ -> [t#string]
   in
   let vars_lit lit = 

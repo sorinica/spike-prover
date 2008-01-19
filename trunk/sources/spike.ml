@@ -55,7 +55,7 @@ let string_to_clause s =
   (* CAPTURING THE Ctrl-Z  *)
 
 (* function to be executed when Ctrl-Z happens  *)
-let  interact x = interaction_mode := true
+let  interact _ = interaction_mode := true
 
 let () =  main_interact  := fun () ->
   let str = "\n\nPlease type\n <1> --- printing the environment\n <2> --- reentering the automatic mode \n <3> --- exit\n <4> --- printing a clause \n <5> --- normalizing a term" in
@@ -174,7 +174,7 @@ let return_code = 0
 let go_parsing s =
   let infile =
     try openin s
-    with Sys_error err -> 
+    with Sys_error _ -> 
       raise (MyExit "spike")
   in
   try
@@ -311,9 +311,7 @@ let process_problem_token = function
   | Conjectures_token l ->
       let fn c = 
 	let n, p = c#content in 
-	let n' = List.map (fun x -> x#update_pos) n in
-	let p' = List.map (fun x -> x#update_pos) p in
-	let res = c#build n p in
+ 	let res = c#build n p in
 (* 	let () = print_dico_ind_positions_v0 () in *)
 (* 	let () = print_dico_rules () in *)
 	let () = if !maximal_output then print_detailed_clause res in
@@ -479,7 +477,7 @@ let process_problem_token = function
       let () = 
 	try 
 	  let pos, subst = 
-	    t#subterm_matching (fun p s -> s) t' in
+	    t#subterm_matching (fun _ s -> s) t' in
 	  buffered_output 
 	    ("the substitution " ^  sprint_subst subst ^ " applied to (" ^ t#string ^ ") " ^ " gives (" ^
 	    t'#string ^ ") at the position " ^ (sprint_position pos) ) 
@@ -491,7 +489,7 @@ let process_problem_token = function
   | Message_token s ->
       let () = buffered_output s
       in true
-  | Ac_token (l, l') ->
+  | Ac_token (_, _) ->
 (*       let () = buffered_output ("l  = " ^ (sprint_list " ; " (fun x -> x#string) l)) *)
 (*       and () = buffered_output ("l' = " ^ (sprint_list " ; " (fun x -> x#string) l')) in *)
 (*       let sigma = subsumes (fun s -> s) (fun proceed_fun s y z -> y#matching_core proceed_fun s [ (z, y) ]) [] l l' *)

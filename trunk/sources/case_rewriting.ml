@@ -28,7 +28,7 @@ let case_rw_condition_1 lhs rhs =
 
 (* compute all ([(rw_r_i, sigma_i)]) couples from the rewrite system,
    given p. (b,n,prefix) is a path *)
-let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n p sl cxt is_strict =
+let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n p sl _ _ =
   let t = try c#subterm_at_position (b, n, p) with (Failure "subterm_at_position") -> failwith "case_rw_condition_2_with_p_given" in
 (*   let () = buffered_output ("\nTreating t = " ^ t#string) in  *)
   let max_var = c#greatest_varcode + 1 in
@@ -129,9 +129,8 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
     final_update t b n p l
   with (Failure "final_update") -> false
     
-let generate_cond_and_eq t c b n p l is_partial =
+let generate_cond_and_eq t c b n p l _ =
   let max_var = c#greatest_varcode + 1 in
-  let n', p' = c#content in
   let fn cl s =
 
     let lhs = cl#lefthand_side in
@@ -327,7 +326,7 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
   let res = ref ([]: Clauses.peano_context Clauses.clause list) in
 
   (* 1: process arguments *)
-    let arg_st =
+    let _ =
       if st#is_query then
         !spike_parse_strategy (try dico_st#find name_strat_query with Not_found -> failwith "raising Not_found in total_case_rewriting") ()
       else st
@@ -365,9 +364,7 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
   let final_update st t b n p l =
     if l = [] then failwith "final_update"
     else
-      let ts = (fun (_, _, s) -> s) (List.hd l) in
       let new_cond, new_eq = generate_cond_and_eq t c b n p l false in
-
       let test1 = 
 	if !broken_order then true 
 	else if not !debug_mode then List.for_all (fun x -> clause_greater false c x) new_eq 
@@ -460,7 +457,7 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
   
   let pos_subterms = (List.map (fun p -> (p, c#subterm_at_position p)) all_pos) in
   
-  let pos_subterms' =   List.filter (fun (p', t') ->  if t'#is_constructor_term then false else if is_constructor t'#head then false else true) pos_subterms in
+  let pos_subterms' =   List.filter (fun (_, t') ->  if t'#is_constructor_term then false else if is_constructor t'#head then false else true) pos_subterms in
   let pos_sorted = order_terms pos_subterms' false in
   
 (*   let () = buffered_output (List.fold_left (fun x (p, t) -> x ^ (sprint_clausal_position p) ^ "( t = " ^ t#string ^ ")" ^ " " ) ("\nPOS SORTED [" ^ *)
@@ -476,7 +473,7 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
 	    if case_rw_condition_2_with_p_given (final_update st) c b n p arg_sl cxt is_strict then
 	      true
 	    else 
-	      let trm = c#subterm_at_position (b, n, [(List.hd p)]) in 
+	      let _ = c#subterm_at_position (b, n, [(List.hd p)]) in 
 	      all_conditions t
 	  with Failure "case_rw_condition_2_with_p_given" -> 
 	      all_conditions t 

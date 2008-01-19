@@ -20,7 +20,7 @@ let broken_order = ref false ;;
 
 (* String for locating errors. Emacs's next-error compatible in caml mode *)
 let file_n_line () =
-  let (s, fd) = !parsed_gfile in
+  let (s, _) = !parsed_gfile in
   match s with
     "" -> ""
   | _ -> "File \"" ^ s ^ "\", line " ^ string_of_int !linenumber ^ ": "

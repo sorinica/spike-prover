@@ -103,7 +103,7 @@ let code_of_var x =
 let incomplete_tree_is_complete t =
   let rec fn = function
       [] -> true
-    | Undefined::t -> let () = if !debug_mode then print_string "\nTree is incomplete" in false
+    | Undefined::_ -> let () = if !debug_mode then print_string "\nTree is incomplete" in false
     | (Defined h)::t ->
         match h with
           Ivar _ -> fn t
@@ -160,9 +160,9 @@ let rec shorten t =
     match t with
     | TypeVar (VT(_,Unknown)) -> t
     | TypeVar (VT(_, TypeVar (VT(x, Unknown)))) -> TypeVar (VT(x, Unknown))
-    | TypeVar (VT(x, TypeVar (VT(y, Number)))) -> shorten (TypeVar (VT(x, Number)))
-    | TypeVar (VT(x, TypeVar (VT(y, Arrow (a, b))))) -> shorten (TypeVar (VT(x, Arrow (a,b))))
-    | TypeVar (VT(x, TypeVar (VT(y, TypeVar a)))) -> shorten (TypeVar (VT(x, TypeVar a)))
+    | TypeVar (VT(x, TypeVar (VT(_, Number)))) -> shorten (TypeVar (VT(x, Number)))
+    | TypeVar (VT(x, TypeVar (VT(_, Arrow (a, b))))) -> shorten (TypeVar (VT(x, Arrow (a,b))))
+    | TypeVar (VT(x, TypeVar (VT(_, TypeVar a)))) -> shorten (TypeVar (VT(x, TypeVar a)))
     | TypeVar (VT (_, Arrow (x, y))) -> Arrow (x, y)
     | TypeVar (VT (_, Number)) -> Number
     | Unknown -> raise (TypingBug "shorten")
@@ -202,32 +202,32 @@ let rec unify (tau1, tau2) =
 	else raise (TypeClash (Unknown, t2))
 
     | (* type variable and type t2 *)
-	((TypeVar (VT (x, Unknown)) as tv) as t1), Number ->
+	((TypeVar (VT (x, Unknown))) as t1), Number ->
 	if not(occurs (VT (x, Unknown)) Number) then (TypeVar (VT (x, Number))), Number
 	else raise (TypeClash (t1, Number))
-    |	((TypeVar (VT (x, Unknown)) as tv) as t1), (Arrow (a, b)) ->
+    |	((TypeVar (VT (x, Unknown))) as t1), (Arrow (a, b)) ->
 	if not(occurs (VT (x, Unknown)) (Arrow (a, b))) then (TypeVar (VT (x, (Arrow (a, b))))), (Arrow (a, b))
 	else raise (TypeClash (t1, (Arrow (a, b))))
-    |	((TypeVar (VT (x, Unknown)) as tv) as t1), Unknown ->
+    |	((TypeVar (VT (x, Unknown)) ) as t1), Unknown ->
 	if not(occurs (VT (x, Unknown)) Unknown) then (TypeVar (VT (x, Unknown))), Unknown
 	else raise (TypeClash (t1, Unknown))
     | Number, Number -> (Number, Number)
-    | Arrow (t1, t2), (Arrow (t'1, t'2) as t) -> 
-	let t1new, t'1new = unify(t1, t'1) in
-	let t2new, t'2new = unify(t2, t'2) in
+    | Arrow (t1, t2), (Arrow (t'1, t'2) ) -> 
+	let t1new, _ = unify(t1, t'1) in
+	let t2new, _ = unify(t2, t'2) in
 	t1new, t2new
     | ((Number as t1), (Unknown as t2)) -> raise (TypeClash (t1, t2))
     | ((Unknown as t1), (Number as t2)) -> raise  (TypeClash (t1, t2)) 
-    | (((Arrow (a, b)) as t1), (Unknown as t2)) -> raise  (TypeClash (t1, t2)) 
-    | ((Unknown as t1), ((Arrow (a, b)) as t2)) -> raise  (TypeClash (t1, t2)) 
-    | (((Arrow (a, b)) as t1), (Number as t2)) -> raise  (TypeClash (t1, t2)) 
+    | (((Arrow (_, _)) as t1), (Unknown as t2)) -> raise  (TypeClash (t1, t2)) 
+    | ((Unknown as t1), ((Arrow (_, _)) as t2)) -> raise  (TypeClash (t1, t2)) 
+    | (((Arrow (_, _)) as t1), (Number as t2)) -> raise  (TypeClash (t1, t2)) 
     | ((Number as t1), ((TypeVar (VT (_, (Arrow (_, _))))) as t2)) -> raise (TypeClash (t1, t2)) 
     | ((Number as t1), ((TypeVar (VT (_, Number))) as t2)) -> raise  (TypeClash (t1, t2)) 
     | ((Number as t1), ((TypeVar (VT (_, (TypeVar _)))) as t2)) -> raise  (TypeClash (t1, t2)) 
     | ((Number as t1), ((Arrow (_, _)) as t2)) -> raise  (TypeClash (t1, t2)) 
-    | (((Arrow(x, y)) as t1), ((TypeVar (VT (_, (Arrow (_, _))))) as t2)) -> raise (TypeClash (t1, t2)) 
-    | (((Arrow(x, y)) as t1), ((TypeVar (VT (_, Number))) as t2)) -> raise  (TypeClash (t1, t2)) 
-    | (((Arrow(x, y)) as t1), ((TypeVar (VT (_, (TypeVar _)))) as t2)) -> raise  (TypeClash (t1, t2)) 
+    | (((Arrow(_, _)) as t1), ((TypeVar (VT (_, (Arrow (_, _))))) as t2)) -> raise (TypeClash (t1, t2)) 
+    | (((Arrow(_, _)) as t1), ((TypeVar (VT (_, Number))) as t2)) -> raise  (TypeClash (t1, t2)) 
+    | (((Arrow(_, _)) as t1), ((TypeVar (VT (_, (TypeVar _)))) as t2)) -> raise  (TypeClash (t1, t2)) 
     | ((Unknown as t1), (Unknown as t2)) -> raise (TypeClash (t1, t2))
     | ((Unknown as t1), ((TypeVar (VT (_, (Arrow (_, _))))) as t2)) -> raise (TypeClash (t1, t2)) 
     | ((Unknown as t1), ((TypeVar (VT (_, Number))) as t2)) -> raise  (TypeClash (t1, t2)) 
@@ -245,7 +245,7 @@ let global_env = ref init_env
 
 let init_typing_env =
     List.map
-     (function s ->
+     (function _ ->
        Forall([], Arrow(Number, Arrow(Number, Number))))
      init_env 
 
@@ -323,23 +323,23 @@ let rec asl_typing_expr gamma =
       let _ = unify(Number, type_rec e1)
       and t2 = type_rec e2 and t3 = type_rec e3 in 
       let _ = unify(t2, t3) in t3
-  | App((Abs(x, e2) as f), e1) -> (* LET case *)
+  | App((Abs(_, e2)), e1) -> (* LET case *)
       let t1 = type_rec e1 in
       let sigma = generalise_type (gamma, t1)
       in asl_typing_expr (sigma :: gamma) e2
-   | App((Const_asl x) as e1, e2) ->
+   | App((Const_asl _) as e1, e2) ->
       let u = TypeVar(new_vartype()) in
       let _ = unify(type_rec e1, Arrow(type_rec e2, u)) in u
-   | App((Var_asl x) as e1, e2) ->
+   | App((Var_asl _) as e1, e2) ->
       let u = TypeVar(new_vartype()) in
       let _ = unify(type_rec e1, Arrow(type_rec e2, u)) in u
-   | App((Cond (x, y, z)) as e1, e2) ->
+   | App((Cond (_, _, _)) as e1, e2) ->
       let u = TypeVar(new_vartype()) in
       let _ = unify(type_rec e1, Arrow(type_rec e2, u)) in u
-   | App((App (x, y)) as e1, e2) ->
+   | App((App (_, _)) as e1, e2) ->
       let u = TypeVar(new_vartype()) in
       let _ = unify(type_rec e1, Arrow(type_rec e2, u)) in u
-  | Abs(x, e) ->
+  | Abs(_, e) ->
       let u = TypeVar(new_vartype()) in
       let s = Forall([], u)
       in Arrow(u, asl_typing_expr (s :: gamma) e) 
@@ -364,8 +364,8 @@ let print_type_scheme (Forall(gv, t)) =
  (* Fails when it encounters an unknown *)
  let names =
    let rec names_of = function
-   | (n, []) -> []
-   | (n, (v1 :: lv)) -> tvar_name n :: names_of (n + 1, lv) in
+   | (_, []) -> []
+   | (n, (_ :: lv)) -> tvar_name n :: names_of (n + 1, lv) in
    names_of (1, gv) in
  let tvar_names = List.combine (List.rev gv) names in
  let rec print_rec = function
@@ -387,7 +387,7 @@ let print_type_scheme (Forall(gv, t)) =
   print_rec t
 
 
-let typing (Decl(s, e)) =
+let typing (Decl(_, e)) =
   reset_vartypes();
   let tau =
     try asl_typing_expr !global_typing_env e

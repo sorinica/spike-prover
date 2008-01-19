@@ -87,16 +87,16 @@ let spike_parse_strategy = ref (fun (st: strategy) () -> st)
 let spike_parse_list_of_systems = ref (fun () -> ([]: which_system list))
 
 (* Dummy function to parse a clausal position. Updated in the lexer *)
-let spike_parse_clausal_lhs_position = ref (fun (c: (peano_context) clause) () -> Pos_all)
+let spike_parse_clausal_lhs_position = ref (fun (_: (peano_context) clause) () -> Pos_all)
 
 (* Dummy function to parse a literal clausal position. Updated in the lexer *)
-let spike_parse_literal_position_in_clause = ref (fun (c: (peano_context) clause) () -> Pos_all)
+let spike_parse_literal_position_in_clause = ref (fun (_: (peano_context) clause) () -> Pos_all)
 
 (* Dummy function to parse a substitution. Updated in the lexer *)
 let spike_parse_substitution = ref (fun () -> ([]: (var * term) list))
 
 (* Dummy function to parse an integer. Updated in the lexer *)
-let spike_parse_positive_int = ref (fun (c: (peano_context) clause) () -> 0)
+let spike_parse_positive_int = ref (fun (_: (peano_context) clause) () -> 0)
 
 (* Dummy function to parse an integer. Updated in the lexer *)
 let main_interact = ref (fun  () -> let () = print_string "\n I am in dummies.ml !" in ())

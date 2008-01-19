@@ -19,7 +19,7 @@ class ['a, 'b] dictionary ini_size =
     method replace k v =
       let () = Hashtbl.remove value k in Hashtbl.add value k v
     method size =
-      let l = ref 0 in let fn x y = incr l in Hashtbl.iter fn value; !l
+      let l = ref 0 in let fn _ _ = incr l in Hashtbl.iter fn value; !l
     method empty = self#size = 0
     method clear = Hashtbl.clear value
     method apply_f f k v =
@@ -51,7 +51,7 @@ let htbl_update_list htbl k vl =
 
 (* Dictionary holding extra information on value -> key bindings *)
 class ['a, 'b] reversible_dictionary ini_size =
-  object (self)
+  object (_)
     inherit ['a, 'b] dictionary ini_size as super
     val revert_value = (Hashtbl.create ini_size : ('b, 'a list) Hashtbl.t)
     method add k v =
@@ -99,7 +99,7 @@ class ['a, 'b] assoc_dictionary ini_size =
     val value = (Hashtbl.create ini_size : ('a, 'b list) Hashtbl.t)
     val revert_value = (Hashtbl.create ini_size : ('b, 'a list) Hashtbl.t)
     method size =
-      let l = ref 0 in let fn x y = incr l in Hashtbl.iter fn value; !l
+      let l = ref 0 in let fn _ _ = incr l in Hashtbl.iter fn value; !l
     method empty = self#size = 0
     method add k v = htbl_update value k v; htbl_update revert_value v k
     method merge k l =
@@ -202,7 +202,7 @@ class ['a] equivalence_dictionary ini_size =
       let l = Hashtbl.find content r in
       let () = List.iter (Hashtbl.remove roots) l in Hashtbl.remove content r
     method size =
-      let l = ref 0 in let fn x y = incr l in Hashtbl.iter fn content; !l
+      let l = ref 0 in let fn _ _ = incr l in Hashtbl.iter fn content; !l
     method empty = self#size = 0
 
   end;;
@@ -246,7 +246,7 @@ class ['a] order_dictionary ini_size =
 	  in
 	  let new_l' = 
 	    if List.mem x l' then 
-	      let () = dico_equivalence#fill (fun x' y' -> true) [x; x'] in
+	      let () = dico_equivalence#fill (fun _ _ -> true) [x; x'] in
 	      let l'' = remove_all_el ( = ) x l' in
 	      let () = Hashtbl.remove content x' in
 	      let () = Hashtbl.add content x' l'' in
@@ -308,7 +308,7 @@ class ['a] order_dictionary ini_size =
     method iter f = Hashtbl.iter f content
 
     method size =
-      let l = ref 0 in let fn x y = incr l in Hashtbl.iter fn content; !l
+      let l = ref 0 in let fn _ _ = incr l in Hashtbl.iter fn content; !l
 
     method empty = self#size = 0
 

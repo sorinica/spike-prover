@@ -38,7 +38,7 @@ open Normalize
 
 
 
-let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is_strict =
+let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 
   let max_var = c#greatest_varcode + 1 in
   (* 0: display *)
@@ -57,7 +57,7 @@ let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is
 
   let max_c = c#all_maximal_terms false in 
   let tested_pos = List.filter 
-    (fun (p, t) -> 
+    (fun (p, _) -> 
       let (b, n, pos) = p in
       let term_pos = c#subterm_at_position (b, n, [List.hd pos]) in 
       if is_strict then list_member (fun x y -> x#syntactic_equal y) term_pos max_c else true
@@ -69,13 +69,11 @@ let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is
   let () = text := !text ^ (List.fold_left (fun x (p, t) -> x ^ (sprint_clausal_position p) ^ " --> " ^ t#string ^ "\n\t" ) ("\n\nfrom the positions:\n\t") tested_pos) in
   let fn t rule max_v is_gen =
     
-    let rule_nr = rule#number in
     (*     let () = buffered_output ("\nfn: max_v = " ^ (string_of_int max_v)) in *)
     let rule' = rule#substitute_and_rename [] max_v in (* rename the variables *)
-    let rule_nr' = rule'#number in
     let lhs = rule'#lefthand_side in
     
-    let (s1, s2) = try unify_terms t lhs is_gen with Failure "unify_terms" -> failwith "fn" in
+    let (s1, _) = try unify_terms t lhs is_gen with Failure "unify_terms" -> failwith "fn" in
 (*     let () = buffered_output rule'#string in *)
 (*     let () = print_detailed_clause rule' in *)
 (*     let () = buffered_output ("\ns1 = " ^ (sprint_subst s1) ^ " s2 = " ^ (sprint_subst s2)) in *)
@@ -183,7 +181,7 @@ let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is
 (* 	  let () = buffered_output ("\nTrying t = " ^ t#string) in *)
 	  try 
 	    let ls = all_inst t max_v false in
-	    let all_ts = List.map (fun (s1, _) -> List.map (fun (i, s) -> s) s1) ls in (* the terms for substitution in t *)
+	    let all_ts = List.map (fun (s1, _) -> List.map (fun (_, s) -> s) s1) ls in (* the terms for substitution in t *)
 	    
 	    let test = (List.exists (fun t -> not t#is_term) (List.flatten all_ts)) in
 	    if (ls = []) or test then fn2 tl max_v gen_on_term
@@ -196,7 +194,7 @@ let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is
 		let ls = all_inst t max_v true in
 		let () = text := !text ^  "\n\n\t by the generalization of some existential variables to universal ones on term "
 		  ^ t#string in
-		let all_ts = List.map (fun (s1, _) -> List.map (fun (i, s) -> s) s1) ls in (* the terms for substitution in t *)
+		let all_ts = List.map (fun (s1, _) -> List.map (fun (_, s) -> s) s1) ls in (* the terms for substitution in t *)
 		let test2 = (List.exists (fun t -> not t#is_term) (List.flatten all_ts)) in
 		if (ls = []) or test2 then fn2 tl max_v gen_on_term
 		else 
@@ -226,7 +224,7 @@ let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is
   let target_vars = List.map (fun (x,_,_) -> x) target_term#variables in
 
 (* expand the other terms whose variables have been instantiated  *)
-  let res_pos = try remove_el (fun (p1, t1) (p2, t2) -> p1 = p2) (p, c#subterm_at_position p) tested_pos with Failure "remove_el" -> failwith "remove_el: induction" in
+  let res_pos = try remove_el (fun (p1, _) (p2, _) -> p1 = p2) (p, c#subterm_at_position p) tested_pos with Failure "remove_el" -> failwith "remove_el: induction" in
 
   let rec fn6 i cl (s, r_orig) = 
 
@@ -235,7 +233,7 @@ let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is
     let max_var = cinst#greatest_varcode + 1 in
     
     let lpos = List.fold_right 
-      (fun (p, t) l -> 
+      (fun (p, _) l -> 
 	let t' = cinst#subterm_at_position p in 
 	let t'' = cl#subterm_at_position p in 
 	if t'#string <> t''#string then (p, t') :: l else l ) 
@@ -264,12 +262,10 @@ let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is
 	    (* build the new set of substitutions  *)
 	    let new_ls = 
 	      List.fold_right 
-		(fun (s', r2) l -> 
+		(fun (s', _) l -> 
 		  let new_s' = (List.map (fun (i, t) -> (i, t#substitute s')) s) @ s' in
 		  (* the variables in new_s' should be in lvar_trm  *)
 		  let new_s'' = List.filter (fun (x,_) -> list_member (=) x target_vars) new_s' in
-		  
-		  let vars_s' = (List.fold_right (fun (i, t) l -> t#variables @ l) s' []) in
 		  (new_s'', r_orig) :: l)
 		ls [] 
 	    in
@@ -308,7 +304,7 @@ let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is
   in
 
   let () = if !coq_mode = true then
-    let f (x, t) = sprint_var x (Def_sort 0) true in
+    let f (x, _) = sprint_var x (Def_sort 0) true in
     let fsts = fst (List.split ls') in
     let lstlst = List.map (List.map f) fsts in
     Coq.induction (List.hd lstlst)
@@ -340,7 +336,7 @@ let generate verbose   dummy_cxt cxt (c:Clauses.peano_context Clauses.clause) is
 (*     let () = buffered_output ("t1 = " ^ t1#string) in *)
 (*     let () = buffered_output ("t2 = " ^ t2#string) in *)
 
-    let (s1, s2) = try unify_terms t1 t2 false with Failure "unify_terms" -> failwith "\nError in Generate: please report it" in
+    let (_, s2) = try unify_terms t1 t2 false with Failure "unify_terms" -> failwith "\nError in Generate: please report it" in
     let r = (new_r#substitute s2)#expand_sorts in
 
     let cond = r#negative_lits in
