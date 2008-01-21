@@ -1425,7 +1425,7 @@ let unify_terms tc tr is_gen =
 						if is_existential_var tc then failwith "fn"
 						else lc := fn1 ((tc#var_content, tc#sort), t2) !lc
 					| false, true -> (* tr free, tc bound *)
-						if is_existential_var tr && not is_gen then failwith "fn"
+						if is_existential_var tr && not is_gen then failwith "fn" else
 						lr := fn1 ((tr#var_content, tr#sort), t1) !lr
 					| false, false -> (* both variables are bound *)
 						fn t1 lc t2 lr

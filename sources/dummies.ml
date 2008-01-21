@@ -126,7 +126,7 @@ let print_dico_rules () =
   buffered_output "dico_rules:";
   dico_rules#iter
     (fun k lr ->
-       try buffered_output (dico_const_string#find k) with Not_found -> failwith "raising Not_found in print_dico_rules";
+       (try buffered_output (dico_const_string#find k) with Not_found -> failwith "raising Not_found in print_dico_rules");
        buffered_output " --> ";
        buffered_output (sprint_list "\n" (fun r -> r#string)
 	 (* (fun x -> string_of_int x) *) lr))
