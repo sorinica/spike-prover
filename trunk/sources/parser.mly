@@ -1011,26 +1011,26 @@ opt_specif_status:
   TOK_STATUS TOK_COLUMN list_of_statuses
   { buffered_output "\nSuccessfully parsed statuses" ; flush stdout ;
     print_dico_id_status () ;
-    try complete_status_dico ()
-    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status") ;
+    (try complete_status_dico ()
+    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status") );
     try check_status_equivalent_symbols ()
-    with (Failure check_status_equivalent_symbols) -> parse_failwith "equivalent symbols must have the same status"
+    with (Failure "check_status_equivalent_symbols") -> parse_failwith "equivalent symbols must have the same status"
   }
 | TOK_STATUS TOK_COLUMN
   { buffered_output "\nSuccessfully parsed statuses" ; flush stdout ;
     print_dico_id_status () ;
-    try complete_status_dico ()
-    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status") ;
+    (try complete_status_dico ()
+    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status")) ;
     try check_status_equivalent_symbols ()
-    with (Failure check_status_equivalent_symbols) -> parse_failwith "equivalent symbols must have the same status"
+    with (Failure "check_status_equivalent_symbols") -> parse_failwith "equivalent symbols must have the same status"
   }
 |
   { buffered_output "\nSuccessfully parsed statuses" ; flush stdout ;
     print_dico_id_status () ;
-    try complete_status_dico ()
-    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status") ;
+    (try complete_status_dico ()
+    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status")) ;
     try check_status_equivalent_symbols ()
-    with (Failure check_status_equivalent_symbols) -> parse_failwith "equivalent symbols must have the same status"
+    with (Failure "check_status_equivalent_symbols") -> parse_failwith "equivalent symbols must have the same status"
   }
 
 list_of_statuses:

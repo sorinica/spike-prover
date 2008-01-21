@@ -145,7 +145,7 @@ class virtual generic : object ('a) method virtual equal : 'a -> bool end
 class virtual printable_object :
   object
     val mutable string : string pointer
-    method private virtual compute_string : string
+    method virtual compute_string : string
     method string : string
     method fprint : out_channel -> unit
     method pprint : Format.formatter -> unit

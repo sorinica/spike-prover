@@ -1350,7 +1350,7 @@ class virtual generic =
 	method virtual equal : 'a -> bool end;;
 
 class virtual printable_object =
-  object (self : 'a)
+  object (self : < compute_string : string; .. >)
     val mutable string = (Undefined : string pointer)
     method string =
       match string with
