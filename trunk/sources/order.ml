@@ -15,6 +15,72 @@ open Terms
 (* Are all these elements totally ordered.
    We produce an ordered list in decreasing order *)
 
+  (* page 26 Baader & Nipkow book  *)
+type order = GR | EQ | NGE
+
+(* page 27 Baader & Nipkow book  *)
+let rec lex ord = function
+  |([], []) -> EQ
+  |(x::xs, y::ys) -> (match ord (x,y) with 
+      | GR ->  GR
+      | EQ -> lex ord (xs,ys) 
+      | NGE -> NGE
+    )
+  | (_,_) -> NGE
+     
+ 
+
+  (* remove the element y from a list xs  *)
+let rec rem1 ord = function
+  | ([],_) -> []
+  | (x::xs,y) -> 
+      (match ord (x, y) with
+	| EQ -> xs
+	| GR
+	| NGE -> x :: (rem1 ord (xs, y))
+      )
+
+  (* multiset difference  *)
+let rec mdiff ord = function
+  | (xs, []) -> xs
+  | (xs, y::ys) -> mdiff ord ((rem1 ord (xs,y)), ys)
+
+let rec mul ord (ms, ns) = 
+  let nms = mdiff ord (ns, ms) 
+  and mns = mdiff ord (ms, ns) in
+  if nms == [] && mns == [] then EQ
+  else if List.for_all (fun n -> List.exists (fun m -> (ord (m, n)) == GR) mns) nms then GR
+  else NGE
+  
+(* page 123 Baader & Nipkow book  *)
+
+let rec rpo ord ((s:term),(t:term)) = match (s#content, t#content) with
+  | (_, Var_univ (x,_)) ->  if s#syntactic_equal t then EQ else
+      if s#occur x then GR else NGE 
+  | (_, Var_exist (x,_)) -> if s#syntactic_equal t then EQ else
+      if s#occur x then GR else NGE
+  | (Var_univ _, Term _) 
+  | (Var_exist _, Term _) -> NGE
+  | (Term (f, ss, _), Term (g, ts, _)) -> 
+      if List.for_all (fun si -> (rpo ord (si,t) == NGE)) ss then
+	match ord f g with 
+	  | GR ->
+	      if List.for_all (fun ti -> (rpo ord (s,ti) == GR)) ts then
+		GR else NGE
+	  | EQ ->
+	      (if List.for_all (fun ti -> (rpo ord (s,ti) == GR)) ts then
+		match get_status f with
+		  | Left -> lex (rpo ord) (ss,ts)
+		  | Right -> 
+		      let inv_ss = List.rev ss
+		      and inv_ts = List.rev ts in
+		      lex (rpo ord) (inv_ss,inv_ts)
+		  | Multiset -> mul (rpo ord) (ss,ts)
+	      else NGE
+	      )
+	  | NGE -> NGE
+      else GR
+
 let rec consecutive_elements = function
     [] -> []
   | l ->
@@ -68,11 +134,11 @@ let remove_common_elements equiv_f l l' =
 let rec multiset_greater is_total equiv_f greater_f l l'  =
   let l1, l2 = remove_common_elements equiv_f l l' in
   match l1, l2 with
-    [], [] -> false
-  | _ ->
+    |  [], [] -> false
+    | _ ->
       let f y = List.exists (fun x -> greater_f is_total x y ) l1 in
       List.for_all f l2
-
+	
 (* Multiset extension to an order *)
 let rec multiset_geq is_total _ greater_f l l' =
   let l1, l2 = remove_common_elements (fun x -> x#syntactic_equal) l l' in
