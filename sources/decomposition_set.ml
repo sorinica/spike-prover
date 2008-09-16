@@ -279,6 +279,8 @@ let congruence_closure _ c level =
     let n', p' = c#content in
     let n = List.map (fun x ->(x#copy)#update_pos) n' in
     let p = List.map (fun x ->(x#copy)#update_pos) p' in
+    
+    let _ = n @ p in
     let _, ne = List.partition (fun x -> x#is_diff) n in
     let pd, _ = List.partition (fun x -> x#is_diff) p in
 (*     let lpos =  List.map (fun x -> x#both_sides) (pe @ nd) in *)

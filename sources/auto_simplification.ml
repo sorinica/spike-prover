@@ -23,8 +23,9 @@ let auto_simplification verbose c _ level =
   (* 0: displa
 y *)
   
-  let n1, _ = c#content in
+  let n1, p1 = c#content in
   let size_n1 = List.length n1 in
+  let _ = List.length p1 in
 
   (* store of rewriting rules  *)
   

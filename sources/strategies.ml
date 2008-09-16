@@ -480,6 +480,7 @@ class strategy (cs: concrete_strategy) =
 		      | Id_st rm -> 
 			  let empty_cxt = ([],[]) in 
 			  let dummy_st = (new strategy (Try_ [])) in 
+			  let _ = false in
 			  (
 			    try 
 			      (* 				let () = write_pos_clause phi in  *)

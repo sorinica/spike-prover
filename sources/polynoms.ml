@@ -18,7 +18,7 @@ exception Inconsistent
   (* the arguments of any ac function are sorted in decreasing order  *)
 let preprocess_ac t = 
   let rec fn t = match t#content with
-      Var_exist _  -> t
+      Var_exist _  
     | Var_univ _  -> t
     | Term (f, l, s) -> 
 	let l' = List.map fn l in
@@ -45,7 +45,7 @@ let rec well_founded (_:int) list =
 
   (* for s(..s(x)) returns the number of s and the term x  *)
 let rec count_s term = match term#content with  
-    Term (symb, l, _) -> 
+     Term (symb, l, _) -> 
       if symb = id_symbol_s then begin
 	assert (List.length l = 1);
       	let count_l, term_l = count_s (List.hd l) in 
@@ -58,7 +58,7 @@ let rec count_s term = match term#content with
 
   (* for p(..p(x)) returns the number of p and the term x  *)
 let rec count_p term = match term#content with  
-    Term (symb, l, _) -> 
+    Term (symb, l, _)  -> 
       if !int_specif_defined && symb = id_symbol_p then begin
 	assert (List.length l = 1);
       	let count_l, term_l = count_p (List.hd l) in 
@@ -111,70 +111,69 @@ let multiply_monoms (c1,m1) (c2,m2) =
      the "zero" terms and transforms terms representing naturals into constants  *)
 let rec normalize_monom_list l = 
   let treat_monoms = function 
-    [] -> 0,[]
-  | (0, _) :: t -> normalize_monom_list t
-  | (c, m) :: t  -> 
-      let const_m, processed_m = process_monom (c,m) in 
-      let const_t, poly_t = (normalize_monom_list t) in 
-      (const_m + const_t, multiset_merge_sorted_lists  (fun m1 m2  ->
-      	m1#syntactic_equal m2) (fun m1 m2 -> heavier m1 m2)
-      	processed_m poly_t) 
+      [] -> 0,[]
+    | (0, _) :: t -> normalize_monom_list t
+    | (c, m) :: t  -> 
+	let const_m, processed_m = process_monom (c,m) in 
+	let const_t, poly_t = (normalize_monom_list t) in 
+	(const_m + const_t, multiset_merge_sorted_lists  (fun m1 m2  ->
+      	  m1#syntactic_equal m2) (fun m1 m2 -> heavier m1 m2)
+      	  processed_m poly_t) 
   in
   let const, treated_monoms = treat_monoms l in
   let no_null = elim_null_monoms treated_monoms in 
   let sorted_monoms = Sort.list (fun (_, t1) (_, t2) -> heavier 
-      t1 t2) no_null in 
+    t1 t2) no_null in 
   const, sorted_monoms
-	
 and process_monom (c,m) =  
   match m#content with
-      Term (symb,l,_) -> 
-				(if symb = id_symbol_plus then
-						let l_sorted = Sort.list (fun x y -> heavier y x) l in 
-						let lc = List.map (fun x -> (c, x)) l_sorted in 
-						normalize_monom_list lc 
- 				 else if symb = (id_symbol_zero) then 0,[]
-				 else if symb = (id_symbol_minus) then 
-						(assert (List.length l = 2);
-							let minuhend = List.hd l in
-							let subtrahend = last_el l in
-							let (c1,t1),(c2,t2) = order_two (fun (_,t') (_,t'') -> heavier t' t'')  (c,minuhend) (-c,subtrahend)  in 
-							normalize_monom_list [c1, t1; c2, t2])
-				 else if symb = (id_symbol_s) then
-						(assert (List.length l = 1);
-							let s_of_l, term_l = count_s (List.hd l) in
- 							let s_of_t = s_of_l + 1 in 
-							let const,poly = normalize_monom_list [1,term_l] in
-							let c_times_poly = (multiply_const (c, poly)) in
-							c * (s_of_t + const), c_times_poly)
-				 else if !int_specif_defined && symb = (id_symbol_p) then
-						(assert (List.length l = 1);
-							let p_of_l, term_l = count_p (List.hd l) in
- 							let p_of_t = - (p_of_l + 1) in 
-							let const,poly = normalize_monom_list [1,term_l] in
-							let c_times_poly = (multiply_const (c, poly)) in
-							c * (p_of_t + const), c_times_poly) 
-				 else if symb = (id_symbol_times) then
-						(let test_zero t = t#syntactic_equal (term_nat 0) in
-							if List.exists test_zero l then 0, [0, m]
-							else 
-	  						let fn t p =
-	    							let si, ti = count_s t in
-	    							let ci, pi = normalize_monom_list [1, ti] in
-	    							multiply_monoms p ((ci + si), pi)
-	  						in 
-	  						let l_sorted = Sort.list (fun x y -> heavier y x) l in
-	  						let const_pi, mult_pi = List.fold_right fn l_sorted (normalize_monom_list [1, (term_nat 1)]) in
-	  						let true_pi = (elim_null_monoms mult_pi) in 
-	  						if List.length true_pi = 1 then (c * const_pi, (multiply_const (c,true_pi)))
-					  		else 
-				    				let c_norm, normalized_pi = normalize_monom_list true_pi in
-	    							let returned_const = c * (const_pi + c_norm) in
-	    							let returned_poly = multiply_const (c, normalized_pi) in
-	    							returned_const, returned_poly)
-					else 0,[(c,m)])
-		 	    | Var_exist _ | Var_univ _ -> 0,[(c,m)]
-	;;
+      Term (symb,l,_)-> 	
+	(if symb = id_symbol_plus then
+	let l_sorted = Sort.list (fun x y -> heavier y x) l in 
+	let lc = List.map (fun x -> (c, x)) l_sorted in 
+	normalize_monom_list lc 
+      else if symb = (id_symbol_zero) then 0,[]
+      else if symb = (id_symbol_minus) then 
+	(assert (List.length l = 2);
+	let minuhend = List.hd l in
+	let subtrahend = last_el l in
+	let (c1,t1),(c2,t2) = order_two (fun (_,t') (_,t'') -> heavier t' t'')  (c,minuhend) (-c,subtrahend)  in 
+	normalize_monom_list [c1, t1; c2, t2])
+      else if symb = (id_symbol_s) then
+	(assert (List.length l = 1);
+	let s_of_l, term_l = count_s (List.hd l) in
+ 	let s_of_t = s_of_l + 1 in 
+	let const,poly = normalize_monom_list [1,term_l] in
+	let c_times_poly = (multiply_const (c, poly)) in
+	c * (s_of_t + const), c_times_poly)
+      else if !int_specif_defined && symb = (id_symbol_p) then
+	(assert (List.length l = 1);
+	let p_of_l, term_l = count_p (List.hd l) in
+ 	let p_of_t = - (p_of_l + 1) in 
+	let const,poly = normalize_monom_list [1,term_l] in
+	let c_times_poly = (multiply_const (c, poly)) in
+	c * (p_of_t + const), c_times_poly) 
+      else if symb = (id_symbol_times) then
+	(let test_zero t = t#syntactic_equal (term_nat 0) in
+	if List.exists test_zero l then 0, [0, m]
+	else 
+	  let fn t p =
+	    let si, ti = count_s t in
+	    let ci, pi = normalize_monom_list [1, ti] in
+	    multiply_monoms p ((ci + si), pi)
+	  in 
+	  let l_sorted = Sort.list (fun x y -> heavier y x) l in
+	  let const_pi, mult_pi = List.fold_right fn l_sorted (normalize_monom_list [1, (term_nat 1)]) in
+	  let true_pi = (elim_null_monoms mult_pi) in 
+	  if List.length true_pi = 1 then (c * const_pi, (multiply_const (c,true_pi)))
+	  else 
+	    let c_norm, normalized_pi = normalize_monom_list true_pi in
+	    let returned_const = c * (const_pi + c_norm) in
+	    let returned_poly = multiply_const (c, normalized_pi) in
+	    returned_const, returned_poly)
+      else 0,[(c,m)])
+    | Var_exist _ | Var_univ _ -> 0,[(c,m)]
+;;
 
 (* a polynom is a wrapper around
    - a constant

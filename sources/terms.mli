@@ -333,7 +333,7 @@ val sprint_detailed_subst :
   term ->
   unit
 
-val dico_rpo_greater : (((string * string), bool) Dicos.dictionary)
+val dico_rpo_greater : (((string * string), Symbols.order) Dicos.dictionary)
 val order_terms :
   ((bool * 'a * 'b) * (term))
   list -> bool -> ((bool * 'a * 'b) * term) list

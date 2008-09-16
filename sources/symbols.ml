@@ -29,6 +29,8 @@ type parameterized_sort =
     Actual_sort of sort
   | Variable_sort of var
 
+  (* page 26 Baader & Nipkow book  *)
+type order = GR | EQ | NGE
 
 
 let var_equal = ( = )

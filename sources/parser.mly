@@ -48,6 +48,32 @@ let introduce_var_exist c =
 
 (* If no ordering is specified in the specification file, we use a total ordering based on symbol codes *)
 let default_fill_order_dico () =
+  let fn c = 
+    let ldef_symb = all_nonvariable_symbols c in
+    let head_symbol = 
+      try 
+	(match (c#lefthand_side)#content with
+	    Term (f, _, _) -> f
+	  | Var_exist _| Var_univ _ -> failwith "default_fill_order_dico"
+	)
+      with Horn -> failwith "default_fill_order_dico"
+    in
+    let r_cond_symb = try 
+      remove_el ( = ) head_symbol ldef_symb 
+    with Failure "remove_el" -> failwith "default_fill_order_dico"
+    in
+    let () = if !debug_mode then 
+      let () = buffered_output c#string in
+      let () = print_string "\n" in
+      let () = print_int head_symbol in
+      let () = print_string "\n" in
+      let () = print_list ", " print_int r_cond_symb in
+      let () = print_string "\n" in
+      let () = flush stdout in
+      ()
+    in
+    List.iter (dico_order#add_couple head_symbol) r_cond_symb
+  in
   let () = buffered_output "Setting default greater order for symbols" in
   let () = flush stdout in
   let axioms = List.map (fun (_, _, x) -> x) !yy_axioms in
@@ -57,6 +83,7 @@ let default_fill_order_dico () =
     let () = print_dico_const_string () in
     ()
   in
+  let _ = List.iter fn axioms in
   let () = 
     try
       dico_order#merge_equivalence_relation dico_equivalence ;
@@ -1020,7 +1047,7 @@ opt_specif_status:
   { buffered_output "\nSuccessfully parsed statuses" ; flush stdout ;
     print_dico_id_status () ;
     (try complete_status_dico ()
-    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status")) ;
+    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status") );
     try check_status_equivalent_symbols ()
     with (Failure "check_status_equivalent_symbols") -> parse_failwith "equivalent symbols must have the same status"
   }
@@ -1028,7 +1055,7 @@ opt_specif_status:
   { buffered_output "\nSuccessfully parsed statuses" ; flush stdout ;
     print_dico_id_status () ;
     (try complete_status_dico ()
-    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status")) ;
+    with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status") );
     try check_status_equivalent_symbols ()
     with (Failure "check_status_equivalent_symbols") -> parse_failwith "equivalent symbols must have the same status"
   }

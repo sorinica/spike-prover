@@ -9,7 +9,7 @@ open Diverse
   
 class virtual pi_object =
   
-  object (self: < compute_pi : bool; .. >)
+  object (self:  < compute_pi : bool; .. >)
 
     val mutable is_pi = (Undefined: bool pointer)
 

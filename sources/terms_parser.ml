@@ -202,10 +202,10 @@ let rec unify (tau1, tau2) =
 	else raise (TypeClash (Unknown, t2))
 
     | (* type variable and type t2 *)
-	((TypeVar (VT (x, Unknown))) as t1), Number ->
+	((TypeVar (VT (x, Unknown)) ) as t1), Number ->
 	if not(occurs (VT (x, Unknown)) Number) then (TypeVar (VT (x, Number))), Number
 	else raise (TypeClash (t1, Number))
-    |	((TypeVar (VT (x, Unknown))) as t1), (Arrow (a, b)) ->
+    |	((TypeVar (VT (x, Unknown)) ) as t1), (Arrow (a, b)) ->
 	if not(occurs (VT (x, Unknown)) (Arrow (a, b))) then (TypeVar (VT (x, (Arrow (a, b))))), (Arrow (a, b))
 	else raise (TypeClash (t1, (Arrow (a, b))))
     |	((TypeVar (VT (x, Unknown)) ) as t1), Unknown ->

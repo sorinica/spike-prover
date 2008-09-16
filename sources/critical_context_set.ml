@@ -166,6 +166,9 @@ begin
 (* main loop *)   
    while not(!stop) do
         let set_to_add_remove = ref ([],[]) in
+        let _ = ref [] in
+        let _ = ref [] in
+       
         let verify cont = 
             let exists = ref false in
             let () = List.iter (fun cobs -> 

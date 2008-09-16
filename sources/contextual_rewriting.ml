@@ -115,7 +115,9 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
 
   (* 7: Make a conjunction of these conditions for a given rewrite rule. *)
   let all_conditions type_system nr_cxt rw_r =
-    let l_2_r = List.hd rw_r#positive_lits in
+    let l_2_r = List.hd rw_r#positive_lits
+    and _ = rw_r#negative_lits 
+    in
     let other_conditions (b, n, p) sigma kept_or =
       let rw_r' = rw_r#substitute_and_rename sigma max_var in
       let l_2_r = List.hd rw_r'#positive_lits
@@ -231,8 +233,7 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
     match c_pos with
       Pos_defined p ->
         begin (* Discards second level PM *)
-          try 
-						let _ = c#subterm_at_position p in c_pos
+          try let _ = c#subterm_at_position p in c_pos
           with (Failure "subterm_at_position") ->
             print_string "Invalid position" ;
             buffered_output "" ;
@@ -357,6 +358,7 @@ let all_terms_pos c =
 
 let reduce_clause fn_rewrite arg_sl _ c cxt =
   
+  let _ = ref "" in
   let rec fn lpos cl = 
     match lpos with
 	[] -> "", cl

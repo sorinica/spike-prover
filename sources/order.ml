@@ -12,20 +12,15 @@ open Io
 open Symbols
 open Terms
 
-(* Are all these elements totally ordered.
-   We produce an ordered list in decreasing order *)
-
-  (* page 26 Baader & Nipkow book  *)
-type order = GR | EQ | NGE
-
 (* page 27 Baader & Nipkow book  *)
 let rec lex ord = function
   |([], []) -> EQ
-  |(x::xs, y::ys) -> (match ord (x,y) with 
+  |(x::xs, y::ys) -> 
+      (match ord (x,y) with 
       | GR ->  GR
       | EQ -> lex ord (xs,ys) 
       | NGE -> NGE
-    )
+      )
   | (_,_) -> NGE
      
  
@@ -52,34 +47,63 @@ let rec mul ord (ms, ns) =
   else if List.for_all (fun n -> List.exists (fun m -> (ord (m, n)) == GR) mns) nms then GR
   else NGE
   
-(* page 123 Baader & Nipkow book  *)
+let multiset_greater ord ms ns = mul ord (ms, ns) == GR
 
-let rec rpo ord ((s:term),(t:term)) = match (s#content, t#content) with
-  | (_, Var_univ (x,_)) ->  if s#syntactic_equal t then EQ else
-      if s#occur x then GR else NGE 
-  | (_, Var_exist (x,_)) -> if s#syntactic_equal t then EQ else
-      if s#occur x then GR else NGE
-  | (Var_univ _, Term _) 
-  | (Var_exist _, Term _) -> NGE
-  | (Term (f, ss, _), Term (g, ts, _)) -> 
-      if List.for_all (fun si -> (rpo ord (si,t) == NGE)) ss then
-	match ord f g with 
-	  | GR ->
-	      if List.for_all (fun ti -> (rpo ord (s,ti) == GR)) ts then
-		GR else NGE
-	  | EQ ->
-	      (if List.for_all (fun ti -> (rpo ord (s,ti) == GR)) ts then
-		match get_status f with
-		  | Left -> lex (rpo ord) (ss,ts)
-		  | Right -> 
-		      let inv_ss = List.rev ss
-		      and inv_ts = List.rev ts in
-		      lex (rpo ord) (inv_ss,inv_ts)
-		  | Multiset -> mul (rpo ord) (ss,ts)
+let multiset_equivalent ord ms ns = mul ord (ms, ns) == EQ
+
+let multiset_geq ord ms ns = mul ord (ms, ns) <> NGE
+
+(* page 123 Baader & Nipkow book, extended to treat total orders over variables *)
+
+let rec rpo is_total ((s:term),(t:term)) = 
+  try 
+    dico_rpo_greater#find (s#string, t#string)
+  with Not_found ->
+    let res = 
+      match (s#content, t#content) with
+	| Var_exist(x,_), Var_exist(y,_) 
+ 	| Var_univ(x,_), Var_exist(y,_) 	
+	| Var_exist (x,_), Var_univ (y,_)
+	| Var_univ (x,_), Var_univ (y,_) -> if var_equal x  y then EQ else if x > y && is_total then GR else NGE
+	| (Term _, Var_univ (x,_))
+	| (Term _, Var_exist (x,_)) -> 
+	    if s#occur x then GR else NGE
+	| (Var_univ _, Term _) 
+	| (Var_exist _, Term _) -> NGE
+	| (Term (f, ss, _), Term (g, ts, _)) -> 
+	    if List.for_all (fun si -> (rpo is_total (si,t) == NGE)) ss then
+	      if greater is_total f g then 
+		if List.for_all (fun ti -> (rpo is_total (s,ti) == GR)) ts then
+		  GR else NGE
+	      else if equivalent f g then
+		(if List.for_all (fun ti -> (rpo is_total (s,ti) == GR)) ts then
+		  match get_status f with
+		    | Left -> lex (rpo is_total) (ss,ts)
+		    | Right -> 
+			let inv_ss = List.rev ss
+			and inv_ts = List.rev ts in
+			lex (rpo is_total) (inv_ss,inv_ts)
+		    | Multiset -> mul (rpo is_total) (ss,ts)
+		else NGE
+		)
 	      else NGE
-	      )
-	  | NGE -> NGE
-      else GR
+	    else GR
+    in
+    let () = dico_rpo_greater#add (s#string, t#string) res
+    in res
+ 
+
+
+let rpo_greater is_total t t' = rpo is_total (t, t') == GR
+
+let rpo_equivalent t t' = rpo true (t, t') == EQ
+
+let rpo_geq is_total t t' =  rpo is_total (t, t') <> NGE
+
+let rpo_incomparable is_total (t:term) (t': term) = rpo is_total (t, t') == NGE && rpo is_total (t', t) == NGE
+
+(* Are all these elements totally ordered.
+   We produce an ordered list in decreasing order *)
 
 let rec consecutive_elements = function
     [] -> []
@@ -106,113 +130,113 @@ let constant_symbols () =
   !l
 
 (* Lexicographic order *)
-let lex_greater is_total equiv_f greater_f l l' =
-  let rec fn l l' =
-    match l, l' with
-      [], _ -> false
-    | _::_, [] -> true
-    | h::t, h'::t' ->
-	greater_f is_total h h' || (equiv_f h h' && fn t t') in
-  fn l l'
+(* let lex_greater is_total equiv_f greater_f l l' = *)
+(*   let rec fn l l' = *)
+(*     match l, l' with *)
+(*       [], _ -> false *)
+(*     | _::_, [] -> true *)
+(*     | h::t, h'::t' -> *)
+(* 	greater_f is_total h h' || (equiv_f h h' && fn t t') in *)
+(*   fn l l' *)
 
-(* Remove common elements from two multisets *)
-let remove_common_elements equiv_f l l' =
-  let rec fn l l' =
-    match l, l' with
-      [], _ as c -> c
-    | _, [] as c -> c
-    | h::t, v ->
-        try
-          let v' = remove_el equiv_f h v in
-          fn t v'
-        with Failure "remove_el" ->
-          let l1, l2 = fn t v in
-          h::l1, l2 in
-  fn l l'
+(* (* Remove common elements from two multisets *) *)
+(* let remove_common_elements equiv_f l l' = *)
+(*   let rec fn l l' = *)
+(*     match l, l' with *)
+(*       [], _ as c -> c *)
+(*     | _, [] as c -> c *)
+(*     | h::t, v -> *)
+(*         try *)
+(*           let v' = remove_el equiv_f h v in *)
+(*           fn t v' *)
+(*         with Failure "remove_el" -> *)
+(*           let l1, l2 = fn t v in *)
+(*           h::l1, l2 in *)
+(*   fn l l' *)
 
-(* Multiset extension to an order *)
-let rec multiset_greater is_total equiv_f greater_f l l'  =
-  let l1, l2 = remove_common_elements equiv_f l l' in
-  match l1, l2 with
-    |  [], [] -> false
-    | _ ->
-      let f y = List.exists (fun x -> greater_f is_total x y ) l1 in
-      List.for_all f l2
+(* (* Multiset extension to an order *) *)
+(* let rec multiset_greater is_total equiv_f greater_f l l'  = *)
+(*   let l1, l2 = remove_common_elements equiv_f l l' in *)
+(*   match l1, l2 with *)
+(*     [], [] -> false *)
+(*   | _ -> *)
+(*       let f y = List.exists (fun x -> greater_f is_total x y ) l1 in *)
+(*       List.for_all f l2 *)
+
+(* (* Multiset extension to an order *) *)
+(* let rec multiset_geq is_total equiv_f greater_f l l' = *)
+(*   let l1, l2 = remove_common_elements (fun x -> x#syntactic_equal) l l' in *)
+(*   match l1, l2 with *)
+(*     [], [] -> true *)
+(*   | _ -> *)
+(*       let f y = List.exists (fun x -> greater_f is_total x y) l1 in *)
+(*       List.for_all f l2 *)
+
+(* (* Extension of an order w.r.t a status *) *)
+(* let extended_greater is_total equiv_f greater_f status_v l l' = *)
+(*   match status_v with *)
+(*     Left -> lex_greater is_total  equiv_f greater_f l l' *)
+(*   | Right -> let l1 = List.rev l  *)
+(* 	     and l1' = List.rev l' in  *)
+(*     lex_greater is_total equiv_f greater_f l1 l1' *)
+(*   | Multiset -> multiset_greater is_total equiv_f greater_f l l' *)
+
+(* (* Recursive path ordering with status *) *)
+(* let rec rpo_equivalent t t' = *)
+(*   let res =  *)
+(*     match t#content, t'#content with *)
+(* 	Term (f, l, s), Term (f', l', s') -> *)
+(* 	  let st = get_status f in *)
+(* 	  equivalent f f' && List.length l = List.length l' && *)
+(* 	      ((st = Multiset && check_on_permutations rpo_equivalent l l') *)
+(* 	      || *)
+(* 	      (st <> Multiset && List.for_all2 rpo_equivalent l l')) *)
+(*       | Var_exist (x, _), Var_exist (x', _)  *)
+(*       | Var_exist (x, _), Var_univ (x', _)  *)
+(*       | Var_univ (x, _), Var_exist (x', _)  *)
+(*       | Var_univ (x, _), Var_univ (x', _) -> var_equal x x' *)
+(*       | Var_exist _, Term _ | Term _, Var_exist _ | Var_univ _, Term _| Term _, Var_univ _ -> false *)
+(*   in *)
+(*   res *)
+
+
+(* let rec rpo_greater is_total (t: term) (t': term) = *)
+(*   try  *)
+(*     dico_rpo_greater#find (t#string, t'#string)  *)
+(*   with Not_found ->  *)
+(*     let res =  *)
+(*       match t#content, t'#content with *)
+(* 	  Term (f, l, s), Term (f', l', s') -> *)
+(* 	    begin *)
+(*       	      let st = get_status f in *)
+(*       	      (greater is_total f f' && multiset_greater is_total rpo_equivalent rpo_greater [t] l') *)
+(* 	      || *)
+(*       	      (equivalent f f' && st = Multiset && multiset_greater *)
+(* 		is_total rpo_equivalent rpo_greater l l') *)
+(* 	      || *)
+(*       	      (equivalent f f' && st <> Multiset && extended_greater is_total *)
+(* 		rpo_equivalent rpo_greater st l l' && not (List.exists *)
+(* 		  (t#syntactic_equal) l') && List.for_all (rpo_greater *)
+(* 		  is_total t) l') *)
+(* 	      || *)
+(* 	      (multiset_geq is_total rpo_equivalent rpo_greater l [t']) *)
+(* 	    end *)
+(* 	| Term (_, _, _), Var_exist (x, _)   *)
+(* 	| Term (_, _, _), Var_univ (x, _) -> (t#occur x) or  *)
+(* 	    (is_total && (List.for_all (fun (v,_, _) -> v > x) t#variables)) *)
+(* 	| Var_exist(x,_), Var_univ(y,_) *)
+(* 	| Var_exist(x,_), Var_exist(y,_) *)
+(* 	| Var_univ(x,_), Var_exist(y,_) *)
+(* 	| Var_univ(x,_), Var_univ(y,_) -> is_total &&  x > y  *)
+(* 	| Var_exist _, Term _ | Var_univ _, Term _ -> false *)
+(*     in  *)
+(*     let () = dico_rpo_greater#add (t#string, t'#string) res in *)
+(*     res *)
+
+(* let rpo_geq is_total t t' =  rpo_equivalent t t' || rpo_greater is_total t t' *)
 	
-(* Multiset extension to an order *)
-let rec multiset_geq is_total _ greater_f l l' =
-  let l1, l2 = remove_common_elements (fun x -> x#syntactic_equal) l l' in
-  match l1, l2 with
-    [], [] -> true
-  | _ ->
-      let f y = List.exists (fun x -> greater_f is_total x y) l1 in
-      List.for_all f l2
-
-(* Extension of an order w.r.t a status *)
-let extended_greater is_total equiv_f greater_f status_v l l' =
-  match status_v with
-    Left -> lex_greater is_total  equiv_f greater_f l l'
-  | Right -> let l1 = List.rev l 
-	     and l1' = List.rev l' in 
-    lex_greater is_total equiv_f greater_f l1 l1'
-  | Multiset -> multiset_greater is_total equiv_f greater_f l l'
-
-(* Recursive path ordering with status *)
-let rec rpo_equivalent t t' =
-  let res = 
-    match t#content, t'#content with
-	Term (f, l, _), Term (f', l', _) ->
-	  let st = get_status f in
-	  equivalent f f' && List.length l = List.length l' &&
-	      ((st = Multiset && check_on_permutations rpo_equivalent l l')
-	      ||
-	      (st <> Multiset && List.for_all2 rpo_equivalent l l'))
-      | Var_exist (x, _), Var_exist (x', _) 
-      | Var_exist (x, _), Var_univ (x', _) 
-      | Var_univ (x, _), Var_exist (x', _) 
-      | Var_univ (x, _), Var_univ (x', _) -> var_equal x x'
-      | Var_exist _, Term _ | Term _, Var_exist _ | Var_univ _, Term _| Term _, Var_univ _ -> false
-  in
-  res
-
-
-let rec rpo_greater is_total (t: term) (t': term) =
-  try 
-    dico_rpo_greater#find (t#string, t'#string) 
-  with Not_found -> 
-    let res = 
-      match t#content, t'#content with
-	  Term (f, l, _), Term (f', l', _) ->
-	    begin
-      	      let st = get_status f in
-      	      (greater is_total f f' && multiset_greater is_total rpo_equivalent rpo_greater [t] l')
-	      ||
-      	      (equivalent f f' && st = Multiset && multiset_greater
-		is_total rpo_equivalent rpo_greater l l')
-	      ||
-      	      (equivalent f f' && st <> Multiset && extended_greater is_total
-		rpo_equivalent rpo_greater st l l' && not (List.exists
-		  (t#syntactic_equal) l') && List.for_all (rpo_greater
-		  is_total t) l')
-	      ||
-	      (multiset_geq is_total rpo_equivalent rpo_greater l [t'])
-	    end
-	| Term (_, _, _), Var_exist (x, _)  
-	| Term (_, _, _), Var_univ (x, _) -> (t#occur x) or 
-	    (is_total && (List.for_all (fun (v,_, _) -> v > x) t#variables))
-	| Var_exist(x,_), Var_univ(y,_)
-	| Var_exist(x,_), Var_exist(y,_)
-	| Var_univ(x,_), Var_exist(y,_)
-	| Var_univ(x,_), Var_univ(y,_) -> is_total &&  x > y 
-	| Var_exist _, Term _ | Var_univ _, Term _ -> false
-    in 
-    let () = dico_rpo_greater#add (t#string, t'#string) res in
-    res
-
-let rpo_geq is_total t t' =  rpo_equivalent t t' || rpo_greater is_total t t'
-	
-let rpo_incomparable is_total (t:term) (t': term) = 
-  not ((rpo_greater is_total t t') or (rpo_greater is_total t' t))
+(* let rpo_incomparable is_total (t:term) (t': term) =  *)
+(*   not ((rpo_greater is_total t t') or (rpo_greater is_total t' t)) *)
 
   (* a total order on ground terms  *)
   (* as in ACL2 (see term-order in
@@ -232,6 +256,7 @@ let ground_greater t1 t2 =
   
 let rpos_greater = ref rpo_greater
 and rpos_geq = ref rpo_geq 
+and rpos = ref rpo
 
 
 let heavier t t' = ground_greater t t'
@@ -247,22 +272,42 @@ let heavier t t' = ground_greater t t'
     
 (* Order on clauses *)
 let clause_greater is_total c c' =
+  let l = c#all_terms
+  and l' = c'#all_terms 
+  and order_on_terms = !rpos  in
+  multiset_greater (order_on_terms is_total)  l l'
+
+let clause_max_greater is_total c c' =
   let l = c#all_maximal_terms is_total
   and l' = c'#all_maximal_terms is_total
-  and equiv_f_on_terms t = t#term_congruence
-  and greater_f_on_terms = !rpos_greater  in
-  multiset_greater is_total equiv_f_on_terms greater_f_on_terms l l'
+  and order_on_terms = !rpos  in
+  multiset_greater (order_on_terms is_total)  l l'
 
 let clause_equiv is_total c c' =
-  let l = c#all_maximal_terms is_total
-  and l' = c'#all_maximal_terms is_total
-  and equiv_f_on_terms t = t#term_congruence in
-  let l1, l2 = remove_common_elements equiv_f_on_terms l l' in
-  check_on_permutations equiv_f_on_terms l1 l2
+  let l = c#all_terms
+  and l' = c'#all_terms 
+  and order_on_terms = !rpos  in
+  multiset_equivalent (order_on_terms is_total)  l l'
+
+(* let clause_equiv is_total c c' = *)
+(*   let l = c#all_maximal_terms is_total *)
+(*   and l' = c'#all_maximal_terms is_total *)
+(*   and equiv_f_on_terms t = t#term_congruence in *)
+(*   let l1, l2 = remove_common_elements equiv_f_on_terms l l' in *)
+(*   check_on_permutations equiv_f_on_terms l1 l2 *)
 
 (* Order on clauses *)
 let clause_geq is_total c c' =
-  clause_greater is_total c c' or clause_equiv is_total c c'
+  let l = c#all_terms
+  and l' = c'#all_terms 
+  and order_on_terms = !rpos  in
+  multiset_geq (order_on_terms is_total)  l l'
+
+let clause_max_geq is_total c c' =
+  let l = c#all_maximal_terms is_total
+  and l' = c'#all_maximal_terms is_total
+  and order_on_terms = !rpos  in
+  multiset_geq (order_on_terms is_total)  l l'
 
 (* Normalization of a term with AC symbols.
    It doesn't preserve typing *)

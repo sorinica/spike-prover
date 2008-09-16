@@ -167,6 +167,7 @@ class ['a] system (ini_l: 'a list) =
 class ['a] l_system (ini_l : 'a list) =
 
   object (_)
+
     inherit ['a] system ini_l
 
     method append els =
@@ -1189,9 +1190,8 @@ class ['peano] clause c_v hist =
       	let lhs, rhs = self#both_sides
       	and negs = self#negative_lits in
       	let neg_terms = self#all_neg_terms in
-      	let equiv_f_on_terms t t' = t#term_congruence t'
-      	and greater_f_on_terms = !rpos_greater in
-      	if multiset_greater false equiv_f_on_terms greater_f_on_terms  [ lhs ] (rhs::neg_terms)
+	let order_on_terms = !rpos in
+      	if multiset_greater (order_on_terms false)  [ lhs ] (rhs::neg_terms)     	
             &&
           (let lhs_vars = lhs#variables in
           let subset_lhs_vars x = generic_is_subset x#variables lhs_vars in
@@ -1411,7 +1411,9 @@ class ['peano] clause c_v hist =
       let n, p = content in
       let n' = List.map (fun x -> x#flatten) n
       and p' = List.map (fun x -> x#flatten) p in
-       {< content = (n', p') ;
+      let _ = generic_merge_set_of_lists (List.map (fun x -> x#variables) n')
+      and _ = generic_merge_set_of_lists (List.map (fun x -> x#variables) p') in
+      {< content = (n', p') ;
         string = Undefined >}
 
     (* proceed_fun: position -> substitution -> bool -> bool *)
@@ -1508,7 +1510,8 @@ class ['peano] clause c_v hist =
       let n, p = content in
       let n1, n2 = List.partition (fun x -> x#is_boolean) n
       and p1, p2 = List.partition (fun x -> x#is_boolean) p in
-      let p'1 = List.map (fun x -> x#revert_boolean) p1
+      let _ = List.map (fun x -> x#revert_boolean) n1
+      and p'1 = List.map (fun x -> x#revert_boolean) p1
       in
       match p2 with
         [] ->
@@ -1925,6 +1928,7 @@ let rec expand_nullary lt  =
     if !res = [] then failwith ("expand_nullary: failure finding constructors for sort " ^ (sprint_sort s)) (* it should be at least one constructor *)
     else 
       let id_x, profile_x = List.hd !res in
+      let _ = List.hd profile_x in
       let lvar = List.map (fun s -> new term (Var_univ (newvar (), s))) (List.tl profile_x) in
       let trm = new term (Term (id_x, lvar, s)) in
       trm, [(i, trm)]
