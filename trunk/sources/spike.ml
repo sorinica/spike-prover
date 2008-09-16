@@ -311,7 +311,9 @@ let process_problem_token = function
   | Conjectures_token l ->
       let fn c = 
 	let n, p = c#content in 
- 	let res = c#build n p in
+	let _ = List.map (fun x -> x#update_pos) n in
+	let _ = List.map (fun x -> x#update_pos) p in
+	let res = c#build n p in
 (* 	let () = print_dico_ind_positions_v0 () in *)
 (* 	let () = print_dico_rules () in *)
 	let () = if !maximal_output then print_detailed_clause res in

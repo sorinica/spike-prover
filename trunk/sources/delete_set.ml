@@ -138,6 +138,7 @@ let subsumption_subsumes _ system_string c' c orig_c _ =
   (*     let lsymb_c' = fn_symb c' in *)
   let lsymb_c = fn_symb c in
   let lvare_c = fn_vare c in
+  let _ = fn_vare c' in
   
   let fn_filter t = 
     (* filters only terms which are not related to lvare_c and lsymb_c  *)

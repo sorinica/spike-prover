@@ -115,7 +115,9 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
       fn () in *)
 
   (* 3: this function attempts to reduce subgoals according to the strategy, and stores the results *)
-  let new_eq = ref [] in
+  let new_eq = ref []
+
+  and _ = ref 0 in
   let process_instances pos (_, sigma) =
     (*let c' = c#substitute sigma in*)
     let c' = match sigma with
@@ -173,10 +175,13 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
       let max_var = cl#greatest_varcode + 1 in
 
       let fn t rule =
+	let _ = rule#number in
+
 (* 	let () = buffered_output ("Unifying the rule is " ^ rule#string ^ " and with the term " ^ t#string ) in *)
 (* 	let () = print_detailed_term t in *)
 	
 	let rule' = rule#substitute_and_rename [] max_var in (* rename the variables *)
+	let _ = rule'#number in
 	let lhs = rule'#lefthand_side in
 	
 	let (s1, s2) = try unify_terms t lhs false with Failure "unify_terms" -> failwith "fn" in
@@ -219,6 +224,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
 	      
 	      try 
 		let ls = all_inst t in
+		let _ = List.map (fun (s1, _, _) -> List.map (fun (_, s) -> s) s1) ls in (* the terms for substitution in t *)
 		
 (* 		let test = (List.exists (fun t -> not t#is_term) (List.flatten all_ts))  false in *)
 		if (ls = []) (* or test  *)then fn2 tl 
@@ -231,6 +237,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
       failwith "generate_obs" in
       (* start to write the instances  *)
 
+      let _ = List.for_all (fun (_, _, r) -> r#oriented) ls in
       let i = ref 0 in
 (*       let () = *)
 (* 	if verbose *)

@@ -142,15 +142,15 @@ val list_assoc_2 : 'a -> ('b * 'a) list -> 'b
 val repeat : ('a -> 'a) -> exn -> 'a -> 'a
 val queue_forall : ('a -> bool) -> 'a Queue.t -> bool
 class virtual generic : object ('a) method virtual equal : 'a -> bool end
-class virtual printable_object :
-  object
-    val mutable string : string pointer
-    method virtual compute_string : string
-    method string : string
-    method fprint : out_channel -> unit
-    method pprint : Format.formatter -> unit
-    method sprint : string
-  end
+  class virtual printable_object :
+    object
+      val mutable string : string pointer
+      method virtual compute_string : string
+      method fprint : out_channel -> unit
+      method pprint : Format.formatter -> unit
+      method sprint : string
+      method string : string
+    end
 val subset : < syntactic_equal : 'a -> bool; .. > list -> 'a list -> bool
 val do_nothing : string -> unit
 val n_spaces : int -> string

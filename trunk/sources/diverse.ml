@@ -1346,11 +1346,10 @@ let eprint      x = eprinter_of_pprinter pprinter x     (* flush *)
   (* END PRETTY PRINTING FUNCTIONS  *)
 
 class virtual generic =
-  object ((_ : 'a)) 
-	method virtual equal : 'a -> bool end;;
+  object ((_ : 'a)) method virtual equal : 'a -> bool end;;
 
 class virtual printable_object =
-  object (self : < compute_string : string; .. >)
+  object ((self :  < compute_string : string; .. >))
     val mutable string = (Undefined : string pointer)
     method string =
       match string with

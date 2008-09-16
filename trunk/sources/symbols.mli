@@ -4,6 +4,9 @@ and sort = Def_sort of int | Abstr_sort0 of string | Abstr_sort1 of int * sort |
 and position = int list
 and path = (const * int) list
 and arity = int * int
+
+type order = GR | EQ | NGE
+
 type parameterized_sort =
     Actual_sort of sort
   | Variable_sort of var

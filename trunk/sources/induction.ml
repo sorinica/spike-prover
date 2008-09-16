@@ -69,8 +69,10 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
   let () = text := !text ^ (List.fold_left (fun x (p, t) -> x ^ (sprint_clausal_position p) ^ " --> " ^ t#string ^ "\n\t" ) ("\n\nfrom the positions:\n\t") tested_pos) in
   let fn t rule max_v is_gen =
     
+    let _ = rule#number in
     (*     let () = buffered_output ("\nfn: max_v = " ^ (string_of_int max_v)) in *)
     let rule' = rule#substitute_and_rename [] max_v in (* rename the variables *)
+    let _ = rule'#number in
     let lhs = rule'#lefthand_side in
     
     let (s1, _) = try unify_terms t lhs is_gen with Failure "unify_terms" -> failwith "fn" in
@@ -266,6 +268,8 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 		  let new_s' = (List.map (fun (i, t) -> (i, t#substitute s')) s) @ s' in
 		  (* the variables in new_s' should be in lvar_trm  *)
 		  let new_s'' = List.filter (fun (x,_) -> list_member (=) x target_vars) new_s' in
+		  
+		  let _ = (List.fold_right (fun (_, t) l -> t#variables @ l) s' []) in
 		  (new_s'', r_orig) :: l)
 		ls [] 
 	    in

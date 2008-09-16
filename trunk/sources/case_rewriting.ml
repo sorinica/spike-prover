@@ -131,6 +131,7 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
     
 let generate_cond_and_eq t c b n p l _ =
   let max_var = c#greatest_varcode + 1 in
+  let _, _ = c#content in
   let fn cl s =
 
     let lhs = cl#lefthand_side in
@@ -364,7 +365,9 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
   let final_update st t b n p l =
     if l = [] then failwith "final_update"
     else
+      let _ = (fun (_, _, s) -> s) (List.hd l) in
       let new_cond, new_eq = generate_cond_and_eq t c b n p l false in
+
       let test1 = 
 	if !broken_order then true 
 	else if not !debug_mode then List.for_all (fun x -> clause_greater false c x) new_eq 

@@ -30,9 +30,7 @@ let compress verbose =
 
 (* This rules makes a positive clause out of a boolean clause *)
 let complement verbose clause is_strict level =
-  let comp_count = ref 0
-  and equiv_f_on_terms t = t#term_congruence
-  and greater_f_on_terms = !rpos_greater in
+  let comp_count = ref 0 in
   let fn c =
     let () = incr comp_count in
     let n, p = c#content in
@@ -43,7 +41,8 @@ let complement verbose clause is_strict level =
       (fun x y ->
         let lhs, rhs = x#both_sides
         and lhs', rhs' = y#both_sides in
-        multiset_greater false equiv_f_on_terms greater_f_on_terms [lhs ; rhs] [lhs' ; rhs'])
+	let order_on_terms = !rpos in
+        multiset_greater (order_on_terms false)  [lhs ; rhs] [lhs' ; rhs'])
     in
     let (m, o) = list_select_maximal_elements suf_f (n'1 @ p1) in
     let c' = c#build (n2 @ List.map (fun x -> x#revert_boolean) o) (p2 @ m) in

@@ -25,6 +25,7 @@ let rec rewrite rw_r (tr:term) c_ref str cxt i =
 (*   let () = buffered_output ("\n Rewrite " ^ tr#string) in *)
   let max_var = c_ref#greatest_varcode + 1 in
   let str_ref = ref str in
+
   let rec fn2 t_p pos l = 
 	  
     match l with
