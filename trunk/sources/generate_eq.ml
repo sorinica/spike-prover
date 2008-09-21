@@ -378,102 +378,158 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
        3) if the both sides of lit are incomparable, test whether a' is smaller than the rhs of cinst *)
 
     let fn_eq lit  =
-      (*       let () = buffered_output ("\n lit: " ^ lit#string) in *)
-      let rewritten_side = (fun (_,_,p') -> List.hd p') p in
-      let left_side = 0 in
-      (*       let () = buffered_output ("\n rewritten side = " ^ (if rewritten_side = left_side then " left_side" else " right_side"))  in *)
-
-      let lhs, rhs = 
-	let l, r = lit#both_sides in
-	if rewritten_side = left_side then l,r else r,l 
-      in
-      let _, _ = 
-	let l, r = (cinst#head)#both_sides in
-	if rewritten_side = left_side  then l,r else r,l 
-      in
-      let lhs_orig, rhs_orig = 
-	let l, r = (c#head)#both_sides in
-	if rewritten_side = left_side then l,r else r,l 
-      in
-      (*       let () = buffered_output ("\n lhs = " ^ lhs#string) in *)
-      (*       let () = buffered_output ("\n rhs = " ^ rhs#string) in *)
-      (*       let () = buffered_output ("\n lhs_orig = " ^ lhs_orig#string) in *)
-      (*       let () = buffered_output ("\n rhs_orig = " ^ rhs_orig#string) in *)
-      (*       let () = buffered_output ("\n lhs_inst = " ^ lhs_inst#string) in *)
-      (*       let () = buffered_output ("\n rhs_inst = " ^ rhs_inst#string) in *)
-      
-      (*       let () = buffered_output ("Testing rpo_greater false rhs lhs  yields " ^ (string_of_bool (rpo_greater false rhs lhs))) in *)
-      try 
+      let fn_term (lhs:Terms.term) rhs is_lhs = 
 	let str_norm, lhs_norm = normalize [R;L] lhs c "" ([],[]) 0 in  
-	(* 	  let () = buffered_output ("Subterm matching trying: I am here !!!") in  *)
-	let pos, theta = lhs_norm#subterm_matching (fun _ s -> s) lhs_orig in
-	let lhs_s = lhs_norm#replace_subterm_at_pos pos (rhs_orig#substitute theta) in
-	let str_repl = (lhs_norm#subterm_at_position pos)#string ^ "\n   matches the " ^ 
-	  (if rewritten_side = left_side then " left " else " right " ) ^ "side of " ^ c#string ^ "\n   with substitution : "  ^ (sprint_subst theta)
-	  ^ "    to give \n" ^ (lhs_s#subterm_at_position pos)#string ^ "\n" in
-	let lhs_theta, rhs_theta = 
-	  let l, r = (c#substitute theta)#both_sides in
-	  if rewritten_side = left_side then l,r else r,l 
+	let lhs_orig, rhs_orig = 
+	  let l, r = (c#head)#both_sides in
+	    if is_lhs then l,r else r,l
 	in
-	if (rpo_greater false lhs_orig rhs_orig) || (rpo_geq false lhs_theta rhs_theta) then 
-	  if rewritten_side = left_side then (str_norm ^ str_repl), (new literal (Lit_equal (lhs_s, rhs)))
-	  else (str_norm ^ str_repl), (new literal (Lit_equal (rhs, lhs_s)))
-	else
-	  let str', lhs' = normalize [R;L] lhs_s c (str_norm ^ str_repl) ([],[]) 0 in
-	  (* 	    let () = buffered_output ("str' = " ^ str') in *)
-	  (* 	    let () = buffered_output ("lhs_s = " ^ lhs_s#string) in *)
-	  (* 	    let () = buffered_output ("lhs' = " ^ lhs'#string) in *)
-	  (* 	    let () = buffered_output ("Normalize lhs oK: I am here !!!") in  *)
-	  (* 	    let () = buffered_output ("Testing rpo_greater false lhs_orig rhs_orig yields " ^ (string_of_bool (rpo_greater false *)
-	  (* 	      lhs_orig rhs_orig))) in *)
-	  (* 	    let () = buffered_output ("Testing rpo_equivalent lhs rhs  yields " ^ (string_of_bool (rpo_equivalent lhs rhs))) in *)
-	  (* 	    let () = buffered_output ("Testing rpo_incomparable false rhs_orig lhs_orig  yields " ^ (string_of_bool (rpo_incomparable false rhs_orig lhs_orig))) in *)
-	  (* 	    let () = buffered_output ("Testing rpo_greater false rhs_inst lhs' yields " ^ (string_of_bool (rpo_greater false rhs_inst *)
-	  (* 	      lhs'))) in *)
-	  (* 	    let () = buffered_output ("rhs_inst = " ^ rhs_inst#string) in *)
-	  (* 	    let () = buffered_output (" lhs' = " ^ lhs'#string) in *)
+	let lhs_inst, rhs_inst =
+	  let l, r = (cinst#head)#both_sides in
+	    if is_lhs then l,r else r, l
+	in
+	  try
+	    let pos, theta = lhs_norm#subterm_matching (fun _ s -> s) lhs_orig in
+	      if 
+		try 
+		  let _ =  (lhs_norm#subterm_at_position pos)#subterm rhs
+		  in true 
+		with (Failure "subterm") -> false 
+	      then str_norm, lhs_norm
+	      else
+		let lhs_s = lhs_norm#replace_subterm_at_pos pos (rhs_orig#substitute theta) in
+		let str_repl = (lhs_norm#subterm_at_position pos)#string ^ "\n   matches the " ^ 
+		  (if is_lhs then " left " else " right " ) ^ "side of " ^ c#string ^ "\n   with substitution : "  ^ (sprint_subst theta)
+		  ^ "    to give \n" ^ (lhs_s#subterm_at_position pos)#string ^ "\n" in
+		  (* 	    let () = buffered_output ("Subterm matching succeeded: I am here !!!\n" ^ str_repl) in *)
+		let _, rhs_theta = 
+		  let l, r = (c#substitute theta)#both_sides in
+		    if is_lhs then l,r else r,l 
+		in
+		  if ((rpo_greater false lhs_inst rhs_theta) || (rpo_geq false rhs_inst rhs_theta)) && 
+		    ((rpo_greater false lhs_inst lhs_norm) || (rpo_greater false rhs_inst lhs_norm))
+		  then
+		    (str_norm ^ str_repl), lhs_s
+		  else
+		    str_norm, lhs_norm
+	  with (Failure "matching") -> str_norm, lhs_norm
+      in
+      let lhs, rhs = lit#both_sides in
+      let str_lhs, lhs' = fn_term lhs rhs true in
+      let str_rhs, rhs' = fn_term rhs lhs' false in
+      let lit_rez = (new literal (Lit_equal (lhs', rhs'))) in
+(*    if clause_greater false false cinst c_rez && clause_greater false false cinst c_theta then *)
+(* 	    str'', l_rez *)
+(* 	  else *)
+(* 	    failwith "fn_eq" *)
+	(str_lhs ^ str_rhs), lit_rez
+    in
+	
+(*       (\*       let () = buffered_output ("\n lit: " ^ lit#string) in *\) *)
+(*       let rewritten_side = (fun (_,_,p') -> List.hd p') p in *)
+(*       let left_side = 0 in *)
+(*       (\*       let () = buffered_output ("\n rewritten side = " ^ (if rewritten_side = left_side then " left_side" else " right_side"))  in *\) *)
+
+(*       let lhs, rhs =  *)
+(* 	let l, r = lit#both_sides in *)
+(* 	if rewritten_side = left_side then l,r else r,l  *)
+(*       in *)
+(*       let _, _ =  *)
+(* 	let l, r = (cinst#head)#both_sides in *)
+(* 	if rewritten_side = left_side  then l,r else r,l  *)
+(*       in *)
+(*       let lhs_orig, rhs_orig =  *)
+(* 	let l, r = (c#head)#both_sides in *)
+(* 	if rewritten_side = left_side then l,r else r,l  *)
+(*       in *)
+(*       (\*       let () = buffered_output ("\n lhs = " ^ lhs#string) in *\) *)
+(*       (\*       let () = buffered_output ("\n rhs = " ^ rhs#string) in *\) *)
+(*       (\*       let () = buffered_output ("\n lhs_orig = " ^ lhs_orig#string) in *\) *)
+(*       (\*       let () = buffered_output ("\n rhs_orig = " ^ rhs_orig#string) in *\) *)
+(*       (\*       let () = buffered_output ("\n lhs_inst = " ^ lhs_inst#string) in *\) *)
+(*       (\*       let () = buffered_output ("\n rhs_inst = " ^ rhs_inst#string) in *\) *)
+      
+(*       (\*       let () = buffered_output ("Testing rpo_greater false rhs lhs  yields " ^ (string_of_bool (rpo_greater false rhs lhs))) in *\) *)
+(*       try  *)
+(* 	let str_norm, lhs_norm = normalize [R;L] lhs c "" ([],[]) 0 in   *)
+(* 	(\* 	  let () = buffered_output ("Subterm matching trying: I am here !!!") in  *\) *)
+(* 	let pos, theta = lhs_norm#subterm_matching (fun _ s -> s) lhs_orig in *)
+(* 	let lhs_s = lhs_norm#replace_subterm_at_pos pos (rhs_orig#substitute theta) in *)
+(* 	let str_repl = (lhs_norm#subterm_at_position pos)#string ^ "\n   matches the " ^  *)
+(* 	  (if rewritten_side = left_side then " left " else " right " ) ^ "side of " ^ c#string ^ "\n   with substitution : "  ^ (sprint_subst theta) *)
+(* 	  ^ "    to give \n" ^ (lhs_s#subterm_at_position pos)#string ^ "\n" in *)
+(* 	let lhs_theta, rhs_theta =  *)
+(* 	  let l, r = (c#substitute theta)#both_sides in *)
+(* 	  if rewritten_side = left_side then l,r else r,l  *)
+(* 	in *)
+(* 	if (rpo_greater false lhs_orig rhs_orig) || (rpo_geq false lhs_theta rhs_theta) then  *)
+(* 	  if rewritten_side = left_side then (str_norm ^ str_repl), (new literal (Lit_equal (lhs_s, rhs))) *)
+(* 	  else (str_norm ^ str_repl), (new literal (Lit_equal (rhs, lhs_s))) *)
+(* 	else *)
+(* 	  let str', lhs' = normalize [R;L] lhs_s c (str_norm ^ str_repl) ([],[]) 0 in *)
+(* 	  (\* 	    let () = buffered_output ("str' = " ^ str') in *\) *)
+(* 	  (\* 	    let () = buffered_output ("lhs_s = " ^ lhs_s#string) in *\) *)
+(* 	  (\* 	    let () = buffered_output ("lhs' = " ^ lhs'#string) in *\) *)
+(* 	  (\* 	    let () = buffered_output ("Normalize lhs oK: I am here !!!") in  *\) *)
+(* 	  (\* 	    let () = buffered_output ("Testing rpo_greater false lhs_orig rhs_orig yields " ^ (string_of_bool (rpo_greater false *\) *)
+(* 	  (\* 	      lhs_orig rhs_orig))) in *\) *)
+(* 	  (\* 	    let () = buffered_output ("Testing rpo_equivalent lhs rhs  yields " ^ (string_of_bool (rpo_equivalent lhs rhs))) in *\) *)
+(* 	  (\* 	    let () = buffered_output ("Testing rpo_incomparable false rhs_orig lhs_orig  yields " ^ (string_of_bool (rpo_incomparable false rhs_orig lhs_orig))) in *\) *)
+(* 	  (\* 	    let () = buffered_output ("Testing rpo_greater false rhs_inst lhs' yields " ^ (string_of_bool (rpo_greater false rhs_inst *\) *)
+(* 	  (\* 	      lhs'))) in *\) *)
+(* 	  (\* 	    let () = buffered_output ("rhs_inst = " ^ rhs_inst#string) in *\) *)
+(* 	  (\* 	    let () = buffered_output (" lhs' = " ^ lhs'#string) in *\) *)
 
 	  
-	  let str'', rhs' = normalize [R;L] rhs c str' ([],[]) 0 in
-	  let l_rez = 
-	    if rewritten_side = left_side then (new literal (Lit_equal (lhs', rhs')))
-	    else (new literal (Lit_equal (rhs', lhs'))) in
-	  let c_rez = c#build [] [l_rez] in 
-	  let c_theta = c#substitute theta in
-	  if clause_greater false false cinst c_rez && clause_greater false false cinst c_theta then
-	    str'', l_rez
-	  else
-	    failwith "fn_eq"
-      with (Failure "matching") -> failwith "fn_eq"
-    in
+(* 	  let str'', rhs' = normalize [R;L] rhs c str' ([],[]) 0 in *)
+(* 	  let l_rez =  *)
+(* 	    if rewritten_side = left_side then (new literal (Lit_equal (lhs', rhs'))) *)
+(* 	    else (new literal (Lit_equal (rhs', lhs'))) in *)
+(* 	  let c_rez = c#build [] [l_rez] in  *)
+(* 	  let c_theta = c#substitute theta in *)
+(* 	  if clause_greater false false cinst c_rez && clause_greater false false cinst c_theta then *)
+(* 	    str'', l_rez *)
+(* 	  else *)
+(* 	    failwith "fn_eq" *)
+(*       with (Failure "matching") -> failwith "fn_eq" *)
+(*     in *)
     
 
-    let str, res = if not res'#is_unit then "",res' else 
-      try 
-	let str', lit = fn_eq res'#head in 
-	let _ = lit#update_pos in
+    let str, res = if not res'#is_unit then "",res' else
+    if (res'#head)#is_diff then "",res' 
+    else
+      let rec repeat str lit = 
+(* 	let () = buffered_output ("lit = " ^ lit#string) in *)
+	let str', lit' = fn_eq lit in
+(* 	let () = buffered_output ("lit' = " ^ lit'#string) in *)
+	  if lit#syntactic_equal lit' then str, lit
+	  else
+	    repeat (str ^ str') lit' 
+      in
+      let str', lit = repeat "" res'#head in 
+      let _ = lit#update_pos in
 	str', (c#build [] [lit])
-      with Failure "fn_eq" -> "", res'
     in
     let () = res#add_history (s, c) in
-    
+      
     let () =
       let () = i := !i + 1 in
-      if verbose
-      then
-	buffered_output ("\n" ^ !indent_string ^ (string_of_int !i) ^ ")" ^ res#string ^ "\n\n" ^ !indent_string ^ 
-	(if str = "" then "" else cinst#string ^ "\n    is rewritten ") ^ "using the rule " ^ r_orig#string ^ (if str = "" then ""
-	else ( " to get\n" ^ res'#string ^ "\n\nFurther operations on " ^ res'#string ^ "\n\n" ^ str)))
-      else ()
+	if verbose
+	then
+	  buffered_output ("\n" ^ !indent_string ^ (string_of_int !i) ^ ")" ^ res#string ^ "\n\n" ^ !indent_string ^ 
+			     (if str = "" then "" else cinst#string ^ "\n    is rewritten ") ^ "using the rule " ^ r_orig#string ^ (if str = "" then ""
+																    else ( " to get\n" ^ res'#string ^ "\n\nFurther operations on " ^ res'#string ^ "\n\n" ^ str)))
+	else ()
     in
     let () =
       if !coq_mode
       then Coq.rewrite_nonum !i ("sp_axiom_" ^ (string_of_int r_orig#number))
       else ()
     in
-    res
+      res
   in
   let () = incr generate_eq_counter_suc in
   let res = List.map fn5 ls' in
   let () = buffered_output "\n" in
-  res
+    res
+      
