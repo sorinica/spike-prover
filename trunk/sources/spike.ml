@@ -467,9 +467,19 @@ let process_problem_token = function
       let () = buffered_output ("c  = " ^ c#string)
       and () = buffered_output ("c' = " ^ c'#string) in
       let s =
-	if clause_equiv false c c' then "c ~ c'"
-	else if clause_greater false c c' then "c > c'"
-	else if clause_greater false c' c then "c < c'"
+	if clause_equiv false false c c' then "c ~ c'"
+	else if clause_greater false false c c' then "c > c'"
+	else if clause_greater false false c' c then "c < c'"
+	else "c and c' are not comparable" in
+      let () = buffered_output s in
+      true 
+  | Compare_max_token (c, c') ->
+      let () = buffered_output ("c  = " ^ c#string)
+      and () = buffered_output ("c' = " ^ c'#string) in
+      let s =
+	if clause_equiv true false c c' then "c ~ c'"
+	else if clause_greater true false c c' then "c > c'"
+	else if clause_greater true false c' c then "c < c'"
 	else "c and c' are not comparable" in
       let () = buffered_output s in
       true 

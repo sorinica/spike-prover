@@ -503,6 +503,7 @@ let _ = List.iter (fun (kwd, tok) -> Hashtbl.add tests_table kwd tok)
        TOK_NORM
        TOK_RPOCOMPARE
        TOK_COMPARE
+       TOK_MAX_COMPARE
        TOK_STOP_ON_CLAUSE
        TOK_EXTRACT
        TOK_MATCH
@@ -747,6 +748,8 @@ spec_problem_field:
 | specif_rpocompare
   { }
 | specif_compare
+  { }
+| specif_max_compare
   { }
 | specif_stop_on_clause
   { }
@@ -1778,6 +1781,13 @@ specif_compare:
   { let c, c' = $3 in
     Queue.add (Compare_token (c, c')) yy_queue }
 | TOK_COMPARE TOK_COLUMN
+  { }
+
+specif_max_compare:
+  TOK_MAX_COMPARE TOK_COLUMN two_clauses
+  { let c, c' = $3 in
+    Queue.add (Compare_max_token (c, c')) yy_queue }
+| TOK_MAX_COMPARE TOK_COLUMN
   { }
 
 

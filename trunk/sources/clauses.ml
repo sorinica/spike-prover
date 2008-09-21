@@ -1754,9 +1754,9 @@ let preprocess_conjecture c =
     [c]
 
 let recursive_new_hyps c_ref r_conj (cxt1, cxt2) = 
-  if List.for_all (fun x -> clause_greater false c_ref x) r_conj
+  if List.for_all (fun x -> clause_greater false false c_ref x) r_conj
   then cxt1
-  else if  List.for_all (fun x -> clause_geq false c_ref x) r_conj
+  else if  List.for_all (fun x -> clause_geq true false c_ref x) r_conj
   then cxt1 @ cxt2
   else []
  

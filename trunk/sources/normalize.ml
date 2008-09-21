@@ -54,10 +54,10 @@ let rec rewrite rw_r (tr:term) c_ref str cxt i =
 		let test_ok = 
 		  if los = "C1" then 
 		    let hsub = h#substitute_and_rename sub max_var in 
-		    clause_geq false c_ref hsub 
+		    clause_geq true false c_ref hsub 
 		  else if los = "C2" then
 		    let hsub = h#substitute_and_rename sub max_var in 
-		    let res = clause_greater false c_ref hsub in
+		    let res = clause_greater false false c_ref hsub in
 		    res
 		  else true
 		in

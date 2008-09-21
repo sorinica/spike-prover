@@ -34,7 +34,7 @@ let true_by_context counter n1 reference cr g l =
 let true_by_strategy n1 c_sigma c_ref cxt = 
   let st = !augmentation_strat in 
   let new_soc = List.map (fun x -> c_sigma#build [] [ x ]) n1 in
-  let new_hyps = recursive_new_hyps c_ref new_soc cxt in
+  let new_hyps = recursive_new_hyps  c_ref new_soc cxt in
   (*    save the current state ? *)
   st#apply_to_subgoals !output_verbosity c_sigma new_hyps new_soc  (* to complete with the available context for the recursive call *)
     
@@ -110,7 +110,7 @@ let augment_polynom counter p lp reference cr g l =
 	      	let c_sigma = c#substitute sigma in 
 	      	if (system = "R" or system = "L" or 
 (* 		  (system = "C1" && clause_geq false c_reference c_sigma) or  *)
-		  (system = "C2" && clause_greater false c_reference c_sigma))  
+		    (system = "C2" && clause_greater false false c_reference c_sigma))  
 		  && (is_conservative max poly_lit_sigma#multiplicands cr g l) then 
 	      	  let () = print_indent_string  ( "\nAUGMENTATION will use the clause " ^ c_sigma#string ^ " from " ^ system )
 	      	  in

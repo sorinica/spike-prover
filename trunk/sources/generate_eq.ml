@@ -440,7 +440,7 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
 	    else (new literal (Lit_equal (rhs', lhs'))) in
 	  let c_rez = c#build [] [l_rez] in 
 	  let c_theta = c#substitute theta in
-	  if clause_greater false cinst c_rez && clause_greater false cinst c_theta then
+	  if clause_greater false false cinst c_rez && clause_greater false false cinst c_theta then
 	    str'', l_rez
 	  else
 	    failwith "fn_eq"

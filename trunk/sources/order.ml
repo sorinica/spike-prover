@@ -270,44 +270,26 @@ let heavier t t' = ground_greater t t'
 (* (try  t#var_content > t'#var_content with Failure "var_content" -> false) ||  *)
 (* (n = n' && d = d' && rpo_greater is_total t t') *)
     
-(* Order on clauses *)
-let clause_greater is_total c c' =
-  let l = c#all_terms
-  and l' = c'#all_terms 
+(* Order on clauses using the multiset extension*)
+let clause_greater is_max is_total c c' =
+  let l = if is_max then c#all_maximal_terms is_total else c#all_terms
+  and l' = if is_max then c#all_maximal_terms is_total else c'#all_terms 
   and order_on_terms = !rpos  in
   multiset_greater (order_on_terms is_total)  l l'
 
-let clause_max_greater is_total c c' =
-  let l = c#all_maximal_terms is_total
-  and l' = c'#all_maximal_terms is_total
-  and order_on_terms = !rpos  in
-  multiset_greater (order_on_terms is_total)  l l'
 
-let clause_equiv is_total c c' =
-  let l = c#all_terms
-  and l' = c'#all_terms 
+let clause_equiv is_max is_total c c' =
+  let l = if is_max then c#all_maximal_terms is_total else c#all_terms
+  and l' = if is_max then c#all_maximal_terms is_total else c'#all_terms 
   and order_on_terms = !rpos  in
   multiset_equivalent (order_on_terms is_total)  l l'
 
-(* let clause_equiv is_total c c' = *)
-(*   let l = c#all_maximal_terms is_total *)
-(*   and l' = c'#all_maximal_terms is_total *)
-(*   and equiv_f_on_terms t = t#term_congruence in *)
-(*   let l1, l2 = remove_common_elements equiv_f_on_terms l l' in *)
-(*   check_on_permutations equiv_f_on_terms l1 l2 *)
-
-(* Order on clauses *)
-let clause_geq is_total c c' =
-  let l = c#all_terms
-  and l' = c'#all_terms 
+let clause_geq is_max is_total c c' =
+  let l = if is_max then c#all_maximal_terms is_total else c#all_terms
+  and l' = if is_max then c#all_maximal_terms is_total else c'#all_terms 
   and order_on_terms = !rpos  in
   multiset_geq (order_on_terms is_total)  l l'
 
-let clause_max_geq is_total c c' =
-  let l = c#all_maximal_terms is_total
-  and l' = c'#all_maximal_terms is_total
-  and order_on_terms = !rpos  in
-  multiset_geq (order_on_terms is_total)  l l'
 
 (* Normalization of a term with AC symbols.
    It doesn't preserve typing *)

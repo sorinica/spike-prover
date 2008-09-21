@@ -109,7 +109,7 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
 
   (* 6: recursive call *)
   and condition_3 new_soc =
-      let new_hyps = recursive_new_hyps c new_soc (cxt1,cxt2) in
+    let new_hyps = recursive_new_hyps c new_soc (cxt1,cxt2) in
       arg_st#apply_to_subgoals !output_verbosity c new_hyps new_soc is_strict (* to complete with the available context for the recursive call *)
   in
 
@@ -127,10 +127,10 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
       let new_cl = c#replace_subterm_at_pos (b, n, p) rhs in
       if (rw_r_is_oriented or condition_2 lhs rhs)
         &&
-        (match type_system with C -> (if nr_cxt = 2 then clause_greater false c rw_r'  else clause_geq false c rw_r' )
+        (match type_system with C -> (if nr_cxt = 2 then clause_greater false false c rw_r'  else clause_geq true false c rw_r' )
 	  | L|R -> true)
 	&&
-	((is_strict && clause_greater false c new_cl) || ((not is_strict) && clause_geq false c new_cl))
+	((is_strict && clause_greater false false c new_cl) || ((not is_strict) && clause_geq true false c new_cl))
         &&
         (let delta = c#build_best_context b n in
          let new_soc = List.map (fun x -> c#build delta [ x ]) gamma in
@@ -261,8 +261,8 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
     let new_cl = c#replace_subterm_at_pos p rhs' in
 (*     let () = buffered_output ("the clause " ^ c#string ^ " is replaced by " ^ new_cl#string) in *)
 (*     let () = buffered_output ("is_less is " ^ (string_of_bool is_less) ^ " and the comparison is " ^  (string_of_bool (clause_geq false c c_ref_sigma)) ) in *)
-    if ((is_less && clause_greater false c c_ref_sigma ) or ((not is_less) && clause_geq false c c_ref_sigma))
-      && ((is_strict && clause_greater false c new_cl ) || ((not is_strict) && clause_geq false c new_cl) )
+    if ((is_less && clause_greater false false c c_ref_sigma ) or ((not is_less) && clause_geq true false c c_ref_sigma))
+      && ((is_strict && clause_greater false false c new_cl ) || ((not is_strict) && clause_geq true false c new_cl) )
     then
       let _ = res := preprocess_conjecture new_cl in
       let erc = !equational_rewriting_counter_suc in

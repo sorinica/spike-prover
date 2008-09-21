@@ -497,12 +497,12 @@ class strategy (cs: concrete_strategy) =
 			  let () = assert (conjectures_system#content <> []) in 
 			  match g with
 			      Goto_smallest ->
-				let i = list_position_smallest_el (fun y x -> clause_greater false x y) conjectures_system#content in
+				let i = list_position_smallest_el (fun y x -> clause_greater false false x y) conjectures_system#content in
 				let l, l' = list_split_at_n i conjectures_system#content in
 				let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) in
 				true
 			    | Goto_greatest ->
-				let i = list_position_smallest_el (clause_greater false) conjectures_system#content in
+				let i = list_position_smallest_el (clause_greater false false) conjectures_system#content in
 				let l, l' = list_split_at_n i conjectures_system#content in
 				let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) in
 				true
@@ -735,6 +735,7 @@ type problem_token =
   | Cterm_token of term list
   | Rpo_token of (term * term)
   | Compare_token of (peano_context clause * peano_context clause)
+  | Compare_max_token of (peano_context clause * peano_context clause)
   | Match_token of (term * term)
   | Message_token of string
   | Ac_token of (term list * term list)
