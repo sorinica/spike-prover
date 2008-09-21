@@ -22,25 +22,23 @@ val rpos_greater : (bool -> Terms.ground_term -> Terms.ground_term -> bool) ref
 val rpos_geq : (bool -> Terms.term -> Terms.term -> bool) ref
 val rpos : (bool -> Terms.term * Terms.term -> Symbols.order) ref
 val heavier : Terms.term -> Terms.term -> bool
-val clause_max_greater :
-  bool ->
-  < all_maximal_terms : bool -> Terms.ground_term list; .. > ->
-  < all_maximal_terms : bool -> Terms.ground_term list; .. > -> bool
-val clause_max_geq:
-bool ->
-    < all_maximal_terms : bool -> Terms.term list; .. > ->
-    < all_maximal_terms : bool -> Terms.term list; .. > -> bool
-val clause_greater :
-  bool ->
-  < all_terms :  Terms.ground_term list; .. > ->
-  < all_terms :  Terms.ground_term list; .. > -> bool
-val clause_equiv :
-     bool ->
-    < all_terms : Terms.term list; .. > ->
+ val clause_greater :
+    bool ->
+    bool ->
+    < all_maximal_terms : bool -> Terms.term list;
+      all_terms : Terms.term list; .. > ->
     < all_terms : Terms.term list; .. > -> bool
-val clause_geq :
- bool ->
-    < all_terms : Terms.term list; .. > ->
+ val clause_equiv :
+    bool ->
+    bool ->
+    < all_maximal_terms : bool -> Terms.term list;
+      all_terms : Terms.term list; .. > ->
+    < all_terms : Terms.term list; .. > -> bool
+ val clause_geq :
+    bool ->
+    bool ->
+    < all_maximal_terms : bool -> Terms.term list;
+      all_terms : Terms.term list; .. > ->
     < all_terms : Terms.term list; .. > -> bool
 val ac_distribute_ac_ac :
   Symbols.const -> Symbols.const -> Terms.term -> Terms.term

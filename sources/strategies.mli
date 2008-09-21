@@ -109,6 +109,7 @@ type problem_token =
   | Cterm_token of Terms.term list
   | Rpo_token of (Terms.term * Terms.term)
   | Compare_token of (Clauses.peano_context Clauses.clause * Clauses.peano_context Clauses.clause)
+  | Compare_max_token of (Clauses.peano_context Clauses.clause * Clauses.peano_context Clauses.clause)
   | Match_token of (Terms.term * Terms.term)
   | Message_token of string
   | Ac_token of (Terms.term list * Terms.term list)

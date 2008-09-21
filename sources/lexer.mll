@@ -79,6 +79,7 @@ let () = List.iter (fun (kwd, tok) -> Hashtbl.add keyword_table kwd tok)
       ("rl",                            TOK_RIGHTLEFT) ;
       ("rpocompare",                    TOK_RPOCOMPARE) ;
       ("s_compare",                     TOK_COMPARE) ;
+      ("s_max_compare",                 TOK_MAX_COMPARE) ;
       ("extract",                       TOK_EXTRACT) ;
       ("simplify",                      TOK_SIMPLIFY) ;
       ("saturate",                      TOK_SATURATE) ;

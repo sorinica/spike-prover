@@ -72,8 +72,8 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
 		  if hs#oriented && ( match los with 
 		      "L"  -> true
 		    | "R"  -> true
-		    | "C1" -> clause_geq false c hs 
-		    | "C2" -> clause_greater false c hs
+		    | "C1" -> clause_geq true false c hs 
+		    | "C2" -> clause_greater false false c hs
 		    | _ -> failwith "normalize: los") 
 		  then 
 		    s
@@ -97,8 +97,8 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
 			    match los with 
 				"L" -> true
 			      | "R" -> false
-			      | "C1" -> clause_geq false c hs' 
-			      | "C2" -> clause_greater false c hs'
+			      | "C1" -> clause_geq true false c hs' 
+			      | "C2" -> clause_greater false false c hs'
 			      | _ -> failwith "normalize: los"
 			  then 		    
 			    s
@@ -220,8 +220,8 @@ let partial_case_rewriting verbose sl c_pos cxt c is_strict level =
       let () =
 	if !broken_order then ()
 	else 
-	  if ((is_strict && (List.for_all (fun x -> clause_greater false c x) new_all)) || 
-	  ((not is_strict) && (List.for_all (fun x -> clause_geq false c x) new_all)))
+	  if ((is_strict && (List.for_all (fun x -> clause_greater false false c x) new_all)) || 
+	    ((not is_strict) && (List.for_all (fun x -> clause_geq true false c x) new_all)))
 	  then 
 	    ()
 	  else failwith "final_update"
@@ -370,15 +370,15 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
 
       let test1 = 
 	if !broken_order then true 
-	else if not !debug_mode then List.for_all (fun x -> clause_greater false c x) new_eq 
+	else if not !debug_mode then List.for_all (fun x -> clause_greater false false c x) new_eq 
 	else
-	  (List.for_all (fun x -> let res = clause_greater false c x in let () = print_string ("\n Is c = " ^ c#string ^
+	  (List.for_all (fun x -> let res = clause_greater false false c x in let () = print_string ("\n Is c = " ^ c#string ^
 	  " \n greater than x = " ^ x#string ^ "\n Result: " ^ (string_of_bool res)) in res) new_eq) 
       in
       let test2 = 
 	if !broken_order then true 
-	else if not !debug_mode then List.for_all (fun x -> clause_geq false c x) new_eq
-	else (List.for_all (fun x -> let res = clause_geq false c x in let () = print_string ("\n Is c = " ^ c#string ^
+	else if not !debug_mode then List.for_all (fun x -> clause_geq true false c x) new_eq
+	else (List.for_all (fun x -> let res = clause_geq true false c x in let () = print_string ("\n Is c = " ^ c#string ^
 	" \n greater or equal than x = " ^ x#string ^ "\n Result: " ^ (string_of_bool res)) in res) new_eq) 
       in
 

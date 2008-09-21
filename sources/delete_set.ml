@@ -201,9 +201,9 @@ let subsumption_subsumes _ system_string c' c orig_c _ =
 	(* 	let () = print_string ("\nHere, after sigma we have c_sigma = " ^ c_sigma#string) in *)
 	let _ = match system_string with (* detect the cases when the procedure fails *)
 	    "C2" -> 
-	      if not(clause_greater false orig_c c_sigma) then
+	      if not(clause_greater false false orig_c c_sigma) then
 		failwith "subsumption_subsumes: comparison"
-	  | "C1" -> if not(clause_geq false orig_c c_sigma) 
+	  | "C1" -> if not(clause_geq true false orig_c c_sigma) 
 	    then failwith "subsumption_subsumes: comparison" 
 	  | _ -> () in
 	(* success *)

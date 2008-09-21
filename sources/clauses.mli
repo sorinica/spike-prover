@@ -327,9 +327,9 @@ val all_nonvariable_symbols :
               'a list;
     .. > ->
   Symbols.const list
-
 val recursive_new_hyps :
-   < all_terms : Terms.term list; .. > ->
+    < all_maximal_terms : bool -> Terms.term list;
+      all_terms : Terms.term list; .. > ->
     < all_terms : Terms.term list; .. > list -> 'a list * 'a list -> 'a list
 val cl1 : peano_context clause ref
 val cl2 : peano_context clause ref

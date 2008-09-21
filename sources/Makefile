@@ -51,8 +51,8 @@ all: bc # top byte-code native-code
 #				REAL_RESULT="$(TOPRESULT)" OCAMLC="$(OCAMLC)" REAL_OCAMLC_LINK="$(OCAMLMKTOP)" make_deps=yes
 #
 # generates the tags for each .ml file
-#taguri:
-#	ocamltags $(SOURCES_ML) parser.ml lexer.ml $(TARGET)
+taguri:
+	ocamltags $(SOURCES_ML) parser.ml lexer.ml $(TARGET)
 #	otags -v $(SOURCES_ML) parser.mly lexer.mll $(TARGET)
 #	cattags *.etags > TAGS
 #
