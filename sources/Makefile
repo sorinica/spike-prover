@@ -46,10 +46,10 @@ all: bc # top byte-code native-code
 -include $(OCAMLMAKEFILE)
 
 # generates a customized top-level 
-#top:			$(AUTO_TARGETS)
-#			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(TOPRESULT) \
-#				REAL_RESULT="$(TOPRESULT)" OCAMLC="$(OCAMLC)" REAL_OCAMLC_LINK="$(OCAMLMKTOP)" make_deps=yes
-#
+# # top:			$(AUTO_TARGETS)
+# # 			@$(MAKE) -r -f $(OCAMLMAKEFILE) $(TOPRESULT) \
+# # 				REAL_RESULT="$(TOPRESULT)" OCAMLC="$(OCAMLC)" REAL_OCAMLC_LINK="$(OCAMLMKTOP)" make_deps=yes
+
 # generates the tags for each .ml file
 taguri:
 	ocamltags $(SOURCES_ML) parser.ml lexer.ml $(TARGET)

@@ -50,29 +50,45 @@ let introduce_var_exist c =
 let default_fill_order_dico () =
   let fn c = 
     let ldef_symb = all_nonvariable_symbols c in
-    let head_symbol = 
+    let lhs,rhs = c#both_sides in
+    let lhs_head_symbol = 
       try 
-	(match (c#lefthand_side)#content with
+	(match lhs#content with
 	    Term (f, _, _) -> f
 	  | Var_exist _| Var_univ _ -> failwith "default_fill_order_dico"
 	)
-      with Horn -> failwith "default_fill_order_dico"
+      with Not_Horn -> failwith "default_fill_order_dico"
     in
     let r_cond_symb = try 
-      remove_el ( = ) head_symbol ldef_symb 
+      remove_el ( = ) lhs_head_symbol ldef_symb 
     with Failure "remove_el" -> failwith "default_fill_order_dico"
     in
     let () = if !debug_mode then 
       let () = buffered_output c#string in
       let () = print_string "\n" in
-      let () = print_int head_symbol in
+      let () = print_int lhs_head_symbol in
       let () = print_string "\n" in
       let () = print_list ", " print_int r_cond_symb in
       let () = print_string "\n" in
       let () = flush stdout in
-      ()
+	()
     in
-    List.iter (dico_order#add_couple head_symbol) r_cond_symb
+    
+    let is_orientable = 
+      try 
+	let rhs_head_symbol = 
+	  try 
+	    (match rhs#content with
+		 Term (f, _, _) -> f
+	       | Var_exist _| Var_univ _ -> failwith "variable"
+	    )
+	  with Not_Horn -> failwith "default_fill_order_dico"
+	in
+	  not (List.mem lhs_head_symbol (try dico_order#find rhs_head_symbol with Not_found -> [])) 
+      with Failure "variable" -> true 
+    in
+      if is_orientable then
+	List.iter (dico_order#add_couple lhs_head_symbol) r_cond_symb
   in
   let () = buffered_output "Setting default greater order for symbols" in
   let () = flush stdout in
@@ -81,7 +97,7 @@ let default_fill_order_dico () =
     let () = print_string "\n Current axioms :" in
     let () = print_clause_list axioms in
     let () = print_dico_const_string () in
-    ()
+      ()
   in
   let _ = List.iter fn axioms in
   let () = 
@@ -986,9 +1002,9 @@ list_of_greater:
   { }
 
 specif_greater:
-  list_of_symbols TOK_SEMICOLUMN
-  { let l = list_2_list_of_couples $1
-    in List.iter (fun (x, y) -> dico_order#add_couple x y) l }
+  TOK_IDENT TOK_COLUMN list_of_symbols TOK_SEMICOLUMN
+  {  let v = find_symbol_id $1 in
+     List.iter (fun x -> dico_order#add_couple v x) $3 }
 
 
 opt_specif_equivs:
@@ -1659,13 +1675,13 @@ reasoning_module:
 | TOK_GENERATE TOK_LPAR TOK_QUESTION_MARK TOK_RPAR
   {Generate (false, []) }
 | TOK_GENERATE TOK_LPAR list_of_priorities TOK_RPAR
-  { Generate_eq (true, $3) }
+  { Generate (true, $3) }
 | TOK_GENERATE_EQ
   { Generate_eq (true, []) }
 | TOK_GENERATE_EQ TOK_LPAR TOK_QUESTION_MARK TOK_RPAR
   {Generate_eq (false, []) }
 | TOK_GENERATE_EQ TOK_LPAR list_of_priorities TOK_RPAR
-  { Generate (true, $3) }
+  { Generate_eq (true, $3) }
 | TOK_GENERATE_OBS
   { ((Generate_obs (true, []))) }
 | TOK_GENERATE_OBS TOK_LPAR TOK_QUESTION_MARK TOK_RPAR
@@ -1824,7 +1840,7 @@ set_of_terms:
   { $1 @ [ $3 ] }
 
 two_terms:
-  reset_tmp_vars get_term TOK_COMA get_term TOK_SEMICOLUMN
+  reset_tmp_vars get_term TOK_QUESTION_MARK get_term TOK_SEMICOLUMN
   { ($2, $4) }
 
 two_clauses:

@@ -316,7 +316,7 @@ variant for " ^  c#string)
   end
 
 
-exception Horn
+exception Not_Horn
 
 type concrete_peano_literal =
     Peano_equal of ground_term * ground_term
@@ -1090,7 +1090,7 @@ class ['peano] clause c_v hist =
     method oriented =
       match oriented with
 	Undefined ->
-	  let b = try self#orientable with Horn -> false in
+	  let b = try self#orientable with Not_Horn -> false in
 	  let () = oriented <- Defined b in
 	  b
       |	Defined b -> b
@@ -1131,35 +1131,35 @@ class ['peano] clause c_v hist =
     method lefthand_side =
       if is_horn
       then (List.hd self#positive_lits)#lefthand_side
-      else raise Horn
+      else raise Not_Horn
 
     (* Returns the head of a Horn rule *)
     method head =
       if is_horn
       then List.hd self#positive_lits
-      else raise Horn
+      else raise Not_Horn
 
     (* Righthand side *)
     method righthand_side =
       if is_horn
       then (List.hd self#positive_lits)#righthand_side
-      else raise Horn
+      else raise Not_Horn
 
     (* Both *)
     method both_sides =
       if is_horn
       then (List.hd self#positive_lits)#both_sides
-      else raise Horn
+      else raise Not_Horn
 
     method conditions =
       if is_horn
       then fst content
-      else raise Horn
+      else raise Not_Horn
 
     method l_2_r =
       if is_horn
       then List.hd (snd content)
-      else raise Horn
+      else raise Not_Horn
 
   (* swaps lhs and rhs of the positive literal of a horn clause if not 
    oriented *)
@@ -1170,7 +1170,7 @@ class ['peano] clause c_v hist =
 	let lhs, rhs = self#l_2_r#both_sides in
 	let n = self#conditions in
  	{< oriented = Undefined ; content = (n, [ new literal (Lit_equal (rhs, lhs)) ]) >}
-      else raise Horn
+      else raise Not_Horn
 
     method force_orientation = 
       let n, p = self#content in
@@ -1215,7 +1215,7 @@ class ['peano] clause c_v hist =
       {< content = (negs',pos') ; >}
 
     method try_to_orient =
-      try self#orient with Horn | (Failure "orient") -> {< oriented = Defined false >}
+      try self#orient with Not_Horn | (Failure "orient") -> {< oriented = Defined false >}
 
   (* again, the clause should be Horn  *)
     method orientable =
@@ -1229,7 +1229,7 @@ class ['peano] clause c_v hist =
               let _ = self#orient in
               true
             with (Failure "orient") -> false
-      else raise Horn
+      else raise Not_Horn
 
     (* Left linearity *)
     method is_left_linear = (self#lefthand_side)#is_linear

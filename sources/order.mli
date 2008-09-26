@@ -27,19 +27,19 @@ val heavier : Terms.term -> Terms.term -> bool
     bool ->
     < all_maximal_terms : bool -> Terms.term list;
       all_terms : Terms.term list; .. > ->
-    < all_terms : Terms.term list; .. > -> bool
+    < all_maximal_terms : bool -> Terms.term list; all_terms : Terms.term list; .. > -> bool
  val clause_equiv :
     bool ->
     bool ->
     < all_maximal_terms : bool -> Terms.term list;
       all_terms : Terms.term list; .. > ->
-    < all_terms : Terms.term list; .. > -> bool
+    < all_maximal_terms : bool -> Terms.term list; all_terms : Terms.term list; .. > -> bool
  val clause_geq :
     bool ->
     bool ->
     < all_maximal_terms : bool -> Terms.term list;
       all_terms : Terms.term list; .. > ->
-    < all_terms : Terms.term list; .. > -> bool
+    < all_maximal_terms : bool -> Terms.term list; all_terms : Terms.term list; .. > -> bool
 val ac_distribute_ac_ac :
   Symbols.const -> Symbols.const -> Terms.term -> Terms.term
 val ac_distribute_un_un :

@@ -434,7 +434,7 @@ let process_problem_token = function
 			  [c']
 		      | Lit_diff _ -> parse_failwith ("The lemma [" ^ (string_of_int c#number) ^ "] is not orientable") 
 		  )
-		with Horn | (Failure "matching") -> []
+		with Not_Horn | (Failure "matching") -> []
 	      in
 	      res @ lst
 	    ) [] !all_lemmas

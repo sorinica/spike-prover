@@ -109,7 +109,7 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
 		    with (Failure "matching") 
 		      | (Failure "swap_rule") -> (fn tail)
 		  )
-	    with Horn -> fn tail
+	    with Not_Horn -> fn tail
   in
   let lpat_L = if List.mem L sl then complete_lemmas_system#content else [] in
   let lpat_L' = List.map (fun x -> ("L", x)) lpat_L in

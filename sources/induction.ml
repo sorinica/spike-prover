@@ -119,7 +119,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
   (* all the instances for a given subterm t *)
   let all_inst t max_v is_gen =
 (*     let () = buffered_output ("\n treating t = " ^ t#string ^ " with is_gen = " ^ (string_of_bool is_gen)) in *)
-    let k = try t#head with Failure "head" -> failwith ("induction: fail on term " ^ t#string) in
+    let k = try t#head with Failure "head" -> failwith ("generate: fail on term " ^ t#string) in
     let rec fn_test1 n t l  =
 (*       let () = buffered_output ( "\n" ^ (n_spaces n) ^ "fn_test1 t = " ^ t#string ^ " l = " ^ (sprint_list ",  " (fun (symb, p) -> *)
 (* 	" symb = " ^ (dico_const_string#find symb) ^ " p = " ^ (string_of_int p)) l) ) in *)
@@ -220,13 +220,13 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 	let () = print_detailed_clause c in 
 	let () = print_history normalize c in 
 (* 	let () = print_history_ic normalize c in  *)
-	failwith ("fail induction on " ^ c#string) in
+	failwith ("fail generate on " ^ c#string) in
   
   let target_term = c#subterm_at_position p in
   let target_vars = List.map (fun (x,_,_) -> x) target_term#variables in
 
 (* expand the other terms whose variables have been instantiated  *)
-  let res_pos = try remove_el (fun (p1, _) (p2, _) -> p1 = p2) (p, c#subterm_at_position p) tested_pos with Failure "remove_el" -> failwith "remove_el: induction" in
+  let res_pos = try remove_el (fun (p1, _) (p2, _) -> p1 = p2) (p, c#subterm_at_position p) tested_pos with Failure "remove_el" -> failwith "remove_el: generate" in
 
   let rec fn6 i cl (s, r_orig) = 
 
@@ -293,7 +293,6 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 
   (* start to write the instances  *)
   
-  let add_hyp = List.for_all (fun (_, r) -> r#oriented) ls' in
   let i = ref 0 in
   let written_term = c#subterm_at_position p in
   let () =
@@ -320,10 +319,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
     then
       buffered_output ("\n" ^ !indent_string ^ "We obtain :")
     else () 
-  in
-  (* add the treated conjecture as premise  *)
-  let () = if add_hyp then hypotheses_system#append [c] in
-  
+  in  
   let () = i := 0 in
   
   let fn5 (s, r_orig) = 
@@ -377,8 +373,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
       let () = i := !i + 1 in
       if verbose
       then
-	buffered_output ("\n" ^ !indent_string ^ (string_of_int !i) ^ ")" ^ res#string ^ "\n\n" ^ !indent_string ^ "using the rule
-" ^ r_orig#string)
+	buffered_output ("\n" ^ !indent_string ^ (string_of_int !i) ^ ") " ^ res#string ^ "\n\n" ^ !indent_string ^ "using the rule" ^ r_orig#string)
       else ()
     in
     let () =
@@ -386,9 +381,20 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
       then Coq.rewrite_nonum !i ("sp_axiom_" ^ (string_of_int r_orig#number))
       else ()
     in
-    res
+    (cinst, res)
   in
   let () = incr generate_counter_suc in
-  let res = List.map fn5 ls' in
+  let lcres = List.map fn5 ls' in
+  let add_hyp = List.for_all (fun (cinst, res) -> clause_greater false false cinst res) lcres in
+    (* add the treated conjecture as premise  *)
+  let () = 
+    if add_hyp then 
+      hypotheses_system#append [c] 
+    else
+      let is_case_analysis = List.for_all (fun (cinst, res) -> clause_geq true false cinst res) lcres in
+	if not is_case_analysis then failwith ("fail generate on " ^ c#string ^ "  \n Hint: ordering to be changed or be ready to reinitialize the hypotheses") 
+  in
+  let lres = List.map (fun (_,x) -> x) lcres in
   let () = buffered_output "\n" in
-  res
+    lres
+      
