@@ -6,7 +6,7 @@ val sprint_lemmas : unit -> string
 val sprint_axioms : unit -> string
 val sprint_goals : unit -> string
 val sprint_hypotheses : unit -> string
-exception Horn
+exception Not_Horn
 type concrete_peano_literal =
   | Peano_equal of Terms.ground_term * Terms.ground_term
   | Peano_diff of Terms.ground_term * Terms.ground_term
@@ -330,7 +330,7 @@ val all_nonvariable_symbols :
 val recursive_new_hyps :
     < all_maximal_terms : bool -> Terms.term list;
       all_terms : Terms.term list; .. > ->
-    < all_terms : Terms.term list; .. > list -> 'a list * 'a list -> 'a list
+    < all_maximal_terms : bool -> Terms.term list; all_terms : Terms.term list; .. > list -> 'a list * 'a list -> 'a list
 val cl1 : peano_context clause ref
 val cl2 : peano_context clause ref
 val print_detailed_clause : peano_context clause -> unit

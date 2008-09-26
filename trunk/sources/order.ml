@@ -77,14 +77,15 @@ let rec rpo is_total ((s:term),(t:term)) =
 		  GR else NGE
 	      else if equivalent f g then
 		(if List.for_all (fun ti -> (rpo is_total (s,ti) == GR)) ts then
-		  match get_status f with
-		    | Left -> lex (rpo is_total) (ss,ts)
-		    | Right -> 
-			let inv_ss = List.rev ss
-			and inv_ts = List.rev ts in
-			lex (rpo is_total) (inv_ss,inv_ts)
-		    | Multiset -> mul (rpo is_total) (ss,ts)
-		else NGE
+		   let st = try get_status f with Failure "raising Not_found in get_status_id" -> Left in
+		     match st with
+		       | Left -> lex (rpo is_total) (ss,ts)
+		       | Right -> 
+			   let inv_ss = List.rev ss
+			   and inv_ts = List.rev ts in
+			     lex (rpo is_total) (inv_ss,inv_ts)
+		       | Multiset -> mul (rpo is_total) (ss,ts)
+		 else NGE
 		)
 	      else NGE
 	    else GR
@@ -273,20 +274,26 @@ let heavier t t' = ground_greater t t'
 (* Order on clauses using the multiset extension*)
 let clause_greater is_max is_total c c' =
   let l = if is_max then c#all_maximal_terms is_total else c#all_terms
-  and l' = if is_max then c#all_maximal_terms is_total else c'#all_terms 
+  and l' = if is_max then c'#all_maximal_terms is_total else c'#all_terms 
   and order_on_terms = !rpos  in
+(*   let strl = List.fold_left (fun s t -> s ^ "   " ^ t#string) "" l in *)
+(*   let strl' = List.fold_left (fun s t -> s ^ "   " ^ t#string) "" l' in *)
+(*   let _ = buffered_output ("\nThe terms involved in clausal comparison are: \n" ^ strl ^ "\nand: " ^ strl') in *)
   multiset_greater (order_on_terms is_total)  l l'
 
 
 let clause_equiv is_max is_total c c' =
   let l = if is_max then c#all_maximal_terms is_total else c#all_terms
-  and l' = if is_max then c#all_maximal_terms is_total else c'#all_terms 
+  and l' = if is_max then c'#all_maximal_terms is_total else c'#all_terms 
   and order_on_terms = !rpos  in
+(*   let strl = List.fold_left (fun s t -> s ^ "   " ^ t#string) "" l in *)
+(*   let strl' = List.fold_left (fun s t -> s ^ "   " ^ t#string) "" l' in *)
+(*   let _ = buffered_output ("\nThe terms involved in clausal comparison are: \n" ^ strl ^ "\nand: " ^ strl') in *)
   multiset_equivalent (order_on_terms is_total)  l l'
 
 let clause_geq is_max is_total c c' =
   let l = if is_max then c#all_maximal_terms is_total else c#all_terms
-  and l' = if is_max then c#all_maximal_terms is_total else c'#all_terms 
+  and l' = if is_max then c'#all_maximal_terms is_total else c'#all_terms 
   and order_on_terms = !rpos  in
   multiset_geq (order_on_terms is_total)  l l'
 

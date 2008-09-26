@@ -557,9 +557,9 @@ let print_dico_order () =
   buffered_output "dico_order:";
   dico_order#iter
     (fun k v ->
-       try buffered_output ((dico_const_string#find k) ^ " \">\" " ^
-        (sprint_list ", " dico_const_string#find
-	 (* (fun x -> string_of_int x) *) v )) with Not_found -> failwith "raising Not_found in print_dico_order")
+       try buffered_output ((dico_const_string#find k) ^ ": " ^
+        (sprint_list " " dico_const_string#find
+	 (* (fun x -> string_of_int x) *) v )^ ";") with Not_found -> failwith "raising Not_found in print_dico_order")
 ;;
 
 
