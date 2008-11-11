@@ -345,7 +345,7 @@ let subsumption verbose c los (cxt1,cxt2) level =
 	    )
 	    or test tl
     in	
-    if (not (c#has_bit subsumption_bit)) && (test ls) then if !delayed then let () = if !maximal_output then buffered_output "\n Delayed !" in failwith "fn" (* stuttering *) else [] 
+    if (not (c#has_bit subsumption_bit)) && (test ls) then if !delayed then let () =  buffered_output "\n Delayed !" in failwith "fn" (* stuttering *) else [] 
     else
       let () = c#set_bit subsumption_bit in
       failwith "fn" 
