@@ -1044,7 +1044,7 @@ class peano_context  (negs: literal list) (poss: literal list) cr g l =
 
   end
 
-class ['peano] clause c_v hist =
+class ['peano] clause c_v hist br_info =
 
   object (self: 'a)
 
@@ -1066,6 +1066,7 @@ class ['peano] clause c_v hist =
     val pos_card = List.length (snd c_v)
     val card = List.length (fst c_v) + List.length (snd c_v)
     val mutable history = (hist: ((var * term) list * 'a) list)
+    val mutable broken_info = (br_info:string * int * (Literals.literal list * Literals.literal list ))
     val is_horn =
       match snd c_v with
         [l] -> (match l#content with 
@@ -1076,6 +1077,10 @@ class ['peano] clause c_v hist =
     val mutable peano_context = (Undefined: 'peano pointer)
     val mutable oriented = (Undefined: bool pointer)
     val mutable maximal_terms = (Undefined: Terms.term list pointer)
+
+      
+    method set_broken_info info = broken_info <- info
+    method get_broken_info = broken_info
 
     method augmentation_literals = augmentation_literals
 
@@ -1283,6 +1288,12 @@ class ['peano] clause c_v hist =
       | _ -> (sprint_list " /\\ " f l) ^ " => " ^ (sprint_list " \\/ " f r))
       ^ " ;"
 (*       ^ (if !specif_LA_defined then "\n" ^ self#peano_context#string else "") *)
+
+    method def_symbols = 
+      let l, r = content in
+      let def_symb_l = List.map (fun x -> x#def_symbols) l in
+      let def_symb_r = List.map (fun x -> x#def_symbols) r in
+	(List.flatten def_symb_l) @ (List.flatten def_symb_r)
 
     (* Bijective renaming modulo AC properties of logical operators *)
     method bijective_renaming ren (c: 'a) =
@@ -1657,6 +1668,7 @@ let hypotheses_system = new system []
 let conjectures_system = new system []
 let rewrite_system = new rw_system []
 let lemmas_system = new l_system []
+let real_conjectures_system = ref [] ;;
 
 let complete_lemmas_system = new l_system []
 let all_conjectures_system = new system []
@@ -1764,8 +1776,8 @@ let recursive_new_hyps c_ref r_conj (cxt1, cxt2) =
 
   (* variables to be instantiated for debugging purposes  *)
 
-let cl1 = ref (new clause ([],[]) [])
-let cl2 = ref (new clause ([],[]) [])
+(* let cl1 = ref (new clause ([],[]) [] ("",c)) *)
+(* let cl2 = ref (new clause ([],[]) [] ("",c)) *)
 
 let print_detailed_clause c = 
   let () = print_string ("\nDetailing clause " ^ (string_of_int c#number)) in
@@ -1973,8 +1985,8 @@ let counterexample fn_norm c =
   let lvar_c' = List.filter (fun (_,_,b) -> b = true) c'#variables in
   (* computes the ground constructors of sort s *)
   let rec fn (i,s) accept_recursivity iter = 
- (*    let () = buffered_output ("BEFORE recursivity = " ^ (string_of_bool accept_recursivity) ^ " in iteration " ^ (string_of_int *)
-(*       iter) ^ ": The variable u" ^ (if is_abstract s then "a" else "") ^ (string_of_int i) ^ " is instantiated by:\n\n") in  *)
+(*     let () = buffered_output ("BEFORE recursivity = " ^ (string_of_bool accept_recursivity) ^ " in iteration " ^ (string_of_int *)
+(*       iter) ^ ": The variable u" ^ (if is_abstract s then "a" else "") ^ (string_of_int i) ^ " of sort " ^ (sprint_sort s) ^ " is instantiated by:\n\n") in *)
     let res = ref [] in
     let () = 
       dico_const_profile#iter 
@@ -2002,24 +2014,27 @@ let counterexample fn_norm c =
     else
       !res
   in
-  let lground_s = megamix (List.map (fun (i,s,_) -> let ltconstr = fn (i, s) true 0 in 
-(*   let () = buffered_output ("AFTER: The variable u" ^ (if is_abstract s then "a" else "") ^ (string_of_int i) ^ " is instantiated by:\n\n") in  *)
-(*   let () = List.iter (fun t -> buffered_output ("    term = " ^ t#string ^ "\n")) ltconstr in *)
-  
-  List.map (fun tc -> (i, tc)) ltconstr) lvar_c') in 
+  let lground_s = megamix (
+    List.map (fun (i,s,_) -> 
+		let ltconstr = fn (i, s) true 0 in 
+(* 		let () = buffered_output ("AFTER: The variable u" ^ (if is_abstract s then "a" else "") ^ (string_of_int i) ^ " is instantiated by:\n\n") in *)
+(* 		let () = List.iter (fun t -> buffered_output ("    term = " ^ t#string ^ "\n")) ltconstr in *)
+		  List.map (fun tc -> (i, tc)) ltconstr) lvar_c'
+  ) 
+  in 
 
 
   (* reduces by normalization the literal and tests it with the boolean value  *)
   let fn_litred lit value = 
     match lit#content with
 	Lit_equal (x,y) | Lit_rule (x,y) -> 
-	  let _, x_norm = fn_norm [R;L] x c "" ([],[]) 0 in
-	  let _, y_norm = fn_norm [R;L] y c "" ([],[]) 0 in
+	  let _, _, x_norm = fn_norm [R;L] x c "" ([],[]) 0 in
+	  let _, _, y_norm = fn_norm [R;L] y c "" ([],[]) 0 in
 	  let res = x_norm#equal y_norm in 
 	  res = value
       | Lit_diff (x,y) -> 
-	  let _, x_norm = fn_norm [R;L] x c "" ([],[]) 0 in
-	  let _, y_norm = fn_norm [R;L] y c "" ([],[]) 0 in
+	  let _, _, x_norm = fn_norm [R;L] x c "" ([],[]) 0 in
+	  let _, _, y_norm = fn_norm [R;L] y c "" ([],[]) 0 in
 	  let res = x_norm#equal y_norm in 
 	  res <> value
   in
@@ -2031,13 +2046,24 @@ let counterexample fn_norm c =
     (List.for_all (fun lit -> fn_litred lit false) lp)
   in
   let res = ref [] in
-(*   let () = buffered_output ("Tried substitutions :\n") in *)
-  let () = List.iter (fun s -> 
-(*     let () = buffered_output ("\n substitution : " ^ (sprint_subst s)) in *)
-    let cs = c#substitute s in if fn_false cs then res := cs :: !res) lground_s in
-  if !res = [] then failwith "counterexample" 
-  else List.hd !res
-
+  let nr_tests = 10 in
+  let nr_subst = List.length lground_s in
+  let str_total = "Checking for counterexample " ^ (string_of_int nr_subst) ^ " substitutions :\n" in
+  let str_partial =  "Checking for counterexample only " ^ (string_of_int nr_tests) ^ " out of " ^ (string_of_int nr_subst) ^ " substitutions :\n" in
+  let () = buffered_output (if nr_tests > nr_subst then str_total else str_partial) in
+  let rec fn_test iter l =
+    match l with  
+	[] -> ()
+      | s :: tl -> 
+	  let () = buffered_output ("\n substitution : " ^ (sprint_subst s)) in
+	  let cs = c#substitute s in 
+	  let () = if fn_false cs then res := cs :: !res in
+            if iter < nr_tests then fn_test (iter + 1) tl 
+  in  
+  let () = fn_test 1 lground_s in
+    if !res = [] then failwith "counterexample" 
+    else List.hd !res
+      
 let clause_ground_instance c =
   let lvar_c = List.fold_right (fun (i,s,b) l -> if b = true then (new term (Var_univ (i, s))) :: l else l) c#variables [] in
 
@@ -2076,7 +2102,7 @@ let clause_ground_instance c =
   res
 
 
-let print_history fn_norm c = 
+let print_history fn_norm c show_ctx= 
   let rec fn l c_rez= match l with
       [] -> c_rez
     | (subst, cl) :: tl -> 
@@ -2084,6 +2110,8 @@ let print_history fn_norm c =
 	let c' = c_rez#substitute subst in
 	fn tl c'
   in 
+  let br_symb, cl_number, _ = c#get_broken_info in 
+  let () = if br_symb <> "" then buffered_output ("\nThe broken functional symbol for [" ^ (string_of_int c#number) ^ "] is " ^ br_symb ^ " and the number of the clause where the break happened is [ " ^ (string_of_int cl_number) ^ " ] \n") in
   let () = print_string ("\n The history of " ^ c#string) in
   try 
     let (_, c_orig) = List.hd c#history in
@@ -2091,18 +2119,20 @@ let print_history fn_norm c =
     let c_inst = fn c#history c_orig in
     let () = buffered_output ("\n\n The corresponding instance is \n\t" ^ c_inst#string) in
     (* computing a ground instance  *)
-    let c_ginst = 
-      (try 
-	let cxp = counterexample fn_norm c_inst in 
-	let () = buffered_output ("\n\n One of its counterexamples is  \n\t" ^ cxp#string) in
-	cxp
-      with Failure "counterexample" -> 
-	let cinst = clause_ground_instance c_inst in
-	let () = buffered_output ("\n\n One of its  ground instances is \n\t" ^ cinst#string) in
-	cinst) 
-    in
-    let () = print_detailed_clause c_ginst in
-    () 
+      if show_ctx then 
+	let c_ginst = 
+	  (try 
+	     let cxp = counterexample fn_norm c_inst in 
+	     let () = buffered_output ("\n\n One of its counterexamples is  \n\t" ^ cxp#string) in
+	       cxp
+	   with Failure "counterexample" -> 
+	     let () = buffered_output "\n\n Preparing a ground instance ...\n" in
+	     let cinst = clause_ground_instance c_inst in
+	     let () = buffered_output ("\n\n One of such instance is \n\t" ^ cinst#string) in
+	       cinst) 
+	in
+	let () = print_detailed_clause c_ginst in
+	  () 
   with Failure "hd" -> ()
 
 let print_history_instance c = 

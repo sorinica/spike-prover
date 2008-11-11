@@ -153,11 +153,11 @@ rule token = parse
 						in "S"
 					      with Not_found -> ""
 					  in
-					  if  char_s <> "" then
-                                            let rec fn = function
-                                                0 -> [ "0" ]
-                                              | i -> char_s ::fn (i - 1)
-                                            in let () = gprint "TOK_IDENT_LIST" in TOK_IDENT_LIST (fn (int_of_string s))
+					  if  char_s <> "" then TOK_IDENT s
+(*                                             let rec fn = function  *)
+(*                                                  0 -> [ "0" ] *)
+(*                                               | i -> char_s ::fn (i - 1) *)
+(*                                             in let () = gprint "TOK_IDENT_LIST" in TOK_IDENT_LIST (fn (int_of_string s)) *)
                                           else
                                             try
                                               let x = Hashtbl.find keyword_table (String.lowercase s) in
