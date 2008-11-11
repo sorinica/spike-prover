@@ -24,6 +24,7 @@ val obs_sort_counter : int ref
         (Symbols.var * Symbols.sort * bool) list ->
         ((Symbols.const * int) list * 'a) list
       method defined_positions : int list list
+      method def_symbols : string list
       method delpos_conditional_rewriting : int list -> unit
       method delpos_contextual_rewriting : int list -> unit
       method delpos_equational_rewriting : int list -> unit

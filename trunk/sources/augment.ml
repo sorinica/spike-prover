@@ -67,7 +67,7 @@ let is_conservative max_poly multiplicands _ _ l =
 (* to be completed: to add the context  *)
 
 let augment_polynom counter p lp reference cr g l = 
-  let c_reference = new clause reference [] in (* rebuild a copy of the reference *)
+  let c_reference = new clause reference [] ("",0,([],[])) in (* rebuild a copy of the reference *)
   let () = print_indent_string (" augment_l has been called on the polynom " ^ p#string ^ " \n with the reference clause " ^ c_reference#string)
   in
   try 

@@ -18,11 +18,11 @@ val equational_rewriting :
     Clauses.peano_context Clauses.clause ->
     string ->
     Clauses.peano_context Clauses.clause list *
-    Clauses.peano_context Clauses.clause list -> int -> string * Terms.term)
+    Clauses.peano_context Clauses.clause list -> int -> string list * string * Terms.term)
       ->
       Clauses.which_system list -> bool ->  Clauses.peano_context Clauses.clause -> 
 	(Clauses.peano_context Clauses.clause list * Clauses.peano_context Clauses.clause list) -> 
-	  string *  Clauses.peano_context Clauses.clause
+	 string list * string *  Clauses.peano_context Clauses.clause
 val conditional_rewriting :
   bool ->
     bool ->

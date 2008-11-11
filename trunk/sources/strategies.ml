@@ -390,7 +390,7 @@ class strategy (cs: concrete_strategy) =
     method pprint f = Format.fprintf f "@[@ Strategy: %s@]" self#string
 
     (* Apply a strategy. *)
-    method apply verbose cxt is_strict = self#apply_at_pos verbose Pos_dumb 0 cxt is_strict
+    method apply verbose cxt is_strict   = self#apply_at_pos verbose Pos_dumb 0 cxt is_strict  
 
     (* Apply a strategy using positions *)
     method apply_at_pos verbose pp level cxt is_strict =
@@ -427,7 +427,7 @@ class strategy (cs: concrete_strategy) =
 			      let l_new_conj = apply_rm rm cxt1 cxt2 phi st true  pp level verbose in
 			      let _ = List.iter (fun cl -> if cl#number = !stop_clause then let () = print_detailed_position_clause cl in
 			      let () = print_detailed_clause cl in
-			      let () = print_history normalize cl in  raise (MyExit "stop on clause ")) l_new_conj in
+			      let () = print_history normalize cl true in  raise (MyExit "stop on clause ")) l_new_conj in
 			      (* success *)
 			      (* 				let () = List.iter (fun c -> write_pos_clause c) l_new_conj in  *)
 			      (* 				let () = List.iter (fun c -> print_detailed_clause c) l_new_conj in  *)
@@ -449,7 +449,7 @@ class strategy (cs: concrete_strategy) =
 			      in (* success *)
 			      let _ = List.iter (fun cl -> if cl#number = !stop_clause then let () = print_detailed_position_clause cl
 			      in let () = print_detailed_clause cl in 
-			      let () = print_history normalize cl in  raise (MyExit "stop on clause ")) l_new_conj in
+			      let () = print_history normalize cl true in  raise (MyExit "stop on clause ")) l_new_conj in
 			      (* 				let () = List.iter (fun c -> write_pos_clause c) l_new_conj in  *)
 			      (* 				let () = List.iter (fun c -> print_detailed_clause c) l_new_conj in  *)
 			      (* 				let () = List.iter (fun c -> print_detailed_position_clause c) l_new_conj in  *)
@@ -469,7 +469,7 @@ class strategy (cs: concrete_strategy) =
 			      let l_new_conj = apply_rm rm cxt1 cxt2 phi st false  pp level verbose 
 			      in (* success *)
 			      if l_new_conj != [] then 
-				failwith ("Delete failure on " ^ (rm_to_string rm) ^ " with " ^ phi#string)
+				  failwith ("Delete failure on " ^ (rm_to_string rm) ^ " with " ^ phi#string)
 			      else
 				let () = conjectures_system#replace_w_list phi_number [] in
 				true
@@ -607,6 +607,7 @@ class strategy (cs: concrete_strategy) =
 
     (* For generate *)
     method apply_new_goal verbose (c: (peano_context) clause) cxt is_strict =
+      let () = real_conjectures_system := conjectures_system#content in
       let () = conjectures_system#init [c] in (* (List.flatten (List.map preprocess_conjecture [c])) in *)
       try
         self#apply verbose cxt is_strict

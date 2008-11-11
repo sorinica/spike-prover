@@ -104,6 +104,12 @@ class literal c_l =
       | Lit_equal (t, t') -> t#string ^ " = " ^ t'#string
       | Lit_diff (t, t') -> t#string ^ " <> " ^ t'#string
 
+    method def_symbols =
+      match content with
+        Lit_rule (t, t') -> t#def_symbols @ t'#def_symbols
+      | Lit_equal (t, t') -> t#def_symbols @ t'#def_symbols
+      | Lit_diff (t, t') -> t#def_symbols @ t'#def_symbols
+
    
     (* Apply function term -> term to members of a literal *)
     method apply_to_lit f =

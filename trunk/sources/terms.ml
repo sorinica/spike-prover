@@ -586,6 +586,15 @@ class term c_t' =
       | Term (_, l, _) ->
           1 + List.fold_left (+) 0 (List.map (fun x -> x#treesize) l)
 
+(* Computes all the defined symbols in a term *)
+    method def_symbols = 
+      match content with
+	  Var_exist _ | Var_univ _ -> []
+	| Term (f, l, _) -> let v = try dico_const_string#find f with Not_found -> failwith "raising Not_found in def_symbs of terms" in
+	  let lv = List.flatten (List.map (fun x -> x#def_symbols) l) in
+	    v :: lv
+
+
     (* Syntactic equality *)
     method syntactic_equal (v: 'a) =
 	match content, v#content with
