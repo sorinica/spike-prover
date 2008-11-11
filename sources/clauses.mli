@@ -100,6 +100,7 @@ type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
   class ['a] clause :
     Literals.literal list * Literals.literal list ->
     (((Symbols.var * Terms.term) list * 'b as 'd) list as 'c) ->
+				      string * int * (Literals.literal list * Literals.literal list ) ->
     object ('b)
       constraint 'a = peano_context
       val mutable augmentation_failure : int list
@@ -107,6 +108,7 @@ type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
       val card : int
       val content : Literals.literal list * Literals.literal list
       val mutable history : 'c
+      val mutable broken_info: string * int * (Literals.literal list * Literals.literal list)
       val mutable inference_bitstream : int
       val is_horn : bool
       val mutable maximal_terms : Terms.ground_term list Diverse.pointer
@@ -121,11 +123,13 @@ type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
       method add_augmentation : Literals.literal -> unit
       method add_failed_augmentation : int -> unit
       method add_failed_subsumption : int -> unit
+      method get_broken_info: string * int * (Literals.literal list * Literals.literal list )
+      method set_broken_info: string * int * (Literals.literal list * Literals.literal list ) -> unit
       method add_history : 'd -> unit
       method all_maximal_terms : bool -> Terms.ground_term list
-      method all_neg_terms : Terms.ground_term list
+      method all_neg_terms : Terms.term list
       method all_pos_terms : Terms.term list
-      method all_terms : Terms.ground_term list
+      method all_terms : Terms.term list
       method apply_to_clause : (Literals.literal -> Literals.literal) -> 'b
       method augmentation_has_failed : int -> bool
       method augmentation_literals : Literals.literal list
@@ -143,6 +147,7 @@ type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
       method content : Literals.literal list * Literals.literal list
       method copy : 'b
       method depth : int
+      method def_symbols : string list
       method equal : 'b -> bool
       method expand : 'b
       method expand_sorts : 'b
@@ -331,8 +336,8 @@ val recursive_new_hyps :
     < all_maximal_terms : bool -> Terms.term list;
       all_terms : Terms.term list; .. > ->
     < all_maximal_terms : bool -> Terms.term list; all_terms : Terms.term list; .. > list -> 'a list * 'a list -> 'a list
-val cl1 : peano_context clause ref
-val cl2 : peano_context clause ref
+(* val cl1 : peano_context clause ref *)
+(* val cl2 : peano_context clause ref *)
 val print_detailed_clause : peano_context clause -> unit
 val print_detailed_position_clause : peano_context clause -> unit
 
@@ -379,8 +384,8 @@ val print_history : (which_system list ->
     Terms.term ->
     peano_context clause ->
     string ->
-      ((peano_context clause) list) *
-      ((peano_context clause) list) -> int -> string * Terms.term) -> peano_context clause -> unit
+       ((peano_context clause) list) *
+      ((peano_context clause) list) -> int -> (string * int * (Literals.literal list * Literals.literal list)) list * string * Terms.term) -> peano_context clause -> bool -> unit
 val print_history_instance : peano_context clause -> unit
 
 val initial_conjectures : (peano_context clause) list ref
@@ -397,3 +402,4 @@ val initial_conjectures : (peano_context clause) list ref
  val rewrite_system : (peano_context clause) rw_system 
 
 val compute_string_clause_caml: peano_context clause -> string
+val real_conjectures_system: (peano_context clause) list ref

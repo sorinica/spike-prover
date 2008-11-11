@@ -218,7 +218,7 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
       with Failure "fn2" ->
 	let () = buffered_output ("\n\n **** fail GENERATE_EQ *** on " ^ c#string ^ "\n\n") in
 	let () = print_detailed_clause c in 
-	let () = print_history normalize c in 
+	let () = print_history normalize c false in 
 (* 	let () = print_history_ic normalize c in  *)
 	failwith ("fail induction on " ^ c#string) in
   
@@ -379,7 +379,7 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
 
     let fn_eq lit  =
       let fn_term (lhs:Terms.term) rhs is_lhs = 
-	let str_norm, lhs_norm = normalize [R;L] lhs c "" ([],[]) 0 in  
+	let _, str_norm, lhs_norm = normalize [R;L] lhs c "" ([],[]) 0 in  
 	let lhs_orig, rhs_orig = 
 	  let l, r = (c#head)#both_sides in
 	    if is_lhs then l,r else r,l

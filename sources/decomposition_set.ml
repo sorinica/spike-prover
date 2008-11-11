@@ -176,7 +176,7 @@ let positive_clash verbose c level  =
     and n' = fn2 false n in 
     match n', p' with
         [], [] -> let () = buffered_output "Positive clash produced a refutation" in 
-	let () = if level = 1 then print_history normalize c in 
+	let () = if level = 1 then print_history normalize c true in 
 	raise Refutation
       | _ ->
           if !pos_clash_counter > 0

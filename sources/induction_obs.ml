@@ -154,7 +154,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
                 ))
               clausal_context c'#positive_lits 
 	    in
-            let (res: peano_context clause) = new clause (c'#negative_lits, pl) c#history in
+            let (res: peano_context clause) = new clause (c'#negative_lits, pl) c#history ("",0,([],[])) in
 	    res
 	  in
 	  List.map fn list_of_clausal_context 
@@ -233,7 +233,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
 	      with Failure "all_inst" -> fn2 tl 
       in
       (* compute the substitutions  *)
-      let p, ls = try fn2 lp_t with Failure "fn2" -> let () = print_history normalize cl in let () =  buffered_output ("\nWarning: fail generate on " ^ cl#string) in
+      let p, ls = try fn2 lp_t with Failure "fn2" -> let () = print_history normalize cl false in let () =  buffered_output ("\nWarning: fail generate on " ^ cl#string) in
       failwith "generate_obs" in
       (* start to write the instances  *)
 

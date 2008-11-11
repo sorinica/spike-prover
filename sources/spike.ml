@@ -109,7 +109,7 @@ let () =  main_interact  := fun () ->
 		let () = normalize_flag := true in
 		let () = interaction_mode := false in
 		let lit = new literal (Lit_equal (t, t)) in
-		let cl = new clause ([], [lit]) [] in
+		let cl = new clause ([], [lit]) [] ("",0,([],[])) in
 		(* build current state *)
 		let () = conjectures_system#init ([cl#update_pos]) in
 		let normal_strat = new Strategies.strategy (Named_strategy "normalize") in
@@ -448,7 +448,7 @@ let process_problem_token = function
       let f t =
         let () = buffered_output ("\nNormalizing ONLY with unconditional rules: " ^ t#string) in
 	let c_dummy = List.hd rewrite_system#content in
-        let str, t' = normalize_plus [R;L] t c_dummy "" ([],[]) 0 in
+        let _, str, t' = normalize_plus [R;L] t c_dummy "" ([],[]) 0 in
         buffered_output ("\n" ^  t'#string ^ " is the normal form of " ^ t#string ^ (if str = "" then "" else " obtained by the following operations :" ^ str)) in
       let () = List.iter f l in 
       true

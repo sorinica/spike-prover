@@ -15,6 +15,7 @@ type concrete_literal =
       method compute_string : string
       method content : concrete_literal
       method copy : 'a
+      method def_symbols: string list
       method depth : int
       method equal : 'a -> bool
       method expand_sorts : 'a
