@@ -56,7 +56,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
   let pos_sorted = order_terms pos_subterms true in
 
   let max_c = c#all_maximal_terms false in 
-  let tested_pos = List.filter 
+  let ltested_pos = List.filter 
     (fun (p, _) -> 
       let (b, n, pos) = p in
       let term_pos = c#subterm_at_position (b, n, [List.hd pos]) in 
@@ -66,7 +66,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
     
 
   in
-  let () = text := !text ^ (List.fold_left (fun x (p, t) -> x ^ (sprint_clausal_position p) ^ " --> " ^ t#string ^ "\n\t" ) ("\n\nfrom the positions:\n\t") tested_pos) in
+  let () = text := !text ^ (List.fold_left (fun x (p, t) -> x ^ (sprint_clausal_position p) ^ " --> " ^ t#string ^ "\n\t" ) ("\n\nfrom the positions:\n\t") ltested_pos) in
   let fn t rule max_v is_gen =
     
     let _ = rule#number in
@@ -176,17 +176,15 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
   in
   
   
-  let rec fn2 l max_v gen_on_term = 
-    match l with 
-	[] -> failwith "fn2"
-      | (p, t) :: tl -> 
+  let rec fn2 (p,t) max_v gen_on_term = 
+  
 (* 	  let () = buffered_output ("\nTrying t = " ^ t#string) in *)
 	  try 
 	    let ls = all_inst t max_v false in
 	    let all_ts = List.map (fun (s1, _) -> List.map (fun (_, s) -> s) s1) ls in (* the terms for substitution in t *)
 	    
 	    let test = (List.exists (fun t -> not t#is_term) (List.flatten all_ts)) in
-	    if (ls = []) or test then fn2 tl max_v gen_on_term
+	    if (ls = []) or test then failwith "fn2"
 	    else 
 	      (p, ls)
 	  with Failure "all_inst" -> 
@@ -197,204 +195,221 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 		let () = text := !text ^  "\n\n\t by the generalization of some existential variables to universal ones on term "
 		  ^ t#string in
 		let all_ts = List.map (fun (s1, _) -> List.map (fun (_, s) -> s) s1) ls in (* the terms for substitution in t *)
-		let test2 = (List.exists (fun t -> not t#is_term) (List.flatten all_ts)) in
-		if (ls = []) or test2 then fn2 tl max_v gen_on_term
+		let test = (List.exists (fun t -> not t#is_term) (List.flatten all_ts)) in
+		if (ls = []) or test then failwith "fn2"
 		else 
 		  (p, ls)
 	      with Failure "all_inst" -> 
-		fn2 tl max_v gen_on_term
-	    else fn2 tl max_v gen_on_term
+		failwith "fn2"
+	    else failwith "fn2"
   in
-  (* compute the substitutions *)
-  let p, ls = 
-    try 
-      fn2 tested_pos max_var false
-    with Failure "fn2" -> 
-      try 
-	(* do again with generalization, this time  *)
-	let res = fn2 tested_pos max_var true in
-	let () = text := !text ^  "\n\n\t by the generalization of some existential variables to universal ones " in
-	res
-      with Failure "fn2" ->
-	let () = buffered_output ("\n\n **** fail GENERATE *** on " ^ c#string ^ "\n\n") in
-	let () = print_detailed_clause c in 
-	let () = print_history normalize c in 
-(* 	let () = print_history_ic normalize c in  *)
-	failwith ("fail generate on " ^ c#string) in
-  
-  let target_term = c#subterm_at_position p in
-  let target_vars = List.map (fun (x,_,_) -> x) target_term#variables in
 
-(* expand the other terms whose variables have been instantiated  *)
-  let res_pos = try remove_el (fun (p1, _) (p2, _) -> p1 = p2) (p, c#subterm_at_position p) tested_pos with Failure "remove_el" -> failwith "remove_el: generate" in
-
-  let rec fn6 i cl (s, r_orig) = 
-
-    (*     let () = buffered_output ("\n" ^ (n_spaces i) ^ "fn6 called with s = " ^ (sprint_subst s)) in *)
-    let cinst = cl#substitute s in
-    let max_var = cinst#greatest_varcode + 1 in
-    
-    let lpos = List.fold_right 
-      (fun (p, _) l -> 
-	let t' = cinst#subterm_at_position p in 
-	let t'' = cl#subterm_at_position p in 
-	if t'#string <> t''#string then (p, t') :: l else l ) 
-      res_pos [] 
-    in
-    
-
-    let rec fn l = 
-      match l with 
-	  [] -> [(s, r_orig)]
-	| (p, trm) :: tl -> 
-
-	    (* new substitutions for the first modified term  *)
-	    (* 	    	    let () = buffered_output ("\n" ^ (n_spaces i) ^ "trm = " ^ trm#string) in *)
-	    (* try fn2 without the generalization of variables ... to see if should be modified ? *)
-	    let _ ,ls =  try fn2 [(p,trm)] max_var false with Failure "fn2" -> (p, [])  in
-	    (* eliminate the duplicates from ls  *)
-	    let rec eq_subst (s1,  tr1') (s2,  tr2') = 
-	      match s1 with
-		  [] -> (match s2 with [] -> true | _ -> false)
-		| (i1, trm1) :: t1 -> (match s2 with [] -> false | (i2, trm2) :: t2 -> (i1 = i2) && (trm1#equal_mod_var trm2) && (eq_subst (t1, tr1') (t2, tr2')))
-	    in
-	    
-	    (* 	    let () = buffered_output ("\n" ^ (n_spaces i) ^ "ls_purged = " ^ (sprint_subst (List.flatten (List.map (fun (s, t1,t2) -> s) ls_purged)))) in *)
-	    
-	    (* build the new set of substitutions  *)
-	    let new_ls = 
-	      List.fold_right 
-		(fun (s', _) l -> 
-		  let new_s' = (List.map (fun (i, t) -> (i, t#substitute s')) s) @ s' in
-		  (* the variables in new_s' should be in lvar_trm  *)
-		  let new_s'' = List.filter (fun (x,_) -> list_member (=) x target_vars) new_s' in
-		  
-		  let _ = (List.fold_right (fun (_, t) l -> t#variables @ l) s' []) in
-		  (new_s'', r_orig) :: l)
-		ls [] 
-	    in
-	    
-	    let ls_purged = list_remove_doubles eq_subst new_ls in
-
-	    let res = if new_ls = [] then fn tl  else List.flatten (List.map (fun s -> fn6 (i + 3) cinst s) ls_purged) in
-	    (* 	    let () = buffered_output ("\n" ^ (n_spaces i) ^ "Results: ") in *)
-	    (* 	    let () = List.iter (fun (s, _, _) ->  buffered_output ("\n" ^ (n_spaces i) ^ (sprint_subst s))) res in *)
-	    res
+  let rec fn_tested_pos l = 
+    let str = ref "" in
+    match l with
+	[] -> 
+	  let () = buffered_output ("\n\n **** fail GENERATE *** on " ^ c#string ^ "\n\n") in
+	  let () = print_detailed_clause c in 
+	  let () = print_history normalize c false in 
+	    (* 	let () = print_history_ic normalize c in  *)
+	    failwith ("fail generate on " ^ c#string) 
+      | tested_pos :: tl_pos ->	  
+	  (* compute the substitutions *)
+	  try 
+	    let p, ls = 
+	      try 
+		fn2 tested_pos max_var false
+	      with Failure "fn2" -> 
+		try 
+		  (* do again with generalization, this time  *)
+		  let res = fn2 tested_pos max_var true in
+		  let () = text := !text ^  "\n\n\t by the generalization of some existential variables to universal ones " in
+		    res
+		with Failure "fn2" ->
+		  failwith "fn_tested_pos"
+	    in  
+	    let target_term = c#subterm_at_position p in
+	    let target_vars = List.map (fun (x,_,_) -> x) target_term#variables in
 	      
-    in
-    fn lpos
+	    (* expand the other terms whose variables have been instantiated  *)
+	    let res_pos = try remove_el (fun (p1, _) (p2, _) -> p1 = p2) (p, c#subterm_at_position p) ltested_pos with Failure "remove_el" -> failwith "remove_el: generate" in
+	      
+	    let rec fn6 i cl (s, r_orig) = 
+	      
+	      (*     let () = buffered_output ("\n" ^ (n_spaces i) ^ "fn6 called with s = " ^ (sprint_subst s)) in *)
+	      let cinst = cl#substitute s in
+	      let max_var = cinst#greatest_varcode + 1 in
+		
+	      let lpos = List.fold_right 
+		(fun (p, _) l -> 
+		   let t' = cinst#subterm_at_position p in 
+		   let t'' = cl#subterm_at_position p in 
+		     if t'#string <> t''#string then (p, t') :: l else l ) 
+		res_pos [] 
+	      in
+		
+		
+	      let rec fn l = 
+		match l with 
+		    [] -> [(s, r_orig)]
+		  | (p, trm) :: tl -> 
+		      
+		      (* new substitutions for the first modified term  *)
+		      (* 	    	    let () = buffered_output ("\n" ^ (n_spaces i) ^ "trm = " ^ trm#string) in *)
+		      (* try fn2 without the generalization of variables ... to see if should be modified ? *)
+		      let _ ,ls =  try fn2 (p,trm) max_var false with Failure "fn2" -> (p, [])  in
+			(* eliminate the duplicates from ls  *)
+		      let rec eq_subst (s1,  tr1') (s2,  tr2') = 
+			match s1 with
+			    [] -> (match s2 with [] -> true | _ -> false)
+			  | (i1, trm1) :: t1 -> (match s2 with [] -> false | (i2, trm2) :: t2 -> (i1 = i2) && (trm1#equal_mod_var trm2) && (eq_subst (t1, tr1') (t2, tr2')))
+		      in
+			
+		      (* 	    let () = buffered_output ("\n" ^ (n_spaces i) ^ "ls_purged = " ^ (sprint_subst (List.flatten (List.map (fun (s, t1,t2) -> s) ls_purged)))) in *)
+			
+		      (* build the new set of substitutions  *)
+		      let new_ls = 
+			List.fold_right 
+			  (fun (s', _) l -> 
+			     let new_s' = (List.map (fun (i, t) -> (i, t#substitute s')) s) @ s' in
+			       (* the variables in new_s' should be in lvar_trm  *)
+			     let new_s'' = List.filter (fun (x,_) -> list_member (=) x target_vars) new_s' in
+			       
+			     let _ = (List.fold_right (fun (_, t) l -> t#variables @ l) s' []) in
+			       (new_s'', r_orig) :: l)
+			  ls [] 
+		      in
+			
+		      let ls_purged = list_remove_doubles eq_subst new_ls in
+			
+		      let res = if new_ls = [] then fn tl  else List.flatten (List.map (fun s -> fn6 (i + 3) cinst s) ls_purged) in
+			(* 	    let () = buffered_output ("\n" ^ (n_spaces i) ^ "Results: ") in *)
+			(* 	    let () = List.iter (fun (s, _, _) ->  buffered_output ("\n" ^ (n_spaces i) ^ (sprint_subst s))) res in *)
+			res
+			  
+	      in
+		fn lpos
+		  
+	    in
+	      (*   let () = buffered_output ("\n" ^  "ls = " ^ (sprint_subst (List.flatten (List.map (fun (s, t1,t2) -> s) ls)))) in *)
+	    let ls' = List.flatten (List.map (fn6 0 c) ls) in
+	      (*   let () = buffered_output ("\n" ^ "ls' = " ^ (sprint_subst (List.flatten (List.map (fun (s, t1,t2) -> s) ls')))) in *)
+	      
+	      
+	      
+	    (* start to write the instances  *)
+	      
+	    let i = ref 0 in
+	    let written_term = c#subterm_at_position p in
+	    let () =
+	      if verbose
+	      then
+		let () = str := !str ^  ("\n" ^ !indent_string ^ "GENERATE " ^ (string_of_int ic) ^ " on\n" ^ !indent_string ^ "\171 " ^ c#string ^ !text) in
+		let () = str := !str ^ (List.fold_left (fun x (s1,_) -> let () = i := !i + 1 in x ^ "\n " ^ !indent_string ^ (string_of_int
+																  !i) ^ ") " ^ (sprint_subst s1)) ("\nat " ^  (sprint_clausal_position p)^ " on \t" ^ written_term#string ^  " \t using the test substitutions:\n") ls') in
+		  (*       let () = print_history c in *)
+		  ()
+	      else ()
+	    in
+	      
+	    let () = if !coq_mode = true then
+	      let f (x, _) = sprint_var x (Def_sort 0) true in
+	      let fsts = fst (List.split ls') in
+	      let lstlst = List.map (List.map f) fsts in
+		Coq.induction (List.hd lstlst)
+	    else ()
+	    in
+	      
+	    let () =
+	      if verbose
+	      then
+		str := !str ^ ("\n\n" ^ !indent_string ^ "We obtain :\n")
+	      else () 
+	    in  
+	    let () = i := 0 in
+	      
+	    let fn5 (s, r_orig) = 
+	      
+	      (* compute the instance of r_orig  *)
+	      (* check if there are variables in common  *)
+	      
+	      let cinst = c#substitute s in
+	      let maxvar_c = cinst#greatest_varcode in
+	      let new_r = r_orig#substitute_and_rename [] (maxvar_c + 1) in
+	      let t1 = cinst#subterm_at_position p in
+	      let t2 = new_r#lefthand_side in
+		
+	      (*     let () = buffered_output ("t1 = " ^ t1#string) in *)
+	      (*     let () = buffered_output ("t2 = " ^ t2#string) in *)
+		
+	      let (_, s2) = try unify_terms t1 t2 false with Failure "unify_terms" -> failwith "\nError in Generate: please report it" in
+	      let r = (new_r#substitute s2)#expand_sorts in
+		
+	      let cond = r#negative_lits in
+	      let rhs = r#righthand_side in
+		(*     let () = write_pos_clause cinst in *)
+		(*     let () = buffered_output ("s1 = " ^ (sprint_subst s1)) in *)
+		(*     let () = buffered_output ("s2 = " ^ (sprint_subst s2)) in *)
+		(*     let () = buffered_output ("r_orig = " ^ r_orig#string) in *)
+		(*     let () = buffered_output ("new_r = " ^ new_r#string) in *)
+		(*     let () = buffered_output ("r = " ^ r#string) in *)
+		(*     let () = buffered_output ("cinst = " ^ cinst#string) in *)
+		(*     let () = buffered_output ("rhs = " ^ rhs#string) in *)
+		
+	      let c' = cinst#replace_subterm_at_pos p rhs in
+		
+		
+	      (*     let () = buffered_output ("c' = " ^ c'#string) in *)
+	      let (b, n, pos) = p in
+		
+	      let phead = (b, n, [List.hd pos]) in
+	      let term = c'#subterm_at_position phead in
+		
+	      let term' = term#update_pos in
+	      let cfinal = c'#replace_subterm_at_pos phead term' in
+		
+	      let lneg, lpos = cfinal#content in
+	      let cond' = List.map (fun x -> x#update_pos) cond in
+	      let lpos' = List.map (fun x ->x#copy) lpos in
+	      let lneg' = List.map (fun x ->x#copy) (lneg @ cond') in
+	      let res = c#build lneg' lpos' in
+	      let () = res#add_history (s, c) in
+		
 
+	      let () =
+		let () = i := !i + 1 in
+		  if verbose
+		  then
+		    str := !str ^ ("\n" ^ !indent_string ^ (string_of_int !i) ^ ") " ^ res#string ^ "\n\n" ^ !indent_string ^ "using the rule " ^ r_orig#string)
+		  else ()
+	      in
+	      let () =
+		if !coq_mode
+		then Coq.rewrite_nonum !i ("sp_axiom_" ^ (string_of_int r_orig#number))
+		else ()
+	      in
+		(cinst, res)
+	    in
+	    let () = incr generate_counter_suc in
+	    let lcres = List.map fn5 ls' in
+	    let add_hyp = List.for_all (fun (cinst, res) -> clause_greater false false cinst res) lcres in
+	      (* add the treated conjecture as premise  *)
+	    let () = 
+	      if add_hyp then 
+		hypotheses_system#append [c] 
+	    in
+	    let is_case_analysis = List.for_all (fun (cinst, res) -> clause_geq true false cinst res) lcres in
+	      if is_case_analysis then 
+		let lres = List.map (fun (_,x) -> x) lcres in
+		let () = str := !str ^ "\n" in
+		  !str, lres
+	      else
+		let () = if !maximal_output then str := !str ^  ("fail generate on position" ^ (sprint_clausal_position (fst tested_pos)) ^ "  \n Hint: ordering to be changed or be ready to reinitialize the hypotheses") in
+		  fn_tested_pos tl_pos
+	  with Failure "fn_tested_pos" -> fn_tested_pos tl_pos
   in
-  (*   let () = buffered_output ("\n" ^  "ls = " ^ (sprint_subst (List.flatten (List.map (fun (s, t1,t2) -> s) ls)))) in *)
-  let ls' = List.flatten (List.map (fn6 0 c) ls) in
-  (*   let () = buffered_output ("\n" ^ "ls' = " ^ (sprint_subst (List.flatten (List.map (fun (s, t1,t2) -> s) ls')))) in *)
-
-
-
-  (* start to write the instances  *)
-  
-  let i = ref 0 in
-  let written_term = c#subterm_at_position p in
-  let () =
-    if verbose
-    then
-      let () = buffered_output ("\n" ^ !indent_string ^ "GENERATE " ^ (string_of_int ic) ^ " on\n" ^ !indent_string ^ "\171 " ^ c#string ^ !text) in
-      let () = buffered_output (List.fold_left (fun x (s1,_) -> let () = i := !i + 1 in x ^ "\n " ^ !indent_string ^ (string_of_int
-	!i) ^ ") " ^ (sprint_subst s1)) ("\nat " ^  (sprint_clausal_position p)^ " on \t" ^ written_term#string ^  " \t using the test substitutions:\n") ls') in
-      (*       let () = print_history c in *)
-      ()
-    else ()
-  in
-
-  let () = if !coq_mode = true then
-    let f (x, _) = sprint_var x (Def_sort 0) true in
-    let fsts = fst (List.split ls') in
-    let lstlst = List.map (List.map f) fsts in
-    Coq.induction (List.hd lstlst)
-    else ()
-  in
-  
-  let () =
-    if verbose
-    then
-      buffered_output ("\n" ^ !indent_string ^ "We obtain :")
-    else () 
-  in  
-  let () = i := 0 in
-  
-  let fn5 (s, r_orig) = 
-
-  (* compute the instance of r_orig  *)
-  (* check if there are variables in common  *)
-
-    let cinst = c#substitute s in
-    let maxvar_c = cinst#greatest_varcode in
-    let new_r = r_orig#substitute_and_rename [] (maxvar_c + 1) in
-    let t1 = cinst#subterm_at_position p in
-    let t2 = new_r#lefthand_side in
-
-(*     let () = buffered_output ("t1 = " ^ t1#string) in *)
-(*     let () = buffered_output ("t2 = " ^ t2#string) in *)
-
-    let (_, s2) = try unify_terms t1 t2 false with Failure "unify_terms" -> failwith "\nError in Generate: please report it" in
-    let r = (new_r#substitute s2)#expand_sorts in
-
-    let cond = r#negative_lits in
-    let rhs = r#righthand_side in
-    (*     let () = write_pos_clause cinst in *)
-(*     let () = buffered_output ("s1 = " ^ (sprint_subst s1)) in *)
-(*     let () = buffered_output ("s2 = " ^ (sprint_subst s2)) in *)
-(*     let () = buffered_output ("r_orig = " ^ r_orig#string) in *)
-(*     let () = buffered_output ("new_r = " ^ new_r#string) in *)
-(*     let () = buffered_output ("r = " ^ r#string) in *)
-(*     let () = buffered_output ("cinst = " ^ cinst#string) in *)
-(*     let () = buffered_output ("rhs = " ^ rhs#string) in *)
-
-    let c' = cinst#replace_subterm_at_pos p rhs in
-
-
-(*     let () = buffered_output ("c' = " ^ c'#string) in *)
-    let (b, n, pos) = p in
-
-    let phead = (b, n, [List.hd pos]) in
-    let term = c'#subterm_at_position phead in
-    
-    let term' = term#update_pos in
-    let cfinal = c'#replace_subterm_at_pos phead term' in
-
-    let lneg, lpos = cfinal#content in
-    let cond' = List.map (fun x -> x#update_pos) cond in
-    let lpos' = List.map (fun x ->x#copy) lpos in
-    let lneg' = List.map (fun x ->x#copy) (lneg @ cond') in
-    let res = c#build lneg' lpos' in
-    let () = res#add_history (s, c) in
-    
-    let () =
-      let () = i := !i + 1 in
-      if verbose
-      then
-	buffered_output ("\n" ^ !indent_string ^ (string_of_int !i) ^ ") " ^ res#string ^ "\n\n" ^ !indent_string ^ "using the rule" ^ r_orig#string)
-      else ()
-    in
-    let () =
-      if !coq_mode
-      then Coq.rewrite_nonum !i ("sp_axiom_" ^ (string_of_int r_orig#number))
-      else ()
-    in
-    (cinst, res)
-  in
-  let () = incr generate_counter_suc in
-  let lcres = List.map fn5 ls' in
-  let add_hyp = List.for_all (fun (cinst, res) -> clause_greater false false cinst res) lcres in
-    (* add the treated conjecture as premise  *)
-  let () = 
-    if add_hyp then 
-      hypotheses_system#append [c] 
-    else
-      let is_case_analysis = List.for_all (fun (cinst, res) -> clause_geq true false cinst res) lcres in
-	if not is_case_analysis then failwith ("fail generate on " ^ c#string ^ "  \n Hint: ordering to be changed or be ready to reinitialize the hypotheses") 
-  in
-  let lres = List.map (fun (_,x) -> x) lcres in
-  let () = buffered_output "\n" in
-    lres
+  let str_rez, lrez = fn_tested_pos ltested_pos in
+  let () = buffered_output str_rez in
+    lrez
       
+	      

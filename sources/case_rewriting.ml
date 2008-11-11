@@ -218,8 +218,8 @@ let partial_case_rewriting verbose sl c_pos cxt c is_strict level =
       let new_cond, new_eq = generate_cond_and_eq t c b n p l true in
       let new_all = new_cond @ new_eq in (* the new conjectures *)
       let () =
-	if !broken_order then ()
-	else 
+(* 	if !broken_order then () *)
+(* 	else  *)
 	  if ((is_strict && (List.for_all (fun x -> clause_greater false false c x) new_all)) || 
 	    ((not is_strict) && (List.for_all (fun x -> clause_geq true false c x) new_all)))
 	  then 
@@ -368,71 +368,67 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
       let _ = (fun (_, _, s) -> s) (List.hd l) in
       let new_cond, new_eq = generate_cond_and_eq t c b n p l false in
 
-      let test1 = 
-	if !broken_order then true 
-	else if not !debug_mode then List.for_all (fun x -> clause_greater false false c x) new_eq 
+      let test = 
+	if !broken_order then true
 	else
-	  (List.for_all (fun x -> let res = clause_greater false false c x in let () = print_string ("\n Is c = " ^ c#string ^
-	  " \n greater than x = " ^ x#string ^ "\n Result: " ^ (string_of_bool res)) in res) new_eq) 
+	  if not !debug_mode then List.for_all (fun x -> if is_strict then clause_greater false false c x else clause_geq true false c x) new_eq 
+	  else
+	    (List.for_all (fun x ->
+			     let res = if is_strict then clause_greater false false c x else clause_geq true false c x in 
+			     let () = print_string ("\n Is c = " ^ c#string ^
+						      " \n greater " ^ (if is_strict then "" else "or equal") ^ " than x = " ^ x#string ^ "\n Result: " ^ (string_of_bool res)) in res) new_eq) 
       in
-      let test2 = 
-	if !broken_order then true 
-	else if not !debug_mode then List.for_all (fun x -> clause_geq true false c x) new_eq
-	else (List.for_all (fun x -> let res = clause_geq true false c x in let () = print_string ("\n Is c = " ^ c#string ^
-	" \n greater or equal than x = " ^ x#string ^ "\n Result: " ^ (string_of_bool res)) in res) new_eq) 
-      in
-
-      if (is_strict && test1) || ((not is_strict) && test2) 
-      then
-	let bres = 
-	  if !system_is_strongly_sufficiently_complete then true
-	  else 
-	    let new_hyps = recursive_new_hyps c new_cond cxt in
-	    let () = buffered_output ("Warning : You didn't specify that the specification is strongly sufficiently complete. Please change accordingly or the system is going to call itself recursively.(feature not yet supported)") in
-	    st#apply_to_subgoals !output_verbosity c new_hyps new_cond false  (* to complete with the available context for the recursive call *)
-	in
-	let tcrc = !total_case_rewriting_counter_suc in
-	let () = incr total_case_rewriting_counter_suc in
-	let () = if verbose
+	if test 
 	then
-          let () = buffered_output (!indent_string ^ "TOTAL CASE REWRITING " ^ (string_of_int tcrc) ^ ": simplify clause\n" ^
-          !indent_string ^ c#string ^ "\n\n" ^
-          !indent_string ^ "at position " ^ (sprint_clausal_position (b, n, p)) ^ " on \t" ^ (c#subterm_at_position (b, n, p))#string) in
-	  let () = if new_cond <> [] 
-	  then 
-	    let () = buffered_output (!indent_string ^ "Preconditions:") in
-            let () = List.iter (fun x -> buffered_output (!indent_string ^ "\187 " ^ x#string)) new_cond in
-	    buffered_output (!indent_string ^ "were proved using strategy " ^ st#string) 
-	  else ()
+	  let bres = 
+	    if !system_is_strongly_sufficiently_complete then true
+	    else 
+	      let new_hyps = recursive_new_hyps c new_cond cxt in
+	      let () = buffered_output ("Warning : You didn't specify that the specification is strongly sufficiently complete. Please change accordingly or the system is going to call itself recursively.(feature not yet supported)") in
+		st#apply_to_subgoals !output_verbosity c new_hyps new_cond false  (* to complete with the available context for the recursive call *)
 	  in
-          let () = if !sub_buffer <> ""
-          then
-            let () = buffered_output (!indent_string ^ "************************************************************\n") in
-            buffered_output (!sub_buffer ^ !indent_string ^ "************************************************************")
-          else () 
+	  let tcrc = !total_case_rewriting_counter_suc in
+	  let () = incr total_case_rewriting_counter_suc in
+	  let () = if verbose
+	  then
+            let () = buffered_output (!indent_string ^ "TOTAL CASE REWRITING " ^ (string_of_int tcrc) ^ ": simplify clause\n" ^
+					!indent_string ^ c#string ^ "\n\n" ^
+					!indent_string ^ "at position " ^ (sprint_clausal_position (b, n, p)) ^ " on \t" ^ (c#subterm_at_position (b, n, p))#string) in
+	    let () = if new_cond <> [] 
+	    then 
+	      let () = buffered_output (!indent_string ^ "Preconditions:") in
+              let () = List.iter (fun x -> buffered_output (!indent_string ^ "\187 " ^ x#string)) new_cond in
+		buffered_output (!indent_string ^ "were proved using strategy " ^ st#string) 
+	    else ()
+	    in
+            let () = if !sub_buffer <> ""
+            then
+              let () = buffered_output (!indent_string ^ "************************************************************\n") in
+		buffered_output (!sub_buffer ^ !indent_string ^ "************************************************************")
+            else () 
+	    in
+            let () = buffered_output ("\n" ^ !indent_string ^ "\171 " ^ c#string ^ "\n\nwith the rules \n") in
+	    let i = ref 0 in
+	      (* 	  let () = prerr_endline "=====\n" in *)
+	      (* 	  let () = List.iter (fun x -> let () = i := !i + 1 in prerr_endline (!indent_string ^ (string_of_int !i) ^ ") " ^
+			  x#string)) (List.map fst l) in *)
+	    let () = if List.length new_eq = 1 then prerr_endline ("\n total case rewriting : only one case for " ^ t#string) in
+	    let () = List.iter (fun x -> let () = i := !i + 1 in  buffered_output (!indent_string ^ (string_of_int !i) ^ ") " ^
+										     x#string)) (List.map (fun (x, _, _) -> x) l) in
+	    let () = buffered_output ("\nresulting\n") in
+	    let i = ref 0 in
+            let () = List.iter2 (fun x (l, _, ls) -> let () = i := !i + 1 in buffered_output (!indent_string ^ "\187 " ^ (string_of_int
+															    !i) ^ ") " ^ x#string ^ "\n\nusing " ^ !indent_string ^ "[ " ^ (string_of_int l#number) ^ " ] from " ^ ls ^ "\n")) new_eq
+	      l in
+              buffered_output "" 
+	  else () 
 	  in
-          let () = buffered_output ("\n" ^ !indent_string ^ "\171 " ^ c#string ^ "\n\nwith the rules \n") in
-	  let i = ref 0 in
-(* 	  let () = prerr_endline "=====\n" in *)
-(* 	  let () = List.iter (fun x -> let () = i := !i + 1 in prerr_endline (!indent_string ^ (string_of_int !i) ^ ") " ^
-	  x#string)) (List.map fst l) in *)
-	  let () = if List.length new_eq = 1 then prerr_endline ("\n total case rewriting : only one case for " ^ t#string) in
-	  let () = List.iter (fun x -> let () = i := !i + 1 in  buffered_output (!indent_string ^ (string_of_int !i) ^ ") " ^
-	  x#string)) (List.map (fun (x, _, _) -> x) l) in
-	  let () = buffered_output ("\nresulting\n") in
-	  let i = ref 0 in
-          let () = List.iter2 (fun x (l, _, ls) -> let () = i := !i + 1 in buffered_output (!indent_string ^ "\187 " ^ (string_of_int
-	    !i) ^ ") " ^ x#string ^ "\n\nusing " ^ !indent_string ^ "[" ^ (string_of_int l#number) ^ "] from " ^ ls ^ "\n")) new_eq
-	    l in
-          buffered_output "" 
-	else () 
-	in
-	let () = res := List.flatten (List.map preprocess_conjecture new_eq) in
-	bres
-	  
-      else failwith "final_update"
+	  let () = res := List.flatten (List.map preprocess_conjecture new_eq) in
+	    bres
+	      
+	else failwith "final_update"
   in
-  
+    
   let all_pos = 
     let nl, pl = c#content in
     let fn b n lit = 

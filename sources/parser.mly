@@ -43,7 +43,7 @@ let introduce_var_exist c =
   let var_lhs = (c'#lefthand_side)#variables in
   let n' = List.map (fn_lit var_lhs) n in
   let p' = List.map (fn_lit var_lhs) p in
-  let new_c' = new clause (n', p') [] in
+  let new_c' = new clause (n', p') [] ("",0,([],[])) in
   (x, y, new_c')
 
 (* If no ordering is specified in the specification file, we use a total ordering based on symbol codes *)
@@ -585,7 +585,7 @@ let _ = List.iter (fun (kwd, tok) -> Hashtbl.add tests_table kwd tok)
 /* Basically any string except the previous */
 %token <string> TOK_IDENT
 %token <string> TOK_STRING
-%token <string list> TOK_IDENT_LIST
+/* %token <string list> TOK_IDENT_LIST */
 
 %start specif
 %type < Strategies.problem_token Queue.t > specif
@@ -1447,7 +1447,7 @@ specif_clause:
     let () = if not !specif_parameterized  && not (test_well_founded_cl ([], new_l')) then 
       failwith "clause1: undefined types"
     in
-    let res = new clause ([], new_l') [] in
+    let res = new clause ([], new_l') [] ("",0,([],[])) in
 (*     let () = print_detailed_clause res in *)
     res
   }
@@ -1458,7 +1458,7 @@ specif_clause:
     let () = if not !specif_parameterized && not (test_well_founded_cl (new_l, [])) then 
       failwith "clause2: undefined types"
     in
-    let res = new clause (new_l, []) [] in
+    let res = new clause (new_l, []) [] ("",0,([],[])) in
 (*     let () = print_detailed_clause res in *)
     res
   }
@@ -1471,7 +1471,7 @@ specif_clause:
     let () = if not !specif_parameterized && not (test_well_founded_cl (new_l, new_l')) then 
       failwith "clause3: undefined types"
     in
-    let res = new clause (new_l, new_l') [] in
+    let res = new clause (new_l, new_l') [] ("",0,([],[])) in
 (*     let () = print_detailed_clause res in *)
     res
   }
@@ -1487,7 +1487,7 @@ specif_horn_clause:
     let () = if not !specif_parameterized && not (test_well_founded_cl ([], new_l')) then 
       failwith "clause4: undefined types"
     in
-    let res = new clause ([], new_l') [] in
+    let res = new clause ([], new_l') [] ("",0,([],[])) in
 (*     let () = print_detailed_clause res in *)
     res
   }
@@ -1503,7 +1503,7 @@ specif_horn_clause:
     let () = if not !specif_parameterized && not (test_well_founded_cl (new_l, new_l')) then 
       failwith "clause5: undefined types"
     in
-    let res = new clause (new_l, new_l') [] in
+    let res = new clause (new_l, new_l') [] ("",0,([],[])) in
 (*     let () = print_detailed_clause res in *)
     res
   }
@@ -1570,8 +1570,8 @@ list_of_tokens:
 one_token:
   TOK_IDENT
   { [ TT_ident $1 ] }
-| TOK_IDENT_LIST
-  { List.map (fun x -> TT_ident x) $1 }
+/* | TOK_IDENT_LIST */
+/*   { List.map (fun x -> TT_ident x) $1 } */
 | TOK_LPAR TOK_IDENT TOK_COLUMN TOK_IDENT TOK_RPAR
   { let () = check_explicit_type $2 $4 in
     [ TT_ident $2 ] }
@@ -1844,8 +1844,8 @@ two_terms:
   { ($2, $4) }
 
 two_clauses:
-  pos_codes_false reset_and_clause TOK_QUESTION_MARK pos_codes_false reset_and_clause 
-  { ($2, $5) }
+  pos_codes_false reset_tmp_vars specif_clause TOK_QUESTION_MARK specif_clause TOK_SEMICOLUMN
+  { ($3, $5) }
 
 specif_literal_position_in_clause:
   TOK_IDENT

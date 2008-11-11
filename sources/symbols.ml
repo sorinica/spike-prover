@@ -590,7 +590,7 @@ let sprint_status =
   | Multiset -> "Multiset"
 ;;
 
-let default_status = ref Left;;
+let default_status = ref Multiset;;
 
 let change_default_status =
   function

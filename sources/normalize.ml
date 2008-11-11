@@ -18,9 +18,12 @@ open Dummies
 open Coq
 
 let norm_string = ref ""
+let broken_symbs = ref []
 
 (* Apply on tr the first rewrite rule from rw_r available and check that its preconditions have equal normal forms *)
 let rec rewrite rw_r (tr:term) c_ref str cxt i =
+
+
   
 (*   let () = buffered_output ("\n Rewrite " ^ tr#string) in *)
   let max_var = c_ref#greatest_varcode + 1 in
@@ -86,6 +89,12 @@ let rec rewrite rw_r (tr:term) c_ref str cxt i =
 			(try fn1 true rhs lhs with Failure "fn1" -> failwith "bad") 
 		    )
 		|  "R" -> 
+		     (* test if the axiom is broken *)
+		     let () = if not (rpo_greater false lhs rhs) then
+		       let head_symb = lhs#head in
+		       let str_symb = dico_const_string#find head_symb in
+			 broken_symbs := (str_symb, c_ref#number,c_ref#content) :: !broken_symbs 
+		     in 
 		     (try fn1 false lhs rhs with Failure "fn1" -> failwith "bad")
 		| _ -> failwith "normalize: los"
 	      in
@@ -99,8 +108,8 @@ let rec rewrite rw_r (tr:term) c_ref str cxt i =
                   else ()
                 in
 		let lhs, rhs = h#both_sides in
-		if is_rev then rhs#string ^ " -> " ^ lhs#string ^ "  (from [" ^ (string_of_int h#number) ^ "] of " ^ los ^ ")"
-		else lhs#string ^ " -> " ^ rhs#string ^ "   (from [" ^ (string_of_int h#number) ^ "] of " ^ los ^ ")"
+		if is_rev then rhs#string ^ " -> " ^ lhs#string ^ "  (from [ " ^ (string_of_int h#number) ^ " ] of " ^ los ^ ")"
+		else lhs#string ^ " -> " ^ rhs#string ^ "   (from [ " ^ (string_of_int h#number) ^ " ] of " ^ los ^ ")"
 	      in
 	      let () = str_ref := !str_ref ^ (
 		"\n" ^ (n_spaces i) ^ tr#string ^
@@ -129,28 +138,28 @@ let rec rewrite rw_r (tr:term) c_ref str cxt i =
     res#expand_sorts
   else failwith "rewrite"
   in
-  !str_ref, res'
+  !broken_symbs, !str_ref, res'
 
 (* normalize a term: apply rewrite rules until saturation *)
 and normalize rw_r tr c_ref str cxt i =
 (*   let () = buffered_output ("\n Normalize " ^ tr#string) in *)
    match tr#content with 
-     Var_univ _  | Var_exist _  -> str, tr
+     Var_univ _  | Var_exist _  -> !broken_symbs, str, tr
    | Term (f, l, s) ->
        let st_list = List.map (fun x -> normalize rw_r x c_ref "" cxt (i + 3)) l in
-       let term_list = List.map (fun (_,x) -> x) st_list in
-       let str_list =  List.map (fun (x,_) -> x) st_list in
+       let term_list = List.map (fun (_,_,x) -> x) st_list in
+       let str_list =  List.map (fun (_, x,_) -> x) st_list in
        let str_list' = list_remove_doubles (fun x y -> x = y) str_list in
        let str'' = List.fold_right (fun x y -> (x ^ y)) str_list' "" in
        let tr'' = new term (Term (f, term_list, s)) in
        try
-	 let str', tr' = rewrite rw_r tr'' c_ref (str ^ str'') cxt i in
+	 let _, str', tr' = rewrite rw_r tr'' c_ref (str ^ str'') cxt i in
 	 normalize rw_r tr' c_ref str' cxt i
        with (Failure "rewrite") ->
-	 (str ^ str''), tr''
+	 !broken_symbs, (str ^ str''), tr''
 
 (* Fails if tr = norm tr *)
 let normalize_plus rw_r tr c_ref str cxt i =
 (*   let str', tr' = rewrite rw_r tr c_ref str cxt i in *)
-  let str', tr' =  normalize rw_r tr c_ref str cxt i in
-  if str = str' then failwith "rewrite" else str', tr'
+  let _, str', tr' =  normalize rw_r tr c_ref str cxt i in
+  if str = str' then failwith "rewrite" else !broken_symbs, str', tr'

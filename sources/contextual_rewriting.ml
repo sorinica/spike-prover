@@ -358,16 +358,16 @@ let all_terms_pos c =
 
 let reduce_clause fn_rewrite arg_sl _ c cxt =
   
-  let _ = ref "" in
+  
   let rec fn lpos cl = 
     match lpos with
-	[] -> "", cl
+	[] -> [], "", cl
       | ((b, n, p), t) :: tl -> 
 	    try
 	      (* the subterm at p did not changed after a previous rewriting operation. Start the replacement.  *)
 (* 	      let () = buffered_output ("Trying at position " ^ (sprint_clausal_position (b, n, p)) ^ " the term " ^ t#string) in *)
 
-	      let str, t' = fn_rewrite arg_sl t c "" cxt 0 in
+	      let broken_infos, str, t' = fn_rewrite arg_sl t c "" cxt 0 in
 	      let c' = cl#replace_subterm_at_pos (b, n, p) t' in
 	      
 	      let phead = (b, n, [List.hd p]) in
@@ -378,8 +378,8 @@ let reduce_clause fn_rewrite arg_sl _ c cxt =
 	      let p_c' = all_terms_pos cfinal in
 (* 	      let () = buffered_output ("\nsimplifications at " ^ (sprint_clausal_position (b, n, p)) ^ " on term\n\t " ^ t#string ^ "" ^ *)
 (* 	      " \n to get " ^ cfinal#string ) in *)
-	      let str', cl' = fn p_c' cfinal in
-	      ("\n- rewriting at the position " ^ (sprint_clausal_position (b, n, p)) ^ ":\n" ^ str ^
+	      let broken_infos', str', cl' = fn p_c' cfinal in
+	      broken_infos' @ broken_infos, ("\n- rewriting at the position " ^ (sprint_clausal_position (b, n, p)) ^ ":\n" ^ str ^
 (* 	      " \n to get " ^ cfinal#string ^ *)
 	      str' ), cl' 
 	    with (Failure "rewrite") -> 
@@ -409,12 +409,12 @@ let conditional_rewriting verbose rw_kind sl pos cxt c is_strict level =
 	LOS_defined l -> l
       | LOS_query -> !spike_parse_list_of_systems ()
   in
-  let str_proof, c' = match pos with
+  let broken_infos, str_proof, c' = match pos with
       Pos_defined p ->
 	begin
           try
             let t = c#subterm_at_position p in
-            let str, t' =
+            let br_symbs, str, t' =
               if rw_kind
               then
 		normalize_plus arg_sl t c "" cxt 0
@@ -422,7 +422,7 @@ let conditional_rewriting verbose rw_kind sl pos cxt c is_strict level =
 		rewrite arg_sl t c "" cxt 0
 	    in
             let res = c#replace_subterm_at_pos p t' in
-	    str, res
+	    br_symbs, str, res
           with (Failure "matching")
             | (Failure "rewrite") | (Failure "replace_subterm_at_pos") -> failwith "conditional_rewriting"
 	end
@@ -433,12 +433,15 @@ let conditional_rewriting verbose rw_kind sl pos cxt c is_strict level =
   in
   if (str_proof <> "") 
   then
-    let is_greater = true (* clause_greater false c c' *) in
-    let is_geq = (* clause_geq false c c'  *) true in
-    if not (!broken_order || (is_strict && is_greater) || ((not is_strict) && is_geq)) then 
-      failwith "conditional_rewriting" (* échec *)
-    else 
-
+    let test = (*  true *) if is_strict then  clause_greater false false c c' else clause_geq true false c c' in
+    let () = if !broken_order && (not test) then
+      let broken_info = try List.hd broken_infos with (Failure "hd") -> failwith "We are expecting a non empty list of broken infos" in 
+      let () = c'#set_broken_info broken_info in
+      let () = buffered_output ("\nWARNING: broken order !!!") in 
+(*       let () = print_history normalize c in *)
+	()
+    in 
+    if test || !broken_order then 
       let res = preprocess_conjecture c' in (* réussite *)
       let crc = !conditional_rewriting_counter_suc in
       let () = incr conditional_rewriting_counter_suc in
@@ -456,5 +459,7 @@ let conditional_rewriting verbose rw_kind sl pos cxt c is_strict level =
           List.iter (fun x -> let () = buffered_output (!indent_string ^ "\n\187 " ^ x#string ^ "\n") in ()) res 
       in
       res
+    else
+      failwith "conditional_rewriting" (* échec *)
   else
     failwith "conditional_rewriting" (* échec *)
