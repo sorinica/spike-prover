@@ -375,8 +375,8 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
 	  else
 	    (List.for_all (fun x ->
 			     let res = if is_strict then clause_greater false false c x else clause_geq true false c x in 
-			     let () = print_string ("\n Is c = " ^ c#string ^
-						      " \n greater " ^ (if is_strict then "" else "or equal") ^ " than x = " ^ x#string ^ "\n Result: " ^ (string_of_bool res)) in res) new_eq) 
+			     (* let () = print_string ("\n Is c = " ^ c#string ^ *)
+(* 						      " \n greater " ^ (if is_strict then "" else "or equal") ^ " than x = " ^ x#string ^ "\n Result: " ^ (string_of_bool res)) in  *)res) new_eq) 
       in
 	if test 
 	then

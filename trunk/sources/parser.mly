@@ -38,7 +38,7 @@ let introduce_var_exist c =
       | Lit_equal (t1, t2) -> new literal (Lit_equal ((fn_term lv t1), (fn_term lv t2)))
       |	Lit_diff (t1, t2) -> new literal (Lit_diff ((fn_term lv t1), (fn_term lv t2)))
   in
-  let ( x, y, c') = c in
+  let (x, y, c') = c in
   let (n, p) = c'#content in
   let var_lhs = (c'#lefthand_side)#variables in
   let n' = List.map (fn_lit var_lhs) n in
@@ -984,7 +984,7 @@ list_of_symbols:
 
 opt_specif_greater:
   TOK_GREATER TOK_COLUMN init_order_dico list_of_greater
-  { (* print_dico_order () *)}
+  {     print_dico_const_string ()(* print_dico_order () *)}
 | TOK_GREATER TOK_COLUMN
   { }
 | init_equiv_dico
@@ -1785,7 +1785,7 @@ specif_norm:
   { }
 
 specif_rpocompare:
-  TOK_RPOCOMPARE TOK_COLUMN two_terms
+  TOK_RPOCOMPARE TOK_COLUMN two_terms  
   { 
      let t, t' = $3 in
     Queue.add (Rpo_token (t, t')) yy_queue }
@@ -1793,14 +1793,14 @@ specif_rpocompare:
   { }
 
 specif_compare:
-  TOK_COMPARE TOK_COLUMN two_clauses
+  TOK_COMPARE TOK_COLUMN two_clauses 
   { let c, c' = $3 in
     Queue.add (Compare_token (c, c')) yy_queue }
 | TOK_COMPARE TOK_COLUMN
   { }
 
 specif_max_compare:
-  TOK_MAX_COMPARE TOK_COLUMN two_clauses
+  TOK_MAX_COMPARE TOK_COLUMN two_clauses 
   { let c, c' = $3 in
     Queue.add (Compare_max_token (c, c')) yy_queue }
 | TOK_MAX_COMPARE TOK_COLUMN
@@ -1821,7 +1821,7 @@ specif_extract:
   { }
 
 specif_match:
-  TOK_MATCH TOK_COLUMN two_terms
+  TOK_MATCH TOK_COLUMN two_terms TOK_SEMICOLUMN
   { let t, t' = $3 in
     Queue.add (Match_token (t, t')) yy_queue }
 | TOK_MATCH TOK_COLUMN
@@ -1840,11 +1840,11 @@ set_of_terms:
   { $1 @ [ $3 ] }
 
 two_terms:
-  reset_tmp_vars get_term TOK_QUESTION_MARK get_term TOK_SEMICOLUMN
+  reset_tmp_vars get_term TOK_QUESTION_MARK get_term
   { ($2, $4) }
 
 two_clauses:
-  pos_codes_false reset_tmp_vars specif_clause TOK_QUESTION_MARK specif_clause TOK_SEMICOLUMN
+  pos_codes_false reset_tmp_vars specif_clause TOK_QUESTION_MARK specif_clause
   { ($3, $5) }
 
 specif_literal_position_in_clause:
