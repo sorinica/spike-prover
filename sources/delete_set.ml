@@ -226,17 +226,17 @@ let subsumption verbose c los (cxt1,cxt2) level =
   let () = incr subsumption_counter in
   let fn c (_,_) = 
     let c' = c#expand in
-    let apply ss x = 
-      if c#number = x#number or c#subsumption_has_failed x#number then false 
+    let apply ss cH = 
+      if c#number = cH#number or c#subsumption_has_failed cH#number then false 
       else
-	let _ = if !maximal_output then buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule SUBSUMPTION on " ^ (string_of_int c#number) ^ " with " ^ (string_of_int x#number) ^ " from " ^ ss) in
-	let (success, epsilon) = subsumption_subsumes verbose ss x c' c level  in
+	let _ = if !maximal_output then buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule SUBSUMPTION on " ^ (string_of_int c#number) ^ " with " ^ (string_of_int cH#number) ^ " from " ^ ss) in
+	let (success, epsilon) = subsumption_subsumes verbose ss cH c' c level  in
 	if  success then 
           let () = 
             if !coq_mode then
               match ss with
               | "L" -> 
-                  let () = Coq.todo ("rewrite sp_lemma_" ^ (string_of_int x#number) ^ "\t (*delete_set*)") in
+                  let () = Coq.todo ("rewrite sp_lemma_" ^ (string_of_int cH#number) ^ "\t (*delete_set*)") in
                   Coq.todo "trivial"                    
               | "C1" | "C2" ->
                   let () = Coq.rewrite_last_induction () in
@@ -248,7 +248,7 @@ let subsumption verbose c los (cxt1,cxt2) level =
 	    if  verbose then 
               let () = buffered_output (!indent_string ^ "\nSUBSUMPTION: delete\n" ^
 					  !indent_string ^ "\171 " ^ c#string ^ "\n\n" ^
-					  !indent_string ^ "Subsumed in " ^ ss ^ " by " ^ x#string ^
+					  !indent_string ^ "Subsumed in " ^ ss ^ " by " ^ cH#string ^
 					  !indent_string ^ "\n\n\twith epsilon = " ^ (sprint_subst epsilon) ^ "\n") in
 	      let () = incr subsumption_counter_suc in
 	      let member_symb s cl =
@@ -264,23 +264,23 @@ let subsumption verbose c los (cxt1,cxt2) level =
 (* 	      let () = buffered_output "\nThe current conjectures are: \n========================" in *)
 (* 	      let () = List.iter (fun x -> print_history normalize x false) !real_conjectures_system in *)
 (* 	      let () = buffered_output "\n====================" in *)
-(* 	      let () = buffered_output ("\nThe history of current conjectures having [ " ^ (string_of_int x#number) ^ " ] as ancestor and broken symbol " ^ br_symb ^ " are: ") in *)
-	      let conjectures_historying_x = List.filter (fun c' -> List.mem x#number (all_hist c'))  !real_conjectures_system in
-	      let () = delayed := (br_symb <> "") && (List.exists (fun y -> not (member_symb br_symb y)) conjectures_historying_x)  in
+(* 	      let () = buffered_output ("\nThe history of current conjectures having [ " ^ (string_of_int cH#number) ^ " ] as ancestor and broken symbol " ^ br_symb ^ " are: ") in *)
+	      let conjectures_historying_cH = List.filter (fun c' -> List.mem cH#number (all_hist c'))  !real_conjectures_system in
+	      let () = delayed := (br_symb <> "") && (List.exists (fun y -> not (member_symb br_symb y)) conjectures_historying_cH)  in
 	      let () = if !maximal_output then buffered_output ("Delayed = " ^ (string_of_bool !delayed)) in
-		if not !delayed then
+		if (not !delayed) && (br_symb <> "") (* !broken_order *) then
 		  let fn_greater cf = 
 		    let () = if !maximal_output then buffered_output ("\n cf = " ^ cf#string) in
 		    let () = if !maximal_output then print_history normalize cf false in
 		    let rec fn_gamma l c_rez is_on = match l with
-			[] -> if is_on then c_rez else failwith "fn_gamma in subsumption: doesn't find x"
+			[] -> if is_on then c_rez else failwith "fn_gamma in subsumption: doesn't find cH"
 		      | (subst, cl') :: tl -> 
 			  let () = if !maximal_output then buffered_output ("\nTreating subst" ^ (sprint_subst subst) ^ " when is_on is " ^  (string_of_bool is_on)) in
 			  if is_on then 
 			    let c' = c_rez#substitute subst in
 			      fn_gamma tl c' true
 			  else
-			    if cl'#number == x#number then let c' = cl'#substitute subst in fn_gamma tl c' true
+			    if cl'#number == cH#number then let c' = cl'#substitute subst in fn_gamma tl c' true
 			    else fn_gamma tl c_rez false
 		    in 
 		    let br_clause = c#build lnegs lpos in
@@ -298,32 +298,38 @@ let subsumption verbose c los (cxt1,cxt2) level =
 		    in
 		    let br_clause_sigma = fn_sigma c#history br_clause false in
 		    let () = if !maximal_output then buffered_output ("\n br_clause_sigma = " ^ br_clause_sigma#string) in		      
-		    let x_gamma = fn_gamma cf#history cf false in
-		    let () = if !maximal_output then buffered_output ("\n x_gamma = " ^ x_gamma#string) in
-		    let x_epsilon = x#substitute epsilon in 
+		    let cH_gamma = fn_gamma cf#history cf false in
+		    let () = if !maximal_output then buffered_output ("\n cH_gamma = " ^ cH_gamma#string) in
+		    let cH_epsilon = cH#substitute epsilon in 
 		    let () = if !maximal_output then buffered_output ("\nepsilon = " ^ (sprint_subst epsilon)) in
-		    let () = if !maximal_output then buffered_output ("\nx = " ^ x#string ^ "\n x_epsilon = " ^ x_epsilon#string) in
+		    let () = if !maximal_output then buffered_output ("\ncH = " ^ cH#string ^ "\n cH_epsilon = " ^ cH_epsilon#string) in
 		      try
-			let (rho1, rho2) = List.fold_right2 (fun t1 t2 (s1,s2) -> let (s1',s2') = unify_terms (t1#substitute s1) (t2#substitute s2) false in (s1@s1', s2@s2')) x_gamma#all_terms x_epsilon#all_terms ([],[])  in
+			let (rho1, rho2) = List.fold_right2 (fun t1 t2 (s1,s2) -> let (s1',s2') = unify_terms (t1#substitute s1) (t2#substitute s2) false in (s1@s1', s2@s2')) cH_gamma#all_terms cH_epsilon#all_terms ([],[])  in
 			let () = if !maximal_output then buffered_output ("\nrho1 = " ^ (sprint_subst rho1) ^ " \nrho2 =  " ^ (sprint_subst rho2)) in
 			let () = if !maximal_output then buffered_output ("\nComparing br_clause_sigma substituted by rho2 " ^ (br_clause_sigma#substitute rho2)#string ^ "\nwith cf substituted by rho1 " ^ (cf#substitute rho1)#string) in
 			  clause_greater false false (br_clause_sigma#substitute rho2) (cf#substitute rho1)
 		      with Failure "unify_terms" -> 
-			let () = if !maximal_output then buffered_output "\nFail to unify x_gamma and x_epsilon" in 
+			let () = if !maximal_output then buffered_output "\nFail to unify cH_gamma and cH_epsilon" in 
 			  true
 		  in
-		  let () = if !maximal_output then buffered_output ("\nTesting the conjectures historying [" ^ (string_of_int x#number) ^ "]") in
-		  let res = List.for_all (fun c -> fn_greater c) conjectures_historying_x in
-		  let br_symb_x,_,_ = x#get_broken_info in
-		  let x_is_a_premise = (match ss with "C1" -> true|_ -> false) && not (List.mem x#number (List.map (fun c -> c#number) !real_conjectures_system)) in
-		    if x_is_a_premise then
-		      if  (br_symb_x == "") then true 
-		      else
-			if res then let () = buffered_output "\n Broken rewritten conjecture was deleted" in true
+		  let () = if !maximal_output then buffered_output ("\nTesting the conjectures historying [" ^ (string_of_int cH#number) ^ "]") in
+
+		  let cH_is_a_premise = (match ss with "C1" -> true|_ -> false) && not (List.mem cH#number (List.map (fun c -> c#number) !real_conjectures_system)) in
+		    if cH_is_a_premise then
+		      let br_symb_cH, _, _ = cH#get_broken_info in
+			if  (br_symb_cH == "") then true 
 			else
-			  let () = c#add_failed_subsumption c'#number in
-			    false
-		    else true
+			  let res = List.for_all (fun c -> fn_greater c) conjectures_historying_cH in
+			    if res then let () = buffered_output "\n Broken rewritten conjecture was deleted" in true
+			    else
+			      let () = c#add_failed_subsumption c'#number in
+				false
+		    else (* cH is a conjecture *)
+		      let cH_is_a_conjecture = List.mem cH#number (List.map (fun c -> c#number) !real_conjectures_system) in
+		      if cH_is_a_conjecture then 
+			let () = c#add_failed_subsumption c'#number in
+			  false 
+		      else true
 		else true
 	    else
 	      true

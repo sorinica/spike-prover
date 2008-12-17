@@ -632,7 +632,7 @@ let complete_status_dico () =
   dico_const_string#iter fn
 ;;
 
-let get_status id = try dico_id_status#find id with Not_found -> failwith "raising Not_found in get_status_id";;
+let get_status id = try dico_id_status#find id with Not_found -> failwith  ("raising Not_found in get_status_id for " ^ (string_of_int id)) ;;
 
 let greater is_total x y =
   try
@@ -689,9 +689,9 @@ let minimal l x =
 (* Check that equivalent symbols have the same status *)
 let check_status_equivalent_symbols () =
   let fn k v =
-    let s = get_status k in
+    let s = try get_status k with _ -> !default_status in
     let _ =
-      List.for_all (fun x -> get_status x = s) v or
+      List.for_all (fun x -> (try get_status x with _ -> !default_status) = s) v or
       failwith "check_status_equivalent_symbols"
     in
     ()
