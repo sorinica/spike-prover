@@ -1,6 +1,6 @@
    
 
-= For the reviewers of ITP-2010, here you can download the sources of our contribution =
+= For the reviewers of ITP-2010: here you can download the sources of our contribution =
 
 
  
