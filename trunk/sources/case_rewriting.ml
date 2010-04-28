@@ -387,6 +387,7 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
 	      let () = buffered_output ("Warning : You didn't specify that the specification is strongly sufficiently complete. Please change accordingly or the system is going to call itself recursively.(feature not yet supported)") in
 		st#apply_to_subgoals !output_verbosity c new_hyps new_cond false  (* to complete with the available context for the recursive call *)
 	  in
+	  let is_add_hyp = if List.for_all (fun x -> clause_greater false false c x) new_eq then true else false in
 	  let tcrc = !total_case_rewriting_counter_suc in
 	  let () = incr total_case_rewriting_counter_suc in
 	  let () = if verbose
@@ -394,6 +395,9 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
             let () = buffered_output (!indent_string ^ "TOTAL CASE REWRITING " ^ (string_of_int tcrc) ^ ": simplify clause\n" ^
 					!indent_string ^ c#string ^ "\n\n" ^
 					!indent_string ^ "at position " ^ (sprint_clausal_position (b, n, p)) ^ " on \t" ^ (c#subterm_at_position (b, n, p))#string) in
+	    let () = if is_add_hyp && is_strict then 
+	      let () = hypotheses_system#append [c] in buffered_output ("\n\n The current clause is added to H since the new conjectures are smaller : ")  
+	    in
 	    let () = if new_cond <> [] 
 	    then 
 	      let () = buffered_output (!indent_string ^ "Preconditions:") in

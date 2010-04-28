@@ -1008,12 +1008,14 @@ specif_greater:
 
 
 opt_specif_equivs:
-  TOK_EQUIV TOK_COLUMN list_of_equivs
-  { if dico_order#empty
+  TOK_EQUIV TOK_COLUMN init_equiv_dico list_of_equivs
+  { 
+    if dico_order#empty
     then
       let () = buffered_output "Order dico is empty" in default_fill_order_dico ()
     else
       try
+(* 	print_dico_equivalence (); *)
         dico_order#merge_equivalence_relation dico_equivalence ;
         buffered_output "\nSuccessfully parsed equivalence relation" ; flush stdout
       with (Failure "rehash") ->
@@ -1038,7 +1040,7 @@ init_equiv_dico:
   { 
 
 (*     List.iter (fun x -> (buffered_output ("init_order_dico : x = " ^ (string_of_int x)))) (!all_defined_functions @ !all_constructors); *)
-    dico_equivalence#init (!all_defined_functions @ !all_constructors) ;
+    dico_equivalence#init dico_order#keys; (* (!all_defined_functions @ !all_constructors) ; *)
     flush stdout }
 
 list_of_equivs:
@@ -1051,7 +1053,7 @@ specif_equiv:
   list_of_symbols TOK_SEMICOLUMN
   { match $1 with
       [] -> failwith "I'm bewildered"
-    | _::_ -> dico_equivalence#fill (fun _ _ -> true) $1 }
+      | _::_ ->  dico_equivalence#fill (fun _ _ -> true) $1;  }
 
 opt_specif_status:
   TOK_STATUS TOK_COLUMN list_of_statuses

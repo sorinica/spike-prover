@@ -1,4 +1,4 @@
-(*
+ (*
  * Project: Spike ver 0.1
  * File: spike.ml
  * Content: symbol definitions
@@ -516,33 +516,35 @@ let name_specif = ref ""
   
 (* ;  *)
 (*   !print_dico_test_set ()   *)
-    
+
 let mainloop s =
-  let _ = name_specif := s in
-  let () = reset_all () in
-  let () = incr specif_counter in
-  let () = global_strat := new Strategies.strategy (Named_strategy "builtin") in
-  let q = go_parsing s in
-  let () = print_context := true in
-  let () = rewrite_system#compute_induction_positions_v0 in
-  let () = if !debug_mode then print_dico_ind_positions_v0 () in
-  let () = update_dico_rules () in
-  
-  let () = 
-    if !actually_process
-    then
-      let () = buffered_output (
-	"\n\n************************************************************\n" ^
-	"******************* Starting computation *******************\n" ^
-	"************************************************************\n\n") in
-      if queue_forall process_problem_token q
-      then buffered_output ("\n\nAll sets of conjectures were successfully processed\n\n")
-      else buffered_output ("\n\nWe failed\n\n")
-    else () 
-  in
-  let () = if !harvey_mode then print_harvey s else () in
-  let () = if !coq_mode then print_coq s else () in
-  ()
+ let _ = name_specif := s in
+ let () = reset_all () in
+ let () = incr specif_counter in
+ let () = global_strat := new Strategies.strategy (Named_strategy "builtin") in
+ let q = go_parsing s in
+ let () = print_context := true in
+ let () = rewrite_system#compute_induction_positions_v0 in
+ let () = if !debug_mode then print_dico_ind_positions_v0 () in
+ let () = update_dico_rules () in
+ if  not !Sys.interactive then
+   let () =
+     if !actually_process
+     then
+       let () = buffered_output (
+         "\n\n************************************************************\n" ^
+           "******************* Starting computation *******************\n" ^
+           "************************************************************\n\n") in
+         if queue_forall process_problem_token q
+         then buffered_output ("\n\nAll sets of conjectures were successfully processed\n\n")
+         else buffered_output ("\n\nWe failed\n\n")
+     else ()
+   in
+   let () = if !harvey_mode then print_harvey s else () in
+   let () = if !coq_mode then print_coq s else () in
+     ()
+ else ()
+
 
 let usage_string = "Usage: " ^ Sys.argv.(0) ^ " [options] spec_file [[options] spec_file...]\nOptions may be:"
   

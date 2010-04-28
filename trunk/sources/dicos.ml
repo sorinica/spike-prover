@@ -184,6 +184,7 @@ class ['a] equivalence_dictionary ini_size =
     method print f =
       let fn k v = buffered_output (f k ^ " --> " ^ sprint_list ", " f v) in
       Hashtbl.iter fn content
+
     method fill f =
       let rec fn el =
         function
@@ -193,6 +194,7 @@ class ['a] equivalence_dictionary ini_size =
       function
         [] -> ()
       | h :: t -> let () = fn h t in self#fill f t
+
     method iter f = Hashtbl.iter f content
     method find k = let r = Hashtbl.find roots k in Hashtbl.find content r
     method clear = let () = Hashtbl.clear content in Hashtbl.clear roots
@@ -321,7 +323,7 @@ class ['a] order_dictionary ini_size =
     method merge_equivalence_relation (ed : 'a equivalence_dictionary) =
       let fn k =
         let () = if k = 0 then buffered_output "processing 0" in
-        let equivs = try generic_remove_sorted k (ed#find k) with Not_found -> failwith "raising Not_found in merge_equivalence_relation" in
+        let equivs = try generic_remove_sorted k (ed#find k) with Not_found -> failwith ("raising Not_found in merge_equivalence_relation for " ^ (string_of_int k)) in
         List.iter (fun x -> self#add_equiv k x) equivs
       in
       List.iter fn self#keys
