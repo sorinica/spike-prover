@@ -257,7 +257,7 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 	else 
 	  failwith "apply_at_pos: the Partial_case_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Total_case_rewriting (st, los, pos) ->
-	if cxt2 = empty_cxt then 
+(* 	if cxt2 = empty_cxt then  *)
 			      (let np = match pp with 
 				  Pos_dumb -> pos 
 				| Pos_defined _ | Pos_litdefined _ | Pos_all| Pos_query -> pp 
@@ -265,8 +265,8 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 			      try 
 				total_case_rewriting verbose st los np cxt1 c is_strict level
 			      with (Failure "total_case_rewriting") -> failwith "apply_rm")
-	else 
-	  failwith "apply_at_pos: the Partial_case_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
+(* 	else  *)
+(* 	  failwith "apply_at_pos: the Total_case_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule" *)
     | Generate (_, _) ->
 	if cxt2 <> empty_cxt then 
 	  (try
@@ -371,7 +371,7 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 	  let brez = st#apply_new_goal verbose c cxt2 is_strict in
 	  let new_goals = conjectures_system#content in 
 	  let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture e)) in (* restore *)
-	  let () = hypotheses_system#init h  in
+	  let () = hypotheses_system#init h in
 	  if brez then new_goals else failwith "apply_rm"
 	else
 	  failwith "apply_at_pos: the Id cannot exist in a list of reasoning modules"
