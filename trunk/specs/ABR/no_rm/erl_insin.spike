@@ -1,0 +1,691 @@
+specification: erl_insin
+
+$Inductive OBJ:Set := C: nat -> nat -> OBJ.
+$Inductive PLAN:Set := Nil | Cons: OBJ -> PLAN -> PLAN.
+$
+$Fixpoint nat_eq (m n:nat) : bool :=
+$match m, n with
+$|0, 0 => true
+$|S_, 0 => false
+$|0, S_ => false
+$| S x, S y => nat_eq x y
+$end.
+$
+$Definition OBJ_eq (m n: OBJ) : bool :=
+$match m, n with
+$| C t1 e1, C t2 e2 => andb (nat_eq t1 t2) (nat_eq e1 e2)
+$end.
+$
+$Fixpoint PLAN_eq (m n: PLAN) : bool :=
+$match m, n with
+$| Nil, Nil => true
+$| Nil, Cons _ _ => false
+$| Cons _ _, Nil => false
+$| Cons o1 l1, Cons o2 l2 => 
+$ match OBJ_eq o1 o2 with
+$  | true => PLAN_eq l1 l2
+$  | false => false
+$ end
+$end.
+$
+$Fixpoint le (m n:nat): bool :=
+$match m,n with
+$| 0,_ => true
+$| S_, 0 => false
+$| S x, S y => le x y
+$end.
+$
+$Definition time (o:OBJ) : nat :=
+$match o with
+$| C t e => t
+$end.
+$
+$Fixpoint memberC (o1:OBJ) (p1:PLAN): bool :=
+$match p1 with
+$|Nil => false
+$| Cons o2 p2 =>  
+$  match OBJ_eq o1 o2 with
+$  |true => true
+$  |false => memberC o1 p2
+$ end
+$end.
+$
+$Fixpoint memberT (t1:nat) (p1:PLAN): bool :=
+$match p1 with
+$|Nil => false
+$| Cons (C t2 e) p2 =>  
+$  match nat_eq t1 t2 with
+$  |true => true
+$  |false => memberT t1 p2
+$ end
+$end.
+$
+$Fixpoint memberE (e1:nat) (p1:PLAN): bool :=
+$match p1 with
+$|Nil => false
+$| Cons (C t e2) p2 =>  
+$  match nat_eq e1 e2 with
+$  |true => true
+$  |false => memberE e1 p2
+$ end
+$end.
+$
+$Definition timel (o:PLAN): nat :=
+$match o with 
+$| Nil => 0
+$| Cons o p => time o
+$end.
+$
+$Definition er (o:OBJ) : nat :=
+$match o with
+$| C t e => e
+$end.
+$
+$Definition erl (p:PLAN) : nat :=
+$match p with
+$| Nil => 0
+$| Cons o p' => er o
+$end.
+$
+$Fixpoint sortedT (p:PLAN) : bool :=
+$match p with
+$| Nil => true
+$| Cons (C t1 e1) p1 => 
+$  match p1 with
+$  | Nil => true
+$  | Cons (C t2 e2) p2 => 
+$     match le t2 t1 with
+$       | true => sortedT p1
+$       | false => false
+$     end
+$  end
+$end.
+$
+$Fixpoint sortedE (p:PLAN) : bool :=
+$match p with
+$| Nil => true
+$| Cons (C t1 e1) p1 => 
+$  match p1 with
+$  | Nil => true
+$  | Cons (C t2 e2) p2 => 
+$     match le e2 e1 with
+$       | false => sortedE p1
+$       | true => false
+$     end
+$  end
+$end.
+$
+$Fixpoint listUpTo (p:PLAN) (t:nat) : PLAN :=
+$match p with
+$|Nil =>  Nil
+$|Cons (C t1 e1) p1 => 
+$  match le t1 t with
+$   | true => Cons (C t1 e1) Nil
+$   | false => Cons (C t1 e1) (listUpTo p1 t)
+$ end
+$end.
+$ 
+$Fixpoint wind (p':PLAN) (t t1 t2: nat) : PLAN :=
+$match p' with
+$|Nil => Nil
+$|Cons (C t' e') p => 
+$ match le (plus t' t2) t with
+$  | false => wind p t  t1 t2
+$  | true => 
+$    match le (plus t' t1) t with
+$       | true => Cons (C t' e') Nil
+$       | false => Cons (C t' e') (wind p t t1 t2)
+$   end
+$ end
+$end.
+$
+$
+$Fixpoint maxEr (p':PLAN) : nat :=
+$match p' with
+$|Nil => 0
+$|Cons (C t e) p => 
+$  match le (maxEr p) e with 
+$  | true => e
+$  | false => maxEr p
+$ end
+$end.
+$
+$Definition acr (p: PLAN) (t t2 t3: nat) : nat := 
+$   match sortedT p with
+$    | true => (match le t2 t3 with 
+$                       |false =>maxEr (wind p t t2 t3)
+$                       |true =>  0
+$                     end)
+$    | false => 0
+$  end.
+$
+$Fixpoint insAt (p:PLAN) (t e:nat) : PLAN :=
+$match p with
+$| Nil => Cons(C t e) Nil
+$| Cons o pg =>
+$  match le (time o) t with
+$  | true => Cons (C t e) (Cons o pg)
+$  | false => insAt pg t e
+$  end
+$end.
+$
+$Fixpoint insIn  (p:PLAN) (t e:nat) : PLAN :=
+$match p with
+$| Nil => Cons(C t e) Nil
+$| Cons o pg =>
+$  match le (er o) e with
+$  | true => insIn pg (time o) e
+$  | false => Cons (C t e) (Cons o pg)
+$  end
+$end.
+$
+$Hint Unfold er. 
+$Hint Unfold time.
+$
+$Fixpoint progAt (p:PLAN) (t:nat) : nat :=
+$match p with
+$| Nil => 0
+$| Cons o pg =>
+$  match le (time o) t with
+$  | true => er o
+$  | false => progAt pg t
+$  end
+$end.
+$
+$Fixpoint timeAt (p: PLAN) (t:nat) : nat :=
+$match p with
+$|Nil => 0
+$|Cons o pg => 
+$  match le (time o) t with
+$   | true => time o
+$   | false => timeAt pg t
+$  end
+$end.
+$
+$Fixpoint firstAt (p:PLAN) (t:nat) : OBJ :=
+$match p with
+$| Nil => C 0 0
+$| Cons o pg => 
+$  match le (time o) t with
+$    | true => o
+$    | false => firstAt pg t
+$  end
+$end.
+$ 
+$Fixpoint listAt (p: PLAN) (t: nat) : PLAN :=
+$match p with 
+$|Nil => Nil
+$|Cons o pg => 
+$  match le (time o) t with
+$    | true => Cons o pg
+$    | false => listAt pg t
+$  end
+$end.
+$ 
+$Fixpoint prog (p:PLAN) (t2 t3:nat) : PLAN :=
+$match p with
+$| Nil => Nil
+$| Cons o p =>
+$  match le (progAt (prog p t2 t3) (plus (time o) t3)) (er o) with
+$  | true => insAt (prog p t2 t3) (plus (time o) t3) (er o) 
+$  | false => insIn (prog p t2 t3) (plus (time o) t2) (er o)
+$  end
+$end.
+$
+$Fixpoint model_nat (n:nat) : term :=
+$match n with
+$| 0 => Term id_0 nil
+$| S n' => Term id_S ((model_nat n')::nil)
+$end.
+$
+$Definition model_bool (b:bool) : term :=
+$match b with
+$| true => Term id_true nil
+$| false => Term id_false nil
+$end.
+$
+$Definition model_OBJ (o:OBJ) : term :=
+$match o with
+$| C x y => Term id_C ((model_nat x)::(model_nat y)::nil)
+$end.
+$
+$Fixpoint model_PLAN (p:PLAN) : term :=
+$match p with
+$| Nil => Term id_Nil nil
+$| Cons o p => Term id_Cons ((model_OBJ o)::(model_PLAN p)::nil)
+$end.
+$
+$Definition acr1 (p: PLAN) (t t2 t3: nat) : nat := 
+$   match sortedT p with
+$    | true => (match le t2 t3 with 
+$                       |false => progAt (prog p t2 t3) t 
+$                       |true =>  0
+$                     end)
+$    | false => 0
+$  end.
+$
+
+
+
+
+sorts : nat bool OBJ PLAN;
+
+
+constructors :
+
+0  :     -> nat;
+S_ : nat -> nat;
+true  : bool;
+false : bool;
+
+C__     : nat nat -> OBJ;
+
+Nil     :           -> PLAN;
+Cons__  : OBJ  PLAN -> PLAN;
+
+
+defined functions:
+
+PLAN_eq__  : PLAN PLAN  -> bool;
+OBJ_eq__   : OBJ  OBJ   -> bool;
+nat_eq__    : nat  nat   -> bool;
+plus__ : nat nat -> nat;
+le__ : nat nat -> bool;
+
+time_   : OBJ     -> nat;
+timel_           : PLAN              -> nat;
+er_     : OBJ     -> nat;
+erl_             : PLAN              -> nat;
+memberC__        : OBJ PLAN          -> bool;
+memberT__        : nat PLAN          -> bool;
+memberE__        : nat PLAN          -> bool;
+sortedT_         : PLAN              -> bool;
+sortedE_         : PLAN              -> bool;
+listUpTo__       : PLAN nat          -> PLAN;
+wind____ : PLAN nat nat nat -> PLAN;
+maxEr_   : PLAN             -> nat;
+acr____  : PLAN nat nat nat -> nat;
+
+
+insAt___         : PLAN nat nat      -> PLAN;
+insIn___         : PLAN nat nat      -> PLAN;
+progAt__         : PLAN nat          -> nat;
+timeAt__         : PLAN nat          -> nat;
+firstAt__        : PLAN nat          -> OBJ;
+listAt__         : PLAN nat          -> PLAN; 
+prog___          : PLAN nat nat      -> PLAN;
+acr1____         : PLAN nat nat nat  -> nat;
+
+axioms:
+
+
+PLAN_eq(Nil, Nil) = true;
+PLAN_eq(Cons(t,l), Nil) = false;
+PLAN_eq(Nil, Cons(t,l)) = false;
+OBJ_eq(t1,t2) = true => PLAN_eq(Cons(t1,l1),Cons(t2,l2)) = PLAN_eq(l1,l2);
+OBJ_eq(t1,t2) = false => PLAN_eq(Cons(t1,l1),Cons(t2,l2)) = false;
+
+nat_eq(t1,t2) = true, nat_eq(e1,e2) = true => OBJ_eq(C(t1,e1),C(t2,e2)) = true;
+nat_eq(t1,t2) = false => OBJ_eq(C(t1,e1),C(t2,e2)) = false;
+nat_eq(t1,t2) = true, nat_eq(e1,e2) = false => OBJ_eq(C(t1,e1),C(t2,e2)) = false;
+
+nat_eq(0,0) = true;
+nat_eq(0,S(x)) = false;
+nat_eq(S(x),0) = false;
+nat_eq(S(x),S(y)) = nat_eq(x,y);
+
+memberC(o, Nil) = false;
+OBJ_eq(o1, o2) = true => memberC(o1,Cons(o2,p)) = true;
+OBJ_eq(o1, o2) = false => memberC(o1,Cons(o2,p)) = memberC(o1, p); 
+
+memberT(t, Nil) = false;
+nat_eq(t1, t2) = true => memberT(t1,Cons(C(t2,e),p)) = true;
+nat_eq(t1, t2) = false => memberT(t1,Cons(C(t2,e),p)) = memberT(t1, p); 
+
+memberE(e, Nil) = false;
+nat_eq(e1, e2) = true => memberE(e1,Cons(C(t, e2),p)) = true;
+nat_eq(e1, e2) = false => memberE(e1,Cons(C(t,e2),p)) = memberE(e1, p); 
+
+timel(Nil) = 0;
+timel(Cons(o,p)) = time(o);
+
+plus(0,  x) = x;
+plus(S(x),  y) = S(plus(x,y));
+
+le(0,x) = true;
+le(S(x),0) = false;
+le(S(x),S(y)) = le(x,y);
+
+time(C(t,e)) = t;
+
+er(C(t,e))   = e;
+
+sortedT(Nil) = true;
+sortedT(Cons(o,Nil)) = true;
+le(t2, t1) = true  => sortedT(Cons(C(t1,e1),Cons(C(t2,e2),p))) = sortedT(Cons(C(t2,e2),p));
+le(t2,  t1) = false => sortedT(Cons(C(t1,e1),Cons(C(t2,e2),p))) = false;
+
+sortedE(Nil) = true;
+sortedE(Cons(o,Nil)) = true;
+le(e2,  e1) = true  => sortedE(Cons(C(t1,e1),Cons(C(t2,e2),p))) = false;
+le(e2,  e1) = false => sortedE(Cons(C(t1,e1),Cons(C(t2,e2),p))) = sortedE(Cons(C(t2,e2),p));
+
+listUpTo(Nil, t) = Nil;
+le(t1, t) = true => listUpTo(Cons(C(t1,e1),p),t) = Cons(C(t1,e1), Nil);
+le(t1, t) = false => listUpTo(Cons(C(t1,e1),p),t) = Cons(C(t1,e1),listUpTo(p,t));
+
+wind(Nil, t, t1, t2) = Nil;
+le(plus(t',t2), t) = true, le(plus(t',t1), t) = false  => wind(Cons(C(t',e'),p), t, t1, t2) = Cons(C(t',e'),wind(p, t, t1, t2)); 
+le(plus(t',t2), t) = false => wind(Cons(C(t',e'),p), t, t1, t2) = wind(p, t, t1, t2); 
+le(plus(t',t2), t) = true, le(plus(t',t1), t) = true  => wind(Cons(C(t',e'),p), t, t1, t2) = Cons(C(t',e'),Nil);
+
+maxEr(Nil) = 0;
+le(maxEr(p), e) = true  =>  maxEr(Cons(C(t,e),p)) = e;
+le(maxEr(p), e) = false =>  maxEr(Cons(C(t,e),p)) = maxEr(p);
+
+sortedT(p) = true, le(t2, t3) = false => acr(p,t,t2,t3) = maxEr(wind(p, t, t2, t3)); 
+sortedT(p) = false => acr(p,t,t2,t3) = 0; 
+sortedT(p) = true, le(t2, t3)  = true  => acr(p,t,t2,t3) = 0;
+
+erl(Nil) = 0;
+erl(Cons(o,p)) = er(o);
+
+insAt(Nil, t, e) = Cons(C(t,e), Nil);
+le(time(o),t) = true => insAt(Cons(o,pg), t, e) =  Cons(C(t,e),Cons(o, pg));
+le(time(o),t) = false  => insAt(Cons(o,pg), t, e) =  insAt(pg, t, e);
+
+insIn(Nil, t, e) = Cons(C(t,e), Nil);    
+le(er(o),e) = true  => insIn(Cons(o,pg), t, e) =  insIn(pg, time(o), e);
+le(er(o),e) = false => insIn(Cons(o,pg), t, e) =  Cons(C(t,e),Cons(o, pg));
+
+progAt(Nil,t) = 0;
+le(time(o),t) = true  => progAt(Cons(o, pg), t) = er(o);
+le(time(o),t) = false => progAt(Cons(o, pg), t) = progAt(pg, t);
+
+timeAt(Nil,t) = 0;
+le(time(o), t) = true  => timeAt(Cons(o, pg), t) = time(o);
+le(time(o), t) = false => timeAt(Cons(o, pg), t) = timeAt(pg, t);
+
+firstAt(Nil,t) = C(0,0);
+le(time(o), t) = true  => firstAt(Cons(o, pg), t) = o;
+le(time(o), t) = false => firstAt(Cons(o, pg), t) = firstAt(pg, t);
+
+listAt(Nil,t) = Nil;
+le(time(o), t) = true  => listAt(Cons(o, pg), t) = Cons(o, pg);
+le(time(o), t) = false => listAt(Cons(o, pg), t) = listAt(pg, t);
+
+prog(Nil, t2, t3) = Nil;
+le(progAt(prog(p, t2, t3) , plus(time(o),t3)),er(o)) = true  => prog(Cons(o,p), t2, t3) = insAt(prog(p, t2, t3), plus(time(o),t3), er(o));
+le(progAt(prog(p, t2, t3) , plus(time(o),t3)),er(o)) = false => prog(Cons(o,p), t2, t3) = insIn(prog(p, t2, t3), plus(time(o),t2), er(o));
+
+sortedT(p) = true,  le(t2, t3)  = false => acr1(p,t,t2,t3) = progAt(prog(p, t2, t3), t); 
+sortedT(p) = false => acr1(p,t,t2,t3) = 0;
+sortedT(p) = true,  le(t2, t3)  = true  => acr1(p,t,t2,t3) = 0;
+
+greater:
+PLAN_eq: OBJ_eq true false;
+OBJ_eq : nat_eq true false;
+nat_eq : true false;
+erl:    er Cons Nil S 0;
+er:     C;
+time:   C;
+plus : S 0;
+Cons : time;
+le: S 0 true false;
+memberC: true false OBJ_eq;
+memberT: true false nat_eq;
+memberE: true false nat_eq;
+timel: 0 S;
+sortedT: timel time true false Nil Cons C le;
+sortedE: erl er true false Nil Cons le C;
+listUpTo: true false Nil Cons le ;
+wind: false true Nil Cons C plus le;
+maxEr: false true le;
+acr: true false maxEr wind 0 S le sortedT;
+prog :  progAt insIn insAt er time le plus Cons Nil; 
+progAt: er time le Cons Nil;
+timeAt: er time le  0 S;
+firstAt: er time le C 0 S;
+listAt: er time le Nil Cons;
+insIn:  er time le Cons Nil C true false;
+insAt: time le Cons Nil C true false;
+acr1: true false progAt prog 0 S le sortedT;
+
+properties:
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+augment_rule = simplify(id,[augmentation (L)]);
+
+% instances of AddPremise
+total_case_rewriting_add_premise_rule = add_premise(total_case_rewriting(simplify_strat, r, *),[id]);
+inst_var_rule = add_premise(generate,[id]);
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    decomposition_rule,
+                    rewriting_rule,      
+                    subsumption_rule,
+                    print_goals,
+                    total_case_rewriting_add_premise_rule
+));
+
+stra_aug = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    decomposition_rule,
+                    rewriting_rule,      
+                    augment_rule,
+                    subsumption_rule,
+                    print_goals,
+                    total_case_rewriting_add_premise_rule
+));
+
+fullind = (repeat(stra, inst_var_rule), print_goals_with_history);
+
+fullind_aug = (repeat(stra_aug, inst_var_rule), print_goals_with_history);
+
+start_with: fullind
+
+% the set of lemmas that are used later in the proof of the conjectures
+
+% % arith_1: ok
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>;
+% % plus0 : ok
+% conjectures: plus (x,0) = x;
+% % plusS: ok
+% conjectures: plus (x, S(y) ) = S(plus(x,y));
+% % le_plus:
+%lemmas:  le (u2, u3) = false, le (u2, u4) = true, le (plus (0, u3), u4) = false =>;
+% % le_eq_false: ok
+% conjectures: le(x, x) = false => ;
+% % nat_eq_false: ok
+% conjectures: nat_eq (x, x) = false =>;
+% % nat_eq_trans1: 
+% lemmas: le (u4, u2) = true, le (u8, u4) = true, le (u8, u2) = false =>;
+% % nat_eq: ok
+% conjectures:  nat_eq (u1, u4) = true, nat_eq (u1, u4) = false =>  ;
+% % memberT: ok. requires nat_eq
+% conjectures:  nat_eq (u1, u4) = true, nat_eq (u1, u4) = false =>  ; conjectures: memberT (u1, u7) = true, memberT (u1, u7) = false =>;
+% % sorted_timel : ok. 
+% conjectures : sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true;
+
+% Now, the set of conjectures from the ABR proof. Uncomment the line under
+% the name of the conjecture to prove. This line is self-contained,
+% i.e. contains all information (lemmas, proof strategy) to prove the
+% conjecture, represented by the last conditional equation. Notice
+% that only the conjectures labelled with Ok would work, the others
+% are given just to be complete w.r.t. the PVS proof.
+
+% %  firstat_timeat: ok. requires arith_1
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures: time(firstAt(l,t)) = timeAt(l,t);
+% %  firstat_progat: ok. requires arith_1
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures: er(firstAt(l,t)) = progAt(l,t);
+% %  sorted_sorted: ok
+% conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;
+% %  sorted_insat1: ok. requires arith_1 and  sorted_sorted. needs augment 
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures: sortedT(Cons(o, p)) = true => sortedT(p) = true;  conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; conjectures: sortedT (u6) = true, le (timel (u6), u8) = true => sortedT (Cons (C (u8, u9), u6)) = true ; start_with: fullind_aug conjectures:  sortedT(l) = true => sortedT(insAt(l, t, e)) = true;
+% %  sorted_insin2:  ok requires arith_1, sorted_timel and sorted_sorted. needs augment
+%   conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;  conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; conjectures: sortedT (u6) = true, le (timel (u6), u8) = true => sortedT (Cons (C (u8, u9), u6)) = true ; start_with: fullind_aug conjectures: sortedT(l) = true, le(timel(l),t) = true => sortedT(insIn(l, t, e)) = true;
+% %  sorted_e_two: ok
+% conjectures:  sortedE(Cons(o,p)) = true => sortedE(p) = true;
+% %  sorted_e_insin: requires sorted_e_two, arith_1. needs augment  (and some fix for augment with disjunction)
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedE(Cons(o, p)) = true => sortedE(p) = true; conjectures: sortedE(Cons(o, p)) = true => le (erl(p), er (o)) = false, p = Nil;   start_with: fullind_aug conjectures:  sortedE(l) = true => sortedE(insIn(l,t,e)) = true;
+% %  sorted_e_member: does not work
+% conjectures:  sortedE(l) = true, memberC(o,l)=true, le (erl(l),  er(o)) = false => l = Nil;
+% %  member_t_insin: ok. requires nat_eq et memberT. preuve longue
+% conjectures:  nat_eq (u1, u4) = true, nat_eq (u1, u4) = false =>  ; conjectures: memberT (u1, u7) = true, memberT (u1, u7) = false =>; conjectures:  memberT(tcrt,insIn(l,t,e)) =true, memberT(tcrt,l) = false => t= tcrt ;
+% %  member_t_insat: ok. requires nat_eq et memberT. (did not work before)
+% conjectures:  nat_eq (u1, u4) = true, nat_eq (u1, u4) = false =>  ;conjectures: memberT (u1, u7) = true, memberT (u1, u7) = false =>; conjectures:  memberT(tcrt,insAt(l,t,e)) = true,  memberT(tcrt,l) = false => tcrt = t ;
+% %  member_less: does not work
+% conjectures:  sortedT(l)= true, memberC(o,l)=true => le (time(o),timel(l)) =true;
+% %  member_insin_time:  does not work
+% conjectures: sortedT(l)=true, memberC(o1,l)=true, s(e) <= er(o1)=true, timel(l)<=t = true => time(o1) <=timel(insIn(l,t,e))=true;
+% %  member_firstat: ok. demande nat_eq_false et arith_1.
+% conjectures: nat_eq (x, x) = false =>; conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  PLAN_eq(listAt(l,tcrt),Nil)=false => memberC(firstAt(l,tcrt),l)=true;
+% %  timel_insat_t: ok 
+% conjectures: timel(insAt(l,t,e)) = t;
+% %  timel_insin: does not work
+% conjectures:  sortedT(l) = true, le(timel(l), tcrt) = true => le(timel(insIn(l,tcrt,e)), tcrt) = true;
+% %  erl_insin: ok
+ conjectures: erl(insIn(l,t,e)) = e;
+% %  erl_insat: ok
+% conjectures:  erl(insAt(l,t,e)) = e;
+% %  erl_prog: ok. requires erl_insin and erl_insat
+%  conjectures: erl(insIn(l,t,e)) = e; conjectures:  erl(insAt(l,t,e)) = e; conjectures:   erl(prog(l,t2,t3)) = erl(l);
+% %  time_progat_er: ok. requires arith_1
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  le(timel(l), tcrt) =true => progAt(l,tcrt) = erl(l);
+% %  timeat_tcrt: ok
+% conjectures:  sortedT(l) = true => le(timeAt(l,tcrt), tcrt) = true;
+% %  timeat_timel: does not work
+% conjectures:  sortedT(l)=true => le(timeAt(l,tcrt),  timel(l)) =true;
+% %  timel_timeat_max: ok needs sorted_sorted and arith_1. requires augment
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures: sortedT(Cons(o, p)) = true => sortedT(p) = true; lemmas: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(l) = true, le( timel(l), t) = true => timeAt(l,t) = timel(l);
+% %  sorted_timeat: does not work
+% conjectures:  sortedT(l) = true, le(t3, t2) = true =>  le(timeAt(l,t3), timeAt(l,t2)) = true;
+% %  sorted_timel_timeat: does not work
+% conjectures:  sortedT(l) = true,  le(timel(l), timeAt(l,t)) = true => le(timel(l), t) = true;
+% %  timel_prog_conj1: does not work
+% conjectures:   sortedT(l) = true, le(timel(l), tcrt) = true, le(S(t3),  t2) = true,  memberT(time(o1), prog(l,t2,t3)) = true => le(time(o1), plus(tcrt, t2)) = true;
+% %  time_dec: does not work
+% conjectures: sortedT(l) = true, le( S(t3), t2) = true => sortedT(prog(l,t2,t3))= true;
+% %  timel_prog: does not work
+% conjectures:  sortedT(l)=true, le(t3, t2)=true => le(timel(prog(l,t2,t3)),  plus(timel(l), t2))=true;
+% %  null_insat: requires augment with premises
+% conjectures:  insAt(l,t,e)=Nil => Nil=l;
+% %  null_insin: requires augment with premises
+% conjectures:  insIn(l,t,e) = Nil => Nil = l;
+% %  null_prog: does not work
+% conjectures:  prog(l,t2,t3) = Nil => l = Nil;
+% %  null_listat: ok. requires arith_1
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>;  conjectures:  listAt(l,t)=Nil => progAt(l,t) = 0 ;
+% %  null_listat1: ok 
+% conjectures:   l = Nil => listAt(l,t) = Nil;
+% %  cons_insat: ok
+% conjectures: insAt(l,t,e) = Nil =>;
+% %  cons_listat: ok (the contraposed version of null_listat1)
+% conjectures: l =  Nil => listAt(l,t) = Nil;
+% %  progat_two_timeat:  does not work. tried with le_eq_false, sorted_sorted and arith_1, imeat_timel. (works only with augment in  the journal version)
+% conjectures: le (x, x) = false =>; conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;  lemmas:  sortedT(l)=true => le(timeAt(l,tcrt), timel(l)) =true;  conjectures:  sortedT(l) = true => progAt(l, timeAt(l,t)) = progAt(l,t);
+% %  progat_timel_erl: ok needs le_eq_false and sorted_sorted. requires augment
+% conjectures: le(x, x) = false => ; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;  conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(l)= true => progAt(l,timel(l)) = erl(l);
+% %  progat_insat:  ok needs arith_1, le_eq_false and sorted_sorted +  new  transitive lemma. requires augment (tres longue preuve, 134  formules dans F !!!, 12 min de Coq)
+% lemmas: le (u6, u3) = true, le (u6, u2) = false, le (u2, u3) = false =>; conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;  conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(l)=true, le(t, tcrt) =false => progAt(insAt(l,t,e),tcrt) = progAt(l,tcrt);
+% %  progat_insat1: ok needs arith_1, sorted_sorted. requires augment
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;  conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(l)=true, le(t, tcrt)=true => progAt(insAt(l,t,e),tcrt) = e;
+% %  progat_insin_timeat: does not work
+% conjectures:  sortedT(l)=true, le(progAt(l,t), e) = false, le( timel(l), to) = true, le(to, t)= false => le(timel(insIn(l,to,e)), t) = false;
+% %  progat_insin: does not work. needs arith_1, sorted_sorted. works only with augment
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;  conjectures:  sortedT(l)=true, le(timel(insIn(l,t,e)), tcrt) =false => progAt(insIn(l,t,e),tcrt) = progAt(l,tcrt);
+% %  listat_insin_tcrt: does not work. needs. arith_1, sorted_sorted. works only with augment
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;   conjectures:  sortedT(l)=true, le(timel(insIn(l,t,e)), tcrt) = false => listAt(insIn(l,t,e),tcrt) = listAt(l,tcrt);
+% %  progat_insin_t: needs arith_1, sorted_sorted. demande augment (fix generate to deal with case analysis)
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;    conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(l)=true, le(timel(insIn(l,t,e)), tcrt)=true => progAt(insIn(l,t,e),tcrt) = e;
+% %  listupto1_erl: does not work( idee: travailler sur la precedence des symboles dans generate). needs arith_1, sorted_sorted. demande augment
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;   conjectures:   sortedT(l)=true, le(t, to) =true=> erl(listUpTo(l,t)) = erl(listUpTo(l,to)), listUpTo(l,to)=Nil, listUpTo(l,t)=Nil;
+% %  null_listupto: does not work( idee: travailler sur la precedence des symboles dans generate) needs arith_1, sorted_sorted. demande augment
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true; conjectures: le( t, to)=true, sortedT(l)=true, listUpTo(l,t)=Nil =>listUpTo(l,to)=Nil;
+% % listupto_t_insat: needs arith_1, le_eq_false,  sorted_sorted. demande augment (to fix)
+% conjectures: le (x, x) = false =>; conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;   conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(l)=true => listUpTo(insAt(l,t,e),t) = Cons((C(t,e)),Nil);
+% %  listupto_insin_tcrt: does not work
+% conjectures:  sortedT(l)=true, le( timel(insIn(l,t,e)), tcrt) = false => listUpTo(insIn(l,t,e),tcrt) = insIn(listUpTo(l,tcrt),t,e);
+% %  sorted_e_listupto: does not work
+% conjectures:  sortedT(l)=true, le(t, to)=true, sortedE(listUpTo(l,t))=true => sortedE(listUpTo(l,to))=true;
+% %  timel_listupto: ok 
+% conjectures:  timel(listUpTo(l,t)) = timel(l);
+% %  sorted_listupto: ok needs arith_1, sorted_sorted. requires augment
+% conjectures: plus (x,0) = x; conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;   conjectures:  sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(l)=true => sortedT(listUpTo(l,t))=true;
+% %  progat_listupto: does not work. needs arith_1, sorted_sorted. requires augment
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;   conjectures:  sortedT(l)=true, le(tb, ta) = true => progAt(listUpTo(l,tb),ta) = progAt(l,ta);
+% %  leftmax: does not work. needs arith_1, sorted_sorted.  works only with augment. requires arith reasoning : example  le (u2, u3) = false /\ le (plus (u7, u2), u4) = true /\ le (plus (u7, u3), u4) = false =>;
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;  conjectures:  sortedT(l)=true, le(t2, t3)=false, le(plus(timel(l), t2), tcrt) = true => progAt(prog(l,t2,t3),tcrt) = erl(l);
+% %  leftmax_max: needs arith_1, sorted_sorted + arith lemma.  requires augment (to fix)
+% lemmas:  le (u2, u3) = false, le (plus (u7, u2), u4) = true, le(plus (u7, u3), u4) = false => ; conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true;   conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(l)=true, le(t2, t3) = false, le(plus(timel(l), t2), tcrt) = true => maxEr(wind(l, tcrt, t2, t3)) = erl(l);
+% %  right_prog: does not work
+% conjectures:  sortedT(Cons(o1,p))=true, le(plus(time(o1), t3),  tcrt) = false, le(t2, t3) = false => progAt(prog(Cons(o1,p),t2,t3),tcrt) = progAt(prog(p,t2,t3),tcrt);
+% %  right_wind: needs arith_1, sorted_sorted + arith lemma. requires  augment (to fix)
+% lemmas:  le (u2, u3) = false, le (plus (u7, u2), u4) = true, le(plus (u7, u3), u4) = false => ; conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true; conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(Cons(o1,p))=true, le(plus(time(o1), t3), tcrt)=false, le(t2, t3) =false => maxEr(wind(Cons(o1,p),tcrt,t2,t3)) = maxEr(wind(p,tcrt,t2,t3));
+% %  time_listat: ok. needs arith_1.
+%  conjectures: le (u6, u2) = false, le (u6, u2) = true =>;   conjectures:  sortedT(l)=true, le(timel(l), t) = true => listAt(l,t) = l;
+% %  listat_listupto:  needs arith_1, sorted_sorted + arith lemma. requires augment (to fix)
+ % lemmas:  le (u2, u3) = true, le (u4, u2) = true, le (u4, u3) = false => ; conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true; conjectures: sortedT(Cons(o, p)) = true => le (timel (p), time(o)) = true; start_with: fullind_aug conjectures:  sortedT(l)=true, le(ta, tb) = true, listAt(listUpTo(l, ta), tb) = Nil => listAt(l,ta) = Nil; 
+% %  sorted_cons_listat: does not work. needs arith_1, sorted_sorted. requires augment ( idee: travailler sur la precedence des symboles dans generate)
+%  conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  sortedT(Cons(o, p)) = true => sortedT(p) = true; conjectures:  sortedT(l)=true, listAt(l,t2)=Nil, le(t3, t2) = true => listAt(l,t3)=Nil;
+% %  progat_member_time: does not work
+% conjectures:  progAt(l,t) = 0, sortedT(l) = true, sortedE(l)= true, memberC(o,l) = true, le(time(o), t) = false => er(o) = 0, listAt(l,t) = Nil;
+% %  sorted_cons_two:  does not work
+% conjectures:  sortedT(Cons(o1,p))=true, listAt(prog(Cons(o1,p),t2,t3), plus(time(o1), t3)) = Nil => le(t2, t3) = true;
+% %  sorted_cons_two_nil:  does not work (simple but Spike ne fait pas de backtracking)
+% conjectures:  sortedT(l) = true, le( t2, t3) = false, listAt(prog(l,t2,t3), plus(timel(l), t3)) = Nil => l =Nil;
+% %  sorted_e_progat_prog_two:  does not work
+% conjectures:  sortedT(Cons(o1,p))=true, le(t2, t3) =false => sortedE(listUpTo(prog(Cons(o1,p),t2,t3),plus(time(o1), t3)))=true;
+% %  rate_inc: does not work (simple but Spike ne fait pas de backtracking)
+% conjectures:  sortedT(l)=true, le(t2, t3)=false => sortedE(listUpTo(prog(l,t2,t3),plus(timel(l), t3)))=true;
+% %  sorted_e_member_two: does not work
+% conjectures:  sortedT(l)=true, sortedE(l)=true, le(t3, t2)=true => le(progAt(l,t2), progAt(l,t3))=true, progAt(l,t3) = 0;
+% %  new_listat_prog: does not work
+% conjectures:  sortedT(l) = true, sortedE(l)=true, le(progAt(l,t),  e) = true, le(t, tcrt) = true => listAt(l,t)= Nil, le(progAt(l,tcrt), e) = true;
+% %  progat_prog_two: does not work
+% conjectures:  sortedT(Cons(o1,p)) = true, le(t2, t3) = false, le(progAt(prog(p,t2,t3),plus(time(o1), t3)), er(o1)) =true, le(plus(time(o1), t3), tcrt)=true=> le(progAt(prog(p,t2,t3),tcrt), er(o1)) = true;
+% %  null_wind1: requires arith_1. problems with wind. 
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  le(t2, t3)=false, le(plus(timel(l), t3),  tcrt) = true, wind(l,tcrt,t2,t3)=Nil => l=Nil;
+% %  null_wind2: ok requires arith reasoning
+% lemmas:  le (plus (u6, u2), u4) = true, le (u8, u6) = true, le (plus (u8, u2), u4) = false =>;  conjectures:  le(t2,t3)=false, le(plus(time(o1), t3), tcrt) =true, wind(l,tcrt,t2,t3)=Nil,  sortedT(Cons(o1,l)) = true=> l=Nil;
+% %  member_t_timel:  does not work
+% conjectures:  memberT(timel(insIn(l,t,e)),l)=true, timel(insIn(l,t,e)) = t;
+% %  timeat_greater:  does not work
+% conjectures:  sortedT(l)=true, memberT(t,l)=true, le(t, timeAt(l,tcrt))=false => le(t, tcrt)=false;
+% %  timel_insin1: ok. needs arith_1
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures:  le( erl(l), e) = false => timel(insIn(l,t,e)) = t;
+% %  null_listupto1: ok
+% conjectures:  listUpTo(l,t)=Nil => l=Nil;
+% %  sorted_e_cons: needs the treatment of the disjunction 
+% conjectures:  sortedE(Cons(o,l))=true => le(erl(l), er(o))=false, l=Nil;
+% %  erl_cons: ok 
+% conjectures:  erl(listUpTo(l,t)) = erl(l);
+% %  no_time: ok. requires arith_1 and eq_nat_trans1.
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>;  lemmas: le (u4, u2) = true, le (u8, u4) = true, le (u8, u2) = false =>; conjectures: progAt(l,t) = e, le(ta, t) = true, le(timeAt(l,t), ta) =true => progAt(l,ta) = e;
+% %  prev_time:  does not work
+% conjectures:  sortedT(l)=true, le(timel(insIn(l,t2,e)), t3)=false,  le(timel(l),t2)=true, le(t2, tcrt)=false, le(t3,tcrt)=true,  le(timeAt(l,tcrt),t3)=true  => le(timel(insIn(l,t2,e)), tcrt)=false, l=Nil;
+% %  monoton_e: does not work
+% conjectures:  sortedT(l)=true, sortedE(listUpTo(l,t3))=true, le(t2, tcrt)=false, le(t3,tcrt)=true,  le(timeAt(l,tcrt),t3)=false,  le(progAt(l,tcrt),e) = true, le(timel(l),t2) = true => le(timel(insIn(l,t2,e)), timeAt(l,tcrt))=true, l = Nil;
+% %  monoton_e1: does not work
+% conjectures:  sortedT(l)=true, sortedE(listUpTo(l,t3))=true, le(t2, tcrt)=false, le(t3,tcrt) =true, le(timeAt(l,tcrt),t3)=false, le(progAt(l,tcrt),e)=false, le(timel(l),t2)=true => le(timel(insIn(l,t2,e)), timeAt(l,tcrt)) = false, l = Nil;
+% %  main_conj: does not work
+% conjectures:  sortedT(l)=true, le(t2, t3)=false => progAt(prog(l,t2,t3),tcrt) = maxEr(wind(l,tcrt,t2,t3));
+% %  final: ok requires main_conj, arith_1
+% conjectures: le (u6, u2) = false, le (u6, u2) = true =>; conjectures: sortedT(l) = true, sortedT(l) = false => ; lemmas: sortedT(l)=true, le(t2, t3)=false => progAt(prog(l,t2,t3),tcrt) = maxEr(wind(l,tcrt,t2,t3));  conjectures:  acr(l,tcrt,t2,t3) = acr1(l,tcrt,t2,t3);

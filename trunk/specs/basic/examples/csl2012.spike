@@ -1,0 +1,123 @@
+specification : csl2012
+
+sorts : nat  bool;
+$ 
+$Fixpoint model_nat (v: nat): term :=
+$match v with
+$| O => (Term id_0 nil)
+$| (S x) => let r := model_nat x in   (Term id_S (r::nil))
+$ end.
+$
+$Fixpoint model_bool (v: bool): term :=
+$match v with
+$|true => (Term id_True nil)
+$|false => (Term id_False nil)
+$end.
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+True : bool;
+False : bool;
+ 
+
+defined functions:
+
+a__: nat nat -> bool;
+b__: nat nat -> bool;
+c__: nat nat -> bool;
+eqe__: nat nat -> bool;
+eqo__: nat nat -> bool;
+
+axioms:
+
+a(0,0) = True;
+a(x, S(y)) = b(x,y);
+a(S(x),y) = c(x,y);
+ 
+$
+$Fixpoint a (x y:nat): bool :=
+$match x,y with
+$| O => y
+$| (S x') => S (plus x' y)
+$end.
+
+b(0,y) = False;
+b(S(x),y) = a(x,y);
+b(S(S(x)),y) = c(x,y);
+ 
+c(x,0) = False;
+c(x,S(y)) = a(x,y);
+c(x,S(S(y))) = b(x,y);
+ 
+eqe(0,0) = True;
+eqe(0,S(y)) = False;
+eqe(S(x),0) = False;
+eqe(S(x),S(y)) = eqo(x,y);
+
+eqo(0,0) = False;
+eqo(0,S(y)) = False;
+eqo(S(x),0) = False;
+eqo(S(x),S(y)) = eqe(x,y); 
+ 
+ 
+greater:
+eqe:  0 S True False;
+a: True False 0 S;
+
+equiv:
+eqe eqo;
+a b c;
+
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+
+
+% instances of AddPremise
+total_case_rewriting_add_premise_rule = add_premise(total_case_rewriting(simplify_strat, r, *),[id]);
+inst_var_rule = add_premise(generate,[id]);
+
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    
+rewriting_rule,      
+                    print_goals,
+total_case_rewriting_add_premise_rule 
+
+));
+
+fullind = (repeat(stra, inst_var_rule), print_goals_with_history);
+
+ind_priorities:
+
+a b c ;
+
+
+start_with: fullind
+
+
+conjectures: 
+a(x,y) = True => eqe( x, y) = True, eqo(x,y) = True ;

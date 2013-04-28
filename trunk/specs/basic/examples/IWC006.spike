@@ -1,0 +1,75 @@
+specification : IWC006 % conjectures taken from http://www.cs.nott.ac.uk/~lad/research/challenges/IWC006.txt
+sorts : nat  bool;
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+true : bool;
+false : bool;
+ 
+
+defined functions:
+
+evenm_ : nat -> bool;
+oddm_ : nat -> bool;
+evenr_: nat -> bool;
+
+axioms:
+
+evenr (0) = true;
+evenr (S(0))  = false;
+evenr (S(S(x))) = evenr (x);
+
+evenm(0) = true;
+evenm(S(x)) = oddm(x);
+
+oddm(0) = false;
+oddm(S(x)) = evenm(x);
+
+greater:
+evenm : true false;
+oddm : true false;
+evenr: true false 0 S;
+
+% equiv:
+% evenm oddm;
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+conditional_rewriting_rule = simplify(id, [conditional_rewriting(normalize, L|R|C, *)]);
+
+% instances of AddPremise
+induction = add_premise(generate,[id]);
+induction_eq = add_premise(generate_eq,[id]);
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    conditional_rewriting_rule,
+                    
+                    print_goals
+));
+
+fullind = (repeat(stra, induction_eq), print_goals_with_history);
+
+start_with: fullind
+
+conjectures: 
+evenm(x) = evenr(x);

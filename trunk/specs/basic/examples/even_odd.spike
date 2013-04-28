@@ -1,0 +1,196 @@
+specification : even_odd
+
+sorts : nat  bool;
+$ 
+$Fixpoint model_nat (v: nat): term :=
+$match v with
+$| O => (Term id_0 nil)
+$| (S x) => let r := model_nat x in   (Term id_S (r::nil))
+$ end.
+$
+$Fixpoint model_bool (v: bool): term :=
+$match v with
+$|true => (Term id_true nil)
+$|false => (Term id_false nil)
+$end.
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+true : bool;
+false : bool;
+ 
+
+defined functions:
+
+evenm_ : nat -> bool;
+oddm_ : nat -> bool;
+even_ : nat -> bool;
+odd_ : nat -> bool;
+evenr_: nat -> bool;
+oddc_:nat -> bool; 
+plus__ : nat nat -> nat;
+
+axioms:
+
+plus(0,  x) = x;
+plus(S(x),  y) = S(plus(x,y));
+$
+$Fixpoint plus (x y:nat): nat :=
+$match x with
+$| O => y
+$| (S x') => S (plus x' y)
+$end.
+
+evenr (0) = true;
+evenr (S(0))  = false;
+evenr (S(S(x))) = evenr (x);
+$
+$Fixpoint evenr (x: nat): bool :=
+$match x with
+$| 0 => true
+$| (S O) => false
+$| (S (S x')) => evenr x'
+$end.
+
+
+evenr(x) = true => oddc(x) = false;
+evenr(x) = false => oddc(x) = true;
+$
+$Definition oddc (x: nat): bool :=
+$match evenr(x) with
+$| true => false
+$| false => true
+$end.
+
+evenm(0) = true;
+evenm(S(x)) = oddm(x);
+
+oddm(0) = false;
+oddm(S(x)) = evenm(x);
+$
+$Fixpoint evenm (v:nat): bool:=
+$match v with
+$| O => true
+$| (S x) => oddm x
+$end
+$with
+$oddm (v:nat): bool :=
+$match v with
+$| O => false
+$| (S x) => evenm x
+$end.
+
+even(0) = true;
+odd(x) = true => even(S(x)) = true;
+odd(x) = false => even(S(x)) = false;
+
+odd(0) = false;
+even(x) = true => odd(S(x)) = true;
+even(x) = false => odd(S(x)) = false;
+$
+$Fixpoint even (v:nat): bool :=
+$match v with
+$  | 0 => true
+$  | S x => match odd x with
+$             | true => true
+$             | false => false
+$           end
+$end
+$with odd (v:nat): bool :=
+$match v with
+$  | 0 => false
+$  | S x => match even x with
+$             | true => true
+$             | false => false
+$           end
+$end.
+ 
+greater:
+evenm : plus S 0 true false; 
+even : plus S 0 true false;
+evenr: plus true false 0 S;
+oddc: evenr true false;
+plus : S 0;
+
+equiv:
+oddm evenm;
+even odd;
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+
+
+% instances of AddPremise
+total_case_rewriting_add_premise_rule = add_premise(total_case_rewriting(simplify_strat, r, *),[id]);
+inst_var_rule = add_premise(generate,[id]);
+
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    
+rewriting_rule,      
+                    print_goals_with_history(t),
+total_case_rewriting_add_premise_rule 
+
+));
+
+fullind = (repeat(stra, inst_var_rule), print_goals_with_history);
+
+start_with: fullind
+
+
+
+conjectures: 
+evenr(plus(x, y)) = true, evenr (plus(y, z)) = true => evenr (plus(x, z)) = true; 
+ 
+conjectures: 
+evenm(x) = evenr(x);
+
+conjectures:
+plus (x, 0) = x;
+
+conjectures:
+plus(x, S(y)) = S(plus(x, y));
+
+conjectures:
+ even(plus(x,x)) = true;
+ odd(S(plus(x,x))) = true;
+
+
+conjectures:
+plus(x,y) = plus (y, x);
+
+conjectures:
+evenm(plus(x,x)) = true;
+oddm(plus(x,x)) = false;
+
+
+conjectures:
+evenr (S (u1)) = true => true = oddm (u1) ;
+
+conjectures:
+oddc(x) = oddm(x);
+
+conjectures:
+plus(x, plus(y, z)) = plus (plus(x, y), z);

@@ -1,0 +1,143 @@
+specification : aoto % conjectures taken from Aoto's RTA'2006 paper.
+
+sorts : nat list ;
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+Nil : -> list;
+Cons__ : nat list -> list;
+
+defined functions:
+
+_+_ : nat nat -> nat;
+_*_ : nat nat -> nat;
+len_ : list -> nat;
+app__: list list -> list;
+sum_ : list -> nat;
+rev2__: list list -> list;
+
+
+axioms:
+
+0 + x = x;
+S(x) + y = S(x+y);
+
+0 * x = 0;
+S(x) * y = y + (x * y); 
+
+len(Nil) = 0;
+len(Cons(x,l)) = S(len(l));
+
+app(Nil, x) = x;
+app(Cons(x,l), l1) = Cons(x, app(l,l1));
+
+sum(Nil) = 0;
+sum(Cons(x,l)) = x + sum(l);
+
+rev2(Nil, l) = l;
+rev2(Cons(a,l),l1) = rev2(l,Cons(a,l1));
+
+
+greater:
+sum: + 0 S Cons Nil; 
+len : S 0 Cons Nil; 
+rev2 : S 0 Cons Nil;  
+app : Cons Nil; 
+*: + S 0;
++: S 0;
+
+status:
++ * ms;
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+conditional_rewriting_rule = simplify(id, [conditional_rewriting(normalize, L|R|C, *)]);
+
+% instances of AddPremise
+induction = add_premise(generate,[id]);
+induction_eq = add_premise(generate_eq,[id]);
+
+stra = repeat (try (
+                    tautology_rule,
+                    decomposition_rule,
+                    conditional_rewriting_rule,
+                    subsumption_rule,
+                    print_goals
+));
+
+fullind = (repeat(stra, induction_eq), print_goals_with_history);
+
+start_with: fullind
+
+conjectures: %completely automatically
+x + S(y) = S(x + y);
+ 
+conjectures: %completely automatically
+x + y = y + x; 
+
+conjectures: %completely automatically
+x + S(y + z) = S(y+ (x + z));
+
+conjectures: %completely automatically
+(S (u1)) + (u3 + z) = S (u3 + (u1 + z)) ;
+
+conjectures: %completely automatically
+x + (y + z) = y + (x  + z);
+
+
+% conjectures: % needs the previous conjecture
+% x * S(y) = x + (x * y);
+
+conjectures: % needs the two previous conjectures
+x * y = y * x;
+
+conjectures: % done automatically
+len(app(xs,ys)) = len(app(ys,xs));
+
+% conjectures: %completely automatically
+% x + S(y) = S(x + y);
+
+conjectures: %needs the previous conjecture
+sum(app(xs,ys)) = sum(app(ys,xs));
+
+conjectures: %completely automatically
+len(rev2(x,y)) = len(x) + len(y);
+
+conjectures: %needs the previous conjecture
+len(rev2(xs,ys)) = len(rev2(ys,xs));
+
+conjectures:  %completely automatically
+x + (y + z) = (y + x)  + z;
+
+conjectures: % requires the previous conjecture
+sum(rev2(x,y)) = sum(x) + sum(y);
+
+conjectures: %completely automatically
+x + y = y + x;
+
+conjectures: %needs the two previous conjectures
+sum(rev2(xs,ys)) = sum(rev2(ys,xs));
+
+conjectures: %completely automatically
+x + (y + z) = (x + y) + z;
+
+% conjectures: %false conjecture
+% app(x,y) = app(y,x);
+
+%conjectures: %false conjecture
+%rev2(x,y) = rev2(y,x);

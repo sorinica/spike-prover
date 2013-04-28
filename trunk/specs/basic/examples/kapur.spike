@@ -1,0 +1,177 @@
+specification : kapur % conjectures taken from Kapur & Subramaniam AMST 1996
+sorts : nat list bool expr state;
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+true : bool;
+false : bool;
+Nil: -> list;
+Cons__: nat list -> list;
+start: -> state;
+update___:  expr nat state-> state;
+nats_: nat -> expr; 
+id1_ :  expr  -> expr;
+plus__: expr expr -> expr;
+apply___: expr expr expr -> expr;
+
+defined functions:
+
+_<=_ : nat nat -> bool;
+_+_: nat nat -> nat;
+evenlist_: list -> list;
+oddlist_: list -> list;
+append__ : list list -> list;
+len_: list -> nat;
+lookup__: expr state -> nat;
+exp___: expr expr expr -> expr; 
+exhelp_: expr  -> expr;
+eval__: expr state -> nat;
+
+axioms:
+
+0 <= x = true;
+S(x) <= 0 = false;
+S(x) <= S(y) = x <= y;
+
+x + 0  = x;
+x + S(y) = S(x+y);
+
+evenlist(Nil) = Nil;
+evenlist(Cons(x,l)) = oddlist(l);
+
+oddlist(Nil) = Nil;
+oddlist(Cons(x,l)) = Cons(x, evenlist(l));
+
+append(Nil, x)  = x;
+append(Cons(x,l), l') = Cons(x, append(l,l'));
+
+len(Nil) = 0;
+len(Cons(x,l)) = S(len(l));
+
+lookup(x, start) = 0;
+x= y => lookup(x, update(y, z, w)) = z;
+x<>y => lookup (x, update(y, z, w)) = lookup(x,w);
+
+eval(nats(x), w) = x;
+eval(id1(x),w) = lookup(x,w);
+eval(plus(x,y),w) = eval (x, w) + eval(y, w);
+eval(apply(x,y,z), w) = eval(x, update(y, eval(z,w),w));
+
+exp(nats(x), y, z) = nats (x);
+x <> y => exp(id1(x), y, z)  = id1 (x);
+x = y => exp (id1 (x), y, z) =  exhelp(z);
+exp(plus(x,y), z, w) = plus (exp(x,z,w), exp(y,z,w));
+exp(apply(x, y, z), z1, w) = exp(exp(x, y, z), z1, w);
+
+exhelp(nats(x)) = nats (x);
+exhelp(id1(x)) = id1(x);
+exhelp(plus(x, y)) = plus(exhelp(x), exhelp(y));
+exhelp(apply(x, y, z)) = exp( x, y, z);
+
+greater:
+
+eval: lookup + 0 S start nats id1 plus;
+exhelp: nats id1 plus;
+exp: exhelp nats id1 plus;
+apply: update exp eval;
+lookup: 0 start update;
+len: 0 S Nil Cons;
+append: Nil Cons;
+oddlist: Nil Cons;
+evenlist: Nil Cons;
++: 0 S;
+<=: 0 S true false;
+
+equiv:
+
+oddlist evenlist;
+
+% status :
+% eval  ms;
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+
+
+% instances of AddPremise
+total_case_rewriting_add_premise_rule = add_premise(total_case_rewriting(simplify_strat, r, *),[id]);
+inst_var_rule = add_premise(generate,[id]);
+
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    
+rewriting_rule,      
+                    print_goals,
+total_case_rewriting_add_premise_rule 
+
+));
+
+fullind = (repeat(stra, inst_var_rule), print_goals_with_history);
+
+start_with: fullind
+
+augmentation_strategy:
+rewrite
+
+start_with: fullind
+ 
+rpocompare :
+eval (apply (u1, u2, u3), u4) ? eval (u1, update (u2, eval (u3, u4), u4)) 
+
+rpocompare:
+apply (u1, u2, u3)  ? u1
+
+rpocompare:
+apply (u1, u2, u3) ? update (u2, eval (u3, u4),u4)
+
+rpocompare:
+eval (apply (u1, u2, u3), u4)  ? eval (u3, u4)
+
+rpocompare:
+eval (apply (u1, u2, u3), u4)  ? u2
+
+rpocompare:
+eval (apply (u1, u2, u3), u4)  ? u4
+
+% conjectures:
+% S(x) + y = S(x + y);
+
+% conjectures: 
+% len(append(x, y)) = len (x)+ len(y);
+
+% conjectures:
+% x <= y = true => x <= S(y) = true;
+
+% conjectures:
+
+% len(evenlist(x)) <= len(x) = true;
+
+% conjectures:
+% len(oddlist(x)) <= S(len(x)) = true;
+
+% conjectures:
+% eval(exp(u,v,t), s) = eval (u, update(v, eval(t,s), s));
