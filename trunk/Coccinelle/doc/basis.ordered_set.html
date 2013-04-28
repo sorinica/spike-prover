@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>basis.ordered_set</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library basis.ordered_set</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Setoid</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Relations</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Arith</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <span class="id" type="var">comp</span> : <span class="id" type="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" type="var">Equivalent</span> : <span class="id" type="var">comp</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Less_than</span> : <span class="id" type="var">comp</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Greater_than</span> : <span class="id" type="var">comp</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Uncomparable</span> : <span class="id" type="var">comp</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">S</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">A</span> : <span class="id" type="keyword">Set</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">eq_bool</span> : <span class="id" type="var">A</span> -&gt; <span class="id" type="var">A</span> -&gt; <span class="id" type="var">bool</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">eq_bool_ok</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">eq_bool</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">with</span> <span class="id" type="var">true</span> =&gt; <span class="id" type="var">a1</span> = <span class="id" type="var">a2</span> | <span class="id" type="var">false</span> =&gt; ~ <span class="id" type="var">a1</span> = <span class="id" type="var">a2</span> <span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o</span> : <span class="id" type="var">relation</span> <span class="id" type="var">A</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o_bool</span> : <span class="id" type="var">A</span> -&gt; <span class="id" type="var">A</span> -&gt; <span class="id" type="var">bool</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o_bool_ok</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">o_bool</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">with</span> <span class="id" type="var">true</span> =&gt; <span class="id" type="var">o</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> | <span class="id" type="var">false</span> =&gt; ~ <span class="id" type="var">o</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">end</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o_proof</span> : <span class="id" type="var">order</span> <span class="id" type="var">A</span> <span class="id" type="var">o</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o_total</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span> : <span class="id" type="var">A</span>, {<span class="id" type="var">o</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span>} + {<span class="id" type="var">o</span> <span class="id" type="var">e2</span> <span class="id" type="var">e1</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">S</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">ES</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">A</span> : <span class="id" type="keyword">Set</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">eq_A</span> : <span class="id" type="var">relation</span> <span class="id" type="var">A</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">eq_bool</span> : <span class="id" type="var">A</span> -&gt; <span class="id" type="var">A</span> -&gt; <span class="id" type="var">bool</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">eq_bool_ok</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">eq_bool</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">with</span> <span class="id" type="var">true</span> =&gt; <span class="id" type="var">eq_A</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> | <span class="id" type="var">false</span> =&gt; ~eq_A <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">end</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">eq_proof</span> : <span class="id" type="var">equivalence</span> <span class="id" type="var">A</span> <span class="id" type="var">eq_A</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o</span> : <span class="id" type="var">relation</span> <span class="id" type="var">A</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o_compat</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">e1</span> <span class="id" type="var">e1'</span> <span class="id" type="var">e2</span> <span class="id" type="var">e2'</span>, <span class="id" type="var">eq_A</span> <span class="id" type="var">e1</span> <span class="id" type="var">e1'</span> -&gt; <span class="id" type="var">eq_A</span> <span class="id" type="var">e2</span> <span class="id" type="var">e2'</span> -&gt; <span class="id" type="var">o</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span> -&gt; <span class="id" type="var">o</span> <span class="id" type="var">e1'</span> <span class="id" type="var">e2'</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o_bool</span> : <span class="id" type="var">A</span> -&gt; <span class="id" type="var">A</span> -&gt; <span class="id" type="var">bool</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o_bool_ok</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">o_bool</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">with</span> <span class="id" type="var">true</span> =&gt; <span class="id" type="var">o</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> | <span class="id" type="var">false</span> =&gt; ~ <span class="id" type="var">o</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">end</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o_proof</span> : <span class="id" type="var">order</span> <span class="id" type="var">A</span> <span class="id" type="var">o</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">o_total</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span> : <span class="id" type="var">A</span>, {<span class="id" type="var">o</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span>} + {<span class="id" type="var">o</span> <span class="id" type="var">e2</span> <span class="id" type="var">e1</span>}.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Add</span> <span class="id" type="var">Relation</span> <span class="id" type="var">A</span> <span class="id" type="var">eq_A</span> <br/>
+&nbsp;&nbsp;<span class="id" type="tactic">reflexivity</span> <span class="id" type="var">proved</span> <span class="id" type="tactic">by</span> (<span class="id" type="var">equiv_refl</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">eq_proof</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">symmetry</span> <span class="id" type="var">proved</span> <span class="id" type="tactic">by</span> (<span class="id" type="var">equiv_sym</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">eq_proof</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">transitivity</span> <span class="id" type="var">proved</span> <span class="id" type="tactic">by</span> (<span class="id" type="var">equiv_trans</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">eq_proof</span>) <span class="id" type="keyword">as</span> <span class="id" type="var">EQA</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">ES</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="var">Nat</span> &lt;: <span class="id" type="var">S</span> <span class="id" type="keyword">with</span> <span class="id" type="keyword">Definition</span> <span class="id" type="var">A</span>:=nat.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">A</span> := <span class="id" type="var">nat</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">o</span> : <span class="id" type="var">relation</span> <span class="id" type="var">A</span> := <span class="id" type="var">le</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">o_proof</span> : <span class="id" type="var">order</span> <span class="id" type="var">A</span> <span class="id" type="var">o</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="var">o</span>; <span class="id" type="var">constructor</span>; <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="var">reflexive</span>; <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="var">transitive</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">n1</span> <span class="id" type="var">n2</span> <span class="id" type="var">n3</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">le_trans</span> <span class="id" type="keyword">with</span> <span class="id" type="var">n2</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="var">antisymmetric</span>; <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">arith</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">o_dec</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span> : <span class="id" type="var">A</span>, {<span class="id" type="var">o</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span>} + {~ <span class="id" type="var">o</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span>}.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="var">o</span>.<br/>
+<span class="id" type="tactic">induction</span> <span class="id" type="var">e1</span>; <span class="id" type="tactic">induction</span> <span class="id" type="var">e2</span>.<br/>
+<span class="id" type="var">left</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="var">left</span>; <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">arith</span>.<br/>
+<span class="id" type="var">right</span>; <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">arith</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">IHe1</span> <span class="id" type="var">e2</span>); <span class="id" type="tactic">destruct</span> <span class="id" type="var">IHe2</span>; <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">arith</span>.<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" type="var">Function</span> <span class="id" type="var">eq_bool</span> (<span class="id" type="var">n</span> <span class="id" type="var">m</span> : <span class="id" type="var">nat</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">n</span>} : <span class="id" type="var">bool</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">n</span>, <span class="id" type="var">m</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">O</span>, <span class="id" type="var">O</span> =&gt; <span class="id" type="var">true</span><br/>
+&nbsp;&nbsp;| (<span class="id" type="var">S</span> <span class="id" type="var">n'</span>), (<span class="id" type="var">S</span> <span class="id" type="var">m'</span>) =&gt; <span class="id" type="var">eq_bool</span> <span class="id" type="var">n'</span> <span class="id" type="var">m'</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">_</span>,  <span class="id" type="var">_</span> =&gt; <span class="id" type="var">false</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">eq_bool_ok</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">eq_bool</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">with</span> <span class="id" type="var">true</span> =&gt; <span class="id" type="var">a1</span> = <span class="id" type="var">a2</span> | <span class="id" type="var">false</span> =&gt; ~a1 = <span class="id" type="var">a2</span> <span class="id" type="keyword">end</span>.<br/>
+<span class="id" type="var">fix</span> 1.<br/>
+<span class="id" type="tactic">intros</span> [ | <span class="id" type="var">n</span>] [ | <span class="id" type="var">m</span>]; <span class="id" type="tactic">simpl</span>.<br/>
+<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="tactic">discriminate</span>.<br/>
+<span class="id" type="tactic">discriminate</span>.<br/>
+<span class="id" type="tactic">generalize</span> (<span class="id" type="var">eq_bool_ok</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span>); <span class="id" type="tactic">case</span> (<span class="id" type="var">eq_bool</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span>).<br/>
+<span class="id" type="tactic">intros</span>; <span class="id" type="tactic">subst</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">n_diff_m</span> <span class="id" type="var">Sn_eq_Sm</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">n_diff_m</span>; <span class="id" type="tactic">injection</span> <span class="id" type="var">Sn_eq_Sm</span>; <span class="id" type="tactic">intro</span>; <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" type="var">Function</span> <span class="id" type="var">o_bool</span> (<span class="id" type="var">n</span> <span class="id" type="var">m</span> : <span class="id" type="var">nat</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">n</span>} : <span class="id" type="var">bool</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">n</span>, <span class="id" type="var">m</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">O</span>, <span class="id" type="var">_</span> =&gt; <span class="id" type="var">true</span><br/>
+&nbsp;&nbsp;| (<span class="id" type="var">S</span> <span class="id" type="var">n'</span>), (<span class="id" type="var">S</span> <span class="id" type="var">m'</span>) =&gt; <span class="id" type="var">o_bool</span> <span class="id" type="var">n'</span> <span class="id" type="var">m'</span><br/>
+&nbsp;&nbsp;| (<span class="id" type="var">S</span> <span class="id" type="var">n'</span>),  <span class="id" type="var">O</span> =&gt; <span class="id" type="var">false</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">o_bool_ok</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">o_bool</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">with</span> <span class="id" type="var">true</span> =&gt; <span class="id" type="var">o</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> | <span class="id" type="var">false</span> =&gt; ~ <span class="id" type="var">o</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">end</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="var">o</span>; <span class="id" type="var">fix</span> 1.<br/>
+<span class="id" type="tactic">intros</span> [ | <span class="id" type="var">n</span>] [ | <span class="id" type="var">m</span>]; <span class="id" type="tactic">simpl</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">le_n</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">le_O_n</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">generalize</span> (<span class="id" type="var">o_bool_ok</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span>); <span class="id" type="tactic">case</span> (<span class="id" type="var">o_bool</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span>).<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">le_n_S</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H</span>).<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">H</span> <span class="id" type="var">H'</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">le_S_n</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H'</span>).<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">o_total</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span> : <span class="id" type="var">A</span>, {<span class="id" type="var">o</span> <span class="id" type="var">e1</span> <span class="id" type="var">e2</span>} + {<span class="id" type="var">o</span> <span class="id" type="var">e2</span> <span class="id" type="var">e1</span>}.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="var">o</span>.<br/>
+<span class="id" type="var">change</span> ({<span class="id" type="var">e1</span>&lt;=e2}+{e1&gt;=e2}).<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">le_ge_dec</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Nat</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
