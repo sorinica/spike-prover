@@ -1,0 +1,936 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>ac_matching.matching</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library ac_matching.matching</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Add</span> <span class="id" type="var">LoadPath</span> "basis".<br/>
+<span class="id" type="keyword">Add</span> <span class="id" type="var">LoadPath</span> "term_algebra".<br/>
+<span class="id" type="keyword">Add</span> <span class="id" type="var">LoadPath</span> "term_orderings".<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Arith</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">List</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">more_list</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">list_sort</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">term_spec</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">ac</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">cf_eq_ac</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">S</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Declare Module</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cf_eq_ac</span> : <span class="id" type="var">cf_eq_ac.S</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">Cf_eq_ac.Ac</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="keyword">Sort</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">EqTh</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">EqTh.T</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">F</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">LPermut</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Record</span> <span class="id" type="var">partly_solved_term</span> : <span class="id" type="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">mk_pst</span> <br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">head_symb</span> : <span class="id" type="var">symbol</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_var</span> : <span class="id" type="var">variable</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">closed_term</span> : <span class="id" type="var">term</span><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" type="keyword">Record</span> <span class="id" type="var">matching_problem</span> : <span class="id" type="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> <br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">existential_vars</span> : <span class="id" type="var">list</span> <span class="id" type="var">variable</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">unsolved_part</span> : <span class="id" type="var">list</span> (<span class="id" type="var">term</span> * <span class="id" type="var">term</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">solved_part</span> : <span class="id" type="var">substitution</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">partly_solved_part</span> : <span class="id" type="var">list</span> (<span class="id" type="var">variable</span> * <span class="id" type="var">partly_solved_term</span>)<br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> :=<br/>
+&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span>, <span class="id" type="var">In</span> (<span class="id" type="var">t1</span>,t2) <span class="id" type="var">pb</span>.(<span class="id" type="var">unsolved_part</span>) -&gt; <span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> <span class="id" type="var">t1</span> = <span class="id" type="var">t2</span>) /\<br/>
+&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">partly_solved_part</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">pst</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">l</span> := (<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">new_var</span>))) :: <span class="id" type="var">pst</span>.(<span class="id" type="var">closed_term</span>) :: <span class="id" type="var">nil</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>) =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Term</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">head_symb</span>) (<span class="id" type="var">quicksort</span> (<span class="id" type="var">flatten</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">head_symb</span>) <span class="id" type="var">l</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>) /\<br/>
+&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">solved_part</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">t</span> =&gt; <span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>) = <span class="id" type="var">t</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">is_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">exists</span> <span class="id" type="var">sigma'</span>, <span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma'</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="var">In</span> <span class="id" type="var">v</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>) \/ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>) = <span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma'</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">occurs_in_term</span> (<span class="id" type="var">v</span> : <span class="id" type="var">variable</span>) (<span class="id" type="var">t</span> : <span class="id" type="var">term</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">t</span>} : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">t</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">v'</span> =&gt; <span class="id" type="var">v</span>=v'<br/>
+&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">_</span> <span class="id" type="var">l</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">occurs_in_term_list</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">fix</span> <span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">_</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">l</span>} : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">l</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">nil</span> =&gt; <span class="id" type="var">False</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">h</span> :: <span class="id" type="var">tl</span> =&gt; (<span class="id" type="var">occurs_in_term</span> <span class="id" type="var">v</span> <span class="id" type="var">h</span>) \/ (<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">tl</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">occurs_in_term_list</span> (<span class="id" type="var">v</span> : <span class="id" type="var">variable</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">term</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">l</span>} : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">l</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">nil</span> =&gt; <span class="id" type="var">False</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">cons</span> <span class="id" type="var">h</span> <span class="id" type="var">tl</span> =&gt; (<span class="id" type="var">occurs_in_term</span> <span class="id" type="var">v</span> <span class="id" type="var">h</span>) \/ (<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">tl</span>)<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">occurs_in_pb</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span> :=<br/>
+&nbsp;(<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> (<span class="id" type="var">map</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">p</span> =&gt; <span class="id" type="keyword">match</span> <span class="id" type="var">p</span> <span class="id" type="keyword">with</span> | (<span class="id" type="var">t1</span>,t2) =&gt; <span class="id" type="var">t1</span> <span class="id" type="keyword">end</span>) <span class="id" type="var">pb</span>.(<span class="id" type="var">unsolved_part</span>))) \/<br/>
+&nbsp;(<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">partly_solved_part</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">False</span> | <span class="id" type="var">Some</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">True</span> <span class="id" type="keyword">end</span>) \/<br/>
+&nbsp;(<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">solved_part</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">False</span> | <span class="id" type="var">Some</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">True</span> <span class="id" type="keyword">end</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">fresh_var</span> : <span class="id" type="var">matching_problem</span> -&gt; <span class="id" type="var">variable</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">fresh_var_spec</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">pb</span>, ~(occurs_in_pb (<span class="id" type="var">fresh_var</span> <span class="id" type="var">pb</span>) <span class="id" type="var">pb</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve_term_term_term</span> <br/>
+<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lg</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> :=<br/>
+<br/>
+&nbsp;&nbsp;<span class="id" type="var">map_without_repetition</span> <span class="id" type="var">T.eq_bool</span><br/>
+&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">t</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">t</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">h</span> <span class="id" type="var">_</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">g</span> <span class="id" type="var">h</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">t</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Some</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">mk_pb</span>  (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">cons</span> ((<span class="id" type="var">Term</span> <span class="id" type="var">g</span> <span class="id" type="var">lg</span>),t) (<span class="id" type="var">cons</span> (<span class="id" type="var">t1'</span>,t2') <span class="id" type="var">list_of_equations</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">l'</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve_term_var_with_val_term</span> <br/>
+<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x_val</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> :=<br/>
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">x_val</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">x_val</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">g</span> <span class="id" type="var">ll</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove_list</span> <span class="id" type="var">ll</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">le_gt_dec</span> (<span class="id" type="var">length</span> <span class="id" type="var">list_of_terms</span>) (<span class="id" type="var">length</span> <span class="id" type="var">rmv</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">cons</span> (<span class="id" type="var">t1'</span>,t2') <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">cons</span> <span class="id" type="var">new_pb</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">t1'</span>,t2') :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve_term_var_with_part_val_term</span><br/>
+<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x_part_val</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> :=<br/>
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">if</span> (<span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">f</span> (<span class="id" type="var">head_symb</span> <span class="id" type="var">x_part_val</span>))<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> (<span class="id" type="var">closed_term</span> <span class="id" type="var">x_part_val</span>) <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> (<span class="id" type="var">cons</span> (<span class="id" type="var">Var</span> (<span class="id" type="var">new_var</span> <span class="id" type="var">x_part_val</span>)) <span class="id" type="var">list_of_terms</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span>  (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">t1'</span>,t2') :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span>  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">else</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">map_without_repetition</span> <span class="id" type="var">T.eq_bool</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">t</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">t</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">h</span> <span class="id" type="var">l'''</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">h</span> (<span class="id" type="var">head_symb</span> <span class="id" type="var">x_part_val</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> (<span class="id" type="var">closed_term</span> <span class="id" type="var">x_part_val</span>) <span class="id" type="var">l'''</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">t</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv2</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y</span> := <span class="id" type="var">new_var</span> <span class="id" type="var">x_part_val</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y_val</span> := <span class="id" type="var">build</span> <span class="id" type="var">h</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv2</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">Var</span> <span class="id" type="var">y</span>, <span class="id" type="var">y_val</span>) :: (<span class="id" type="var">t1'</span>,t2') :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Some</span> <span class="id" type="var">new_pb</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">l'</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve_term_var_without_val_term</span> <br/>
+<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> := <br/>
+<br/>
+&nbsp;&nbsp;<span class="id" type="var">map12_without_repetition</span> <span class="id" type="var">T.eq_bool</span><br/>
+&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">t</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">t</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; (<span class="id" type="var">None</span>, <span class="id" type="var">None</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">l'_without_t</span> := <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">l'_without_t</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">t1'</span>, <span class="id" type="var">t2'</span>) :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">x</span>, <span class="id" type="var">t</span>) :: (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">le_gt_dec</span> (<span class="id" type="var">length</span> <span class="id" type="var">l'</span>) ((<span class="id" type="var">length</span> <span class="id" type="var">list_of_terms</span>) + 1)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> (<span class="id" type="var">Some</span> <span class="id" type="var">new_pb</span>, <span class="id" type="var">None</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y</span> := <span class="id" type="var">fresh_var</span> <span class="id" type="var">pb</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1''</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> (<span class="id" type="var">Var</span> <span class="id" type="var">y</span> :: <span class="id" type="var">list_of_terms</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb'</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">y</span> :: <span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">t1''</span>, <span class="id" type="var">t2'</span>) :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">x</span>, <span class="id" type="var">mk_pst</span> <span class="id" type="var">f</span> <span class="id" type="var">y</span> <span class="id" type="var">t</span>) :: (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>)) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Some</span> <span class="id" type="var">new_pb</span>, <span class="id" type="var">Some</span> <span class="id" type="var">new_pb'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">l'</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve</span> <span class="id" type="var">pb</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">list_of_equations</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">t1</span>, <span class="id" type="var">t2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| (<span class="id" type="var">Term</span> <span class="id" type="var">f</span> (<span class="id" type="var">s</span> :: <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">as</span> <span class="id" type="var">l</span>)), (<span class="id" type="var">Term</span> <span class="id" type="var">_</span> <span class="id" type="var">l'</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">s</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">g</span> <span class="id" type="var">lg</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">ac_elementary_solve_term_term_term</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lg</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">x</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">x</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">x_val</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">ac_elementary_solve_term_var_with_val_term</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x_val</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">x</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">x_part_val</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">ac_elementary_solve_term_var_with_part_val_term</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x_part_val</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">ac_elementary_solve_term_var_without_val_term</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;| (<span class="id" type="var">Term</span> <span class="id" type="var">_</span> <span class="id" type="var">nil</span>), (<span class="id" type="var">Term</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">_</span>, <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">solve</span> <span class="id" type="var">pb</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">unsolved_part</span> <span class="id" type="var">pb</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| (<span class="id" type="var">tt1</span>,tt2 <span class="id" type="keyword">as</span> <span class="id" type="var">e</span>) :: <span class="id" type="var">list_of_equations</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">tt1</span>, <span class="id" type="var">tt2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">x</span>, <span class="id" type="var">_</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">x</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">x_val</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">x_val</span> <span class="id" type="var">tt2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">list_of_equations</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">x</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">x_part_val</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">tt2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">f2</span> <span class="id" type="var">l2</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> (<span class="id" type="var">head_symb</span> <span class="id" type="var">x_part_val</span>) <span class="id" type="var">f2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y</span> := <span class="id" type="var">new_var</span> <span class="id" type="var">x_part_val</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> (<span class="id" type="var">closed_term</span> <span class="id" type="var">x_part_val</span>) <span class="id" type="var">l2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y_val</span> := <span class="id" type="var">build</span> <span class="id" type="var">f2</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">Var</span> <span class="id" type="var">y</span>, <span class="id" type="var">y_val</span>) :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">list_of_equations</span> ((<span class="id" type="var">x</span>, <span class="id" type="var">tt2</span>) :: (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">f1</span> <span class="id" type="var">l1</span>, <span class="id" type="var">Term</span> <span class="id" type="var">f2</span> <span class="id" type="var">l2</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">arity</span> <span class="id" type="var">f1</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Free</span> <span class="id" type="var">_</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">fold_left2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">current_list_of_eqs</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> =&gt; (<span class="id" type="var">t1</span>,t2) :: <span class="id" type="var">current_list_of_eqs</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">list_of_equations</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">new_list_of_equations</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_list_of_equations</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">AC</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">le_gt_dec</span> (<span class="id" type="var">length</span> <span class="id" type="var">l1</span>) (<span class="id" type="var">length</span> <span class="id" type="var">l2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <span class="id" type="var">ac_elementary_solve</span> <span class="id" type="var">pb</span> <span class="id" type="var">tt1</span> <span class="id" type="var">tt2</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">C</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">l1</span>, <span class="id" type="var">l2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">s1</span> :: <span class="id" type="var">s2</span> :: <span class="id" type="var">nil</span>), (<span class="id" type="var">t1</span> :: <span class="id" type="var">t2</span> :: <span class="id" type="var">nil</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb1</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">s1</span>,t1) :: (<span class="id" type="var">s2</span>,t2) :: <span class="id" type="var">list_of_equations</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb2</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">s1</span>,t2) :: (<span class="id" type="var">s2</span>,t1) :: <span class="id" type="var">list_of_equations</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb1</span> :: <span class="id" type="var">new_pb2</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span>, <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span>, <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">nil</span> =&gt; <span class="id" type="var">nil</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">well_sorted_partly_solved_part</span> (<span class="id" type="var">l</span> :  <span class="id" type="var">list</span> (<span class="id" type="var">variable</span> * <span class="id" type="var">partly_solved_term</span>)) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">l</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;| <span class="id" type="var">nil</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;| (<span class="id" type="var">v</span>,p) :: <span class="id" type="var">tl</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">v</span> &lt;&gt; <span class="id" type="var">new_var</span> <span class="id" type="var">p</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v'</span>, 1 &lt;= <span class="id" type="var">nb_occ</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v'</span> <span class="id" type="var">tl</span> -&gt; <span class="id" type="var">v'</span> &lt;&gt; <span class="id" type="var">new_var</span> <span class="id" type="var">p</span>) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">well_sorted_partly_solved_part</span> <span class="id" type="var">tl</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">well_formed_pb</span> <span class="id" type="var">pb</span> :=<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span>, <span class="id" type="var">In</span> (<span class="id" type="var">t1</span>,t2) <span class="id" type="var">pb</span>.(<span class="id" type="var">unsolved_part</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">well_formed_cf</span> <span class="id" type="var">t1</span> /\ <span class="id" type="var">well_formed_cf</span> <span class="id" type="var">t2</span>) /\<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="keyword">match</span> (<span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">solved_part</span>)) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">t</span> =&gt; <span class="id" type="var">well_formed_cf</span> <span class="id" type="var">t</span> <br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>) /\<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="keyword">match</span> (<span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">partly_solved_part</span>)) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">pst</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">arity</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">head_symb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">AC</span> =&gt; <span class="id" type="var">well_formed_cf</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">closed_term</span>) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">closed_term</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">f</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">pst</span>.(<span class="id" type="var">head_symb</span>)&lt;&gt;f<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> =&gt; <span class="id" type="var">False</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>) /\<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <br/>
+&nbsp;&nbsp;<span class="id" type="var">nb_occ</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) + <span class="id" type="var">nb_occ</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) &lt;= 1) /\<br/>
+<span class="id" type="var">well_sorted_partly_solved_part</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) /\<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span> <span class="id" type="var">p</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) = <span class="id" type="var">Some</span> <span class="id" type="var">p</span> -&gt; <span class="id" type="var">occurs_in_pb</span> (<span class="id" type="var">new_var</span> <span class="id" type="var">p</span>) <span class="id" type="var">pb</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">is_well_formed_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> :=<br/>
+&nbsp;(<span class="id" type="var">exists</span> <span class="id" type="var">sigma'</span>,  <span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma'</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="var">In</span> <span class="id" type="var">v</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>) \/<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>) = <span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma'</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>)) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">well_formed_cf_subst</span> <span class="id" type="var">sigma'</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">list_permut_occurs_in_term_list</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>, <span class="id" type="var">permut</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> -&gt; <span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">l2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">add_new_var_to_subst</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">t1</span> <span class="id" type="var">v</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span>, ~occurs_in_term <span class="id" type="var">v</span> <span class="id" type="var">t1</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> <span class="id" type="var">t1</span> = <span class="id" type="var">apply_cf_subst</span> ((<span class="id" type="var">v</span>,t2) ::  <span class="id" type="var">sigma</span>) <span class="id" type="var">t1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">add_new_var_to_rough_sol</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> <span class="id" type="var">t</span>, <span class="id" type="var">well_formed_pb</span> <span class="id" type="var">pb</span> -&gt; <span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> ((<span class="id" type="var">fresh_var</span> <span class="id" type="var">pb</span>, <span class="id" type="var">t</span>) :: <span class="id" type="var">sigma</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">S</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="var">Make</span> (<span class="id" type="var">Cf_eq_ac1</span> : <span class="id" type="var">cf_eq_ac.S</span>) : <span class="id" type="var">S</span> <span class="id" type="keyword">with</span> <span class="id" type="keyword">Module</span> <span class="id" type="var">Cf_eq_ac</span> := <span class="id" type="var">Cf_eq_ac1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="var">Cf_eq_ac</span> := <span class="id" type="var">Cf_eq_ac1</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">Cf_eq_ac1</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">Ac</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">EqTh</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">T</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">F</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">X</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="keyword">Sort</span>.<br/>
+<span class="id" type="keyword">Import</span> <span class="id" type="var">LPermut</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Record</span> <span class="id" type="var">partly_solved_term</span> : <span class="id" type="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">mk_pst</span> <br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">head_symb</span> : <span class="id" type="var">symbol</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_var</span> : <span class="id" type="var">variable</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">closed_term</span> : <span class="id" type="var">term</span><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" type="keyword">Record</span> <span class="id" type="var">matching_problem</span> : <span class="id" type="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> <br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">existential_vars</span> : <span class="id" type="var">list</span> <span class="id" type="var">variable</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">unsolved_part</span> : <span class="id" type="var">list</span> (<span class="id" type="var">term</span> * <span class="id" type="var">term</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">solved_part</span> : <span class="id" type="var">substitution</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">partly_solved_part</span> : <span class="id" type="var">list</span> (<span class="id" type="var">variable</span> * <span class="id" type="var">partly_solved_term</span>)<br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> :=<br/>
+&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span>, <span class="id" type="var">In</span> (<span class="id" type="var">t1</span>,t2) <span class="id" type="var">pb</span>.(<span class="id" type="var">unsolved_part</span>) -&gt; <span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> <span class="id" type="var">t1</span> = <span class="id" type="var">t2</span>) /\<br/>
+&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">partly_solved_part</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">pst</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">l</span> := (<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">new_var</span>))) :: <span class="id" type="var">pst</span>.(<span class="id" type="var">closed_term</span>) :: <span class="id" type="var">nil</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>) =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Term</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">head_symb</span>) (<span class="id" type="var">quicksort</span> (<span class="id" type="var">flatten</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">head_symb</span>) <span class="id" type="var">l</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>) /\<br/>
+&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">solved_part</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">t</span> =&gt; <span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>) = <span class="id" type="var">t</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">is_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">exists</span> <span class="id" type="var">sigma'</span>, <span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma'</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="var">In</span> <span class="id" type="var">v</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>) \/ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>) = <span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma'</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">occurs_in_term</span> (<span class="id" type="var">v</span> : <span class="id" type="var">variable</span>) (<span class="id" type="var">t</span> : <span class="id" type="var">term</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">t</span>} : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">t</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">v'</span> =&gt; <span class="id" type="var">v</span>=v'<br/>
+&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">_</span> <span class="id" type="var">l</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">occurs_in_term_list</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">fix</span> <span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">_</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">l</span>} : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">l</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">nil</span> =&gt; <span class="id" type="var">False</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">h</span> :: <span class="id" type="var">tl</span> =&gt; (<span class="id" type="var">occurs_in_term</span> <span class="id" type="var">v</span> <span class="id" type="var">h</span>) \/ (<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">tl</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">occurs_in_term_list</span> (<span class="id" type="var">v</span> : <span class="id" type="var">variable</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">list</span> <span class="id" type="var">term</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">l</span>} : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">l</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">nil</span> =&gt; <span class="id" type="var">False</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">cons</span> <span class="id" type="var">h</span> <span class="id" type="var">tl</span> =&gt; (<span class="id" type="var">occurs_in_term</span> <span class="id" type="var">v</span> <span class="id" type="var">h</span>) \/ (<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">tl</span>)<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">occurs_in_pb</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span> :=<br/>
+&nbsp;(<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> (<span class="id" type="var">map</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">p</span> =&gt; <span class="id" type="keyword">match</span> <span class="id" type="var">p</span> <span class="id" type="keyword">with</span> | (<span class="id" type="var">t1</span>,t2) =&gt; <span class="id" type="var">t1</span> <span class="id" type="keyword">end</span>) <span class="id" type="var">pb</span>.(<span class="id" type="var">unsolved_part</span>))) \/<br/>
+&nbsp;(<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">partly_solved_part</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">False</span> | <span class="id" type="var">Some</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">True</span> <span class="id" type="keyword">end</span>) \/<br/>
+&nbsp;(<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">solved_part</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">False</span> | <span class="id" type="var">Some</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">True</span> <span class="id" type="keyword">end</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">fresh_var</span> : <span class="id" type="var">matching_problem</span> -&gt; <span class="id" type="var">variable</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <span class="id" type="var">fresh_var_spec</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">pb</span>, ~(occurs_in_pb (<span class="id" type="var">fresh_var</span> <span class="id" type="var">pb</span>) <span class="id" type="var">pb</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve_term_term_term</span> <br/>
+<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lg</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> :=<br/>
+<br/>
+&nbsp;&nbsp;<span class="id" type="var">map_without_repetition</span> <span class="id" type="var">T.eq_bool</span><br/>
+&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">t</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">t</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">h</span> <span class="id" type="var">_</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">g</span> <span class="id" type="var">h</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">t</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Some</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">mk_pb</span>  (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">cons</span> ((<span class="id" type="var">Term</span> <span class="id" type="var">g</span> <span class="id" type="var">lg</span>),t) (<span class="id" type="var">cons</span> (<span class="id" type="var">t1'</span>,t2') <span class="id" type="var">list_of_equations</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">l'</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve_term_var_with_val_term</span> <br/>
+<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x_val</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> :=<br/>
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">x_val</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">x_val</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">g</span> <span class="id" type="var">ll</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove_list</span> <span class="id" type="var">ll</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">le_gt_dec</span> (<span class="id" type="var">length</span> <span class="id" type="var">list_of_terms</span>) (<span class="id" type="var">length</span> <span class="id" type="var">rmv</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">cons</span> (<span class="id" type="var">t1'</span>,t2') <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">cons</span> <span class="id" type="var">new_pb</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">t1'</span>,t2') :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve_term_var_with_part_val_term</span><br/>
+<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x_part_val</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> :=<br/>
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">if</span> (<span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">f</span> (<span class="id" type="var">head_symb</span> <span class="id" type="var">x_part_val</span>))<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> (<span class="id" type="var">closed_term</span> <span class="id" type="var">x_part_val</span>) <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> (<span class="id" type="var">cons</span> (<span class="id" type="var">Var</span> (<span class="id" type="var">new_var</span> <span class="id" type="var">x_part_val</span>)) <span class="id" type="var">list_of_terms</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span>  (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">t1'</span>,t2') :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span>  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">else</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">map_without_repetition</span> <span class="id" type="var">T.eq_bool</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">t</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">t</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">h</span> <span class="id" type="var">l'''</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">h</span> (<span class="id" type="var">head_symb</span> <span class="id" type="var">x_part_val</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> (<span class="id" type="var">closed_term</span> <span class="id" type="var">x_part_val</span>) <span class="id" type="var">l'''</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">t</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv2</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y</span> := <span class="id" type="var">new_var</span> <span class="id" type="var">x_part_val</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y_val</span> := <span class="id" type="var">build</span> <span class="id" type="var">h</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">rmv2</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">Var</span> <span class="id" type="var">y</span>, <span class="id" type="var">y_val</span>) :: (<span class="id" type="var">t1'</span>,t2') :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Some</span> <span class="id" type="var">new_pb</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">l'</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve_term_var_without_val_term</span> <br/>
+<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> := <br/>
+<br/>
+&nbsp;&nbsp;<span class="id" type="var">map12_without_repetition</span> <span class="id" type="var">T.eq_bool</span><br/>
+&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">t</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">t</span> <span class="id" type="var">l'</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; (<span class="id" type="var">None</span>, <span class="id" type="var">None</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">l'_without_t</span> := <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t2'</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> <span class="id" type="var">l'_without_t</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">t1'</span>, <span class="id" type="var">t2'</span>) :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">x</span>, <span class="id" type="var">t</span>) :: (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">le_gt_dec</span> (<span class="id" type="var">length</span> <span class="id" type="var">l'</span>) ((<span class="id" type="var">length</span> <span class="id" type="var">list_of_terms</span>) + 1)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> (<span class="id" type="var">Some</span> <span class="id" type="var">new_pb</span>, <span class="id" type="var">None</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y</span> := <span class="id" type="var">fresh_var</span> <span class="id" type="var">pb</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1''</span> := <span class="id" type="var">build</span> <span class="id" type="var">f</span> (<span class="id" type="var">Var</span> <span class="id" type="var">y</span> :: <span class="id" type="var">list_of_terms</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb'</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">y</span> :: <span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">t1''</span>, <span class="id" type="var">t2'</span>) :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">x</span>, <span class="id" type="var">mk_pst</span> <span class="id" type="var">f</span> <span class="id" type="var">y</span> <span class="id" type="var">t</span>) :: (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>)) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Some</span> <span class="id" type="var">new_pb</span>, <span class="id" type="var">Some</span> <span class="id" type="var">new_pb'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">l'</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ac_elementary_solve</span> <span class="id" type="var">pb</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">list_of_equations</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">t1</span>, <span class="id" type="var">t2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| (<span class="id" type="var">Term</span> <span class="id" type="var">f</span> (<span class="id" type="var">s</span> :: <span class="id" type="var">list_of_terms</span> <span class="id" type="keyword">as</span> <span class="id" type="var">l</span>)), (<span class="id" type="var">Term</span> <span class="id" type="var">_</span> <span class="id" type="var">l'</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">s</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">g</span> <span class="id" type="var">lg</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">ac_elementary_solve_term_term_term</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lg</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">x</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">x</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">x_val</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">ac_elementary_solve_term_var_with_val_term</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x_val</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">x</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">x_part_val</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">ac_elementary_solve_term_var_with_part_val_term</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x_part_val</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">ac_elementary_solve_term_var_without_val_term</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">pb</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">list_of_terms</span> <span class="id" type="var">l'</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;| (<span class="id" type="var">Term</span> <span class="id" type="var">_</span> <span class="id" type="var">nil</span>), (<span class="id" type="var">Term</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">_</span>, <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">solve</span> <span class="id" type="var">pb</span> : <span class="id" type="var">list</span> <span class="id" type="var">matching_problem</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">unsolved_part</span> <span class="id" type="var">pb</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| (<span class="id" type="var">tt1</span>,tt2 <span class="id" type="keyword">as</span> <span class="id" type="var">e</span>) :: <span class="id" type="var">list_of_equations</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">tt1</span>, <span class="id" type="var">tt2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">x</span>, <span class="id" type="var">_</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">x</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">x_val</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">T.eq_bool</span> <span class="id" type="var">x_val</span> <span class="id" type="var">tt2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">list_of_equations</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">x</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">x_part_val</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">tt2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">f2</span> <span class="id" type="var">l2</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> (<span class="id" type="var">head_symb</span> <span class="id" type="var">x_part_val</span>) <span class="id" type="var">f2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y</span> := <span class="id" type="var">new_var</span> <span class="id" type="var">x_part_val</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">remove</span> <span class="id" type="var">T.eq_bool</span> (<span class="id" type="var">closed_term</span> <span class="id" type="var">x_part_val</span>) <span class="id" type="var">l2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">rmv</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">y_val</span> := <span class="id" type="var">build</span> <span class="id" type="var">f2</span> <span class="id" type="var">rmv</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">Var</span> <span class="id" type="var">y</span>, <span class="id" type="var">y_val</span>) :: <span class="id" type="var">list_of_equations</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">list_of_equations</span> ((<span class="id" type="var">x</span>, <span class="id" type="var">tt2</span>) :: (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">f1</span> <span class="id" type="var">l1</span>, <span class="id" type="var">Term</span> <span class="id" type="var">f2</span> <span class="id" type="var">l2</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">F.Symb.eq_bool</span> <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">arity</span> <span class="id" type="var">f1</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Free</span> <span class="id" type="var">_</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">fold_left2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">current_list_of_eqs</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> =&gt; (<span class="id" type="var">t1</span>,t2) :: <span class="id" type="var">current_list_of_eqs</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">list_of_equations</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">new_list_of_equations</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_list_of_equations</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">AC</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">le_gt_dec</span> (<span class="id" type="var">length</span> <span class="id" type="var">l1</span>) (<span class="id" type="var">length</span> <span class="id" type="var">l2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">then</span> <span class="id" type="var">ac_elementary_solve</span> <span class="id" type="var">pb</span> <span class="id" type="var">tt1</span> <span class="id" type="var">tt2</span> <span class="id" type="var">list_of_equations</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">C</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">l1</span>, <span class="id" type="var">l2</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">s1</span> :: <span class="id" type="var">s2</span> :: <span class="id" type="var">nil</span>), (<span class="id" type="var">t1</span> :: <span class="id" type="var">t2</span> :: <span class="id" type="var">nil</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb1</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">s1</span>,t1) :: (<span class="id" type="var">s2</span>,t2) :: <span class="id" type="var">list_of_equations</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">new_pb2</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">mk_pb</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" type="var">s1</span>,t2) :: (<span class="id" type="var">s2</span>,t1) :: <span class="id" type="var">list_of_equations</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">new_pb1</span> :: <span class="id" type="var">new_pb2</span> :: <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span>, <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span>, <span class="id" type="var">_</span> =&gt; <span class="id" type="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">nil</span> =&gt; <span class="id" type="var">nil</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">well_sorted_partly_solved_part</span> (<span class="id" type="var">l</span> :  <span class="id" type="var">list</span> (<span class="id" type="var">variable</span> * <span class="id" type="var">partly_solved_term</span>)) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">l</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;| <span class="id" type="var">nil</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;| (<span class="id" type="var">v</span>,p) :: <span class="id" type="var">tl</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">v</span> &lt;&gt; <span class="id" type="var">new_var</span> <span class="id" type="var">p</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v'</span>, 1 &lt;= <span class="id" type="var">nb_occ</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v'</span> <span class="id" type="var">tl</span> -&gt; <span class="id" type="var">v'</span> &lt;&gt; <span class="id" type="var">new_var</span> <span class="id" type="var">p</span>) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">well_sorted_partly_solved_part</span> <span class="id" type="var">tl</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">well_formed_pb</span> <span class="id" type="var">pb</span> :=<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span>, <span class="id" type="var">In</span> (<span class="id" type="var">t1</span>,t2) <span class="id" type="var">pb</span>.(<span class="id" type="var">unsolved_part</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">well_formed_cf</span> <span class="id" type="var">t1</span> /\ <span class="id" type="var">well_formed_cf</span> <span class="id" type="var">t2</span>) /\<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="keyword">match</span> (<span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">solved_part</span>)) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">t</span> =&gt; <span class="id" type="var">well_formed_cf</span> <span class="id" type="var">t</span> <br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>) /\<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="keyword">match</span> (<span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">partly_solved_part</span>)) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">None</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Some</span> <span class="id" type="var">pst</span> =&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">arity</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">head_symb</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">AC</span> =&gt; <span class="id" type="var">well_formed_cf</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">closed_term</span>) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">pst</span>.(<span class="id" type="var">closed_term</span>) <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Var</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">True</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Term</span> <span class="id" type="var">f</span> <span class="id" type="var">_</span> =&gt; <span class="id" type="var">pst</span>.(<span class="id" type="var">head_symb</span>)&lt;&gt;f<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> =&gt; <span class="id" type="var">False</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>) /\<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <br/>
+&nbsp;&nbsp;<span class="id" type="var">nb_occ</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>) + <span class="id" type="var">nb_occ</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) &lt;= 1) /\<br/>
+<span class="id" type="var">well_sorted_partly_solved_part</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) /\<br/>
+(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span> <span class="id" type="var">p</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>) = <span class="id" type="var">Some</span> <span class="id" type="var">p</span> -&gt; <span class="id" type="var">occurs_in_pb</span> (<span class="id" type="var">new_var</span> <span class="id" type="var">p</span>) <span class="id" type="var">pb</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">list_permut_occurs_in_term_list</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>, <span class="id" type="var">permut</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> -&gt; <span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">l2</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">v</span>; <br/>
+<span class="id" type="tactic">cut</span> (<span class="id" type="keyword">forall</span> <span class="id" type="var">l</span> <span class="id" type="var">l'</span>, <span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> <span class="id" type="var">l'</span> -&gt; <span class="id" type="var">occurs_in_term_list</span> <span class="id" type="var">v</span> (<span class="id" type="var">l</span> ++ <span class="id" type="var">l'</span>)).<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">H</span> <span class="id" type="var">l1</span>; <span class="id" type="tactic">induction</span> <span class="id" type="var">l1</span>.<br/>
+<span class="id" type="var">contradiction</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">l2</span> <span class="id" type="var">P</span> <span class="id" type="var">O</span>.<br/>
+<span class="id" type="tactic">assert</span> (<span class="id" type="var">a_in_l2</span> : <span class="id" type="var">In</span> <span class="id" type="var">a</span> <span class="id" type="var">l2</span>).<br/>
+<span class="id" type="tactic">rewrite</span> &lt;- (<span class="id" type="var">list_permut.in_permut_in</span> <span class="id" type="var">P</span>); <span class="id" type="var">left</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">In_split</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">a_in_l2</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">l2'</span> [<span class="id" type="var">l2''</span> <span class="id" type="var">H'</span>]]; <span class="id" type="tactic">subst</span> <span class="id" type="var">l2</span>.<br/>
+<span class="id" type="tactic">elim</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">clear</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">intro</span> <span class="id" type="var">O</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>; <span class="id" type="var">left</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">permut_cons_inside</span> <span class="id" type="keyword">in</span> <span class="id" type="var">P</span>.<br/>
+<span class="id" type="tactic">generalize</span> (<span class="id" type="var">IHl1</span> (<span class="id" type="var">l2'</span> ++ <span class="id" type="var">l2''</span>) <span class="id" type="var">P</span> <span class="id" type="var">O</span>).<br/>
+<span class="id" type="tactic">clear</span> <span class="id" type="var">l1</span> <span class="id" type="var">IHl1</span> <span class="id" type="var">P</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">induction</span> <span class="id" type="var">l2'</span>.<br/>
+<span class="id" type="tactic">intro</span>; <span class="id" type="var">right</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">intro</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">destruct</span> <span class="id" type="var">O</span> <span class="id" type="keyword">as</span> [ <span class="id" type="var">O</span> | <span class="id" type="var">O</span> ].<br/>
+<span class="id" type="var">left</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="var">right</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">IHl2'</span>; <span class="id" type="tactic">trivial</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">in_or_app</span>; <span class="id" type="var">right</span>; <span class="id" type="var">left</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">l</span>; <span class="id" type="tactic">induction</span> <span class="id" type="var">l</span>; <span class="id" type="tactic">trivial</span>; <span class="id" type="var">right</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">IHl</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">add_new_var_to_subst</span> :<br/>
+<span class="id" type="keyword">forall</span> <span class="id" type="var">t1</span> <span class="id" type="var">v</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span>, ~occurs_in_term <span class="id" type="var">v</span> <span class="id" type="var">t1</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> <span class="id" type="var">t1</span> = <span class="id" type="var">apply_cf_subst</span> ((<span class="id" type="var">v</span>,t2) ::  <span class="id" type="var">sigma</span>) <span class="id" type="var">t1</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">t1</span>; <span class="id" type="tactic">pattern</span> <span class="id" type="var">t1</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">term_rec3</span>; <span class="id" type="tactic">clear</span> <span class="id" type="var">t1</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">v</span> <span class="id" type="var">v0</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">simpl</span>; <br/>
+<span class="id" type="tactic">generalize</span> (<span class="id" type="var">X.eq_bool_ok</span> <span class="id" type="var">v</span> <span class="id" type="var">v0</span>); <span class="id" type="tactic">case</span> (<span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> <span class="id" type="var">v0</span>); [<span class="id" type="tactic">intro</span> <span class="id" type="var">v_eq_v0</span>; <span class="id" type="tactic">subst</span> <span class="id" type="var">v</span> | <span class="id" type="tactic">intros</span> <span class="id" type="var">_</span>].<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">False_rec</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">occurs_in_term</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">f</span> <span class="id" type="var">l</span> <span class="id" type="var">IH</span> <span class="id" type="var">v</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">simpl</span>.<br/>
+<span class="id" type="tactic">assert</span> (<span class="id" type="var">H</span> : <span class="id" type="var">map</span> (<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span>) <span class="id" type="var">l</span> = <span class="id" type="var">map</span> (<span class="id" type="var">apply_cf_subst</span> ((<span class="id" type="var">v</span>,t2) :: <span class="id" type="var">sigma</span>)) <span class="id" type="var">l</span>).<br/>
+<span class="id" type="tactic">induction</span> <span class="id" type="var">l</span> <span class="id" type="keyword">as</span> [ | <span class="id" type="var">t</span> <span class="id" type="var">l</span>].<br/>
+<span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">simpl</span> <span class="id" type="var">map</span>; <span class="id" type="tactic">rewrite</span> &lt;- (<span class="id" type="var">IH</span> <span class="id" type="var">t</span>).<br/>
+<span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">IHl</span>.<br/>
+<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="tactic">intros</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">IH</span>; [<span class="id" type="var">right</span> | <span class="id" type="var">idtac</span>]; <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">v_in_l</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">O</span>; <span class="id" type="var">right</span>; <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="var">left</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">v_in_t</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">O</span>; <span class="id" type="var">left</span>; <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">add_new_var_to_rough_sol</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">forall</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> <span class="id" type="var">t</span>, <span class="id" type="var">well_formed_pb</span> <span class="id" type="var">pb</span> -&gt; <span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> ((<span class="id" type="var">fresh_var</span> <span class="id" type="var">pb</span>, <span class="id" type="var">t</span>) :: <span class="id" type="var">sigma</span>)).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> <span class="id" type="var">t</span> ; <span class="id" type="tactic">generalize</span> (<span class="id" type="var">fresh_var_spec</span> <span class="id" type="var">pb</span>);<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="var">occurs_in_pb</span>, <span class="id" type="var">is_rough_sol</span>;<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">O</span> <span class="id" type="var">w</span> <span class="id" type="var">S'</span>; <span class="id" type="tactic">elim</span> <span class="id" type="var">S'</span>; <span class="id" type="tactic">clear</span> <span class="id" type="var">S'</span>;<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">S1</span> <span class="id" type="var">S2</span>; <span class="id" type="tactic">elim</span> <span class="id" type="var">S2</span>; <span class="id" type="tactic">clear</span> <span class="id" type="var">S2</span>;<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">S2</span> <span class="id" type="var">S3</span>; <span class="id" type="tactic">split</span>.<br/>
+<span class="id" type="tactic">induction</span> <span class="id" type="var">pb</span>.(<span class="id" type="var">unsolved_part</span>).<br/>
+<span class="id" type="var">contradiction</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">a</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">t2</span> <span class="id" type="var">t3</span> <span class="id" type="var">I</span>; <span class="id" type="tactic">elim</span> <span class="id" type="var">I</span>; <span class="id" type="tactic">clear</span> <span class="id" type="var">I</span>; <span class="id" type="tactic">intro</span> <span class="id" type="var">I</span>.<br/>
+<span class="id" type="tactic">inversion</span> <span class="id" type="var">I</span>.<br/>
+<span class="id" type="tactic">rewrite</span> &lt;- (<span class="id" type="var">add_new_var_to_subst</span> <span class="id" type="var">t2</span> (<span class="id" type="var">fresh_var</span> <span class="id" type="var">pb</span>) <span class="id" type="var">t</span>).<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">S1</span>; <span class="id" type="var">left</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="var">not</span>; <span class="id" type="tactic">intro</span> <span class="id" type="var">O'</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">O</span>.<br/>
+<span class="id" type="var">left</span>; <span class="id" type="var">left</span>; <span class="id" type="tactic">subst</span> <span class="id" type="var">t2</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">IHl</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">O'</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">destruct</span> <span class="id" type="var">O'</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">O'</span> | <span class="id" type="var">O'</span>]; [ <span class="id" type="var">left</span> | <span class="id" type="var">idtac</span> ]; <span class="id" type="var">right</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">intros</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">S1</span>; <span class="id" type="var">right</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">w</span> <span class="id" type="keyword">as</span> [ <span class="id" type="var">_</span> [<span class="id" type="var">_</span> [<span class="id" type="var">_</span> [<span class="id" type="var">_</span> [<span class="id" type="var">_</span> <span class="id" type="var">w</span>]]]]]; <span class="id" type="tactic">split</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">v</span>; <span class="id" type="tactic">generalize</span> (<span class="id" type="var">S2</span> <span class="id" type="var">v</span>); <span class="id" type="var">case_eq</span> (<span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> (<span class="id" type="var">partly_solved_part</span> <span class="id" type="var">pb</span>)).<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">p</span> <span class="id" type="var">F</span>; <span class="id" type="tactic">repeat</span> <span class="id" type="tactic">rewrite</span> &lt;- (<span class="id" type="var">add_new_var_to_subst</span>); <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">O'</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">simpl</span> <span class="id" type="keyword">in</span> <span class="id" type="var">O'</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">O'</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">w</span> <span class="id" type="var">v</span> <span class="id" type="var">p</span> <span class="id" type="var">F</span>).<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">O'</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">O</span>; <span class="id" type="tactic">simpl</span> <span class="id" type="keyword">in</span> <span class="id" type="var">O'</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">O'</span>; <span class="id" type="var">right</span>; <span class="id" type="var">left</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">F</span>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">v</span>; <span class="id" type="tactic">generalize</span> (<span class="id" type="var">S3</span> <span class="id" type="var">v</span>); <span class="id" type="var">case_eq</span> (<span class="id" type="var">find</span> <span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> (<span class="id" type="var">solved_part</span> <span class="id" type="var">pb</span>)).<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">t0</span> <span class="id" type="var">F</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">generalize</span> (<span class="id" type="var">X.eq_bool_ok</span> <span class="id" type="var">v</span> (<span class="id" type="var">fresh_var</span> <span class="id" type="var">pb</span>)); <span class="id" type="tactic">case</span> (<span class="id" type="var">X.eq_bool</span> <span class="id" type="var">v</span> (<span class="id" type="var">fresh_var</span> <span class="id" type="var">pb</span>)); [<span class="id" type="tactic">intro</span> <span class="id" type="var">v_eq_fresh_var</span> | <span class="id" type="tactic">intro</span> <span class="id" type="var">v_diff_fresh_var</span>].<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">False_rec</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">O</span>.<br/>
+<span class="id" type="tactic">do</span> 2 <span class="id" type="var">right</span>; <span class="id" type="tactic">subst</span> <span class="id" type="var">v</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">F</span>; <span class="id" type="tactic">exact</span> <span class="id" type="var">I</span>.<br/>
+<span class="id" type="tactic">intro</span>; <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span>; <span class="id" type="tactic">exact</span> <span class="id" type="var">I</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">is_well_formed_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma</span> :=<br/>
+&nbsp;(<span class="id" type="var">exists</span> <span class="id" type="var">sigma'</span>,  <span class="id" type="var">is_rough_sol</span> <span class="id" type="var">pb</span> <span class="id" type="var">sigma'</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">forall</span> <span class="id" type="var">v</span>, <span class="id" type="var">In</span> <span class="id" type="var">v</span> (<span class="id" type="var">existential_vars</span> <span class="id" type="var">pb</span>) \/<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>) = <span class="id" type="var">apply_cf_subst</span> <span class="id" type="var">sigma'</span> (<span class="id" type="var">Var</span> <span class="id" type="var">v</span>)) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">well_formed_cf_subst</span> <span class="id" type="var">sigma'</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Make</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

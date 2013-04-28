@@ -1,0 +1,647 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>examples.cime_trace.rpo_extension</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library examples.cime_trace.rpo_extension</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Setoid</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">weaved_relation</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="var">rpo</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="var">equational_theory</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="var">equational_extension</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="var">term</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="var">subterm_dp</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">List</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">list_permut</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">terminaison</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Relations</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">ROmega</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="var">order_extension</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Set</span> <span class="id" type="keyword">Implicit</span> <span class="id" type="var">Arguments</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">MakePrecedence</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">status</span> : <span class="id" type="var">A</span> -&gt; <span class="id" type="var">rpo.status_type</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">prec_nat</span> : <span class="id" type="var">A</span> -&gt; <span class="id" type="var">nat</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">prec</span> (<span class="id" type="var">a1</span> <span class="id" type="var">a2</span> : <span class="id" type="var">A</span>) := <span class="id" type="var">prec_nat</span> <span class="id" type="var">a1</span> &lt; <span class="id" type="var">prec_nat</span> <span class="id" type="var">a2</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">prec_bool</span> (<span class="id" type="var">a1</span> <span class="id" type="var">a2</span> : <span class="id" type="var">A</span>) := <span class="id" type="var">leb</span> (<span class="id" type="var">S</span> (<span class="id" type="var">prec_nat</span> <span class="id" type="var">a1</span>)) (<span class="id" type="var">prec_nat</span> <span class="id" type="var">a2</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">prec_bool_ok</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">prec_bool</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">then</span> <span class="id" type="var">prec</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span> <span class="id" type="keyword">else</span> ~prec <span class="id" type="var">a1</span> <span class="id" type="var">a2</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span>; <span class="id" type="var">case_eq</span> (<span class="id" type="var">prec_bool</span> <span class="id" type="var">a1</span> <span class="id" type="var">a2</span>); <span class="id" type="tactic">intros</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">apply</span> <span class="id" type="var">leb_complete</span>; <span class="id" type="tactic">assumption</span> |];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">prec</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">lt</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">H0</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">leb_correct</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H0</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">prec_bool</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">H0</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">discriminate</span> <span class="id" type="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">prec_antisym</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">a</span>, <span class="id" type="var">prec</span> <span class="id" type="var">a</span> <span class="id" type="var">a</span> -&gt; <span class="id" type="var">False</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">lt_irrefl</span> <span class="id" type="var">_</span> <span class="id" type="var">H</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">prec_transitive</span> : <span class="id" type="var">transitive</span> <span class="id" type="var">A</span> <span class="id" type="var">prec</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">lt_trans</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">prec_nat</span> <span class="id" type="var">b</span>); <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">prec_wf</span> : <span class="id" type="var">well_founded</span> <span class="id" type="var">prec</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Inverse_Image.wf_inverse_image</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">lt_wf</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">Precedence</span> := <span class="id" type="var">rpo.Build_Precedence</span> <span class="id" type="var">status</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">prec_bool</span> <span class="id" type="var">prec_bool_ok</span> <span class="id" type="var">prec_antisym</span> <span class="id" type="var">prec_transitive</span>.<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">MakePrecedence</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="var">MakeRpoExt</span> (<span class="id" type="var">Eqt</span> : <span class="id" type="var">equational_theory_spec.EqTh</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">M</span> := <span class="id" type="var">Eqt.T</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Rpo</span> := <span class="id" type="var">rpo.Make</span>(<span class="id" type="var">M</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">op</span> := <span class="id" type="var">order_extension.OrderingPair</span>(<span class="id" type="var">Eqt</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Section</span> <span class="id" type="var">S</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">prec</span> : <span class="id" type="var">M.symbol</span> -&gt; <span class="id" type="var">nat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">status</span> : <span class="id" type="var">M.symbol</span> -&gt; <span class="id" type="var">rpo.status_type</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">P</span> := <span class="id" type="var">Precedence</span> <span class="id" type="var">status</span> <span class="id" type="var">prec</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rpo_eq_trans</span> : <span class="id" type="var">transitive</span> <span class="id" type="var">_</span> (<span class="id" type="var">Rpo.rpo_eq</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>; <span class="id" type="tactic">do</span> 2 <span class="id" type="tactic">inversion</span> 1; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="var">constructor</span>; <span class="id" type="tactic">destruct</span> (<span class="id" type="var">Rpo.equiv_equiv</span> <span class="id" type="var">P</span>); <span class="id" type="tactic">apply</span> <span class="id" type="var">equiv_trans</span> <span class="id" type="keyword">with</span> <span class="id" type="var">y</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">constructor</span> 2; <span class="id" type="tactic">rewrite</span> (@<span class="id" type="var">Rpo.equiv_rpo_equiv_2</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span>  <span class="id" type="var">x</span> <span class="id" type="var">y</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">constructor</span> 2; <span class="id" type="tactic">apply</span> (@<span class="id" type="var">Rpo.equiv_rpo_equiv_1</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span> <span class="id" type="var">H4</span> <span class="id" type="var">x</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">constructor</span> 2; <span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_trans</span> <span class="id" type="keyword">with</span> <span class="id" type="var">y</span> ]; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rpo_rpo_eq_compat</span> : <span class="id" type="var">Trel_compat</span> (<span class="id" type="var">Rpo.rpo</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span>) (<span class="id" type="var">Rpo.rpo_eq</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">t3</span> <span class="id" type="var">H</span> <span class="id" type="var">H0</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H0</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">apply</span> (<span class="id" type="var">proj1</span> (@<span class="id" type="var">Rpo.equiv_rpo_equiv_1</span> <span class="id" type="var">P</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">_</span>) <span class="id" type="var">H</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_trans</span> <span class="id" type="keyword">with</span> <span class="id" type="var">t2</span>; <span class="id" type="tactic">assumption</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">osl_R_pos</span> : <span class="id" type="keyword">forall</span> <span class="id" type="var">R</span> <span class="id" type="var">f</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">one_step_list</span> <span class="id" type="var">R</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> -&gt; <span class="id" type="var">exists</span> <span class="id" type="var">p</span>, <span class="id" type="var">exists</span> <span class="id" type="var">s</span>, <span class="id" type="var">exists</span> <span class="id" type="var">t</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">R</span> <span class="id" type="var">s</span> <span class="id" type="var">t</span> /\ <span class="id" type="var">M.is_a_pos</span> (<span class="id" type="var">M.Term</span> <span class="id" type="var">f</span> <span class="id" type="var">l1</span>) (<span class="id" type="var">p</span>::nil) = <span class="id" type="var">true</span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">M.Term</span> <span class="id" type="var">f</span> <span class="id" type="var">l1</span> = <span class="id" type="var">M.replace_at_pos</span> (<span class="id" type="var">M.Term</span> <span class="id" type="var">f</span> <span class="id" type="var">l1</span>) <span class="id" type="var">s</span> (<span class="id" type="var">p</span>::nil) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">M.Term</span> <span class="id" type="var">f</span> <span class="id" type="var">l2</span> = <span class="id" type="var">M.replace_at_pos</span> (<span class="id" type="var">M.Term</span> <span class="id" type="var">f</span> <span class="id" type="var">l1</span>) <span class="id" type="var">t</span> (<span class="id" type="var">p</span>::nil).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">R</span> <span class="id" type="var">f</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> <span class="id" type="var">H</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">revert</span> <span class="id" type="var">l2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">induction</span> <span class="id" type="var">l1</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">l2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="var">exists</span> <span class="id" type="var">O</span>; <span class="id" type="var">exists</span> <span class="id" type="var">a</span>; <span class="id" type="var">exists</span> <span class="id" type="var">t2</span>; <span class="id" type="tactic">repeat</span> <span class="id" type="tactic">split</span>; <span class="id" type="tactic">assumption</span> |];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">IHl1</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H3</span>; <span class="id" type="tactic">destruct</span> <span class="id" type="var">H3</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">p</span> [<span class="id" type="var">s</span> [<span class="id" type="var">t</span> [<span class="id" type="var">H0</span> [<span class="id" type="var">H1</span> [<span class="id" type="var">H2</span> <span class="id" type="var">H3</span>]]]]]];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">exists</span> (<span class="id" type="var">S</span> <span class="id" type="var">p</span>); <span class="id" type="var">exists</span> <span class="id" type="var">s</span>; <span class="id" type="var">exists</span> <span class="id" type="var">t</span>; <span class="id" type="tactic">repeat</span> <span class="id" type="tactic">split</span>; <span class="id" type="tactic">try</span> <span class="id" type="tactic">assumption</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">simpl</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H2</span>; <span class="id" type="tactic">injection</span> <span class="id" type="var">H2</span> | <span class="id" type="tactic">simpl</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H3</span>; <span class="id" type="tactic">injection</span> <span class="id" type="var">H3</span> ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">Heq</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">Heq</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rpo_eq_monotone</span> : <span class="id" type="var">Trel_monotone</span> (<span class="id" type="var">Rpo.rpo_eq</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">f</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> <span class="id" type="var">H</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">osl_R_pos</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">f</span>:=f) <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">p</span> [<span class="id" type="var">s</span> [<span class="id" type="var">t</span> [<span class="id" type="var">H0</span> [<span class="id" type="var">H1</span> [<span class="id" type="var">H2</span> <span class="id" type="var">H3</span>]]]]]];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">H2</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">H3</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_eq_add_context</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rpo_monotone</span> : <span class="id" type="var">Trel_monotone</span> (<span class="id" type="var">Rpo.rpo</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">f</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> <span class="id" type="var">H</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">osl_R_pos</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">f</span>:=f) <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">p</span> [<span class="id" type="var">s</span> [<span class="id" type="var">t</span> [<span class="id" type="var">H0</span> [<span class="id" type="var">H1</span> [<span class="id" type="var">H2</span> <span class="id" type="var">H3</span>]]]]]];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">H2</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">H3</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_add_context</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">rpo_inf_nil</span> : <span class="id" type="var">Rpo.rpo_inf</span> <span class="id" type="var">P</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.Build_rpo_inf</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">bb</span>:=n)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">rpo_l</span>:=nil) (<span class="id" type="var">equiv_l</span>:=nil) (<span class="id" type="var">rpo_eq_l</span>:=nil);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span> <span class="id" type="keyword">in</span> |-*; <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="var">contradiction</span> <span class="id" type="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">rpo_eic</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">M.term</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@<span class="id" type="var">Rpo.rpo_eval_is_complete</span> <span class="id" type="var">P</span> <span class="id" type="var">rpo_inf_nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">M.size</span> <span class="id" type="var">t1</span> + <span class="id" type="var">M.size</span> <span class="id" type="var">t2</span>) <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> (<span class="id" type="var">le_n</span> <span class="id" type="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">End</span> <span class="id" type="var">S</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Ltac</span> <span class="id" type="var">prove_rpo</span> <span class="id" type="var">prec</span> <span class="id" type="var">stat</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>; <span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|- ?rpo <span class="id" type="var">_</span> ?n ?t1 ?t2 =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H</span> := <span class="id" type="tactic">fresh</span> "H" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">set</span> (<span class="id" type="var">H</span>:=@rpo_eic <span class="id" type="var">n</span> <span class="id" type="var">prec</span> <span class="id" type="var">stat</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">vm_compute</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">rpo</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rpo.rpo</span> =&gt; <span class="id" type="tactic">exact</span> <span class="id" type="var">H</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rpo.rpo_eq</span> =&gt; <span class="id" type="var">constructor</span> <span class="id" type="tactic">exact</span> <span class="id" type="var">H</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">MakeRpoExt</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="var">MakeRpoLexAFS</span> (<span class="id" type="var">Eqt</span> : <span class="id" type="var">equational_theory_spec.EqTh</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Ext</span> := <span class="id" type="var">MakeRpoExt</span>(<span class="id" type="var">Eqt</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Afs</span> := <span class="id" type="var">order_extension.OrdSafeAFS</span>(<span class="id" type="var">Eqt</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Lex</span> := <span class="id" type="var">order_extension.MakeLEX</span>(<span class="id" type="var">Eqt</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">M</span> := <span class="id" type="var">Eqt.T</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Rpo</span> := <span class="id" type="var">Ext.Rpo</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Section</span> <span class="id" type="var">S</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">prec</span> : <span class="id" type="var">M.symbol</span> -&gt; <span class="id" type="var">nat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">status</span> : <span class="id" type="var">M.symbol</span> -&gt; <span class="id" type="var">rpo.status_type</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">afs_symb</span> : <span class="id" type="var">M.symbol</span> -&gt; <span class="id" type="var">Afs.afs_val</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">P</span> := <span class="id" type="var">Precedence</span> <span class="id" type="var">status</span> <span class="id" type="var">prec</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">afs</span> := <span class="id" type="var">Afs.afs_term</span> <span class="id" type="var">afs_symb</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">rpo_afs</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">M.term</span>) := <span class="id" type="var">Rpo.rpo</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span> (<span class="id" type="var">afs</span> <span class="id" type="var">t1</span>) (<span class="id" type="var">afs</span> <span class="id" type="var">t2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">rpo_eq_afs</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">M.term</span>) := <span class="id" type="var">Rpo.rpo_eq</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span> (<span class="id" type="var">afs</span> <span class="id" type="var">t1</span>) (<span class="id" type="var">afs</span> <span class="id" type="var">t2</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">R_rules</span> : <span class="id" type="var">relation</span> <span class="id" type="var">M.term</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">rules_decrease</span> : <span class="id" type="var">inclusion</span> <span class="id" type="var">_</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">rpo_afs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rpo_stable_afs</span> : <span class="id" type="var">Ext.op.Trel_stable</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">rpo_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_afs</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_subst</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">rules_decrease</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="keyword">wf</span> : <span class="id" type="var">well_founded</span> (<span class="id" type="var">Eqt.one_step</span> <span class="id" type="var">R_rules</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Lex.wf_R</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">Tlt</span>:=rpo_afs).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Inverse_Image.wf_inverse_image</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.wf_rpo</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">prec_wf</span> <span class="id" type="var">prec</span> ).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Afs.Tlt_monotone_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_monotone</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_trans</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_stable_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variables</span> <span class="id" type="var">R_large</span> <span class="id" type="var">R_union</span> : <span class="id" type="var">relation</span> <span class="id" type="var">M.term</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">rules_large_decrease</span> : <span class="id" type="var">inclusion</span> <span class="id" type="var">_</span> <span class="id" type="var">R_large</span> <span class="id" type="var">rpo_eq_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">rules_large_wf</span> : <span class="id" type="var">well_founded</span> (<span class="id" type="var">Eqt.one_step</span> <span class="id" type="var">R_large</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">rules_union_def</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">M.term</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">R_union</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> -&gt; <span class="id" type="var">R_rules</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> \/ <span class="id" type="var">R_large</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">wf_union</span> : <span class="id" type="var">well_founded</span> (<span class="id" type="var">Eqt.one_step</span> <span class="id" type="var">R_union</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Lex.wf_union_R</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">Tle</span>:=rpo_eq_afs) (<span class="id" type="var">Tlt</span>:=rpo_afs)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">R_rules</span>:=R_rules) (<span class="id" type="var">R_large</span>:=R_large); <span class="id" type="tactic">try</span> <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_afs</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Inverse_Image.wf_inverse_image</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.wf_rpo</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">prec_wf</span> <span class="id" type="var">prec</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Afs.Tle_monotone_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_monotone</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_trans</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Afs.Tlt_monotone_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_monotone</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_trans</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Afs.Tlt_Tle_compat_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_rpo_eq_compat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_stable_afs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_eq_afs</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_eq_subst</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">rules_large_decrease</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">End</span> <span class="id" type="var">S</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Ltac</span> <span class="id" type="var">prove_wf</span> <span class="id" type="var">bb</span> <span class="id" type="var">prc</span> <span class="id" type="var">stat</span> <span class="id" type="var">afs</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1</span> := <span class="id" type="tactic">fresh</span> "t1" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">t2</span> := <span class="id" type="tactic">fresh</span> "t2" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H</span>  := <span class="id" type="tactic">fresh</span> "H"  <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|- <span class="id" type="var">well_founded</span> (?os ?R) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="keyword">wf</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">n</span>:=bb) (<span class="id" type="var">prec</span>:=prc) (<span class="id" type="var">status</span>:=stat) (<span class="id" type="var">afs_symb</span>:=afs);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>; <span class="id" type="var">Ext.prove_rpo</span> <span class="id" type="var">prc</span> <span class="id" type="var">stat</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Ltac</span> <span class="id" type="var">prove_wf_union</span> <span class="id" type="var">bb</span> <span class="id" type="var">nprec</span> <span class="id" type="var">nstat</span> <span class="id" type="var">nafs</span> <span class="id" type="var">ds</span> <span class="id" type="var">dl</span> <span class="id" type="var">wfl</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1</span> := <span class="id" type="tactic">fresh</span> "t1" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">t2</span> := <span class="id" type="tactic">fresh</span> "t2" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">l1</span> := <span class="id" type="tactic">fresh</span> "l1" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">l2</span> := <span class="id" type="tactic">fresh</span> "l2" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">f</span>  := <span class="id" type="tactic">fresh</span> "f"  <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">H</span>  := <span class="id" type="tactic">fresh</span> "H"  <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">Hl</span> := <span class="id" type="tactic">fresh</span> "Hl" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">Ht</span> := <span class="id" type="tactic">fresh</span> "Ht" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|- <span class="id" type="var">well_founded</span> (?one_step ?R) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">wf_union</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">n</span>:=bb) (<span class="id" type="var">R_rules</span>:=ds) (<span class="id" type="var">R_large</span>:=dl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">prec</span>:=nprec) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">status</span>:=nstat)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">afs_symb</span>:=nafs); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Ext.prove_rpo</span>  <span class="id" type="var">nprec</span> <span class="id" type="var">nstat</span>|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Ext.prove_rpo</span>  <span class="id" type="var">nprec</span> <span class="id" type="var">nstat</span>|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">wfl</span>|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">try</span> <span class="id" type="var">complete</span> (<span class="id" type="var">left</span>; <span class="id" type="var">constructor</span>); <span class="id" type="var">right</span>; <span class="id" type="var">constructor</span>                  ]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">MakeRpoLexAFS</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="var">MakeRpoSdpAFS</span> (<span class="id" type="var">Eqt</span> : <span class="id" type="var">equational_theory_spec.EqTh</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Ext</span> := <span class="id" type="var">MakeRpoExt</span>(<span class="id" type="var">Eqt</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Afs</span> := <span class="id" type="var">order_extension.OrdAFS</span>(<span class="id" type="var">Eqt</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Sdp</span> := <span class="id" type="var">order_extension.MakeSDP</span>(<span class="id" type="var">Eqt</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">M</span> := <span class="id" type="var">Eqt.T</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Rpo</span> := <span class="id" type="var">Ext.Rpo</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Section</span> <span class="id" type="var">S</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">prec</span> : <span class="id" type="var">M.symbol</span> -&gt; <span class="id" type="var">nat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">status</span> : <span class="id" type="var">M.symbol</span> -&gt; <span class="id" type="var">rpo.status_type</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">afs_symb</span> : <span class="id" type="var">M.symbol</span> -&gt; <span class="id" type="var">Afs.afs_val</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">P</span> := <span class="id" type="var">Precedence</span> <span class="id" type="var">status</span> <span class="id" type="var">prec</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">afs</span> := <span class="id" type="var">Afs.afs_term</span> <span class="id" type="var">afs_symb</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">rpo_afs</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">M.term</span>) := <span class="id" type="var">Rpo.rpo</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span> (<span class="id" type="var">afs</span> <span class="id" type="var">t1</span>) (<span class="id" type="var">afs</span> <span class="id" type="var">t2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">rpo_eq_afs</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">M.term</span>) := <span class="id" type="var">Rpo.rpo_eq</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span> (<span class="id" type="var">afs</span> <span class="id" type="var">t1</span>) (<span class="id" type="var">afs</span> <span class="id" type="var">t2</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">dps</span> : <span class="id" type="var">relation</span> <span class="id" type="var">M.term</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">rules_decrease</span> : <span class="id" type="var">inclusion</span> <span class="id" type="var">_</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">rpo_eq_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_strictly_decrease</span> : <span class="id" type="var">inclusion</span> <span class="id" type="var">_</span> <span class="id" type="var">dps</span> <span class="id" type="var">rpo_afs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rpo_eq_stable_afs</span> : <span class="id" type="var">Ext.op.Trel_stable</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">rpo_eq_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_eq_afs</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_eq_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rules_decrease</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rpo_stable_afs</span> : <span class="id" type="var">Ext.op.Trel_stable</span> <span class="id" type="var">dps</span> <span class="id" type="var">rpo_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_afs</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">dps_strictly_decrease</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="keyword">wf</span> : <span class="id" type="var">well_founded</span> (<span class="id" type="var">Sdp.sdp.Rcdp_min</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">dps</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Sdp.wf_Rcdp_rest</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">Tle</span>:=rpo_eq_afs) (<span class="id" type="var">Tlt</span>:=rpo_afs).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_afs</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Inverse_Image.wf_inverse_image</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.wf_rpo</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">prec_wf</span> <span class="id" type="var">prec</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Afs.Tle_monotone_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_monotone</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">constructor</span> <span class="id" type="var">constructor</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_trans</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Afs.Tlt_Tle_compat_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_rpo_eq_compat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_eq_stable_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_stable_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variables</span> <span class="id" type="var">dps_large</span> <span class="id" type="var">dps_union</span> : <span class="id" type="var">relation</span> <span class="id" type="var">M.term</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_large_decrease</span> : <span class="id" type="var">inclusion</span> <span class="id" type="var">_</span> <span class="id" type="var">dps_large</span> <span class="id" type="var">rpo_eq_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_large_wf</span> : <span class="id" type="var">well_founded</span> (<span class="id" type="var">Sdp.sdp.Rcdp_min</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">dps_large</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_union_def</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">M.term</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">dps_union</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> -&gt; <span class="id" type="var">dps</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> \/ <span class="id" type="var">dps_large</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">wf_union</span> : <span class="id" type="var">well_founded</span> (<span class="id" type="var">Sdp.sdp.Rcdp_min</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">dps_union</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Sdp.wf_union_Rcdp_rest</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">Tle</span>:=rpo_eq_afs) (<span class="id" type="var">Tlt</span>:=rpo_afs)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">dps</span>:=dps) (<span class="id" type="var">dps_large</span>:=dps_large); <span class="id" type="tactic">try</span> <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_afs</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Inverse_Image.wf_inverse_image</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.wf_rpo</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">prec_wf</span> <span class="id" type="var">prec</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Afs.Tle_monotone_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_monotone</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">constructor</span> <span class="id" type="var">constructor</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_trans</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Afs.Tlt_Tle_compat_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_rpo_eq_compat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_eq_stable_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_stable_afs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_eq_afs</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">Afs.afs_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_eq_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">dps_large_decrease</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">End</span> <span class="id" type="var">S</span>.<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">MakeRpoSdpAFS</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <span class="id" type="var">MakeRpoSdpMarkedAFS</span> (<span class="id" type="var">Eqt</span> : <span class="id" type="var">equational_theory_spec.EqTh</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Mrk</span> := <span class="id" type="var">order_extension.MakeMarkedEqTh</span>(<span class="id" type="var">Eqt</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">EqtM</span> := <span class="id" type="var">Mrk.EQT</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Ext</span> := <span class="id" type="var">MakeRpoExt</span>(<span class="id" type="var">EqtM</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Afs</span> := <span class="id" type="var">order_extension.OrdAFS</span>(<span class="id" type="var">Eqt</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">AfsM</span> := <span class="id" type="var">order_extension.OrdAFS</span>(<span class="id" type="var">EqtM</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Sdp</span> := <span class="id" type="var">order_extension.MakeMarkedSDP</span>(<span class="id" type="var">Eqt</span>)(<span class="id" type="var">EqtM</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">T</span> := <span class="id" type="var">Eqt.T</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">M</span> := <span class="id" type="var">EqtM.T</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <span class="id" type="var">Rpo</span> := <span class="id" type="var">Ext.Rpo</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Section</span> <span class="id" type="var">S</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">prec</span> : <span class="id" type="var">T.symbol</span> -&gt; <span class="id" type="var">nat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">prec_marked</span> : <span class="id" type="var">T.symbol</span> -&gt; <span class="id" type="var">nat</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">status</span> : <span class="id" type="var">T.symbol</span> -&gt; <span class="id" type="var">rpo.status_type</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">status_marked</span> : <span class="id" type="var">T.symbol</span> -&gt; <span class="id" type="var">rpo.status_type</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">afs_symb</span> : <span class="id" type="var">T.symbol</span> -&gt; <span class="id" type="var">Afs.afs_val</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">afs_symb_marked</span> : <span class="id" type="var">T.symbol</span> -&gt; <span class="id" type="var">Afs.afs_val</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">prec_union</span> (<span class="id" type="var">f</span> : <span class="id" type="var">M.symbol</span>) : <span class="id" type="var">nat</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">f</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">true</span>, <span class="id" type="var">f</span>) =&gt; <span class="id" type="var">prec_marked</span> <span class="id" type="var">f</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">_</span>, <span class="id" type="var">f</span>) =&gt; <span class="id" type="var">prec</span> <span class="id" type="var">f</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">status_union</span> (<span class="id" type="var">f</span> : <span class="id" type="var">M.symbol</span>) : <span class="id" type="var">rpo.status_type</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">f</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">true</span>, <span class="id" type="var">f</span>) =&gt; <span class="id" type="var">status_marked</span> <span class="id" type="var">f</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">_</span>, <span class="id" type="var">f</span>) =&gt; <span class="id" type="var">status</span> <span class="id" type="var">f</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">afs_symb_union</span> (<span class="id" type="var">f</span> : <span class="id" type="var">M.symbol</span>) : <span class="id" type="var">AfsM.afs_val</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">f</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">true</span>, <span class="id" type="var">f</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">afs_symb_marked</span> <span class="id" type="var">f</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Afs.AFS_id</span> <span class="id" type="var">g</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">AfsM.AFS_id</span> (<span class="id" type="var">beq_nat</span> (<span class="id" type="var">prec_marked</span> <span class="id" type="var">f</span>) (<span class="id" type="var">prec_marked</span> <span class="id" type="var">g</span>), <span class="id" type="var">g</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Afs.AFS_arg</span> <span class="id" type="var">i</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">AfsM.AFS_arg</span> <span class="id" type="var">i</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Afs.AFS_filt</span> <span class="id" type="var">g</span> <span class="id" type="var">p</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">AfsM.AFS_filt</span> (<span class="id" type="var">beq_nat</span> (<span class="id" type="var">prec_marked</span> <span class="id" type="var">f</span>) (<span class="id" type="var">prec_marked</span> <span class="id" type="var">g</span>), <span class="id" type="var">g</span>) <span class="id" type="var">p</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">_</span>, <span class="id" type="var">f</span>) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">afs_symb</span> <span class="id" type="var">f</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Afs.AFS_id</span> <span class="id" type="var">g</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">AfsM.AFS_id</span> (<span class="id" type="var">beq_nat</span> (<span class="id" type="var">prec</span> <span class="id" type="var">f</span>) (<span class="id" type="var">prec_marked</span> <span class="id" type="var">g</span>), <span class="id" type="var">g</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Afs.AFS_arg</span> <span class="id" type="var">i</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">AfsM.AFS_arg</span> <span class="id" type="var">i</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Afs.AFS_filt</span> <span class="id" type="var">g</span> <span class="id" type="var">p</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">AfsM.AFS_filt</span> (<span class="id" type="var">beq_nat</span> (<span class="id" type="var">prec</span> <span class="id" type="var">f</span>) (<span class="id" type="var">prec_marked</span> <span class="id" type="var">g</span>), <span class="id" type="var">g</span>) <span class="id" type="var">p</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <span class="id" type="var">P</span> := <span class="id" type="var">Precedence</span> <span class="id" type="var">status_union</span> <span class="id" type="var">prec_union</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">afs</span> := <span class="id" type="var">AfsM.afs_term</span> <span class="id" type="var">afs_symb_union</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">rpo_afs</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">M.term</span>) := <span class="id" type="var">Rpo.rpo</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span> (<span class="id" type="var">afs</span> <span class="id" type="var">t1</span>) (<span class="id" type="var">afs</span> <span class="id" type="var">t2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">rpo_eq_afs</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">M.term</span>) := <span class="id" type="var">Rpo.rpo_eq</span> <span class="id" type="var">P</span> <span class="id" type="var">n</span> (<span class="id" type="var">afs</span> <span class="id" type="var">t1</span>) (<span class="id" type="var">afs</span> <span class="id" type="var">t2</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">mark_term</span> := <span class="id" type="var">Sdp.mark_term</span> <span class="id" type="var">Mrk.mark_symb</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">inject_term</span> := <span class="id" type="var">Sdp.inject_term</span> <span class="id" type="var">Mrk.inject_symb</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">Tlt_mark</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">T.term</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">rpo_afs</span> (<span class="id" type="var">mark_term</span> (<span class="id" type="var">inject_term</span> <span class="id" type="var">t1</span>)) (<span class="id" type="var">mark_term</span> (<span class="id" type="var">inject_term</span> <span class="id" type="var">t2</span>)).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">Tle_mark</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">T.term</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">rpo_eq_afs</span> (<span class="id" type="var">mark_term</span> (<span class="id" type="var">inject_term</span> <span class="id" type="var">t1</span>)) (<span class="id" type="var">mark_term</span> (<span class="id" type="var">inject_term</span> <span class="id" type="var">t2</span>)).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Let</span> <span class="id" type="var">Tle_inject</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">T.term</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">rpo_eq_afs</span> (<span class="id" type="var">inject_term</span> <span class="id" type="var">t1</span>) (<span class="id" type="var">inject_term</span> <span class="id" type="var">t2</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">dps</span> : <span class="id" type="var">relation</span> <span class="id" type="var">T.term</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">rules_decrease</span> : <span class="id" type="var">inclusion</span> <span class="id" type="var">_</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">Tle_inject</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_strictly_decrease</span> : <span class="id" type="var">inclusion</span> <span class="id" type="var">_</span> <span class="id" type="var">dps</span> <span class="id" type="var">Tlt_mark</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_non_variable</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">T.term</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">dps</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> -&gt; <span class="id" type="var">Sdp.is_fapp</span> <span class="id" type="var">t1</span> /\ <span class="id" type="var">Sdp.is_fapp</span> <span class="id" type="var">t2</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rpo_eq_stable_afs</span> : <span class="id" type="var">Sdp.opT.Trel_stable</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">Tle_inject</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">Tle_inject</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">inject_term</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Sdp.inject_subst</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">Sdp.inject_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_eq_afs</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">AfsM.afs_subst</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">AfsM.afs_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_eq_subst</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">rules_decrease</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">rpo_stable_afs</span> : <span class="id" type="var">Sdp.opT.Trel_stable</span> <span class="id" type="var">dps</span> <span class="id" type="var">Tlt_mark</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">Tlt_mark</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">inject_term</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">mark_term</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Sdp.mark_inject_subst</span>; [| <span class="id" type="tactic">apply</span> (<span class="id" type="var">dps_non_variable</span> <span class="id" type="var">H</span>) ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Sdp.mark_inject_subst</span>; [| <span class="id" type="tactic">apply</span> (<span class="id" type="var">dps_non_variable</span> <span class="id" type="var">H</span>) ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_afs</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">AfsM.afs_subst</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">AfsM.afs_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_subst</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">dps_strictly_decrease</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="keyword">wf</span> : <span class="id" type="var">well_founded</span> (<span class="id" type="var">Sdp.sdp.Rcdp_min</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">dps</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Sdp.wf_Rcdp_rest</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Tle</span>:=rpo_eq_afs) (<span class="id" type="var">Tlt</span>:=rpo_afs)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">inject_symb</span>:=Mrk.<span class="id" type="var">inject_symb</span>) (<span class="id" type="var">mark_symb</span>:=Mrk.<span class="id" type="var">mark_symb</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_afs</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Inverse_Image.wf_inverse_image</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.wf_rpo</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">prec_wf</span> <span class="id" type="var">prec_union</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">AfsM.Tle_monotone_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_monotone</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">constructor</span> <span class="id" type="var">constructor</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_trans</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">AfsM.Tlt_Tle_compat_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_rpo_eq_compat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_eq_stable_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_stable_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Variables</span> <span class="id" type="var">dps_large</span> <span class="id" type="var">dps_union</span> : <span class="id" type="var">relation</span> <span class="id" type="var">T.term</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_large_decrease</span> : <span class="id" type="var">inclusion</span> <span class="id" type="var">_</span> <span class="id" type="var">dps_large</span> <span class="id" type="var">Tle_mark</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_large_non_variable</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">T.term</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">dps_large</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> -&gt; <span class="id" type="var">Sdp.is_fapp</span> <span class="id" type="var">t1</span> /\ <span class="id" type="var">Sdp.is_fapp</span> <span class="id" type="var">t2</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_large_wf</span> : <span class="id" type="var">well_founded</span> (<span class="id" type="var">Sdp.sdp.Rcdp_min</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">dps_large</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">dps_union_def</span> : <span class="id" type="keyword">forall</span> (<span class="id" type="var">t1</span> <span class="id" type="var">t2</span> : <span class="id" type="var">T.term</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">dps_union</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> -&gt; <span class="id" type="var">dps</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> \/ <span class="id" type="var">dps_large</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <span class="id" type="var">wf_union</span> : <span class="id" type="var">well_founded</span> (<span class="id" type="var">Sdp.sdp.Rcdp_min</span> <span class="id" type="var">R_rules</span> <span class="id" type="var">dps_union</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Sdp.wf_union_Rcdp_rest</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Tle</span>:=rpo_eq_afs) (<span class="id" type="var">Tlt</span>:=rpo_afs)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">dps</span>:=dps) (<span class="id" type="var">dps_large</span>:=dps_large)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">inject_symb</span>:=Mrk.<span class="id" type="var">inject_symb</span>) (<span class="id" type="var">mark_symb</span>:=Mrk.<span class="id" type="var">mark_symb</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">try</span> <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_afs</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Inverse_Image.wf_inverse_image</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.wf_rpo</span>; <span class="id" type="tactic">apply</span> (<span class="id" type="var">prec_wf</span> <span class="id" type="var">prec_union</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">AfsM.Tle_monotone_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_monotone</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">constructor</span> <span class="id" type="var">constructor</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_eq_trans</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">AfsM.Tlt_Tle_compat_afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Ext.rpo_rpo_eq_compat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_eq_stable_afs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">rpo_stable_afs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">sigma</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">Tlt_mark</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">inject_term</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">mark_term</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Sdp.mark_inject_subst</span>; [| <span class="id" type="tactic">apply</span> (<span class="id" type="var">dps_large_non_variable</span> <span class="id" type="var">H</span>) ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Sdp.mark_inject_subst</span>; [| <span class="id" type="tactic">apply</span> (<span class="id" type="var">dps_large_non_variable</span> <span class="id" type="var">H</span>) ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">rpo_eq_afs</span>; <span class="id" type="tactic">unfold</span> <span class="id" type="var">afs</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">AfsM.afs_subst</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">AfsM.afs_subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Rpo.rpo_eq_subst</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">dps_large_decrease</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">End</span> <span class="id" type="var">S</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Ltac</span> <span class="id" type="var">prove_wf</span> <span class="id" type="var">bb</span> <span class="id" type="var">nprec</span> <span class="id" type="var">nstat</span> <span class="id" type="var">nafs</span> <span class="id" type="var">mprec</span> <span class="id" type="var">mstat</span> <span class="id" type="var">mafs</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1</span> := <span class="id" type="tactic">fresh</span> "t1" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">t2</span> := <span class="id" type="tactic">fresh</span> "t2" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">l1</span> := <span class="id" type="tactic">fresh</span> "l1" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">l2</span> := <span class="id" type="tactic">fresh</span> "l2" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">f</span>  := <span class="id" type="tactic">fresh</span> "f"  <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">H</span>  := <span class="id" type="tactic">fresh</span> "H"  <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">Hl</span> := <span class="id" type="tactic">fresh</span> "Hl" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">Ht</span> := <span class="id" type="tactic">fresh</span> "Ht" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|- <span class="id" type="var">well_founded</span> (?rcdp ?R ?du) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Inclusion.wf_incl</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">Sdp.sdp.Rcdp_min</span> <span class="id" type="var">R</span> <span class="id" type="var">du</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> [[<span class="id" type="var">f</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> <span class="id" type="var">Hl</span> <span class="id" type="var">Ht</span>] <span class="id" type="var">H</span>];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">split</span>; [ <span class="id" type="var">constructor</span> 1 <span class="id" type="keyword">with</span> <span class="id" type="var">l2</span> |]; <span class="id" type="tactic">assumption</span> |];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="keyword">wf</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">n</span>:=bb)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">prec</span>:=nprec) (<span class="id" type="var">prec_marked</span>:=mprec)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">status</span>:=nstat) (<span class="id" type="var">status_marked</span>:=mstat)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">afs_symb</span>:=nafs) (<span class="id" type="var">afs_symb_marked</span>:=mafs);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Ext.prove_rpo</span> (<span class="id" type="var">prec_union</span> <span class="id" type="var">nprec</span> <span class="id" type="var">mprec</span>) (<span class="id" type="var">status_union</span> <span class="id" type="var">nstat</span> <span class="id" type="var">mstat</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Ext.prove_rpo</span> (<span class="id" type="var">prec_union</span> <span class="id" type="var">nprec</span> <span class="id" type="var">mprec</span>) (<span class="id" type="var">status_union</span> <span class="id" type="var">nstat</span> <span class="id" type="var">mstat</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">split</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">trivial</span> ]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Ltac</span> <span class="id" type="var">prove_wf_union</span> <span class="id" type="var">bb</span> <span class="id" type="var">nprec</span> <span class="id" type="var">nstat</span> <span class="id" type="var">nafs</span> <span class="id" type="var">mprec</span> <span class="id" type="var">mstat</span> <span class="id" type="var">mafs</span> <span class="id" type="var">ds</span> <span class="id" type="var">dl</span> <span class="id" type="var">wfl</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">t1</span> := <span class="id" type="tactic">fresh</span> "t1" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">t2</span> := <span class="id" type="tactic">fresh</span> "t2" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">l1</span> := <span class="id" type="tactic">fresh</span> "l1" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">l2</span> := <span class="id" type="tactic">fresh</span> "l2" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">f</span>  := <span class="id" type="tactic">fresh</span> "f"  <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">H</span>  := <span class="id" type="tactic">fresh</span> "H"  <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">Hl</span> := <span class="id" type="tactic">fresh</span> "Hl" <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">Ht</span> := <span class="id" type="tactic">fresh</span> "Ht" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|- <span class="id" type="var">well_founded</span> (?rcdp ?R ?du) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Inclusion.wf_incl</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">Sdp.sdp.Rcdp_min</span> <span class="id" type="var">R</span> <span class="id" type="var">du</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> [[<span class="id" type="var">f</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> <span class="id" type="var">Hl</span> <span class="id" type="var">Ht</span>] <span class="id" type="var">H</span>];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">split</span>; [ <span class="id" type="var">constructor</span> 1 <span class="id" type="keyword">with</span> <span class="id" type="var">l2</span> |]; <span class="id" type="tactic">assumption</span> |];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">wf_union</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">n</span>:=bb) (<span class="id" type="var">dps</span>:=ds) (<span class="id" type="var">dps_large</span>:=dl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">prec</span>:=nprec) (<span class="id" type="var">prec_marked</span>:=mprec)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">status</span>:=nstat) (<span class="id" type="var">status_marked</span>:=mstat)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">afs_symb</span>:=nafs) (<span class="id" type="var">afs_symb_marked</span>:=mafs);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Ext.prove_rpo</span> (<span class="id" type="var">prec_union</span> <span class="id" type="var">nprec</span> <span class="id" type="var">mprec</span>) (<span class="id" type="var">status_union</span> <span class="id" type="var">nstat</span> <span class="id" type="var">mstat</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Ext.prove_rpo</span> (<span class="id" type="var">prec_union</span> <span class="id" type="var">nprec</span> <span class="id" type="var">mprec</span>) (<span class="id" type="var">status_union</span> <span class="id" type="var">nstat</span> <span class="id" type="var">mstat</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">split</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">trivial</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Ext.prove_rpo</span> (<span class="id" type="var">prec_union</span> <span class="id" type="var">nprec</span> <span class="id" type="var">mprec</span>) (<span class="id" type="var">status_union</span> <span class="id" type="var">nstat</span> <span class="id" type="var">mstat</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">split</span>; <span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">trivial</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">idtac</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">try</span> <span class="id" type="var">complete</span> (<span class="id" type="var">left</span>; <span class="id" type="var">constructor</span>); <span class="id" type="var">right</span>; <span class="id" type="var">constructor</span> ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Inclusion.wf_incl</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">rcdp</span> <span class="id" type="var">R</span> <span class="id" type="var">dl</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" type="tactic">intros</span> <span class="id" type="var">t1</span> <span class="id" type="var">t2</span> [[<span class="id" type="var">f</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span> <span class="id" type="var">Hl</span> <span class="id" type="var">Ht</span>] <span class="id" type="var">H</span>];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">split</span>; [ <span class="id" type="var">constructor</span> 1 <span class="id" type="keyword">with</span> <span class="id" type="var">l2</span> |]; <span class="id" type="tactic">assumption</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="tactic">apply</span> <span class="id" type="var">wfl</span> ]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">MakeRpoSdpMarkedAFS</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
