@@ -84,7 +84,7 @@ class term c_t' =
           Var_univ _ | Var_exist _ -> 1
 	| Term (_, l, _) -> compute_depth l
           
-    val mutable pos_conditional_rewriting  = []
+    val mutable pos_rewriting  = []
     val mutable pos_contextual_rewriting   = []
     val mutable pos_partial_case_rewriting = []
     val mutable pos_total_case_rewriting   = []
@@ -97,19 +97,19 @@ class term c_t' =
 	
     method copy = {< >}
 
-    method pos_conditional_rewriting  = pos_conditional_rewriting
+    method pos_rewriting  = pos_rewriting
     method pos_contextual_rewriting   = pos_contextual_rewriting
     method pos_partial_case_rewriting = pos_partial_case_rewriting
     method pos_total_case_rewriting   = pos_total_case_rewriting
     method pos_equational_rewriting   = pos_equational_rewriting
-    method resetpos_conditional_rewriting  = 
-      let () = buffered_output ("\nReset pos_conditional_rewriting in " ^ self#string) in
+    method resetpos_rewriting  = 
+      let () = buffered_output ("\nReset pos_rewriting in " ^ self#string) in
       let () = 
 	match content with 
-	    Term (_, l, _) -> List.iter (fun x -> x#resetpos_conditional_rewriting) l
+	    Term (_, l, _) -> List.iter (fun x -> x#resetpos_rewriting) l
 	  | Var_exist _ | Var_univ _ -> ()
       in
-      pos_conditional_rewriting <- []
+      pos_rewriting <- []
 
     method resetpos_contextual_rewriting = 
       let () = 
@@ -144,19 +144,19 @@ class term c_t' =
       pos_equational_rewriting <- []
 
 
-    method delpos_conditional_rewriting pos  =
-      let lpos = self#pos_conditional_rewriting in
+    method delpos_rewriting pos  =
+      let lpos = self#pos_rewriting in
 (*       let () = buffered_output ("\n cond_rew: Eliminating " ^ (sprint_position pos) ^ " from " ^ self#string ^ " having positions : ") in *)
 (*       let () = List.iter (fun x -> buffered_output (" " ^ (sprint_position x))) lpos in *)
       let lpos' = 
 	try 
 	  remove_el (=) pos lpos 
 	with Failure "remove_el" -> 
-	  let () = if !maximal_output then  buffered_output ("WARNING: " ^ ("delpos_conditional_rewriting on " ^ self#string ^ " at position " ^ (sprint_position pos))) in
+	  let () = if !maximal_output then  buffered_output ("WARNING: " ^ ("delpos_rewriting on " ^ self#string ^ " at position " ^ (sprint_position pos))) in
 	  try 
 	    remove_el (=) pos self#all_positions 
-	  with Failure "remove_el" -> failwith ("delpos_conditional_rewriting on " ^ self#string ^ " at position " ^ (sprint_position pos))  in
-      let () = pos_conditional_rewriting <- lpos' in
+	  with Failure "remove_el" -> failwith ("delpos_rewriting on " ^ self#string ^ " at position " ^ (sprint_position pos))  in
+      let () = pos_rewriting <- lpos' in
 
       (* eliminating the positions from subterms   *)
       if pos <> [] then 
@@ -165,9 +165,9 @@ class term c_t' =
 	      let n = List.hd pos in
 	      let pos' = List.tl pos in
 	      let t = List.nth l n in
-	      let () = t#delpos_conditional_rewriting pos' in
+	      let () = t#delpos_rewriting pos' in
 	      ()
-	  | Var_exist _ | Var_univ _ -> failwith "delpos_conditional_rewriting"
+	  | Var_exist _ | Var_univ _ -> failwith "delpos_rewriting"
 	)
 
     method delpos_partial_case_rewriting pos  =
@@ -267,7 +267,7 @@ class term c_t' =
 	  Term (k, l, s) -> 
 	    let allpos =  all_defined_positions content in
 	    let l' = List.map (fun x -> x#update_pos) l in 
-	    let () = pos_conditional_rewriting <-  allpos  in
+	    let () = pos_rewriting <-  allpos  in
 	    let () = pos_contextual_rewriting <-  allpos in
 	    let () = pos_partial_case_rewriting <- allpos in
 	    let () = pos_total_case_rewriting <-  allpos in
@@ -297,7 +297,7 @@ class term c_t' =
 		      else true
 		    else false
 		  in
-		  let () = pos_conditional_rewriting <- (List.filter  fn' pos_conditional_rewriting) in
+		  let () = pos_rewriting <- (List.filter  fn' pos_rewriting) in
 		  let () = pos_contextual_rewriting <- (List.filter  fn' pos_contextual_rewriting) in
 		  let () = pos_partial_case_rewriting <- (List.filter  fn' pos_partial_case_rewriting) in
 		  let () = pos_total_case_rewriting <- (List.filter  fn' pos_total_case_rewriting) in
@@ -314,7 +314,7 @@ class term c_t' =
               {< content = Term (f, l', s) ;
               variables = v ;
               depth = compute_depth l' ;
-	      pos_conditional_rewriting  = generic_merge_sorted_lists pos_conditional_rewriting new_pos ;
+	      pos_rewriting  = generic_merge_sorted_lists pos_rewriting new_pos ;
 	      pos_contextual_rewriting   = generic_merge_sorted_lists pos_contextual_rewriting new_pos ;
 	      pos_partial_case_rewriting = generic_merge_sorted_lists pos_partial_case_rewriting new_pos ;
 	      pos_total_case_rewriting   = generic_merge_sorted_lists pos_total_case_rewriting new_pos ;
@@ -340,7 +340,7 @@ class term c_t' =
 		      else true
 		    else false
 		  in
-		  let () = pos_conditional_rewriting <- (List.filter  fn' pos_conditional_rewriting) in
+		  let () = pos_rewriting <- (List.filter  fn' pos_rewriting) in
 		  let () = pos_contextual_rewriting <- (List.filter  fn' pos_contextual_rewriting) in
 		  let () = pos_partial_case_rewriting <- (List.filter  fn' pos_partial_case_rewriting) in
 		  let () = pos_total_case_rewriting <- (List.filter  fn' pos_total_case_rewriting) in
@@ -361,7 +361,7 @@ class term c_t' =
               {< content = Term (f, l', s) ;
                  variables = v ;
                  depth = compute_depth l' ;
-		 pos_conditional_rewriting  = generic_merge_sorted_lists pos_conditional_rewriting new_pos ;
+		 pos_rewriting  = generic_merge_sorted_lists pos_rewriting new_pos ;
 		 pos_contextual_rewriting   = generic_merge_sorted_lists pos_contextual_rewriting new_pos ;
 		 pos_partial_case_rewriting = generic_merge_sorted_lists pos_partial_case_rewriting new_pos ;
 		 pos_total_case_rewriting   = all_defined_positions (Term (f, l', s));(* generic_merge_sorted_lists pos_total_case_rewriting new_pos ; *)
@@ -555,7 +555,7 @@ class term c_t' =
 
 	  let fn t t' n = 
 	    if t#string <> t'#string then 
-	      let lpos_t = (List.map (fun p -> n :: p) t'#pos_conditional_rewriting) in
+	      let lpos_t = (List.map (fun p -> n :: p) t'#pos_rewriting) in
 	      try if (is_constructor t'#head  or (not t'#is_term)) && is_defined f then generic_merge_sorted_lists [[]] lpos_t else lpos_t with Failure "head" -> lpos_t
 	    else
 	      []
@@ -566,7 +566,7 @@ class term c_t' =
           {< content = Term (f, l', s) ;
              variables = generic_merge_set_of_lists (List.map (fun x -> x#variables) l') ;
              depth = compute_depth l' ;
-	     pos_conditional_rewriting  = generic_merge_sorted_lists pos_conditional_rewriting new_pos ;
+	     pos_rewriting  = generic_merge_sorted_lists pos_rewriting new_pos ;
 	     pos_contextual_rewriting   = generic_merge_sorted_lists pos_contextual_rewriting new_pos ;
 	     pos_partial_case_rewriting = generic_merge_sorted_lists pos_partial_case_rewriting new_pos ;
 	     pos_total_case_rewriting   = generic_merge_sorted_lists pos_total_case_rewriting new_pos ;
@@ -818,6 +818,31 @@ class term c_t' =
 
   (* pretty print function *)
     method pprint f = Format.fprintf f "@[{@[Term: %s@]@ @[ with sort \"%s\"@]}@]" self#string (sprint_sort self#sort)
+
+    method compute_string_coq with_model =   
+      match content with
+          Var_exist (_, _) -> failwith "compute_string_coq: existential variables not yet treated" 
+	| Var_univ (x, s) -> (match s with 
+				  Def_sort _ -> let s_name = dico_sort_string#find s in if with_model then "(model_" ^ s_name ^ " u" ^ (string_of_int x) ^ ")" else "(Var " ^ (string_of_int x) ^ ")"
+				| Abstr_sort0 _ | Abstr_sort1 _ | Abstr_sort2 _ -> failwith "compute_string_coq: parameterized specifications not yet treated"
+			     )
+	| Term (f, l, _) ->
+            let v = try dico_const_string#find f with Not_found -> failwith "raising Not_found in compute_basic_string" in
+            let a = sprint_list ":: " (fun x -> x#compute_string_coq with_model) l in
+              "(Term id_" ^ v ^ (if l == [] then " nil)" else " (" ^ a ^ "::nil))")
+
+    method compute_string_coq_with_quantifiers lv =   
+      match content with
+          Var_exist (_, _) -> failwith "compute_string_coq: existential variables not yet treated" 
+	| Var_univ (x, s) -> (match s with 
+				  Def_sort _ ->  (if List.mem x lv then "_u" else "u") ^ (string_of_int x)
+				| Abstr_sort0 _ | Abstr_sort1 _ | Abstr_sort2 _ -> failwith "compute_string_coq: parameterized specifications not yet treated"
+			     )
+	| Term (f, l, _) ->
+            let v = try dico_const_string#find f with Not_found -> failwith "raising Not_found in compute_basic_string" in
+            let a = sprint_list " " (fun x -> x#compute_string_coq_with_quantifiers lv) l in
+              (if l == [] then "" else "(") ^ v ^ (if l == [] then "" else " ") ^ a ^ (if l == [] then "" else ")")
+	      
 
     (* Returns: (position, path (mixed), max depth of subterm, sort)
        for each strict position, and non linear position. *)
@@ -1213,7 +1238,7 @@ let subst_is_primitive s =
    Next time the same rule is to be applied, failure will occur at once or special cases will be triggered *)
 let contextual_rewriting_bit        = get_bitstream [1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
 let equational_rewriting_bit        = get_bitstream [0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
-let conditional_rewriting_bit       = get_bitstream [0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
+let rewriting_bit       = get_bitstream [0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
 let partial_case_rewriting_bit      = get_bitstream [0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
 let total_case_rewriting_bit        = get_bitstream [0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0]
 let induction_bit                   = get_bitstream [0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0]
@@ -1363,7 +1388,7 @@ let sprint_detailed_term t  =
        
 let print_detailed_position_term t = 
   let rec fn spaces t = 
-    let spos = List.fold_left (fun x y -> x ^ "  " ^ (sprint_position y)) "" t#pos_conditional_rewriting in
+    let spos = List.fold_left (fun x y -> x ^ "  " ^ (sprint_position y)) "" t#pos_rewriting in
     let () = buffered_output ("\n" ^ (n_spaces spaces) ^ "the term " ^ t#string ^ " has the positions " ^ spos) in
     match t#content with
 	Var_exist _ | Var_univ _ -> ()
@@ -1482,7 +1507,7 @@ let write_pos_term t =
   in
   if !maximal_output then 
     buffered_output ("\nThe positions of t = " ^ t#string ^ " are: " ^ "\n\nConditional Rewriting : " ^ (fn
-      t#pos_conditional_rewriting)^ "\n\nPartial Case Rewriting : " ^ (fn
+      t#pos_rewriting)^ "\n\nPartial Case Rewriting : " ^ (fn
       t#pos_partial_case_rewriting)^ "\n\nTotal Case Rewriting : " ^ (fn
       t#pos_total_case_rewriting)  )
 

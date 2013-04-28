@@ -34,7 +34,7 @@ let () = List.iter (fun (kwd, tok) -> Hashtbl.add keyword_table kwd tok)
       ("axioms",                        TOK_AXIOMS) ;
       ("bool",                          TOK_IDENT "bool") ;
       ("complement",                    TOK_COMPLEMENT) ;
-      ("conditional_rewriting",         TOK_CONDITIONAL_REWRITING) ;
+      ("rewriting",         TOK_REWRITING) ;
       ("congruence_closure",            TOK_CONGRUENCE_CLOSURE) ;
       ("complete_terms",                TOK_COMPLETE_TERMS) ;
       ("conjectures",                   TOK_CONJECTURES) ;
@@ -69,7 +69,7 @@ let () = List.iter (fun (kwd, tok) -> Hashtbl.add keyword_table kwd tok)
       ("positive_clash",                TOK_POSITIVE_CLASH) ;
       ("positive_decomposition",        TOK_POSITIVE_DECOMPOSITION) ;
       ("print_goals",                   TOK_PRINT_GOALS) ;
-      ("print_clause_caml",                   TOK_PRINT_CAML) ;
+      ("print_clause_caml",             TOK_PRINT_CAML) ;
       ("print_goals_with_history",      TOK_PRINT_GOALS_HISTORY) ;
       ("priorities",                    TOK_PRIORITIES) ;
       ("ind_priorities",                TOK_IND_PRIORITIES) ;
@@ -107,12 +107,14 @@ let ident_core = [ 'A'-'Z' 'a'-'z' '_' '0'-'9' '''] + | special_ident
 let ident = '_' * ident_core '_' *
 let filename_ident = [ 'A'-'Z' 'a'-'z' '_' '0'-'9' '=' '+' '-' '/' '.' ]
 let comment = "%"[ ^'\010' ]*
+let coq_comment = "$"[ ^'\010' ]*
 let string =  '[' integer ']' [ ^'\010' ]*
 
 rule token = parse
   whitespace                            { token lexbuf }
 | newline                               { let () = incr linenumber in token lexbuf }
 | comment                               { token lexbuf }
+| coq_comment                           { let s = Lexing.lexeme lexbuf in let s' = String.sub s 1 ((String.length s) -1) in coq_inline := !coq_inline ^ s' ^ "\n"; token lexbuf}
 | ":"                                   { let () = gprint "TOK_COLUMN" in TOK_COLUMN }
 | ","                                   { let () = gprint "TOK_COMA" in TOK_COMA }
 | ";"                                   { let () = gprint "TOK_SEMICOLUMN" in TOK_SEMICOLUMN }

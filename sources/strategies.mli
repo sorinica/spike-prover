@@ -4,7 +4,7 @@ val print_goals : bool -> unit
         Clauses.list_of_systems_argument * Dummies.position_argument
     | Equational_rewriting of Dummies.position_argument
     | Congruence_closure
-    | Conditional_rewriting of bool * Clauses.list_of_systems_argument *
+    | Rewriting of bool * Clauses.list_of_systems_argument *
         Dummies.position_argument
     | Partial_case_rewriting of Clauses.list_of_systems_argument *
         Dummies.position_argument

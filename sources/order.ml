@@ -76,7 +76,7 @@ let rec rpo is_total ((s:term),(t:term)) =
 		if List.for_all (fun ti -> (rpo is_total (s,ti) == GR)) ts then
 		  GR else NGE
 	      else if equivalent f g then
-		(if List.for_all (fun ti -> (rpo is_total (s,ti) == GR)) ts then
+		((* if List.for_all (fun ti -> (rpo is_total (s,ti) == GR)) ts then *)
 		   let st = try get_status f with Failure "raising Not_found in get_status_id" -> Multiset in
 		     match st with
 		       | Left -> lex (rpo is_total) (ss,ts)
@@ -85,7 +85,7 @@ let rec rpo is_total ((s:term),(t:term)) =
 			   and inv_ts = List.rev ts in
 			     lex (rpo is_total) (inv_ss,inv_ts)
 		       | Multiset -> mul (rpo is_total) (ss,ts)
-		 else NGE
+		 (* else NGE *)
 		)
 	      else NGE
 	    else GR

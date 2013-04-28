@@ -64,6 +64,7 @@ let main_function verbose c level is_pos =
   let i = ref (-1) in
   let pl = List.map (fun x -> let () = i := !i + 1 in  (x, !i, true)) p in
 
+  let _ = rewriting_clauses := [] in
   (* compute the new literals  *)
   let main c =
     let appl_counter = ref 0 in
@@ -116,7 +117,15 @@ let main_function verbose c level is_pos =
 	let () = List.iter (fun x -> buffered_output (!indent_string ^ "\187 " ^ x#string)) lres in
         buffered_output "" 
     in
-    List.map (fun x -> x#expand_sorts) lres
+    let lres' = List.map (fun x -> x#expand_sorts) lres in
+    let dummy_term = List.hd (c#all_terms) in
+    let dummy_clause = c in 
+    let () = List.iter (fun c1 -> rewriting_clauses := !rewriting_clauses @ [(c1, "", dummy_clause, [] )]) lres' in 
+    let () = List.iter (fun c1 -> coq_less_clauses:= !coq_less_clauses @ [(c1, c)] ) lres' in
+    let () = coq_formulas_with_infos := !coq_formulas_with_infos @ [((if is_positive then "positive_decomposition" else "negative_decomposition"), c#number, [], (List.map (fun x -> (x#number, [])) lres'), !rewriting_clauses)] in
+    let () = coq_formulas := !coq_formulas @ [c] in
+	let () = List.iter (fun neq -> neq#add_history ([], c)) lres' in 
+      (List.rev lres')
       
 (* Recursively applied until saturation on all positive literals *)
 let positive_decomposition verbose c level = main_function verbose c level true

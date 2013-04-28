@@ -14,6 +14,8 @@ val obs_sort_counter : int ref
       method check_property : ('a -> bool) -> bool
       method private compute_basic_string : string
       method compute_string : string
+      method compute_string_coq : bool -> string
+      method compute_string_coq_with_quantifiers :  (Symbols.var list) -> string
       method content : 'b
       method contextual_var : Symbols.var
       method copy : 'a
@@ -25,7 +27,7 @@ val obs_sort_counter : int ref
         ((Symbols.const * int) list * 'a) list
       method defined_positions : int list list
       method def_symbols : string list
-      method delpos_conditional_rewriting : int list -> unit
+      method delpos_rewriting : int list -> unit
       method delpos_contextual_rewriting : int list -> unit
       method delpos_equational_rewriting : int list -> unit
       method delpos_partial_case_rewriting : int list -> unit
@@ -68,7 +70,7 @@ val obs_sort_counter : int ref
       method non_linear_variables :
         ((Symbols.var * Symbols.sort * bool) * int list list) list
       method occur : Symbols.var -> bool
-      method pos_conditional_rewriting : int list list
+      method pos_rewriting : int list list
       method pos_contextual_rewriting : int list list
       method pos_equational_rewriting : int list list
       method pos_partial_case_rewriting : int list list
@@ -79,7 +81,7 @@ val obs_sort_counter : int ref
       method replace_sort : Symbols.sort -> 'a
       method replace_subterm_at_pos : int list -> 'a -> 'a
       method replace_subterms : int ref -> 'a -> 'a -> 'a
-      method resetpos_conditional_rewriting : unit
+      method resetpos_rewriting : unit
       method resetpos_contextual_rewriting : unit
       method resetpos_equational_rewriting : unit
       method resetpos_partial_case_rewriting : unit
@@ -120,7 +122,7 @@ val obs_sort_counter : int ref
         ((Symbols.var * Symbols.sort * bool) * int list list) list
       val content : 'b
       val depth : int
-      val mutable pos_conditional_rewriting : int list list
+      val mutable pos_rewriting : int list list
       val mutable pos_contextual_rewriting : int list list
       val mutable pos_equational_rewriting : int list list
       val mutable pos_partial_case_rewriting : int list list

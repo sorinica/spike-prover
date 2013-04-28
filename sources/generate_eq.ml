@@ -33,6 +33,9 @@ open Normalize
      Two modes are therefore proposed:
      - automatic computes test substitutions, and uses default strategies ("1" and "2").
      - non-automatic mode asks for a list of substitutions, and proceeds with those.
+
+Implementing relaxed rewriting from RTA 2008
+
   *)
 
 
@@ -71,7 +74,7 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
     
     let _ = rule#number in
     (*     let () = buffered_output ("\nfn: max_v = " ^ (string_of_int max_v)) in *)
-    let rule' = rule#substitute_and_rename [] max_v in (* rename the variables *)
+    let rule', _ = rule#substitute_and_rename [] max_v in (* rename the variables *)
     let _ = rule'#number in
     let lhs = rule'#lefthand_side in
     
@@ -306,14 +309,6 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
       ()
     else ()
   in
-
-  let () = if !coq_mode = true then
-    let f (x, _) = sprint_var x (Def_sort 0) true in
-    let fsts = fst (List.split ls') in
-    let lstlst = List.map (List.map f) fsts in
-    Coq.induction (List.hd lstlst)
-  else ()
-  in
   
   let () =
     if verbose
@@ -333,7 +328,7 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
 
     let cinst = c#substitute s in
     let maxvar_c = cinst#greatest_varcode in
-    let new_r = r_orig#substitute_and_rename [] (maxvar_c + 1) in
+    let new_r,_ = r_orig#substitute_and_rename [] (maxvar_c + 1) in
     let t1 = cinst#subterm_at_position p in
     let t2 = new_r#lefthand_side in
 
@@ -379,7 +374,7 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
 
     let fn_eq lit  =
       let fn_term (lhs:Terms.term) rhs is_lhs = 
-	let _, str_norm, lhs_norm = normalize [R;L] lhs c "" ([],[]) 0 in  
+	let _, str_norm, lhs_norm, _ = normalize [R;L] lhs c "" ([],[]) 0 in  
 	let lhs_orig, rhs_orig = 
 	  let l, r = (c#head)#both_sides in
 	    if is_lhs then l,r else r,l
@@ -520,11 +515,6 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
 			     (if str = "" then "" else cinst#string ^ "\n    is rewritten ") ^ "using the rule " ^ r_orig#string ^ (if str = "" then ""
 																    else ( " to get\n" ^ res'#string ^ "\n\nFurther operations on " ^ res'#string ^ "\n\n" ^ str)))
 	else ()
-    in
-    let () =
-      if !coq_mode
-      then Coq.rewrite_nonum !i ("sp_axiom_" ^ (string_of_int r_orig#number))
-      else ()
     in
       res
   in

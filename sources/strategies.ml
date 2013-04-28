@@ -35,7 +35,7 @@ let print_goals print_history =
   let () = buffered_output (!indent_string ^ "\nCurrent goals E" ^ (string_of_int pg) ^
                             " (" ^ (string_of_int conjectures_system#length) ^ "):") in
   let () = conjectures_system#print !indent_string in
-  let () = Coq.renumber_clauses () in
+
 
   let () = buffered_output "" in
   
@@ -44,7 +44,7 @@ let print_goals print_history =
 
 (*   let () =  *)
     if hypotheses_system#content <> [] then
-      let () = buffered_output (!indent_string ^ "Current hypotheses H" ^ (string_of_int pg) ^
+      let () = buffered_output (!indent_string ^ "Current premises H" ^ (string_of_int pg) ^
                             " (" ^ (string_of_int hypotheses_system#length) ^ "):") in
       let () = hypotheses_system#print !indent_string in
       buffered_output ""
@@ -64,7 +64,7 @@ type reasoning_module =
     Contextual_rewriting of strategy * list_of_systems_argument * position_argument
   | Equational_rewriting of position_argument
   | Congruence_closure
-  | Conditional_rewriting of bool * list_of_systems_argument * position_argument
+  | Rewriting of bool * list_of_systems_argument * position_argument
   | Partial_case_rewriting of list_of_systems_argument * position_argument
   | Total_case_rewriting of strategy * list_of_systems_argument * position_argument
   | Generate of bool * induction_position_specification list
@@ -91,8 +91,8 @@ let rm_to_string = function
       ^ sprint_position_argument pos ^ ")"
   |  (Equational_rewriting pos) ->
        "equational_rewriting (" ^ sprint_position_argument pos ^ ")"
-  |  (Conditional_rewriting (b, sl, p)) ->
-       "conditional_rewriting (" ^ (if b then "normalize" else "rewrite") ^ ", "  ^ (sprint_which_rw_system_list_arg sl) ^ ", " ^ (sprint_position_argument p) ^ ")"
+  |  (Rewriting (b, sl, p)) ->
+       "rewriting (" ^ (if b then "normalize" else "rewrite") ^ ", "  ^ (sprint_which_rw_system_list_arg sl) ^ ", " ^ (sprint_position_argument p) ^ ")"
   |  (Partial_case_rewriting (los, pos)) ->
        "partial_case_rewriting (" ^ (sprint_which_rw_system_list_arg los) ^ ", " ^ sprint_position_argument pos ^ ")"
   |  (Total_case_rewriting (st, los, pos)) ->
@@ -234,17 +234,17 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 	  with (Failure "equational_rewriting") -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Equational_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
-    | Conditional_rewriting (b, sl, pos) ->
+    | Rewriting (b, sl, pos) ->
 	if cxt2 = empty_cxt then 
 	  (let np = match pp with 
 	      Pos_dumb -> pos 
 	    | Pos_defined _ | Pos_litdefined _ | Pos_all| Pos_query -> pp 
 	  in
 	  try 
-	    conditional_rewriting verbose b sl np cxt1 c is_strict level
-	  with (Failure "conditional_rewriting") -> failwith "apply_rm")
+	    rewriting verbose b sl np cxt1 c is_strict level
+	  with (Failure "rewriting") -> failwith "apply_rm")
 	else 
-	  failwith "apply_at_pos: the Conditional_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
+	  failwith "apply_at_pos: the rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Partial_case_rewriting (los, pos) ->
 	if cxt2 = empty_cxt then 
 	  (let np = match pp with 
@@ -680,7 +680,7 @@ let dico_st_refill () =
                                 new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st Auto_simplification))))) ]))
 
   and _ = dico_st#replace name_strat_rewrite
-      (new strategy (Try_ [ new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Conditional_rewriting (true, LOS_defined [R], Pos_all))))))) ;
+      (new strategy (Try_ [ new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Rewriting (true, LOS_defined [R], Pos_all))))))) ;
                             new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Equational_rewriting Pos_all)))))) ;
                             new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Contextual_rewriting (new strategy (Named_strategy "recursive"),
                                                                                 LOS_defined [R;C;L],
@@ -717,7 +717,7 @@ let dico_st_refill () =
       new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st Congruence_closure))))) ;
       new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st Negative_decomposition))))) ;
       new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st Auto_simplification)))));
-      new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Conditional_rewriting (true, LOS_defined [L;R], Pos_all))))))) ;
+      new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Rewriting (true, LOS_defined [L;R], Pos_all))))))) ;
       new strategy (Inference_rule (Delete (Id, new strategy (Inference_rule (Id_st (Subsumption (LOS_defined [L; C]))))))) ;
       new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Total_case_rewriting ( !global_strat, LOS_defined [R], Pos_all)))))))]
  ))))

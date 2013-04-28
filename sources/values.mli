@@ -21,7 +21,10 @@ val decr_indent : string ref -> unit
 val specif_parameterized : bool ref
 val debug_mode : bool ref
 val harvey_mode : bool ref
-val coq_mode : bool ref
+val coqc_spec_mode : bool ref
+val coq_inline : string ref
+val coqc_mode : bool ref
+val dracula_mode : bool ref
 val induction_mode : bool ref
 val augmentation_mode : bool ref
 val resolution_mode : bool ref
@@ -41,7 +44,7 @@ val ac_symbol_2 : int ref
 val unary_symbol_1 : int ref
 val contextual_rewriting_counter : int ref
 val equational_rewriting_counter : int ref
-val conditional_rewriting_counter : int ref
+val rewriting_counter : int ref
 val partial_case_rewriting_counter : int ref
 val total_case_rewriting_counter : int ref
 val generate_counter : int ref
@@ -52,7 +55,7 @@ val tautology_counter : int ref
 val augmentation_counter_suc : int ref
 val contextual_rewriting_counter_suc : int ref
 val equational_rewriting_counter_suc : int ref
-val conditional_rewriting_counter_suc : int ref
+val rewriting_counter_suc : int ref
 val partial_case_rewriting_counter_suc : int ref
 val total_case_rewriting_counter_suc : int ref
 val generate_counter_suc : int ref
@@ -60,6 +63,7 @@ val generate_eq_counter_suc : int ref
 val subsumption_counter_suc : int ref
 val tautology_counter_suc : int ref
 val pgoals_counter : int ref
+val spec_name : string ref
 (* val pi_contextual_rewriting_counter : int ref *)
 val depth_counter : int ref
 val maxdepth_counter : int ref

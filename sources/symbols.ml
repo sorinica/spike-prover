@@ -330,7 +330,7 @@ let dico_const_string : (const, string) bijective_dictionary =
 let print_dico_const_string () =
   buffered_output "dico_const_string:";
   dico_const_string#iter
-    (fun k v -> print_int k; buffered_output " --> "; buffered_output v)
+    (fun k v -> print_int k; buffered_output (" --> " ^ v))
 ;;
 
   (* sort_main_string gives the main string of a sort  *)
@@ -556,10 +556,10 @@ let dico_order_cc = new order_dictionary 101;;
 let print_dico_order () =
   buffered_output "dico_order:";
   dico_order#iter
-    (fun k v ->
+    (fun k l -> if k <> 0 && k <> 1 && l <> [] then
        try buffered_output ((dico_const_string#find k) ^ ": " ^
         (sprint_list " " dico_const_string#find
-	 (* (fun x -> string_of_int x) *) v )^ ";") with Not_found -> failwith "raising Not_found in print_dico_order")
+	 (* (fun x -> string_of_int x) *) l )^ ";") with Not_found -> failwith ("raising Not_found in print_dico_order with symbol k = " ^ (string_of_int k)))
 ;;
 
 
@@ -567,13 +567,14 @@ let print_dico_order () =
 let print_dico_equivalence () =
   buffered_output "dico_equivalence:";
   dico_equivalence#iter
-    (fun k v ->
-      try buffered_output (" k = " ^ (string_of_int k));
-       buffered_output (dico_const_string#find k);
-       buffered_output " --> ";
-       buffered_output (sprint_list ", " 
-	 (fun x -> let () = buffered_output (" x = " ^ (string_of_int x)) in dico_const_string#find x) v)
-      with Not_found -> failwith "raising Not_found in print_dico_equivalence")
+    (fun k v -> if k <> 0 && k <> 1&& List.length v <> 1 then
+	try 
+	  (* buffered_output (" k = " ^ (string_of_int k)); *)
+	  (* buffered_output (dico_const_string#find k); *)
+	  (* buffered_output " --> "; *)
+	  buffered_output (sprint_list " ~ " 
+			     (fun x -> (* let () = buffered_output (" x = " ^ (string_of_int x)) in *) dico_const_string#find x) v)
+	with Not_found -> failwith "raising Not_found in print_dico_equivalence")
 ;;
 
 let print_dico_eq f d =
@@ -636,13 +637,9 @@ let get_status id = try dico_id_status#find id with Not_found -> failwith  ("rai
 
 let greater is_total x y =
   try
-    (if is_total then List.mem y (dico_order_cc#find x)
-    else List.mem y (dico_order#find x)) &&
-    (let () =
-       do_nothing
-         (dico_const_string#find x ^ " > " ^ dico_const_string#find y)
-     in
-     true)
+    ((* if is then List.mem y (dico_order_cc#find x) *)
+    (* else *)
+      List.mem y (dico_order#find x))
   with
     Not_found -> false
 ;;
