@@ -1,0 +1,31 @@
+(* Sorin Stratulat - April 2013 *)
+
+The `trunk' directory contains the following information:
+
+- README - this file
+- sources directory - the SPIKE sources. To create `spike_bc', run `make' in the directory (you need ocaml installed).
+- specs directory - the SPIKE specification files. The files related to the ABR proof are in the 'abr' subdirectory. Simpler examples are in the 'basic' subdirectory.
+
+NEW: we have added two subdirectories to the `abr' directory: 1) the `rm' subdirectory has ABR conjectures that can be proved using a reasoning module combining a semi-decision procedure for linear arithmetic and a congruence closure procedure, and 2)  the `no_rm' subdirectory has ABR conjectures that can be proved without the reasoning module. The proof for a spec file <file.spike> can be launched with '../../../sources/spike_bc <file.spike>'.
+
+- Coccinelle directory - It allows to certify the implicit induction proofs issued by SPIKE with Coq (see below). However, the `dracula'- and the `reasoning module'-based proofs cannot be certified in this version.
+ 
+The proofs using the DRaCuLa strategy can be automatically launched with the shell script prove.sh from the `dracula' subdirectories. The output is stored in the .tmp files.
+
+Similarly, examples of certified proofs are given in the `certify' directories. They contain a shell script, validate.sh, that automatizes the certification process for you. Before running the script, you should:
+
+1. compile Coccinelle  (you need COQ installed. version 8.2pl1 should work.). 
+2. enter the `sources' directory and compile with the command "make" to generate spike_bc (you need Ocaml installed; version 3.11 should work).  
+3. to automatically run and test the specifications of the SPIKE files, run `validate.sh -spec'.
+4. to automatically run and test the proofs of the SPIKE files, run afterwards `validate.sh' without parameters. (step 4 is compulsory).
+
+To setup the path to Coccinelle, here is an example of the file .coqrc from your home directory
+
+Add LoadPath "<path_to_spike_prover>/trunk/Coccinelle/basis".
+Add LoadPath "<path_to_spike_prover>/trunk/Coccinelle/list_extensions". 
+Add LoadPath "<path_to_spike_prover>/trunk/Coccinelle/term_algebra". 
+Add LoadPath "<path_to_spike_prover>/trunk/Coccinelle/term_orderings". 
+
+In case of problems, please contact Sorin (sorin.stratulat@univ-lorraine.fr).
+
+
