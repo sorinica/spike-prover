@@ -24,16 +24,20 @@ open Normalize
 open Harvey
 open Coq
 
+let all_lemmas = ref [];;
+
 let sprint_useful_values () =
   let f (s, c, cs) = (s ^": " ^ (string_of_int (!cs - 1)) ^ " of " ^ (string_of_int (!c - 1)) ^ " tries.") in
   let s = List.map f
       [ 
-        "- conditional_rewriting  " , conditional_rewriting_counter, conditional_rewriting_counter_suc ;
-        "- total_case_rewriting   " , total_case_rewriting_counter, total_case_rewriting_counter_suc ;
-        "- generate              " , generate_counter, generate_counter_suc ;
-        "- subsumption            " , subsumption_counter, subsumption_counter_suc ;
-        "- tautology              " , tautology_counter, tautology_counter_suc] in
-  ("\n--- Global statistics of the main successful operations ---\n\n" ^ sprint_string_list "\n" s) ^ ("\n\n-----------\n  Total clauses: " ^ (string_of_int (!clause_counter - 1))^ "\n\n" ^ "  Max depth    : " ^ (string_of_int !maxdepth_counter))
+        "- tautology               " , tautology_counter, tautology_counter_suc ;
+        "- rewriting               " , rewriting_counter, rewriting_counter_suc ;
+        "- augmentation            " , augmentation_counter, augmentation_counter_suc ;
+        "- subsumption             " , subsumption_counter, subsumption_counter_suc ;
+        "- total_case_rewriting    " , total_case_rewriting_counter, total_case_rewriting_counter_suc ;
+        "- generate                " , generate_counter, generate_counter_suc 
+] in
+  ("\n--- Global statistics of the main successful operations ---\n\n" ^ sprint_string_list "\n" s) ^ ("\n\n-----------\n  Total clauses: " ^ (string_of_int (!clause_counter - 1)) ^ "\n\n-----------\n  Total lemmas: " ^ (string_of_int ((List.length !all_lemmas) - 1)) ^ "\n\n" ^ "  Max depth    : " ^ (string_of_int !maxdepth_counter))
 
   (* some useful parsers  *)
 let string_to_term s = 
@@ -234,7 +238,7 @@ let reset_all () =
 
   and () = contextual_rewriting_counter := 1
   and () = equational_rewriting_counter := 1
-  and () = conditional_rewriting_counter := 1
+  and () = rewriting_counter := 1
   and () = partial_case_rewriting_counter := 1
   and () = total_case_rewriting_counter := 1
   and () = generate_counter := 1
@@ -243,7 +247,7 @@ let reset_all () =
   and () = tautology_counter := 1
   and () = contextual_rewriting_counter_suc := 1
   and () = equational_rewriting_counter_suc := 1
-  and () = conditional_rewriting_counter_suc := 1
+  and () = rewriting_counter_suc := 1
   and () = partial_case_rewriting_counter_suc := 1
   and () = total_case_rewriting_counter_suc := 1
   and () = generate_counter_suc := 1
@@ -287,7 +291,13 @@ let reset_all () =
   and () = enable_arithmetic := false in
   ()
 
-let all_lemmas = ref []
+
+
+
+(* the name of the specification to be tested  *)
+
+let out = ref stdout;;
+let out_proof = ref stdout;;
 
 let process_problem_token = function
     Strat_token l ->
@@ -296,6 +306,7 @@ let process_problem_token = function
       true
   | Lemmas_token l ->
       let () = all_lemmas := generic_list_object_remove_doubles (!all_lemmas @ l) in
+      let () = coq_spec_lemmas := l @ !coq_spec_lemmas in
       true
   | Startpoint_token s ->
       let () = global_strat := s in
@@ -324,11 +335,9 @@ let process_problem_token = function
       let () = initial_conjectures := conjectures_system#content in
       let () = lemmas_system#init !all_lemmas in
       (* all_lemmas is updated with the proved conjectures from l *)
-      let () = all_lemmas := generic_list_object_remove_doubles (!all_lemmas @ l) in
       let () = buffered_output   "\n************************  Proving  *************************" in
       let () = List.iter (fun x -> buffered_output x#string) conjectures_system#content  in
       let () = buffered_output "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" in
-      let () = Coq.next_proof () in
       let () = 
 	if !all_lemmas <> [] then 
 	  let () = buffered_output "\n\nusing lemmas\n" in
@@ -348,17 +357,29 @@ let process_problem_token = function
 	else ()
       in
 (*       let () = if !global_strat#string = "normalize" then normalize_flag := true else normalize_flag := false in  (* to change this line  *) *)
-      let () = buffered_output "\n\nusing strategy \n" in
-      let () = buffered_output !global_strat#string in
+      let () = buffered_output "\n\nusing strategy \n"in
+      let () = buffered_output (!global_strat#string  ^ (if !dracula_mode then " mixed with DRaCuLa" else ""))in
       let () = buffered_output "************************************************************" in
       let b =
         try
           if !global_strat#apply true ([],[]) false && proof_found ()
           then
             let () = buffered_output "\n\nThe following initial conjectures are inductive consequences of R"
-	    and () = List.iter (fun x -> buffered_output x#string) !initial_conjectures
-	    in
+	    and () = List.iter (fun x -> buffered_output x#string) !initial_conjectures in 
             let () = exit_code := 0 in
+
+(* 	    let () = if !coqc_mode then *)
+(* 	      let () = if !maximal_output then buffered_output  ("\n\n(\* Generating the COQ proof for the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*\)\n" ) in *)
+(* 	      let () =  output_string !out  ("\n\n(\* Generating the COQ proof for the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*\)\n" ) in *)
+(* 	      let () = print_coq_proof !out in *)
+(* 	      (\* Initialize coq proof *\) *)
+(* 	      let () = coq_formulas_with_infos := [] in *)
+(* 	      let () = coq_less_clauses := [] in *)
+(* 	      let () = coq_main_lemma := "" in *)
+(* 	      let () = main_lemma_proof := "" in *)
+(* 	      let () = coq_induction_schemas := "" in *)
+(* 		()  *)
+(* 	    in *)
             true
           else
             let () = buffered_output "\n\nWe failed on the initial conjectures" 
@@ -370,7 +391,23 @@ let process_problem_token = function
 	    Proof ->
               let () = buffered_output "\n\nThe following initial conjectures are inductive consequences of R"
 	      and () = List.iter (fun x -> buffered_output x#string) !initial_conjectures in
+	      let () = all_lemmas := generic_list_object_remove_doubles (!all_lemmas @ !initial_conjectures) in
               let () = exit_code := 0 in
+	      (* Initialize coq proof *)
+	    let () = if !coqc_mode then
+	      let () = if !maximal_output then buffered_output  ("\n\n(* Generating the COQ proof of the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*)\n" ) in
+	      let () = output_string !out  ("\n\n(* Generating the COQ proof of the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*)\n" ) in
+	      let () = print_coq_proof !out_proof in
+	      (* Initialize coq proof *)
+	      let () = coq_formulas := [] in
+	      let () = coq_formulas_with_infos := [] in
+	      let () = coq_less_clauses := [] in
+	      let () = coq_main_lemma := "" in
+	      let () = main_lemma_proof := "" in
+	      let () = coq_replacing_clauses := [] in
+	      let () = coq_induction_schemas := "" in
+		() 
+	    in
               true
           | Refutation ->
               if !system_is_strongly_sufficiently_complete && !system_is_ground_convergent && !free_constructors
@@ -429,7 +466,7 @@ let process_problem_token = function
 		      | Lit_rule _ -> 
       			  let c' = c#force_orientation in
 			  let () = buffered_output ("\t" ^ c'#string) in
-			  let () = broken_order := true in 
+			  (* let () = broken_order := true in  *)
 			  let () = buffered_output ("\nWARNING: the lemma [" ^ (string_of_int c#number) ^ "] is not orientable in a rewrite rule using the current order") in
 			  [c']
 		      | Lit_diff _ -> parse_failwith ("The lemma [" ^ (string_of_int c#number) ^ "] is not orientable") 
@@ -448,7 +485,7 @@ let process_problem_token = function
       let f t =
         let () = buffered_output ("\nNormalizing ONLY with unconditional rules: " ^ t#string) in
 	let c_dummy = List.hd rewrite_system#content in
-        let _, str, t' = normalize_plus [R;L] t c_dummy "" ([],[]) 0 in
+        let _, str, t', _ = normalize_plus [R;L] t c_dummy "" ([],[]) 0 in
         buffered_output ("\n" ^  t'#string ^ " is the normal form of " ^ t#string ^ (if str = "" then "" else " obtained by the following operations :" ^ str)) in
       let () = List.iter f l in 
       true
@@ -458,11 +495,12 @@ let process_problem_token = function
       and () = buffered_output ("t' = " ^ t'#string) in
       let s =
 	if rpo_equivalent t t' then "t ~ t'"
-	else if rpo_greater false t t' then "t > t'"
-	else if rpo_greater false t' t then "t < t'"
-	else "t and t' are not comparable" in
+	else 
+	  if rpo_greater false t t' then "t > t'"
+	  else if rpo_greater false t' t then "t < t'"
+	  else "t and t' are not comparable" in
       let () = buffered_output s in
-      true
+	true
   | Compare_token (c, c') ->
       let () = buffered_output ("c  = " ^ c#string)
       and () = buffered_output ("c' = " ^ c'#string) in
@@ -511,14 +549,12 @@ let process_problem_token = function
 	   
 let specif_counter = ref 0
   
-(* the name of the specification to be tested  *)
-let name_specif = ref ""
   
 (* ;  *)
-(*   !print_dico_test_set ()   *)
+(*   !print_dico_test_set ()   *) 
 
 let mainloop s =
- let _ = name_specif := s in
+
  let () = reset_all () in
  let () = incr specif_counter in
  let () = global_strat := new Strategies.strategy (Named_strategy "builtin") in
@@ -527,10 +563,27 @@ let mainloop s =
  let () = rewrite_system#compute_induction_positions_v0 in
  let () = if !debug_mode then print_dico_ind_positions_v0 () in
  let () = update_dico_rules () in
+ let () = if !dracula_mode then 
+   let () = if !coqc_spec_mode then let () = buffered_output "\n\n *** -coqc_spec option is incompatible with the Dracula strategy ***\n" in coqc_spec_mode := false in
+   let () = if !coqc_mode then  let () = buffered_output "\n\n *** -coqc option is incompatible with the Dracula strategy ***\n" in coqc_mode := false in
+()
+ in
  if  not !Sys.interactive then
    let () =
      if !actually_process
      then
+       let () = if !coqc_mode then
+	 let () =  out_proof := open_out (!spec_name ^ ".v")  in
+	 let () = output_string !out_proof ("\nRequire Import " ^ !spec_name ^ "_spec.\n\n") in
+	   ()
+       in 
+   let () = if !coqc_spec_mode then
+     let () = out := open_out (!spec_name ^ "_spec.v") in 
+     let () = buffered_output ("\n\n(* Generating the COQ specification in " ^ !spec_name ^ ".v file *)\n") in
+     let () = print_coq_specification !out in
+     let () = if !maximal_output && !coqc_mode then buffered_output "********* Output of Coq (using Coccinelle) proof **********" in
+     ()
+   in
        let () = buffered_output (
          "\n\n************************************************************\n" ^
            "******************* Starting computation *******************\n" ^
@@ -541,7 +594,7 @@ let mainloop s =
      else ()
    in
    let () = if !harvey_mode then print_harvey s else () in
-   let () = if !coq_mode then print_coq s else () in
+   let () = if !coqc_mode then close_out !out in
      ()
  else ()
 
@@ -551,7 +604,9 @@ let usage_string = "Usage: " ^ Sys.argv.(0) ^ " [options] spec_file [[options] s
 let rec speclist =
   [
     ("-augment", Arg.Set augmentation_mode, ": use augmentation with LA and CC") ;
-    ("-coq", Arg.Set coq_mode, ": output the CoQ proof specification") ;
+    ("-coqc_spec", Arg.Set coqc_spec_mode, ": generates the CoQ specification using Coccinelle") ;
+    ("-coqc", Arg.Set coqc_mode, ": output a one-to-one CoQ proof using Coccinelle") ;
+    ("-dracula", Arg.Set dracula_mode, ": D-proof mode") ;
     ("-debug", Arg.Set debug_mode, ": debug mode") ;
     ("-exclude_nullary", Arg.Set exclude_nullary_mode, ": don't add nullary variables to induction variables") ;
     ("-harvey", Arg.Set harvey_mode, ": output the specification in a HarVey friendly way") ;

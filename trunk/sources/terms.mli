@@ -19,7 +19,9 @@ val compute_depth : < depth : int; .. > list -> int
         'a -> (Symbols.var * Symbols.var) list
       method check_property : ('a -> bool) -> bool
       method private compute_basic_string : string
+      method compute_string_coq_with_quantifiers: (Symbols.var list) -> string
       method compute_string : string
+      method compute_string_coq : bool -> string
       method content : 'b
       method contextual_var : int
       method copy : 'a
@@ -31,7 +33,7 @@ val compute_depth : < depth : int; .. > list -> int
         ((Symbols.const * int) list * 'a) list
       method defined_positions : int list list
       method def_symbols : string list
-      method delpos_conditional_rewriting : int list -> unit
+      method delpos_rewriting : int list -> unit
       method delpos_contextual_rewriting : int list -> unit
       method delpos_equational_rewriting : int list -> unit
       method delpos_partial_case_rewriting : int list -> unit
@@ -74,7 +76,7 @@ val compute_depth : < depth : int; .. > list -> int
       method non_linear_variables :
         ((Symbols.var * Symbols.sort * bool) * int list list) list
       method occur : Symbols.var -> bool
-      method pos_conditional_rewriting : int list list
+      method pos_rewriting : int list list
       method pos_contextual_rewriting : int list list
       method pos_equational_rewriting : int list list
       method pos_partial_case_rewriting : int list list
@@ -85,7 +87,7 @@ val compute_depth : < depth : int; .. > list -> int
       method replace_sort : Symbols.sort -> 'a
       method replace_subterm_at_pos : int list -> 'a -> 'a
       method replace_subterms : int ref -> 'a -> 'a -> 'a
-      method resetpos_conditional_rewriting : unit
+      method resetpos_rewriting : unit
       method resetpos_contextual_rewriting : unit
       method resetpos_equational_rewriting : unit
       method resetpos_partial_case_rewriting : unit
@@ -126,7 +128,7 @@ val compute_depth : < depth : int; .. > list -> int
         ((Symbols.var * Symbols.sort * bool) * int list list) list
       val content : 'b
       val depth : int
-      val mutable pos_conditional_rewriting : int list list
+      val mutable pos_rewriting : int list list
       val mutable pos_contextual_rewriting : int list list
       val mutable pos_equational_rewriting : int list list
       val mutable pos_partial_case_rewriting : int list list
@@ -148,6 +150,8 @@ val compute_depth : < depth : int; .. > list -> int
       method check_property : ('a -> bool) -> bool
       method private compute_basic_string : string
       method compute_string : string
+      method compute_string_coq_with_quantifiers :  (Symbols.var list) -> string
+      method compute_string_coq : bool -> string
       method content : 'b
       method contextual_var : int
       method copy : 'a
@@ -159,7 +163,7 @@ val compute_depth : < depth : int; .. > list -> int
         ((Symbols.const * int) list * 'a) list
       method defined_positions : int list list
       method def_symbols : string list
-      method delpos_conditional_rewriting : int list -> unit
+      method delpos_rewriting : int list -> unit
       method delpos_contextual_rewriting : int list -> unit
       method delpos_equational_rewriting : int list -> unit
       method delpos_partial_case_rewriting : int list -> unit
@@ -202,7 +206,7 @@ val compute_depth : < depth : int; .. > list -> int
       method non_linear_variables :
         ((Symbols.var * Symbols.sort * bool) * int list list) list
       method occur : Symbols.var -> bool
-      method pos_conditional_rewriting : int list list
+      method pos_rewriting : int list list
       method pos_contextual_rewriting : int list list
       method pos_equational_rewriting : int list list
       method pos_partial_case_rewriting : int list list
@@ -213,7 +217,7 @@ val compute_depth : < depth : int; .. > list -> int
       method replace_sort : Symbols.sort -> 'a
       method replace_subterm_at_pos : int list -> 'a -> 'a
       method replace_subterms : int ref -> 'a -> 'a -> 'a
-      method resetpos_conditional_rewriting : unit
+      method resetpos_rewriting : unit
       method resetpos_contextual_rewriting : unit
       method resetpos_equational_rewriting : unit
       method resetpos_partial_case_rewriting : unit
@@ -254,7 +258,7 @@ val compute_depth : < depth : int; .. > list -> int
         ((Symbols.var * Symbols.sort * bool) * int list list) list
       val content : 'b
       val depth : int
-      val mutable pos_conditional_rewriting : int list list
+      val mutable pos_rewriting : int list list
       val mutable pos_contextual_rewriting : int list list
       val mutable pos_equational_rewriting : int list list
       val mutable pos_partial_case_rewriting : int list list
@@ -270,7 +274,7 @@ val subst_is_primitive :
   ('a * < is_constructor_term : bool; .. >) list -> bool
 val contextual_rewriting_bit : int
 val equational_rewriting_bit : int
-val conditional_rewriting_bit : int
+val rewriting_bit : int
 val partial_case_rewriting_bit : int
 val total_case_rewriting_bit : int
 val induction_bit : int
@@ -315,7 +319,7 @@ val sprint_detailed_term :
      string; .. > as 'a) ->
   string
 val print_detailed_position_term :
-    (< content : 'a concrete_term; pos_conditional_rewriting : int list list;
+    (< content : 'a concrete_term; pos_rewriting : int list list;
        string : string; .. > as 'a) ->
     unit
 val expand_terms :

@@ -108,6 +108,11 @@ type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
       val card : int
       val content : Literals.literal list * Literals.literal list
       val mutable history : 'c
+      val mutable standby: bool
+      val mutable delete_standby: bool
+      val mutable sb_string: string
+      val mutable sb_newconjs: 'b list
+      val mutable sb_IHs: ('b *  (Symbols.var * Terms.term) list) list
       val mutable broken_info: string * int * (Literals.literal list * Literals.literal list)
       val mutable inference_bitstream : int
       val is_horn : bool
@@ -143,6 +148,8 @@ type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
       method cardinal : int
       method compute_peano_context : 'a
       method compute_string : string
+      method compute_string_coq_with_quantifiers : bool -> string
+      method compute_string_coq_for_order : bool -> string
       method conditions : Literals.literal list
       method content : Literals.literal list * Literals.literal list
       method copy : 'b
@@ -158,6 +165,11 @@ type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
       method greatest_varcode : int
       method has_bit : int -> bool
       method history : 'c
+      method delete_standby: bool
+      method standby: bool
+      method sb_string: string 
+      method sb_newconjs: 'b list
+      method sb_IHs: ('b *  (Symbols.var * Terms.term) list) list
       method is_boolean : bool
       method is_empty : bool
       method is_horn : bool
@@ -186,11 +198,16 @@ type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
       method righthand_side : Terms.term
       method set_bit : int -> unit
       method set_history : 'c -> unit
+      method set_standby: bool -> unit
+      method set_delete_standby: bool -> unit
+      method set_sb_string: string -> unit
+      method set_sb_newconjs: 'b list -> unit
+      method set_sb_IHs: ('b *  (Symbols.var * Terms.term) list) list -> unit
       method sprint : string
       method string : string
       method substitute : (Symbols.var * Terms.term) list -> 'b
       method substitute_and_rename :
-        (Symbols.var * Terms.term) list -> int -> 'b
+        (Symbols.var * Terms.term) list -> int -> 'b *  (Symbols.var * Terms.term) list
       method subsumption_has_failed : int -> bool
       method subterm_at_position : bool * int * int list -> Terms.term
       method subterm_matching :
@@ -353,21 +370,21 @@ val write_pos_clause : peano_context clause -> unit
 
   val list_exists_w_number :
     (int ->
-     (< content : < both_sides : < pos_conditional_rewriting : int list list;
+     (< content : < both_sides : < pos_rewriting : int list list;
                                    pos_partial_case_rewriting : int list list;
                                    pos_total_case_rewriting : int list list;
                                    .. > *
-                                 < pos_conditional_rewriting : int list list;
+                                 < pos_rewriting : int list list;
                                    pos_partial_case_rewriting : int list list;
                                    pos_total_case_rewriting : int list list;
                                    .. >;
                     .. >
                   list *
-                  < both_sides : < pos_conditional_rewriting : int list list;
+                  < both_sides : < pos_rewriting : int list list;
                                    pos_partial_case_rewriting : int list list;
                                    pos_total_case_rewriting : int list list;
                                    .. > *
-                                 < pos_conditional_rewriting : int list list;
+                                 < pos_rewriting : int list list;
                                    pos_partial_case_rewriting : int list list;
                                    pos_total_case_rewriting : int list list;
                                    .. >;
@@ -385,7 +402,7 @@ val print_history : (which_system list ->
     peano_context clause ->
     string ->
        ((peano_context clause) list) *
-      ((peano_context clause) list) -> int -> (string * int * (Literals.literal list * Literals.literal list)) list * string * Terms.term) -> peano_context clause -> bool -> unit
+      ((peano_context clause) list) -> int -> (string * int * (Literals.literal list * Literals.literal list)) list * string * Terms.term * (peano_context clause * (Symbols.var * Terms.term) list) list) -> peano_context clause -> bool -> unit
 val print_history_instance : peano_context clause -> unit
 
 val initial_conjectures : (peano_context clause) list ref
@@ -403,3 +420,14 @@ val initial_conjectures : (peano_context clause) list ref
 
 val compute_string_clause_caml: peano_context clause -> string
 val real_conjectures_system: (peano_context clause) list ref
+val coq_formulas : (peano_context clause) list ref
+val coq_all_lemmas : (int * (string * ((Symbols.var * Symbols.sort) list))) list ref
+val coq_spec_lemmas : (peano_context clause) list ref
+val coq_generate_cond  : (int * Literals.literal list list) list ref
+val coq_formulas_with_infos :(string * int * (Symbols.var * Symbols.sort * bool) list * (int * (Symbols.var * Terms.term) list) list * ((peano_context clause) * string * (peano_context clause)  *  (Symbols.var * Terms.term) list ) list) list ref
+val coq_less_clauses : ((peano_context clause) * (peano_context clause)) list ref
+val coq_main_lemma : string ref
+val main_lemma_proof : string ref
+val coq_induction_schemas : string ref
+val rewriting_clauses : ((peano_context clause) * string * (peano_context clause) *  (Symbols.var * Terms.term) list ) list ref
+val coq_replacing_clauses : (int * (peano_context clause * (Symbols.var * Terms.term) list * int)) list ref 

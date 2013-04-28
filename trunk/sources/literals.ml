@@ -104,6 +104,18 @@ class literal c_l =
       | Lit_equal (t, t') -> t#string ^ " = " ^ t'#string
       | Lit_diff (t, t') -> t#string ^ " <> " ^ t'#string
 
+    method compute_string_coq with_model =
+      match content with
+        Lit_rule (t, t') -> (t#compute_string_coq with_model) ^ "::" ^ (t'#compute_string_coq with_model)
+      | Lit_equal (t, t') -> (t#compute_string_coq with_model) ^ "::" ^ (t'#compute_string_coq with_model)
+      | Lit_diff (t, t') -> (t#compute_string_coq with_model) ^ "::" ^ (t'#compute_string_coq with_model)
+
+    method compute_string_coq_with_quantifiers =
+      match content with
+        Lit_rule (t, t') -> (t#compute_string_coq_with_quantifiers []) ^ " = " ^ (t'#compute_string_coq_with_quantifiers [])
+      | Lit_equal (t, t') -> (t#compute_string_coq_with_quantifiers []) ^ " = " ^ (t'#compute_string_coq_with_quantifiers [])
+      | Lit_diff _ -> failwith "compute_string_coq_with_quantifiers: difference literals are not yet treated"
+
     method def_symbols =
       match content with
         Lit_rule (t, t') -> t#def_symbols @ t'#def_symbols

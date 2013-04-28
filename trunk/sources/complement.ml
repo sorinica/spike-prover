@@ -48,7 +48,7 @@ let complement verbose clause is_strict level =
     let c' = c#build (n2 @ List.map (fun x -> x#revert_boolean) o) (p2 @ m) in
     let () = c'#set_bit complement_bit in
     let () = 
-      if ((is_strict && clause_greater false false c c') || ((not is_strict) && clause_geq true false c c')) then
+      if ((is_strict && clause_greater false false c c') || ((not is_strict) && clause_geq false false c c')) then
         if verbose
         then
           let () = buffered_output (!indent_string ^ "Complement: simplify\n" ^

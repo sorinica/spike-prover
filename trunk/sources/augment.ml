@@ -122,7 +122,7 @@ let augment_polynom counter p lp reference cr g l =
 	      	  let () = print_indent_string ("\n c_sigma' = " ^ c_sigma'#string) in
 		  let c_sigma1 = List.hd (try auto_simplification false c_sigma' true 1 with Failure "auto_simplification" -> [c_sigma']) in
 	      	  let () = print_indent_string ("\n c_sigma1 = " ^ c_sigma1#string) in
-		  let c_sigma2 = List.hd (try conditional_rewriting false true (LOS_defined [R]) Pos_all ([],[]) c_sigma1 true 1 with Failure "conditional_rewriting" -> [c_sigma1]) in
+		  let c_sigma2 = List.hd (try rewriting false true (LOS_defined [R]) Pos_all ([],[]) c_sigma1 true 1 with Failure "rewriting" -> [c_sigma1]) in
 	      	  let () = print_indent_string ("\n c_sigma2 = " ^ c_sigma2#string) in
 		  let _, new_p1 = c_sigma2#content in
 	      	  if n1 = [] 

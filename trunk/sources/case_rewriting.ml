@@ -16,6 +16,7 @@ open Dummies
 open Clauses
 open Test_sets
 
+let axiom_numbers = ref [];;
 
 (* These conditions are shared by both partial and total case rewriting *)
 
@@ -68,12 +69,12 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
             try
               let sub = t#matching
 		(fun s ->
-		  let hs = h#substitute_and_rename s max_var in
+		  let hs, _ = h#substitute_and_rename s max_var in
 		  if hs#oriented && ( match los with 
 		      "L"  -> true
 		    | "R"  -> true
-		    | "C1" -> clause_geq true false c hs 
-		    | "C2" -> clause_greater false false c hs
+		    | "C1" -> if !dracula_mode then failwith "case_rewriting: dracula not yet implemented" else clause_geq false false c hs 
+		    | "C2" ->  if !dracula_mode then failwith "case_rewriting: dracula not yet implemented" else clause_greater false false c hs
 		    | _ -> failwith "normalize: los") 
 		  then 
 		    s
@@ -91,13 +92,13 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
 	      	      let lhs' = h'#lefthand_side in
               	      let sub' = t#matching
 			(fun s ->
-			  let hs' = (h'#substitute_and_rename s max_var) in
+			  let hs', _ = (h'#substitute_and_rename s max_var) in
 			  
 			  if hs'#oriented &&
 			    match los with 
 				"L" -> true
 			      | "R" -> false
-			      | "C1" -> clause_geq true false c hs' 
+			      | "C1" -> clause_geq false false c hs' 
 			      | "C2" -> clause_greater false false c hs'
 			      | _ -> failwith "normalize: los"
 			  then 		    
@@ -135,7 +136,7 @@ let generate_cond_and_eq t c b n p l _ =
   let fn cl s =
 
     let lhs = cl#lefthand_side in
-    let cl'' = cl#substitute_and_rename s max_var in
+    let cl'', _ = cl#substitute_and_rename s max_var in
     (* we need to update the parameterized sorts from hsub *)
     let _ = unify_sorts (Actual_sort  t#sort) lhs#sort in
     let cl' = cl''#expand_sorts in
@@ -156,7 +157,8 @@ let generate_cond_and_eq t c b n p l _ =
     let negs' = List.map (fun x ->x#copy) (negs @ p_i') in
     let poss' = List.map (fun x ->x#copy) poss in
     let res = c#build negs' poss' in
-    
+    let () = axiom_numbers := !axiom_numbers @ [cl#number, []] in
+    let () = rewriting_clauses := !rewriting_clauses @ [(res, "R", cl', s)] in 
     p_i, res 
   in
   let c_i, new_eq = list_2_2_map fn (List.map (fun (x, y, _) -> (x, y)) l) in
@@ -221,7 +223,7 @@ let partial_case_rewriting verbose sl c_pos cxt c is_strict level =
 (* 	if !broken_order then () *)
 (* 	else  *)
 	  if ((is_strict && (List.for_all (fun x -> clause_greater false false c x) new_all)) || 
-	    ((not is_strict) && (List.for_all (fun x -> clause_geq true false c x) new_all)))
+	    ((not is_strict) && (List.for_all (fun x -> clause_geq false false c x) new_all)))
 	  then 
 	    ()
 	  else failwith "final_update"
@@ -305,8 +307,8 @@ let partial_case_rewriting verbose sl c_pos cxt c is_strict level =
 	  buffered_output ""
 	else ()
       in
-      List.flatten (List.map preprocess_conjecture (new_cond @ new_eq)) (* réussite principale *)
-    else (* échec principal *)
+      List.flatten (List.map preprocess_conjecture (new_cond @ new_eq)) (* reussite principale *)
+    else (* echec principal *)
       let () = c#set_bit partial_case_rewriting_bit in
       failwith "partial_case_rewriting"
 	
@@ -318,21 +320,33 @@ let partial_case_rewriting verbose sl c_pos cxt c is_strict level =
 *)
 
 let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
-
+  let all_hist c = List.map (fun (_,cl) -> cl#number) (c#history) in
+ if c#standby then 
+      let sb_IHs' = List.filter (fun (cH,_) -> 
+				   (* let () = buffered_output ( "\n\n standby: The IH related to " ^ (string_of_int cH#number) ^ " will be checked") in *)
+				   let offsprings_cH = List.filter (fun c' -> List.mem cH#number (c'#number :: (all_hist c')))  !real_conjectures_system in 
+				     if  offsprings_cH = []  then (* all IHs have been  already proved *)
+				       let () = buffered_output ( "\n\n standby: The IH related to " ^ (string_of_int cH#number) ^ " is checked since it is already proved. ") in false
+				     else
+				       true) c#sb_IHs in
+	if sb_IHs' = [] then  let () = buffered_output ("\t    It unblocked the following operation:\n\n" ^ c#sb_string) in c#sb_newconjs
+	else let () = c#set_sb_IHs sb_IHs' in failwith "total_case_rewriting"
+else
   let _ =  if !maximal_output then  buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule TOTAL CASE REWRITING " ^ " on " ^ (string_of_int c#number)) in
-(*   let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
+    (*   let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
 
-(*   let () = write_pos_clause c in  *)
+  (*   let () = write_pos_clause c in  *)
 
   let res = ref ([]: Clauses.peano_context Clauses.clause list) in
-
-  (* 1: process arguments *)
-    let _ =
-      if st#is_query then
-        !spike_parse_strategy (try dico_st#find name_strat_query with Not_found -> failwith "raising Not_found in total_case_rewriting") ()
-      else st
-    and arg_pos =
-      match c_pos with
+  let () = rewriting_clauses := [] in
+  let () = axiom_numbers := [] in
+    (* 1: process arguments *)
+  let _ =
+    if st#is_query then
+      !spike_parse_strategy (try dico_st#find name_strat_query with Not_found -> failwith "raising Not_found in total_case_rewriting") ()
+    else st
+  and arg_pos =
+    match c_pos with
         Pos_defined (b, n, p) ->
           begin (* Discards second level PM *)
             try let _ = c#subterm_at_position (b, n, p) in c_pos
@@ -352,16 +366,16 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
       | Pos_all -> c_pos
       | Pos_query -> !spike_parse_literal_position_in_clause c () 
       | Pos_dumb -> failwith "positions in total_case_rewriting"
-    in
+  in
   let arg_sl = 
     match sl with
         LOS_defined l ->  l
-	 
+	  
       | LOS_query -> 
 	  !spike_parse_list_of_systems () 
   in
 
-      (* 2: final update *)
+  (* 2: final update *)
   let final_update st t b n p l =
     if l = [] then failwith "final_update"
     else
@@ -369,14 +383,16 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
       let new_cond, new_eq = generate_cond_and_eq t c b n p l false in
 
       let test = 
-	if !broken_order then true
+	if !dracula_mode then true
 	else
-	  if not !debug_mode then List.for_all (fun x -> if is_strict then clause_greater false false c x else clause_geq true false c x) new_eq 
+	  if !broken_order then true
 	  else
-	    (List.for_all (fun x ->
-			     let res = if is_strict then clause_greater false false c x else clause_geq true false c x in 
-			     (* let () = print_string ("\n Is c = " ^ c#string ^ *)
-(* 						      " \n greater " ^ (if is_strict then "" else "or equal") ^ " than x = " ^ x#string ^ "\n Result: " ^ (string_of_bool res)) in  *)res) new_eq) 
+	    if not !debug_mode then List.for_all (fun x -> if is_strict then clause_greater false false c x else clause_geq false false c x) new_eq 
+	    else
+	      (List.for_all (fun x ->
+			       let res = if is_strict then clause_greater false false c x else clause_geq false false c x in 
+				 (* let () = print_string ("\n Is c = " ^ c#string ^ *)
+				 (* 						      " \n greater " ^ (if is_strict then "" else "or equal") ^ " than x = " ^ x#string ^ "\n Result: " ^ (string_of_bool res)) in  *)res) new_eq) 
       in
 	if test 
 	then
@@ -422,8 +438,7 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
 	    let () = buffered_output ("\nresulting\n") in
 	    let i = ref 0 in
             let () = List.iter2 (fun x (l, _, ls) -> let () = i := !i + 1 in buffered_output (!indent_string ^ "\187 " ^ (string_of_int
-															    !i) ^ ") " ^ x#string ^ "\n\nusing " ^ !indent_string ^ "[ " ^ (string_of_int l#number) ^ " ] from " ^ ls ^ "\n")) new_eq
-	      l in
+															    !i) ^ ") " ^ x#string ^ "\n\nusing " ^ !indent_string ^ "[ " ^ (string_of_int l#number) ^ " ] from " ^ ls ^ "\n")) new_eq l in
               buffered_output "" 
 	  else () 
 	  in
@@ -446,42 +461,42 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
 	  if b && n = 0 then [] else res1 
 	else res1 
       in 
-      new_res1 @ res2 
+	new_res1 @ res2 
     in
     let i = ref (-1) in
     let res = List.fold_left (fun l lit -> i := !i + 1; (fn false !i lit) @ l) [] nl in
     let i = ref (-1) in
     let res' = List.fold_left (fun l lit -> i := !i + 1; (fn true !i lit) @ l) res pl in
-    res'
-      
+      res'
+	
   in
-  
+    
   (* sort the positions according to the order over the symbols  *)
-  
+    
   let pos_subterms = (List.map (fun p -> (p, c#subterm_at_position p)) all_pos) in
-  
+    
   let pos_subterms' =   List.filter (fun (_, t') ->  if t'#is_constructor_term then false else if is_constructor t'#head then false else true) pos_subterms in
   let pos_sorted = order_terms pos_subterms' false in
-  
-(*   let () = buffered_output (List.fold_left (fun x (p, t) -> x ^ (sprint_clausal_position p) ^ "( t = " ^ t#string ^ ")" ^ " " ) ("\nPOS SORTED [" ^ *)
-(*   (string_of_int c#number) ^"] are: ") pos_sorted) in *)
+    
+  (*   let () = buffered_output (List.fold_left (fun x (p, t) -> x ^ (sprint_clausal_position p) ^ "( t = " ^ t#string ^ ")" ^ " " ) ("\nPOS SORTED [" ^ *)
+  (*   (string_of_int c#number) ^"] are: ") pos_sorted) in *)
 
 
   let rec all_conditions lpos =
     match lpos with
 	[] -> false 
       | ((b, n, p), _) :: t -> 
-(* 	  let () = buffered_output ("\nTreating the term " ^ (c#subterm_at_position (b, n, p))#string ^ " at position " ^ (sprint_clausal_position (b, n, p))) in *)
+	  (* 	  let () = buffered_output ("\nTreating the term " ^ (c#subterm_at_position (b, n, p))#string ^ " at position " ^ (sprint_clausal_position (b, n, p))) in *)
 	  try 
 	    if case_rw_condition_2_with_p_given (final_update st) c b n p arg_sl cxt is_strict then
 	      true
 	    else 
 	      let _ = c#subterm_at_position (b, n, [(List.hd p)]) in 
-	      all_conditions t
+		all_conditions t
 	  with Failure "case_rw_condition_2_with_p_given" -> 
-	      all_conditions t 
+	    all_conditions t 
   in
-  
+    
   (* 3: process conditions on selected arguments ! *)
   let try_all_conditions =
     match arg_pos with
@@ -493,14 +508,19 @@ let total_case_rewriting verbose st sl c_pos cxt c is_strict level =
       | Pos_dumb -> failwith "positions in total_case_rewriting"
 	  
   in
-              (* 5: let's do it ! *) 
+    (* 5: let's do it ! *) 
   let () = incr total_case_rewriting_counter in
-  if all_pos = []  then failwith "total_case_rewriting" (* échec principal *)
-  else
-    if try_all_conditions
-    then !res (* réussite principale *)
-    else (* échec principal *)
-      failwith "total_case_rewriting" (* échec principal *)
+    if all_pos = []  then failwith "total_case_rewriting" (* echec principal *)
+    else
+      if try_all_conditions
+      then 
+	let () = List.iter (fun c1 -> coq_less_clauses:= !coq_less_clauses @ [(c1, c)]) !res in
+	let () = coq_formulas_with_infos := !coq_formulas_with_infos @ [("total_case_rewriting", c#number, [], !axiom_numbers, !rewriting_clauses)] in
+	let () = coq_formulas := !coq_formulas @ [c] in   
+	let () = List.iter (fun neq -> neq#add_history ([], c)) !res in 
+	  !res (* reussite principale *)
+      else (* echec principal *)
+	failwith "total_case_rewriting" (* echec principal *)
 	
 (* TO DO : to add a new rule, CASE ANALYSIS, which performs the case analysis operation  *)
 	

@@ -13,6 +13,8 @@ type concrete_literal =
       method both_sides_w_or : bool -> Terms.term * Terms.term
       method compute_pi : bool
       method compute_string : string
+      method compute_string_coq_with_quantifiers : string
+      method compute_string_coq : bool -> string
       method content : concrete_literal
       method copy : 'a
       method def_symbols: string list

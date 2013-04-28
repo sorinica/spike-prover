@@ -54,7 +54,8 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
       [] -> raise Exit
     | _ ->
 	let max_var = c#greatest_varcode + 1 in
-        buffered_output ("Current instance: " ^ (c#substitute_and_rename sigma max_var)#string) ;
+	let c_tmp,_ = c#substitute_and_rename sigma max_var in
+        buffered_output ("Current instance: " ^ c_tmp#string) ;
         let (st: strategy) = try dico_st#find name_strat_generate_reduce with Not_found -> failwith "find:generate_obs" (* !spike_parse_strategy def_st () *) in
         st, sigma in
 
@@ -180,7 +181,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
 (* 	let () = buffered_output ("Unifying the rule is " ^ rule#string ^ " and with the term " ^ t#string ) in *)
 (* 	let () = print_detailed_term t in *)
 	
-	let rule' = rule#substitute_and_rename [] max_var in (* rename the variables *)
+	let rule', _ = rule#substitute_and_rename [] max_var in (* rename the variables *)
 	let _ = rule'#number in
 	let lhs = rule'#lefthand_side in
 	

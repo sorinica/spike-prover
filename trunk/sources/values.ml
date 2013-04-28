@@ -59,7 +59,13 @@ let debug_mode = ref false;;
 
 let harvey_mode = ref false;;
 
-let coq_mode = ref false;;
+let coqc_spec_mode = ref false;;
+
+let coq_inline = ref "";;
+
+let coqc_mode = ref false;;
+
+let dracula_mode = ref false;;
 
 let induction_mode = ref true;;
 
@@ -124,7 +130,7 @@ and unary_symbol_1 = ref 0;; (* The smallest unary symbol (unused in 3) *)
 (* Counters for counting application of rules *)
 let contextual_rewriting_counter = ref 1;;
 let equational_rewriting_counter = ref 1;;
-let conditional_rewriting_counter = ref 1;;
+let rewriting_counter = ref 1;;
 let partial_case_rewriting_counter = ref 1;;
 let total_case_rewriting_counter = ref 1;;
 let generate_counter = ref 1;;
@@ -135,13 +141,15 @@ let tautology_counter = ref 1;;
 let augmentation_counter_suc = ref 1;;
 let contextual_rewriting_counter_suc = ref 1;;
 let equational_rewriting_counter_suc = ref 1;;
-let conditional_rewriting_counter_suc = ref 1;;
+let rewriting_counter_suc = ref 1;;
 let partial_case_rewriting_counter_suc = ref 1;;
 let total_case_rewriting_counter_suc = ref 1;;
 let generate_counter_suc = ref 1;;
 let generate_eq_counter_suc = ref 1;;
 let subsumption_counter_suc = ref 1;;
 let tautology_counter_suc = ref 1;;
+
+let spec_name = ref "";;
 
 let pgoals_counter = ref 1;; (* counter to print the goals from E H L  *)
 

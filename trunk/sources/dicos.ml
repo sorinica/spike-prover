@@ -227,52 +227,65 @@ class ['a] order_dictionary ini_size =
       in !res
 
     method add_couple x x' =
-      let lequiv_x =  
-	try dico_equivalence#find x with 
-	    Not_found -> [x] 
-      in
-      if List.mem x' lequiv_x then ()
+      let l = try Hashtbl.find content x with 
+      	  Not_found -> [] in
+      let l' = try Hashtbl.find content x' with 
+      	  Not_found -> [] in
+      if List.exists (fun c -> let l_c = try Hashtbl. find content c with Not_found -> [] in List.mem x l_c) (x' :: l') or 
+      List.mem x l then 
+	 failwith ("the symbol " ^ (string_of_int x) ^ " cannot be added to the existing ordering")
       else
-	let lequiv_x' = 
-	  try dico_equivalence#find x' with
-	      Not_found -> [x']
-	in
-	if List.mem x lequiv_x' then ()
-	else 
-	  let l =
-            try Hashtbl.find content x with
-		Not_found -> []
-	  and l' =
-            try Hashtbl.find content x' with
-		Not_found -> []
-	  in
-	  let new_l' = 
-	    if List.mem x l' then 
-	      let () = dico_equivalence#fill (fun _ _ -> true) [x; x'] in
-	      let l'' = remove_all_el ( = ) x l' in
-	      let () = Hashtbl.remove content x' in
-	      let () = Hashtbl.add content x' l'' in
-	      l''
-	    else
-	      generic_insert_sorted x' l'
-	  in
+	let new_l = generic_merge_sorted_lists l (generic_insert_sorted x' l') in
+	    let () = Hashtbl.remove content x in
+	    let () = Hashtbl.add content x new_l in
+	    self#iter (fun i l_i -> if List.mem x l_i then List.iter (fun b -> if not (List.mem b l_i) then self#add_couple i b) new_l)
+	    
+      (* let lequiv_x =   *)
+      (* 	try dico_equivalence#find x with  *)
+      (* 	    Not_found -> [x]  *)
+      (* in *)
+      (* if List.mem x' lequiv_x then () *)
+      (* else *)
+      (* 	let lequiv_x' =  *)
+      (* 	  try dico_equivalence#find x' with *)
+      (* 	      Not_found -> [x'] *)
+      (* 	in *)
+      (* 	if List.mem x lequiv_x' then () *)
+      (* 	else  *)
+      (* 	  let l = *)
+      (*       try Hashtbl.find content x with *)
+      (* 		Not_found -> [] *)
+      (* 	  and l' = *)
+      (*       try Hashtbl.find content x' with *)
+      (* 		Not_found -> [] *)
+      (* 	  in *)
+      (* 	  let new_l' =  *)
+      (* 	    if List.mem x l' then  *)
+      (* 	      let () = dico_equivalence#fill (fun _ _ -> true) [x; x'] in *)
+      (* 	      let l'' = remove_all_el ( = ) x l' in *)
+      (* 	      let () = Hashtbl.remove content x' in *)
+      (* 	      let () = Hashtbl.add content x' l'' in *)
+      (* 	      l'' *)
+      (* 	    else *)
+      (* 	      generic_insert_sorted x' l' *)
+      (* 	  in *)
 	  
 	  
-	  let v = generic_merge_sorted_lists l new_l' in
-	  let () = Hashtbl.remove content x in
-	  let () = Hashtbl.add content x v in
-	  (* update the related values w.r.t x *)
-	  let rel_x = self#related x in
-	  let fn v1 = 
-	    let lv =
-              try Hashtbl.find content v1 with
-		  Not_found -> failwith "add_couple"
- 	    in 
-	    let new_lv = generic_merge_sorted_lists v lv in
-	    let () = Hashtbl.remove content v1 in
-	    Hashtbl.add content v1 new_lv 
-	  in
-	  List.iter fn rel_x
+	  (* let v = generic_merge_sorted_lists l new_l' in *)
+	  (* let () = Hashtbl.remove content x in *)
+	  (* let () = Hashtbl.add content x v in *)
+	  (* (\* update the related values w.r.t x *\) *)
+	  (* let rel_x = self#related x in *)
+	  (* let fn v1 =  *)
+	  (*   let lv = *)
+          (*     try Hashtbl.find content v1 with *)
+	  (* 	  Not_found -> failwith "add_couple" *)
+ 	  (*   in  *)
+	  (*   let new_lv = generic_merge_sorted_lists v lv in *)
+	  (*   let () = Hashtbl.remove content v1 in *)
+	  (*   Hashtbl.add content v1 new_lv  *)
+	  (* in *)
+	  (* List.iter fn rel_x *)
 	    
 	
 
@@ -288,21 +301,24 @@ class ['a] order_dictionary ini_size =
           try Hashtbl.find content x' with
             Not_found -> []
         in
-        let () =
-          if List.mem x l' or List.mem x' l then failwith "add_equiv"
-        in
-        let fn k v =
-          if List.mem x v then
-            let () = Hashtbl.remove content k in
-            Hashtbl.add content k
-              (generic_insert_sorted x' (generic_merge_sorted_lists v l'))
-          else if List.mem x' v then
-            let () = Hashtbl.remove content k in
-            Hashtbl.add content k
-              (generic_insert_sorted x (generic_merge_sorted_lists v l))
-        in
-        let () = Hashtbl.iter fn content in
-        let v = generic_merge_sorted_lists l l'
+        (* let () = *)
+        (*   if List.mem x l' or List.mem x' l then failwith "add_equiv" *)
+        (* in *)
+	let new_l = try remove_el (=) x' l with Failure "remove_el" -> l in
+	let new_l' = try remove_el (=) x l'  with Failure "remove_el" -> l' in
+
+        (* let fn k v = *)
+        (*   if List.mem x v then *)
+        (*     let () = Hashtbl.remove content k in *)
+        (*     Hashtbl.add content k *)
+        (*       (generic_insert_sorted x' (generic_merge_sorted_lists v l')) *)
+        (*   else if List.mem x' v then *)
+        (*     let () = Hashtbl.remove content k in *)
+        (*     Hashtbl.add content k *)
+        (*       (generic_insert_sorted x (generic_merge_sorted_lists v l)) *)
+        (* in *)
+        (* let () = Hashtbl.iter fn content in *)
+        let v = generic_merge_sorted_lists new_l new_l'
         and () = Hashtbl.remove content x
         and () = Hashtbl.remove content x' in
         let () = Hashtbl.add content x v in Hashtbl.add content x' v
@@ -322,8 +338,8 @@ class ['a] order_dictionary ini_size =
 
     method merge_equivalence_relation (ed : 'a equivalence_dictionary) =
       let fn k =
-        let () = if k = 0 then buffered_output "processing 0" in
-        let equivs = try generic_remove_sorted k (ed#find k) with Not_found -> failwith ("raising Not_found in merge_equivalence_relation for " ^ (string_of_int k)) in
+        (* let () = if k = 0 then buffered_output "processing 0" in *)
+        let equivs = try generic_remove_sorted k (ed#find k) with Not_found -> (* failwith ("raising Not_found in merge_equivalence_relation for " ^ (string_of_int k) ) *) [] in
         List.iter (fun x -> self#add_equiv k x) equivs
       in
       List.iter fn self#keys

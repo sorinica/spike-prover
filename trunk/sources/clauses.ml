@@ -1066,6 +1066,11 @@ class ['peano] clause c_v hist br_info =
     val pos_card = List.length (snd c_v)
     val card = List.length (fst c_v) + List.length (snd c_v)
     val mutable history = (hist: ((var * term) list * 'a) list)
+    val mutable standby = false
+    val mutable delete_standby = false
+    val mutable sb_string = ""
+    val mutable sb_IHs = ([]: ('a *  (Symbols.var * Terms.term) list) list)
+    val mutable sb_newconjs = ([]: 'a list)
     val mutable broken_info = (br_info:string * int * (Literals.literal list * Literals.literal list ))
     val is_horn =
       match snd c_v with
@@ -1277,17 +1282,36 @@ class ['peano] clause c_v hist br_info =
       List.fold_right (fun lv_c max_l -> let n = fn lv_c in max (abs n) (abs max_l)) (variables ::  lc_history) 0
 
     method compute_string =
-      
-      "[ " ^ (string_of_int number) ^ " ] " ^
+      let init_str =  "[ " ^ (string_of_int number) ^ " ] " in
+      let final_str = " ;" in
+      init_str ^
       (let l, r = content
       and f x = x#string in
       match l, r with
         [], [] -> "[]"
       | [], _ -> sprint_list " \\/ " f r
       | _, [] -> (sprint_list " /\\ " f l) ^ " => "
-      | _ -> (sprint_list " /\\ " f l) ^ " => " ^ (sprint_list " \\/ " f r))
-      ^ " ;"
+      | _ -> (sprint_list " /\\ " f l) ^ " => " ^ (sprint_list " \\/ " f r)) ^ final_str
 (*       ^ (if !specif_LA_defined then "\n" ^ self#peano_context#string else "") *)
+
+
+    method compute_string_coq_with_quantifiers print_quantifiers =
+      let init_str = if variables = [] || (not print_quantifiers) then "" else "forall " ^ (sprint_list " " (fun (x, _, _) -> "u" ^ (string_of_int x)) variables) ^ ", " in
+      init_str ^
+      (
+	let l, r = content
+	and f x = x#compute_string_coq_with_quantifiers in
+	  match l, r with
+              [], [] -> "[]"
+	    | [], _ -> (sprint_list " \\/ " f r) 
+	    | _, [] -> (sprint_list " -> " f l) ^ " -> False"
+	    | _ ->       let is_disj = List.length r > 1 in
+		(sprint_list " -> " f l) ^ " -> " ^ (if is_disj then " (" else "") ^ (sprint_list " or " f r)^ (if is_disj then " )" else "")
+      ) 
+
+    method compute_string_coq_for_order with_model =
+      let l, r = content and f x = x#compute_string_coq with_model in
+	(sprint_list "::" f l) ^ (if l == [] or r == [] then "" else "::") ^ (sprint_list "::" f r) ^ "::nil"
 
     method def_symbols = 
       let l, r = content in
@@ -1364,10 +1388,20 @@ class ['peano] clause c_v hist br_info =
 
   (* history of a clause : TODO replace a clause with the its number. The clause to be retrieved from a dictionary  *)
     method history = history
-
+    method standby = standby
+    method delete_standby = delete_standby
+    method sb_string = sb_string
+    method sb_newconjs = sb_newconjs
+    method sb_IHs = sb_IHs 
     method add_history (el: ((var * term) list * 'a)) = history <- history @ [el]
 
     method set_history hist = history <-hist
+
+    method set_standby sb = standby <- sb
+    method set_delete_standby ds = delete_standby <- ds
+    method set_sb_string sbs = sb_string <- sbs
+    method set_sb_newconjs sbc = sb_newconjs <- sbc
+    method set_sb_IHs ihs = sb_IHs <- ihs
 
     (* Substitution *)
     method substitute sigma' =
@@ -1399,7 +1433,7 @@ class ['peano] clause c_v hist br_info =
       let v' = fn variables v in
       let sigma' = generic_merge_sorted_lists sigma (List.map (fun (x, s, is_univ) -> if is_univ then x, new term (Var_univ
 	(newvar (), s)) else x, new term (Var_exist (newvar (), s)) ) v') in
-      self#substitute sigma'
+      (self#substitute sigma', sigma')
 
     method replace_subterm_at_pos (b, n, p) st =
       let negs, poss = content
@@ -1673,6 +1707,28 @@ let real_conjectures_system = ref [] ;;
 let complete_lemmas_system = new l_system []
 let all_conjectures_system = new system []
 
+let coq_formulas = ref [] ;;
+
+let coq_all_lemmas = ref [] ;;
+
+let coq_formulas_with_infos = ref [];;
+
+let coq_less_clauses  = ref [];;
+
+let coq_spec_lemmas  = ref [];;
+
+let coq_main_lemma = ref "";;
+
+let main_lemma_proof = ref "";;
+
+let coq_induction_schemas = ref "";;
+
+let coq_generate_cond = ref [];;
+
+let rewriting_clauses = ref [] ;;
+
+let coq_replacing_clauses = ref [] ;;
+ 
 let sprint_lemmas () =
   sprint_list "\n" (fun x -> x#string) lemmas_system#content
 
@@ -1768,7 +1824,7 @@ let preprocess_conjecture c =
 let recursive_new_hyps c_ref r_conj (cxt1, cxt2) = 
   if List.for_all (fun x -> clause_greater false false c_ref x) r_conj
   then cxt1
-  else if  List.for_all (fun x -> clause_geq true false c_ref x) r_conj
+  else if  List.for_all (fun x -> clause_geq false false c_ref x) r_conj
   then cxt1 @ cxt2
   else []
  
@@ -1867,8 +1923,8 @@ let initial_conjectures = ref ([]: (peano_context clause) list);;
 
 let write_pos_clause  c  = 
   let fn b i (lhs, rhs) = 
-    [(b, i, [1]), (rhs#pos_conditional_rewriting, rhs#pos_partial_case_rewriting, rhs#pos_total_case_rewriting)] @
-    [(b, i, [0]), (lhs#pos_conditional_rewriting, lhs#pos_partial_case_rewriting, lhs#pos_total_case_rewriting)] 
+    [(b, i, [1]), (rhs#pos_rewriting, rhs#pos_partial_case_rewriting, rhs#pos_total_case_rewriting)] @
+    [(b, i, [0]), (lhs#pos_rewriting, lhs#pos_partial_case_rewriting, lhs#pos_total_case_rewriting)] 
   in
 
   let n, p = c#content in
@@ -1891,8 +1947,8 @@ let write_pos_clause  c  =
 let write_pos_term_clause  c  = 
 
   let fn b i (lhs, rhs) = 
-    [(b, i, [1]), (rhs#pos_conditional_rewriting, rhs#pos_partial_case_rewriting, rhs#pos_total_case_rewriting)] @
-    [(b, i, [0]), (lhs#pos_conditional_rewriting, lhs#pos_partial_case_rewriting, lhs#pos_total_case_rewriting)] 
+    [(b, i, [1]), (rhs#pos_rewriting, rhs#pos_partial_case_rewriting, rhs#pos_total_case_rewriting)] @
+    [(b, i, [0]), (lhs#pos_rewriting, lhs#pos_partial_case_rewriting, lhs#pos_total_case_rewriting)] 
   in
 
   let n, p = c#content in
@@ -2028,13 +2084,13 @@ let counterexample fn_norm c =
   let fn_litred lit value = 
     match lit#content with
 	Lit_equal (x,y) | Lit_rule (x,y) -> 
-	  let _, _, x_norm = fn_norm [R;L] x c "" ([],[]) 0 in
-	  let _, _, y_norm = fn_norm [R;L] y c "" ([],[]) 0 in
+	  let _, _, x_norm, _ = fn_norm [R;L] x c "" ([],[]) 0 in
+	  let _, _, y_norm, _ = fn_norm [R;L] y c "" ([],[]) 0 in
 	  let res = x_norm#equal y_norm in 
 	  res = value
       | Lit_diff (x,y) -> 
-	  let _, _, x_norm = fn_norm [R;L] x c "" ([],[]) 0 in
-	  let _, _, y_norm = fn_norm [R;L] y c "" ([],[]) 0 in
+	  let _, _, x_norm, _ = fn_norm [R;L] x c "" ([],[]) 0 in
+	  let _, _, y_norm, _ = fn_norm [R;L] y c "" ([],[]) 0 in
 	  let res = x_norm#equal y_norm in 
 	  res <> value
   in

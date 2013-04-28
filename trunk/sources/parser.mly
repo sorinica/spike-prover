@@ -104,11 +104,11 @@ let default_fill_order_dico () =
     try
       dico_order#merge_equivalence_relation dico_equivalence ;
     with (Failure "rehash") ->
-      parse_failwith "t here are incompatibilities between the order and equivalence relations"
+      parse_failwith "there are incompatibilities between the order and equivalence relations"
   in
   if !debug_mode then 
     let () = print_dico_order () in
-(*     let () = print_dico_equivalence () in *)
+    let () = print_dico_equivalence () in
     ()
 
 let share_variables s s' = 
@@ -553,7 +553,7 @@ let _ = List.iter (fun (kwd, tok) -> Hashtbl.add tests_table kwd tok)
        TOK_CONTEXTUAL_REWRITING
        TOK_CONGRUENCE_CLOSURE
        TOK_EQUATIONAL_REWRITING
-       TOK_CONDITIONAL_REWRITING
+       TOK_REWRITING
        TOK_NEGATIVE_DECOMPOSITION
        TOK_POSITIVE_DECOMPOSITION
        TOK_POSITIVE_CLASH
@@ -681,7 +681,7 @@ spec_ordering:
 	      | Lit_rule _ -> 
       		  let c' = c#force_orientation in
 		  let () = buffered_output ("\t" ^ c'#string) in
-		  let () = broken_order := true in 
+		  (* let () = broken_order := true in  *)
 		  let () = buffered_output ("\nWARNING: the axiom [" ^ (string_of_int c#number) ^ "] is not orientable in a rewrite rule using the current order") in
 		  (f, l, c')::fn t
 
@@ -698,7 +698,8 @@ spec_ordering:
 
 (*    print_clause_list rewrite_system#content ;*)
 (*     buffered_output "\nThe current order is :"; *)
-    print_dico_order ();
+    print_dico_order (); 
+    print_dico_equivalence ();
     buffered_output ("Computing nullary sorts") ;
     flush stdout ;
     update_dico_sort_nullarity () ;
@@ -782,7 +783,7 @@ spec_problem_field:
 
 opt_specif_name:
   TOK_SPECIF TOK_COLUMN TOK_IDENT
-  { }
+  { spec_name := $3 }
 | TOK_SPECIF TOK_COLUMN
   { }
 |
@@ -984,7 +985,7 @@ list_of_symbols:
 
 opt_specif_greater:
   TOK_GREATER TOK_COLUMN init_order_dico list_of_greater
-  {     print_dico_const_string ()(* print_dico_order () *)}
+  {     (* print_dico_order () *)}
 | TOK_GREATER TOK_COLUMN
   { }
 | init_equiv_dico
@@ -992,7 +993,8 @@ opt_specif_greater:
 
 init_order_dico:
   { 
-    dico_order#init (* (!all_defined_functions @ !all_constructors) *) [];
+    print_dico_const_string ();
+    dico_order#init (!all_defined_functions @ !all_constructors) ;
     flush stdout }
 
 list_of_greater:
@@ -1035,6 +1037,7 @@ opt_specif_equivs:
     else
       ()
   }
+
 
 init_equiv_dico:
   { 
@@ -1663,11 +1666,11 @@ reasoning_module:
   { Contextual_rewriting ($3, $5, $7) }
 | TOK_EQUATIONAL_REWRITING TOK_LPAR specif_literal_position_in_clause TOK_RPAR
   { (Equational_rewriting $3) }
-| TOK_CONDITIONAL_REWRITING TOK_LPAR TOK_IDENT TOK_COMA specif_list_of_systems TOK_COMA specif_literal_position_in_clause TOK_RPAR
+| TOK_REWRITING TOK_LPAR TOK_IDENT TOK_COMA specif_list_of_systems TOK_COMA specif_literal_position_in_clause TOK_RPAR
   { match $3 with
-      "rewrite" -> (Conditional_rewriting (false, $5, $7))
-    | "normalize" -> (Conditional_rewriting (true, $5, $7))
-    | _ -> parse_failwith "argument of conditional rewriting must be either \"rewrite\" or \"normalize\"" }
+      "rewrite" -> (Rewriting (false, $5, $7))
+    | "normalize" -> (Rewriting (true, $5, $7))
+    | _ -> parse_failwith "argument of rewriting must be either \"rewrite\" or \"normalize\"" }
 | TOK_PARTIAL_CASE_REWRITING TOK_LPAR specif_list_of_systems TOK_COMA specif_literal_position_in_clause TOK_RPAR
   { Partial_case_rewriting ($3, $5) }
 | TOK_TOTAL_CASE_REWRITING TOK_LPAR strategy_term TOK_COMA specif_list_of_systems TOK_COMA specif_literal_position_in_clause TOK_RPAR
