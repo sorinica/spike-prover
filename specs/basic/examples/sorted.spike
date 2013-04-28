@@ -1,0 +1,176 @@
+specification : sorted
+
+sorts : nat list bool ;
+
+$ 
+$Fixpoint model_nat (v: nat): term :=
+$match v with
+$| O => (Term id_0 nil)
+$| (S x) => let x' := model_nat x in   (Term id_S (x'::nil))
+$ end.
+$
+$Fixpoint model_bool (v: bool): term :=
+$match v with
+$|true => (Term id_true nil)
+$|false => (Term id_false nil)
+$end.
+$
+$Inductive list : Set :=
+$|Nil : list
+$|Cons : nat -> list -> list.
+$
+$Fixpoint model_list (v:list) : term :=
+$match v with
+$| Nil => (Term id_Nil nil)
+$| (Cons x l) => let x' := model_nat x in let l' := model_list l in
+$(Term id_Cons (x' :: l' :: nil))  
+$end.
+
+constructors :
+
+0  : -> nat;
+S_ : nat -> nat;
+Nil    :          -> list;
+Cons__ : nat list -> list;
+true : -> bool;
+false : -> bool;
+
+defined functions :
+
+sorted_  : list     -> bool;
+leq__     : nat nat  -> bool; 
+length_  : list     -> nat;
+insert__ : nat list -> list;
+isort_   : list     -> list;
+eq_nat__ : nat nat -> bool;
+
+axioms:
+
+eq_nat (0, 0) = true;
+eq_nat (0, S(y)) = false;
+eq_nat (S(x), 0) = false;
+eq_nat (S(x), S(y)) = eq_nat (x, y);
+$
+$Fixpoint eq_nat (n1:nat) (n2:nat): bool :=
+$match n1, n2 with
+$| O, O => true
+$| O, _ => false
+$| _, O => false
+$| (S x), (S y) => eq_nat x y
+$end.
+
+leq (0, x) = true ; 
+leq (x, 0) = false ; 
+leq (S(x), S(y)) = leq (x, y) ; 
+$
+$Fixpoint leq (n1:nat) (n2: nat) : bool := 
+$match n1, n2 with
+$|O, _ => true
+$| _, 0 => false
+$| (S x), (S y) => leq x y
+$end.
+      
+length(Nil)=0;
+length(Cons(x,y))=S(length(y));
+$
+$Fixpoint length (l:list): nat :=
+$match l with
+$| Nil => O
+$| Cons _ y => S (length y)
+$end.
+ 
+insert(x,Nil) = Cons(x,Nil) ;
+leq (x, y) = true  => insert(x,Cons(y,z)) = Cons(x,Cons(y,z))  ;
+leq(x, y) = false => insert(x,Cons(y,z)) = Cons(y,insert(x,z)) ;
+$
+$Fixpoint insert (x:nat) (l:list): list :=
+$match l with
+$|Nil => Cons x Nil
+$|Cons h tl => match leq x h with |true => Cons x l |false => Cons h (insert x tl) end
+$end.
+
+isort(Nil) = Nil ;
+isort(Cons(x,l)) = insert(x,isort(l)) ;
+$
+$Fixpoint isort (l:list): list:=
+$match l with
+$|Nil => Nil
+$|Cons h tl =>insert h (isort tl)
+$end.
+
+sorted(Nil) = true ;
+sorted(Cons(x2,Nil)) = true ;
+leq (x, y) = true => sorted(Cons(x,Cons(y,z))) = sorted(Cons(y,z)) ;
+leq (x, y) = false => sorted(Cons(x,Cons(y,z))) = false ;
+$
+$Definition head_sorted (l : list) : bool := match l with
+$Cons a (Cons b _) => leq a b | _ => true end.
+$
+$Fixpoint sorted (l : list) : bool := match l with
+$Cons a tl => if head_sorted (Cons a tl) then sorted tl else false | Nil => true end.
+
+
+greater:
+
+eq_nat: 0 S true false;
+leq : 0 S true false;
+length :  0 S Nil Cons;
+insert : leq  Nil Cons;
+isort : insert Nil Cons;
+sorted : leq Nil Cons true false; 
+
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+
+
+% instances of AddPremise
+total_case_rewriting_add_premise_rule = add_premise(total_case_rewriting(simplify_strat, r, *),[id]);
+inst_var_rule = add_premise(generate,[id]);
+
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    rewriting_rule,      
+                    print_goals,
+                    total_case_rewriting_add_premise_rule
+));
+
+fullind = (repeat(stra, inst_var_rule), print_goals_with_history);
+
+start_with: fullind
+
+Conjectures:
+sorted(Cons(x,y)) = true => sorted(y) = true;
+
+Conjectures:
+length(insert(x,y))=S(length(y));
+
+Conjectures:
+length(isort(x))=length(x);
+
+Lemmas:
+sorted(insert(x,y))=sorted(y);
+
+Conjectures:
+sorted(isort(x))=true;
+
+ 

@@ -1,0 +1,138 @@
+specification : tree_list
+
+sorts : nat bool tree list;
+
+$ 
+$Fixpoint model_nat (v: nat): term :=
+$match v with
+$| O => (Term id_0 nil)
+$| (S x) => let x' := model_nat x in   (Term id_S (x'::nil))
+$ end.
+$
+$Fixpoint model_bool (v: bool): term :=
+$match v with
+$|true => (Term id_true nil)
+$|false => (Term id_false nil)
+$end.
+$
+$Inductive tree : Set :=
+$| Feuille : nat -> tree
+$| Noeud : tree -> tree -> tree.
+$
+$Fixpoint model_tree (v: tree): term :=
+$match v with
+$| (Noeud t1 t2) => let t1' := model_tree t1 in let t2' := model_tree t2
+$in (Term id_Noeud (t1' :: t2' :: nil))
+$| (Feuille x) => let x' := model_nat x in (Term id_Feuille (x' :: nil))
+$end.
+$
+$Inductive list : Set :=
+$|Nil : list
+$|Cons : nat -> list -> list.
+$
+$Fixpoint model_list (v:list) : term :=
+$match v with
+$| Nil => (Term id_Nil nil)
+$| (Cons x l) => let x' := model_nat x in let l' := model_list l in
+$(Term id_Cons (x' :: l' :: nil))  
+$end.
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+Feuille_ : nat -> tree;
+Noeud__ : tree tree -> tree;
+false : -> bool;
+true : -> bool;
+Nil : -> list;
+Cons__ : nat list -> list;
+
+defined functions:
+
+app__ : list list -> list;
+flat_ : tree -> list;
+ins__ : nat tree -> tree;
+
+
+axioms:
+
+app(Nil,l) = l;
+app(Cons(x,l), l1) = Cons(x, app(l, l1));
+$
+$Fixpoint app (l1 l2: list) : list := 
+$match l1 with
+$|Nil => l2
+$|(Cons x l) => (Cons x (app l l2))
+$end.
+
+
+flat(Feuille(x)) = Cons(x, Nil);
+flat(Noeud(t1,t2)) = app(flat(t1),flat(t2));
+$
+$Fixpoint flat (t: tree) : list :=
+$match t with
+$|(Feuille x) => (Cons x Nil)
+$|(Noeud t1 t2) => (app (flat t1) (flat t2))
+$end.
+
+ins(x,Feuille(y)) = Noeud(Feuille(x),Feuille(y));
+ins(x,Noeud(t1,t2)) = Noeud(ins(x,t1),t2);
+$
+$Fixpoint ins (x:nat) (t:tree) : tree :=
+$match t with
+$|(Feuille y) => (Noeud (Feuille x) (Feuille y))
+$|(Noeud t1 t2) => (Noeud (ins x t1) t2)
+$end.
+
+greater:
+app : Nil Cons;
+ins : Feuille Noeud;
+flat: app Nil Cons;
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+
+
+% instances of AddPremise
+total_case_rewriting_add_premise_rule = add_premise(total_case_rewriting(simplify_strat, r, *),[id]);
+inst_var_rule = add_premise(generate,[id]);
+
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    rewriting_rule,      
+                    print_goals,
+total_case_rewriting_add_premise_rule 
+
+
+));
+
+fullind = (repeat(stra, inst_var_rule), print_goals_with_history);
+
+start_with: fullind
+  
+conjectures:
+flat(ins(x,t)) = Cons(x,flat(t));
+
+conjectures:
+app(x,app(y,z)) = app(app(x,y),z);

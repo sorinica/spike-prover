@@ -1,0 +1,12 @@
+launch 
+
+coqc utils.v
+coqc coccinelle_utils.v
+
+then
+
+./validate.sh -coqc
+
+and, finally
+
+./validate.sh

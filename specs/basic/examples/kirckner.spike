@@ -1,0 +1,94 @@
+specification : kirchner % Inductive proof search modulo Fabrice Nahon · Claude Kirchner ·Hélène Kirchner · Paul Brauner Ann Math Artif Intell (2009) 55:123–154 DOI 10.1007/s10472-009-9154-5
+sorts : nat ;
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+
+
+defined functions:
+
+_+_ : nat nat -> nat;
+_*_ : nat nat -> nat;
+exp__ : nat nat -> nat;
+ 
+axioms:
+
+x + 0 = x;
+x + S(y) = S(x + y);
+
+x * 0 = 0;
+x * S(y) = (x * y) + x;
+
+exp(x, 0) = S(0);
+exp(x, S(y)) = x * exp(x, y);
+
+greater:
+exp: * S 0;
+*: + S 0;
++: S 0;
+
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+conditional_rewriting_rule = simplify(id,[conditional_rewriting(normalize, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+
+% instances of AddPremise
+induction = add_premise(generate,[id]);
+induction_eq = add_premise(generate_eq,[id]);
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    conditional_rewriting_rule,      
+                    print_goals,
+total_case_rewriting_rule
+));
+
+fullind = (repeat(stra, induction_eq), print_goals_with_history);
+
+start_with: fullind
+
+conjectures:
+
+exp(x * y, n) = exp(x,n) * exp(y,n);
+
+conjectures:
+((x1 + x2) + x3) * x4  = (x1 * x4) + (x2 * x4) + (x3 * x4);
+
+conjectures:
+S(x) + y = S(x + y);
+0 + x = x;
+0 * x = 0;
+
+conjectures:
+ (x+ y) + z = x + (y + z) ;
+
+conjectures:
+x + (y + z) = x + (z + y);
+
+conjectures:
+S(x) * y = (x * y) + y;
+
+conjectures:
+x1 * (x2 + x3) = (x1 * x2) + (x1 * x3);
+
+  

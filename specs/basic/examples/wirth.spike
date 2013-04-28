@@ -1,0 +1,69 @@
+specification : wirth % conjectures taken from Wirth's DFKI 2006
+                      % report Progress in Computer-Assisted Inductive Theorem Proving by Human-Orientedness and Descente Infinie?.
+
+sorts : nat  bool;
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+true : bool;
+false : bool;
+
+
+defined functions:
+
+_+_ : nat nat -> nat;
+even_ : nat -> bool;
+
+axioms:
+
+0 + x = x;
+S(x) + y = S(x+y);
+
+even (0) = true;
+even (S(0))  = false;
+even (S(S(x))) = even (x);
+
+greater:
+even: S 0 true false;
++ : S 0;
+ 
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+conditional_rewriting_rule = simplify(id, [conditional_rewriting(normalize, L|R|C, *)]);
+
+% instances of AddPremise
+induction = add_premise(generate,[id]);
+induction_eq = add_premise(generate_eq,[id]);
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    conditional_rewriting_rule,
+                    
+                    print_goals
+));
+
+fullind = (repeat(stra, induction), print_goals_with_history);
+
+start_with: fullind
+
+conjectures: 
+even(x + y) = true, even (y + z) = true => even (x + z) = true; 

@@ -1,0 +1,506 @@
+specification: member_t_insin
+
+$Inductive OBJ:Set := C: nat -> nat -> OBJ.
+$Inductive PLAN:Set := Nil | Cons: OBJ -> PLAN -> PLAN.
+$
+$Fixpoint nat_eq (m n:nat) : bool :=
+$match m, n with
+$|0, 0 => true
+$|S_, 0 => false
+$|0, S_ => false
+$| S x, S y => nat_eq x y
+$end.
+$
+$Definition OBJ_eq (m n: OBJ) : bool :=
+$match m, n with
+$| C t1 e1, C t2 e2 => andb (nat_eq t1 t2) (nat_eq e1 e2)
+$end.
+$
+$Fixpoint PLAN_eq (m n: PLAN) : bool :=
+$match m, n with
+$| Nil, Nil => true
+$| Nil, Cons _ _ => false
+$| Cons _ _, Nil => false
+$| Cons o1 l1, Cons o2 l2 => 
+$ match OBJ_eq o1 o2 with
+$  | true => PLAN_eq l1 l2
+$  | false => false
+$ end
+$end.
+$
+$Fixpoint le (m n:nat): bool :=
+$match m,n with
+$| 0,_ => true
+$| S_, 0 => false
+$| S x, S y => le x y
+$end.
+$
+$Definition time (o:OBJ) : nat :=
+$match o with
+$| C t e => t
+$end.
+$
+$Fixpoint memberC (o1:OBJ) (p1:PLAN): bool :=
+$match p1 with
+$|Nil => false
+$| Cons o2 p2 =>  
+$  match OBJ_eq o1 o2 with
+$  |true => true
+$  |false => memberC o1 p2
+$ end
+$end.
+$
+$Fixpoint memberT (t1:nat) (p1:PLAN): bool :=
+$match p1 with
+$|Nil => false
+$| Cons (C t2 e) p2 =>  
+$  match nat_eq t1 t2 with
+$  |true => true
+$  |false => memberT t1 p2
+$ end
+$end.
+$
+$Fixpoint memberE (e1:nat) (p1:PLAN): bool :=
+$match p1 with
+$|Nil => false
+$| Cons (C t e2) p2 =>  
+$  match nat_eq e1 e2 with
+$  |true => true
+$  |false => memberE e1 p2
+$ end
+$end.
+$
+$Definition timel (o:PLAN): nat :=
+$match o with 
+$| Nil => 0
+$| Cons o p => time o
+$end.
+$
+$Definition er (o:OBJ) : nat :=
+$match o with
+$| C t e => e
+$end.
+$
+$Definition erl (p:PLAN) : nat :=
+$match p with
+$| Nil => 0
+$| Cons o p' => er o
+$end.
+$
+$Fixpoint sortedT (p:PLAN) : bool :=
+$match p with
+$| Nil => true
+$| Cons (C t1 e1) p1 => 
+$  match p1 with
+$  | Nil => true
+$  | Cons (C t2 e2) p2 => 
+$     match le t2 t1 with
+$       | true => sortedT p1
+$       | false => false
+$     end
+$  end
+$end.
+$
+$Fixpoint sortedE (p:PLAN) : bool :=
+$match p with
+$| Nil => true
+$| Cons (C t1 e1) p1 => 
+$  match p1 with
+$  | Nil => true
+$  | Cons (C t2 e2) p2 => 
+$     match le e2 e1 with
+$       | false => sortedE p1
+$       | true => false
+$     end
+$  end
+$end.
+$
+$Fixpoint listUpTo (p:PLAN) (t:nat) : PLAN :=
+$match p with
+$|Nil =>  Nil
+$|Cons (C t1 e1) p1 => 
+$  match le t1 t with
+$   | true => Cons (C t1 e1) Nil
+$   | false => Cons (C t1 e1) (listUpTo p1 t)
+$ end
+$end.
+$ 
+$Fixpoint wind (p':PLAN) (t t1 t2: nat) : PLAN :=
+$match p' with
+$|Nil => Nil
+$|Cons (C t' e') p => 
+$ match le (plus t' t2) t with
+$  | false => wind p t  t1 t2
+$  | true => 
+$    match le (plus t' t1) t with
+$       | true => Cons (C t' e') Nil
+$       | false => Cons (C t' e') (wind p t t1 t2)
+$   end
+$ end
+$end.
+$
+$
+$Fixpoint maxEr (p':PLAN) : nat :=
+$match p' with
+$|Nil => 0
+$|Cons (C t e) p => 
+$  match le (maxEr p) e with 
+$  | true => e
+$  | false => maxEr p
+$ end
+$end.
+$
+$Definition acr (p: PLAN) (t t2 t3: nat) : nat := 
+$   match sortedT p with
+$    | true => (match le t2 t3 with 
+$                       |false =>maxEr (wind p t t2 t3)
+$                       |true =>  0
+$                     end)
+$    | false => 0
+$  end.
+$
+$Fixpoint insAt (p:PLAN) (t e:nat) : PLAN :=
+$match p with
+$| Nil => Cons(C t e) Nil
+$| Cons o pg =>
+$  match le (time o) t with
+$  | true => Cons (C t e) (Cons o pg)
+$  | false => insAt pg t e
+$  end
+$end.
+$
+$Fixpoint insIn  (p:PLAN) (t e:nat) : PLAN :=
+$match p with
+$| Nil => Cons(C t e) Nil
+$| Cons o pg =>
+$  match le (er o) e with
+$  | true => insIn pg (time o) e
+$  | false => Cons (C t e) (Cons o pg)
+$  end
+$end.
+$
+$Hint Unfold er. 
+$Hint Unfold time.
+$
+$Fixpoint progAt (p:PLAN) (t:nat) : nat :=
+$match p with
+$| Nil => 0
+$| Cons o pg =>
+$  match le (time o) t with
+$  | true => er o
+$  | false => progAt pg t
+$  end
+$end.
+$
+$Fixpoint timeAt (p: PLAN) (t:nat) : nat :=
+$match p with
+$|Nil => 0
+$|Cons o pg => 
+$  match le (time o) t with
+$   | true => time o
+$   | false => timeAt pg t
+$  end
+$end.
+$
+$Fixpoint firstAt (p:PLAN) (t:nat) : OBJ :=
+$match p with
+$| Nil => C 0 0
+$| Cons o pg => 
+$  match le (time o) t with
+$    | true => o
+$    | false => firstAt pg t
+$  end
+$end.
+$ 
+$Fixpoint listAt (p: PLAN) (t: nat) : PLAN :=
+$match p with 
+$|Nil => Nil
+$|Cons o pg => 
+$  match le (time o) t with
+$    | true => Cons o pg
+$    | false => listAt pg t
+$  end
+$end.
+$ 
+$Fixpoint prog (p:PLAN) (t2 t3:nat) : PLAN :=
+$match p with
+$| Nil => Nil
+$| Cons o p =>
+$  match le (progAt (prog p t2 t3) (plus (time o) t3)) (er o) with
+$  | true => insAt (prog p t2 t3) (plus (time o) t3) (er o) 
+$  | false => insIn (prog p t2 t3) (plus (time o) t2) (er o)
+$  end
+$end.
+$
+$Fixpoint model_nat (n:nat) : term :=
+$match n with
+$| 0 => Term id_0 nil
+$| S n' => Term id_S ((model_nat n')::nil)
+$end.
+$
+$Definition model_bool (b:bool) : term :=
+$match b with
+$| true => Term id_true nil
+$| false => Term id_false nil
+$end.
+$
+$Definition model_OBJ (o:OBJ) : term :=
+$match o with
+$| C x y => Term id_C ((model_nat x)::(model_nat y)::nil)
+$end.
+$
+$Fixpoint model_PLAN (p:PLAN) : term :=
+$match p with
+$| Nil => Term id_Nil nil
+$| Cons o p => Term id_Cons ((model_OBJ o)::(model_PLAN p)::nil)
+$end.
+$
+$Definition acr1 (p: PLAN) (t t2 t3: nat) : nat := 
+$   match sortedT p with
+$    | true => (match le t2 t3 with 
+$                       |false => progAt (prog p t2 t3) t 
+$                       |true =>  0
+$                     end)
+$    | false => 0
+$  end.
+$
+
+
+
+
+sorts : nat bool OBJ PLAN;
+
+
+constructors :
+
+0  :     -> nat;
+S_ : nat -> nat;
+true  : bool;
+false : bool;
+
+C__     : nat nat -> OBJ;
+
+Nil     :           -> PLAN;
+Cons__  : OBJ  PLAN -> PLAN;
+
+
+defined functions:
+
+PLAN_eq__  : PLAN PLAN  -> bool;
+OBJ_eq__   : OBJ  OBJ   -> bool;
+nat_eq__    : nat  nat   -> bool;
+plus__ : nat nat -> nat;
+le__ : nat nat -> bool;
+
+time_   : OBJ     -> nat;
+timel_           : PLAN              -> nat;
+er_     : OBJ     -> nat;
+erl_             : PLAN              -> nat;
+memberC__        : OBJ PLAN          -> bool;
+memberT__        : nat PLAN          -> bool;
+memberE__        : nat PLAN          -> bool;
+sortedT_         : PLAN              -> bool;
+sortedE_         : PLAN              -> bool;
+listUpTo__       : PLAN nat          -> PLAN;
+wind____ : PLAN nat nat nat -> PLAN;
+maxEr_   : PLAN             -> nat;
+acr____  : PLAN nat nat nat -> nat;
+
+
+insAt___         : PLAN nat nat      -> PLAN;
+insIn___         : PLAN nat nat      -> PLAN;
+progAt__         : PLAN nat          -> nat;
+timeAt__         : PLAN nat          -> nat;
+firstAt__        : PLAN nat          -> OBJ;
+listAt__         : PLAN nat          -> PLAN; 
+prog___          : PLAN nat nat      -> PLAN;
+acr1____         : PLAN nat nat nat  -> nat;
+
+axioms:
+
+
+PLAN_eq(Nil, Nil) = true;
+PLAN_eq(Cons(t,l), Nil) = false;
+PLAN_eq(Nil, Cons(t,l)) = false;
+OBJ_eq(t1,t2) = true => PLAN_eq(Cons(t1,l1),Cons(t2,l2)) = PLAN_eq(l1,l2);
+OBJ_eq(t1,t2) = false => PLAN_eq(Cons(t1,l1),Cons(t2,l2)) = false;
+
+nat_eq(t1,t2) = true, nat_eq(e1,e2) = true => OBJ_eq(C(t1,e1),C(t2,e2)) = true;
+nat_eq(t1,t2) = false => OBJ_eq(C(t1,e1),C(t2,e2)) = false;
+nat_eq(t1,t2) = true, nat_eq(e1,e2) = false => OBJ_eq(C(t1,e1),C(t2,e2)) = false;
+
+nat_eq(0,0) = true;
+nat_eq(0,S(x)) = false;
+nat_eq(S(x),0) = false;
+nat_eq(S(x),S(y)) = nat_eq(x,y);
+
+memberC(o, Nil) = false;
+OBJ_eq(o1, o2) = true => memberC(o1,Cons(o2,p)) = true;
+OBJ_eq(o1, o2) = false => memberC(o1,Cons(o2,p)) = memberC(o1, p); 
+
+memberT(t, Nil) = false;
+nat_eq(t1, t2) = true => memberT(t1,Cons(C(t2,e),p)) = true;
+nat_eq(t1, t2) = false => memberT(t1,Cons(C(t2,e),p)) = memberT(t1, p); 
+
+memberE(e, Nil) = false;
+nat_eq(e1, e2) = true => memberE(e1,Cons(C(t, e2),p)) = true;
+nat_eq(e1, e2) = false => memberE(e1,Cons(C(t,e2),p)) = memberE(e1, p); 
+
+timel(Nil) = 0;
+timel(Cons(o,p)) = time(o);
+
+plus(0,  x) = x;
+plus(S(x),  y) = S(plus(x,y));
+
+le(0,x) = true;
+le(S(x),0) = false;
+le(S(x),S(y)) = le(x,y);
+
+time(C(t,e)) = t;
+
+er(C(t,e))   = e;
+
+sortedT(Nil) = true;
+sortedT(Cons(o,Nil)) = true;
+le(t2, t1) = true  => sortedT(Cons(C(t1,e1),Cons(C(t2,e2),p))) = sortedT(Cons(C(t2,e2),p));
+le(t2,  t1) = false => sortedT(Cons(C(t1,e1),Cons(C(t2,e2),p))) = false;
+
+sortedE(Nil) = true;
+sortedE(Cons(o,Nil)) = true;
+le(e2,  e1) = true  => sortedE(Cons(C(t1,e1),Cons(C(t2,e2),p))) = false;
+le(e2,  e1) = false => sortedE(Cons(C(t1,e1),Cons(C(t2,e2),p))) = sortedE(Cons(C(t2,e2),p));
+
+listUpTo(Nil, t) = Nil;
+le(t1, t) = true => listUpTo(Cons(C(t1,e1),p),t) = Cons(C(t1,e1), Nil);
+le(t1, t) = false => listUpTo(Cons(C(t1,e1),p),t) = Cons(C(t1,e1),listUpTo(p,t));
+
+wind(Nil, t, t1, t2) = Nil;
+le(plus(t',t2), t) = true, le(plus(t',t1), t) = false  => wind(Cons(C(t',e'),p), t, t1, t2) = Cons(C(t',e'),wind(p, t, t1, t2)); 
+le(plus(t',t2), t) = false => wind(Cons(C(t',e'),p), t, t1, t2) = wind(p, t, t1, t2); 
+le(plus(t',t2), t) = true, le(plus(t',t1), t) = true  => wind(Cons(C(t',e'),p), t, t1, t2) = Cons(C(t',e'),Nil);
+
+maxEr(Nil) = 0;
+le(maxEr(p), e) = true  =>  maxEr(Cons(C(t,e),p)) = e;
+le(maxEr(p), e) = false =>  maxEr(Cons(C(t,e),p)) = maxEr(p);
+
+sortedT(p) = true, le(t2, t3) = false => acr(p,t,t2,t3) = maxEr(wind(p, t, t2, t3)); 
+sortedT(p) = false => acr(p,t,t2,t3) = 0; 
+sortedT(p) = true, le(t2, t3)  = true  => acr(p,t,t2,t3) = 0;
+
+erl(Nil) = 0;
+erl(Cons(o,p)) = er(o);
+
+insAt(Nil, t, e) = Cons(C(t,e), Nil);
+le(time(o),t) = true => insAt(Cons(o,pg), t, e) =  Cons(C(t,e),Cons(o, pg));
+le(time(o),t) = false  => insAt(Cons(o,pg), t, e) =  insAt(pg, t, e);
+
+insIn(Nil, t, e) = Cons(C(t,e), Nil);    
+le(er(o),e) = true  => insIn(Cons(o,pg), t, e) =  insIn(pg, time(o), e);
+le(er(o),e) = false => insIn(Cons(o,pg), t, e) =  Cons(C(t,e),Cons(o, pg));
+
+progAt(Nil,t) = 0;
+le(time(o),t) = true  => progAt(Cons(o, pg), t) = er(o);
+le(time(o),t) = false => progAt(Cons(o, pg), t) = progAt(pg, t);
+
+timeAt(Nil,t) = 0;
+le(time(o), t) = true  => timeAt(Cons(o, pg), t) = time(o);
+le(time(o), t) = false => timeAt(Cons(o, pg), t) = timeAt(pg, t);
+
+firstAt(Nil,t) = C(0,0);
+le(time(o), t) = true  => firstAt(Cons(o, pg), t) = o;
+le(time(o), t) = false => firstAt(Cons(o, pg), t) = firstAt(pg, t);
+
+listAt(Nil,t) = Nil;
+le(time(o), t) = true  => listAt(Cons(o, pg), t) = Cons(o, pg);
+le(time(o), t) = false => listAt(Cons(o, pg), t) = listAt(pg, t);
+
+prog(Nil, t2, t3) = Nil;
+le(progAt(prog(p, t2, t3) , plus(time(o),t3)),er(o)) = true  => prog(Cons(o,p), t2, t3) = insAt(prog(p, t2, t3), plus(time(o),t3), er(o));
+le(progAt(prog(p, t2, t3) , plus(time(o),t3)),er(o)) = false => prog(Cons(o,p), t2, t3) = insIn(prog(p, t2, t3), plus(time(o),t2), er(o));
+
+sortedT(p) = true,  le(t2, t3)  = false => acr1(p,t,t2,t3) = progAt(prog(p, t2, t3), t); 
+sortedT(p) = false => acr1(p,t,t2,t3) = 0;
+sortedT(p) = true,  le(t2, t3)  = true  => acr1(p,t,t2,t3) = 0;
+
+greater:
+PLAN_eq: OBJ_eq true false;
+OBJ_eq : nat_eq true false;
+nat_eq : true false;
+erl:    er Cons Nil S 0;
+er:     C;
+time:   C;
+plus : S 0;
+Cons : time;
+le: S 0 true false;
+memberC: true false OBJ_eq;
+memberT: true false nat_eq;
+memberE: true false nat_eq;
+timel: 0 S;
+sortedT: timel time true false Nil Cons C le;
+sortedE: erl er true false Nil Cons le C;
+listUpTo: true false Nil Cons le ;
+wind: false true Nil Cons C plus le;
+maxEr: false true le;
+acr: true false maxEr wind 0 S le sortedT;
+prog :  progAt insIn insAt er time le plus Cons Nil; 
+progAt: er time le Cons Nil;
+timeAt: er time le  0 S;
+firstAt: er time le C 0 S;
+listAt: er time le Nil Cons;
+insIn:  er time le Cons Nil C true false;
+insAt: time le Cons Nil C true false;
+acr1: true false progAt prog 0 S le sortedT;
+
+properties:
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+augment_rule = simplify(id,[augmentation (L)]);
+
+% instances of AddPremise
+total_case_rewriting_add_premise_rule = add_premise(total_case_rewriting(simplify_strat, r, *),[id]);
+inst_var_rule = add_premise(generate,[id]);
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    decomposition_rule,
+                    rewriting_rule,      
+                    subsumption_rule,
+                    print_goals_with_history(t),
+                    total_case_rewriting_add_premise_rule
+));
+
+stra_aug = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    decomposition_rule,
+                    rewriting_rule,      
+                    augment_rule,
+                    subsumption_rule,
+                    print_goals,
+                    total_case_rewriting_add_premise_rule
+));
+
+fullind = (repeat(stra, inst_var_rule), print_goals_with_history);
+
+fullind_aug = (repeat(stra_aug, inst_var_rule), print_goals_with_history);
+
+start_with: fullind
+ 
+% %  member_t_insin: ok. requires nat_eq et memberT. preuve longue
+ conjectures:  nat_eq (u1, u4) = true, nat_eq (u1, u4) = false =>  ; conjectures: memberT (u1, u7) = true, memberT (u1, u7) = false =>; conjectures:  memberT(tcrt,insIn(l,t,e)) =true, memberT(tcrt,l) = false => t= tcrt ;
+ 

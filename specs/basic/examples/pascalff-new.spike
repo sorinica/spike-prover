@@ -1,0 +1,330 @@
+specification : marketplace
+
+use : nats;
+
+sorts : action state event partner message string;
+
+%% Structures and Constants
+constructors :
+ _._ : action state -> state;
+ finish : -> state;
+
+ happens__ : event nat -> action;
+
+ receive__ : partner message -> event;
+ reply__ : partner message -> event;
+
+ sellerInfoMessage__ : string nat -> message;  
+ buyerInfoMessage__ : string nat -> message;
+
+ negotiationMessage_ : string -> message;
+
+ seller : -> partner;
+ buyer : -> partner;
+
+% foo : -> string;
+ DealSuccessful : -> string;
+ DealFailed : -> string;
+
+%% Functions
+defined functions :
+ F0____ : message message message state -> bool;
+ F1____ : message message message state -> bool;
+ F2____ : message message message state -> bool;
+ F3____ : message message message state -> bool;
+ F4____ : message message message state -> bool;
+ F5____ : message message message state -> bool;
+ F6____ : message message message state -> bool;
+ F7____ : message message message state -> bool;
+ F8____ : message message message state -> bool;
+ F9____ : message message message state -> bool;
+ F10____ : message message message state -> bool;
+ F11____ : message message message state -> bool;
+ F12____ : message message message state -> bool;
+ F13____ : message message message state -> bool;
+
+ logOK : -> state;
+ logKO : -> state;
+
+ P0_ : state -> bool;
+ P1_ : state -> bool;
+
+ Pb0_ : state -> bool;
+ Pb1__ : string state -> bool;
+ Pb2__ : string state -> bool;
+
+%% Rules
+axioms :
+ 
+%%%% RECEIVE %%%% 
+  F0(sellerInfo, buyerInfo, negociationOutcome, happens(receive(seller, sellerInfoMessage(inventoryItem, askingPrice)), t) . state) = 
+     F1(sellerInfoMessage(inventoryItem, askingPrice), buyerInfo, negociationOutcome, state);
+  F0(sellerInfo, buyerInfo, negociationOutcome, happens(receive(seller, buyerInfoMessage(item, offer)), t) . state) = false;
+  F0(sellerInfo, buyerInfo, negociationOutcome, happens(receive(seller, negotiationMessage(outcome)), t) . state) = false;
+  F0(sellerInfo, buyerInfo, negociationOutcome, happens(receive(buyer, y), t) . state) = false;
+  F0(sellerInfo, buyerInfo, negociationOutcome, happens(reply(x, y), t) . state) = false;
+  F0(sellerInfo, buyerInfo, negociationOutcome, finish) = false;
+
+ 
+  F1(sellerInfo, buyerInfo, negociationOutcome, happens(receive(buyer, buyerInfoMessage(item, offer)), t) . state) =  
+     F2(sellerInfo, buyerInfoMessage(item, offer), negociationOutcome, state);
+  F1(sellerInfo, buyerInfo, negociationOutcome, happens(receive(buyer, sellerInfoMessage(inventoryItem, askingPrice)), t) . state) = false;
+  F1(sellerInfo, buyerInfo, negociationOutcome, happens(receive(seller, negotiationMessage(outcome)), t) . state) = false;
+  F1(sellerInfo, buyerInfo, negociationOutcome, happens(receive(seller, y), t) . state) = false;
+  F1(sellerInfo, buyerInfo, negociationOutcome, happens(reply(x, y), t) . state) = false;
+  F1(sellerInfo, buyerInfo, negociationOutcome, finish) = false;
+
+
+%%%% SWITCH %%%%
+askingPrice  < offer = true =>
+  F2(sellerInfoMessage(inventoryItem, askingPrice), buyerInfoMessage(item, offer), negociationOutcome, state) = 
+    F3(sellerInfoMessage(inventoryItem, askingPrice), buyerInfoMessage(item, offer), negociationOutcome, state);
+askingPrice  < offer = false =>
+  F2(sellerInfoMessage(inventoryItem, askingPrice), buyerInfoMessage(item, offer), negociationOutcome, state) = 
+    F4(sellerInfoMessage(inventoryItem, askingPrice), buyerInfoMessage(item, offer), negociationOutcome, state);
+
+
+%%%% ASSIGN %%%%
+  F3(sellerInfo, buyerInfo, negociationOutcome, state) = F5(sellerInfo, buyerInfo, negotiationMessage(DealSuccessful), state);
+
+  F4(sellerInfo, buyerInfo, negociationOutcome, state) = F5(sellerInfo, buyerInfo, negotiationMessage(DealFailed), state);
+ 
+
+%%%% FLOW %%%%
+
+msg3 = negociationOutcome =>
+  F5(sellerInfo, buyerInfo, negociationOutcome, happens(reply(buyer, msg3), t) . state) = 
+     F6(sellerInfo, buyerInfo, negociationOutcome, state);
+msg3 <> negociationOutcome =>
+  F5(sellerInfo, buyerInfo, negociationOutcome, happens(reply(buyer, msg3), t) . state) = false;
+msg3 = negociationOutcome =>
+  F5(sellerInfo, buyerInfo, negociationOutcome, happens(reply(seller, msg3), t) . state) = 
+     F7(sellerInfo, buyerInfo, negociationOutcome, state);
+msg3 <> negociationOutcome =>
+  F5(sellerInfo, buyerInfo, negociationOutcome, happens(reply(seller, msg3), t) . state) = false;
+  F5(sellerInfo, buyerInfo, negociationOutcome, happens(reply(seller, msg3), t) . state) = false;
+  F5(sellerInfo, buyerInfo, negociationOutcome, happens(receive(x, y), t) . state) = false;
+  F5(sellerInfo, buyerInfo, negociationOutcome, finish) = false;
+
+
+
+msg3 = negociationOutcome =>
+  F6(sellerInfo, buyerInfo, negociationOutcome, happens(reply(seller, msg3), t) . state) = 
+     F8(sellerInfo, buyerInfo, negociationOutcome, state);
+msg3 <> negociationOutcome =>
+  F6(sellerInfo, buyerInfo, negociationOutcome, happens(reply(seller, msg3), t) . state) = false;
+  F6(sellerInfo, buyerInfo, negociationOutcome, happens(reply(buyer, msg3), t) . state) = false;
+  F6(sellerInfo, buyerInfo, negociationOutcome, happens(receive(x, y), t) . state) = false;
+  F6(sellerInfo, buyerInfo, negociationOutcome, finish) = false;
+
+msg3 = negociationOutcome =>
+  F7(sellerInfo, buyerInfo, negociationOutcome, happens(reply(buyer, msg3), t) . state) = 
+     F8(sellerInfo, buyerInfo, negociationOutcome, state);
+msg3 <> negociationOutcome =>
+  F7(sellerInfo, buyerInfo, negociationOutcome, happens(reply(buyer, msg3), t) . state) = false;
+  F7(sellerInfo, buyerInfo, negociationOutcome, happens(reply(seller, msg3), t) . state) = false;
+  F7(sellerInfo, buyerInfo, negociationOutcome, happens(receive(x, y), t) . state) = false;
+  F7(sellerInfo, buyerInfo, negociationOutcome, finish) = false;
+
+
+%%%% END %%%%
+  F8(sellerInfo, buyerInfo, negociationOutcome, finish) = true;
+  F8(sellerInfo, buyerInfo, negociationOutcome, x . y) =  F0(sellerInfo, buyerInfo, negociationOutcome, x . y);
+
+
+%% LOG OK
+logOK = happens(receive(seller, sellerInfoMessage(x, 10)), 1) . (
+  happens(receive(buyer, buyerInfoMessage(x, 20)), 2) . (
+  happens(reply(buyer,negotiationMessage(DealSuccessful)), 3) . (
+  happens(reply(seller, negotiationMessage(DealSuccessful)), 3) . (
+  finish))));
+
+%% LOG KO
+logKO = happens(receive(seller, sellerInfoMessage(x, 20)), 1) . (
+  happens(receive(buyer, buyerInfoMessage(x, 10)), 2) . (
+  happens(reply(buyer,negotiationMessage(DealSuccessful)), 3) . (
+  happens(reply(seller, negotiationMessage(DealFailed)), 3) . (
+  finish))));
+
+
+%%%% PROPERTY %%%%
+%% No one can obtain something for less than 1
+ offer = 0 => 
+  P0(happens(receive(buyer, buyerInfoMessage(item, offer)), t) . state) = 
+     P1(state);
+ offer <> 0 => 
+  P0(happens(receive(buyer, buyerInfoMessage(item, offer)), t) . state) = 
+     P0(state);
+  P0(happens(receive(buyer, sellerInfoMessage(inventoryItem, askingPrice)), t) . state) = P0(state);
+  P0(happens(receive(seller, y), t) . state) = P0(state);
+  P0(happens(reply(x, y), t) . state) = P0(state);
+  P0(finish) = true;
+
+msg3 = negotiationMessage(DealSuccessful) =>
+  P1(happens(reply(buyer, msg3), t) . state) = false;
+msg3 <> negotiationMessage(DealSuccessful) =>
+  P1(happens(reply(buyer, msg3), t) . state) = P0(state);
+  P1(happens(reply(seller, msg3), t) . state) = P1(state);
+  P1(happens(receive(x, y), t) . state) = P1(state);
+  P1(finish) = true;
+
+%% Same deal for buyer & seller
+
+  Pb0(happens(reply(buyer, negotiationMessage(deal)), t) . state) = Pb1(deal, state);
+  Pb0(happens(reply(seller, negotiationMessage(deal)), t) . state) = Pb2(deal, state);
+  Pb0(happens(receive(x, y), t) . state) = Pb0(state);
+  Pb0(finish) = true;
+
+ deals = dealb => Pb1(dealb, happens(reply(seller, negotiationMessage(deals)), t) . state) = true;
+ deals <> dealb => Pb1(dealb, happens(reply(seller, negotiationMessage(deals)), t) . state) = false;
+  Pb1(dealb, happens(reply(buyer, msg), t). state) = Pb1(dealb, state);
+  Pb1(dealb, happens(receive(x, y), t) . state) = Pb1(dealb, state);
+  Pb1(dealb, finish) = false;
+
+ deals = dealb => Pb2(deals, happens(reply(buyer, negotiationMessage(dealb)), t) . state) = true;
+ deals <> dealb => Pb2(deals, happens(reply(buyer, negotiationMessage(dealb)), t) . state) = false;
+  Pb2(deals, happens(reply(seller, msg), t) . state) = Pb2(deals, state);
+  Pb2(deals, happens(receive(x, y), t) . state) = Pb2(deals, state);
+  Pb2(deals, finish) = false;
+
+greater:
+
+F8: false true finish <;
+F7: F8 true false . finish happens receive reply seller buyer;
+F6: F8 true false . finish happens receive reply seller buyer;
+F5: F8 F7 F6 true false . finish happens receive reply seller buyer;
+F4: F8 F7 F6 F5 true false . finish happens receive reply negotiationMessage seller buyer DealFailed;
+F3: F8 F7 F6 F5 true false . finish happens receive reply negotiationMessage seller buyer DealSuccessful;
+F2: F8 F7 F6 F5 F4 F3 < true false . finish happens receive reply sellerInfoMessage buyerInfoMessage negotiationMessage seller buyer DealSuccessful DealFailed;
+F1: F8 F7 F6 F5 F4 F3 F2 < true false . finish happens receive reply sellerInfoMessage buyerInfoMessage negotiationMessage seller buyer DealSuccessful DealFailed;
+F0: F8 F7 F6 F5 F4 F3 F2 F1 < true false . finish happens receive reply sellerInfoMessage buyerInfoMessage negotiationMessage seller buyer DealSuccessful DealFailed;
+Pb2: true false . finish happens receive reply negotiationMessage seller buyer;
+Pb1: true false . finish happens receive reply negotiationMessage seller buyer;
+Pb0: Pb2 Pb1 true false . finish happens receive reply negotiationMessage seller buyer;
+P1: true false . finish happens receive reply negotiationMessage seller buyer DealSuccessful;
+P0: P1 true false 0 . finish happens receive reply sellerInfoMessage buyerInfoMessage negotiationMessage seller buyer DealSuccessful;
+logKO: . finish happens receive reply sellerInfoMessage buyerInfoMessage negotiationMessage seller buyer DealSuccessful DealFailed;
+logOK: . finish happens receive reply sellerInfoMessage buyerInfoMessage negotiationMessage seller buyer DealSuccessful;
+ 
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+  
+  
+%% Strategy -- SPIKE Beaviour
+Strategy:
+       tautology_rule                   = Delete(id, [tautology]);
+       negative_clash_rule              = Delete(id, [negative_clash]);
+       subsumption_rule                 = Delete(id, [subsumption (L|C)]);
+       eliminate_redundant_literal_rule = simplify(id, [eliminate_redundant_literal]);
+       eliminate_trivial_literal_rule   = simplify(id, [eliminate_trivial_literal]);
+       positive_clash_rule              = simplify(id, [positive_clash]);
+       congruence_closure_rule          = simplify(id, [congruence_closure]);
+       negative_decomposition_rule      = simplify(id, [negative_decomposition]);
+       auto_simplification_rule         = simplify(id, [auto_simplification]);
+       conditional_rewriting_rule2      = simplify(id, [rewriting(rewrite, R, *)]);
+       total_case_rewriting_rule        = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+       induction1 = add_premise(generate,[id]);
+
+       stra = repeat (try (
+                   tautology_rule,
+                   negative_clash_rule,
+                   eliminate_redundant_literal_rule,
+                   eliminate_trivial_literal_rule,
+                   positive_clash_rule,
+                   congruence_closure_rule,
+                   negative_decomposition_rule,
+                   auto_simplification_rule,
+                   conditional_rewriting_rule2,
+                   subsumption_rule,
+                   print_goals,
+                   total_case_rewriting_rule
+       ));
+
+       strategie = (induction1, stra, print_goals_with_history);
+       rewrite   = (stra, print_goals_with_history);
+       fullind   = (repeat(stra, induction1), print_goals_with_history);
+
+start_with: fullind
+ 
+% s_max_compare:
+
+% F6 (sellerInfoMessage (DealSuccessful, u9), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), u24) = true , u9 < 0 = false => P1 ((happens (reply (buyer, negotiationMessage (DealFailed)), u23)) . u24) = true  ?
+% F6 (sellerInfoMessage (DealSuccessful, u9), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), u24) = true , u9 < 0 = false , negotiationMessage (DealFailed) <> negotiationMessage (DealSuccessful) => P0 (u24) = true 
+
+
+% s_max_compare:
+%  false = true , u9 < 0 = false , u31 <> 0 => P0 (u34) = true  ?
+% F8 (sellerInfoMessage (DealSuccessful, u9), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (buyer, buyerInfoMessage (DealSuccessful, u31)), u33)) . u34) = true , u9 < 0 = false , u31 <> 0 => P0 (u34) = true 
+
+% s_max_compare:
+
+%   F8 (sellerInfoMessage (DealSuccessful, u9), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u38)), u32)) . u33) = true , u9 < 0 = false => P0 (u33) = true  ?
+%   F1 (sellerInfoMessage (DealSuccessful, u38), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), u33) = true , u9 < 0 = false => P0 (u33) = true 
+
+% s_max_compare: % :-)
+% F8 (sellerInfoMessage (DealSuccessful, u9), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u38)), u32)) . u33) = true , u9 < 0 = false => P0 (u33) = true 
+% ?
+%   F8 (sellerInfoMessage (DealSuccessful, u9), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u38)), u32)) . u33) = true , u9 < 0 = false => P0 ((happens (receive (buyer, buyerInfoMessage (DealSuccessful, 0)), u17)) . ((happens (reply (buyer, negotiationMessage (DealFailed)), u23)) . ((happens (reply (seller, negotiationMessage (DealFailed)), u29)) . ((happens (receive (seller, sellerInfoMessage (DealSuccessful, u38)), u32)) . u33)))) = true 
+
+  
+
+% s_compare: %  [ 1988 ] :-)
+
+%   F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, u22), u23)) . u24) = true , u1 < 0 = false => P0 (u24) = true 
+% ?
+%   F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u38)), u32)) . ((happens (receive (buyer, buyerInfoMessage (DealSuccessful, 0)), u8)) . ((happens (reply (buyer, negotiationMessage (DealFailed)), u14)) . ((happens (reply (seller, negotiationMessage (DealFailed)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true , u1 < 0 = false => P0 ((happens (receive (buyer, buyerInfoMessage (DealSuccessful, 0)), u8)) . ((happens (reply (buyer, negotiationMessage (DealFailed)), u14)) . ((happens (reply (seller, negotiationMessage (DealFailed)), u20)) . ((happens (receive (seller, u22), u23)) . u24)))) = true 
+
+% s_compare: %  [ 5527 ] :-)
+%   F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealFailed, u7), negotiationMessage (DealSuccessful), (happens (receive (seller, u22), u23)) . u24) = true , u1 < u7 = true , u7 <> 0 => P0 (u24) = true 
+% ?
+%  F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u38)), u32)) . ((happens (receive (buyer, buyerInfoMessage (DealFailed, u7)), u8)) . ((happens (reply (buyer, negotiationMessage (DealSuccessful)), u14)) . ((happens (reply (seller, negotiationMessage (DealSuccessful)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true , u1 < 0 = false => P0 (((happens (receive (buyer, buyerInfoMessage (DealFailed, u7)), u8)) . ((happens (reply (buyer, negotiationMessage (DealSuccessful)), u14)) . ((happens (reply (seller, negotiationMessage (DealSuccessful)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true 
+
+% s_compare: % [ 5229 ] :-)
+
+%  F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealSuccessful, u7), negotiationMessage (DealFailed), (happens (receive (seller, u22), u23)) . u24) = true , u1 < u7 = false , u7 <> 0 => P0 (u24) = true 
+% ?
+%  F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u38)), u32)) . ((happens (receive (buyer, buyerInfoMessage (DealSuccessful, u7)), u8)) . ((happens (reply (buyer, negotiationMessage (DealFailed)), u14)) . ((happens (reply (seller, negotiationMessage (DealFailed)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true, u1 < 0 = false => P0 (((happens (receive (buyer, buyerInfoMessage (DealSuccessful, u7)), u8)) . ((happens (reply (buyer, negotiationMessage (DealFailed)), u14)) . ((happens (reply (seller, negotiationMessage (DealFailed)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true 
+
+
+% s_compare: % [ 3661 ] :-)
+
+% F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealSuccessful, u7), negotiationMessage (DealSuccessful), (happens (receive (seller, u22), u23)) . u24) = true , u1 < u7 = true , u7 <> 0 => P0 (u24) = true
+% ?
+% F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u138)), u132)) . ((happens (receive (buyer, buyerInfoMessage (DealSuccessful, u7)), u8)) . ((happens (reply (buyer, negotiationMessage (DealSuccessful)), u14)) . ((happens (reply (seller, negotiationMessage (DealSuccessful)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true , u1 < 0 = false => P0 (((happens (receive (buyer, buyerInfoMessage (DealSuccessful, u7)), u8)) . ((happens (reply (buyer, negotiationMessage (DealSuccessful)), u14)) . ((happens (reply (seller, negotiationMessage (DealSuccessful)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true 
+
+% s_compare: %  [ 3363 ] :-) 
+
+% F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealFailed, u7), negotiationMessage (DealFailed), (happens (receive (seller, u22), u23)) . u24) = true , u1 < u7 = false , u7 <> 0 => P0 (u24) = true 
+% ?
+%  F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u138)), u132)) . ((happens (receive (buyer, buyerInfoMessage (DealFailed, u7)), u8)) . ((happens (reply (buyer, negotiationMessage (DealFailed)), u14)) . ((happens (reply (seller, negotiationMessage (DealFailed)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true , u1 < 0 = false => P0 (((happens (receive (buyer, buyerInfoMessage (DealFailed, u7)), u8)) . ((happens (reply (buyer, negotiationMessage (DealFailed)), u14)) . ((happens (reply (seller, negotiationMessage (DealFailed)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true 
+
+% s_compare: % [ 3080 ] :-)
+
+% F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealFailed, 0), negotiationMessage (DealFailed), (happens (receive (seller, u22), u23)) . u24) = true , u1 < 0 = false => P0 (u24) = true 
+% ?
+% F8 (sellerInfoMessage (DealSuccessful, u1), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u138)), u132)) . ((happens (receive (buyer, buyerInfoMessage (DealFailed, 0)), u8)) . ((happens (reply (buyer, negotiationMessage (DealFailed)), u14)) . ((happens (reply (seller, negotiationMessage (DealFailed)), u20)) . ((happens (receive (seller, u22), u23)) . u24)))) ) = true , u1 < 0 = false => P0 (((happens (receive (buyer, buyerInfoMessage (DealFailed, 0)), u8)) . ((happens (reply (buyer, negotiationMessage (DealFailed)), u14)) . ((happens (reply (seller, negotiationMessage (DealFailed)), u20)) . ((happens (receive (seller, u22), u23)) . u24))))) = true 
+
+% s_compare: % Cf\rho < C1\sigma\rho
+% F8 (sellerInfoMessage (DealSuccessful, u38), buyerInfoMessage (DealFailed, 0), negotiationMessage (DealFailed), u30) = true , u38 < 0 = false => P0 ((happens (reply (seller, negotiationMessage (DealFailed)), u29)) . u30) = true 
+% ?
+% F8 (sellerInfoMessage (DealSuccessful, u38), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), (happens (receive (seller, sellerInfoMessage (DealSuccessful, u138)), u132)) . ((happens (receive (buyer, buyerInfoMessage (DealFailed, 0)), u17)) .  ((happens (reply (buyer, negotiationMessage (DealFailed)), u23)) . ((happens (reply (seller,  negotiationMessage (DealFailed)), u29)) . u30)))) = true , u38 < 0 = false => P0 (((happens (receive (buyer, buyerInfoMessage (DealFailed, 0)), u17)) .  ((happens (reply (buyer, negotiationMessage (DealFailed)), u23)) . ((happens (reply (seller,  negotiationMessage (DealFailed)), u29)) . u30)))) = true 
+
+
+
+conjectures :
+
+% F0(x,y,z,logOK) = true;
+
+% F0(x,y,z,logKO) = false;
+
+F0(x,y,z,log) = true => P0(log) = true;
+
+% F0(x,y,z,log) = true => Pb0(log) = true;
+
+%F1 (sellerInfoMessage (DealSuccessful, u38), buyerInfoMessage (DealSuccessful, 0), negotiationMessage (DealFailed), u33) = true => P0 (u33) = true ; 
+
+ 
