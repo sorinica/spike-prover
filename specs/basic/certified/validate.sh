@@ -19,11 +19,11 @@ do
 j=`expr $j + 1`
 echo "file $j: $i.spike"
 if [  "$1" == "-spec" ] ;then 
-    ../../../sources/spike_bc -coqc_spec ../no_rm/$i.spike > $i.proof 
+    ../../../sources/spike_bc -coqc_spec ../examples/$i.spike > $i.proof 
     echo "treating $i"'_spec.v' 
     time coqc "$i"'_spec.v' 
 else 
-    ../../../sources/spike_bc -coqc ../no_rm/$i.spike > $i.proof
+    ../../../sources/spike_bc -coqc ../examples/$i.spike > $i.proof
     echo "treating $i.v" 
     time coqc "$i.v" 
 fi
