@@ -1,0 +1,1 @@
+examples/cime_trace/order_extension.vo examples/cime_trace/order_extension.glob: examples/cime_trace/order_extension.v list_extensions/weaved_relation.vo term_algebra/equational_theory.vo examples/cime_trace/equational_extension.vo term_algebra/term.vo term_orderings/subterm_dp.vo list_extensions/list_permut.vo basis/terminaison.vo

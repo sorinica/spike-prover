@@ -1,0 +1,105 @@
+Frewriting
+R15 Coq.omega.Omega <> <> lib
+R37 term <> <> lib
+R87 Coq.Relations.Relations <> <> lib
+R106 Coq.Wellfounded.Inclusion <> <> lib
+R125 equational_theory <> <> lib
+R187 Coq.Wellfounded.Wellfounded <> <> lib
+R221 Coq.Init.Wf <> Acc ind
+R250 Coq.Init.Wf <> well_founded def
+sec 298 <> Inclusion
+var 320 Inclusion A
+var 340 Inclusion R1
+var 344 Inclusion R2
+var 375 Inclusion Incl
+R382 Coq.Relations.Relation_Definitions <> inclusion def
+prf 412 <> SN_incl
+R448 rewriting "'SN'" not
+R437 rewriting "'SN'" not
+R500 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R500 Coq.Wellfounded.Inclusion <> Acc_incl thm
+prf 546 <> termine_incl
+R575 rewriting "'termine'" not
+R561 rewriting "'termine'" not
+R630 Coq.Wellfounded.Inclusion <> wf_incl thm
+R630 Coq.Wellfounded.Inclusion <> wf_incl thm
+R669 rewriting Inclusion <> sec
+sec 832 <> Terminaison
+var 856 Terminaison T
+var 875 Terminaison R
+def 993 <> Retoile
+R1004 Coq.Relations.Relation_Operators <> clos_refl_trans ind
+prf 1036 <> no_infinite_sequence2
+R1089 Coq.Init.Logic "~ x" not
+R1091 Coq.Init.Logic "'exists' x : t , p" not
+R1121 Coq.Init.Logic "A /\ B" not
+R1117 Coq.Init.Logic "x = y" not
+R1115 Coq.Init.Datatypes "" not
+R1145 rewriting "T -R> U" not
+R1153 Coq.Init.Peano "n + m" not
+R1154 Coq.Init.Datatypes "" not
+R1135 Coq.Init.Datatypes <> nat ind
+R1102 Coq.Init.Datatypes <> nat ind
+R1075 rewriting "'SN'" not
+R1248 Coq.Init.Datatypes "" not
+R1248 Coq.Init.Datatypes "" not
+R1293 Coq.Init.Datatypes "" not
+R1293 Coq.Init.Datatypes "" not
+R1325 Coq.Init.Peano "n + m" not
+R1326 Coq.Init.Datatypes "" not
+R1325 Coq.Init.Peano "n + m" not
+R1326 Coq.Init.Datatypes "" not
+var 1368 Terminaison f
+R1377 Coq.Init.Datatypes <> nat ind
+var 1396 Terminaison H_compat
+R1437 Coq.Init.Peano "x < y" not
+R1424 rewriting "T -R> U" not
+prf 1455 <> termine_gt_compat
+R1475 rewriting "'termine'" not
+R1537 Coq.Init.Wf <> Acc ind
+R1530 Coq.Init.Peano "x < y" not
+R1537 Coq.Init.Wf <> Acc ind
+R1530 Coq.Init.Peano "x < y" not
+R1577 Coq.Init.Datatypes <> S constr
+R1577 Coq.Init.Datatypes <> S constr
+R1646 Coq.Init.Peano "x < y" not
+R1648 Coq.Init.Datatypes "" not
+R1646 Coq.Init.Peano "x < y" not
+R1648 Coq.Init.Datatypes "" not
+R1699 Coq.Init.Wf <> Acc_intro constr
+R1699 Coq.Init.Wf <> Acc_intro constr
+R1762 Coq.Init.Peano "x < y" not
+R1762 Coq.Init.Peano "x < y" not
+ind 1834 <> R2
+constr 1860 <> R2_intro
+R1906 rewriting <> R2 ind
+R1897 rewriting "T -R> U" not
+R1886 rewriting "T -R> U" not
+prf 1923 <> termineR2aux
+R1973 Coq.Init.Logic "A /\ B" not
+R1965 rewriting "'SN'" not
+R1968 rewriting <> R2 ind
+R1996 rewriting "'SN'" not
+R1999 rewriting <> R2 ind
+R1942 rewriting "'termine'" not
+R2077 Coq.Init.Logic "A /\ B" not
+R2070 rewriting "'SN'" not
+R2073 rewriting <> R2 ind
+R2103 rewriting "'SN'" not
+R2106 rewriting <> R2 ind
+R2028 Coq.Init.Wf <> Acc_ind def
+R2077 Coq.Init.Logic "A /\ B" not
+R2070 rewriting "'SN'" not
+R2073 rewriting <> R2 ind
+R2103 rewriting "'SN'" not
+R2106 rewriting <> R2 ind
+R2028 Coq.Init.Wf <> Acc_ind def
+R2140 Coq.Init.Wf <> Acc_intro constr
+R2140 Coq.Init.Wf <> Acc_intro constr
+prf 2301 <> termineR2
+R2326 rewriting "'termine'" not
+R2334 rewriting <> R2 ind
+R2313 rewriting "'termine'" not
+R2398 rewriting <> termineR2aux thm
+R2398 rewriting <> termineR2aux thm
+R2489 rewriting Terminaison <> sec

@@ -1,0 +1,22 @@
+let F = signature "
+0 : constant;
+s : unary;
+ack : binary;
+";
+
+let X = vars "x y z";
+
+let R = TRS F X "
+ack(0, y) -> s(y);
+ack(s(x), 0) -> ack(x, s(0));
+ack(s(x), s(y)) -> ack(x, ack(s(x),y));
+";
+
+#time on;
+polyinterpkind {("rpo",0)};
+termcrit "dp";
+termcrit "nograph";
+termcrit "nomarks";
+termination R;
+new_coq_dp_proof2 "ack_hubert.v" "ack_all.v" R;
+#quit;
