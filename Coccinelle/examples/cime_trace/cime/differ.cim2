@@ -1,0 +1,38 @@
+let F = signature "dx:unary; +,* : AC ; 0,1,X,a : constant";
+let X = vars "f g";
+
+let R = TRS F X "
+dx(X) -> 1 ;
+dx(a) -> 0 ;
+dx(f+g) -> dx(f) + dx(g) ;
+dx(f*g) -> (g * dx(f)) + (f * dx(g))
+";
+#time on;
+polyinterpkind {("rpo",0)};
+termcrit "dp";
+termcrit "nograph";
+termcrit "nomarks";
+termination R;
+new_coq_dp_proof2 "differ_hubert.v" "differ_all.v" R;
+#quit;
+
+(*
+CiME> termination R;
+Entering the termination expert. Verbose level = 1
+Termination constraints:
+{ dx(f + g) > dx(f) ;
+dx(f + g) > dx(g) ;
+dx(f + g) >= dx(f) + dx(g) ;
+dx(f * g) > dx(f) ;
+dx(f * g) > dx(g) ;
+dx(f * g) >= (g * dx(f)) + (f * dx(g)) ;
+dx(X) >= 1 ;
+dx(a) >= 0 ;
+
+dx(minus(f,g)) -> minus(dx(f),dx(g))
+dx(neg(f)) -> neg(dx(f))
+dx(div(f,g)) -> minus(div(dx(f),g),times(f,div(dx(g),exp(g,two))))
+dx(ln(f)) -> div(dx(f),f)
+dx(exp(f,g)) -> plus(times(g,times(exp(f,minus(g,one)),dx(f))),times(exp(f,g),times(ln(f),dx(g))))
+
+*)

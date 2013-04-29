@@ -1,0 +1,2661 @@
+Fring_extention
+R15 Coq.ZArith.ZArith <> <> lib
+R38 Coq.setoid_ring.ZArithRing <> <> lib
+R65 Coq.setoid_ring.Ring_polynom <> <> lib
+R94 Coq.Bool.Bool <> <> lib
+R115 Coq.Lists.List <> <> lib
+R136 closure <> <> lib
+R181 Coq.Init.Datatypes <> bool ind
+R172 Coq.setoid_ring.Ring_polynom <> Pol ind
+R176 Coq.ZArith.BinInt <> Z ind
+R211 Coq.setoid_ring.Ring_polynom <> Pc constr
+R225 Coq.ZArith.BinInt <> Zcompare def
+R234 Coq.ZArith.BinInt "" not
+R262 Coq.Init.Datatypes <> Gt constr
+R268 Coq.Init.Datatypes <> false constr
+R298 Coq.Init.Datatypes <> true constr
+R328 Coq.setoid_ring.Ring_polynom <> Pinj constr
+R340 ring_extention <> all_coef_pos def
+R361 Coq.setoid_ring.Ring_polynom <> PX constr
+R373 Coq.Init.Datatypes <> andb def
+R396 ring_extention <> all_coef_pos def
+R379 ring_extention <> all_coef_pos def
+R172 Coq.setoid_ring.Ring_polynom <> Pol ind
+R176 Coq.ZArith.BinInt <> Z ind
+R172 Coq.setoid_ring.Ring_polynom <> Pol ind
+R176 Coq.ZArith.BinInt <> Z ind
+R181 Coq.Init.Datatypes <> bool ind
+R211 Coq.setoid_ring.Ring_polynom <> Pc constr
+R225 Coq.ZArith.BinInt <> Zcompare def
+R234 Coq.ZArith.BinInt "" not
+R262 Coq.Init.Datatypes <> Gt constr
+R268 Coq.Init.Datatypes <> false constr
+R298 Coq.Init.Datatypes <> true constr
+R328 Coq.setoid_ring.Ring_polynom <> Pinj constr
+R340 ring_extention <> all_coef_pos def
+R361 Coq.setoid_ring.Ring_polynom <> PX constr
+R373 Coq.Init.Datatypes <> andb def
+R396 ring_extention <> all_coef_pos def
+R379 ring_extention <> all_coef_pos def
+R445 Coq.Lists.List <> list ind
+R450 Coq.ZArith.BinInt <> Z ind
+R484 Coq.Lists.List <> nil constr
+R491 Coq.Init.Logic <> True ind
+R503 Coq.Lists.List "x :: y" not
+R519 Coq.Init.Logic "A /\ B" not
+R512 Coq.ZArith.BinInt "x <= y" not
+R511 Coq.ZArith.BinInt "" not
+R522 ring_extention <> all_mem_pos def
+R445 Coq.Lists.List <> list ind
+R450 Coq.ZArith.BinInt <> Z ind
+R445 Coq.Lists.List <> list ind
+R450 Coq.ZArith.BinInt <> Z ind
+R484 Coq.Lists.List <> nil constr
+R491 Coq.Init.Logic <> True ind
+R503 Coq.Lists.List "x :: y" not
+R519 Coq.Init.Logic "A /\ B" not
+R512 Coq.ZArith.BinInt "x <= y" not
+R511 Coq.ZArith.BinInt "" not
+R522 ring_extention <> all_mem_pos def
+R0 ring_extention <> jump def
+R0 ring_extention <> jump def
+R0 ring_extention <> jump def
+R0 ring_extention <> jump def
+prf 686 <> all_mem_pos_def
+R740 Coq.Init.Logic "A <-> B" not
+R736 Coq.ZArith.BinInt "x <= y" not
+R735 Coq.ZArith.BinInt "" not
+R725 Coq.Lists.List <> In def
+R746 ring_extention <> all_mem_pos def
+R909 ring_extention <> all_mem_pos def
+R909 ring_extention <> all_mem_pos def
+prf 1031 <> tail_in
+R1081 Coq.Lists.List <> In def
+R1064 Coq.Lists.List <> In def
+R1070 Coq.Lists.List <> tail def
+R1053 Coq.Lists.List <> list ind
+prf 1155 <> jump_in
+R1205 Coq.Lists.List <> In def
+R1185 Coq.Lists.List <> In def
+R1191 Coq.setoid_ring.BinList <> jump def
+R1257 Coq.setoid_ring.BinList <> jump def
+R1257 Coq.setoid_ring.BinList <> jump def
+R1281 ring_extention <> tail_in thm
+R1281 ring_extention <> tail_in thm
+R1316 ring_extention <> tail_in thm
+R1316 ring_extention <> tail_in thm
+prf 1342 <> pos_expr_if_all_pos_aux
+R1448 Coq.ZArith.BinInt "x <= y" not
+R1447 Coq.ZArith.BinInt "" not
+R1450 Coq.setoid_ring.Ring_polynom <> Pphi def
+R1472 Coq.setoid_ring.Ring_theory <> IDphi def
+R1482 Coq.ZArith.BinInt <> Z ind
+R1464 Coq.ZArith.BinInt <> Zmult def
+R1458 Coq.ZArith.BinInt <> Zplus def
+R1456 Coq.ZArith.BinInt "" not
+R1424 ring_extention <> all_mem_pos def
+R1404 Coq.Init.Logic "x = y" not
+R1389 ring_extention <> all_coef_pos def
+R1406 Coq.Init.Datatypes <> true constr
+R1381 Coq.setoid_ring.Ring_polynom <> Pol ind
+R1385 Coq.ZArith.BinInt <> Z ind
+R1532 ring_extention <> all_coef_pos def
+R1532 ring_extention <> all_coef_pos def
+R1757 ring_extention <> all_mem_pos_def thm
+R1757 ring_extention <> all_mem_pos_def thm
+R1818 ring_extention <> jump_in thm
+R1818 ring_extention <> jump_in thm
+R1883 Coq.ZArith.BinInt "x <= y" not
+R1882 Coq.ZArith.BinInt "" not
+R1885 Coq.Lists.List <> hd def
+R1888 Coq.ZArith.BinInt "" not
+R1883 Coq.ZArith.BinInt "x <= y" not
+R1882 Coq.ZArith.BinInt "" not
+R1885 Coq.Lists.List <> hd def
+R1888 Coq.ZArith.BinInt "" not
+R1961 ring_extention <> all_mem_pos_def thm
+R1961 ring_extention <> all_mem_pos_def thm
+R2013 Coq.ZArith.BinInt "x <= y" not
+R2012 Coq.ZArith.BinInt "" not
+R2016 Coq.setoid_ring.Ring_theory <> pow_pos def
+R2031 Coq.Lists.List <> hd def
+R2034 Coq.ZArith.BinInt "" not
+R2024 Coq.ZArith.BinInt <> Zmult def
+R2013 Coq.ZArith.BinInt "x <= y" not
+R2012 Coq.ZArith.BinInt "" not
+R2016 Coq.setoid_ring.Ring_theory <> pow_pos def
+R2031 Coq.Lists.List <> hd def
+R2034 Coq.ZArith.BinInt "" not
+R2024 Coq.ZArith.BinInt <> Zmult def
+R2054 Coq.Lists.List <> hd def
+R2057 Coq.ZArith.BinInt "" not
+R2054 Coq.Lists.List <> hd def
+R2057 Coq.ZArith.BinInt "" not
+R2204 Coq.ZArith.BinInt "x <= y" not
+R2202 Coq.ZArith.BinInt "" not
+R2210 Coq.setoid_ring.Ring_polynom <> Pphi def
+R2230 Coq.setoid_ring.Ring_theory <> IDphi def
+R2240 Coq.ZArith.BinInt <> Z ind
+R2223 Coq.ZArith.BinInt <> Zmult def
+R2217 Coq.ZArith.BinInt <> Zplus def
+R2215 Coq.ZArith.BinInt "" not
+R2204 Coq.ZArith.BinInt "x <= y" not
+R2202 Coq.ZArith.BinInt "" not
+R2210 Coq.setoid_ring.Ring_polynom <> Pphi def
+R2230 Coq.setoid_ring.Ring_theory <> IDphi def
+R2240 Coq.ZArith.BinInt <> Z ind
+R2223 Coq.ZArith.BinInt <> Zmult def
+R2217 Coq.ZArith.BinInt <> Zplus def
+R2215 Coq.ZArith.BinInt "" not
+R2288 Coq.Bool.Bool <> andb_true_eq thm
+R2288 Coq.Bool.Bool <> andb_true_eq thm
+R2335 Coq.ZArith.BinInt "x <= y" not
+R2334 Coq.ZArith.BinInt "" not
+R2337 Coq.setoid_ring.Ring_polynom <> Pphi def
+R2372 Coq.Lists.List <> tail def
+R2357 Coq.setoid_ring.Ring_theory <> IDphi def
+R2367 Coq.ZArith.BinInt <> Z ind
+R2350 Coq.ZArith.BinInt <> Zmult def
+R2344 Coq.ZArith.BinInt <> Zplus def
+R2342 Coq.ZArith.BinInt "" not
+R2335 Coq.ZArith.BinInt "x <= y" not
+R2334 Coq.ZArith.BinInt "" not
+R2337 Coq.setoid_ring.Ring_polynom <> Pphi def
+R2372 Coq.Lists.List <> tail def
+R2357 Coq.setoid_ring.Ring_theory <> IDphi def
+R2367 Coq.ZArith.BinInt <> Z ind
+R2350 Coq.ZArith.BinInt <> Zmult def
+R2344 Coq.ZArith.BinInt <> Zplus def
+R2342 Coq.ZArith.BinInt "" not
+R2421 Coq.Bool.Bool <> andb_true_eq thm
+R2421 Coq.Bool.Bool <> andb_true_eq thm
+R2458 ring_extention <> all_mem_pos_def thm
+R2458 ring_extention <> all_mem_pos_def thm
+R2515 ring_extention <> tail_in thm
+R2515 ring_extention <> tail_in thm
+prf 3296 <> pos_expr_if_all_pos_aux'
+R3403 Coq.ZArith.BinInt "x <= y" not
+R3402 Coq.ZArith.BinInt "" not
+R3412 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R3505 Coq.setoid_ring.InitialRing <> get_signZ def
+R3497 Coq.ZArith.Zpow_def <> Zpower def
+R3490 Coq.ZArith.BinInt <> Z_of_N def
+R3474 Coq.setoid_ring.Ring_theory <> IDphi def
+R3484 Coq.ZArith.BinInt <> Z ind
+R3458 Coq.ZArith.Zbool <> Zeq_bool def
+R3456 Coq.ZArith.BinInt "" not
+R3454 Coq.ZArith.BinInt "" not
+R3447 Coq.ZArith.BinInt <> Zopp def
+R3440 Coq.ZArith.BinInt <> Zminus def
+R3434 Coq.ZArith.BinInt <> Zmult def
+R3428 Coq.ZArith.BinInt <> Zplus def
+R3426 Coq.ZArith.BinInt "" not
+R3424 Coq.ZArith.BinInt "" not
+R3379 ring_extention <> all_mem_pos def
+R3359 Coq.Init.Logic "x = y" not
+R3344 ring_extention <> all_coef_pos def
+R3361 Coq.Init.Datatypes <> true constr
+R3336 Coq.setoid_ring.Ring_polynom <> Pol ind
+R3340 Coq.ZArith.BinInt <> Z ind
+R3560 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R3647 Coq.setoid_ring.InitialRing <> get_signZ def
+R3640 Coq.ZArith.Zpow_def <> Zpower def
+R3633 Coq.ZArith.BinInt <> Z_of_N def
+R3617 Coq.setoid_ring.Ring_theory <> IDphi def
+R3627 Coq.ZArith.BinInt <> Z ind
+R3606 Coq.ZArith.Zbool <> Zeq_bool def
+R3604 Coq.ZArith.BinInt "" not
+R3602 Coq.ZArith.BinInt "" not
+R3595 Coq.ZArith.BinInt <> Zopp def
+R3588 Coq.ZArith.BinInt <> Zminus def
+R3582 Coq.ZArith.BinInt <> Zmult def
+R3576 Coq.ZArith.BinInt <> Zplus def
+R3574 Coq.ZArith.BinInt "" not
+R3572 Coq.ZArith.BinInt "" not
+R3672 Coq.setoid_ring.Ring_polynom <> Pphi def
+R3693 Coq.setoid_ring.Ring_theory <> IDphi def
+R3699 Coq.ZArith.BinInt <> Z ind
+R3685 Coq.ZArith.BinInt <> Zmult def
+R3679 Coq.ZArith.BinInt <> Zplus def
+R3677 Coq.ZArith.BinInt "" not
+R3560 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R3647 Coq.setoid_ring.InitialRing <> get_signZ def
+R3640 Coq.ZArith.Zpow_def <> Zpower def
+R3633 Coq.ZArith.BinInt <> Z_of_N def
+R3617 Coq.setoid_ring.Ring_theory <> IDphi def
+R3627 Coq.ZArith.BinInt <> Z ind
+R3606 Coq.ZArith.Zbool <> Zeq_bool def
+R3604 Coq.ZArith.BinInt "" not
+R3602 Coq.ZArith.BinInt "" not
+R3595 Coq.ZArith.BinInt <> Zopp def
+R3588 Coq.ZArith.BinInt <> Zminus def
+R3582 Coq.ZArith.BinInt <> Zmult def
+R3576 Coq.ZArith.BinInt <> Zplus def
+R3574 Coq.ZArith.BinInt "" not
+R3572 Coq.ZArith.BinInt "" not
+R3672 Coq.setoid_ring.Ring_polynom <> Pphi def
+R3693 Coq.setoid_ring.Ring_theory <> IDphi def
+R3699 Coq.ZArith.BinInt <> Z ind
+R3685 Coq.ZArith.BinInt <> Zmult def
+R3679 Coq.ZArith.BinInt <> Zplus def
+R3677 Coq.ZArith.BinInt "" not
+R3716 ring_extention <> pos_expr_if_all_pos_aux thm
+R3716 ring_extention <> pos_expr_if_all_pos_aux thm
+R3791 Coq.setoid_ring.InitialRing <> Zsth thm
+R3814 Coq.ZArith.BinInt <> Z ind
+R3770 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R3791 Coq.setoid_ring.InitialRing <> Zsth thm
+R3814 Coq.ZArith.BinInt <> Z ind
+R3770 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R3827 Coq.setoid_ring.InitialRing <> Zeqe thm
+R3827 Coq.setoid_ring.InitialRing <> Zeqe thm
+R3855 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R3914 Coq.setoid_ring.InitialRing <> Zth thm
+R3897 Coq.setoid_ring.InitialRing <> Zeqe thm
+R3880 Coq.setoid_ring.InitialRing <> Zsth thm
+R3855 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R3914 Coq.setoid_ring.InitialRing <> Zth thm
+R3897 Coq.setoid_ring.InitialRing <> Zeqe thm
+R3880 Coq.setoid_ring.InitialRing <> Zsth thm
+R3944 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R4012 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R4003 Coq.ZArith.Zbool <> Zeq_bool def
+R3986 Coq.setoid_ring.InitialRing <> Zsth thm
+R3978 Coq.ZArith.BinInt <> Zopp def
+R3971 Coq.ZArith.BinInt <> Zminus def
+R3965 Coq.ZArith.BinInt <> Zmult def
+R3959 Coq.ZArith.BinInt <> Zplus def
+R3957 Coq.ZArith.BinInt "" not
+R3954 Coq.ZArith.BinInt <> Z0 constr
+R3952 Coq.ZArith.BinInt <> Z ind
+R3944 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R4012 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R4003 Coq.ZArith.Zbool <> Zeq_bool def
+R3986 Coq.setoid_ring.InitialRing <> Zsth thm
+R3978 Coq.ZArith.BinInt <> Zopp def
+R3971 Coq.ZArith.BinInt <> Zminus def
+R3965 Coq.ZArith.BinInt <> Zmult def
+R3959 Coq.ZArith.BinInt <> Zplus def
+R3957 Coq.ZArith.BinInt "" not
+R3954 Coq.ZArith.BinInt <> Z0 constr
+R3952 Coq.ZArith.BinInt <> Z ind
+R4034 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R4034 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R4057 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+R4057 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+prf 4084 <> pos_expr_if_all_pos'
+R4277 Coq.ZArith.BinInt "x <= y" not
+R4276 Coq.ZArith.BinInt "" not
+R4283 Coq.setoid_ring.Ring_polynom <> PEeval def
+R4338 Coq.ZArith.Zpow_def <> Zpower def
+R4331 Coq.ZArith.BinInt <> Z_of_N def
+R4317 Coq.setoid_ring.Ring_theory <> IDphi def
+R4327 Coq.ZArith.BinInt <> Z ind
+R4311 Coq.ZArith.BinInt <> Zopp def
+R4304 Coq.ZArith.BinInt <> Zminus def
+R4298 Coq.ZArith.BinInt <> Zmult def
+R4292 Coq.ZArith.BinInt <> Zplus def
+R4290 Coq.ZArith.BinInt "" not
+R4253 ring_extention <> all_mem_pos def
+R4228 Coq.Init.Logic "x = y" not
+R4126 ring_extention <> all_coef_pos def
+R4145 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R4220 Coq.Lists.List <> nil constr
+R4203 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R4193 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R4184 Coq.ZArith.Zbool <> Zeq_bool def
+R4179 Coq.ZArith.BinInt <> Zopp def
+R4172 Coq.ZArith.BinInt <> Zminus def
+R4166 Coq.ZArith.BinInt <> Zmult def
+R4160 Coq.ZArith.BinInt <> Zplus def
+R4158 Coq.ZArith.BinInt "" not
+R4156 Coq.ZArith.BinInt "" not
+R4230 Coq.Init.Datatypes <> true constr
+R4418 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R4442 Coq.Lists.List <> nil constr
+R4455 Coq.Init.Datatypes "x * y" not
+R4447 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R4453 Coq.ZArith.BinInt <> Z ind
+R4457 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R4463 Coq.ZArith.BinInt <> Z ind
+R4491 Coq.Lists.List <> nil constr
+R4502 Coq.Init.Datatypes "x * y" not
+R4497 Coq.Init.Datatypes "x * y" not
+R4496 Coq.ZArith.BinInt <> Z ind
+R4498 Coq.setoid_ring.Ring_polynom <> Mon ind
+R4504 Coq.setoid_ring.Ring_polynom <> Pol ind
+R4508 Coq.ZArith.BinInt <> Z ind
+R4543 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R4618 Coq.Lists.List <> nil constr
+R4601 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R4591 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R4582 Coq.ZArith.Zbool <> Zeq_bool def
+R4577 Coq.ZArith.BinInt <> Zopp def
+R4570 Coq.ZArith.BinInt <> Zminus def
+R4564 Coq.ZArith.BinInt <> Zmult def
+R4558 Coq.ZArith.BinInt <> Zplus def
+R4556 Coq.ZArith.BinInt "" not
+R4554 Coq.ZArith.BinInt "" not
+R4389 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R4418 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R4442 Coq.Lists.List <> nil constr
+R4455 Coq.Init.Datatypes "x * y" not
+R4447 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R4453 Coq.ZArith.BinInt <> Z ind
+R4457 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R4463 Coq.ZArith.BinInt <> Z ind
+R4491 Coq.Lists.List <> nil constr
+R4502 Coq.Init.Datatypes "x * y" not
+R4497 Coq.Init.Datatypes "x * y" not
+R4496 Coq.ZArith.BinInt <> Z ind
+R4498 Coq.setoid_ring.Ring_polynom <> Mon ind
+R4504 Coq.setoid_ring.Ring_polynom <> Pol ind
+R4508 Coq.ZArith.BinInt <> Z ind
+R4543 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R4618 Coq.Lists.List <> nil constr
+R4601 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R4591 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R4582 Coq.ZArith.Zbool <> Zeq_bool def
+R4577 Coq.ZArith.BinInt <> Zopp def
+R4570 Coq.ZArith.BinInt <> Zminus def
+R4564 Coq.ZArith.BinInt <> Zmult def
+R4558 Coq.ZArith.BinInt <> Zplus def
+R4556 Coq.ZArith.BinInt "" not
+R4554 Coq.ZArith.BinInt "" not
+R4389 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R4642 ring_extention <> pos_expr_if_all_pos_aux' thm
+R4642 ring_extention <> pos_expr_if_all_pos_aux' thm
+R4698 Coq.Init.Logic <> I constr
+R4698 Coq.Init.Logic <> I constr
+prf 4755 <> pos_expr_if_all_pos
+R5050 Coq.ZArith.BinInt "x <= y" not
+R4982 Coq.setoid_ring.Ring_polynom <> PEeval def
+R5037 Coq.ZArith.Zpow_def <> Zpower def
+R5030 Coq.ZArith.BinInt <> Z_of_N def
+R5016 Coq.setoid_ring.Ring_theory <> IDphi def
+R5026 Coq.ZArith.BinInt <> Z ind
+R5010 Coq.ZArith.BinInt <> Zopp def
+R5003 Coq.ZArith.BinInt <> Zminus def
+R4997 Coq.ZArith.BinInt <> Zmult def
+R4991 Coq.ZArith.BinInt <> Zplus def
+R4989 Coq.ZArith.BinInt "" not
+R5059 Coq.setoid_ring.Ring_polynom <> PEeval def
+R5114 Coq.ZArith.Zpow_def <> Zpower def
+R5107 Coq.ZArith.BinInt <> Z_of_N def
+R5093 Coq.setoid_ring.Ring_theory <> IDphi def
+R5103 Coq.ZArith.BinInt <> Z ind
+R5087 Coq.ZArith.BinInt <> Zopp def
+R5080 Coq.ZArith.BinInt <> Zminus def
+R5074 Coq.ZArith.BinInt <> Zmult def
+R5068 Coq.ZArith.BinInt <> Zplus def
+R5066 Coq.ZArith.BinInt "" not
+R4957 ring_extention <> all_mem_pos def
+R4932 Coq.Init.Logic "x = y" not
+R4801 ring_extention <> all_coef_pos def
+R4822 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R4910 Coq.setoid_ring.Ring_polynom <> PEsub constr
+R4905 Coq.Lists.List <> nil constr
+R4880 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R4870 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R4861 Coq.ZArith.Zbool <> Zeq_bool def
+R4856 Coq.ZArith.BinInt <> Zopp def
+R4849 Coq.ZArith.BinInt <> Zminus def
+R4843 Coq.ZArith.BinInt <> Zmult def
+R4837 Coq.ZArith.BinInt <> Zplus def
+R4835 Coq.ZArith.BinInt "" not
+R4833 Coq.ZArith.BinInt "" not
+R4934 Coq.Init.Datatypes <> true constr
+R5172 Coq.ZArith.BinInt "x <= y" not
+R5171 Coq.ZArith.BinInt "" not
+R5176 Coq.setoid_ring.Ring_polynom <> PEeval def
+R5241 Coq.setoid_ring.Ring_polynom <> PEsub constr
+R5231 Coq.ZArith.Zpow_def <> Zpower def
+R5224 Coq.ZArith.BinInt <> Z_of_N def
+R5210 Coq.setoid_ring.Ring_theory <> IDphi def
+R5220 Coq.ZArith.BinInt <> Z ind
+R5204 Coq.ZArith.BinInt <> Zopp def
+R5197 Coq.ZArith.BinInt <> Zminus def
+R5191 Coq.ZArith.BinInt <> Zmult def
+R5185 Coq.ZArith.BinInt <> Zplus def
+R5183 Coq.ZArith.BinInt "" not
+R5172 Coq.ZArith.BinInt "x <= y" not
+R5171 Coq.ZArith.BinInt "" not
+R5176 Coq.setoid_ring.Ring_polynom <> PEeval def
+R5241 Coq.setoid_ring.Ring_polynom <> PEsub constr
+R5231 Coq.ZArith.Zpow_def <> Zpower def
+R5224 Coq.ZArith.BinInt <> Z_of_N def
+R5210 Coq.setoid_ring.Ring_theory <> IDphi def
+R5220 Coq.ZArith.BinInt <> Z ind
+R5204 Coq.ZArith.BinInt <> Zopp def
+R5197 Coq.ZArith.BinInt <> Zminus def
+R5191 Coq.ZArith.BinInt <> Zmult def
+R5185 Coq.ZArith.BinInt <> Zplus def
+R5183 Coq.ZArith.BinInt "" not
+R5266 ring_extention <> pos_expr_if_all_pos' thm
+R5266 ring_extention <> pos_expr_if_all_pos' thm
+prf 5361 <> jump_nil
+R5398 Coq.Init.Logic "x = y" not
+R5382 Coq.setoid_ring.BinList <> jump def
+R5391 Coq.Lists.List <> nil constr
+R5395 Coq.ZArith.BinInt <> Z ind
+R5400 Coq.Lists.List <> nil constr
+prf 5528 <> Pphi_nil
+R5592 Coq.Init.Logic "x = y" not
+R5552 Coq.setoid_ring.Ring_polynom <> Pphi def
+R5586 Coq.Lists.List <> nil constr
+R5572 Coq.setoid_ring.Ring_theory <> IDphi def
+R5582 Coq.ZArith.BinInt <> Z ind
+R5565 Coq.ZArith.BinInt <> Zmult def
+R5559 Coq.ZArith.BinInt <> Zplus def
+R5557 Coq.ZArith.BinInt "" not
+R5617 Coq.setoid_ring.Ring_polynom <> Pc constr
+R5634 Coq.setoid_ring.Ring_polynom <> Pinj constr
+R5646 Coq.setoid_ring.Ring_polynom <> Pphi def
+R5680 Coq.Lists.List <> nil constr
+R5666 Coq.setoid_ring.Ring_theory <> IDphi def
+R5676 Coq.ZArith.BinInt <> Z ind
+R5659 Coq.ZArith.BinInt <> Zmult def
+R5653 Coq.ZArith.BinInt <> Zplus def
+R5651 Coq.ZArith.BinInt "" not
+R5692 Coq.setoid_ring.Ring_polynom <> PX constr
+R5704 Coq.setoid_ring.Ring_polynom <> Pphi def
+R5738 Coq.Lists.List <> nil constr
+R5724 Coq.setoid_ring.Ring_theory <> IDphi def
+R5734 Coq.ZArith.BinInt <> Z ind
+R5717 Coq.ZArith.BinInt <> Zmult def
+R5711 Coq.ZArith.BinInt <> Zplus def
+R5709 Coq.ZArith.BinInt "" not
+R5819 ring_extention <> jump_nil thm
+R5819 ring_extention <> jump_nil thm
+R5858 Coq.setoid_ring.Ring_theory <> pow_pos def
+R5872 Coq.ZArith.BinInt "" not
+R5866 Coq.ZArith.BinInt <> Zmult def
+R5883 Coq.ZArith.BinInt "" not
+R5858 Coq.setoid_ring.Ring_theory <> pow_pos def
+R5872 Coq.ZArith.BinInt "" not
+R5866 Coq.ZArith.BinInt <> Zmult def
+R5883 Coq.ZArith.BinInt "" not
+R5999 Coq.Lists.List <> list ind
+R6006 Coq.Init.Datatypes "x * y" not
+R6005 Coq.ZArith.BinInt <> Z ind
+R6007 Coq.ZArith.BinInt <> Z ind
+R6042 Coq.Lists.List <> nil constr
+R6049 Coq.Init.Logic <> True ind
+R6065 Coq.Lists.List "x :: y" not
+R6060 Coq.Init.Datatypes "( x , y , .. , z )" not
+R6081 Coq.Init.Logic "A /\ B" not
+R6074 Coq.ZArith.BinInt "x <= y" not
+R6084 ring_extention <> all_mem_bounded def
+R5999 Coq.Lists.List <> list ind
+R6006 Coq.Init.Datatypes "x * y" not
+R6005 Coq.ZArith.BinInt <> Z ind
+R6007 Coq.ZArith.BinInt <> Z ind
+R5999 Coq.Lists.List <> list ind
+R6006 Coq.Init.Datatypes "x * y" not
+R6005 Coq.ZArith.BinInt <> Z ind
+R6007 Coq.ZArith.BinInt <> Z ind
+R6042 Coq.Lists.List <> nil constr
+R6049 Coq.Init.Logic <> True ind
+R6065 Coq.Lists.List "x :: y" not
+R6060 Coq.Init.Datatypes "( x , y , .. , z )" not
+R6081 Coq.Init.Logic "A /\ B" not
+R6074 Coq.ZArith.BinInt "x <= y" not
+R6084 ring_extention <> all_mem_bounded def
+prf 6118 <> tail_length
+R6202 Coq.Init.Logic "x = y" not
+R6185 Coq.Lists.List <> length def
+R6193 Coq.Lists.List <> tail def
+R6204 Coq.Lists.List <> length def
+R6212 Coq.Lists.List <> tail def
+R6167 Coq.Init.Logic "x = y" not
+R6157 Coq.Lists.List <> length def
+R6169 Coq.Lists.List <> length def
+R6148 Coq.Lists.List <> list ind
+R6148 Coq.Lists.List <> list ind
+prf 6365 <> jump_length
+R6453 Coq.Init.Logic "x = y" not
+R6434 Coq.Lists.List <> length def
+R6442 Coq.setoid_ring.BinList <> jump def
+R6455 Coq.Lists.List <> length def
+R6463 Coq.setoid_ring.BinList <> jump def
+R6416 Coq.Init.Logic "x = y" not
+R6406 Coq.Lists.List <> length def
+R6418 Coq.Lists.List <> length def
+R6397 Coq.Lists.List <> list ind
+R6397 Coq.Lists.List <> list ind
+R6520 Coq.setoid_ring.BinList <> jump def
+R6520 Coq.setoid_ring.BinList <> jump def
+R6594 ring_extention <> tail_length thm
+R6594 ring_extention <> tail_length thm
+R6673 ring_extention <> tail_length thm
+R6673 ring_extention <> tail_length thm
+prf 6713 <> all_mem_pos_tail
+R6771 ring_extention <> all_mem_pos def
+R6784 Coq.Lists.List <> tail def
+R6751 ring_extention <> all_mem_pos def
+R6742 Coq.Lists.List <> list ind
+R6747 Coq.ZArith.BinInt <> Z ind
+R6834 ring_extention <> all_mem_pos def
+R6834 ring_extention <> all_mem_pos def
+prf 6904 <> all_mem_pos_jump
+R6964 ring_extention <> all_mem_pos def
+R6977 Coq.setoid_ring.BinList <> jump def
+R6944 ring_extention <> all_mem_pos def
+R6935 Coq.Lists.List <> list ind
+R6940 Coq.ZArith.BinInt <> Z ind
+R7030 Coq.setoid_ring.BinList <> jump def
+R7030 Coq.setoid_ring.BinList <> jump def
+R7089 ring_extention <> all_mem_pos_tail thm
+R7089 ring_extention <> all_mem_pos_tail thm
+R7163 ring_extention <> all_mem_pos_tail thm
+R7163 ring_extention <> all_mem_pos_tail thm
+R0 ring_extention <> combine def
+prf 7273 <> combine_tail
+R7345 Coq.Init.Logic "x = y" not
+R7317 Coq.Lists.List <> combine def
+R7336 Coq.Lists.List <> tail def
+R7326 Coq.Lists.List <> tail def
+R7348 Coq.Lists.List <> tail def
+R7354 Coq.Lists.List <> combine def
+R7305 Coq.Lists.List <> list ind
+R7305 Coq.Lists.List <> list ind
+R7416 Coq.Lists.List <> combine def
+R7416 Coq.Lists.List <> combine def
+prf 7525 <> combine_jump
+R7603 Coq.Init.Logic "x = y" not
+R7571 Coq.Lists.List <> combine def
+R7592 Coq.setoid_ring.BinList <> jump def
+R7580 Coq.setoid_ring.BinList <> jump def
+R7606 Coq.setoid_ring.BinList <> jump def
+R7614 Coq.Lists.List <> combine def
+R7559 Coq.Lists.List <> list ind
+R7559 Coq.Lists.List <> list ind
+R7675 Coq.setoid_ring.BinList <> jump def
+R7675 Coq.setoid_ring.BinList <> jump def
+R7738 ring_extention <> combine_tail thm
+R7738 ring_extention <> combine_tail thm
+R7814 ring_extention <> combine_tail thm
+R7814 ring_extention <> combine_tail thm
+prf 7853 <> all_mem_bounded_tail
+R7923 ring_extention <> all_mem_bounded def
+R7940 Coq.Lists.List <> tail def
+R7899 ring_extention <> all_mem_bounded def
+R7886 Coq.Lists.List <> list ind
+R7893 Coq.Init.Datatypes "x * y" not
+R7892 Coq.ZArith.BinInt <> Z ind
+R7894 Coq.ZArith.BinInt <> Z ind
+R7989 ring_extention <> all_mem_bounded def
+R7989 ring_extention <> all_mem_bounded def
+prf 8059 <> all_mem_bounded_jump
+R8131 ring_extention <> all_mem_bounded def
+R8148 Coq.setoid_ring.BinList <> jump def
+R8107 ring_extention <> all_mem_bounded def
+R8094 Coq.Lists.List <> list ind
+R8101 Coq.Init.Datatypes "x * y" not
+R8100 Coq.ZArith.BinInt <> Z ind
+R8102 Coq.ZArith.BinInt <> Z ind
+R8201 Coq.setoid_ring.BinList <> jump def
+R8201 Coq.setoid_ring.BinList <> jump def
+R8257 ring_extention <> all_mem_bounded_tail thm
+R8257 ring_extention <> all_mem_bounded_tail thm
+R8328 ring_extention <> all_mem_bounded_tail thm
+R8328 ring_extention <> all_mem_bounded_tail thm
+prf 8371 <> all_mem_pos_all_mem_bounded
+R8501 ring_extention <> all_mem_pos def
+R8466 ring_extention <> all_mem_bounded def
+R8483 Coq.Lists.List <> combine def
+R8443 ring_extention <> all_mem_pos def
+R8428 Coq.Init.Logic "x = y" not
+R8418 Coq.Lists.List <> length def
+R8430 Coq.Lists.List <> length def
+R8561 Coq.Lists.List <> combine def
+R8561 Coq.Lists.List <> combine def
+prf 8791 <> Zmult_compat
+R8839 Coq.Init.Logic "A /\ B" not
+R8836 Coq.ZArith.BinInt "x < y" not
+R8835 Coq.ZArith.BinInt "" not
+R8843 Coq.ZArith.BinInt "x < y" not
+R8842 Coq.ZArith.BinInt "" not
+R8827 Coq.ZArith.BinInt "x < y" not
+R8826 Coq.ZArith.BinInt "" not
+R8829 Coq.ZArith.BinInt "x * y" not
+R8819 Coq.ZArith.BinInt "x <= y" not
+R8818 Coq.ZArith.BinInt "" not
+R8872 Coq.ZArith.ZArith_dec <> Z_lt_le_dec thm
+R8884 Coq.ZArith.BinInt "" not
+R8872 Coq.ZArith.ZArith_dec <> Z_lt_le_dec thm
+R8884 Coq.ZArith.BinInt "" not
+R8913 Coq.ZArith.BinInt "" not
+R8922 Coq.ZArith.BinInt "x * y" not
+R8921 Coq.ZArith.BinInt "" not
+R8953 Coq.ZArith.BinInt "x * y" not
+R8964 Coq.ZArith.BinInt "x * y" not
+R8997 Coq.ZArith.Zorder <> Zmult_gt_0_lt_reg_r thm
+R9024 Coq.ZArith.Zorder <> Zlt_gt thm
+R8913 Coq.ZArith.BinInt "" not
+R8922 Coq.ZArith.BinInt "x * y" not
+R8921 Coq.ZArith.BinInt "" not
+R8953 Coq.ZArith.BinInt "x * y" not
+R8964 Coq.ZArith.BinInt "x * y" not
+R8997 Coq.ZArith.Zorder <> Zmult_gt_0_lt_reg_r thm
+R9024 Coq.ZArith.Zorder <> Zlt_gt thm
+R9068 Coq.Init.Logic "x = y" not
+R9069 Coq.ZArith.BinInt "" not
+R9068 Coq.Init.Logic "x = y" not
+R9069 Coq.ZArith.BinInt "" not
+R0 ring_extention <> pow_pos def
+R0 ring_extention <> pow_pos def
+prf 9191 <> pow_pos_pos
+R9226 Coq.ZArith.BinInt "x <= y" not
+R9225 Coq.ZArith.BinInt "" not
+R9229 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9237 Coq.ZArith.BinInt <> Zmult def
+R9218 Coq.ZArith.BinInt "x <= y" not
+R9217 Coq.ZArith.BinInt "" not
+R9290 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9298 Coq.ZArith.BinInt <> Zmult def
+R9290 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9298 Coq.ZArith.BinInt <> Zmult def
+prf 9340 <> pow_pos_strict_pos
+R9381 Coq.ZArith.BinInt "x < y" not
+R9380 Coq.ZArith.BinInt "" not
+R9383 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9391 Coq.ZArith.BinInt <> Zmult def
+R9374 Coq.ZArith.BinInt "x < y" not
+R9373 Coq.ZArith.BinInt "" not
+R9444 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9452 Coq.ZArith.BinInt <> Zmult def
+R9444 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9452 Coq.ZArith.BinInt <> Zmult def
+R9496 Coq.ZArith.Zorder <> Zmult_lt_0_compat thm
+R9496 Coq.ZArith.Zorder <> Zmult_lt_0_compat thm
+R9526 Coq.ZArith.Zorder <> Zmult_lt_0_compat thm
+R9526 Coq.ZArith.Zorder <> Zmult_lt_0_compat thm
+R9565 Coq.ZArith.Zorder <> Zmult_lt_0_compat thm
+R9565 Coq.ZArith.Zorder <> Zmult_lt_0_compat thm
+prf 9601 <> pow_pos_monotonic
+R9672 Coq.ZArith.BinInt "x <= y" not
+R9653 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9661 Coq.ZArith.BinInt <> Zmult def
+R9675 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9683 Coq.ZArith.BinInt <> Zmult def
+R9641 Coq.ZArith.BinInt "x <= y <= z" not
+R9640 Coq.ZArith.BinInt "" not
+R9753 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9761 Coq.ZArith.BinInt <> Zmult def
+R9753 Coq.setoid_ring.Ring_theory <> pow_pos def
+R9761 Coq.ZArith.BinInt <> Zmult def
+R9835 Coq.ZArith.Zorder <> Zmult_le_compat thm
+R9835 Coq.ZArith.Zorder <> Zmult_le_compat thm
+R9875 Coq.ZArith.Zorder <> Zmult_le_compat thm
+R9875 Coq.ZArith.Zorder <> Zmult_le_compat thm
+R9915 ring_extention <> pow_pos_pos thm
+R9915 ring_extention <> pow_pos_pos thm
+R9953 ring_extention <> pow_pos_pos thm
+R9953 ring_extention <> pow_pos_pos thm
+R9991 Coq.ZArith.Zorder <> Zmult_le_0_compat thm
+R10015 ring_extention <> pow_pos_pos thm
+R9991 Coq.ZArith.Zorder <> Zmult_le_0_compat thm
+R10015 ring_extention <> pow_pos_pos thm
+R10015 ring_extention <> pow_pos_pos thm
+R10054 Coq.ZArith.Zorder <> Zmult_le_compat thm
+R10054 Coq.ZArith.Zorder <> Zmult_le_compat thm
+R10094 ring_extention <> pow_pos_pos thm
+R10094 ring_extention <> pow_pos_pos thm
+R10132 ring_extention <> pow_pos_pos thm
+R10132 ring_extention <> pow_pos_pos thm
+prf 10203 <> strict_pos_expr_if_all_pos_aux
+R10445 Coq.ZArith.BinInt "x < y" not
+R10444 Coq.ZArith.BinInt "" not
+R10447 Coq.setoid_ring.Ring_polynom <> Pphi def
+R10468 Coq.setoid_ring.Ring_theory <> IDphi def
+R10478 Coq.ZArith.BinInt <> Z ind
+R10460 Coq.ZArith.BinInt <> Zmult def
+R10454 Coq.ZArith.BinInt <> Zplus def
+R10452 Coq.ZArith.BinInt "" not
+R10394 Coq.ZArith.BinInt "x < y" not
+R10392 Coq.ZArith.BinInt "" not
+R10396 Coq.setoid_ring.Ring_polynom <> Pphi def
+R10418 Coq.setoid_ring.Ring_theory <> IDphi def
+R10428 Coq.ZArith.BinInt <> Z ind
+R10410 Coq.ZArith.BinInt <> Zmult def
+R10404 Coq.ZArith.BinInt <> Zplus def
+R10402 Coq.ZArith.BinInt "" not
+R10353 ring_extention <> all_mem_bounded def
+R10370 Coq.Lists.List <> combine def
+R10338 Coq.Init.Logic "x = y" not
+R10328 Coq.Lists.List <> length def
+R10340 Coq.Lists.List <> length def
+R10293 ring_extention <> all_mem_pos def
+R10272 Coq.Init.Logic "x = y" not
+R10257 ring_extention <> all_coef_pos def
+R10274 Coq.Init.Datatypes <> true constr
+R10249 Coq.setoid_ring.Ring_polynom <> Pol ind
+R10253 Coq.ZArith.BinInt <> Z ind
+R10621 Coq.setoid_ring.BinList <> jump def
+R10621 Coq.setoid_ring.BinList <> jump def
+R10656 ring_extention <> all_mem_pos_jump thm
+R10656 ring_extention <> all_mem_pos_jump thm
+R10695 ring_extention <> jump_length thm
+R10695 ring_extention <> jump_length thm
+R10732 ring_extention <> combine_jump thm
+R10751 ring_extention <> all_mem_bounded_jump thm
+R10732 ring_extention <> combine_jump thm
+R10751 ring_extention <> all_mem_bounded_jump thm
+R10853 Coq.ZArith.BinInt "x <= y" not
+R10852 Coq.ZArith.BinInt "" not
+R10855 Coq.setoid_ring.Ring_theory <> pow_pos def
+R10870 Coq.Lists.List <> hd def
+R10873 Coq.ZArith.BinInt "" not
+R10863 Coq.ZArith.BinInt <> Zmult def
+R10853 Coq.ZArith.BinInt "x <= y" not
+R10852 Coq.ZArith.BinInt "" not
+R10855 Coq.setoid_ring.Ring_theory <> pow_pos def
+R10870 Coq.Lists.List <> hd def
+R10873 Coq.ZArith.BinInt "" not
+R10863 Coq.ZArith.BinInt <> Zmult def
+R11067 Coq.ZArith.BinInt "x <= y" not
+R11066 Coq.ZArith.BinInt "" not
+R11069 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11089 Coq.setoid_ring.Ring_theory <> IDphi def
+R11099 Coq.ZArith.BinInt <> Z ind
+R11082 Coq.ZArith.BinInt <> Zmult def
+R11076 Coq.ZArith.BinInt <> Zplus def
+R11074 Coq.ZArith.BinInt "" not
+R11067 Coq.ZArith.BinInt "x <= y" not
+R11066 Coq.ZArith.BinInt "" not
+R11069 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11089 Coq.setoid_ring.Ring_theory <> IDphi def
+R11099 Coq.ZArith.BinInt <> Z ind
+R11082 Coq.ZArith.BinInt <> Zmult def
+R11076 Coq.ZArith.BinInt <> Zplus def
+R11074 Coq.ZArith.BinInt "" not
+R11120 ring_extention <> pos_expr_if_all_pos_aux thm
+R11120 ring_extention <> pos_expr_if_all_pos_aux thm
+R11177 Coq.Bool.Bool <> andb_true_eq thm
+R11177 Coq.Bool.Bool <> andb_true_eq thm
+R11238 Coq.ZArith.BinInt "x <= y" not
+R11237 Coq.ZArith.BinInt "" not
+R11280 Coq.ZArith.BinInt "x * y" not
+R11240 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11260 Coq.setoid_ring.Ring_theory <> IDphi def
+R11270 Coq.ZArith.BinInt <> Z ind
+R11253 Coq.ZArith.BinInt <> Zmult def
+R11247 Coq.ZArith.BinInt <> Zplus def
+R11245 Coq.ZArith.BinInt "" not
+R11282 Coq.setoid_ring.Ring_theory <> pow_pos def
+R11297 Coq.Lists.List <> hd def
+R11300 Coq.ZArith.BinInt "" not
+R11290 Coq.ZArith.BinInt <> Zmult def
+R11238 Coq.ZArith.BinInt "x <= y" not
+R11237 Coq.ZArith.BinInt "" not
+R11280 Coq.ZArith.BinInt "x * y" not
+R11240 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11260 Coq.setoid_ring.Ring_theory <> IDphi def
+R11270 Coq.ZArith.BinInt <> Z ind
+R11253 Coq.ZArith.BinInt <> Zmult def
+R11247 Coq.ZArith.BinInt <> Zplus def
+R11245 Coq.ZArith.BinInt "" not
+R11282 Coq.setoid_ring.Ring_theory <> pow_pos def
+R11297 Coq.Lists.List <> hd def
+R11300 Coq.ZArith.BinInt "" not
+R11290 Coq.ZArith.BinInt <> Zmult def
+R11392 Coq.Init.Logic "A \/ B" not
+R11345 Coq.ZArith.BinInt "x < y" not
+R11344 Coq.ZArith.BinInt "" not
+R11346 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11381 Coq.Lists.List <> tail def
+R11366 Coq.setoid_ring.Ring_theory <> IDphi def
+R11376 Coq.ZArith.BinInt <> Z ind
+R11359 Coq.ZArith.BinInt <> Zmult def
+R11353 Coq.ZArith.BinInt <> Zplus def
+R11351 Coq.ZArith.BinInt "" not
+R11396 Coq.ZArith.BinInt "x < y" not
+R11395 Coq.ZArith.BinInt "" not
+R11437 Coq.ZArith.BinInt "x * y" not
+R11397 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11417 Coq.setoid_ring.Ring_theory <> IDphi def
+R11427 Coq.ZArith.BinInt <> Z ind
+R11410 Coq.ZArith.BinInt <> Zmult def
+R11404 Coq.ZArith.BinInt <> Zplus def
+R11402 Coq.ZArith.BinInt "" not
+R11439 Coq.setoid_ring.Ring_theory <> pow_pos def
+R11454 Coq.Lists.List <> hd def
+R11457 Coq.ZArith.BinInt "" not
+R11447 Coq.ZArith.BinInt <> Zmult def
+R11392 Coq.Init.Logic "A \/ B" not
+R11345 Coq.ZArith.BinInt "x < y" not
+R11344 Coq.ZArith.BinInt "" not
+R11346 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11381 Coq.Lists.List <> tail def
+R11366 Coq.setoid_ring.Ring_theory <> IDphi def
+R11376 Coq.ZArith.BinInt <> Z ind
+R11359 Coq.ZArith.BinInt <> Zmult def
+R11353 Coq.ZArith.BinInt <> Zplus def
+R11351 Coq.ZArith.BinInt "" not
+R11396 Coq.ZArith.BinInt "x < y" not
+R11395 Coq.ZArith.BinInt "" not
+R11437 Coq.ZArith.BinInt "x * y" not
+R11397 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11417 Coq.setoid_ring.Ring_theory <> IDphi def
+R11427 Coq.ZArith.BinInt <> Z ind
+R11410 Coq.ZArith.BinInt <> Zmult def
+R11404 Coq.ZArith.BinInt <> Zplus def
+R11402 Coq.ZArith.BinInt "" not
+R11439 Coq.setoid_ring.Ring_theory <> pow_pos def
+R11454 Coq.Lists.List <> hd def
+R11457 Coq.ZArith.BinInt "" not
+R11447 Coq.ZArith.BinInt <> Zmult def
+R11475 Coq.ZArith.Zorder <> Zle_lt_or_eq thm
+R11475 Coq.ZArith.Zorder <> Zle_lt_or_eq thm
+R11567 Coq.ZArith.BinInt "x <= y" not
+R11566 Coq.ZArith.BinInt "" not
+R11569 Coq.setoid_ring.Ring_theory <> pow_pos def
+R11584 Coq.Lists.List <> hd def
+R11587 Coq.ZArith.BinInt "" not
+R11577 Coq.ZArith.BinInt <> Zmult def
+R11567 Coq.ZArith.BinInt "x <= y" not
+R11566 Coq.ZArith.BinInt "" not
+R11569 Coq.setoid_ring.Ring_theory <> pow_pos def
+R11584 Coq.Lists.List <> hd def
+R11587 Coq.ZArith.BinInt "" not
+R11577 Coq.ZArith.BinInt <> Zmult def
+R11792 Coq.ZArith.BinInt "x <= y" not
+R11791 Coq.ZArith.BinInt "" not
+R11792 Coq.ZArith.BinInt "x <= y" not
+R11791 Coq.ZArith.BinInt "" not
+R11888 Coq.ZArith.BinInt "x <= y" not
+R11887 Coq.ZArith.BinInt "" not
+R11890 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11910 Coq.setoid_ring.Ring_theory <> IDphi def
+R11920 Coq.ZArith.BinInt <> Z ind
+R11903 Coq.ZArith.BinInt <> Zmult def
+R11897 Coq.ZArith.BinInt <> Zplus def
+R11895 Coq.ZArith.BinInt "" not
+R11888 Coq.ZArith.BinInt "x <= y" not
+R11887 Coq.ZArith.BinInt "" not
+R11890 Coq.setoid_ring.Ring_polynom <> Pphi def
+R11910 Coq.setoid_ring.Ring_theory <> IDphi def
+R11920 Coq.ZArith.BinInt <> Z ind
+R11903 Coq.ZArith.BinInt <> Zmult def
+R11897 Coq.ZArith.BinInt <> Zplus def
+R11895 Coq.ZArith.BinInt "" not
+R11941 ring_extention <> pos_expr_if_all_pos_aux thm
+R11941 ring_extention <> pos_expr_if_all_pos_aux thm
+R11998 Coq.Bool.Bool <> andb_true_eq thm
+R11998 Coq.Bool.Bool <> andb_true_eq thm
+R12038 ring_extention <> all_mem_pos_all_mem_bounded thm
+R12038 ring_extention <> all_mem_pos_all_mem_bounded thm
+R12133 Coq.ZArith.BinInt "x <= y" not
+R12132 Coq.ZArith.BinInt "" not
+R12175 Coq.ZArith.BinInt "x * y" not
+R12135 Coq.setoid_ring.Ring_polynom <> Pphi def
+R12155 Coq.setoid_ring.Ring_theory <> IDphi def
+R12165 Coq.ZArith.BinInt <> Z ind
+R12148 Coq.ZArith.BinInt <> Zmult def
+R12142 Coq.ZArith.BinInt <> Zplus def
+R12140 Coq.ZArith.BinInt "" not
+R12177 Coq.setoid_ring.Ring_theory <> pow_pos def
+R12192 Coq.Lists.List <> hd def
+R12195 Coq.ZArith.BinInt "" not
+R12185 Coq.ZArith.BinInt <> Zmult def
+R12133 Coq.ZArith.BinInt "x <= y" not
+R12132 Coq.ZArith.BinInt "" not
+R12175 Coq.ZArith.BinInt "x * y" not
+R12135 Coq.setoid_ring.Ring_polynom <> Pphi def
+R12155 Coq.setoid_ring.Ring_theory <> IDphi def
+R12165 Coq.ZArith.BinInt <> Z ind
+R12148 Coq.ZArith.BinInt <> Zmult def
+R12142 Coq.ZArith.BinInt <> Zplus def
+R12140 Coq.ZArith.BinInt "" not
+R12177 Coq.setoid_ring.Ring_theory <> pow_pos def
+R12192 Coq.Lists.List <> hd def
+R12195 Coq.ZArith.BinInt "" not
+R12185 Coq.ZArith.BinInt <> Zmult def
+R12270 Coq.ZArith.BinInt "x < y" not
+R12269 Coq.ZArith.BinInt "" not
+R12272 Coq.setoid_ring.Ring_polynom <> Pphi def
+R12307 Coq.Lists.List <> tail def
+R12292 Coq.setoid_ring.Ring_theory <> IDphi def
+R12302 Coq.ZArith.BinInt <> Z ind
+R12285 Coq.ZArith.BinInt <> Zmult def
+R12279 Coq.ZArith.BinInt <> Zplus def
+R12277 Coq.ZArith.BinInt "" not
+R12270 Coq.ZArith.BinInt "x < y" not
+R12269 Coq.ZArith.BinInt "" not
+R12272 Coq.setoid_ring.Ring_polynom <> Pphi def
+R12307 Coq.Lists.List <> tail def
+R12292 Coq.setoid_ring.Ring_theory <> IDphi def
+R12302 Coq.ZArith.BinInt <> Z ind
+R12285 Coq.ZArith.BinInt <> Zmult def
+R12279 Coq.ZArith.BinInt <> Zplus def
+R12277 Coq.ZArith.BinInt "" not
+R12340 Coq.Lists.List <> tail def
+R12340 Coq.Lists.List <> tail def
+R12382 Coq.Bool.Bool <> andb_true_eq thm
+R12382 Coq.Bool.Bool <> andb_true_eq thm
+R12421 ring_extention <> all_mem_pos_tail thm
+R12421 ring_extention <> all_mem_pos_tail thm
+R12460 ring_extention <> tail_length thm
+R12460 ring_extention <> tail_length thm
+R12497 ring_extention <> combine_tail thm
+R12516 ring_extention <> all_mem_bounded_tail thm
+R12497 ring_extention <> combine_tail thm
+R12516 ring_extention <> all_mem_bounded_tail thm
+R12596 ring_extention <> Zmult_compat thm
+R12596 ring_extention <> Zmult_compat thm
+R12657 Coq.ZArith.BinInt "x < y" not
+R12655 Coq.ZArith.BinInt "" not
+R12659 Coq.setoid_ring.Ring_polynom <> Pphi def
+R12679 Coq.setoid_ring.Ring_theory <> IDphi def
+R12689 Coq.ZArith.BinInt <> Z ind
+R12672 Coq.ZArith.BinInt <> Zmult def
+R12666 Coq.ZArith.BinInt <> Zplus def
+R12664 Coq.ZArith.BinInt "" not
+R12657 Coq.ZArith.BinInt "x < y" not
+R12655 Coq.ZArith.BinInt "" not
+R12659 Coq.setoid_ring.Ring_polynom <> Pphi def
+R12679 Coq.setoid_ring.Ring_theory <> IDphi def
+R12689 Coq.ZArith.BinInt <> Z ind
+R12672 Coq.ZArith.BinInt <> Zmult def
+R12666 Coq.ZArith.BinInt <> Zplus def
+R12664 Coq.ZArith.BinInt "" not
+R12755 Coq.Bool.Bool <> andb_true_eq thm
+R12755 Coq.Bool.Bool <> andb_true_eq thm
+R12864 Coq.ZArith.BinInt "x < y" not
+R12862 Coq.ZArith.BinInt "" not
+R12866 Coq.setoid_ring.Ring_theory <> pow_pos def
+R12881 Coq.Lists.List <> hd def
+R12884 Coq.ZArith.BinInt "" not
+R12874 Coq.ZArith.BinInt <> Zmult def
+R12864 Coq.ZArith.BinInt "x < y" not
+R12862 Coq.ZArith.BinInt "" not
+R12866 Coq.setoid_ring.Ring_theory <> pow_pos def
+R12881 Coq.Lists.List <> hd def
+R12884 Coq.ZArith.BinInt "" not
+R12874 Coq.ZArith.BinInt <> Zmult def
+R13013 Coq.Init.Logic <> False_ind def
+R13013 Coq.Init.Logic <> False_ind def
+R13036 Coq.setoid_ring.Ring_theory <> pow_pos def
+R13050 Coq.ZArith.BinInt "" not
+R13044 Coq.ZArith.BinInt <> Zmult def
+R13061 Coq.ZArith.BinInt "" not
+R13036 Coq.setoid_ring.Ring_theory <> pow_pos def
+R13050 Coq.ZArith.BinInt "" not
+R13044 Coq.ZArith.BinInt <> Zmult def
+R13061 Coq.ZArith.BinInt "" not
+R13363 Coq.setoid_ring.Ring_theory <> pow_pos def
+R13371 Coq.ZArith.BinInt <> Zmult def
+R13344 Coq.ZArith.Zorder <> Zlt_le_trans thm
+R13363 Coq.setoid_ring.Ring_theory <> pow_pos def
+R13371 Coq.ZArith.BinInt <> Zmult def
+R13344 Coq.ZArith.Zorder <> Zlt_le_trans thm
+R13407 ring_extention <> pow_pos_monotonic thm
+R13407 ring_extention <> pow_pos_monotonic thm
+R13455 Coq.ZArith.BinInt "x < y" not
+R13453 Coq.ZArith.BinInt "" not
+R13500 Coq.ZArith.BinInt "x * y" not
+R13460 Coq.setoid_ring.Ring_polynom <> Pphi def
+R13480 Coq.setoid_ring.Ring_theory <> IDphi def
+R13490 Coq.ZArith.BinInt <> Z ind
+R13473 Coq.ZArith.BinInt <> Zmult def
+R13467 Coq.ZArith.BinInt <> Zplus def
+R13465 Coq.ZArith.BinInt "" not
+R13502 Coq.setoid_ring.Ring_theory <> pow_pos def
+R13517 Coq.Lists.List <> hd def
+R13520 Coq.ZArith.BinInt "" not
+R13510 Coq.ZArith.BinInt <> Zmult def
+R13455 Coq.ZArith.BinInt "x < y" not
+R13453 Coq.ZArith.BinInt "" not
+R13500 Coq.ZArith.BinInt "x * y" not
+R13460 Coq.setoid_ring.Ring_polynom <> Pphi def
+R13480 Coq.setoid_ring.Ring_theory <> IDphi def
+R13490 Coq.ZArith.BinInt <> Z ind
+R13473 Coq.ZArith.BinInt <> Zmult def
+R13467 Coq.ZArith.BinInt <> Zplus def
+R13465 Coq.ZArith.BinInt "" not
+R13502 Coq.setoid_ring.Ring_theory <> pow_pos def
+R13517 Coq.Lists.List <> hd def
+R13520 Coq.ZArith.BinInt "" not
+R13510 Coq.ZArith.BinInt <> Zmult def
+R13539 Coq.ZArith.Zorder <> Zmult_lt_0_compat thm
+R13539 Coq.ZArith.Zorder <> Zmult_lt_0_compat thm
+R13581 Coq.ZArith.BinInt "x <= y" not
+R13580 Coq.ZArith.BinInt "" not
+R13583 Coq.setoid_ring.Ring_polynom <> Pphi def
+R13618 Coq.Lists.List <> tail def
+R13603 Coq.setoid_ring.Ring_theory <> IDphi def
+R13613 Coq.ZArith.BinInt <> Z ind
+R13596 Coq.ZArith.BinInt <> Zmult def
+R13590 Coq.ZArith.BinInt <> Zplus def
+R13588 Coq.ZArith.BinInt "" not
+R13581 Coq.ZArith.BinInt "x <= y" not
+R13580 Coq.ZArith.BinInt "" not
+R13583 Coq.setoid_ring.Ring_polynom <> Pphi def
+R13618 Coq.Lists.List <> tail def
+R13603 Coq.setoid_ring.Ring_theory <> IDphi def
+R13613 Coq.ZArith.BinInt <> Z ind
+R13596 Coq.ZArith.BinInt <> Zmult def
+R13590 Coq.ZArith.BinInt <> Zplus def
+R13588 Coq.ZArith.BinInt "" not
+R13640 ring_extention <> pos_expr_if_all_pos_aux thm
+R13640 ring_extention <> pos_expr_if_all_pos_aux thm
+R13697 Coq.Bool.Bool <> andb_true_eq thm
+R13697 Coq.Bool.Bool <> andb_true_eq thm
+R13736 ring_extention <> all_mem_pos_tail thm
+R13736 ring_extention <> all_mem_pos_tail thm
+R13760 ring_extention <> all_mem_pos_all_mem_bounded thm
+R13760 ring_extention <> all_mem_pos_all_mem_bounded thm
+prf 13835 <> strict_pos_expr_if_all_pos_aux'
+R14145 Coq.ZArith.BinInt "x < y" not
+R14144 Coq.ZArith.BinInt "" not
+R14149 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R14238 Coq.setoid_ring.InitialRing <> get_signZ def
+R14229 Coq.ZArith.Zpow_def <> Zpower def
+R14222 Coq.ZArith.BinInt <> Z_of_N def
+R14206 Coq.setoid_ring.Ring_theory <> IDphi def
+R14216 Coq.ZArith.BinInt <> Z ind
+R14195 Coq.ZArith.Zbool <> Zeq_bool def
+R14193 Coq.ZArith.BinInt "" not
+R14191 Coq.ZArith.BinInt "" not
+R14184 Coq.ZArith.BinInt <> Zopp def
+R14177 Coq.ZArith.BinInt <> Zminus def
+R14171 Coq.ZArith.BinInt <> Zmult def
+R14165 Coq.ZArith.BinInt <> Zplus def
+R14163 Coq.ZArith.BinInt "" not
+R14161 Coq.ZArith.BinInt "" not
+R14027 Coq.ZArith.BinInt "x < y" not
+R14026 Coq.ZArith.BinInt "" not
+R14031 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R14120 Coq.setoid_ring.InitialRing <> get_signZ def
+R14111 Coq.ZArith.Zpow_def <> Zpower def
+R14104 Coq.ZArith.BinInt <> Z_of_N def
+R14088 Coq.setoid_ring.Ring_theory <> IDphi def
+R14098 Coq.ZArith.BinInt <> Z ind
+R14077 Coq.ZArith.Zbool <> Zeq_bool def
+R14075 Coq.ZArith.BinInt "" not
+R14073 Coq.ZArith.BinInt "" not
+R14066 Coq.ZArith.BinInt <> Zopp def
+R14059 Coq.ZArith.BinInt <> Zminus def
+R14053 Coq.ZArith.BinInt <> Zmult def
+R14047 Coq.ZArith.BinInt <> Zplus def
+R14045 Coq.ZArith.BinInt "" not
+R14043 Coq.ZArith.BinInt "" not
+R13986 ring_extention <> all_mem_bounded def
+R14003 Coq.Lists.List <> combine def
+R13971 Coq.Init.Logic "x = y" not
+R13961 Coq.Lists.List <> length def
+R13973 Coq.Lists.List <> length def
+R13926 ring_extention <> all_mem_pos def
+R13905 Coq.Init.Logic "x = y" not
+R13890 ring_extention <> all_coef_pos def
+R13907 Coq.Init.Datatypes <> true constr
+R13882 Coq.setoid_ring.Ring_polynom <> Pol ind
+R13886 Coq.ZArith.BinInt <> Z ind
+R14304 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R14393 Coq.setoid_ring.InitialRing <> get_signZ def
+R14384 Coq.ZArith.Zpow_def <> Zpower def
+R14377 Coq.ZArith.BinInt <> Z_of_N def
+R14361 Coq.setoid_ring.Ring_theory <> IDphi def
+R14371 Coq.ZArith.BinInt <> Z ind
+R14350 Coq.ZArith.Zbool <> Zeq_bool def
+R14348 Coq.ZArith.BinInt "" not
+R14346 Coq.ZArith.BinInt "" not
+R14339 Coq.ZArith.BinInt <> Zopp def
+R14332 Coq.ZArith.BinInt <> Zminus def
+R14326 Coq.ZArith.BinInt <> Zmult def
+R14320 Coq.ZArith.BinInt <> Zplus def
+R14318 Coq.ZArith.BinInt "" not
+R14316 Coq.ZArith.BinInt "" not
+R14421 Coq.setoid_ring.Ring_polynom <> Pphi def
+R14442 Coq.setoid_ring.Ring_theory <> IDphi def
+R14448 Coq.ZArith.BinInt <> Z ind
+R14434 Coq.ZArith.BinInt <> Zmult def
+R14428 Coq.ZArith.BinInt <> Zplus def
+R14426 Coq.ZArith.BinInt "" not
+R14304 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R14393 Coq.setoid_ring.InitialRing <> get_signZ def
+R14384 Coq.ZArith.Zpow_def <> Zpower def
+R14377 Coq.ZArith.BinInt <> Z_of_N def
+R14361 Coq.setoid_ring.Ring_theory <> IDphi def
+R14371 Coq.ZArith.BinInt <> Z ind
+R14350 Coq.ZArith.Zbool <> Zeq_bool def
+R14348 Coq.ZArith.BinInt "" not
+R14346 Coq.ZArith.BinInt "" not
+R14339 Coq.ZArith.BinInt <> Zopp def
+R14332 Coq.ZArith.BinInt <> Zminus def
+R14326 Coq.ZArith.BinInt <> Zmult def
+R14320 Coq.ZArith.BinInt <> Zplus def
+R14318 Coq.ZArith.BinInt "" not
+R14316 Coq.ZArith.BinInt "" not
+R14421 Coq.setoid_ring.Ring_polynom <> Pphi def
+R14442 Coq.setoid_ring.Ring_theory <> IDphi def
+R14448 Coq.ZArith.BinInt <> Z ind
+R14434 Coq.ZArith.BinInt <> Zmult def
+R14428 Coq.ZArith.BinInt <> Zplus def
+R14426 Coq.ZArith.BinInt "" not
+R14468 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R14554 Coq.setoid_ring.InitialRing <> get_signZ def
+R14546 Coq.ZArith.Zpow_def <> Zpower def
+R14539 Coq.ZArith.BinInt <> Z_of_N def
+R14525 Coq.setoid_ring.Ring_theory <> IDphi def
+R14535 Coq.ZArith.BinInt <> Z ind
+R14509 Coq.ZArith.Zbool <> Zeq_bool def
+R14507 Coq.ZArith.BinInt "" not
+R14505 Coq.ZArith.BinInt "" not
+R14500 Coq.ZArith.BinInt <> Zopp def
+R14493 Coq.ZArith.BinInt <> Zminus def
+R14487 Coq.ZArith.BinInt <> Zmult def
+R14481 Coq.ZArith.BinInt <> Zplus def
+R14479 Coq.ZArith.BinInt "" not
+R14477 Coq.ZArith.BinInt "" not
+R14581 Coq.setoid_ring.Ring_polynom <> Pphi def
+R14602 Coq.setoid_ring.Ring_theory <> IDphi def
+R14608 Coq.ZArith.BinInt <> Z ind
+R14594 Coq.ZArith.BinInt <> Zmult def
+R14588 Coq.ZArith.BinInt <> Zplus def
+R14586 Coq.ZArith.BinInt "" not
+R14468 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R14554 Coq.setoid_ring.InitialRing <> get_signZ def
+R14546 Coq.ZArith.Zpow_def <> Zpower def
+R14539 Coq.ZArith.BinInt <> Z_of_N def
+R14525 Coq.setoid_ring.Ring_theory <> IDphi def
+R14535 Coq.ZArith.BinInt <> Z ind
+R14509 Coq.ZArith.Zbool <> Zeq_bool def
+R14507 Coq.ZArith.BinInt "" not
+R14505 Coq.ZArith.BinInt "" not
+R14500 Coq.ZArith.BinInt <> Zopp def
+R14493 Coq.ZArith.BinInt <> Zminus def
+R14487 Coq.ZArith.BinInt <> Zmult def
+R14481 Coq.ZArith.BinInt <> Zplus def
+R14479 Coq.ZArith.BinInt "" not
+R14477 Coq.ZArith.BinInt "" not
+R14581 Coq.setoid_ring.Ring_polynom <> Pphi def
+R14602 Coq.setoid_ring.Ring_theory <> IDphi def
+R14608 Coq.ZArith.BinInt <> Z ind
+R14594 Coq.ZArith.BinInt <> Zmult def
+R14588 Coq.ZArith.BinInt <> Zplus def
+R14586 Coq.ZArith.BinInt "" not
+R14633 ring_extention <> strict_pos_expr_if_all_pos_aux thm
+R14633 ring_extention <> strict_pos_expr_if_all_pos_aux thm
+R14722 Coq.setoid_ring.InitialRing <> Zsth thm
+R14745 Coq.ZArith.BinInt <> Z ind
+R14701 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R14722 Coq.setoid_ring.InitialRing <> Zsth thm
+R14745 Coq.ZArith.BinInt <> Z ind
+R14701 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R14758 Coq.setoid_ring.InitialRing <> Zeqe thm
+R14758 Coq.setoid_ring.InitialRing <> Zeqe thm
+R14786 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R14845 Coq.setoid_ring.InitialRing <> Zth thm
+R14828 Coq.setoid_ring.InitialRing <> Zeqe thm
+R14811 Coq.setoid_ring.InitialRing <> Zsth thm
+R14786 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R14845 Coq.setoid_ring.InitialRing <> Zth thm
+R14828 Coq.setoid_ring.InitialRing <> Zeqe thm
+R14811 Coq.setoid_ring.InitialRing <> Zsth thm
+R14875 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R14943 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R14934 Coq.ZArith.Zbool <> Zeq_bool def
+R14917 Coq.setoid_ring.InitialRing <> Zsth thm
+R14909 Coq.ZArith.BinInt <> Zopp def
+R14902 Coq.ZArith.BinInt <> Zminus def
+R14896 Coq.ZArith.BinInt <> Zmult def
+R14890 Coq.ZArith.BinInt <> Zplus def
+R14888 Coq.ZArith.BinInt "" not
+R14885 Coq.ZArith.BinInt <> Z0 constr
+R14883 Coq.ZArith.BinInt <> Z ind
+R14875 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R14943 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R14934 Coq.ZArith.Zbool <> Zeq_bool def
+R14917 Coq.setoid_ring.InitialRing <> Zsth thm
+R14909 Coq.ZArith.BinInt <> Zopp def
+R14902 Coq.ZArith.BinInt <> Zminus def
+R14896 Coq.ZArith.BinInt <> Zmult def
+R14890 Coq.ZArith.BinInt <> Zplus def
+R14888 Coq.ZArith.BinInt "" not
+R14885 Coq.ZArith.BinInt <> Z0 constr
+R14883 Coq.ZArith.BinInt <> Z ind
+R14965 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R14965 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R14988 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+R14988 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+R15040 Coq.setoid_ring.InitialRing <> Zsth thm
+R15063 Coq.ZArith.BinInt <> Z ind
+R15019 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R15040 Coq.setoid_ring.InitialRing <> Zsth thm
+R15063 Coq.ZArith.BinInt <> Z ind
+R15019 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R15076 Coq.setoid_ring.InitialRing <> Zeqe thm
+R15076 Coq.setoid_ring.InitialRing <> Zeqe thm
+R15104 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R15163 Coq.setoid_ring.InitialRing <> Zth thm
+R15146 Coq.setoid_ring.InitialRing <> Zeqe thm
+R15129 Coq.setoid_ring.InitialRing <> Zsth thm
+R15104 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R15163 Coq.setoid_ring.InitialRing <> Zth thm
+R15146 Coq.setoid_ring.InitialRing <> Zeqe thm
+R15129 Coq.setoid_ring.InitialRing <> Zsth thm
+R15193 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R15261 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R15252 Coq.ZArith.Zbool <> Zeq_bool def
+R15235 Coq.setoid_ring.InitialRing <> Zsth thm
+R15227 Coq.ZArith.BinInt <> Zopp def
+R15220 Coq.ZArith.BinInt <> Zminus def
+R15214 Coq.ZArith.BinInt <> Zmult def
+R15208 Coq.ZArith.BinInt <> Zplus def
+R15206 Coq.ZArith.BinInt "" not
+R15203 Coq.ZArith.BinInt <> Z0 constr
+R15201 Coq.ZArith.BinInt <> Z ind
+R15193 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R15261 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R15252 Coq.ZArith.Zbool <> Zeq_bool def
+R15235 Coq.setoid_ring.InitialRing <> Zsth thm
+R15227 Coq.ZArith.BinInt <> Zopp def
+R15220 Coq.ZArith.BinInt <> Zminus def
+R15214 Coq.ZArith.BinInt <> Zmult def
+R15208 Coq.ZArith.BinInt <> Zplus def
+R15206 Coq.ZArith.BinInt "" not
+R15203 Coq.ZArith.BinInt <> Z0 constr
+R15201 Coq.ZArith.BinInt <> Z ind
+R15283 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R15283 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R15306 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+R15306 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+prf 15332 <> strict_pos_expr_if_all_pos'
+R15685 Coq.ZArith.BinInt "x < y" not
+R15684 Coq.ZArith.BinInt "" not
+R15689 Coq.setoid_ring.Ring_polynom <> PEeval def
+R15744 Coq.ZArith.Zpow_def <> Zpower def
+R15737 Coq.ZArith.BinInt <> Z_of_N def
+R15723 Coq.setoid_ring.Ring_theory <> IDphi def
+R15733 Coq.ZArith.BinInt <> Z ind
+R15717 Coq.ZArith.BinInt <> Zopp def
+R15710 Coq.ZArith.BinInt <> Zminus def
+R15704 Coq.ZArith.BinInt <> Zmult def
+R15698 Coq.ZArith.BinInt <> Zplus def
+R15696 Coq.ZArith.BinInt "" not
+R15604 Coq.ZArith.BinInt "x < y" not
+R15602 Coq.ZArith.BinInt "" not
+R15606 Coq.setoid_ring.Ring_polynom <> PEeval def
+R15661 Coq.ZArith.Zpow_def <> Zpower def
+R15654 Coq.ZArith.BinInt <> Z_of_N def
+R15640 Coq.setoid_ring.Ring_theory <> IDphi def
+R15650 Coq.ZArith.BinInt <> Z ind
+R15634 Coq.ZArith.BinInt <> Zopp def
+R15627 Coq.ZArith.BinInt <> Zminus def
+R15621 Coq.ZArith.BinInt <> Zmult def
+R15615 Coq.ZArith.BinInt <> Zplus def
+R15613 Coq.ZArith.BinInt "" not
+R15561 ring_extention <> all_mem_bounded def
+R15578 Coq.Lists.List <> combine def
+R15546 Coq.Init.Logic "x = y" not
+R15536 Coq.Lists.List <> length def
+R15548 Coq.Lists.List <> length def
+R15499 ring_extention <> all_mem_pos def
+R15473 Coq.Init.Logic "x = y" not
+R15376 ring_extention <> all_coef_pos def
+R15390 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R15465 Coq.Lists.List <> nil constr
+R15448 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R15438 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R15429 Coq.ZArith.Zbool <> Zeq_bool def
+R15424 Coq.ZArith.BinInt <> Zopp def
+R15417 Coq.ZArith.BinInt <> Zminus def
+R15411 Coq.ZArith.BinInt <> Zmult def
+R15405 Coq.ZArith.BinInt <> Zplus def
+R15403 Coq.ZArith.BinInt "" not
+R15401 Coq.ZArith.BinInt "" not
+R15475 Coq.Init.Datatypes <> true constr
+R15846 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R15870 Coq.Lists.List <> nil constr
+R15883 Coq.Init.Datatypes "x * y" not
+R15875 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R15881 Coq.ZArith.BinInt <> Z ind
+R15885 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R15891 Coq.ZArith.BinInt <> Z ind
+R15908 Coq.Lists.List <> nil constr
+R15919 Coq.Init.Datatypes "x * y" not
+R15914 Coq.Init.Datatypes "x * y" not
+R15913 Coq.ZArith.BinInt <> Z ind
+R15915 Coq.setoid_ring.Ring_polynom <> Mon ind
+R15921 Coq.setoid_ring.Ring_polynom <> Pol ind
+R15925 Coq.ZArith.BinInt <> Z ind
+R15944 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R16019 Coq.Lists.List <> nil constr
+R16002 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R15992 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R15983 Coq.ZArith.Zbool <> Zeq_bool def
+R15978 Coq.ZArith.BinInt <> Zopp def
+R15971 Coq.ZArith.BinInt <> Zminus def
+R15965 Coq.ZArith.BinInt <> Zmult def
+R15959 Coq.ZArith.BinInt <> Zplus def
+R15957 Coq.ZArith.BinInt "" not
+R15955 Coq.ZArith.BinInt "" not
+R15822 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R15846 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R15870 Coq.Lists.List <> nil constr
+R15883 Coq.Init.Datatypes "x * y" not
+R15875 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R15881 Coq.ZArith.BinInt <> Z ind
+R15885 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R15891 Coq.ZArith.BinInt <> Z ind
+R15908 Coq.Lists.List <> nil constr
+R15919 Coq.Init.Datatypes "x * y" not
+R15914 Coq.Init.Datatypes "x * y" not
+R15913 Coq.ZArith.BinInt <> Z ind
+R15915 Coq.setoid_ring.Ring_polynom <> Mon ind
+R15921 Coq.setoid_ring.Ring_polynom <> Pol ind
+R15925 Coq.ZArith.BinInt <> Z ind
+R15944 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R16019 Coq.Lists.List <> nil constr
+R16002 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R15992 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R15983 Coq.ZArith.Zbool <> Zeq_bool def
+R15978 Coq.ZArith.BinInt <> Zopp def
+R15971 Coq.ZArith.BinInt <> Zminus def
+R15965 Coq.ZArith.BinInt <> Zmult def
+R15959 Coq.ZArith.BinInt <> Zplus def
+R15957 Coq.ZArith.BinInt "" not
+R15955 Coq.ZArith.BinInt "" not
+R15822 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R16068 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R16092 Coq.Lists.List <> nil constr
+R16105 Coq.Init.Datatypes "x * y" not
+R16097 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R16103 Coq.ZArith.BinInt <> Z ind
+R16107 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R16113 Coq.ZArith.BinInt <> Z ind
+R16130 Coq.Lists.List <> nil constr
+R16141 Coq.Init.Datatypes "x * y" not
+R16136 Coq.Init.Datatypes "x * y" not
+R16135 Coq.ZArith.BinInt <> Z ind
+R16137 Coq.setoid_ring.Ring_polynom <> Mon ind
+R16143 Coq.setoid_ring.Ring_polynom <> Pol ind
+R16147 Coq.ZArith.BinInt <> Z ind
+R16166 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R16241 Coq.Lists.List <> nil constr
+R16224 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R16214 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R16205 Coq.ZArith.Zbool <> Zeq_bool def
+R16200 Coq.ZArith.BinInt <> Zopp def
+R16193 Coq.ZArith.BinInt <> Zminus def
+R16187 Coq.ZArith.BinInt <> Zmult def
+R16181 Coq.ZArith.BinInt <> Zplus def
+R16179 Coq.ZArith.BinInt "" not
+R16177 Coq.ZArith.BinInt "" not
+R16044 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R16068 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R16092 Coq.Lists.List <> nil constr
+R16105 Coq.Init.Datatypes "x * y" not
+R16097 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R16103 Coq.ZArith.BinInt <> Z ind
+R16107 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R16113 Coq.ZArith.BinInt <> Z ind
+R16130 Coq.Lists.List <> nil constr
+R16141 Coq.Init.Datatypes "x * y" not
+R16136 Coq.Init.Datatypes "x * y" not
+R16135 Coq.ZArith.BinInt <> Z ind
+R16137 Coq.setoid_ring.Ring_polynom <> Mon ind
+R16143 Coq.setoid_ring.Ring_polynom <> Pol ind
+R16147 Coq.ZArith.BinInt <> Z ind
+R16166 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R16241 Coq.Lists.List <> nil constr
+R16224 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R16214 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R16205 Coq.ZArith.Zbool <> Zeq_bool def
+R16200 Coq.ZArith.BinInt <> Zopp def
+R16193 Coq.ZArith.BinInt <> Zminus def
+R16187 Coq.ZArith.BinInt <> Zmult def
+R16181 Coq.ZArith.BinInt <> Zplus def
+R16179 Coq.ZArith.BinInt "" not
+R16177 Coq.ZArith.BinInt "" not
+R16044 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R16264 ring_extention <> strict_pos_expr_if_all_pos_aux' thm
+R16264 ring_extention <> strict_pos_expr_if_all_pos_aux' thm
+R16327 Coq.Init.Logic <> I constr
+R16327 Coq.Init.Logic <> I constr
+R16390 Coq.Init.Logic <> I constr
+R16390 Coq.Init.Logic <> I constr
+prf 16446 <> strict_pos_expr_if_all_pos
+R16960 Coq.ZArith.BinInt "x < y" not
+R16890 Coq.setoid_ring.Ring_polynom <> PEeval def
+R16946 Coq.ZArith.Zpow_def <> Zpower def
+R16939 Coq.ZArith.BinInt <> Z_of_N def
+R16924 Coq.setoid_ring.Ring_theory <> IDphi def
+R16934 Coq.ZArith.BinInt <> Z ind
+R16918 Coq.ZArith.BinInt <> Zopp def
+R16911 Coq.ZArith.BinInt <> Zminus def
+R16905 Coq.ZArith.BinInt <> Zmult def
+R16899 Coq.ZArith.BinInt <> Zplus def
+R16897 Coq.ZArith.BinInt "" not
+R16971 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17027 Coq.ZArith.Zpow_def <> Zpower def
+R17020 Coq.ZArith.BinInt <> Z_of_N def
+R17005 Coq.setoid_ring.Ring_theory <> IDphi def
+R17015 Coq.ZArith.BinInt <> Z ind
+R16999 Coq.ZArith.BinInt <> Zopp def
+R16992 Coq.ZArith.BinInt <> Zminus def
+R16986 Coq.ZArith.BinInt <> Zmult def
+R16980 Coq.ZArith.BinInt <> Zplus def
+R16978 Coq.ZArith.BinInt "" not
+R16801 Coq.ZArith.BinInt "x < y" not
+R16731 Coq.setoid_ring.Ring_polynom <> PEeval def
+R16787 Coq.ZArith.Zpow_def <> Zpower def
+R16780 Coq.ZArith.BinInt <> Z_of_N def
+R16765 Coq.setoid_ring.Ring_theory <> IDphi def
+R16775 Coq.ZArith.BinInt <> Z ind
+R16759 Coq.ZArith.BinInt <> Zopp def
+R16752 Coq.ZArith.BinInt <> Zminus def
+R16746 Coq.ZArith.BinInt <> Zmult def
+R16740 Coq.ZArith.BinInt <> Zplus def
+R16738 Coq.ZArith.BinInt "" not
+R16810 Coq.setoid_ring.Ring_polynom <> PEeval def
+R16866 Coq.ZArith.Zpow_def <> Zpower def
+R16859 Coq.ZArith.BinInt <> Z_of_N def
+R16844 Coq.setoid_ring.Ring_theory <> IDphi def
+R16854 Coq.ZArith.BinInt <> Z ind
+R16838 Coq.ZArith.BinInt <> Zopp def
+R16831 Coq.ZArith.BinInt <> Zminus def
+R16825 Coq.ZArith.BinInt <> Zmult def
+R16819 Coq.ZArith.BinInt <> Zplus def
+R16817 Coq.ZArith.BinInt "" not
+R16690 ring_extention <> all_mem_bounded def
+R16707 Coq.Lists.List <> combine def
+R16675 Coq.Init.Logic "x = y" not
+R16665 Coq.Lists.List <> length def
+R16677 Coq.Lists.List <> length def
+R16631 ring_extention <> all_mem_pos def
+R16607 Coq.Init.Logic "x = y" not
+R16496 ring_extention <> all_coef_pos def
+R16510 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R16591 Coq.setoid_ring.Ring_polynom <> PEsub constr
+R16585 Coq.Lists.List <> nil constr
+R16568 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R16558 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R16549 Coq.ZArith.Zbool <> Zeq_bool def
+R16544 Coq.ZArith.BinInt <> Zopp def
+R16537 Coq.ZArith.BinInt <> Zminus def
+R16531 Coq.ZArith.BinInt <> Zmult def
+R16525 Coq.ZArith.BinInt <> Zplus def
+R16523 Coq.ZArith.BinInt "" not
+R16521 Coq.ZArith.BinInt "" not
+R16609 Coq.Init.Datatypes <> true constr
+R17102 Coq.ZArith.BinInt "x < y" not
+R17101 Coq.ZArith.BinInt "" not
+R17176 Coq.ZArith.BinInt "x - y" not
+R17105 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17161 Coq.ZArith.Zpow_def <> Zpower def
+R17154 Coq.ZArith.BinInt <> Z_of_N def
+R17139 Coq.setoid_ring.Ring_theory <> IDphi def
+R17149 Coq.ZArith.BinInt <> Z ind
+R17133 Coq.ZArith.BinInt <> Zopp def
+R17126 Coq.ZArith.BinInt <> Zminus def
+R17120 Coq.ZArith.BinInt <> Zmult def
+R17114 Coq.ZArith.BinInt <> Zplus def
+R17112 Coq.ZArith.BinInt "" not
+R17182 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17238 Coq.ZArith.Zpow_def <> Zpower def
+R17231 Coq.ZArith.BinInt <> Z_of_N def
+R17216 Coq.setoid_ring.Ring_theory <> IDphi def
+R17226 Coq.ZArith.BinInt <> Z ind
+R17210 Coq.ZArith.BinInt <> Zopp def
+R17203 Coq.ZArith.BinInt <> Zminus def
+R17197 Coq.ZArith.BinInt <> Zmult def
+R17191 Coq.ZArith.BinInt <> Zplus def
+R17189 Coq.ZArith.BinInt "" not
+R17102 Coq.ZArith.BinInt "x < y" not
+R17101 Coq.ZArith.BinInt "" not
+R17176 Coq.ZArith.BinInt "x - y" not
+R17105 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17161 Coq.ZArith.Zpow_def <> Zpower def
+R17154 Coq.ZArith.BinInt <> Z_of_N def
+R17139 Coq.setoid_ring.Ring_theory <> IDphi def
+R17149 Coq.ZArith.BinInt <> Z ind
+R17133 Coq.ZArith.BinInt <> Zopp def
+R17126 Coq.ZArith.BinInt <> Zminus def
+R17120 Coq.ZArith.BinInt <> Zmult def
+R17114 Coq.ZArith.BinInt <> Zplus def
+R17112 Coq.ZArith.BinInt "" not
+R17182 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17238 Coq.ZArith.Zpow_def <> Zpower def
+R17231 Coq.ZArith.BinInt <> Z_of_N def
+R17216 Coq.setoid_ring.Ring_theory <> IDphi def
+R17226 Coq.ZArith.BinInt <> Z ind
+R17210 Coq.ZArith.BinInt <> Zopp def
+R17203 Coq.ZArith.BinInt <> Zminus def
+R17197 Coq.ZArith.BinInt <> Zmult def
+R17191 Coq.ZArith.BinInt <> Zplus def
+R17189 Coq.ZArith.BinInt "" not
+R17336 Coq.ZArith.BinInt "x - y" not
+R17265 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17321 Coq.ZArith.Zpow_def <> Zpower def
+R17314 Coq.ZArith.BinInt <> Z_of_N def
+R17299 Coq.setoid_ring.Ring_theory <> IDphi def
+R17309 Coq.ZArith.BinInt <> Z ind
+R17293 Coq.ZArith.BinInt <> Zopp def
+R17286 Coq.ZArith.BinInt <> Zminus def
+R17280 Coq.ZArith.BinInt <> Zmult def
+R17274 Coq.ZArith.BinInt <> Zplus def
+R17272 Coq.ZArith.BinInt "" not
+R17342 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17398 Coq.ZArith.Zpow_def <> Zpower def
+R17391 Coq.ZArith.BinInt <> Z_of_N def
+R17376 Coq.setoid_ring.Ring_theory <> IDphi def
+R17386 Coq.ZArith.BinInt <> Z ind
+R17370 Coq.ZArith.BinInt <> Zopp def
+R17363 Coq.ZArith.BinInt <> Zminus def
+R17357 Coq.ZArith.BinInt <> Zmult def
+R17351 Coq.ZArith.BinInt <> Zplus def
+R17349 Coq.ZArith.BinInt "" not
+R17422 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17489 Coq.setoid_ring.Ring_polynom <> PEsub constr
+R17478 Coq.ZArith.Zpow_def <> Zpower def
+R17471 Coq.ZArith.BinInt <> Z_of_N def
+R17456 Coq.setoid_ring.Ring_theory <> IDphi def
+R17466 Coq.ZArith.BinInt <> Z ind
+R17450 Coq.ZArith.BinInt <> Zopp def
+R17443 Coq.ZArith.BinInt <> Zminus def
+R17437 Coq.ZArith.BinInt <> Zmult def
+R17431 Coq.ZArith.BinInt <> Zplus def
+R17429 Coq.ZArith.BinInt "" not
+R17336 Coq.ZArith.BinInt "x - y" not
+R17265 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17321 Coq.ZArith.Zpow_def <> Zpower def
+R17314 Coq.ZArith.BinInt <> Z_of_N def
+R17299 Coq.setoid_ring.Ring_theory <> IDphi def
+R17309 Coq.ZArith.BinInt <> Z ind
+R17293 Coq.ZArith.BinInt <> Zopp def
+R17286 Coq.ZArith.BinInt <> Zminus def
+R17280 Coq.ZArith.BinInt <> Zmult def
+R17274 Coq.ZArith.BinInt <> Zplus def
+R17272 Coq.ZArith.BinInt "" not
+R17342 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17398 Coq.ZArith.Zpow_def <> Zpower def
+R17391 Coq.ZArith.BinInt <> Z_of_N def
+R17376 Coq.setoid_ring.Ring_theory <> IDphi def
+R17386 Coq.ZArith.BinInt <> Z ind
+R17370 Coq.ZArith.BinInt <> Zopp def
+R17363 Coq.ZArith.BinInt <> Zminus def
+R17357 Coq.ZArith.BinInt <> Zmult def
+R17351 Coq.ZArith.BinInt <> Zplus def
+R17349 Coq.ZArith.BinInt "" not
+R17422 Coq.setoid_ring.Ring_polynom <> PEeval def
+R17489 Coq.setoid_ring.Ring_polynom <> PEsub constr
+R17478 Coq.ZArith.Zpow_def <> Zpower def
+R17471 Coq.ZArith.BinInt <> Z_of_N def
+R17456 Coq.setoid_ring.Ring_theory <> IDphi def
+R17466 Coq.ZArith.BinInt <> Z ind
+R17450 Coq.ZArith.BinInt <> Zopp def
+R17443 Coq.ZArith.BinInt <> Zminus def
+R17437 Coq.ZArith.BinInt <> Zmult def
+R17431 Coq.ZArith.BinInt <> Zplus def
+R17429 Coq.ZArith.BinInt "" not
+R17543 ring_extention <> strict_pos_expr_if_all_pos' thm
+R17543 ring_extention <> strict_pos_expr_if_all_pos' thm
+R17713 Coq.Lists.List <> list ind
+R17718 Coq.ZArith.BinInt <> Z ind
+R17713 Coq.Lists.List <> list ind
+R17718 Coq.ZArith.BinInt <> Z ind
+R17766 Coq.Lists.List <> nil constr
+R17805 Coq.Lists.List <> nil constr
+R17812 Coq.Init.Logic <> True ind
+R17833 Coq.Init.Logic <> False ind
+R17856 Coq.Lists.List "x :: y" not
+R17896 Coq.Lists.List <> nil constr
+R17903 Coq.Init.Logic <> False ind
+R17921 Coq.Lists.List "x :: y" not
+R17947 Coq.Init.Logic "A /\ B" not
+R17942 Coq.ZArith.BinInt "x <= y" not
+R17950 ring_extention <> all_le def
+R17713 Coq.Lists.List <> list ind
+R17718 Coq.ZArith.BinInt <> Z ind
+R17713 Coq.Lists.List <> list ind
+R17718 Coq.ZArith.BinInt <> Z ind
+R17713 Coq.Lists.List <> list ind
+R17718 Coq.ZArith.BinInt <> Z ind
+R17766 Coq.Lists.List <> nil constr
+R17805 Coq.Lists.List <> nil constr
+R17812 Coq.Init.Logic <> True ind
+R17833 Coq.Init.Logic <> False ind
+R17856 Coq.Lists.List "x :: y" not
+R17896 Coq.Lists.List <> nil constr
+R17903 Coq.Init.Logic <> False ind
+R17921 Coq.Lists.List "x :: y" not
+R17947 Coq.Init.Logic "A /\ B" not
+R17942 Coq.ZArith.BinInt "x <= y" not
+R17950 ring_extention <> all_le def
+prf 17988 <> all_le_def
+R18028 Coq.Init.Logic "A <-> B" not
+R18015 ring_extention <> all_le def
+R18055 Coq.Init.Logic "A /\ B" not
+R18043 Coq.Init.Logic "x = y" not
+R18033 Coq.Lists.List <> length def
+R18045 Coq.Lists.List <> length def
+R18100 Coq.ZArith.BinInt "x <= y" not
+R18070 Coq.Lists.List <> In def
+R18080 Coq.Lists.List <> combine def
+R18073 Coq.Init.Datatypes "( x , y , .. , z )" not
+R18149 ring_extention <> all_le def
+R18149 ring_extention <> all_le def
+prf 18567 <> jump_combine
+R18635 Coq.Init.Logic "x = y" not
+R18612 Coq.setoid_ring.BinList <> jump def
+R18620 Coq.Lists.List <> combine def
+R18637 Coq.Lists.List <> combine def
+R18658 Coq.setoid_ring.BinList <> jump def
+R18646 Coq.setoid_ring.BinList <> jump def
+R18603 Coq.Lists.List <> list ind
+R18603 Coq.Lists.List <> list ind
+prf 19013 <> pos_pol_incr
+R19135 Coq.ZArith.BinInt "x <= y <= z" not
+R19134 Coq.ZArith.BinInt "" not
+R19137 Coq.setoid_ring.Ring_polynom <> Pphi def
+R19159 Coq.setoid_ring.Ring_theory <> IDphi def
+R19169 Coq.ZArith.BinInt <> Z ind
+R19151 Coq.ZArith.BinInt <> Zmult def
+R19145 Coq.ZArith.BinInt <> Zplus def
+R19143 Coq.ZArith.BinInt "" not
+R19137 Coq.setoid_ring.Ring_polynom <> Pphi def
+R19159 Coq.setoid_ring.Ring_theory <> IDphi def
+R19169 Coq.ZArith.BinInt <> Z ind
+R19151 Coq.ZArith.BinInt <> Zmult def
+R19145 Coq.ZArith.BinInt <> Zplus def
+R19143 Coq.ZArith.BinInt "" not
+R19182 Coq.setoid_ring.Ring_polynom <> Pphi def
+R19204 Coq.setoid_ring.Ring_theory <> IDphi def
+R19214 Coq.ZArith.BinInt <> Z ind
+R19196 Coq.ZArith.BinInt <> Zmult def
+R19190 Coq.ZArith.BinInt <> Zplus def
+R19188 Coq.ZArith.BinInt "" not
+R19110 ring_extention <> all_mem_pos def
+R19093 ring_extention <> all_le def
+R19064 Coq.Init.Logic "x = y" not
+R19049 ring_extention <> all_coef_pos def
+R19066 Coq.Init.Datatypes <> true constr
+R19041 Coq.setoid_ring.Ring_polynom <> Pol ind
+R19045 Coq.ZArith.BinInt <> Z ind
+R19265 ring_extention <> all_coef_pos def
+R19265 ring_extention <> all_coef_pos def
+R19493 ring_extention <> all_le_def thm
+R19493 ring_extention <> all_le_def thm
+R19567 ring_extention <> jump_length thm
+R19567 ring_extention <> jump_length thm
+R19630 ring_extention <> jump_in thm
+R19630 ring_extention <> jump_in thm
+R19658 ring_extention <> jump_combine thm
+R19658 ring_extention <> jump_combine thm
+R19696 ring_extention <> all_mem_pos_def thm
+R19696 ring_extention <> all_mem_pos_def thm
+R19751 ring_extention <> jump_in thm
+R19751 ring_extention <> jump_in thm
+R19828 Coq.ZArith.BinInt "x <= y <= z" not
+R19827 Coq.ZArith.BinInt "" not
+R19830 Coq.setoid_ring.Ring_theory <> pow_pos def
+R19845 Coq.Lists.List <> hd def
+R19848 Coq.ZArith.BinInt "" not
+R19838 Coq.ZArith.BinInt <> Zmult def
+R19830 Coq.setoid_ring.Ring_theory <> pow_pos def
+R19845 Coq.Lists.List <> hd def
+R19848 Coq.ZArith.BinInt "" not
+R19838 Coq.ZArith.BinInt <> Zmult def
+R19860 Coq.setoid_ring.Ring_theory <> pow_pos def
+R19875 Coq.Lists.List <> hd def
+R19878 Coq.ZArith.BinInt "" not
+R19868 Coq.ZArith.BinInt <> Zmult def
+R19828 Coq.ZArith.BinInt "x <= y <= z" not
+R19827 Coq.ZArith.BinInt "" not
+R19830 Coq.setoid_ring.Ring_theory <> pow_pos def
+R19845 Coq.Lists.List <> hd def
+R19848 Coq.ZArith.BinInt "" not
+R19838 Coq.ZArith.BinInt <> Zmult def
+R19830 Coq.setoid_ring.Ring_theory <> pow_pos def
+R19845 Coq.Lists.List <> hd def
+R19848 Coq.ZArith.BinInt "" not
+R19838 Coq.ZArith.BinInt <> Zmult def
+R19860 Coq.setoid_ring.Ring_theory <> pow_pos def
+R19875 Coq.Lists.List <> hd def
+R19878 Coq.ZArith.BinInt "" not
+R19868 Coq.ZArith.BinInt <> Zmult def
+R20090 Coq.ZArith.BinInt "x <= y" not
+R20089 Coq.ZArith.BinInt "" not
+R20090 Coq.ZArith.BinInt "x <= y" not
+R20089 Coq.ZArith.BinInt "" not
+R20204 Coq.ZArith.BinInt "x <= y" not
+R20203 Coq.ZArith.BinInt "" not
+R20206 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20214 Coq.ZArith.BinInt <> Zmult def
+R20204 Coq.ZArith.BinInt "x <= y" not
+R20203 Coq.ZArith.BinInt "" not
+R20206 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20214 Coq.ZArith.BinInt <> Zmult def
+R20309 Coq.ZArith.BinInt "x <= y" not
+R20289 Coq.ZArith.BinInt "x * y" not
+R20290 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20298 Coq.ZArith.BinInt <> Zmult def
+R20315 Coq.ZArith.BinInt "x * y" not
+R20317 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20325 Coq.ZArith.BinInt <> Zmult def
+R20309 Coq.ZArith.BinInt "x <= y" not
+R20289 Coq.ZArith.BinInt "x * y" not
+R20290 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20298 Coq.ZArith.BinInt <> Zmult def
+R20315 Coq.ZArith.BinInt "x * y" not
+R20317 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20325 Coq.ZArith.BinInt <> Zmult def
+R20395 Coq.ZArith.BinInt "x * y" not
+R20396 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20404 Coq.ZArith.BinInt <> Zmult def
+R20377 Coq.ZArith.Zorder <> Zle_trans thm
+R20395 Coq.ZArith.BinInt "x * y" not
+R20396 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20404 Coq.ZArith.BinInt <> Zmult def
+R20377 Coq.ZArith.Zorder <> Zle_trans thm
+R20524 Coq.ZArith.BinInt <> Zmult_assoc thm
+R20524 Coq.ZArith.BinInt <> Zmult_assoc thm
+R20524 Coq.ZArith.BinInt <> Zmult_assoc thm
+R20584 Coq.ZArith.BinInt "x * y" not
+R20564 Coq.ZArith.BinInt "x * y" not
+R20565 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20573 Coq.ZArith.BinInt <> Zmult def
+R20586 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20594 Coq.ZArith.BinInt <> Zmult def
+R20547 Coq.ZArith.Zorder <> Zle_trans thm
+R20584 Coq.ZArith.BinInt "x * y" not
+R20564 Coq.ZArith.BinInt "x * y" not
+R20565 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20573 Coq.ZArith.BinInt <> Zmult def
+R20586 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20594 Coq.ZArith.BinInt <> Zmult def
+R20547 Coq.ZArith.Zorder <> Zle_trans thm
+R20703 Coq.ZArith.BinInt "x <= y" not
+R20702 Coq.ZArith.BinInt "" not
+R20706 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20714 Coq.ZArith.BinInt <> Zmult def
+R20703 Coq.ZArith.BinInt "x <= y" not
+R20702 Coq.ZArith.BinInt "" not
+R20706 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20714 Coq.ZArith.BinInt <> Zmult def
+R20752 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20760 Coq.ZArith.BinInt <> Zmult def
+R20736 Coq.ZArith.Zorder <> Zle_trans thm
+R20752 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20760 Coq.ZArith.BinInt <> Zmult def
+R20736 Coq.ZArith.Zorder <> Zle_trans thm
+R20832 Coq.ZArith.BinInt "x * y" not
+R20814 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20822 Coq.ZArith.BinInt <> Zmult def
+R20833 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20841 Coq.ZArith.BinInt <> Zmult def
+R20798 Coq.ZArith.Zorder <> Zle_trans thm
+R20832 Coq.ZArith.BinInt "x * y" not
+R20814 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20822 Coq.ZArith.BinInt <> Zmult def
+R20833 Coq.setoid_ring.Ring_theory <> pow_pos def
+R20841 Coq.ZArith.BinInt <> Zmult def
+R20798 Coq.ZArith.Zorder <> Zle_trans thm
+R20903 Coq.ZArith.BinInt "x <= y <= z" not
+R20901 Coq.ZArith.BinInt "" not
+R20906 Coq.setoid_ring.Ring_polynom <> Pphi def
+R20926 Coq.setoid_ring.Ring_theory <> IDphi def
+R20936 Coq.ZArith.BinInt <> Z ind
+R20919 Coq.ZArith.BinInt <> Zmult def
+R20913 Coq.ZArith.BinInt <> Zplus def
+R20911 Coq.ZArith.BinInt "" not
+R20906 Coq.setoid_ring.Ring_polynom <> Pphi def
+R20926 Coq.setoid_ring.Ring_theory <> IDphi def
+R20936 Coq.ZArith.BinInt <> Z ind
+R20919 Coq.ZArith.BinInt <> Zmult def
+R20913 Coq.ZArith.BinInt <> Zplus def
+R20911 Coq.ZArith.BinInt "" not
+R20949 Coq.setoid_ring.Ring_polynom <> Pphi def
+R20969 Coq.setoid_ring.Ring_theory <> IDphi def
+R20979 Coq.ZArith.BinInt <> Z ind
+R20962 Coq.ZArith.BinInt <> Zmult def
+R20956 Coq.ZArith.BinInt <> Zplus def
+R20954 Coq.ZArith.BinInt "" not
+R20903 Coq.ZArith.BinInt "x <= y <= z" not
+R20901 Coq.ZArith.BinInt "" not
+R20906 Coq.setoid_ring.Ring_polynom <> Pphi def
+R20926 Coq.setoid_ring.Ring_theory <> IDphi def
+R20936 Coq.ZArith.BinInt <> Z ind
+R20919 Coq.ZArith.BinInt <> Zmult def
+R20913 Coq.ZArith.BinInt <> Zplus def
+R20911 Coq.ZArith.BinInt "" not
+R20906 Coq.setoid_ring.Ring_polynom <> Pphi def
+R20926 Coq.setoid_ring.Ring_theory <> IDphi def
+R20936 Coq.ZArith.BinInt <> Z ind
+R20919 Coq.ZArith.BinInt <> Zmult def
+R20913 Coq.ZArith.BinInt <> Zplus def
+R20911 Coq.ZArith.BinInt "" not
+R20949 Coq.setoid_ring.Ring_polynom <> Pphi def
+R20969 Coq.setoid_ring.Ring_theory <> IDphi def
+R20979 Coq.ZArith.BinInt <> Z ind
+R20962 Coq.ZArith.BinInt <> Zmult def
+R20956 Coq.ZArith.BinInt <> Zplus def
+R20954 Coq.ZArith.BinInt "" not
+R21028 Coq.Bool.Bool <> andb_true_eq thm
+R21028 Coq.Bool.Bool <> andb_true_eq thm
+R21087 Coq.ZArith.BinInt "x <= y <= z" not
+R21086 Coq.ZArith.BinInt "" not
+R21089 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21124 Coq.Lists.List <> tail def
+R21109 Coq.setoid_ring.Ring_theory <> IDphi def
+R21119 Coq.ZArith.BinInt <> Z ind
+R21102 Coq.ZArith.BinInt <> Zmult def
+R21096 Coq.ZArith.BinInt <> Zplus def
+R21094 Coq.ZArith.BinInt "" not
+R21089 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21124 Coq.Lists.List <> tail def
+R21109 Coq.setoid_ring.Ring_theory <> IDphi def
+R21119 Coq.ZArith.BinInt <> Z ind
+R21102 Coq.ZArith.BinInt <> Zmult def
+R21096 Coq.ZArith.BinInt <> Zplus def
+R21094 Coq.ZArith.BinInt "" not
+R21138 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21173 Coq.Lists.List <> tail def
+R21158 Coq.setoid_ring.Ring_theory <> IDphi def
+R21168 Coq.ZArith.BinInt <> Z ind
+R21151 Coq.ZArith.BinInt <> Zmult def
+R21145 Coq.ZArith.BinInt <> Zplus def
+R21143 Coq.ZArith.BinInt "" not
+R21087 Coq.ZArith.BinInt "x <= y <= z" not
+R21086 Coq.ZArith.BinInt "" not
+R21089 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21124 Coq.Lists.List <> tail def
+R21109 Coq.setoid_ring.Ring_theory <> IDphi def
+R21119 Coq.ZArith.BinInt <> Z ind
+R21102 Coq.ZArith.BinInt <> Zmult def
+R21096 Coq.ZArith.BinInt <> Zplus def
+R21094 Coq.ZArith.BinInt "" not
+R21089 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21124 Coq.Lists.List <> tail def
+R21109 Coq.setoid_ring.Ring_theory <> IDphi def
+R21119 Coq.ZArith.BinInt <> Z ind
+R21102 Coq.ZArith.BinInt <> Zmult def
+R21096 Coq.ZArith.BinInt <> Zplus def
+R21094 Coq.ZArith.BinInt "" not
+R21138 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21173 Coq.Lists.List <> tail def
+R21158 Coq.setoid_ring.Ring_theory <> IDphi def
+R21168 Coq.ZArith.BinInt <> Z ind
+R21151 Coq.ZArith.BinInt <> Zmult def
+R21145 Coq.ZArith.BinInt <> Zplus def
+R21143 Coq.ZArith.BinInt "" not
+R21223 Coq.Bool.Bool <> andb_true_eq thm
+R21223 Coq.Bool.Bool <> andb_true_eq thm
+R21318 ring_extention <> all_mem_pos_def thm
+R21318 ring_extention <> all_mem_pos_def thm
+R21375 ring_extention <> tail_in thm
+R21375 ring_extention <> tail_in thm
+R21462 Coq.ZArith.BinInt "x <= y" not
+R21461 Coq.ZArith.BinInt "" not
+R21464 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21484 Coq.setoid_ring.Ring_theory <> IDphi def
+R21494 Coq.ZArith.BinInt <> Z ind
+R21477 Coq.ZArith.BinInt <> Zmult def
+R21471 Coq.ZArith.BinInt <> Zplus def
+R21469 Coq.ZArith.BinInt "" not
+R21534 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21554 Coq.setoid_ring.Ring_theory <> IDphi def
+R21564 Coq.ZArith.BinInt <> Z ind
+R21547 Coq.ZArith.BinInt <> Zmult def
+R21541 Coq.ZArith.BinInt <> Zplus def
+R21539 Coq.ZArith.BinInt "" not
+R21518 Coq.ZArith.Zorder <> Zle_trans thm
+R21462 Coq.ZArith.BinInt "x <= y" not
+R21461 Coq.ZArith.BinInt "" not
+R21464 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21484 Coq.setoid_ring.Ring_theory <> IDphi def
+R21494 Coq.ZArith.BinInt <> Z ind
+R21477 Coq.ZArith.BinInt <> Zmult def
+R21471 Coq.ZArith.BinInt <> Zplus def
+R21469 Coq.ZArith.BinInt "" not
+R21534 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21554 Coq.setoid_ring.Ring_theory <> IDphi def
+R21564 Coq.ZArith.BinInt <> Z ind
+R21547 Coq.ZArith.BinInt <> Zmult def
+R21541 Coq.ZArith.BinInt <> Zplus def
+R21539 Coq.ZArith.BinInt "" not
+R21518 Coq.ZArith.Zorder <> Zle_trans thm
+R21603 Coq.ZArith.BinInt "x <= y" not
+R21602 Coq.ZArith.BinInt "" not
+R21605 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21640 Coq.Lists.List <> tail def
+R21625 Coq.setoid_ring.Ring_theory <> IDphi def
+R21635 Coq.ZArith.BinInt <> Z ind
+R21618 Coq.ZArith.BinInt <> Zmult def
+R21612 Coq.ZArith.BinInt <> Zplus def
+R21610 Coq.ZArith.BinInt "" not
+R21681 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21716 Coq.Lists.List <> tail def
+R21701 Coq.setoid_ring.Ring_theory <> IDphi def
+R21711 Coq.ZArith.BinInt <> Z ind
+R21694 Coq.ZArith.BinInt <> Zmult def
+R21688 Coq.ZArith.BinInt <> Zplus def
+R21686 Coq.ZArith.BinInt "" not
+R21665 Coq.ZArith.Zorder <> Zle_trans thm
+R21603 Coq.ZArith.BinInt "x <= y" not
+R21602 Coq.ZArith.BinInt "" not
+R21605 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21640 Coq.Lists.List <> tail def
+R21625 Coq.setoid_ring.Ring_theory <> IDphi def
+R21635 Coq.ZArith.BinInt <> Z ind
+R21618 Coq.ZArith.BinInt <> Zmult def
+R21612 Coq.ZArith.BinInt <> Zplus def
+R21610 Coq.ZArith.BinInt "" not
+R21681 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21716 Coq.Lists.List <> tail def
+R21701 Coq.setoid_ring.Ring_theory <> IDphi def
+R21711 Coq.ZArith.BinInt <> Z ind
+R21694 Coq.ZArith.BinInt <> Zmult def
+R21688 Coq.ZArith.BinInt <> Zplus def
+R21686 Coq.ZArith.BinInt "" not
+R21665 Coq.ZArith.Zorder <> Zle_trans thm
+R21757 Coq.ZArith.BinInt "x <= y" not
+R21755 Coq.ZArith.BinInt "" not
+R21760 Coq.setoid_ring.Ring_theory <> pow_pos def
+R21775 Coq.Lists.List <> hd def
+R21778 Coq.ZArith.BinInt "" not
+R21768 Coq.ZArith.BinInt <> Zmult def
+R21817 Coq.setoid_ring.Ring_theory <> pow_pos def
+R21832 Coq.Lists.List <> hd def
+R21835 Coq.ZArith.BinInt "" not
+R21825 Coq.ZArith.BinInt <> Zmult def
+R21801 Coq.ZArith.Zorder <> Zle_trans thm
+R21757 Coq.ZArith.BinInt "x <= y" not
+R21755 Coq.ZArith.BinInt "" not
+R21760 Coq.setoid_ring.Ring_theory <> pow_pos def
+R21775 Coq.Lists.List <> hd def
+R21778 Coq.ZArith.BinInt "" not
+R21768 Coq.ZArith.BinInt <> Zmult def
+R21817 Coq.setoid_ring.Ring_theory <> pow_pos def
+R21832 Coq.Lists.List <> hd def
+R21835 Coq.ZArith.BinInt "" not
+R21825 Coq.ZArith.BinInt <> Zmult def
+R21801 Coq.ZArith.Zorder <> Zle_trans thm
+R21941 Coq.ZArith.BinInt "x <= y" not
+R21912 Coq.ZArith.BinInt "x * y" not
+R21872 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21892 Coq.setoid_ring.Ring_theory <> IDphi def
+R21902 Coq.ZArith.BinInt <> Z ind
+R21885 Coq.ZArith.BinInt <> Zmult def
+R21879 Coq.ZArith.BinInt <> Zplus def
+R21877 Coq.ZArith.BinInt "" not
+R21914 Coq.setoid_ring.Ring_theory <> pow_pos def
+R21929 Coq.Lists.List <> hd def
+R21932 Coq.ZArith.BinInt "" not
+R21922 Coq.ZArith.BinInt <> Zmult def
+R21987 Coq.ZArith.BinInt "x * y" not
+R21947 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21967 Coq.setoid_ring.Ring_theory <> IDphi def
+R21977 Coq.ZArith.BinInt <> Z ind
+R21960 Coq.ZArith.BinInt <> Zmult def
+R21954 Coq.ZArith.BinInt <> Zplus def
+R21952 Coq.ZArith.BinInt "" not
+R21989 Coq.setoid_ring.Ring_theory <> pow_pos def
+R22004 Coq.Lists.List <> hd def
+R22007 Coq.ZArith.BinInt "" not
+R21997 Coq.ZArith.BinInt <> Zmult def
+R22084 Coq.ZArith.BinInt "x * y" not
+R22044 Coq.setoid_ring.Ring_polynom <> Pphi def
+R22064 Coq.setoid_ring.Ring_theory <> IDphi def
+R22074 Coq.ZArith.BinInt <> Z ind
+R22057 Coq.ZArith.BinInt <> Zmult def
+R22051 Coq.ZArith.BinInt <> Zplus def
+R22049 Coq.ZArith.BinInt "" not
+R22086 Coq.setoid_ring.Ring_theory <> pow_pos def
+R22101 Coq.Lists.List <> hd def
+R22104 Coq.ZArith.BinInt "" not
+R22094 Coq.ZArith.BinInt <> Zmult def
+R22028 Coq.ZArith.Zorder <> Zle_trans thm
+R21941 Coq.ZArith.BinInt "x <= y" not
+R21912 Coq.ZArith.BinInt "x * y" not
+R21872 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21892 Coq.setoid_ring.Ring_theory <> IDphi def
+R21902 Coq.ZArith.BinInt <> Z ind
+R21885 Coq.ZArith.BinInt <> Zmult def
+R21879 Coq.ZArith.BinInt <> Zplus def
+R21877 Coq.ZArith.BinInt "" not
+R21914 Coq.setoid_ring.Ring_theory <> pow_pos def
+R21929 Coq.Lists.List <> hd def
+R21932 Coq.ZArith.BinInt "" not
+R21922 Coq.ZArith.BinInt <> Zmult def
+R21987 Coq.ZArith.BinInt "x * y" not
+R21947 Coq.setoid_ring.Ring_polynom <> Pphi def
+R21967 Coq.setoid_ring.Ring_theory <> IDphi def
+R21977 Coq.ZArith.BinInt <> Z ind
+R21960 Coq.ZArith.BinInt <> Zmult def
+R21954 Coq.ZArith.BinInt <> Zplus def
+R21952 Coq.ZArith.BinInt "" not
+R21989 Coq.setoid_ring.Ring_theory <> pow_pos def
+R22004 Coq.Lists.List <> hd def
+R22007 Coq.ZArith.BinInt "" not
+R21997 Coq.ZArith.BinInt <> Zmult def
+R22084 Coq.ZArith.BinInt "x * y" not
+R22044 Coq.setoid_ring.Ring_polynom <> Pphi def
+R22064 Coq.setoid_ring.Ring_theory <> IDphi def
+R22074 Coq.ZArith.BinInt <> Z ind
+R22057 Coq.ZArith.BinInt <> Zmult def
+R22051 Coq.ZArith.BinInt <> Zplus def
+R22049 Coq.ZArith.BinInt "" not
+R22086 Coq.setoid_ring.Ring_theory <> pow_pos def
+R22101 Coq.Lists.List <> hd def
+R22104 Coq.ZArith.BinInt "" not
+R22094 Coq.ZArith.BinInt <> Zmult def
+R22028 Coq.ZArith.Zorder <> Zle_trans thm
+prf 22163 <> pos_pol_incr'
+R22286 Coq.ZArith.BinInt "x <= y <= z" not
+R22285 Coq.ZArith.BinInt "" not
+R22289 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R22379 Coq.setoid_ring.InitialRing <> get_signZ def
+R22370 Coq.ZArith.Zpow_def <> Zpower def
+R22363 Coq.ZArith.BinInt <> Z_of_N def
+R22347 Coq.setoid_ring.Ring_theory <> IDphi def
+R22357 Coq.ZArith.BinInt <> Z ind
+R22336 Coq.ZArith.Zbool <> Zeq_bool def
+R22333 Coq.ZArith.BinInt "" not
+R22331 Coq.ZArith.BinInt "" not
+R22324 Coq.ZArith.BinInt <> Zopp def
+R22317 Coq.ZArith.BinInt <> Zminus def
+R22311 Coq.ZArith.BinInt <> Zmult def
+R22305 Coq.ZArith.BinInt <> Zplus def
+R22303 Coq.ZArith.BinInt "" not
+R22301 Coq.ZArith.BinInt "" not
+R22289 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R22379 Coq.setoid_ring.InitialRing <> get_signZ def
+R22370 Coq.ZArith.Zpow_def <> Zpower def
+R22363 Coq.ZArith.BinInt <> Z_of_N def
+R22347 Coq.setoid_ring.Ring_theory <> IDphi def
+R22357 Coq.ZArith.BinInt <> Z ind
+R22336 Coq.ZArith.Zbool <> Zeq_bool def
+R22333 Coq.ZArith.BinInt "" not
+R22331 Coq.ZArith.BinInt "" not
+R22324 Coq.ZArith.BinInt <> Zopp def
+R22317 Coq.ZArith.BinInt <> Zminus def
+R22311 Coq.ZArith.BinInt <> Zmult def
+R22305 Coq.ZArith.BinInt <> Zplus def
+R22303 Coq.ZArith.BinInt "" not
+R22301 Coq.ZArith.BinInt "" not
+R22405 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R22495 Coq.setoid_ring.InitialRing <> get_signZ def
+R22486 Coq.ZArith.Zpow_def <> Zpower def
+R22479 Coq.ZArith.BinInt <> Z_of_N def
+R22463 Coq.setoid_ring.Ring_theory <> IDphi def
+R22473 Coq.ZArith.BinInt <> Z ind
+R22452 Coq.ZArith.Zbool <> Zeq_bool def
+R22449 Coq.ZArith.BinInt "" not
+R22447 Coq.ZArith.BinInt "" not
+R22440 Coq.ZArith.BinInt <> Zopp def
+R22433 Coq.ZArith.BinInt <> Zminus def
+R22427 Coq.ZArith.BinInt <> Zmult def
+R22421 Coq.ZArith.BinInt <> Zplus def
+R22419 Coq.ZArith.BinInt "" not
+R22417 Coq.ZArith.BinInt "" not
+R22261 ring_extention <> all_mem_pos def
+R22244 ring_extention <> all_le def
+R22215 Coq.Init.Logic "x = y" not
+R22200 ring_extention <> all_coef_pos def
+R22217 Coq.Init.Datatypes <> true constr
+R22192 Coq.setoid_ring.Ring_polynom <> Pol ind
+R22196 Coq.ZArith.BinInt <> Z ind
+R22556 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R22645 Coq.setoid_ring.InitialRing <> get_signZ def
+R22636 Coq.ZArith.Zpow_def <> Zpower def
+R22629 Coq.ZArith.BinInt <> Z_of_N def
+R22613 Coq.setoid_ring.Ring_theory <> IDphi def
+R22623 Coq.ZArith.BinInt <> Z ind
+R22602 Coq.ZArith.Zbool <> Zeq_bool def
+R22600 Coq.ZArith.BinInt "" not
+R22598 Coq.ZArith.BinInt "" not
+R22591 Coq.ZArith.BinInt <> Zopp def
+R22584 Coq.ZArith.BinInt <> Zminus def
+R22578 Coq.ZArith.BinInt <> Zmult def
+R22572 Coq.ZArith.BinInt <> Zplus def
+R22570 Coq.ZArith.BinInt "" not
+R22568 Coq.ZArith.BinInt "" not
+R22673 Coq.setoid_ring.Ring_polynom <> Pphi def
+R22694 Coq.setoid_ring.Ring_theory <> IDphi def
+R22700 Coq.ZArith.BinInt <> Z ind
+R22686 Coq.ZArith.BinInt <> Zmult def
+R22680 Coq.ZArith.BinInt <> Zplus def
+R22678 Coq.ZArith.BinInt "" not
+R22556 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R22645 Coq.setoid_ring.InitialRing <> get_signZ def
+R22636 Coq.ZArith.Zpow_def <> Zpower def
+R22629 Coq.ZArith.BinInt <> Z_of_N def
+R22613 Coq.setoid_ring.Ring_theory <> IDphi def
+R22623 Coq.ZArith.BinInt <> Z ind
+R22602 Coq.ZArith.Zbool <> Zeq_bool def
+R22600 Coq.ZArith.BinInt "" not
+R22598 Coq.ZArith.BinInt "" not
+R22591 Coq.ZArith.BinInt <> Zopp def
+R22584 Coq.ZArith.BinInt <> Zminus def
+R22578 Coq.ZArith.BinInt <> Zmult def
+R22572 Coq.ZArith.BinInt <> Zplus def
+R22570 Coq.ZArith.BinInt "" not
+R22568 Coq.ZArith.BinInt "" not
+R22673 Coq.setoid_ring.Ring_polynom <> Pphi def
+R22694 Coq.setoid_ring.Ring_theory <> IDphi def
+R22700 Coq.ZArith.BinInt <> Z ind
+R22686 Coq.ZArith.BinInt <> Zmult def
+R22680 Coq.ZArith.BinInt <> Zplus def
+R22678 Coq.ZArith.BinInt "" not
+R22720 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R22806 Coq.setoid_ring.InitialRing <> get_signZ def
+R22798 Coq.ZArith.Zpow_def <> Zpower def
+R22791 Coq.ZArith.BinInt <> Z_of_N def
+R22777 Coq.setoid_ring.Ring_theory <> IDphi def
+R22787 Coq.ZArith.BinInt <> Z ind
+R22761 Coq.ZArith.Zbool <> Zeq_bool def
+R22759 Coq.ZArith.BinInt "" not
+R22757 Coq.ZArith.BinInt "" not
+R22752 Coq.ZArith.BinInt <> Zopp def
+R22745 Coq.ZArith.BinInt <> Zminus def
+R22739 Coq.ZArith.BinInt <> Zmult def
+R22733 Coq.ZArith.BinInt <> Zplus def
+R22731 Coq.ZArith.BinInt "" not
+R22729 Coq.ZArith.BinInt "" not
+R22833 Coq.setoid_ring.Ring_polynom <> Pphi def
+R22854 Coq.setoid_ring.Ring_theory <> IDphi def
+R22860 Coq.ZArith.BinInt <> Z ind
+R22846 Coq.ZArith.BinInt <> Zmult def
+R22840 Coq.ZArith.BinInt <> Zplus def
+R22838 Coq.ZArith.BinInt "" not
+R22720 Coq.setoid_ring.Ring_polynom <> Pphi_pow def
+R22806 Coq.setoid_ring.InitialRing <> get_signZ def
+R22798 Coq.ZArith.Zpow_def <> Zpower def
+R22791 Coq.ZArith.BinInt <> Z_of_N def
+R22777 Coq.setoid_ring.Ring_theory <> IDphi def
+R22787 Coq.ZArith.BinInt <> Z ind
+R22761 Coq.ZArith.Zbool <> Zeq_bool def
+R22759 Coq.ZArith.BinInt "" not
+R22757 Coq.ZArith.BinInt "" not
+R22752 Coq.ZArith.BinInt <> Zopp def
+R22745 Coq.ZArith.BinInt <> Zminus def
+R22739 Coq.ZArith.BinInt <> Zmult def
+R22733 Coq.ZArith.BinInt <> Zplus def
+R22731 Coq.ZArith.BinInt "" not
+R22729 Coq.ZArith.BinInt "" not
+R22833 Coq.setoid_ring.Ring_polynom <> Pphi def
+R22854 Coq.setoid_ring.Ring_theory <> IDphi def
+R22860 Coq.ZArith.BinInt <> Z ind
+R22846 Coq.ZArith.BinInt <> Zmult def
+R22840 Coq.ZArith.BinInt <> Zplus def
+R22838 Coq.ZArith.BinInt "" not
+R22877 ring_extention <> pos_pol_incr thm
+R22877 ring_extention <> pos_pol_incr thm
+R22940 Coq.setoid_ring.InitialRing <> Zsth thm
+R22963 Coq.ZArith.BinInt <> Z ind
+R22919 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R22940 Coq.setoid_ring.InitialRing <> Zsth thm
+R22963 Coq.ZArith.BinInt <> Z ind
+R22919 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R22976 Coq.setoid_ring.InitialRing <> Zeqe thm
+R22976 Coq.setoid_ring.InitialRing <> Zeqe thm
+R23004 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R23063 Coq.setoid_ring.InitialRing <> Zth thm
+R23046 Coq.setoid_ring.InitialRing <> Zeqe thm
+R23029 Coq.setoid_ring.InitialRing <> Zsth thm
+R23004 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R23063 Coq.setoid_ring.InitialRing <> Zth thm
+R23046 Coq.setoid_ring.InitialRing <> Zeqe thm
+R23029 Coq.setoid_ring.InitialRing <> Zsth thm
+R23093 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R23161 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R23152 Coq.ZArith.Zbool <> Zeq_bool def
+R23135 Coq.setoid_ring.InitialRing <> Zsth thm
+R23127 Coq.ZArith.BinInt <> Zopp def
+R23120 Coq.ZArith.BinInt <> Zminus def
+R23114 Coq.ZArith.BinInt <> Zmult def
+R23108 Coq.ZArith.BinInt <> Zplus def
+R23106 Coq.ZArith.BinInt "" not
+R23103 Coq.ZArith.BinInt <> Z0 constr
+R23101 Coq.ZArith.BinInt <> Z ind
+R23093 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R23161 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R23152 Coq.ZArith.Zbool <> Zeq_bool def
+R23135 Coq.setoid_ring.InitialRing <> Zsth thm
+R23127 Coq.ZArith.BinInt <> Zopp def
+R23120 Coq.ZArith.BinInt <> Zminus def
+R23114 Coq.ZArith.BinInt <> Zmult def
+R23108 Coq.ZArith.BinInt <> Zplus def
+R23106 Coq.ZArith.BinInt "" not
+R23103 Coq.ZArith.BinInt <> Z0 constr
+R23101 Coq.ZArith.BinInt <> Z ind
+R23183 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R23183 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R23206 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+R23206 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+R23260 Coq.setoid_ring.InitialRing <> Zsth thm
+R23283 Coq.ZArith.BinInt <> Z ind
+R23239 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R23260 Coq.setoid_ring.InitialRing <> Zsth thm
+R23283 Coq.ZArith.BinInt <> Z ind
+R23239 Coq.setoid_ring.Ring_polynom <> Pphi_pow_ok thm
+R23296 Coq.setoid_ring.InitialRing <> Zeqe thm
+R23296 Coq.setoid_ring.InitialRing <> Zeqe thm
+R23324 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R23383 Coq.setoid_ring.InitialRing <> Zth thm
+R23366 Coq.setoid_ring.InitialRing <> Zeqe thm
+R23349 Coq.setoid_ring.InitialRing <> Zsth thm
+R23324 Coq.setoid_ring.Ring_theory <> Rth_ARth thm
+R23383 Coq.setoid_ring.InitialRing <> Zth thm
+R23366 Coq.setoid_ring.InitialRing <> Zeqe thm
+R23349 Coq.setoid_ring.InitialRing <> Zsth thm
+R23413 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R23481 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R23472 Coq.ZArith.Zbool <> Zeq_bool def
+R23455 Coq.setoid_ring.InitialRing <> Zsth thm
+R23447 Coq.ZArith.BinInt <> Zopp def
+R23440 Coq.ZArith.BinInt <> Zminus def
+R23434 Coq.ZArith.BinInt <> Zmult def
+R23428 Coq.ZArith.BinInt <> Zplus def
+R23426 Coq.ZArith.BinInt "" not
+R23423 Coq.ZArith.BinInt <> Z0 constr
+R23421 Coq.ZArith.BinInt <> Z ind
+R23413 Coq.setoid_ring.Ring_theory <> IDmorph thm
+R23481 Coq.ZArith.Zbool <> Zeq_bool_eq thm
+R23472 Coq.ZArith.Zbool <> Zeq_bool def
+R23455 Coq.setoid_ring.InitialRing <> Zsth thm
+R23447 Coq.ZArith.BinInt <> Zopp def
+R23440 Coq.ZArith.BinInt <> Zminus def
+R23434 Coq.ZArith.BinInt <> Zmult def
+R23428 Coq.ZArith.BinInt <> Zplus def
+R23426 Coq.ZArith.BinInt "" not
+R23423 Coq.ZArith.BinInt <> Z0 constr
+R23421 Coq.ZArith.BinInt <> Z ind
+R23503 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R23503 Coq.ZArith.Zpow_def <> Zpower_theory thm
+R23526 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+R23526 Coq.setoid_ring.InitialRing <> get_signZ_th thm
+prf 23552 <> pos_expr_incr_aux
+R23757 Coq.ZArith.BinInt "x <= y <= z" not
+R23755 Coq.ZArith.BinInt "" not
+R23761 Coq.setoid_ring.Ring_polynom <> PEeval def
+R23817 Coq.ZArith.Zpow_def <> Zpower def
+R23810 Coq.ZArith.BinInt <> Z_of_N def
+R23795 Coq.setoid_ring.Ring_theory <> IDphi def
+R23805 Coq.ZArith.BinInt <> Z ind
+R23789 Coq.ZArith.BinInt <> Zopp def
+R23782 Coq.ZArith.BinInt <> Zminus def
+R23776 Coq.ZArith.BinInt <> Zmult def
+R23770 Coq.ZArith.BinInt <> Zplus def
+R23768 Coq.ZArith.BinInt "" not
+R23761 Coq.setoid_ring.Ring_polynom <> PEeval def
+R23817 Coq.ZArith.Zpow_def <> Zpower def
+R23810 Coq.ZArith.BinInt <> Z_of_N def
+R23795 Coq.setoid_ring.Ring_theory <> IDphi def
+R23805 Coq.ZArith.BinInt <> Z ind
+R23789 Coq.ZArith.BinInt <> Zopp def
+R23782 Coq.ZArith.BinInt <> Zminus def
+R23776 Coq.ZArith.BinInt <> Zmult def
+R23770 Coq.ZArith.BinInt <> Zplus def
+R23768 Coq.ZArith.BinInt "" not
+R23840 Coq.setoid_ring.Ring_polynom <> PEeval def
+R23896 Coq.ZArith.Zpow_def <> Zpower def
+R23889 Coq.ZArith.BinInt <> Z_of_N def
+R23874 Coq.setoid_ring.Ring_theory <> IDphi def
+R23884 Coq.ZArith.BinInt <> Z ind
+R23868 Coq.ZArith.BinInt <> Zopp def
+R23861 Coq.ZArith.BinInt <> Zminus def
+R23855 Coq.ZArith.BinInt <> Zmult def
+R23849 Coq.ZArith.BinInt <> Zplus def
+R23847 Coq.ZArith.BinInt "" not
+R23732 ring_extention <> all_mem_pos def
+R23716 ring_extention <> all_le def
+R23689 Coq.Init.Logic "x = y" not
+R23591 ring_extention <> all_coef_pos def
+R23605 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R23680 Coq.Lists.List <> nil constr
+R23663 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R23653 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R23644 Coq.ZArith.Zbool <> Zeq_bool def
+R23639 Coq.ZArith.BinInt <> Zopp def
+R23632 Coq.ZArith.BinInt <> Zminus def
+R23626 Coq.ZArith.BinInt <> Zmult def
+R23620 Coq.ZArith.BinInt <> Zplus def
+R23618 Coq.ZArith.BinInt "" not
+R23616 Coq.ZArith.BinInt "" not
+R23691 Coq.Init.Datatypes <> true constr
+R23983 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R24007 Coq.Lists.List <> nil constr
+R24020 Coq.Init.Datatypes "x * y" not
+R24012 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R24018 Coq.ZArith.BinInt <> Z ind
+R24022 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R24028 Coq.ZArith.BinInt <> Z ind
+R24045 Coq.Lists.List <> nil constr
+R24058 Coq.Init.Datatypes "x * y" not
+R24052 Coq.Init.Datatypes "x * y" not
+R24050 Coq.ZArith.BinInt <> Z ind
+R24054 Coq.setoid_ring.Ring_polynom <> Mon ind
+R24060 Coq.setoid_ring.Ring_polynom <> Pol ind
+R24064 Coq.ZArith.BinInt <> Z ind
+R24083 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R24158 Coq.Lists.List <> nil constr
+R24141 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R24131 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R24122 Coq.ZArith.Zbool <> Zeq_bool def
+R24117 Coq.ZArith.BinInt <> Zopp def
+R24110 Coq.ZArith.BinInt <> Zminus def
+R24104 Coq.ZArith.BinInt <> Zmult def
+R24098 Coq.ZArith.BinInt <> Zplus def
+R24096 Coq.ZArith.BinInt "" not
+R24094 Coq.ZArith.BinInt "" not
+R23959 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R23983 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R24007 Coq.Lists.List <> nil constr
+R24020 Coq.Init.Datatypes "x * y" not
+R24012 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R24018 Coq.ZArith.BinInt <> Z ind
+R24022 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R24028 Coq.ZArith.BinInt <> Z ind
+R24045 Coq.Lists.List <> nil constr
+R24058 Coq.Init.Datatypes "x * y" not
+R24052 Coq.Init.Datatypes "x * y" not
+R24050 Coq.ZArith.BinInt <> Z ind
+R24054 Coq.setoid_ring.Ring_polynom <> Mon ind
+R24060 Coq.setoid_ring.Ring_polynom <> Pol ind
+R24064 Coq.ZArith.BinInt <> Z ind
+R24083 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R24158 Coq.Lists.List <> nil constr
+R24141 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R24131 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R24122 Coq.ZArith.Zbool <> Zeq_bool def
+R24117 Coq.ZArith.BinInt <> Zopp def
+R24110 Coq.ZArith.BinInt <> Zminus def
+R24104 Coq.ZArith.BinInt <> Zmult def
+R24098 Coq.ZArith.BinInt <> Zplus def
+R24096 Coq.ZArith.BinInt "" not
+R24094 Coq.ZArith.BinInt "" not
+R23959 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R24207 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R24231 Coq.Lists.List <> nil constr
+R24244 Coq.Init.Datatypes "x * y" not
+R24236 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R24242 Coq.ZArith.BinInt <> Z ind
+R24246 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R24252 Coq.ZArith.BinInt <> Z ind
+R24269 Coq.Lists.List <> nil constr
+R24281 Coq.Init.Datatypes "x * y" not
+R24275 Coq.Init.Datatypes "x * y" not
+R24274 Coq.ZArith.BinInt <> Z ind
+R24277 Coq.setoid_ring.Ring_polynom <> Mon ind
+R24283 Coq.setoid_ring.Ring_polynom <> Pol ind
+R24287 Coq.ZArith.BinInt <> Z ind
+R24306 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R24381 Coq.Lists.List <> nil constr
+R24364 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R24354 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R24345 Coq.ZArith.Zbool <> Zeq_bool def
+R24340 Coq.ZArith.BinInt <> Zopp def
+R24333 Coq.ZArith.BinInt <> Zminus def
+R24327 Coq.ZArith.BinInt <> Zmult def
+R24321 Coq.ZArith.BinInt <> Zplus def
+R24319 Coq.ZArith.BinInt "" not
+R24317 Coq.ZArith.BinInt "" not
+R24183 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R24207 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R24231 Coq.Lists.List <> nil constr
+R24244 Coq.Init.Datatypes "x * y" not
+R24236 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R24242 Coq.ZArith.BinInt <> Z ind
+R24246 Coq.setoid_ring.Ring_polynom <> PExpr ind
+R24252 Coq.ZArith.BinInt <> Z ind
+R24269 Coq.Lists.List <> nil constr
+R24281 Coq.Init.Datatypes "x * y" not
+R24275 Coq.Init.Datatypes "x * y" not
+R24274 Coq.ZArith.BinInt <> Z ind
+R24277 Coq.setoid_ring.Ring_polynom <> Mon ind
+R24283 Coq.setoid_ring.Ring_polynom <> Pol ind
+R24287 Coq.ZArith.BinInt <> Z ind
+R24306 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R24381 Coq.Lists.List <> nil constr
+R24364 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R24354 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R24345 Coq.ZArith.Zbool <> Zeq_bool def
+R24340 Coq.ZArith.BinInt <> Zopp def
+R24333 Coq.ZArith.BinInt <> Zminus def
+R24327 Coq.ZArith.BinInt <> Zmult def
+R24321 Coq.ZArith.BinInt <> Zplus def
+R24319 Coq.ZArith.BinInt "" not
+R24317 Coq.ZArith.BinInt "" not
+R24183 Coq.setoid_ring.ZArithRing <> Zr_ring_lemma2 thm
+R24404 ring_extention <> pos_pol_incr' thm
+R24404 ring_extention <> pos_pol_incr' thm
+R24449 Coq.Init.Logic <> I constr
+R24449 Coq.Init.Logic <> I constr
+R24512 Coq.Init.Logic <> I constr
+R24512 Coq.Init.Logic <> I constr
+prf 24568 <> pos_expr_incr
+R24841 Coq.ZArith.BinInt "x <= y" not
+R24767 Coq.setoid_ring.Ring_polynom <> PEeval def
+R24823 Coq.ZArith.Zpow_def <> Zpower def
+R24816 Coq.ZArith.BinInt <> Z_of_N def
+R24801 Coq.setoid_ring.Ring_theory <> IDphi def
+R24811 Coq.ZArith.BinInt <> Z ind
+R24795 Coq.ZArith.BinInt <> Zopp def
+R24788 Coq.ZArith.BinInt <> Zminus def
+R24782 Coq.ZArith.BinInt <> Zmult def
+R24776 Coq.ZArith.BinInt <> Zplus def
+R24774 Coq.ZArith.BinInt "" not
+R24846 Coq.setoid_ring.Ring_polynom <> PEeval def
+R24902 Coq.ZArith.Zpow_def <> Zpower def
+R24895 Coq.ZArith.BinInt <> Z_of_N def
+R24880 Coq.setoid_ring.Ring_theory <> IDphi def
+R24890 Coq.ZArith.BinInt <> Z ind
+R24874 Coq.ZArith.BinInt <> Zopp def
+R24867 Coq.ZArith.BinInt <> Zminus def
+R24861 Coq.ZArith.BinInt <> Zmult def
+R24855 Coq.ZArith.BinInt <> Zplus def
+R24853 Coq.ZArith.BinInt "" not
+R24744 ring_extention <> all_mem_pos def
+R24728 ring_extention <> all_le def
+R24701 Coq.Init.Logic "x = y" not
+R24603 ring_extention <> all_coef_pos def
+R24617 Coq.setoid_ring.Ring_polynom <> norm_subst def
+R24692 Coq.Lists.List <> nil constr
+R24675 Coq.setoid_ring.Ring_tac <> ring_subst_niter def
+R24665 Coq.ZArith.Zdiv <> Zdiv_eucl def
+R24656 Coq.ZArith.Zbool <> Zeq_bool def
+R24651 Coq.ZArith.BinInt <> Zopp def
+R24644 Coq.ZArith.BinInt <> Zminus def
+R24638 Coq.ZArith.BinInt <> Zmult def
+R24632 Coq.ZArith.BinInt <> Zplus def
+R24630 Coq.ZArith.BinInt "" not
+R24628 Coq.ZArith.BinInt "" not
+R24703 Coq.Init.Datatypes <> true constr
+R24964 ring_extention <> pos_expr_incr_aux thm
+R24964 ring_extention <> pos_expr_incr_aux thm
+R25082 Coq.ZArith.BinInt "x <= y" not
+R25288 Coq.ZArith.BinInt "" not
+R25134 Coq.Init.Datatypes <> false constr
+R25160 Coq.Init.Datatypes <> true constr
+R25206 Coq.ZArith.BinInt "" not
+R25343 Coq.Lists.List <> nil constr
+R25374 Coq.Lists.List "x :: y" not
+R25461 Coq.Lists.List "x :: y" not
+R25359 Coq.Lists.List <> nil constr
+R25363 Coq.ZArith.BinInt <> Z ind
+R25552 Coq.ZArith.BinInt "x <= y" not
+R26413 Coq.ZArith.BinInt "x < y" not
+R26602 Coq.Lists.List <> nil constr
+R26611 Coq.ZArith.BinInt <> Z ind
+R26790 Coq.setoid_ring.Ring_polynom <> PEeval def
+R26858 Coq.ZArith.Zpow_def <> Zpower def
+R26851 Coq.ZArith.BinInt <> Z_of_N def
+R26837 Coq.setoid_ring.Ring_theory <> IDphi def
+R26847 Coq.ZArith.BinInt <> Z ind
+R26831 Coq.ZArith.BinInt <> Zopp def
+R26824 Coq.ZArith.BinInt <> Zminus def
+R26818 Coq.ZArith.BinInt <> Zmult def
+R26812 Coq.ZArith.BinInt <> Zplus def
+R26810 Coq.ZArith.BinInt "" not
+R26985 Coq.setoid_ring.Ring_polynom <> PEeval def
+R27053 Coq.ZArith.Zpow_def <> Zpower def
+R27046 Coq.ZArith.BinInt <> Z_of_N def
+R27032 Coq.setoid_ring.Ring_theory <> IDphi def
+R27042 Coq.ZArith.BinInt <> Z ind
+R27026 Coq.ZArith.BinInt <> Zopp def
+R27019 Coq.ZArith.BinInt <> Zminus def
+R27013 Coq.ZArith.BinInt <> Zmult def
+R27007 Coq.ZArith.BinInt <> Zplus def
+R27005 Coq.ZArith.BinInt "" not
+R27182 Coq.ZArith.BinInt "x < y" not
+R27274 ring_extention <> strict_pos_expr_if_all_pos thm
+R25742 Coq.Lists.List <> nil constr
+R25751 Coq.ZArith.BinInt <> Z ind
+R25894 Coq.setoid_ring.Ring_polynom <> PEeval def
+R25962 Coq.ZArith.Zpow_def <> Zpower def
+R25955 Coq.ZArith.BinInt <> Z_of_N def
+R25941 Coq.setoid_ring.Ring_theory <> IDphi def
+R25951 Coq.ZArith.BinInt <> Z ind
+R25935 Coq.ZArith.BinInt <> Zopp def
+R25928 Coq.ZArith.BinInt <> Zminus def
+R25922 Coq.ZArith.BinInt <> Zmult def
+R25916 Coq.ZArith.BinInt <> Zplus def
+R25914 Coq.ZArith.BinInt "" not
+R26015 Coq.setoid_ring.Ring_polynom <> PEeval def
+R26083 Coq.ZArith.Zpow_def <> Zpower def
+R26076 Coq.ZArith.BinInt <> Z_of_N def
+R26062 Coq.setoid_ring.Ring_theory <> IDphi def
+R26072 Coq.ZArith.BinInt <> Z ind
+R26056 Coq.ZArith.BinInt <> Zopp def
+R26049 Coq.ZArith.BinInt <> Zminus def
+R26043 Coq.ZArith.BinInt <> Zmult def
+R26037 Coq.ZArith.BinInt <> Zplus def
+R26035 Coq.ZArith.BinInt "" not
+R26174 Coq.ZArith.BinInt "x <= y" not
+R26209 ring_extention <> pos_expr_if_all_pos thm
+R27735 Coq.Lists.List <> nil constr
+R27766 Coq.Lists.List "x :: y" not
+R27965 Coq.Lists.List "x :: y" not
+R28025 Coq.Lists.List "x :: y" not
+R27818 Coq.ZArith.BinInt "x <= y" not
+R27868 Coq.ZArith.BinInt "" not
+R27926 Coq.Lists.List "x :: y" not
+R27751 Coq.Lists.List <> nil constr
+R27755 Coq.ZArith.BinInt <> Z ind
+R28140 Coq.ZArith.BinInt "x <= y" not
+R28139 Coq.ZArith.BinInt "" not
+R28221 Coq.ZArith.BinInt <> Zplus def
+R28267 Coq.ZArith.BinInt <> Zmult def
+R28313 Coq.ZArith.BinInt <> Zminus def
+R28360 Coq.ZArith.BinInt <> Zopp def
+R28500 Coq.ZArith.BinInt "x <= y" not
+R28609 Coq.ZArith.BinInt "x <= y" not
+R28799 Coq.Lists.List <> nil constr
+R28808 Coq.ZArith.BinInt <> Z ind
+R28925 Coq.setoid_ring.Ring_polynom <> PEeval def
+R28993 Coq.ZArith.Zpow_def <> Zpower def
+R28986 Coq.ZArith.BinInt <> Z_of_N def
+R28972 Coq.setoid_ring.Ring_theory <> IDphi def
+R28982 Coq.ZArith.BinInt <> Z ind
+R28966 Coq.ZArith.BinInt <> Zopp def
+R28959 Coq.ZArith.BinInt <> Zminus def
+R28953 Coq.ZArith.BinInt <> Zmult def
+R28947 Coq.ZArith.BinInt <> Zplus def
+R28945 Coq.ZArith.BinInt "" not
+R29045 Coq.setoid_ring.Ring_polynom <> PEeval def
+R29113 Coq.ZArith.Zpow_def <> Zpower def
+R29106 Coq.ZArith.BinInt <> Z_of_N def
+R29092 Coq.setoid_ring.Ring_theory <> IDphi def
+R29102 Coq.ZArith.BinInt <> Z ind
+R29086 Coq.ZArith.BinInt <> Zopp def
+R29079 Coq.ZArith.BinInt <> Zminus def
+R29073 Coq.ZArith.BinInt <> Zmult def
+R29067 Coq.ZArith.BinInt <> Zplus def
+R29065 Coq.ZArith.BinInt "" not
+R29204 Coq.ZArith.BinInt "x <= y" not
+R29239 ring_extention <> pos_expr_incr thm
+R29893 Coq.Init.Datatypes <> true constr
+R29914 Coq.Init.Datatypes <> false constr
+R30961 Coq.ZArith.BinInt "x <= y" not
+R30959 Coq.ZArith.BinInt "" not
+R31366 Coq.Init.Datatypes <> tt constr
+R31425 Coq.Init.Logic <> conj constr
+R30122 Coq.Init.Datatypes <> tt constr
+R30177 Coq.Init.Logic <> conj constr
+R30353 Coq.ZArith.BinInt "x <= y" not
+R30351 Coq.ZArith.BinInt "" not
+R31656 Coq.ZArith.BinInt "x <= y" not
+R31670 Coq.ZArith.BinInt "x <= y" not
+R31769 Coq.ZArith.BinInt "x <= y" not
+R31783 Coq.ZArith.BinInt "x < y" not
+R31886 Coq.ZArith.BinInt "x < y" not
+R31898 Coq.ZArith.BinInt "x < y" not
+R32024 Coq.ZArith.Zwf <> <> lib
+R32037 terminaison <> <> lib
+R32161 Coq.ZArith.BinInt <> Z ind
+R32245 Coq.Init.Datatypes <> false constr
+R32212 Coq.Init.Datatypes <> true constr
+R33375 Coq.ZArith.BinInt "x <= y" not
+R33427 Coq.Init.Datatypes <> true constr
+R33474 Coq.ZArith.BinInt "" not
+R33558 Coq.Init.Datatypes <> true constr
+R33910 Coq.Init.Datatypes <> false constr
+R34136 Coq.Lists.List <> nil constr
+R34145 Coq.ZArith.BinInt <> Z ind
+R34219 Coq.Lists.List "x :: y" not
+R34221 Coq.Lists.List <> nil constr
+R34490 Coq.ZArith.BinInt "" not
+R34733 Coq.ZArith.BinInt "x <= y" not
+R34649 Coq.ZArith.BinInt "x - y" not
+R34651 Coq.setoid_ring.Ring_polynom <> PEeval def
+R34726 Coq.Lists.List <> nil constr
+R34719 Coq.ZArith.Zpow_def <> Zpower def
+R34712 Coq.ZArith.BinInt <> Z_of_N def
+R34698 Coq.setoid_ring.Ring_theory <> IDphi def
+R34708 Coq.ZArith.BinInt <> Z ind
+R34692 Coq.ZArith.BinInt <> Zopp def
+R34685 Coq.ZArith.BinInt <> Zminus def
+R34679 Coq.ZArith.BinInt <> Zmult def
+R34673 Coq.ZArith.BinInt <> Zplus def
+R34671 Coq.ZArith.BinInt "" not
+R34855 Coq.ZArith.BinInt "x - y" not
+R34774 Coq.setoid_ring.Ring_polynom <> PEeval def
+R34842 Coq.ZArith.Zpow_def <> Zpower def
+R34835 Coq.ZArith.BinInt <> Z_of_N def
+R34821 Coq.setoid_ring.Ring_theory <> IDphi def
+R34831 Coq.ZArith.BinInt <> Z ind
+R34815 Coq.ZArith.BinInt <> Zopp def
+R34808 Coq.ZArith.BinInt <> Zminus def
+R34802 Coq.ZArith.BinInt <> Zmult def
+R34796 Coq.ZArith.BinInt <> Zplus def
+R34794 Coq.ZArith.BinInt "" not
+R34857 Coq.setoid_ring.Ring_polynom <> PEeval def
+R34932 Coq.Lists.List <> nil constr
+R34925 Coq.ZArith.Zpow_def <> Zpower def
+R34918 Coq.ZArith.BinInt <> Z_of_N def
+R34904 Coq.setoid_ring.Ring_theory <> IDphi def
+R34914 Coq.ZArith.BinInt <> Z ind
+R34898 Coq.ZArith.BinInt <> Zopp def
+R34891 Coq.ZArith.BinInt <> Zminus def
+R34885 Coq.ZArith.BinInt <> Zmult def
+R34879 Coq.ZArith.BinInt <> Zplus def
+R34877 Coq.ZArith.BinInt "" not
+R34368 Coq.setoid_ring.Ring_polynom <> PEeval def
+R34443 Coq.Lists.List <> nil constr
+R34436 Coq.ZArith.Zpow_def <> Zpower def
+R34429 Coq.ZArith.BinInt <> Z_of_N def
+R34415 Coq.setoid_ring.Ring_theory <> IDphi def
+R34425 Coq.ZArith.BinInt <> Z ind
+R34409 Coq.ZArith.BinInt <> Zopp def
+R34402 Coq.ZArith.BinInt <> Zminus def
+R34396 Coq.ZArith.BinInt <> Zmult def
+R34390 Coq.ZArith.BinInt <> Zplus def
+R34388 Coq.ZArith.BinInt "" not
+R33640 Coq.ZArith.BinInt "x - y" not
+R33683 Coq.Init.Logic "x = y" not
+R33688 Coq.ZArith.BinInt "x + y" not
+R33747 Coq.ZArith.BinInt "x <= y" not
+R33746 Coq.ZArith.BinInt "" not
+R35410 Coq.omega.Omega <> <> lib
+R35426 interp <> <> lib
+R35887 interp <> le_lt_compat_right proj
+R36400 Coq.Init.Wf <> Acc ind
+R36472 Coq.Init.Wf <> Acc ind
+R36854 interp <> le_lt_compat_right proj
+R37253 interp <> le_lt_compat_right proj
+R37686 terminaison <> star ind

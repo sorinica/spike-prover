@@ -1,0 +1,134 @@
+Frpo_extension
+R15 Coq.Setoids.Setoid <> <> lib
+R38 weaved_relation <> <> lib
+R63 rpo <> <> lib
+R76 equational_theory <> <> lib
+R103 equational_extension <> <> lib
+R133 term <> <> lib
+R147 subterm_dp <> <> lib
+R174 Coq.Lists.List <> <> lib
+R195 list_permut <> <> lib
+R223 terminaison <> <> lib
+R251 Coq.Relations.Relations <> <> lib
+R277 Coq.romega.ROmega <> <> lib
+R293 order_extension <> <> lib
+sec 344 <> MakePrecedence
+var 371 MakePrecedence A
+var 392 MakePrecedence status
+R406 rpo <> status_type ind
+var 434 MakePrecedence prec_nat
+R450 Coq.Init.Datatypes <> nat ind
+def 470 <> prec
+R502 Coq.Init.Peano "x < y" not
+def 532 <> prec_eq
+R556 Coq.Arith.EqNat <> eq_nat def
+def 606 <> prec_bool
+R631 Coq.Arith.Compare_dec <> leb def
+R636 Coq.Init.Datatypes <> S constr
+def 682 <> prec_eq_bool
+R710 Coq.Arith.EqNat <> beq_nat def
+prf 756 <> prec_bool_ok
+R792 rpo_extension <> prec_bool def
+R829 Coq.Init.Logic "~ x" not
+R830 rpo_extension <> prec def
+R813 rpo_extension <> prec def
+R872 rpo_extension <> prec_bool def
+R910 Coq.Arith.Compare_dec <> leb_complete thm
+R988 Coq.Arith.Compare_dec <> leb_correct thm
+R872 rpo_extension <> prec_bool def
+R910 Coq.Arith.Compare_dec <> leb_complete thm
+R988 Coq.Arith.Compare_dec <> leb_correct thm
+prf 1085 <> prec_eq_bool_ok
+R1122 rpo_extension <> prec_eq_bool def
+R1146 Coq.Init.Datatypes <> true constr
+R1154 rpo_extension <> prec_eq def
+R1170 Coq.Init.Datatypes <> false constr
+R1179 Coq.Init.Logic "~ x" not
+R1180 rpo_extension <> prec_eq def
+R1277 Coq.Arith.EqNat <> beq_nat def
+R1277 Coq.Arith.EqNat <> beq_nat def
+R1343 Coq.Init.Logic "x = y" not
+R1343 Coq.Init.Logic "x = y" not
+R1368 Coq.Arith.EqNat <> beq_nat_eq def
+R1368 Coq.Arith.EqNat <> beq_nat_eq def
+R1418 Coq.Arith.EqNat <> eq_nat_refl thm
+R1418 Coq.Arith.EqNat <> eq_nat_refl thm
+R1458 Coq.Init.Logic "x = y" not
+R1458 Coq.Init.Logic "x = y" not
+R1480 Coq.Arith.EqNat <> eq_nat_eq thm
+R1480 Coq.Arith.EqNat <> eq_nat_eq thm
+R1521 Coq.Arith.EqNat <> beq_nat_false thm
+R1521 Coq.Arith.EqNat <> beq_nat_false thm
+prf 1559 <> prec_antisym
+R1596 Coq.Init.Logic <> False ind
+R1584 rpo_extension <> prec def
+R1631 Coq.Arith.Lt <> lt_irrefl thm
+R1631 Coq.Arith.Lt <> lt_irrefl thm
+prf 1663 <> prec_transitive
+R1681 Coq.Relations.Relation_Definitions <> transitive def
+R1694 rpo_extension <> prec def
+R1739 Coq.Arith.Lt <> lt_trans thm
+R1739 Coq.Arith.Lt <> lt_trans thm
+prf 1795 <> prec_eq_transitive
+R1816 Coq.Relations.Relation_Definitions <> transitive def
+R1829 rpo_extension <> prec_eq def
+R1950 Coq.Init.Logic "x = y" not
+R1950 Coq.Init.Logic "x = y" not
+R1972 Coq.Arith.EqNat <> eq_nat_eq thm
+R1972 Coq.Arith.EqNat <> eq_nat_eq thm
+R2016 Coq.Init.Logic "x = y" not
+R2016 Coq.Init.Logic "x = y" not
+R2037 Coq.Arith.EqNat <> eq_nat_eq thm
+R2037 Coq.Arith.EqNat <> eq_nat_eq thm
+R2080 Coq.Init.Logic "x = y" not
+R2080 Coq.Init.Logic "x = y" not
+R2120 Coq.Arith.EqNat <> eq_nat_refl thm
+R2120 Coq.Arith.EqNat <> eq_nat_refl thm
+prf 2147 <> prec_eq_prec1
+R2210 rpo_extension <> prec def
+R2193 rpo_extension <> prec_eq def
+R2179 rpo_extension <> prec def
+R2286 Coq.Init.Logic "x = y" not
+R2286 Coq.Init.Logic "x = y" not
+R2308 Coq.Arith.EqNat <> eq_nat_eq thm
+R2308 Coq.Arith.EqNat <> eq_nat_eq thm
+prf 2365 <> prec_eq_prec2
+R2429 rpo_extension <> prec def
+R2412 rpo_extension <> prec_eq def
+R2398 rpo_extension <> prec def
+R2504 Coq.Init.Logic "x = y" not
+R2504 Coq.Init.Logic "x = y" not
+R2526 Coq.Arith.EqNat <> eq_nat_eq thm
+R2526 Coq.Arith.EqNat <> eq_nat_eq thm
+prf 2586 <> prec_eq_sym
+R2627 rpo_extension <> prec_eq def
+R2612 rpo_extension <> prec_eq def
+R2690 Coq.Init.Logic "x = y" not
+R2690 Coq.Init.Logic "x = y" not
+R2711 Coq.Arith.EqNat <> eq_nat_eq thm
+R2711 Coq.Arith.EqNat <> eq_nat_eq thm
+R2749 Coq.Arith.EqNat <> eq_nat_refl thm
+R2749 Coq.Arith.EqNat <> eq_nat_refl thm
+prf 2775 <> prec_eq_refl
+R2800 rpo_extension <> prec_eq def
+R2850 Coq.Arith.EqNat <> eq_nat_refl thm
+R2850 Coq.Arith.EqNat <> eq_nat_refl thm
+var 2882 MakePrecedence prec_eq_status
+R2934 Coq.Init.Logic "x = y" not
+R2910 rpo_extension <> prec_eq def
+prf 3101 <> prec_not_prec_eq
+R3158 Coq.Init.Logic <> False ind
+R3143 rpo_extension <> prec_eq def
+R3131 rpo_extension <> prec def
+R3228 Coq.Init.Logic "x = y" not
+R3228 Coq.Init.Logic "x = y" not
+R3249 Coq.Arith.EqNat <> eq_nat_eq thm
+R3249 Coq.Arith.EqNat <> eq_nat_eq thm
+prf 3288 <> prec_wf
+R3298 Coq.Init.Wf <> well_founded def
+R3311 rpo_extension <> prec def
+R3336 Coq.Wellfounded.Inverse_Image <> wf_inverse_image thm
+R3374 Coq.Arith.Wf_nat <> lt_wf thm
+R3336 Coq.Wellfounded.Inverse_Image <> wf_inverse_image thm
+R3374 Coq.Arith.Wf_nat <> lt_wf thm
+def 3402 <> Precedence

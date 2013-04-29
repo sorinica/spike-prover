@@ -1,0 +1,25 @@
+Fclosure_extension
+R15 closure <> <> lib
+R40 Coq.Relations.Relation_Operators <> <> lib
+sec 68 <> S
+var 83 S A
+var 104 S R
+R107 Coq.Relations.Relation_Definitions <> relation def
+prf 152 <> refl_trans_clos_ind2
+R288 TransClosure <> refl_trans_clos ind
+prf 467 <> refl_trans_clos_R
+R547 TransClosure <> refl_trans_clos ind
+R506 TransClosure <> refl_trans_clos ind
+R620 TransClosure <> refl_trans_clos_is_trans thm
+R620 TransClosure <> refl_trans_clos_is_trans thm
+prf 719 <> refl_trans_clos_with_R
+R770 TransClosure <> refl_trans_clos ind
+prf 870 <> trans_clos_left
+R929 TransClosure <> trans_clos ind
+R941 Coq.Relations.Relation_Operators <> union def
+R908 TransClosure <> trans_clos ind
+prf 1122 <> trans_clos_right
+R1181 TransClosure <> trans_clos ind
+R1193 Coq.Relations.Relation_Operators <> union def
+R1161 TransClosure <> trans_clos ind
+R1371 closure_extension S <> sec

@@ -1,0 +1,218 @@
+FNewman
+R597 weaved_relation <> <> lib
+R629 closure <> <> lib
+R653 terminaison <> <> lib
+sec 675 <> Newman
+var 693 Newman A
+var 713 Newman R
+def 933 <> coherence
+R957 Coq.Init.Logic "'exists' x , p" not
+R979 Coq.Init.Logic "A /\ B" not
+R967 terminaison <> star ind
+R982 terminaison <> star ind
+prf 1008 <> coherence_intro
+R1076 Newman <> coherence def
+R1060 terminaison <> star ind
+R1044 terminaison <> star ind
+prf 1196 <> Rstar_coherence
+R1252 Newman <> coherence def
+R1231 terminaison <> star ind
+R1300 Newman <> coherence_intro thm
+R1300 Newman <> coherence_intro thm
+R1334 terminaison <> star_refl constr
+R1334 terminaison <> star_refl constr
+prf 1408 <> coherence_sym
+R1468 Newman <> coherence def
+R1446 Newman <> coherence def
+def 1581 <> confluence
+R1649 Newman <> coherence def
+R1633 terminaison <> star ind
+R1617 terminaison <> star ind
+def 1680 <> local_confluence
+R1740 Newman <> coherence def
+sec 1906 Newman Newman_section
+var 1984 Newman.Newman_section Hyp1
+R1991 Coq.Init.Wf <> well_founded def
+var 2021 Newman.Newman_section Hyp2
+R2040 Newman <> local_confluence def
+sec 2110 Newman.Newman_section Induct
+var 2131 Newman.Newman_section.Induct x
+var 2153 Newman.Newman_section.Induct hyp_ind
+R2209 Newman <> confluence def
+var 2272 Newman.Newman_section.Induct y
+var 2274 Newman.Newman_section.Induct z
+var 2298 Newman.Newman_section.Induct h1
+R2303 terminaison <> star ind
+var 2334 Newman.Newman_section.Induct h2
+R2339 terminaison <> star ind
+sec 2418 Newman.Newman_section.Induct Newman_
+var 2442 Newman.Newman_section.Induct.Newman_ u
+var 2468 Newman.Newman_section.Induct.Newman_ t1
+var 2499 Newman.Newman_section.Induct.Newman_ t2
+R2504 terminaison <> star ind
+prf 2617 <> Diagram
+R2690 Newman <> coherence def
+R2664 terminaison <> star ind
+R2941 terminaison <> star_trans thm
+R2941 terminaison <> star_trans thm
+R3027 Newman <> coherence_intro thm
+R3027 Newman <> coherence_intro thm
+R3065 terminaison <> star_trans thm
+R3065 terminaison <> star_trans thm
+prf 4183 <> caseRxy
+R4193 Newman <> coherence def
+R4288 terminaison <> star_refl constr
+R4288 terminaison <> star_refl constr
+R4343 Newman <> Diagram thm
+R4343 Newman <> Diagram thm
+R4390 Newman Newman.Newman_section.Induct.Newman_ <> sec
+prf 4412 <> Ind_proof
+R4424 Newman <> coherence def
+R4495 Newman <> coherence_sym thm
+R4515 Newman <> Rstar_coherence thm
+R4495 Newman <> coherence_sym thm
+R4515 Newman <> Rstar_coherence thm
+R4577 Newman <> caseRxy thm
+R4577 Newman <> caseRxy thm
+R4614 Newman Newman.Newman_section.Induct <> sec
+prf 4633 <> Newman
+R4654 Newman <> confluence def
+R4710 Coq.Init.Wf <> well_founded_ind thm
+R4710 Coq.Init.Wf <> well_founded_ind thm
+R4811 Newman <> Ind_proof thm
+R4811 Newman <> Ind_proof thm
+R4859 Newman Newman.Newman_section <> sec
+R4881 Newman Newman <> sec
+R4904 equational_theory_spec <> <> lib
+R4951 equational_theory_spec <> <> mod
+mod 4936 <> Confluence
+sec 4988 Confluence Rew
+var 5002 Confluence.Rew R
+R5014 Newman Eqt.T term ind
+R5006 Newman Eqt.T term ind
+var 5037 Confluence.Rew wf_R
+R5044 Coq.Init.Wf <> well_founded def
+R5058 Newman Eqt one_step ind
+var 5084 Confluence.Rew no_need_of_instance
+R5136 Newman Eqt axiom ind
+R5122 Newman Eqt.T term ind
+R5122 Newman Eqt.T term ind
+var 5171 Confluence.Rew R_non_var
+R5198 Coq.Init.Logic "~ x" not
+R5205 Newman Eqt.T Var constr
+var 5223 Confluence.Rew head_down_confl
+R5286 Newman Confluence coherence def
+R5302 Newman Eqt one_step ind
+R5296 Newman Eqt.T term ind
+R5255 Newman Eqt one_step ind
+prf 5326 Confluence star_list
+R5400 terminaison <> star ind
+R5433 Newman Eqt.T Term constr
+R5421 Newman Eqt.T Term constr
+R5408 Newman Eqt one_step ind
+R5353 terminaison <> star ind
+R5361 weaved_relation <> one_step_list ind
+R5376 Newman Eqt one_step ind
+R5528 Newman Eqt.T Term constr
+R5511 terminaison <> star_trans thm
+R5528 Newman Eqt.T Term constr
+R5511 terminaison <> star_trans thm
+R5552 terminaison <> star_R thm
+R5552 terminaison <> star_R thm
+R5609 Coq.Lists.List <> <> lib
+prf 5622 Confluence star_cons
+R5730 terminaison <> star ind
+R5777 Coq.Lists.List "x :: y" not
+R5769 Coq.Lists.List "x :: y" not
+R5738 weaved_relation <> one_step_list ind
+R5753 Newman Eqt one_step ind
+R5683 terminaison <> star ind
+R5691 weaved_relation <> one_step_list ind
+R5706 Newman Eqt one_step ind
+R5655 terminaison <> star ind
+R5663 Newman Eqt one_step ind
+R5842 Coq.Lists.List "x :: y" not
+R5824 terminaison <> star_trans thm
+R5842 Coq.Lists.List "x :: y" not
+R5824 terminaison <> star_trans thm
+R5914 Coq.Lists.List "x :: y" not
+R5896 terminaison <> star_trans thm
+R5914 Coq.Lists.List "x :: y" not
+R5896 terminaison <> star_trans thm
+R5943 terminaison <> star_R thm
+R5943 terminaison <> star_R thm
+R6040 Coq.Lists.List "x :: y" not
+R6022 terminaison <> star_trans thm
+R6040 Coq.Lists.List "x :: y" not
+R6022 terminaison <> star_trans thm
+R6068 terminaison <> star_R thm
+R6068 terminaison <> star_R thm
+prf 6111 Confluence confluence
+R6134 Newman Confluence confluence def
+R6148 Newman Eqt one_step ind
+R6181 Newman Confluence Newman thm
+R6181 Newman Confluence Newman thm
+R6263 Newman Confluence local_confluence def
+R6283 weaved_relation <> one_step_list ind
+R6298 Newman Eqt one_step ind
+R6230 Newman Eqt.T term_rec4 defax
+R6263 Newman Confluence local_confluence def
+R6283 weaved_relation <> one_step_list ind
+R6298 Newman Eqt one_step ind
+R6230 Newman Eqt.T term_rec4 defax
+R6655 Newman Confluence coherence_sym thm
+R6655 Newman Confluence coherence_sym thm
+R6768 Newman Eqt.T Term constr
+R6768 Newman Eqt.T Term constr
+R6792 Newman Confluence star_list thm
+R6792 Newman Confluence star_list thm
+R6820 Newman Confluence star_list thm
+R6820 Newman Confluence star_list thm
+R6985 Newman Confluence coherence def
+R6998 Newman Eqt one_step ind
+R6985 Newman Confluence coherence def
+R6998 Newman Eqt one_step ind
+R7082 Coq.Lists.List "x :: y" not
+R7099 Newman Confluence star_cons thm
+R7082 Coq.Lists.List "x :: y" not
+R7099 Newman Confluence star_cons thm
+R7099 Newman Confluence star_cons thm
+R7143 Coq.Lists.List "x :: y" not
+R7166 Newman Confluence star_cons thm
+R7183 terminaison <> star_R thm
+R7143 Coq.Lists.List "x :: y" not
+R7166 Newman Confluence star_cons thm
+R7166 Newman Confluence star_cons thm
+R7183 terminaison <> star_R thm
+R7183 terminaison <> star_R thm
+R7219 Coq.Lists.List "x :: y" not
+R7242 Newman Confluence star_cons thm
+R7259 terminaison <> star_R thm
+R7219 Coq.Lists.List "x :: y" not
+R7242 Newman Confluence star_cons thm
+R7242 Newman Confluence star_cons thm
+R7259 terminaison <> star_R thm
+R7259 terminaison <> star_R thm
+R7294 Newman Confluence coherence def
+R7307 weaved_relation <> one_step_list ind
+R7322 Newman Eqt one_step ind
+R7294 Newman Confluence coherence def
+R7307 weaved_relation <> one_step_list ind
+R7322 Newman Eqt one_step ind
+R7408 Coq.Lists.List "x :: y" not
+R7426 Newman Confluence star_cons thm
+R7408 Coq.Lists.List "x :: y" not
+R7426 Newman Confluence star_cons thm
+R7426 Newman Confluence star_cons thm
+R7466 Newman Confluence.Rew <> sec
+R7486 Coq.Lists.List <> <> lib
+R7807 Coq.Lists.List <> nil constr
+R7838 Coq.Lists.List "x :: y" not
+R8048 Coq.Lists.List "x :: y" not
+R8015 Coq.Lists.List "x :: y" not
+R8183 terminaison <> star ind
+R8544 Newman Confluence star_list thm
+R8567 Newman Confluence star_cons thm
+R8398 terminaison <> star_R thm
+R8912 Coq.Init.Logic "x = y" not
+R9084 Newman Confluence <> mod
