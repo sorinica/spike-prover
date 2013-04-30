@@ -191,6 +191,6 @@ fullind_aug = (repeat(stra_aug, inst_var_rule), print_goals_with_history);
 
 start_with: fullind
 
-% %  progat_timel_erl: ok 
+% % progat_timel_erl: ok 
 start_with: fullind_aug conjectures:  sortedT(l)= true => progAt(l,timel(l)) = erl(l);
  
