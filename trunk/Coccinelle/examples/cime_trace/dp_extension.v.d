@@ -1,1 +1,0 @@
-examples/cime_trace/dp_extension.vo examples/cime_trace/dp_extension.glob: examples/cime_trace/dp_extension.v list_extensions/weaved_relation.vo basis/closure.vo term_algebra/equational_theory_spec.vo term_orderings/dp.vo term_orderings/modular_dp.vo basis/terminaison.vo

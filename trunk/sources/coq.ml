@@ -126,45 +126,21 @@ Module Symbols <: term_spec.Signature.
 
 End Symbols. (* Symbols : term_spec.Signature *)
 
-
-Module Prec <: rpo.Precedence.
-
-  Definition A := Specif.symb.
-  Definition status := Specif.status.
-
-  Definition prec_bool (x y:A) : bool :=
-    utils.blt_nat (Specif.index x) (Specif.index y).
-  Definition prec (x y:A) := prec_bool x y = true.
-
-  Definition prec_bool_ok := utils.prec_bool_ok A Specif.index.
-  Definition prec_antisym := utils.prec_antisym A Specif.index.
-  Definition prec_transitive := utils.prec_transitive A Specif.index.
-  Definition prec_eq := utils.prec_eq A Specif.index.
-  Definition prec_eq_bool := utils.prec_eq_bool A Specif.index.
-  Definition prec_eq_bool_ok := utils.prec_eq_bool_ok A Specif.index.
-  Definition prec_eq_transitive := utils.prec_eq_transitive A Specif.index.
-  Definition prec_eq_sym := utils.prec_eq_sym A Specif.index.
-  Definition prec_eq_refl := utils.prec_eq_refl A Specif.index.
-  Definition prec_eq_prec1 := utils.prec_eq_prec1 A Specif.index.
-  Definition prec_eq_prec2 := utils.prec_eq_prec2 A Specif.index.
-  Definition prec_not_prec_eq := utils.prec_not_prec_eq A Specif.index.
-  Definition prec_wf := utils.prec_wf A Specif.index.
-
-  Theorem prec_eq_status : forall f g, prec_eq f g -> status f = status g.
-  Proof.
-  intros f g; case f; case g; reflexivity.
-  Qed.
-
-End Prec. (* Prec : rpo.Precedence *)
-
-
 Module Terms <: term_spec.Term := term.Make' Symbols Nat.
-Module Rpo := coccinelle_utils.Make Terms Prec.
+Module Rpo := coccinelle_utils.Make Terms.
 
 Export Specif.
 Export Rpo.
 
-Notation less := (rpo_mul (bb (empty_rpo_infos max_size))).
+Theorem prec_eq_status : forall f g, utils.prec_eq symb index f g -> status f = status g.
+Proof.
+intros f g; case f; case g; reflexivity.
+Qed.
+
+Definition P := rpo.Build_Precedence status
+    (utils.prec_bool symb index) (utils.prec_bool_ok symb index)  (utils.prec_antisym symb index) (utils.prec_transitive symb index) (utils.prec_eq_bool symb index) (utils.prec_eq_transitive symb index) (utils.prec_eq_refl symb index) (utils.prec_eq_bool_ok symb index) (utils.prec_eq_prec1 symb index) (utils.prec_eq_prec2 symb index) (utils.prec_eq_sym symb index) (utils.prec_not_prec_eq symb index) (prec_eq_status).
+
+Notation less := (rpo_mul P (bb (empty_rpo_infos P max_size))).
 
 
 (* Coq version of the specification. *) (* TODO: should be in Spec module but model_* *)
@@ -878,7 +854,7 @@ let p := constr:(S(S(n))) in
 intros;
 let G := fresh \"G\" in
 let x := fresh \"x\" in
-apply wf_subset with (R:=@snd_rpo_mul Prop max_size) (S:=S_" ^ id ^ ");
+apply wf_subset with (R:=@snd_rpo_mul P Prop max_size) (S:=S_" ^ id ^ ");
 [(* 1 *) apply wf_snd_rpo_mul, prec_wf
 |(* 2 *) idtac
 |(* 3 *) eexists; split; [ eassumption | idtac]; do_nat n ltac:(eexists); reflexivity

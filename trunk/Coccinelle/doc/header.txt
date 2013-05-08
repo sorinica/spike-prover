@@ -1,8 +1,0 @@
-         *
-   _     *   The Coccinelle Library / Evelyne Contejean
-  <o>    *          CNRS-LRI-Universite Paris Sud
--/@|@\-  *                   A3PAT Project
--@ | @-  *   
--\@|@/-  *      This file is distributed under the terms of the 
-  -v-    *      CeCILL-C licence
-         *

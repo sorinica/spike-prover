@@ -18,37 +18,15 @@ end.
 
 Lemma beq_nat_true: forall m n, beq_nat m n = true -> m = n.
 Proof.
-refine (
-fix f m n :=
-match m,n with
-| 0,0 => _
-| S x', S y' => _
-| _, _ => _
-end
-); simpl; intro H.
-reflexivity.
-discriminate H.
-discriminate H.
-apply eq_S, f, H.
+double induction m n; intros. trivial. unfold beq_nat in H0. discriminate H0.
+unfold beq_nat in H0. discriminate H0. assert (H2: n1 = n). 
+apply H0. unfold beq_nat in H1. apply H1.  rewrite H2. trivial. 
 Defined.
 
 Lemma beq_nat_false: forall m n, beq_nat m n = false -> m <> n.
 Proof.
-refine (
-fix f m n :=
-match m,n with
-| 0,0 => _
-| S x', S y' => _
-| _, _ => _
-end
-); simpl; intro H.
-discriminate H.
-intros H1; discriminate H1.
-intros H1; discriminate H1.
-cut (x' <> y').
-apply not_eq_S.
-apply f, H.
-Defined.
+double induction m n; intros. unfold beq_nat in H. discriminate H. trivial. discriminate. 
+injection. intros. contradict H3. apply H0. unfold beq_nat in H1. apply H1. Defined.
 
 Theorem beq_nat_ok: forall m n, if beq_nat m n then m = n else m <> n.
 Proof.
@@ -76,16 +54,12 @@ end.
 
 Theorem blt_lt: forall x y, blt_nat x y = true <-> x < y.
 Proof.
-refine (fix IH x y :=
-match x,y with
-| _,0 => _
-| 0,S _ => _
-| S x', S y' => _
-end); simpl; split; intro H; trivial; try (discriminate H || inversion H).
-apply Lt.lt_O_Sn.
-apply Lt.lt_n_S; apply -> IH; trivial.
-apply <- IH; constructor.
-apply <- IH; apply Lt.lt_S_n; trivial.
+double induction x y; intros.
+unfold blt_nat. 
+intuition. inversion H. inversion H. intuition. intuition. unfold blt_nat in H0. discriminate H0. 
+inversion H0. intuition.  apply Lt.lt_n_S. apply H0. unfold blt_nat in H1. apply H1. apply Lt.lt_S_n in H1.
+apply H0 in H1. 
+unfold blt_nat. apply H1.
 Qed.
 
 
@@ -150,14 +124,14 @@ Section init_prec.
 
   Variable A: Type.
   Variable index: A -> nat.
-
+  
   Definition prec_bool (x y:A) : bool :=
     blt_nat (index x) (index y).
   Definition prec (x y:A) := prec_bool x y = true.
 
   Theorem prec_bool_ok x y : if prec_bool x y then prec x y else ~prec x y.
   Proof.
-  intros x y; case_eq (prec_bool x y); trivial.
+  case_eq (prec_bool x y); trivial.
   intros H H'; rewrite H' in H; discriminate H.
   Defined.
 
@@ -294,5 +268,5 @@ Section flatten_list.
   Qed.
 
 End flatten_list.
-Implicit Arguments flatten [A].
+Implicit Arguments flatten [A] .
 Implicit Arguments combine [A].

@@ -475,7 +475,7 @@ rewrite <- ass_app; apply IHl1; trivial.
 Qed.
 
 Instance equivalence_coercion (A : Set) (R : relation A) (E : equivalence _ R) : Equivalence R.
-intros A R [E1 E2 E3].
+revert E;intros [E1 E2 E3].
 split; assumption.
 Qed.
 
@@ -919,15 +919,15 @@ Parameter remove_equiv_permut:
    Add Morphism (mem eq_A)
 	with signature eq_A ==> permut ==> iff
 	as mem_morph2.
-
+ Admitted.
  Add Morphism (List.app (A:=A)) 
-	with signature permut ==> permut ==> permut
-	as app_morph.
-
- Add Morphism (List.cons (A:=A)) 
-	with signature eq_A ==> permut ==> permut
-	as add_A_morph.
-
+   with signature permut ==> permut ==> permut
+     as app_morph.
+Admitted.  
+Add Morphism (List.cons (A:=A)) 
+  with signature eq_A ==> permut ==> permut
+    as add_A_morph.
+Admitted.
 End S.
 
 

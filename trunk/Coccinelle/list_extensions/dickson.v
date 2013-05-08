@@ -9,9 +9,7 @@
 (*           *                                                            *)
 (**************************************************************************)
 
-Add LoadPath "/users/Sorin/Apps/coccinelle-8.2/basis". 
-Add LoadPath "/users/Sorin/Apps/coccinelle-8.2/list_extensions". 
-Add LoadPath "/users/Sorin/Apps/coccinelle-8.2/term_algebra". 
+Add LoadPath "basis". 
 
 (**  *Dickson Lemma: the multiset extension of a well-founded ordering is well-founded.
  *)
@@ -56,7 +54,7 @@ Parameter list_permut_multiset_extension_step_2 :
 Add Parametric Morphism (R : relation A) : (multiset_extension_step R)
   with signature  permut ==> permut ==> iff 
   as mult_morph.
-
+Admitted.
 (** *** Accessibility lemmata. *)
 Parameter list_permut_acc :
   forall R l1 l2, permut l2 l1 -> 
@@ -701,7 +699,7 @@ apply (proj1 (mem_permut_mem a (permut_sym Pq))).
 left; apply (equiv_refl _ _ eq_proof).
 rewrite <- mem_or_app in a_in_appl_qr.
 generalize (mem_bool_ok _ _ EDS.eq_bool_ok a (appendn l)).
-case (mem_bool DS1.eq_bool a (appendn l)); [intro a_in_appl | intro a_not_in_appl].
+case (mem_bool EDS.eq_bool a (appendn l)); [intro a_in_appl | intro a_not_in_appl].
 destruct (in_appendn _ _ a_in_appl) as [x [lx [xlx_in_l a_in_lx]]].
 destruct (mem_split_set _ _ eq_bool_ok _ _ a_in_lx) as [a' [lx' [lx'' [a_eq_a' [H _]]]]].
 simpl in a_eq_a'; simpl in H; subst lx.
@@ -1311,7 +1309,6 @@ apply permut_swapp; apply permut_refl.
 assumption.
 Defined.
 
-
 Lemma mult_is_complete : 
  transitive _ R -> (forall a, ~ R a a) ->
  forall l1 l2,
@@ -1330,19 +1327,6 @@ intros _ H1 H2 H3; repeat split; intro H.
 generalize (H1 H); discriminate.
 generalize (H3 H); discriminate.
 generalize (H2 H); discriminate.
-Qed.
-
-Lemma mult_is_complete_less_not : 
- transitive _ R -> (forall a, ~ R a a) -> forall l1 l2, mult l1 l2 = Less_than -> ~ trans_clos (multiset_extension_step R) l2 l1.
-Proof.
-intros trans_R irrefl_R l1 l2.
-generalize (mult_is_sound l1 l2) (@mult_is_complete_greater trans_R irrefl_R l1 l2) (@mult_is_complete_less_than trans_R irrefl_R l1 l2).
-case (mult l1 l2).
-intros; repeat split; intro H3.
-discriminate.
-red; intros. apply H0 in H3. discriminate.
-intros. discriminate.
-intros. discriminate.
 Qed.
 
 End Mult.
