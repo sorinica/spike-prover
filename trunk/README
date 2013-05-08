@@ -14,8 +14,8 @@ The proofs using the DRaCuLa strategy can be automatically launched with the she
 
 Similarly, examples of certified proofs are given in the `certify' directories. They contain a shell script, validate.sh, that automatizes the certification process for you. Before running the script, you should:
 
-1. compile Coccinelle  (you need COQ installed. version 8.2pl1 should work.). This is an adapted version from http://raweb.inria.fr/rapportsactivite/RA2010/proval/uid44.html
-2. enter the `sources' directory and compile with the command "make" to generate spike_bc (you need Ocaml installed; version 3.11 should work).  
+1. compile Coccinelle  (you need COQ installed. Any version 8.4 should work.). This is an adapted version from http://raweb.inria.fr/rapportsactivite/RA2010/proval/uid44.html
+2. enter the `sources' directory and compile with the command "make" to generate spike_bc (you need Ocaml installed).  
 3. to automatically run and test the specifications of the SPIKE files, run `validate.sh -spec'.
 4. to automatically run and test the proofs of the SPIKE files, run afterwards `validate.sh' without parameters. (step 4 is compulsory).
 
