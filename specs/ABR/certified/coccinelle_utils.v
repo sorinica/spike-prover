@@ -4,36 +4,37 @@ Require Import Relations.
 Require Import term.
 Require Import rpo.
 Require Import list_permut.
-
+Require Import Setoid.
 
 Module Make
-  (T1:term_spec.Term)
-  (P1 : Precedence with Definition A := T1.symbol).
-
-  Module R := rpo.Make T1 P1.
+  (T1: term_spec.Term).
+  (* (P1: Precedence with Definition A := T1.symbol). *)
+  Module R := rpo.Make T1.
   Export T1.
-  Export P1.
   Export R.
 
+
+
+
   (** Multiset extension of rpo is well-founded *)
-  Lemma wf_rpo_mul : well_founded prec -> forall bb, well_founded (rpo_mul bb).
+  Lemma wf_rpo_mul : forall pr, well_founded (prec pr) -> forall bb, well_founded (rpo_mul pr bb).
   Proof.
-  intros wf_prec bb0.
+  intros pr wf_prec bb0.
   unfold well_founded.
-  apply (well_founded_induction_type (wf_rpo_mul_rest bb0)).
+  apply (well_founded_induction_type (wf_rpo_mul_rest pr bb0)).
   intros l Hl; constructor; intros l' Hl'.
   apply Hl.
-  constructor; trivial; intros s Hs; apply (wf_rpo wf_prec bb0 s).
+  constructor; trivial; intros s Hs; apply (wf_rpo pr wf_prec bb0 s).
   Qed.
 
 
   (** Order on couples using rpo_mul on the second projection. *)
-  Definition snd_rpo_mul {B:Type} n (f1 f2: B * (list term)) := rpo_mul n (snd f1) (snd f2).
+  Definition snd_rpo_mul prec {B:Type} n (f1 f2: B * (list term)) := rpo_mul prec n (snd f1) (snd f2).
 
-  Lemma wf_snd_rpo_mul : well_founded prec -> forall bb B, well_founded (@snd_rpo_mul B bb).
+  Lemma wf_snd_rpo_mul : forall pr, well_founded (prec pr) -> forall bb B, well_founded (@snd_rpo_mul pr B bb).
   Proof.
-  intros wf_prec n B (z,pz); revert z.
-  elim (wf_rpo_mul wf_prec n pz); intros x _ H.
+  intros pr wf_prec n B (z,pz); revert z.
+  elim (wf_rpo_mul pr wf_prec n pz); intros x _ H.
   intro z; constructor; intros (y,py) Hy.
   apply H; exact Hy.
   Qed.
@@ -51,26 +52,31 @@ Module Make
   end.
 
   Lemma rpo_mul_add_context :
-    forall bb i p l s t, rpo bb s t -> is_a_pos_list l (i::p) = true -> 
-    rpo_mul bb (replace_at_pos_list l s i p) (replace_at_pos_list l t i p).
+    forall pr bb i p l s t, rpo pr bb s t -> is_a_pos_list l (i::p) = true -> 
+    rpo_mul pr bb (replace_at_pos_list l s i p) (replace_at_pos_list l t i p).
   Proof.
-  intros bb0 i p l s t H0 H.
+  intros pr bb0 i p l s t H0 H.
   generalize i H; clear i H; induction l as [ | u l]; intros i H; simpl.
   simpl in H; destruct i; discriminate.
   destruct i as [ | i].
-  apply (@List_mul bb0 (replace_at_pos u t p) nil (replace_at_pos u s p :: nil) l); reflexivity || auto.
+  apply (@List_mul pr bb0 (replace_at_pos u t p) nil (replace_at_pos u s p :: nil) l). assert (H1: ((replace_at_pos u s p :: l) = ((replace_at_pos u s p :: nil) ++ l))). 
+reflexivity. rewrite H1. apply permut_refl. intros. apply Eq. assert (H1: ((replace_at_pos u t p :: l) = (replace_at_pos u t p :: nil ++ l))). 
+reflexivity. rewrite H1. apply permut_refl. intros. apply Eq.
+
+
   intros b [b_eq_s' | b_mem_nil].
-  exists (replace_at_pos u t p); split.
-  left; reflexivity.
-  rewrite (equiv_rpo_equiv_2 _ _ _ b_eq_s').
+  exists (replace_at_pos u t p); split.  unfold more_list.mem. left. apply equiv_refl. apply equiv_equiv.
+
+
+  rewrite (equiv_rpo_equiv_2 _ b_eq_s').
   apply rpo_add_context; trivial.
   contradiction.
   simpl in IHl; simpl in H; assert (H' := IHl i H).
   inversion H' as [a lg ls lc l' l'' ls_lt_alg P1 P2]; subst.
-  apply (@List_mul bb0 a lg ls (u :: lc)); trivial.
-  rewrite <- permut0_cons_inside; trivial; try reflexivity. apply equiv_equiv.
+  apply (@List_mul pr bb0 a lg ls (u :: lc)); trivial.
+  rewrite <- permut0_cons_inside; trivial; try reflexivity. apply equiv_equiv. apply equiv_equiv.
   rewrite app_comm_cons.
-  rewrite <- permut0_cons_inside; trivial; try reflexivity. apply equiv_equiv.
+  rewrite <- permut0_cons_inside; trivial; try reflexivity. apply equiv_equiv. apply equiv_equiv.
   Qed.
 
 
@@ -155,13 +161,13 @@ Module Make
   Ltac solve_rpo_mul :=
   intros;
   match goal with
-  | |- rpo_mul ?n ?X1 ?X2 =>
+  | |- rpo_mul ?p ?n ?X1 ?X2 =>
     let lvar1 := seek_var_list (@nil term) X1 in
     let lvar := seek_var_list lvar1 X2 in
     let sigma := build_subst lvar in
     let lt1 := interp_list sigma X1 in
     let lt2 := interp_list sigma X2 in
-    change (rpo_mul n
+    change (rpo_mul p n
       (map (apply_subst sigma) lt1)
       (map (apply_subst sigma) lt2)
     )

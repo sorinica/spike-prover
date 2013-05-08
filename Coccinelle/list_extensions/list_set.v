@@ -233,7 +233,6 @@ symmetry; trivial.
 Qed.
 
 Definition add (e : A) (s : t) : t.
-intros e s.
 generalize (mem_bool_ok _ _ eq_bool_ok e s.(support)).
 case (mem_bool eq_bool e s.(support)).
 intros _; exact s.
@@ -1144,3 +1143,11 @@ intros _ _ _; simpl; apply le_n_S; assumption.
 Qed.
 
 End Make.
+
+
+(* 
+*** Local Variables: ***
+*** coq-prog-name: "coqtop" ***
+*** coq-prog-args: ("-emacs-U" "-I" "../basis/" "-I" "../list_extensions/") ***
+*** End: ***
+ *)

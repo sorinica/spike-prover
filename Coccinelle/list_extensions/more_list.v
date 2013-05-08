@@ -317,7 +317,7 @@ Definition list_rec3 (A : Set) (size : A -> nat) :
     (forall (n:nat) (l : list A), list_size size l <= n -> P l) -> 
     forall l : list A, P l.
 Proof.
-intros A size P H l; apply (H (list_size size l) l); apply le_n.
+intros P H l; apply (H (list_size size l) l); apply le_n.
 Defined.
 
 (** ** Properties on the nth element. *)
@@ -1449,7 +1449,7 @@ Qed.
 Definition list_exists_rest (A : Set) (P : A -> Prop) l 
 (P_dec : forall a, In a l -> {P a}+{~P a}) : bool.
 Proof.
-intros A P l; induction l as [ | a l]; intro P_dec.
+revert P_dec; induction l as [ | a l]; intro P_dec.
 exact false.
 case (P_dec a (or_introl _ (refl_equal _))).
 intros; exact true.
@@ -1557,10 +1557,10 @@ apply IHn; trivial.
 Defined.
 
 Definition dep_fun_tail (a : A) (l : list A) (f : forall t, In t (a :: l) -> list A) : dep_fun. 
-intros a l f.
-assert (f' : forall t, In t l -> list A).
-intros t t_in_l; exact (f t (or_intror _ t_in_l)).
-exact (Dep_fun l f').
+Proof.
+  assert (f' : forall t, In t l -> list A).
+  intros t t_in_l; exact (f t (or_intror _ t_in_l)).
+  exact (Dep_fun l f').
 Defined.
 
 Lemma map_dep_call :

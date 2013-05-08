@@ -1,1 +1,0 @@
-examples/cime_trace/equational_extension.vo examples/cime_trace/equational_extension.glob: examples/cime_trace/equational_extension.v list_extensions/weaved_relation.vo basis/closure.vo term_algebra/term_spec.vo term_algebra/equational_theory_spec.vo basis/terminaison.vo examples/cime_trace/closure_extension.vo
