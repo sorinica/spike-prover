@@ -5,7 +5,7 @@ coqc coccinelle_utils.v
 
 then
 
-./validate.sh -coqc
+./validate.sh -spec
 
 and, finally
 
