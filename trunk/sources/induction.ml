@@ -358,7 +358,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 		  let () = f_ind_arg_vars := list_vars in
 		  let () = List.iter (fun subst -> list_inst_var := []; let _ = (fn_sv subst list_vars) in total_inst_var := !total_inst_var @ [!list_inst_var]) (List.map fst ls') in
 		  let cases = (List.fold_right (fun subst s ->  let str = "\n| " ^ (fn_sv subst list_vars) ^ s in str) all_subst "") in
-		  let f_coq_schema = "\nFixpoint f_" ^ (string_of_int c#number) ^ " " ^ (sprint_list " " (fun (i, s, _) -> "(u" ^ (string_of_int i) ^ ": " ^ (dico_sort_string#find s) ^ ")") list_vars) ^ struct_str ^ ": " ^ (dico_sort_string#find written_term#sort) ^ " :=\n match " ^ (sprint_list ", " (fun (i, _, _) -> "u" ^ (string_of_int i)) list_vars) ^ " with" ^ cases ^ "\nend.\n\nFunctional Scheme f_" ^ (string_of_int c#number) ^ "_ind := Induction for " ^ "f_"  ^ (string_of_int c#number) ^ " Sort Prop.\n" in
+		  let f_coq_schema = "\nFunction f_" ^ (string_of_int c#number) ^ " " ^ (sprint_list " " (fun (i, s, _) -> "(u" ^ (string_of_int i) ^ ": " ^ (dico_sort_string#find s) ^ ")") list_vars) ^ struct_str ^ ": " ^ (dico_sort_string#find written_term#sort) ^ " :=\n match " ^ (sprint_list ", " (fun (i, _, _) -> "u" ^ (string_of_int i)) list_vars) ^ " with" ^ cases ^ "\nend.\n" in
 		  let () = coq_induction_schemas := !coq_induction_schemas ^ f_coq_schema in 
 
 
