@@ -322,23 +322,23 @@ intros F HF " ^ (fn_var total_number_vars 1 true) ^ "; case_In HF; intro Hind.\n
   in
   let fn_case_generate orig_case n_case (subst: (Symbols.var * Terms.term) list) vars_pattern init intros1 case_eq_str write_case_eq =
     let subst_h = ref [] in
+    let eq_counter = ref 0 in
     let (n_case_string, vars_case, num_case) = try List.assoc n_case !coq_formulas_with_numbers with Not_found ->  (try let ch, sh, _ =  List.assoc n_case !coq_replacing_clauses  in let () = subst_h := sh in List.assoc ch#number !coq_formulas_with_numbers with Not_found ->  failwith ("fn_case_generate: clause " ^ (string_of_int n_case) ^ " used but not registered")) in
     let new_vars = ref [] in
-    let rec intros_extra_vars t =
+    let rec list_v t =
       match t#content with
-	| Var_univ (i, _) ->   " intro u" ^ (string_of_int i) ^ ". " 
-	| Var_exist _ -> failwith "intros_extra_vars: existential variables not yet treated ! "
-	| Term (_, l, _) -> 
-	    let str_niv0 = List.fold_right (fun t s -> match t#content with 
-					     Var_univ (i, _) -> "intro u" ^ (string_of_int i) ^ ". " ^ s 
-					   | Var_exist _ -> failwith "intros_extra_vars: existential variables not yet treated ! " 
-					   | Term _ -> "intro. " ^ s   
-					) l "" in 
-	    let str_niv1 = List.fold_right (fun t s -> let str_t =  if t#is_term then  (intros_extra_vars t) else "" in str_t ^ s) l "" in 
-	      str_niv0 ^ "intro. " ^ str_niv1
+	| Var_univ (i, _) -> [i]
+	| Var_exist _ -> failwith "list_v: existential variables not yet treated ! " 
+	| Term (_, l, _) -> List.fold_right (fun t' l' ->  list_v t' @ l') l []
     in
-    let intros2 =  (List.fold_right (fun (_, t) s -> 
-				       s ^ (intros_extra_vars t) 
+    let intros_extra_vars t = 
+      match t#content with
+	| Var_univ (i, _) -> "intro. intro Heq" ^ (string_of_int i) ^ ". rewrite <- Heq" ^ (string_of_int i) ^ ". "
+	| Var_exist _ -> failwith "intros_extra_vars: existential variables not yet treated ! " 
+	| Term (_, l, _) -> List.fold_right (fun i s ->  "intro u" ^ (string_of_int i) ^ ". " ^ s) (list_v t) (" intro eq_" ^ (let () = eq_counter := !eq_counter + 1 in (string_of_int !eq_counter)) ^ ". " )
+    in
+    let intros2 = (List.fold_right (fun (_, t) s -> 
+      s  ^ (intros_extra_vars t)
  				    ) subst "") ^ " intro HFabs0.\n" 
     in
     (*let stuff1 = "split. trivial_in " ^ (string_of_int (npos 0 n_case_string !coq_formulas_with_numbers)) ^ ".
@@ -370,6 +370,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 (*    let less_lemma = "apply less_" ^ (string_of_int less_clause#number) ^ "_" ^ (string_of_int greater_clause#number) ^ ".\n" in*)
    
     let preambule = 
+      let () = eq_counter := 0 in
       if compare case_eq_str "" == 0 then 
 	if write_case_eq then init ^ intros1 ^ intros2 else init ^ "\n" 
       else if not write_case_eq then intros1 ^ intros2 ^ case_eq_str ^ init ^ "\n"  else   "(\* this case is not possible *\)\n"  in
@@ -426,7 +427,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 	  "specialize true_" ^ (string_of_int lemma#number) ^ " with " ^ subst_str ^ ". intro L. try rewrite L.\n" 
       else "" 
     in
-    let stuff2 =   lemma_str ^ " " ^ pat_str ^ " auto.\n" in
+    let stuff2 =   lemma_str ^ " " ^ pat_str ^ " simpl. auto.\n" in
 (*     let less_clause = if not has_hyp then n_case else let hyp = List.hd auxiliary_clauses in hyp in *)
 (*     let greater_clause = try List.assoc less_clause (List.map (fun (c1, c2) -> (c1#number, c2#number)) !coq_less_clauses) with Not_found -> failwith "less_clause not found !" in *)
 (*     let less_lemma = "apply less_" ^ (string_of_int less_clause) ^ "_" ^ (string_of_int greater_clause) ^ ".\n" in *)
@@ -732,7 +733,7 @@ let stuff12 = ")).\napply H1. trivial_in " ^ nth_str ^ ". unfold snd. unfold F_"
 										   let rez_subst = ref [] in
 										   let () =  List.iter (fun (i, s, _) ->
 													  try let t = List.assoc i subst in rez_subst := (i, t) :: !rez_subst
-										   			  with Not_found -> () (* (if has_only_one_constr s then rez_subst := (i, dummy_t s) :: !rez_subst  ) *)) lvars in
+										   			  with Not_found -> let v = new term (Var_univ (i, s)) in rez_subst := (i, v) :: !rez_subst (* (if has_only_one_constr s then rez_subst := (i, dummy_t s) :: !rez_subst  ) *)) lvars in
 										     !rez_subst
 										 in
 										   s ^ (fn_case_generate n  n' subst' vars_pattern init intros case_eq_str  !write_case_eq) ^ "\n\n"  ) "" linst_cond in
