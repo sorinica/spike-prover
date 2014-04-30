@@ -4,6 +4,7 @@
 open Values
 open Diverse
 open Symbols
+open Order
 open Dicos
 open Clauses
 open Literals
@@ -377,21 +378,20 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 preambule (*^ exists_f*) ^ stuff1 ^ exists ^ stuff2 
   in
 
-  let fn_case_rew orig n_case (subst: (Symbols.var * Terms.term) list) (*auxiliary_clauses*) info_rewriting = 
+  let fn_case_rew orig n_case (subst: (Symbols.var * Terms.term) list) hyp_subst_list info_rewriting = 
     let _, los, ax_inst, pat_subst = try List.hd info_rewriting with Failure "hd" -> failwith "fn_case_rew: there should be something" in
     let trm = ax_inst#lefthand_side in
-  let has_hyp  = compare los "C1" == 0 or compare los "C2" == 0 in
+  let has_hyp  = hyp_subst_list <> [] (* compare los "C1" == 0 or compare los "C2" == 0 *) in
   let has_lemma = compare los "L" == 0 in
   let h_subst = ref [] in
   let (n_case_string, vars_case, num_case) = try List.assoc n_case !coq_formulas_with_numbers with Not_found ->  (try let ch, subst_h, _ = List.assoc n_case !coq_replacing_clauses in let () = h_subst := subst_h in List.assoc ch#number !coq_formulas_with_numbers with Not_found ->  failwith ("fn_case_rew: clause " ^ (string_of_int n_case) ^ " used but not registered")) in
   let str_case = string_of_int num_case in
      let orig_str = string_of_int orig in
-    let ind_case = (string_of_int (npos 0 n_case_string !coq_formulas_with_numbers)) in
-    let stuff1 = "assert (H := Hind F_" ^ str_case ^ "). clear Hind.
-assert (HFabs0 : fst (F_" ^ str_case ^ " "
-    in
-(*     let exists_f = "\nexists " ^ n_case_string ^ ").\n" in *)
-    let exists = sprint_list " " (fun (i, sort) -> (
+    let res_case = (string_of_int (npos 0 n_case_string !coq_formulas_with_numbers)) in
+    let stuff0_hyp = if has_hyp then let (hyp, hyp_subst) = List.hd hyp_subst_list in "assert (H := Hind F_" ^ (string_of_int hyp#number) ^ ").\n" else "" in
+    let stuff0_res = "assert (Res := Hind F_" ^ str_case ^ "). clear Hind.\n" in
+ (*     let exists_f = "\nexists " ^ n_case_string ^ ").\n" in *)
+    let exists_res = "assert (HFabs1 : fst (F_" ^ str_case ^ " " ^ sprint_list " " (fun (i, sort) -> (
 				     if i == 0 then constructor_term_res sort else 
 				       let i_subst = 
 					 try
@@ -405,7 +405,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 				       in 
 					  i_subst)) vars_case    
     in
-    let stuff12 = ")).\napply H. trivial_in " ^ ind_case ^ ". unfold snd. unfold F_" ^ str_case ^ ". unfold F_" ^ orig_str ^ ". rewrite_model. abstract solve_rpo_mul.\nunfold fst. unfold F_" ^ orig_str ^ ". unfold F_" ^ str_case ^ ". unfold fst in HFabs0. unfold F_" ^ str_case ^ " in HFabs0. "  
+    let stuff1_res = ")).\napply Res. trivial_in " ^ res_case ^ ". unfold snd. unfold F_" ^ str_case ^ ". unfold F_" ^ orig_str ^ ". rewrite_model. abstract solve_rpo_mul.\nunfold fst. unfold F_" ^ orig_str ^ ". unfold fst in HFabs1. unfold F_" ^ str_case ^ " in HFabs1. "  
     in
      let pat_str =
       if has_lemma   then "" else 
@@ -416,7 +416,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 		| Term (f, _, _) -> (try dico_const_string#find f with Not_found -> failwith "fn_case_rew: symbol not found" )
 		| Var_exist _ | Var_univ _ -> failwith "fn_case_rew : lhs is a variable" 
 	    in
-	      (if has_hyp then "try rewrite HFabs0.\n" else "pattern " ^ pat_args ^ ".\nsimpl " ^ fun_str ^ ". cbv beta.\n")
+	      (* (if has_hyp then "try rewrite HFabs0.\n" else  *)"\npattern " ^ pat_args ^ ". simpl " ^ fun_str ^ ". cbv beta.\n"
     in
 
     let lemma_str = 
@@ -427,12 +427,48 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 	  "specialize true_" ^ (string_of_int lemma#number) ^ " with " ^ subst_str ^ ". intro L. try rewrite L.\n" 
       else "" 
     in
-    let stuff2 =   lemma_str ^ " " ^ pat_str ^ " simpl. auto.\n" in
+    let stuff3_hyp = 
+      if has_hyp then 
+	let (hyp, hyp_subst) = List.hd hyp_subst_list in
+	let hyps = hyp#substitute hyp_subst in
+	let orientation = if rpo_greater false hyps#righthand_side hyps#lefthand_side then "<-" else "" in
+	"try rewrite " ^ orientation ^ " HFabs0. " 
+      else "" 
+    in
+    let stuff2_res =   lemma_str ^ " " ^ pat_str ^ stuff3_hyp ^ " simpl. auto.\n" in
 (*     let less_clause = if not has_hyp then n_case else let hyp = List.hd auxiliary_clauses in hyp in *)
 (*     let greater_clause = try List.assoc less_clause (List.map (fun (c1, c2) -> (c1#number, c2#number)) !coq_less_clauses) with Not_found -> failwith "less_clause not found !" in *)
 (*     let less_lemma = "apply less_" ^ (string_of_int less_clause) ^ "_" ^ (string_of_int greater_clause) ^ ".\n" in *)
-      (*exists_f ^*) stuff1 ^ exists ^ stuff12 ^ " " ^ stuff2 
+    let exists_hyp = 
+      if has_hyp then 
+	let (hyp, hyp_subst) = List.hd hyp_subst_list in
+	let (_, vars_hyp, _) = try List.assoc hyp#number !coq_formulas_with_numbers with Not_found ->  (try let ch, subst_h, _ = List.assoc hyp#number !coq_replacing_clauses in let () = h_subst := subst_h in List.assoc ch#number !coq_formulas_with_numbers with Not_found ->  failwith ("fn_case_rew: clause " ^ (string_of_int hyp#number) ^ " used but not registered")) in 
+	"assert (HFabs0 : fst (F_" ^ (string_of_int hyp#number) ^ " " ^ sprint_list " " (fun (i, sort) -> (
+				     if i == 0 then constructor_term_res sort else 
+				       let i_subst = 
+					 try
+					   let trm = List.assoc i hyp_subst in
+					     trm#compute_string_coq_with_quantifiers []
+					   with Not_found ->
+							    ( "u" ^ (string_of_int i)) 
+				       in 
+					  i_subst)) vars_hyp  
+      else ""
+    in
+    let stuff1_hyp = 
+      if has_hyp then 
+	let (hyp, hyp_subst) = List.hd hyp_subst_list in
+	let (hyp_string, vars_hyp, num_case_hyp) = try List.assoc hyp#number !coq_formulas_with_numbers with Not_found ->  (try let ch, subst_h, _ = List.assoc hyp#number !coq_replacing_clauses in let () = h_subst := subst_h in List.assoc ch#number !coq_formulas_with_numbers with Not_found ->  failwith ("fn_case_rew: clause " ^ (string_of_int n_case) ^ " used but not registered")) in 
+	let hyp_case = (string_of_int (npos 0 hyp_string !coq_formulas_with_numbers)) in 
+	let str_case = string_of_int hyp#number in
+	")).\napply H. trivial_in " ^ hyp_case ^ ". unfold snd. unfold F_" ^ str_case ^ ". unfold F_" ^ orig_str ^ ". rewrite_model. abstract solve_rpo_mul.\nunfold fst in HFabs0. unfold F_" ^ str_case ^ " in HFabs0.\n\n" 
+      else "" 
+    in
+    let stuff_hyp =  exists_hyp ^ stuff1_hyp in
+    let stuff_res =  exists_res ^ stuff1_res ^ " " ^ stuff2_res in 
+       stuff0_hyp ^ stuff0_res ^ stuff_hyp ^ stuff_res 
   in
+
   let fn_case_negdec orig_case n_case = 
  let h_subst = ref [] in 
      let (n_case_string, nvars_case, num_case) = try List.assoc n_case !coq_formulas_with_numbers with Not_found ->  (try let ch, s, _ = List.assoc n_case !coq_replacing_clauses  in h_subst := s; List.assoc ch#number !coq_formulas_with_numbers with Not_found ->  failwith ("fn_case_negdec: clause " ^ (string_of_int n_case) ^ " used but not registered")) in
@@ -507,7 +543,7 @@ let exists =  sprint_list " " (fun (i, sort) -> (
   let init = "(* rewriting with the axiom [ " ^ (string_of_int orig_clause_number) ^ " ] *)\n\n" in
   let h_subst = ref [] in 
      let (n_case_string, nvars_case, num_case) = try List.assoc cl_case#number !coq_formulas_with_numbers with Not_found ->  (try let ch, s, _ = List.assoc cl_case#number !coq_replacing_clauses  in h_subst := s; List.assoc ch#number !coq_formulas_with_numbers with Not_found ->  failwith ("fn_case_totalrew: clause " ^ (string_of_int cl_case#number) ^ " used but not registered")) in
-  let pat_str = List.fold_right (fun (_, t) s -> let tstr = t#compute_string_coq_with_quantifiers [] in " pattern " ^  tstr ^ "." ^ s) subst "" in
+  let pat_str = List.fold_right (fun (_, t) s -> let tstr = t#compute_string_coq_with_quantifiers [] in "\npattern " ^  tstr ^ "." ^ s) subst "" in
   (*let stuff1 = "split. trivial_in " ^ (string_of_int (npos 0 n_case_string !coq_formulas_with_numbers)) ^ ".
 unfold snd.
 unfold fst.\n" in
@@ -661,19 +697,18 @@ let stuff12 = ")).\napply H1. trivial_in " ^ nth_str ^ ". unfold snd. unfold F_"
 					   | "rewriting" -> 
 					       let head = "\t(* REWRITING on [ " ^ (string_of_int n) ^ " ] *)\n\n" in
 					       let () = if !maximal_output && !coqc_mode then buffered_output head in
-					       let rew_cl, rew_los, _, rew_subst = try List.hd info_rewriting with Failure "hd" -> failwith "fn_case_rew: there should be something" in
 					       let (_, vars_case, _) = try List.assoc n !coq_formulas_with_numbers with Not_found -> failwith ("fn_case_rew: clause " ^ (string_of_int n) ^ " used but not registered") in
 					       let conv_vars = ref [] in
 					       let rename_vars1 = j:= 0; List.fold_right (fun (i, _) s -> let () = j := !j + 1 in s ^ (if i == 0 then ("rename u" ^ (string_of_int !j) ^ " into d_u" ^ (string_of_int !j) ^ ". ") else let () = conv_vars := i :: !conv_vars in "rename u" ^ (string_of_int !j) ^ " into _u" ^ (string_of_int i) ^ ". ")) (List.rev vars_case) "" in  
 					       let rename_vars2 = List.fold_right (fun i s -> s ^ "rename _u" ^ (string_of_int i) ^ " into u" ^ (string_of_int i) ^ ". ") !conv_vars "" in
-					       let is_hyp = compare rew_los "C1" == 0 or compare rew_los "C2" == 0 in
+					       let is_hyp = lvars <> [] in
 					       let lcase = 
 						 if not is_hyp then 
-						     sprint_list "\n\n" (fun (n', _) -> fn_case_rew n n' [] (*[]*) info_rewriting) linst 
+						     sprint_list "\n\n" (fun (n', _) -> fn_case_rew n n' [] [] info_rewriting) linst 
 						 else
-						   let (h, sub) = (rew_cl, rew_subst) in
-(* 						   let (h_inst_number, _) = List.hd linst in *)
-						     fn_case_rew n h#number sub (*[h_inst_number]*) info_rewriting 
+						   let h, _, _, subst = try List.hd info_rewriting with Failure "hd" -> failwith "fn_case_rew: there should be something" in						   
+ 						   let (n', _) = List.hd linst in 
+						     fn_case_rew n n' [] [(h,subst)] (List.tl info_rewriting)
 					       in
 						 head ^ rename_vars1 ^ "\n" ^ rename_vars2 ^ "\n" ^ lcase ^ "\n\n\n"  
 					   | "generate" ->

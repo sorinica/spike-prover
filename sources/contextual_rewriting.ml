@@ -582,10 +582,14 @@ let rewriting verbose rw_kind sl pos cxt c is_strict level =
 			let (h, subst) = List.hd hyp_rewriting in
 			let h_subst = h#substitute subst in
 			let () = 
-			  if c#syntactic_equal h_subst then coq_replacing_clauses := (c#number, (h, subst, h#number)) :: !coq_replacing_clauses else
+			  if c#syntactic_equal h_subst then 
+			    coq_replacing_clauses := (c#number, (h, subst, h#number)) :: !coq_replacing_clauses 
+			  else
+			    let cres = List.hd res in
 			    let () = coq_formulas := !coq_formulas @ [c] in   
-			    let () = coq_less_clauses:= !coq_less_clauses @ [(h_subst, c)] in
-			    let () = coq_formulas_with_infos := !coq_formulas_with_infos @ [("rewriting", c#number, [], [(h_subst#number, [])], !rewriting_clauses)] in ()
+			    let () = List.iter (fun c1 -> coq_less_clauses:= !coq_less_clauses @ [(c1, c)]) res in	
+			    let () = coq_less_clauses:= !coq_less_clauses @ [(h_subst, c)]  in
+			    let () = coq_formulas_with_infos := !coq_formulas_with_infos @ [("rewriting", c#number, [(1, Def_sort 1, true)], [(cres#number, [])], (h, "C1", c, subst) :: !rewriting_clauses)] in ()
 			in
 			  ()
 		    in
