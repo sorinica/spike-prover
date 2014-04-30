@@ -52,8 +52,8 @@ all: bc # top byte-code native-code
 
 # generates the tags for each .ml file
 taguri:
-	ocamltags $(SOURCES_ML) parser.ml lexer.ml $(TARGET)
-#	otags -v $(SOURCES_ML) parser.mly lexer.mll $(TARGET)
+#	ocamltags $(SOURCES_ML) parser.ml lexer.ml $(TARGET)
+	otags -v $(SOURCES_ML) parser.mly lexer.mll $(TARGET)
 #	cattags *.etags > TAGS
 #
 #all_tags: # builds tags in directories recursively. Needs script.sh
