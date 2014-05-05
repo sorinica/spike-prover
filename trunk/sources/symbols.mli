@@ -148,6 +148,11 @@ val id_symbol_true : const
 val id_symbol_false : const
 val add_bool_specif : unit -> unit
 val specif_LA_defined : bool ref
+val specif_Rmps0_defined : bool ref
+val specif_Rmins0_defined : bool ref
+val specif_Rmaxs0_defined : bool ref
+val specif_Rzmm_defined : bool ref
+val specif_Rnatlist_defined : bool ref
 val nat_specif_defined : bool ref
 val int_specif_defined : bool ref
 val id_symbol_zero : const
@@ -162,6 +167,8 @@ val id_symbol_geq : const
 val id_symbol_plus : const
 val id_symbol_times : const
 val id_symbol_minus : const
+val id_symbol_min : const
+val id_symbol_max : const
 val id_symbol_minus_nat : const
 val add_nat_specif : unit -> unit
 val sprint_term_list : < string : string; .. > list -> string

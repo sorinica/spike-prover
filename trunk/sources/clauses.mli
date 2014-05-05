@@ -250,14 +250,21 @@ val preprocess_conjecture : 'a clause -> 'a clause list
       method sprint_numbers : string
       val mutable content : 'a list
       constraint 'a =
-        < build : (< both_sides : (< syntactic_equal : 'd -> bool; .. > as 'd) *
-                                  'd;
-                     is_diff : bool; syntactic_equal : 'c -> bool; .. > as 'c)
-                  list ->
-                  (< syntactic_equal : 'e -> bool; .. > as 'e) list -> 'a;
-          content : 'c list * 'e list; equal : 'a -> bool;
-          fill_peano_context : unit; number : int; string : string;
-          syntactic_equal : 'a -> bool; .. >
+        < both_sides : Terms.term * Terms.term;
+                 build : (< both_sides : (< syntactic_equal : 'f -> bool;
+                                            .. >
+                                          as 'f) *
+                                         'f;
+                            is_diff : bool; syntactic_equal : 'e -> bool;
+                            .. >
+                          as 'e)
+                         list ->
+                         (< syntactic_equal : 'g -> bool; .. > as 'g) list ->
+                         'a;
+                 content : 'e list * 'g list; equal : 'a -> bool;
+                 fill_peano_context : unit; negative_lits : 'h list;
+                 number : int; positive_lits : 'i list; string : string;
+                 syntactic_equal : 'a -> bool; .. >
     end
   class ['a] l_system :
     'a list ->
@@ -280,15 +287,23 @@ val preprocess_conjecture : 'a clause -> 'a clause list
       method sprint_numbers : string
       val mutable content : 'a list
       constraint 'a =
-        < build : (< both_sides : (< syntactic_equal : 'd -> bool; .. > as 'd) *
-                                  'd;
-                     is_diff : bool; syntactic_equal : 'c -> bool; .. > as 'c)
-                  list ->
-                  (< syntactic_equal : 'e -> bool; .. > as 'e) list -> 'a;
-          content : 'c list * 'e list; equal : 'a -> bool;
-          fill_peano_context : unit; number : int; rename_from_zero : 'a;
-          string : string; syntactic_equal : 'a -> bool; try_to_orient : 'a;
-          .. >
+        < both_sides : Terms.term *
+                              Terms.term;
+                 build : (< both_sides : (< syntactic_equal : 'f -> bool;
+                                            .. >
+                                          as 'f) *
+                                         'f;
+                            is_diff : bool; syntactic_equal : 'e -> bool;
+                            .. >
+                          as 'e)
+                         list ->
+                         (< syntactic_equal : 'g -> bool; .. > as 'g) list ->
+                         'a;
+                 content : 'e list * 'g list; equal : 'a -> bool;
+                 fill_peano_context : unit; negative_lits : 'h list;
+                 number : int; positive_lits : 'i list;
+                 rename_from_zero : 'a; string : string;
+                 syntactic_equal : 'a -> bool; try_to_orient : 'a; .. >
     end
 class ['a] rw_system :
   'a list ->

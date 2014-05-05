@@ -1379,7 +1379,6 @@ specif_conjectures:
   TOK_CONJECTURES TOK_COLUMN pos_codes_false list_of_clauses_history
   { buffered_output "\nSuccessfully parsed conjectures" ;
     print_clause_list $4 ;
-    all_conjectures_system#append $4;
     Queue.add (Conjectures_token $4) yy_queue }
 | TOK_CONJECTURES TOK_COLUMN
   { }
