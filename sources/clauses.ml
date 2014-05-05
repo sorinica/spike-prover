@@ -7,17 +7,21 @@
 
 open Values
 open Io
-open Dicos
 open Symbols
 open Terms
 open Order
 open Literals
 open Pi
 open Polynoms
+open Max
+open Min
+open Zmaxmin
+open Npolynoms
+open Natlist
 open Diverse
 
-  (* defined but not used   *)
-let get_strat_by_name = ref (fun (_ : string) -> true)
+
+exception Not_Horn
 
 (* Ad hoc function for computation of capital d's (i.e. the global depth) of a rewrite system.
    We have sorted lists of (sort * depth). All sorts featured in the first list are also in the second.
@@ -54,114 +58,198 @@ exception MyExit of string
   (* system of clauses  *)
 class ['a] system (ini_l: 'a list) =
 
-  object (_)
+object (self)
 
-    val mutable content = ini_l
+  val mutable content = ini_l
 
-    method content = content
+  method content = content
 
-    method copy = {< >}
+  method copy = {< >}
 
-    method length = List.length content
+  method length = List.length content
 
-    method sprint_numbers =
-      let l = List.map (fun x -> x#number) content in
-      List.fold_left (fun x y -> x ^ " " ^ y) "" (List.map string_of_int l)
+  method sprint_numbers =
+    let l = List.map (fun x -> x#number) content in
+    List.fold_left (fun x y -> x ^ " " ^ y) "" (List.map string_of_int l)
 
-    (* Checks whether one element satisfies predicate p *)
-    method exists p =
-      List.exists p content
+  (* Checks whether one element satisfies predicate p *)
+  method exists p =
+    List.exists p content
 
-    method iter f =
-      List.iter f content
+  method iter f =
+    List.iter f content
 
-    method current_el =
-      match content with
+  method current_el =
+    match content with
         [] -> raise Proof
       | h::_ -> h
 
-    method all_but i =
-      list_all_but i content
+  method all_but i =
+    list_all_but i content
 
-    method append els =
+  method append els =
+    
+    let els', els_equal = List.partition (fun x -> not
+      (generic_list_object_member x content)) els in
+    let () = List.iter (print_redundant content) els_equal in
+    let els'', content' = if !resolution_mode then resolution els' content else els', content in
+    self#replace_w_list (List.length content') els'' 
 
-      let els', els_equal = List.partition (fun x -> not
-	  (generic_list_object_member x content)) els in
-      let () = List.iter (print_redundant content) els_equal in
-      let els'', content' = if !resolution_mode then resolution els' content else els', content in
-      let v = 
-	if !specif_LA_defined
-	then 
-	  list_special_map (fun c -> let () = c#fill_peano_context in c) Inconsistent els''
-      	else els'' in
-(*       let new_l = List.flatten (List.map preprocess_conjecture v) in *)
-      content <- content' @ v
+  method init (c: 'a list) =
+    content <- [];
+    self#replace_w_list 0 c
 
-    method init (c: 'a list) =
-      let v =  (* List.map (fun x -> x#rename_from_zero) *) c in
-      let v' = 
-	if !specif_LA_defined
-	then 
-	  list_special_map (fun c -> let () = c#fill_peano_context in c) Inconsistent v
-	else v in
-(*       let new_l = List.flatten (List.map preprocess_conjecture v')
-	 in *)
-      content <- v'
-
-    method is_empty =
-      match content with
+  method is_empty =
+    match content with
         [] -> true
       | _ -> false
 
-    method print ind_s =
-      List.iter (fun x -> buffered_output (ind_s ^ x#string)) content
+  method print ind_s =
+    List.iter (fun x -> buffered_output (ind_s ^ x#string)) content
 
-    method ith i = try List.nth content i with (Failure "nth") -> failwith "ith"
+  method ith i = try List.nth content i with (Failure "nth") -> failwith "ith"
 
-    (* Replace nth element. Put all previous elements at the tail of the list *)
-    method replace n el =
-      let v, tv = try list_split_at_n n content with Failure "list_split_at_n" -> failwith "clauses, method replace1" in
-      if tv = [] then failwith "clauses, method replace2" 
-      else
-	let tv' = List.tl tv in
-	if generic_list_object_member el content
-	then content <- tv'@v
-	else
-	  let el' = el (* el#rename_from_zero  *)in
-	  let el'' = 
-	    if !specif_LA_defined
-	    then 
-		  list_special_map (fun c -> let () = c#fill_peano_context in c) Inconsistent [el']
-	    else [el'] 
-	  in
-	  (* 	let new_l = List.flatten (List.map preprocess_conjecture el'') in *)
-	  content <- tv'@v@el''
-	    
-    method replace_w_list n (els: 'a list) =
-      let els', els_equal = List.partition (fun x -> not
-	  (generic_list_object_member x content)) els in
-(*       let () = List.iter (print_redundant content) els_equal in *)
-      let () = if els_equal <> [] then 
+  (* Replace nth element. Put all previous elements at the tail of the list *)
+  method replace n el =
+    self#replace_w_list n [el]
+      
+  method replace_w_list n (els: 'a list) =
+    let els', els_equal = List.partition (fun x -> not
+      (generic_list_object_member x content)) els in
+    let () = if els_equal <> [] then 
 	print_string (List.fold_left (fun str c -> str ^ (" \n The clause " ^ c#string ^ "\n is eliminated from the current set of conjectures since redundant\n\n" ) ) "\n " els_equal) in
-      let els'', content' = if !resolution_mode then resolution els' content else els', content in
-      let newels = 
-	if !specif_LA_defined
-	then 
-	  list_special_map (fun c -> let () = c#fill_peano_context in c) Inconsistent els''
-      	else els''
-      in
-(*       let new_l = List.flatten (List.map preprocess_conjecture newels) in *)
-      let new_n = if (difference (fun z y -> z#syntactic_equal y) content content') = [] then n else (n-1) in
-      let new_n' = if List.length content' < new_n then List.length content' else new_n in
-      let new_n'' = if new_n' < 0 then 0 else new_n' in
-      let v, tv = try list_split_at_n new_n'' content' with Failure "list_split_at_n" -> failwith "replace_w_list" in
-      let tv' = if tv = [] then [] else List.tl tv in
-      content <- tv'@v@newels
+    let els'', content' = if !resolution_mode then resolution els' content else els', content in
+    (* dealing with the decision procedures *)
+    let els_res = 
+      if els'' == [] then []
+      else
+	let els_Rnatlist = 
+	  if !specif_Rnatlist_defined 
+	  then 
+	    list_special_map (fun c -> 
+	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
+		try 
+		  let () = if !maximal_output then buffered_output ("\nTrying the Rnatlist module on " ^ c#string) in 
+		  let (lhs, rhs) = c#both_sides in 
+		  let lhs_norm = natlist_norm lhs 0 in 
+		  let rhs_norm = natlist_norm rhs 0 in 
+		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
+		  if  lhs_norm#syntactic_equal rhs_norm 
+		  then let _ = buffered_output ("\nThe Rnatlist module validated the conjecture " ^ c#string) in 
+		       raise Inconsistent 
+		  else let _ = buffered_output ("\nThe Rnatlist module refuted the conjecture " ^ c#string) in  
+		       raise Refutation 
+		with Failure "natlist_norm" -> c
+	      else c) Inconsistent els'' 
+	  else els''
+	in
+	let els_Rzmm = 
+	  if els_Rnatlist == [] then []
+	  else if !specif_Rzmm_defined 
+	  then 
+	    list_special_map (fun c -> 
+	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
+		try 
+		  let () = if !maximal_output then buffered_output ("\nTrying the Rzmm module on " ^ c#string) in 
+		  let (lhs, rhs) = c#both_sides in 
+		  let lhs_norm = zmm_norm lhs 0 in 
+		  let rhs_norm = zmm_norm rhs 0 in 
+		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
+		  if  lhs_norm#syntactic_equal rhs_norm 
+		  then let _ = buffered_output ("\nThe Rzmm module validated the conjecture " ^ c#string) in 
+		       raise Inconsistent 
+		  else let _ = buffered_output ("\nThe Rzmm module refuted the conjecture " ^ c#string) in  
+		       raise Refutation 
+		with Failure "zmm_norm" -> c
+	      else c) Inconsistent els_Rnatlist 
+	  else els_Rnatlist
+	in
+	let els_Rmins0 = 
+	  if els_Rzmm == [] then [] 
+	  else if !specif_Rmins0_defined 
+	  then 
+	    list_special_map (fun c -> 
+	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
+		try 
+		  let () = if !maximal_output then buffered_output ("\nTrying the Rmins0 module on " ^ c#string) in 
+		  let (lhs, rhs) = c#both_sides in 
+		  let lhs_norm = min_norm lhs 0 in 
+		  (* let () = buffered_output "\nDealing with rhs_norm !\n\n\n" in *)
+		  let rhs_norm = min_norm rhs 0 in 
+		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
+		  if  lhs_norm#syntactic_equal rhs_norm 
+		  then let _ = buffered_output ("\nThe Rmins0 module validated the conjecture " ^ c#string) in 
+		       raise Inconsistent 
+		  else let _ = buffered_output ("\nThe Rmins0 module refuted the conjecture " ^ c#string) in  
+		       raise Refutation 
+		with Failure "min_norm" -> c
+	      else c) Inconsistent els_Rzmm
+	  else els_Rzmm
+	in
+	let els_Rmaxs0 = 
+	  if els_Rmins0 == [] then []
+	  else if !specif_Rmaxs0_defined 
+	  then 
+	    list_special_map (fun c -> 
+	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
+		try 
+		  let () = if !maximal_output then buffered_output ("\nTrying the Rmaxs0 module on " ^ c#string) in 
+		  let (lhs, rhs) = c#both_sides in 
+		  let lhs_norm = max_norm lhs 0 in 
+		  let rhs_norm = max_norm rhs 0 in 
+		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
+		  if  lhs_norm#syntactic_equal rhs_norm 
+		  then let _ = buffered_output ("\nThe Rmaxs0 module validated the conjecture " ^ c#string) in 
+		       raise Inconsistent 
+		  else let _ = buffered_output ("\nThe Rmaxs0 module refuted the conjecture " ^ c#string) in  
+		       raise Refutation 
+		with Failure "max_norm" -> c
+	      else c) Inconsistent els_Rmins0
+	  else els_Rmins0
+	in
+	let els_Rmps0 = 
+	  if els_Rmaxs0 == [] then []
+	  else if !specif_Rmps0_defined 
+	  then 
+	    list_special_map (fun c -> 
+	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
+		try 
+		  let () = if !maximal_output then buffered_output ("\nTrying the Rmps0 module on " ^ c#string) in 
+		  let (lhs, rhs) = c#both_sides in 
+		  let lhs_norm = np_norm lhs 0 in 
+		  let rhs_norm = np_norm rhs 0 in 
+		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
+		  if  lhs_norm#syntactic_equal rhs_norm 
+		  then let _ = buffered_output ("\nThe Rmps0 module validated the conjecture " ^ c#string) in 
+		       raise Inconsistent 
+		  else let _ = buffered_output ("\nThe Rmps0 module refuted the conjecture " ^ c#string) in  
+		       raise Refutation 
+		with Failure "np_norm" -> c
+	      else c) Inconsistent els_Rmaxs0 
+	  else els_Rmaxs0
+	in
+	let els_LA =
+	  if els_Rmps0 == [] then [] 
+	  else if !specif_LA_defined
+	  then 
+	    let () = if !maximal_output then buffered_output "\nTrying LA + CC !\n" in 
+	    list_special_map (fun c -> let () = c#fill_peano_context in c) Inconsistent els_Rmps0
+      	  else els_Rmps0
+	in
+	els_LA
+    in
+    (*       let new_l = List.flatten (List.map preprocess_conjecture newels) in *)
+    let new_n = if (difference (fun z y -> z#syntactic_equal y) content content') = [] then n else (n-1) in
+    let new_n' = if List.length content' < new_n then List.length content' else new_n in
+    let new_n'' = if new_n' < 0 then 0 else new_n' in
+    let v, tv = try list_split_at_n new_n'' content' with Failure "list_split_at_n" -> failwith "replace_w_list" in
+    let tv' = if tv = [] then [] else List.tl tv in
+    content <- tv'@v@els_res
 
-    method clear =
-      content <- []
+  method clear =
+    content <- []
 
-  end
+end
 
   (* used for lemmas system *)
 class ['a] l_system (ini_l : 'a list) =
@@ -285,8 +373,7 @@ class ['a] rw_system (ini_l: 'a list) =
 	  in
           let fn3 t =
 	    let nl =  t#non_linear_positions in
-	    if nl <> [] then failwith ("Rules with non_linear lhs are not yet supported. Please use the conditional
-variant for " ^  c#string) 
+	    if nl <> [] then failwith ("Rules with non_linear lhs are not yet supported. Please use the conditional variant for " ^  c#string) 
 	    else
 	      let lpos = fn2 t in
 (* 	      let () = buffered_output (sprint_list "\t" sprint_position lpos) in *)
@@ -315,8 +402,6 @@ variant for " ^  c#string)
 
   end
 
-
-exception Not_Horn
 
 type concrete_peano_literal =
     Peano_equal of ground_term * ground_term
@@ -872,7 +957,7 @@ class peano_context  (negs: literal list) (poss: literal list) cr g l =
 	    | _  -> 
 		let fn1 e = 
 		  let s',t' = e#both_sides in 
-		  if s'#sort = id_sort_bool && ((s'#syntactic_equal term_true && t'#syntactic_equal term_false) or 
+		  if s'#sort = id_sort_bool && ((s'#syntactic_equal term_true && t'#syntactic_equal term_false) || 
                                              (t'#syntactic_equal term_true && s'#syntactic_equal term_false)) then true 
 		  else false 
 		in
@@ -894,7 +979,7 @@ class peano_context  (negs: literal list) (poss: literal list) cr g l =
     method l_2_g =
       let p, ie = cx_l in
       let diff =  difference (fun x y ->x#syntactic_equal y ) ie cx_g in
-      if ie = [] or diff = []
+      if ie = [] || diff = []
       then []
       else
         let () = cx_g <- diff @ cx_g in
@@ -1049,7 +1134,7 @@ class ['peano] clause c_v hist br_info =
   object (self: 'a)
 
     inherit generic
-    inherit printable_object as super
+    inherit printable_object
 
     val content = c_v
     val variables =
@@ -1195,7 +1280,7 @@ class ['peano] clause c_v hist br_info =
     (* Tries to orient the Horn clause into a rule. Fails otherwise. *)
     method orient =
       if oriented = Defined true then self
-      else if oriented = Defined false or (self#head)#is_diff then failwith "orient"
+      else if oriented = Defined false || (self#head)#is_diff then failwith "orient"
       else
       	let lhs, rhs = self#both_sides
       	and negs = self#negative_lits in
@@ -1269,7 +1354,7 @@ class ['peano] clause c_v hist br_info =
       | _ -> false
 
     method greatest_varcode = 
-      let rec fn variables = 
+      let fn variables = 
       try 
 	let i = (fun (x,_,_) -> x) (last_el variables) in
 	let j = (fun (x,_,_) -> x) (List.hd variables) in
@@ -1311,7 +1396,7 @@ class ['peano] clause c_v hist br_info =
 
     method compute_string_coq_for_order with_model =
       let l, r = content and f x = x#compute_string_coq with_model in
-	(sprint_list "::" f l) ^ (if l == [] or r == [] then "" else "::") ^ (sprint_list "::" f r) ^ "::nil"
+	(sprint_list "::" f l) ^ (if l == [] || r == [] then "" else "::") ^ (sprint_list "::" f r) ^ "::nil"
 
     method def_symbols = 
       let l, r = content in
@@ -1564,13 +1649,13 @@ class ['peano] clause c_v hist br_info =
               [] -> false
             | h::t ->
                 proceed {< content = (n @ (list_all_but i p'1), [h]) ; maximal_terms = Undefined;
-                          string = Undefined >} or fn (i + 1) t
+                          string = Undefined >} || fn (i + 1) t
           and fn2 i = function
               [] -> false
             | h::t ->
                 proceed {< content = (n2 @ (list_all_but i n1) @ p'1, [h]) ; maximal_terms = Undefined;
-                          string = Undefined >} or fn2 (i + 1) t in
-          fn 0 p1 or fn2 0 n1
+                          string = Undefined >} || fn2 (i + 1) t in
+          fn 0 p1 || fn2 0 n1
       | [h] -> proceed {< content = (n @ p'1, [h]) ; maximal_terms = Undefined;
 			 string = Undefined >}
       | _ -> false
@@ -1808,7 +1893,7 @@ let preprocess_conjecture c =
   in
   if !nat_specif_defined then (* for naturals *)
     let new_l = fn c in
-    let () = if List.length new_l <> 1 or (List.length new_l > 1 && not(c#syntactic_equal (List.hd new_l))) then 
+    let () = if List.length new_l <> 1 || (List.length new_l > 1 && not(c#syntactic_equal (List.hd new_l))) then 
       begin
 	buffered_output ("\nThe conjecture \n" ^ "      " ^ c#string ^ "\n    has been preprocessed to:\n"); 
     	List.iter (fun x -> buffered_output x#string)
@@ -1957,8 +2042,7 @@ let write_pos_term_clause  c  =
   let i = ref (-1) in
   let pos' = List.fold_left (fun l lit -> i := !i + 1; (fn true !i lit#both_sides) @ l) pos p in
 
-  let fn' ((b, n, t), lp) = List.fold_left (fun str p -> str ^ "\n\t The term at " ^ (sprint_clausal_position (b, n, (t @ p))) ^ "
-is " ^ (c#subterm_at_position (b, n, (t @ p)))#string) " " lp  in
+  let fn' ((b, n, t), lp) = List.fold_left (fun str p -> str ^ "\n\t The term at " ^ (sprint_clausal_position (b, n, (t @ p))) ^ " is " ^ (c#subterm_at_position (b, n, (t @ p)))#string) " " lp  in
    let () = if !maximal_output then buffered_output ((List.fold_right (fun  (p, (_, _, pos)) str -> str ^  "  " ^ (fn' (p, pos) ))
      pos' ("\n\nThe terms and positions for "^ c#string))  ^ " \n") in
   ()
@@ -1972,7 +2056,7 @@ let list_exists_w_number p =
 (* 	let _ = if !maximal_output then buffered_output ("\n TREATING the clause " ^ h#string); flush stdout  in *)
 (* 	let () = write_pos_clause h in  *)
 	let test = p i h in
-	test or fn (i + 1) t
+	test || fn (i + 1) t
   in
   fn 0
 ;;

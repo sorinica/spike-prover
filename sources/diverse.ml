@@ -1410,7 +1410,7 @@ let list_special_map f ex  =
 	  let res = f h in res :: resl 
 	with
 	   e  -> if e = ex then 
-	      let () = buffered_output ("\nAn inconsistency was produced by LA + CC while treating " ^ h#string ^ "\n\n")  in
+	      (* let () = buffered_output ("\nThe clause " ^ h#string ^ " is cleared.\n\n")  in *)
 	      resl
 	    else 
 	      raise e

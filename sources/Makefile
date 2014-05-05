@@ -17,7 +17,7 @@ LIBS		= unix str
 OCAMLMAKEFILE 	= OcamlMakefile
 
 SOURCES_ML	= values.ml io.ml diverse.ml dicos.ml pi.ml \
-		  symbols.ml terms.ml context.ml order.ml polynoms.ml terms_parser.ml literals.ml \
+		  symbols.ml terms.ml context.ml order.ml npolynoms.ml max.ml min.ml zmaxmin.ml natlist.ml polynoms.ml terms_parser.ml literals.ml \
 		  clauses.ml coq.ml dummies.ml normalize.ml test_sets.ml critical_context_set.ml shell.ml \
 		  contextual_rewriting.ml case_rewriting.ml induction.ml induction_obs.ml generate_eq.ml \
 		  decomposition_set.ml delete_set.ml eliminate_set.ml auto_simplification.ml complement.ml harvey.ml \
@@ -53,7 +53,7 @@ all: bc # top byte-code native-code
 # generates the tags for each .ml file
 taguri:
 #	ocamltags $(SOURCES_ML) parser.ml lexer.ml $(TARGET)
-	otags -v $(SOURCES_ML) parser.mly lexer.mll $(TARGET)
+	otags -v $(SOURCES_ML)  $(TARGET)
 #	cattags *.etags > TAGS
 #
 #all_tags: # builds tags in directories recursively. Needs script.sh

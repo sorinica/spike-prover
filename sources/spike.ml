@@ -330,13 +330,12 @@ let process_problem_token = function
 	let () = if !maximal_output then print_detailed_clause res in
 	res
       in
-      let l' = List.map fn l in
-      let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture l')) in
+      (* let () = all_conjectures_system#append l in *)
       let () = initial_conjectures := conjectures_system#content in
       let () = lemmas_system#init !all_lemmas in
       (* all_lemmas is updated with the proved conjectures from l *)
       let () = buffered_output   "\n************************  Proving  *************************" in
-      let () = List.iter (fun x -> buffered_output x#string) conjectures_system#content  in
+      let () = List.iter (fun x -> buffered_output x#string) (* conjectures_system#content *) l  in
       let () = buffered_output "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" in
       let () = 
 	if !all_lemmas <> [] then 
@@ -360,12 +359,14 @@ let process_problem_token = function
       let () = buffered_output "\n\nusing strategy \n"in
       let () = buffered_output (!global_strat#string  ^ (if !dracula_mode then " mixed with DRaCuLa" else ""))in
       let () = buffered_output "************************************************************" in
+      let l' = List.map fn l in
+      let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture l')) in
       let b =
         try
           if !global_strat#apply true ([],[]) false && proof_found ()
           then
             let () = buffered_output "\n\nThe following initial conjectures are inductive consequences of R"
-	    and () = List.iter (fun x -> buffered_output x#string) !initial_conjectures in 
+	    and () = List.iter (fun x -> buffered_output x#string) (* !initial_conjectures *) l in 
             let () = exit_code := 0 in
 
 (* 	    let () = if !coqc_mode then *)
@@ -390,8 +391,8 @@ let process_problem_token = function
         with 
 	    Proof ->
               let () = buffered_output "\n\nThe following initial conjectures are inductive consequences of R"
-	      and () = List.iter (fun x -> buffered_output x#string) !initial_conjectures in
-	      let () = all_lemmas := generic_list_object_remove_doubles (!all_lemmas @ !initial_conjectures) in
+	      and () = List.iter (fun x -> buffered_output ("\n" ^ x#string)) (* !initial_conjectures *) l in
+	      let () = all_lemmas := generic_list_object_remove_doubles (!all_lemmas @ (* !initial_conjectures *) l) in
               let () = exit_code := 0 in
 	      (* Initialize coq proof *)
 	    let () = if !coqc_mode then
@@ -624,6 +625,11 @@ let rec speclist =
     ("-param", Arg.Set specif_parameterized, ": use it whenever the specification is parameterized") ;
     ("-pgoals", Arg.Set pgoals, ": print goals after each successful application of a rule") ;
     ("-resolution", Arg.Set resolution_mode, ": use resolution") ;
+    ("-Rmaxs0", Arg.Set specif_Rmaxs0_defined, ": use the decision procedure Rmaxs0 for naturals. Works with `use: nats'") ;
+    ("-Rmins0", Arg.Set specif_Rmins0_defined, ": use the decision procedure Rmins0 for naturals. Works with `use: nats'") ;
+    ("-Rmps0", Arg.Set specif_Rmps0_defined, ": use the decision procedure Rmps0 for naturals. Works with `use: nats'") ;
+    ("-Rzmm", Arg.Set specif_Rzmm_defined, ": use the decision procedure Rzmm for naturals. Works with `use: nats'") ;
+    ("-Rnatlist", Arg.Set specif_Rnatlist_defined, ": use the decision procedure Rnatlist for naturals. Works with `use: nats'") ;
     ("-silent", Arg.Clear output_verbosity, ": select minimal output") ;
     ("-status", Arg.String change_default_status, ": default status for functions (LR | RL | MS)") ;
     ("-verbose", Arg.Set output_verbosity, ": select verbose output (default)") ;

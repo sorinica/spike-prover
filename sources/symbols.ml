@@ -101,6 +101,21 @@ let sprint_subst l =
 (* Peano arithmetics. We trigger its use with the "use" token. *)
 let specif_LA_defined = ref false;;
 
+(* Theory of max, s and 0. We trigger its use with the "use" token. *)
+let specif_Rmaxs0_defined = ref false;;
+
+(* Theory of min, s and 0. We trigger its use with the "use" token. *)
+let specif_Rmins0_defined = ref false;;
+
+(* Theory of zero, max min . We trigger its use with the "use" token. *)
+let specif_Rzmm_defined = ref false;;
+
+(* Theory of mult, plus, s and 0. We trigger its use with the "use" token. *)
+let specif_Rmps0_defined = ref false;;
+
+(* Theory of lists + nats: len, rev, @, single, cons, nil, mult, plus, s and 0. We trigger its use with the "use" token. *)
+let specif_Rnatlist_defined = ref false;;
+
   (* intermediate function for subsumption  *)
 
 let subsumes proceed_fun matchfun sigma l l' fn_arith =
@@ -894,6 +909,12 @@ let id_symbol_times = new_function ();;
 let id_symbol_minus = new_function ();;
 let id_symbol_minus_nat = new_function ();;
 
+(* extra arithmetics functions. *)
+
+let id_symbol_min = new_function ();;
+let id_symbol_max = new_function ();;
+
+
 let add_nat_specif () =
   let () = add_bool_specif () in
   let nat_incompatible_types = ["int"] in
@@ -917,13 +938,15 @@ let add_nat_specif () =
       [Prop_peano(* ; Prop_ac *)];
       id_symbol_times, "*", [id_sort_nat; id_sort_nat; id_sort_nat], 1,
       1, [Prop_peano(* ; Prop_ac *) ];
-      id_symbol_minus, "-", [id_sort_nat; id_sort_nat; id_sort_nat], 1, 1,
-     [Prop_peano]
+      id_symbol_min, "min", [id_sort_nat; id_sort_nat; id_sort_nat], 0, 2,
+     [];
+      id_symbol_max, "max", [id_sort_nat; id_sort_nat; id_sort_nat], 0, 2,
+     []
     ]
   in
   sort_counter := 2; (* because we have nat, bool *)
   constructor_counter := 4; (* true and false, 0 and s*)
-  function_counter := -9; (* <, <=, >, >=, +, *, -, minus *)
+  function_counter := -10; (* <, <=, >, >=, +, *, -, minus, min, max *)
   add_specif "nat" l_sorts l_symbols;
   nat_specif_defined := true;
   specif_LA_defined := true
@@ -972,6 +995,53 @@ let add_int_specif () =
 ;;
 
 Hashtbl.add predefined_specif_table "int" add_int_specif;;
+
+(* Theory of natural lists. We trigger its use with the "use" token. *)
+
+(* Basic representation for integers *)
+
+let list_specif_defined = ref false;;
+let id_sort_list = new_sort ();;
+let id_symbol_nil = new_constructor ();;
+let id_symbol_cons = new_constructor ();;
+
+
+let id_symbol_rev = new_function ();;
+let id_symbol_len = new_function ();;
+let id_symbol_app = new_function ();;
+let id_symbol_single = new_function ();;
+
+
+
+let add_list_specif () =
+  let () = add_nat_specif () in
+  let list_incompatible_types = ["int"] in
+  let () = if List.exists (fun x -> List.mem x !all_specifs) list_incompatible_types then failwith "lists" in
+  let l_sorts = [id_sort_list, "natlist"]
+  and l_symbols =
+    [
+      id_symbol_nil, "nil", [id_sort_list], 0, 0, [];
+      id_symbol_cons, "cons", [id_sort_list; id_sort_nat; id_sort_list], 0, 2, [];
+      id_symbol_len, "len", [id_sort_nat; id_sort_list], 0, 1,
+      [];
+      id_symbol_rev, "rev", [id_sort_list; id_sort_list], 0, 1,
+      [];
+      id_symbol_app, "app", [id_sort_list; id_sort_list; id_sort_list], 0, 2,
+      [];
+      id_symbol_single, "single", [id_sort_list; id_sort_list], 0,
+      1, []
+    ]
+  in
+  sort_counter := 3; (* because we have nat, list, bool *)
+  constructor_counter := 6; (* true and false, 0 and s, nil, cons*)
+  function_counter := -14; (* <, <=, >, >=, +, *, -, minus, min, max, len, rev, app, single *)
+  add_specif "natlist" l_sorts l_symbols;
+  specif_LA_defined := true;
+  list_specif_defined := true;
+;;
+
+Hashtbl.add predefined_specif_table "lists" add_list_specif;;
+
 
 (*************************************************************************)
 

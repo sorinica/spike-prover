@@ -692,11 +692,15 @@ let dico_st_refill () =
                             new strategy (Named_strategy "rewrite") ;
                             new strategy (Inference_rule (AddPremise (Id, new strategy (Inference_rule (Id_st (Generate (true, []))))))) ]))   (*  to be modified *)
 
-(*   and _ = dico_st#replace name_strat_builtin *)
-(*       (new strategy (Repeat (new strategy (Try_ [ new strategy (Named_strategy "simplify") ; *)
-(*                                                   new strategy (Named_strategy "rewrite") ; *)
-(*                                                   new strategy (Print_goals false) ; *)
-(*                                                   new strategy (Inference_rule (AddPremise (Id, [ (Generate (true, []))]))) ])))) *)
+  and _ = dico_st#replace name_strat_builtin
+       (new strategy (Try_ [ new strategy (Named_strategy "delete") ;
+                            new strategy (Named_strategy "rewrite") ;
+                            new strategy (Inference_rule (AddPremise (Id, new strategy (Inference_rule (Id_st (Generate (true, []))))))) ]))
+
+       (* (new strategy (Repeat (new strategy (Try_ [ new strategy (Named_strategy "simplify") ; *)
+       (*                                            new strategy (Named_strategy "rewrite") ; *)
+       (*                                            new strategy (Print_goals false) ; *)
+       (*                                            new strategy (Inference_rule (AddPremise (Id, [ (Generate (true, []))]))) ])))) *)
 
   and () = dico_st#replace name_strat_generate_reduce
       (new strategy (Try_ [ new strategy (Inference_rule (Delete (Id, new strategy (Inference_rule (Id_st Tautology))))) ;
