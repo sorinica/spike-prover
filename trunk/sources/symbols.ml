@@ -1022,14 +1022,14 @@ let add_list_specif () =
     [
       id_symbol_nil, "nil", [id_sort_list], 0, 0, [];
       id_symbol_cons, "cons", [id_sort_list; id_sort_nat; id_sort_list], 0, 2, [];
+      id_symbol_single, "single", [id_sort_list; id_sort_nat], 0,
+      1, [];
       id_symbol_len, "len", [id_sort_nat; id_sort_list], 0, 1,
       [];
       id_symbol_rev, "rev", [id_sort_list; id_sort_list], 0, 1,
       [];
       id_symbol_app, "app", [id_sort_list; id_sort_list; id_sort_list], 0, 2,
-      [];
-      id_symbol_single, "single", [id_sort_list; id_sort_list], 0,
-      1, []
+      []
     ]
   in
   sort_counter := 3; (* because we have nat, list, bool *)
@@ -1049,3 +1049,6 @@ let sprint_term_list l = sprint_list " ; " (fun x -> x#string) l;;
 
 (*************************************************************************)
 
+(* stores the variables that abstracted terms of the form len(xs) *)
+
+let lenvar_l = ref [] 
