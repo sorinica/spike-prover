@@ -143,6 +143,7 @@ val predefined_specif_table : (string, unit -> unit) Hashtbl.t
 val add_predefined_specif : string -> unit
 val id_sort_bool : sort
 val id_sort_nat : sort
+val id_sort_list : sort
 val id_sort_int : sort
 val id_symbol_true : const
 val id_symbol_false : const
@@ -155,6 +156,8 @@ val specif_Rzmm_defined : bool ref
 val specif_Rnatlist_defined : bool ref
 val nat_specif_defined : bool ref
 val int_specif_defined : bool ref
+val id_symbol_nil : const
+val id_symbol_cons : const
 val id_symbol_zero : const
 val id_symbol_s : const
 val id_symbol_p : const
@@ -170,5 +173,10 @@ val id_symbol_minus : const
 val id_symbol_min : const
 val id_symbol_max : const
 val id_symbol_minus_nat : const
+val id_symbol_single : const
+val id_symbol_app : const
+val id_symbol_rev : const
+val id_symbol_len : const
 val add_nat_specif : unit -> unit
 val sprint_term_list : < string : string; .. > list -> string
+val lenvar_l : (int list) ref

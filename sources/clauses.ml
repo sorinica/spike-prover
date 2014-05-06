@@ -126,15 +126,34 @@ object (self)
 	let els_Rnatlist = 
 	  if !specif_Rnatlist_defined 
 	  then 
+	    let rec update_lenvar t =
+	      match t#content with
+		| Var_univ (i,s) ->
+		  if (s == id_sort_nat) && list_member (=) i !lenvar_l then 
+		    let v = new term (Var_univ (i, id_sort_list)) in
+		    new term (Term (id_symbol_len, [v], id_sort_nat))
+		  else t
+		| Var_exist (i,s)  ->
+		  if (s == id_sort_nat) && list_member (=) i !lenvar_l then 
+		    let v = new term (Var_univ (i, id_sort_list)) in
+		    new term (Term (id_symbol_len, [v], id_sort_nat))
+		  else t
+		| Term (f, l, s) -> let l' = List.map (fun t' -> update_lenvar t') l in
+				    new term (Term (f, l', s))
+	    in
 	    list_special_map (fun c -> 
 	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
 		try 
 		  let () = if !maximal_output then buffered_output ("\nTrying the Rnatlist module on " ^ c#string) in 
 		  let (lhs, rhs) = c#both_sides in 
+		  let () = lenvar_l := [] in
 		  let lhs_norm = natlist_norm lhs 0 in 
+		  let lhs' = update_lenvar lhs_norm in
+		  let () = lenvar_l := [] in
 		  let rhs_norm = natlist_norm rhs 0 in 
-		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
-		  if  lhs_norm#syntactic_equal rhs_norm 
+		  let rhs' = update_lenvar rhs_norm in
+		  let () = buffered_output ("\nNormalized lhs = " ^ lhs'#string ^ "\nNormalized rhs = " ^ rhs'#string) in
+		  if  lhs'#syntactic_equal rhs'
 		  then let _ = buffered_output ("\nThe Rnatlist module validated the conjecture " ^ c#string) in 
 		       raise Inconsistent 
 		  else let _ = buffered_output ("\nThe Rnatlist module refuted the conjecture " ^ c#string) in  
