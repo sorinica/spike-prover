@@ -5,6 +5,9 @@ open Terms
 open Order
 open Io
 
+
+let zero_t = new term (Term (id_symbol_zero,[], id_sort_nat))
+
 let rec fn_spaces n = 
   if n == 0 then "\n" else (fn_spaces (n-1)) ^ "  "
 
@@ -17,24 +20,18 @@ let rec zmm_propagate_min t i =
       else if f == id_symbol_max then 
 	let arg1 = zmm_propagate_min (List.hd l) (i+1) in
 	let arg2 = zmm_propagate_min (List.hd (List.tl l)) (i+1) in
-	(match arg1#content with 
-	     | Var_univ _ | Var_exist _ -> new term (Term (id_symbol_max,[arg1;arg2], id_sort_nat))
-	     | Term (f1, _, _) -> 
-	       if f1 == id_symbol_zero then arg2
-	       else 
-		 (match arg2#content with 
-		   | Var_univ _ | Var_exist _ -> new term (Term (id_symbol_max,[arg1;arg2], id_sort_nat))
-		   | Term (f2, _, _) -> 
-		     if f2 == id_symbol_zero then arg1
-		     else new term (Term (id_symbol_max, [arg1;arg2], id_sort_nat))
-		 )
-	)
+	if arg1#syntactic_equal arg2 then arg1
+	else if arg1#syntactic_equal zero_t then arg2
+	else if arg2#syntactic_equal zero_t then arg1
+	else new term (Term (id_symbol_max, [arg1;arg2], id_sort_nat))
       else if f == id_symbol_min then 
 	let arg1' = (List.hd l) in
 	let arg2' = (List.hd (List.tl l)) in
 	let arg1 = zmm_propagate_min arg1' (i+1) in
 	let arg2 = zmm_propagate_min arg2' (i+1) in 
-	(match arg1#content with 
+	if arg1#syntactic_equal arg2 then arg1
+	else
+	  (match arg1#content with 
 	     | Var_univ _ | Var_exist _ -> 
 		 (match arg2#content with
 		   | Var_univ _ | Var_exist _ -> new term (Term (id_symbol_min, [arg1; arg2], id_sort_nat))
@@ -106,7 +103,7 @@ let rec zmm_delete l l_orig =
   else 
     let tail_ordered =  zmm_delete (List.tl l) l_orig  in
     let fst = List.hd l in
-    if zmm_greater fst l_orig  then
+    if (zmm_greater fst l_orig)  (* || (list_member (fun x y -> x#syntactic_equal y) zero_t fst) *)  then
       tail_ordered
     else (fst :: tail_ordered)
 	     
@@ -120,7 +117,7 @@ let rec zmm_list t =
 	if f == id_symbol_min then
 	  let arg1_l = fn_min (List.hd l) in
 	  let arg2_l = fn_min (List.hd (List.tl l)) in
-	  arg1_l @ arg2_l
+	  List.fold_right (fun h l -> insert_sorted (fun x y -> x#syntactic_equal y) (fun x y -> ground_greater x y) h l) arg1_l  arg2_l
 	else failwith "fn_min"
   in
   match t#content with
