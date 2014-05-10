@@ -5,6 +5,8 @@ open Terms
 open Order
 open Io
 
+let zero_t = new term (Term (id_symbol_zero, [], id_sort_nat))
+
 let rec min_propagate_s t = 
  match t#content with
     | Var_univ _ | Var_exist _ -> t
@@ -14,11 +16,11 @@ let rec min_propagate_s t =
  	let arg_s = List.hd l in
 	let arg_s_n = min_propagate_s arg_s in
 	(match arg_s_n#content with
-	  | Var_univ _ | Var_exist _ -> t
+	  | Var_univ _ | Var_exist _ -> new term (Term (id_symbol_s, [arg_s_n], id_sort_nat))
 	  | Term (f', l', _) ->
-	    if f'== id_symbol_zero then t
+	    if f'== id_symbol_zero then new term (Term (id_symbol_s, [arg_s_n], id_sort_nat))
 	    else if f'== id_symbol_s then 
-	       t
+	       new term (Term (id_symbol_s, [arg_s_n], id_sort_nat))
 	    else if f' == id_symbol_min then 
 	      let arg1 = List.hd l' in
 	      let arg2 = List.hd (List.tl l') in
@@ -35,7 +37,10 @@ let rec min_propagate_s t =
 	let arg2 = List.hd (List.tl l) in
 	let arg1' = min_propagate_s arg1 in
 	let arg2' = min_propagate_s arg2 in
-	 new term (Term (id_symbol_min, [arg1';arg2'], id_sort_nat))
+	if arg1'#syntactic_equal zero_t then new term (Term (id_symbol_zero, [], id_sort_nat))
+	else if arg2'#syntactic_equal zero_t then new term (Term (id_symbol_zero, [], id_sort_nat))
+	else 
+	  new term (Term (id_symbol_min, [arg1';arg2'], id_sort_nat))
       else
 	let () = if !maximal_output then buffered_output ("min_propagate_s: symbol " ^ (dico_const_string#find f) ^ " not managed by Rmins0") in failwith "outside Rmin"
 
@@ -49,7 +54,9 @@ let rec min_greater x l =
 		  if f == id_symbol_zero then false
 		  else if f == id_symbol_s then 
 		     list_member (fun (i, _, _) (j, _, _) -> i == j) (List.hd t#variables) t'#variables
-		  else failwith "fn_smaller"
+		  else 
+		    let () = if !maximal_output then buffered_output ("min_propagate_s: symbol " ^ (dico_const_string#find f) ^ " not managed by Rmins0") in 
+		    failwith "fn_smaller"
 	   )
 	 | Term (f1, l1, _) ->
 	   if f1 == id_symbol_zero then 
@@ -61,9 +68,13 @@ let rec min_greater x l =
 		  if f2 == id_symbol_zero then false
 		  else if f2 == id_symbol_s then 
 		     fn_smaller (List.hd l1) (List.hd l2)
-		  else failwith "fn_smaller"
+		  else 
+		    let () = if !maximal_output then buffered_output ("min_propagate_s: symbol " ^ (dico_const_string#find f2) ^ " not managed by Rmins0") in 
+		    failwith "fn_smaller"
 	     )
-	   else failwith "fn_smaller"
+	   else
+	     let () = if !maximal_output then buffered_output ("min_propagate_s: symbol " ^ (dico_const_string#find f1) ^ " not managed by Rmins0") in 
+	     failwith "fn_smaller"
   in
   if l == [] then false
   else 

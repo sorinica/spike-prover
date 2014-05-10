@@ -45,7 +45,11 @@ let rec zmm_propagate_min t i =
 		       let t2 = new term (Term (id_symbol_min, [arg1;arg22], id_sort_nat)) in
 		       let t1' = zmm_propagate_min t1 (i+1) in
 		       let t2' = zmm_propagate_min t2 (i+1) in
-		       new term (Term (id_symbol_max,[t1'; t2'], id_sort_nat))
+		       if t1'#syntactic_equal t2' then t1'
+		       else if t1'#syntactic_equal zero_t then t2'
+		       else if t2'#syntactic_equal zero_t then t1'
+		       else  
+			 new term (Term (id_symbol_max,[t1'; t2'], id_sort_nat))
 		     else 
 		       let () = if !maximal_output then buffered_output ("zmm_propagate_min: symbol " ^ (dico_const_string#find f2) ^ " not managed by Rzmm") in
 		       failwith "outside Rzmm"
@@ -59,7 +63,11 @@ let rec zmm_propagate_min t i =
 		 let t2 = new term (Term (id_symbol_min, [arg12;arg2], id_sort_nat)) in
 		 let t1' = zmm_propagate_min t1 (i+1) in
 		 let t2' = zmm_propagate_min t2 (i+1) in
-		 new term (Term (id_symbol_max,[t1'; t2'], id_sort_nat))
+		 if t1'#syntactic_equal t2' then t1'
+		 else if t1'#syntactic_equal zero_t then t2'
+		 else if t2'#syntactic_equal zero_t then t1'
+		 else  
+		   new term (Term (id_symbol_max,[t1'; t2'], id_sort_nat))
 	       else if f1 == id_symbol_min then
 		 (match arg2#content with 
 		   | Var_univ _ | Var_exist _ ->  new term (Term (id_symbol_min, [arg1; arg2], id_sort_nat))
