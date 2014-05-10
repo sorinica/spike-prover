@@ -5,6 +5,8 @@ open Terms
 open Order
 open Io
 
+let zero_t = new term (Term (id_symbol_zero, [], id_sort_nat))
+
 let rec max_propagate_s t = 
  match t#content with
     | Var_univ _ | Var_exist _ -> t
@@ -14,11 +16,11 @@ let rec max_propagate_s t =
  	let arg_s = List.hd l in
 	let arg_s_n = max_propagate_s arg_s in
 	(match arg_s_n#content with
-	  | Var_univ _ | Var_exist _ -> t
+	  | Var_univ _ | Var_exist _ -> new term (Term (id_symbol_s, [arg_s_n], id_sort_nat))
 	  | Term (f', l', _) ->
-	    if f'== id_symbol_zero then t
+	    if f'== id_symbol_zero then new term (Term (id_symbol_s, [arg_s_n], id_sort_nat))
 	    else if f'== id_symbol_s then 
-	       t
+	       new term (Term (id_symbol_s, [arg_s_n], id_sort_nat))
 	    else if f' == id_symbol_max then 
 	      let arg1 = List.hd l' in
 	      let arg2 = List.hd (List.tl l') in
@@ -27,14 +29,17 @@ let rec max_propagate_s t =
 	      let arg1'_s = new term (Term (id_symbol_s, [arg1'], id_sort_nat)) in
 	      let arg2'_s = new term (Term (id_symbol_s, [arg2'], id_sort_nat)) in
 	      new term (Term (id_symbol_max, [arg1'_s;arg2'_s], id_sort_nat))
-	    else let () = if !maximal_output then buffered_output ("max_propagate_s: symbol " ^ (dico_const_string#find f') ^ " not managed by Rmaxs0") in failwith "outside Rmax"
+	    else
+	      let () = if !maximal_output then buffered_output ("max_propagate_s: symbol " ^ (dico_const_string#find f') ^ " not managed by Rmaxs0") in failwith "outside Rmax"
 	)
       else if f == id_symbol_max then
 	let arg1 = List.hd l in
 	let arg2 = List.hd (List.tl l) in
 	let arg1' = max_propagate_s arg1 in
 	let arg2' = max_propagate_s arg2 in
-	 new term (Term (id_symbol_max, [arg1';arg2'], id_sort_nat))
+	if arg1'#syntactic_equal zero_t then arg2'
+	else if arg2'#syntactic_equal zero_t then arg1'
+	else new term (Term (id_symbol_max, [arg1';arg2'], id_sort_nat))
       else
 	let () = if !maximal_output then buffered_output ("max_propagate_s: symbol " ^ (dico_const_string#find f) ^ " not managed by Rmaxs0") in failwith "outside Rmax"
 
@@ -48,7 +53,7 @@ let rec max_smaller x l =
 		  if f == id_symbol_zero then false
 		  else if f == id_symbol_s then 
 		     list_member (fun (i, _, _) (j, _, _) -> i == j) (List.hd t#variables) t'#variables
-		  else failwith "fn_smaller"
+		  else  let () = if !maximal_output then buffered_output ("fn_smaller: symbol " ^ (dico_const_string#find f) ^ " not managed by Rmaxs0") in failwith "fn_smaller"
 	   )
 	 | Term (f1, l1, _) ->
 	   if f1 == id_symbol_zero then 
@@ -60,9 +65,9 @@ let rec max_smaller x l =
 		  if f2 == id_symbol_zero then false
 		  else if f2 == id_symbol_s then 
 		     fn_smaller (List.hd l1) (List.hd l2)
-		  else failwith "fn_smaller"
+		  else  let () = if !maximal_output then buffered_output ("fn_smaller: symbol " ^ (dico_const_string#find f2) ^ " not managed by Rmaxs0") in failwith "fn_smaller"
 	     )
-	   else failwith "fn_smaller"
+	   else  let () = if !maximal_output then buffered_output ("fn_smaller: symbol " ^ (dico_const_string#find f1) ^ " not managed by Rmaxs0") in failwith "fn_smaller"
   in
   if l == [] then false
   else 
@@ -84,7 +89,9 @@ let rec max_list t =
     | Var_univ _ | Var_exist _ -> [t]
     | Term (f, l, _) ->
       if f == id_symbol_zero then [t]
-      else if f == id_symbol_s then [t]
+      else if f == id_symbol_s then
+	(* let arg1 = max_list (List.hd l) in  *)
+	[t]
       else if f == id_symbol_max then
 	let arg1_l = max_list (List.hd l) in
 	let arg2_l = max_list (List.hd (List.tl l)) in
