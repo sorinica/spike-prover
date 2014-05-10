@@ -5,6 +5,7 @@
    * Content: non-linear polynoms definitions
 *)
 
+open Diverse
 open Values
 open Symbols
 open Terms
@@ -23,18 +24,44 @@ let rec fn_spaces n =
   if n == 0 then "\n" else (fn_spaces (n-1)) ^ "  "
 
 let measure t = 
-  match t#content with
-       | Var_univ _ | Var_exist _ -> t
-       | Term (f, l, _) -> 
-	 if f == id_symbol_s then t	  
-	 else if f == id_symbol_times then 
-	   let fst_arg = List.hd l in
-	   let snd_arg = List.hd (List.tl l) in
-	   if fst_arg#variables == [] then snd_arg else t
-	 else failwith "measure"
+  let rec fn_univ t l =
+    match t#content with
+      | Var_univ (i,_) ->   insert_sorted_dup (=) (fun x y -> y < x) i l
+      | Var_exist _ -> l
+      | Term (f, l, _) -> List.fold_right (fun t' l' -> fn_univ t' l') l []
+  in
+  let rec fn_exist t l =
+    match t#content with
+      | Var_exist (i,_) ->   insert_sorted_dup (=) (fun x y -> y < x) i l
+      | Var_univ _ -> l
+      | Term (f, l, _) -> List.fold_right (fun t' l' -> fn_exist t' l') l []
+  in
+  let sorted_vuniv = fn_univ t [] in
+  let sorted_vexist = fn_exist t [] in
+  (sorted_vuniv, sorted_vexist)
 
 let heavier t1 t2 = 
-  ground_greater (measure t1) (measure t2)
+  let (vu1, ve1) = measure t1 in
+  let (vu2, ve2) = measure t2 in
+  let rec fn_greater l1 l2 = 
+    match l1 with
+      | [] -> 
+	(match l2 with 
+	  | [] -> false
+	  | h2 :: tl2 -> false
+	)
+      | h1 :: tl1 -> 
+	(match l2 with
+	  | [] -> true
+	  | h2 :: tl2 -> if h1 > h2 then true
+	    else if h1 < h2 then false
+	    else fn_greater tl1 tl2
+	)
+  in
+  if fn_greater vu1 vu2 then true
+  else if (fn_greater ve1 ve2) then true
+  else false
+
 
 let rec propagate_one t = 
   match t#content with
@@ -99,26 +126,41 @@ let rec np_add t1 t2 i =
 	  else if f == id_symbol_plus then
 	    let fst_arg = List.hd l in
 	    let snd_arg = List.hd (List.tl l) in
-	    if compare t1#string fst_arg#string == 0 then (* x + (n*x +...) -> (n+1)*x + ... *)
+	     (* x + (n*x +...) -> (n+1)*x + ... *)
 	      (match fst_arg#content with
 		| Var_univ _ | Var_exist _ ->
-		  new term (Term (id_symbol_plus, [(new term (Term (id_symbol_times,[two_t;fst_arg], id_sort_nat)));snd_arg],id_sort_nat))
+		  if compare t1#string fst_arg#string == 0 then
+		    new term (Term (id_symbol_plus, [(new term (Term (id_symbol_times,[two_t;fst_arg], id_sort_nat)));snd_arg],id_sort_nat))
+		  else if heavier t1 fst_arg then 
+		    new term (Term (id_symbol_plus, [t1; t2], id_sort_nat))
+		  else 
+		    let t2' = np_add t1 snd_arg (i+1) in
+		    new term (Term (id_symbol_plus, [fst_arg; t2'], id_sort_nat))
 		| Term (f, l, _) -> 
 		  if f == id_symbol_times then (* fst_arg is of the form c*v *)
 		    let coeff = List.hd l in
 		    let var = List.hd (List.tl l) in
 		    if coeff#variables == [] then
-		      let s_fst_arg = new term (Term (id_symbol_s, [coeff], id_sort_nat)) in
-		      new term (Term (id_symbol_plus, [(new term (Term (id_symbol_times,[s_fst_arg;var],id_sort_nat))); snd_arg], id_sort_nat))
-		    else failwith "np_add: impossible coefficient"
-		  else failwith "np_add: impossible case"
+		      if compare t1#string var#string == 0 then
+			let s_fst_arg = new term (Term (id_symbol_s, [coeff], id_sort_nat)) in
+			new term (Term (id_symbol_plus, [(new term (Term (id_symbol_times,[s_fst_arg;var],id_sort_nat))); snd_arg], id_sort_nat))
+		      else 
+			if heavier t1 var then
+			 new term (Term (id_symbol_plus, [t1; t2], id_sort_nat))
+			else
+			  let t2' = np_add t1 snd_arg (i+1) in
+			new term (Term (id_symbol_plus, [fst_arg; t2'], id_sort_nat))
+		    else 
+		      let t2' = np_add t1 snd_arg (i+1) in
+		      new term (Term (id_symbol_plus, [fst_arg; t2'], id_sort_nat))
+		  else  new term (Term (id_symbol_plus, [t1; t2], id_sort_nat))
 	      )
-	    else 
-	      if heavier t1 fst_arg then
-		new term (Term (id_symbol_plus, [t1;t2], id_sort_nat))
-	      else 
-		let snd_arg_norm = np_add t1 snd_arg (i+1) in
-		new term (Term (id_symbol_plus, [fst_arg;snd_arg_norm], id_sort_nat))
+	    (* else  *)
+	    (*   if heavier t1 fst_arg then *)
+	    (* 	new term (Term (id_symbol_plus, [t1;t2], id_sort_nat)) *)
+	    (*   else  *)
+	    (* 	let snd_arg_norm = np_add t1 snd_arg (i+1) in *)
+	    (* 	new term (Term (id_symbol_plus, [fst_arg;snd_arg_norm], id_sort_nat)) *)
 	  else if f == id_symbol_times then
 	    let fst_arg = List.hd l in
 	    let snd_arg = List.hd (List.tl l) in
@@ -202,7 +244,13 @@ let rec np_add t1 t2 i =
 		    let snd_arg2 = List.hd (List.tl l2) in
 		    (match fst_arg2#content with
 		      | Var_univ _ | Var_exist _ -> 
-			new term (Term (id_symbol_plus, [t1; t2], id_sort_nat))
+			if heavier t1 fst_arg2 then
+			  (* let () = buffered_output "\nHeavier !" in *)
+			  new term (Term (id_symbol_plus, [t1; t2], id_sort_nat))
+			else 
+			  (* let () = buffered_output "\nNOT Heavier !" in *)
+			  let t1_snd_arg2 = np_add t1 snd_arg2 (i+1) in
+			  new term (Term (id_symbol_plus, [fst_arg2; t1_snd_arg2], id_sort_nat))
 		      | Term(f3, l3, _) ->
 			if f3 == id_symbol_zero then np_add t1 snd_arg2 (i+1)
 			else if f3 == id_symbol_s then failwith "np_add: t2 is not in normal form"

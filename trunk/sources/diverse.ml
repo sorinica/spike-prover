@@ -85,19 +85,17 @@ assert (insert_sorted ( = ) ( < ) 3 [1; 2; 3; 4; 5] = [1; 2; 3; 4; 5]);;
 assert (insert_sorted ( = ) ( < ) 6 [1; 2; 3; 4; 5; 7] = [1; 2; 3; 4; 5; 6; 7]);;
 
 
-let rec insert_sorted_dup inf_f eq_f el l =
-  match l with
+let rec insert_sorted_dup eq_f inf_f el l =
+  let rec fn =
+    function
       [] -> [el]
-    | h :: t ->
-(* 	let b1 = inf_f el h in *)
-(* 	let b2 = eq_f el h in *)
-(* 	let () = buffered_output ("\n b1 = " ^ (string_of_bool b1) ^ "\n b2 = " ^ (string_of_bool b2) ) in *)
-        if (inf_f h el)or (eq_f el h) then el :: l 
-	else 
-	  h :: (insert_sorted_dup inf_f eq_f el t)
+    | h :: t as l' ->
+        if inf_f el h or eq_f el h then el :: l' else  h :: fn t
+  in
+  fn l
 ;;
 
-assert (insert_sorted_dup ( < ) ( = ) 3 [5; 4; 3; 2; 1] = [5; 4; 3; 3; 2; 1]);;
+assert (insert_sorted_dup ( = ) (<) 3 [1;2;3;4;5] = [1;2;3;3;4;5]);;
 
 (* Merge sorted lists and eliminates the duplicates *)
 let merge_sorted_lists inf_f l1 l2 =
