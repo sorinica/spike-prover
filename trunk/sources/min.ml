@@ -24,13 +24,13 @@ let rec min_propagate_s t =
 	    else if f' == id_symbol_min then 
 	      let arg1 = List.hd l' in
 	      let arg2 = List.hd (List.tl l') in
-	      let arg1' = min_propagate_s arg1 in
-	      let arg2' = min_propagate_s arg2 in
-	      let arg1'_s = new term (Term (id_symbol_s, [arg1'], id_sort_nat)) in
-	      let arg2'_s = new term (Term (id_symbol_s, [arg2'], id_sort_nat)) in
+	      let arg1' = new term (Term (id_symbol_s, [arg1], id_sort_nat)) in
+	      let arg2' = new term (Term (id_symbol_s, [arg2], id_sort_nat)) in
+	      let arg1'_s = min_propagate_s arg1' in
+	      let arg2'_s = min_propagate_s arg2' in
 	      new term (Term (id_symbol_min, [arg1'_s;arg2'_s], id_sort_nat))
 	    else 
-	      let () = if !maximal_output then buffered_output ("min_propagate_s: symbol " ^ (dico_const_string#find f') ^ " not managed by Rmins0") in failwith "outside Rmin"
+	      let () = if !maximal_output then buffered_output ("min_propagate_s: f' symbol " ^ (dico_const_string#find f') ^ " not managed by Rmins0") in failwith "outside Rmin"
 	)
       else if f == id_symbol_min then
 	let arg1 = List.hd l in
@@ -42,7 +42,7 @@ let rec min_propagate_s t =
 	else 
 	  new term (Term (id_symbol_min, [arg1';arg2'], id_sort_nat))
       else
-	let () = if !maximal_output then buffered_output ("min_propagate_s: symbol " ^ (dico_const_string#find f) ^ " not managed by Rmins0") in failwith "outside Rmin"
+	let () = if !maximal_output then buffered_output ("min_propagate_s: f symbol " ^ (dico_const_string#find f) ^ " not managed by Rmins0") in failwith "outside Rmin"
 
 let rec min_greater x l = 
   let rec fn_smaller t t' =
@@ -55,7 +55,7 @@ let rec min_greater x l =
 		  else if f == id_symbol_s then 
 		     list_member (fun (i, _, _) (j, _, _) -> i == j) (List.hd t#variables) t'#variables
 		  else 
-		    let () = if !maximal_output then buffered_output ("min_propagate_s: symbol " ^ (dico_const_string#find f) ^ " not managed by Rmins0") in 
+		    let () = if !maximal_output then buffered_output ("fn_smaller: f symbol " ^ (dico_const_string#find f) ^ " not managed by Rmins0") in 
 		    failwith "fn_smaller"
 	   )
 	 | Term (f1, l1, _) ->
@@ -69,11 +69,11 @@ let rec min_greater x l =
 		  else if f2 == id_symbol_s then 
 		     fn_smaller (List.hd l1) (List.hd l2)
 		  else 
-		    let () = if !maximal_output then buffered_output ("min_propagate_s: symbol " ^ (dico_const_string#find f2) ^ " not managed by Rmins0") in 
+		    let () = if !maximal_output then buffered_output ("fn_smaller: f2 symbol " ^ (dico_const_string#find f2) ^ " not managed by Rmins0") in 
 		    failwith "fn_smaller"
 	     )
 	   else
-	     let () = if !maximal_output then buffered_output ("min_propagate_s: symbol " ^ (dico_const_string#find f1) ^ " not managed by Rmins0") in 
+	     let () = if !maximal_output then buffered_output ("fn_smaller: f1 symbol " ^ (dico_const_string#find f1) ^ " not managed by Rmins0") in 
 	     failwith "fn_smaller"
   in
   if l == [] then false
@@ -124,7 +124,7 @@ let min_norm t i =
     try min_propagate_s t 
     with Failure "outside Rmin" -> failwith "min_norm"
   in
-  (* let () = buffered_output ("\nAfter min_propagate, t = " ^ t#string) in *)
+  (* let () = buffered_output ("\nAfter min_propagate, ts = " ^ ts#string) in *)
   let list_ts = min_list ts in
   let del_l = min_delete list_ts list_ts in
   let lres = min_ordered del_l [] in

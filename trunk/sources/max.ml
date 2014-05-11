@@ -24,10 +24,10 @@ let rec max_propagate_s t =
 	    else if f' == id_symbol_max then 
 	      let arg1 = List.hd l' in
 	      let arg2 = List.hd (List.tl l') in
-	      let arg1' = max_propagate_s arg1 in
-	      let arg2' = max_propagate_s arg2 in
-	      let arg1'_s = new term (Term (id_symbol_s, [arg1'], id_sort_nat)) in
-	      let arg2'_s = new term (Term (id_symbol_s, [arg2'], id_sort_nat)) in
+	      let arg1' = new term (Term (id_symbol_s, [arg1], id_sort_nat)) in
+	      let arg2' = new term (Term (id_symbol_s, [arg2], id_sort_nat)) in
+	      let arg1'_s = max_propagate_s arg1' in
+	      let arg2'_s = max_propagate_s arg2' in
 	      new term (Term (id_symbol_max, [arg1'_s;arg2'_s], id_sort_nat))
 	    else
 	      let () = if !maximal_output then buffered_output ("max_propagate_s: symbol " ^ (dico_const_string#find f') ^ " not managed by Rmaxs0") in failwith "outside Rmax"
