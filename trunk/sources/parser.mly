@@ -474,6 +474,90 @@ let _ = List.iter (fun (kwd, tok) -> Hashtbl.add tests_table kwd tok)
       ("do_strongly_sufficient_completeness_test",      strongly_sufficient_completeness_test) ;
       ("do_ground_convergence_test",                    ground_convergence_test) ]
 ;;
+
+(* returns a list of clauses by deleting the min and max symbols from c *)
+
+let del_minmax c = 
+  let rec delt_minmax t = 
+    match t#content with
+      | Var_univ _ | Var_exist _ -> [([], t)]
+      | Term (f, l, s) -> 
+	  let  megamix12 =
+	    megamix (List.fold_right (fun t lres -> (delt_minmax t) :: lres) l [])
+	  in
+	  let res = List.fold_right (
+	    fun l1'  lres -> 
+	      if f == id_symbol_min || f == id_symbol_max then
+		let (l1, t1) = List.hd l1' in
+		let (l2, t2) = List.hd (List.tl l1') in
+		let tless = new term (Term (id_symbol_less, [t1;t2], id_sort_bool)) in
+		let tge = new term (Term (id_symbol_geq, [t1;t2], id_sort_bool)) in
+		let litless = new literal (Lit_equal (tless, new term (Term (id_symbol_true, [], id_sort_bool)))) in
+		let litge = new literal (Lit_equal (tge, new term (Term (id_symbol_true, [], id_sort_bool)))) in
+		if f == id_symbol_min then (litless :: (l1@l2), t1) :: ((litge:: (l1@l2), t2) :: lres)
+		else if f == id_symbol_max then (litless:: (l1@l2), t2) :: ((litge:: (l1@l2), t1) :: lres)
+		else ((l1@l2), new term (Term (f, [t1;t2], s))) :: lres
+		else
+		  let nl, l' =  (List.fold_right (fun (l1,t) (ll, lt) -> (l1 @ ll, t::lt)) l1' ([],[])) in
+		  (nl, new term (Term (f, l',s))) :: lres
+	  )  megamix12 [] 
+	  in
+	  if res == [] then [([], t)] else res
+
+  in
+  let dellit_minmax lit = 
+       match lit#content with
+	 | Lit_equal (tl, tr) -> 
+	   let tl' = delt_minmax tl in
+	   let tr' = delt_minmax tr in
+	   let megamix12 = megamix [tl'; tr'] in
+	   List.fold_right (fun l lres -> 
+	     let (l1, t1) = List.hd l in
+	     let (l2, t2) = List.hd (List.tl l) in 
+	     [(l1@l2), new literal (Lit_equal (t1, t2))] @ lres) megamix12 []
+	 | Lit_rule (tl, tr) -> 
+	   let tl' = delt_minmax tl in
+	   let tr' = delt_minmax tr in
+	   let megamix12 = megamix [tl'; tr'] in
+	   List.fold_right (fun l lres -> 
+	     let (l1, t1) = List.hd l in
+	     let (l2, t2) = List.hd (List.tl l) in 
+	     [(l1@l2), new literal (Lit_rule (t1, t2))] @ lres) megamix12 []
+	 | Lit_diff (tl, tr) -> 
+	   let tl' = delt_minmax tl in
+	   let tr' = delt_minmax tr in
+	   let megamix12 = megamix [tl'; tr'] in
+	   List.fold_right (fun l lres -> 
+	     let (l1, t1) = List.hd l in
+	     let (l2, t2) = List.hd (List.tl l) in 
+	     [(l1@l2), new literal (Lit_diff (t1, t2))] @ lres) megamix12 []
+  in 
+  let rec split_f l l' len = 
+    if len == 0 then (l, l') 
+    else 
+      try 
+	let l1 = List.hd l in
+	split_f (l1::l) (List.tl l') (len - 1)
+      with Failure "hd" ->
+	failwith "split_f"
+  in
+  let lnegs = c#negative_lits in
+  let len_nlits = List.length lnegs in
+  let lpos = c#positive_lits in
+  let nlits_mm = List.map (fun l -> (dellit_minmax l)) lnegs in
+  let npos_mm = List.map (fun l -> (dellit_minmax l)) lpos in
+  let mm = megamix (nlits_mm @ npos_mm) in
+    (* if nlits_mm == [] then npos_mm  *)
+    (* else if npos_mm == [] then nlits_mm  *)
+    (* else megamix (nlits_mm @ npos_mm) in *)
+  List.map (fun ll -> 
+    let (ln', lp') = split_f [] ll len_nlits in 
+    let (ln1, ln) = List.fold_right (fun (lnegs, lit) (lln, llits) -> (lnegs @ lln, lit :: llits)) ln' ([],[])  in
+    let (lp1, lp) = List.fold_right (fun (lposs, lit) (llp, llits) -> (lposs @ llp, lit :: llits)) lp' ([],[])  in
+    let nlneg = lp1 @ ln1 @ ln in
+    let nlpos = lp in
+    c#build nlneg nlpos
+  ) mm
     %}
 
 /* End of file. Specification file may also end with the "end" keyword */
@@ -1379,7 +1463,12 @@ specif_conjectures:
   TOK_CONJECTURES TOK_COLUMN pos_codes_false list_of_clauses_history
   { buffered_output "\nSuccessfully parsed conjectures" ;
     print_clause_list $4 ;
-    Queue.add (Conjectures_token $4) yy_queue }
+    let lc = 
+      if !specif_LA_defined && not !specif_Rmaxs0_defined && not !specif_Rmins0_defined && not !specif_Rzmm_defined then List.fold_right (fun c l -> (del_minmax c) @ l) $4 [] 
+      else $4
+    in
+    Queue.add (Conjectures_token lc ) yy_queue
+  }
 | TOK_CONJECTURES TOK_COLUMN
   { }
 
