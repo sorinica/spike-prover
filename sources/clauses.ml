@@ -908,6 +908,9 @@ let normalize_lit rules lit = match lit#content with
 type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
 
 class peano_context  (negs: literal list) (poss: literal list) cr g l =
+  (* let (negs_minmax, negs1) = if !specif_LA_defined then lList.fold_left (fun l (l1, l2) -> treat_minmax l (l1, l2) ) negs' ([],[]) else ([], negs') in *)
+  (* let (poss_minmax, poss) = if !specif_LA_defined then lList.fold_left (fun l (l1, l2) -> treat_minmax l (l1, l2) ) poss' ([],[]) else ([], poss') in *)
+  (* let negs = (poss_minmax @ poss_minmax @ negs1) in *)
   let a = List.map convert_literal negs @ List.map
     invert_literal poss in 
   let initialize_a = List.map (fun x -> normalize_lit cr x) a in
