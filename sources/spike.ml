@@ -392,7 +392,7 @@ let process_problem_token = function
 	    Proof ->
               let () = buffered_output "\n\nThe following initial conjectures are inductive consequences of R"
 	      and () = List.iter (fun x -> buffered_output ("\n" ^ x#string)) (* !initial_conjectures *) l in
-	      let () = all_lemmas := generic_list_object_remove_doubles (!all_lemmas @ (* !initial_conjectures *) l) in
+	      let () = all_lemmas := (* list_remove_doubles (fun x y -> x#syntactic_equal y) *) (!all_lemmas @ (* !initial_conjectures *) l) in
               let () = exit_code := 0 in
 	      (* Initialize coq proof *)
 	    let () = if !coqc_mode then
