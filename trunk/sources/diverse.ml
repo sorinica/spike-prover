@@ -376,15 +376,14 @@ let rec list_member eq_f e =
 assert (list_member ( = ) 5 [1; 2; 3; 4; 5] = true);;
 
 (* Remove multiple occurences of an element from a list*)
-let rec list_remove_doubles f =
-  let rec fn h =
+let list_remove_doubles eq_f l =
+  let rec fn lres =
     function
-      [] -> []
-    | h' :: t' -> if f h h' then fn h t' else h' :: fn h t'
+      [] -> lres
+    | h :: t ->
+      if list_member eq_f h lres then fn lres t else fn (lres @ [h]) t
   in
-  function
-    [] -> []
-  | h :: t -> let t' = fn h t in h :: list_remove_doubles f t'
+  fn [] l 
 ;;
 
 assert (list_remove_doubles ( = ) [1; 2; 2; 3; 3] = [1; 2; 3]);;
