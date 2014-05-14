@@ -682,9 +682,9 @@ let dico_st_refill () =
   and _ = dico_st#replace name_strat_rewrite
       (new strategy (Try_ [ new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Rewriting (true, LOS_defined [R], Pos_all))))))) ;
                             new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Equational_rewriting Pos_all)))))) ;
-                            new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Contextual_rewriting (new strategy (Named_strategy "recursive"),
-                                                                                LOS_defined [R;C;L],
-                                                                                Pos_all))))))) ;
+                            (* new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Contextual_rewriting (new strategy (Named_strategy "recursive"), *)
+                            (*                                                     LOS_defined [R;C;L], *)
+                            (*                                                     Pos_all))))))) ; *)
                             new strategy (Inference_rule (Simplify (Id, new strategy (Inference_rule (Id_st (Partial_case_rewriting (LOS_defined [R;L], Pos_all)))))))]))
 
   and _ = dico_st#replace name_strat_recursive

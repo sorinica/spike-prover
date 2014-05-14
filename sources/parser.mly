@@ -536,7 +536,7 @@ let del_minmax c =
     if len == 0 then (l, l') 
     else 
       try 
-	let l1 = List.hd l in
+	let l1 = List.hd l' in
 	split_f (l1::l) (List.tl l') (len - 1)
       with Failure "hd" ->
 	failwith "split_f"
@@ -556,7 +556,13 @@ let del_minmax c =
     let (lp1, lp) = List.fold_right (fun (lposs, lit) (llp, llits) -> (lposs @ llp, lit :: llits)) lp' ([],[])  in
     let nlneg = lp1 @ ln1 @ ln in
     let nlpos = lp in
-    c#build nlneg nlpos
+    let nlneg' = expand_sorts_list nlneg in
+    let nlpos' = expand_sorts_list nlpos in
+    let () = if not !specif_parameterized && not (test_well_founded_cl (nlneg', nlpos')) then 
+      failwith "clause3: undefined types"
+    in
+    new clause (nlneg', nlpos') [] ("",0,([],[])) 
+    (* c#build nlneg' nlpos' *)
   ) mm
     %}
 
@@ -1467,7 +1473,7 @@ specif_conjectures:
       if !specif_LA_defined && not !specif_Rmaxs0_defined && not !specif_Rmins0_defined && not !specif_Rzmm_defined then List.fold_right (fun c l -> (del_minmax c) @ l) $4 [] 
       else $4
     in
-    Queue.add (Conjectures_token lc ) yy_queue
+    Queue.add (Conjectures_token lc) yy_queue
   }
 | TOK_CONJECTURES TOK_COLUMN
   { }
