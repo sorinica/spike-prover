@@ -38,7 +38,7 @@ let rec purify t =
 
 
 let rec list_propagate t i = 
-  let () = buffered_output ((fn_spaces i) ^ "list_propagate t = " ^ t#string) in
+  (* let () = buffered_output ((fn_spaces i) ^ "list_propagate t = " ^ t#string) in *)
   match t#content with
     | Var_univ _ | Var_exist _ -> t
     | Term (f, l, _) -> 
