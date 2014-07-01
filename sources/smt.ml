@@ -128,11 +128,19 @@ let sprint_lit lit =
 
 
 
-let print_and l = 
-  if l = [] then ""
-  else if List.length l = 1 then let fst = (List.hd l) in sprint_lit fst
+let print_and l lnat = 
+  if l == [] then
+    if lnat == [] then ""
+    else 
+      if List.length lnat == 1 then List.hd lnat
+      else Printf.sprintf "(and %s)" (sprint_list "  " (fun y -> y) lnat)
   else
-    Printf.sprintf "(and %s)" (sprint_list "  " (fun y -> sprint_lit y) l)
+    if lnat == [] then 
+      if List.length l = 1 then let fst = (List.hd l) in sprint_lit fst
+      else
+	Printf.sprintf "(and %s)" (sprint_list "  " (fun y -> sprint_lit y) l)
+    else
+      Printf.sprintf "(and %s %s)" (sprint_list "  " (fun y -> sprint_lit y) l) (sprint_list "  " (fun y -> y) lnat)
 
 let print_or l = 
   if l = [] then ""
@@ -144,7 +152,7 @@ let print_axiom out c is_axiom =
   let vars = c#variables in
   let ln = c#negative_lits in
   let lp = c#positive_lits in
-
+  let lnat = ref [] in
   let body () = 
     let list_var lv = 
       if List.length lv <> 0 then
@@ -153,7 +161,8 @@ let print_axiom out c is_axiom =
     in
     
     
-    let lvars = sprint_list " " (fun (id, s, _) -> "(u" ^ (string_of_int id) ^ " " ^ (sprint_sort_smt s) ^ ")") vars in 
+    let lvars = sprint_list " " (fun (id, s, _) -> 
+      let _ = if String.compare (sprint_sort_smt s) "Int" == 0 then lnat := ("(<= 0 u" ^ (string_of_int id) ^ ")") :: !lnat  in "(u" ^ (string_of_int id) ^ " " ^ (sprint_sort_smt s) ^ ")") vars in 
     let _ = if is_axiom then Printf.fprintf out "\n(assert " else Printf.fprintf out "\n(assert (not " in
     let _ = if List.length ln == 0 then 
       if lvars <> "" then Printf.fprintf out "(forall (  %s  ) %s)" lvars  (print_or lp) 
@@ -161,11 +170,11 @@ let print_axiom out c is_axiom =
       else
 	let conseq = (print_or lp) in
 	if lvars <> "" then 
-	  if List.length lp == 0 then 	Printf.fprintf out "(forall (  %s  ) (not %s))" lvars (print_and ln)
-	  else 	Printf.fprintf out "(forall (  %s  ) (=> %s %s))" lvars (print_and ln) (print_or lp)
+	  if List.length lp == 0 then 	Printf.fprintf out "(forall (  %s  ) (not %s))" lvars (print_and ln !lnat)
+	  else 	Printf.fprintf out "(forall (  %s  ) (=> %s %s))" lvars (print_and ln !lnat) (print_or lp)
 	else 
-	  if List.length lp == 0 then Printf.fprintf out "not %s" (print_and ln) 
-	  else Printf.fprintf out "=> %s %s" (print_and ln) conseq
+	  if List.length lp == 0 then Printf.fprintf out "not %s" (print_and ln !lnat) 
+	  else Printf.fprintf out "=> %s %s" (print_and ln !lnat) conseq
     in 
     if is_axiom then Printf.fprintf out ")\n" else Printf.fprintf out "))\n"
   in
@@ -295,7 +304,7 @@ let print_smt c l1 l2 =
     let () =flush out in
     let () = close_out out in
     let n_print_string s = buffered_output s in 
-    let oc_in, oc_out = Unix.open_process  ("/Users/sorin/Downloads/z3-cade24/build/z3 -T:2 " ^ name ^ ".smt2") in
+    let oc_in, oc_out = Unix.open_process  ( !z3_path ^ " -T:1" ^ " " ^ name ^ ".smt2") in
     let () = try 
 	       while true do
 		 let line = input_line oc_in in

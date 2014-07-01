@@ -610,7 +610,7 @@ let rec speclist =
     ("-dracula", Arg.Set dracula_mode, ": D-proof mode") ;
     ("-debug", Arg.Set debug_mode, ": debug mode") ;
     ("-exclude_nullary", Arg.Set exclude_nullary_mode, ": don't add nullary variables to induction variables") ;
-    ("-smt", Arg.Set smt_mode, ": for specifications including `use' applies the z3 SMT solver on each conjecture. The specification format for z3 is smt2.") ;
+    ("-smt", Arg.String (fun s -> let _ =  smt_mode:= true in z3_path := s), ": requires the path for the Z3 SMT solver for specifications including `use'. The specification format for z3 is smt2.") ;
     ("-help", Arg.Unit (fun () -> let () = Arg.usage speclist usage_string in incr specif_counter), ": print this message") ;
     ("-include_nullary", Arg.Clear exclude_nullary_mode, ": add nullary variables to induction variables (default)") ;
     ("-k", Arg.Set continue_mode, ": continue even if a proof fails") ;

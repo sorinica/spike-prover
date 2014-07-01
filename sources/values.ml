@@ -61,6 +61,8 @@ let smt_inline = ref "";;
 
 let smt_mode = ref false;;
 
+let z3_path = ref "";;
+
 let coqc_spec_mode = ref false;;
 
 let coq_inline = ref "";;
