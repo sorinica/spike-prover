@@ -488,6 +488,7 @@ let del_minmax c =
 	  let res = List.fold_right (
 	    fun l1'  lres -> 
 	      if f == id_symbol_min || f == id_symbol_max then
+		(* let _ = buffered_output ("Here delt_minmax is " ^ (dico_const_string#find f) ^ " and value is " ^ (string_of_int f)) in *)
 		let (l1, t1) = List.hd l1' in
 		let (l2, t2) = List.hd (List.tl l1') in
 		let tless = new term (Term (id_symbol_less, [t1;t2], id_sort_bool)) in
@@ -1470,7 +1471,7 @@ specif_conjectures:
   { buffered_output "\nSuccessfully parsed conjectures" ;
     print_clause_list $4 ;
     let lc = 
-      if !specif_LA_defined && not !specif_Rmaxs0_defined && not !specif_Rmins0_defined && not !specif_Rzmm_defined then List.fold_right (fun c l -> (del_minmax c) @ l) $4 [] 
+      if !specif_LA_defined && not !specif_Rmaxs0_defined && not !specif_Rmins0_defined && not !specif_Rzmm_defined then  let res = List.fold_right (fun c l -> (del_minmax c) @ l) $4 [] in res
       else $4
     in
     Queue.add (Conjectures_token lc) yy_queue

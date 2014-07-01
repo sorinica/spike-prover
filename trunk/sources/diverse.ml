@@ -1405,7 +1405,7 @@ let matrix_map f =
 
 (* Similar to map but raise an exception if the catched exception is 
    different of ex *)
-let list_special_map f ex  =
+let list_special_map f ex s  =
   let rec fn = 
   function
       [] -> []
@@ -1415,13 +1415,14 @@ let list_special_map f ex  =
 	  let res = f h in res :: resl 
 	with
 	   e  -> if e = ex then 
-	      (* let () = buffered_output ("\nThe clause " ^ h#string ^ " is cleared.\n\n")  in *)
+	      let () = buffered_output (s ^ h#string ^ "\n\n")  in
 	      resl
 	    else 
 	      raise e
   in
   fn
 ;;
+
 
 
 (* replaces the even strings in the list with "\n" *)

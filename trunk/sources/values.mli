@@ -20,7 +20,8 @@ val incr_indent : string ref -> unit
 val decr_indent : string ref -> unit
 val specif_parameterized : bool ref
 val debug_mode : bool ref
-val harvey_mode : bool ref
+val smt_inline : string ref
+val smt_mode : bool ref
 val coqc_spec_mode : bool ref
 val coq_inline : string ref
 val coqc_mode : bool ref

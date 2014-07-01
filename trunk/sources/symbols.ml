@@ -914,6 +914,7 @@ let id_symbol_minus_nat = new_function ();;
 let id_symbol_min = new_function ();;
 let id_symbol_max = new_function ();;
 
+(* let id_dummy = new_function ();; *)
 
 let add_nat_specif () =
   let () = add_bool_specif () in
@@ -946,7 +947,7 @@ let add_nat_specif () =
   in
   sort_counter := 2; (* because we have nat, bool *)
   constructor_counter := 4; (* true and false, 0 and s*)
-  function_counter := -10; (* <, <=, >, >=, +, *, -, minus, min, max *)
+  function_counter := -11; (* <, <=, >, >=, +, *, -, minus, min, max *)
   add_specif "nat" l_sorts l_symbols;
   nat_specif_defined := true;
   specif_LA_defined := true

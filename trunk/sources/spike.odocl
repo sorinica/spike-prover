@@ -32,7 +32,7 @@ Delete_set
 Eliminate_set 
 Auto_simplification
 Complement 
-Harvey 
+Smt 
 Strategies
 Augment
 Extract

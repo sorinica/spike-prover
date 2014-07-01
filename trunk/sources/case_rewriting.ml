@@ -412,7 +412,7 @@ else
 					!indent_string ^ c#string ^ "\n\n" ^
 					!indent_string ^ "at position " ^ (sprint_clausal_position (b, n, p)) ^ " on \t" ^ (c#subterm_at_position (b, n, p))#string) in
 	    let () = if is_add_hyp && is_strict then 
-	      let () = hypotheses_system#append [c] in buffered_output ("\n\n The current clause is added to H since the new conjectures are smaller : ")  
+	      let () = hypotheses_system#append [c] (fun c -> ()) in buffered_output ("\n\n The current clause is added to H since the new conjectures are smaller : ")  
 	    in
 	    let () = if new_cond <> [] 
 	    then 

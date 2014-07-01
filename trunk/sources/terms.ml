@@ -827,7 +827,7 @@ class term c_t' =
 				| Abstr_sort0 _ | Abstr_sort1 _ | Abstr_sort2 _ -> failwith "compute_string_coq: parameterized specifications not yet treated"
 			     )
 	| Term (f, l, _) ->
-            let v = try dico_const_string#find f with Not_found -> failwith "raising Not_found in compute_basic_string" in
+            let v = try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) with Not_found -> failwith "raising Not_found in compute_basic_string" in
             let a = sprint_list ":: " (fun x -> x#compute_string_coq with_model) l in
               "(Term id_" ^ v ^ (if l == [] then " nil)" else " (" ^ a ^ "::nil))")
 
@@ -839,7 +839,7 @@ class term c_t' =
 				| Abstr_sort0 _ | Abstr_sort1 _ | Abstr_sort2 _ -> failwith "compute_string_coq: parameterized specifications not yet treated"
 			     )
 	| Term (f, l, _) ->
-            let v = try dico_const_string#find f with Not_found -> failwith "raising Not_found in compute_basic_string" in
+            let v = try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) with Not_found -> failwith "raising Not_found in compute_basic_string" in
             let a = sprint_list " " (fun x -> x#compute_string_coq_with_quantifiers lv) l in
               (if l == [] then "" else "(") ^ v ^ (if l == [] then "" else " ") ^ a ^ (if l == [] then "" else ")")
 	      
@@ -1236,24 +1236,27 @@ let subst_is_primitive s =
 
 (* The inference rules bitstream. These values set bits to true once a rule has failed on a certain clause.
    Next time the same rule is to be applied, failure will occur at once or special cases will be triggered *)
-let contextual_rewriting_bit        = get_bitstream [1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
-let equational_rewriting_bit        = get_bitstream [0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
-let rewriting_bit       = get_bitstream [0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
-let partial_case_rewriting_bit      = get_bitstream [0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
-let total_case_rewriting_bit        = get_bitstream [0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0]
-let induction_bit                   = get_bitstream [0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0]
-let positive_decomposition_bit      = get_bitstream [0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0]
-let negative_decomposition_bit      = get_bitstream [0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0]
-let positive_clash_bit              = get_bitstream [0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0]
-let tautology_bit                   = get_bitstream [0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0]
-let subsumption_bit                 = get_bitstream [0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0]
-let negative_clash_bit              = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0]
-let eliminate_redundant_literal_bit = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0]
-let eliminate_trivial_literal_bit   = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0]
-let auto_simplification_bit         = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0]
-let complement_bit                  = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0]
-let congruence_closure_bit          = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0]
-let augmentation_bit                = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1]
+
+let contextual_rewriting_bit        = get_bitstream [1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
+let equational_rewriting_bit        = get_bitstream [0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
+let rewriting_bit       = get_bitstream [0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
+let partial_case_rewriting_bit      = get_bitstream [0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
+let total_case_rewriting_bit        = get_bitstream [0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
+let induction_bit                   = get_bitstream [0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
+let positive_decomposition_bit      = get_bitstream [0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0]
+let negative_decomposition_bit      = get_bitstream [0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0]
+let positive_clash_bit              = get_bitstream [0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0]
+let tautology_bit                   = get_bitstream [0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0]
+let subsumption_bit                 = get_bitstream [0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0]
+let negative_clash_bit              = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0]
+let eliminate_redundant_literal_bit = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0]
+let eliminate_trivial_literal_bit   = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0]
+let auto_simplification_bit         = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0]
+let complement_bit                  = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0]
+let congruence_closure_bit          = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0]
+let augmentation_bit                = get_bitstream [0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0]
+let smt_bit                          = get_bitstream [1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0]
+let la_bit                           = get_bitstream [1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1]
 
 (* Dictionay for the list of individuals of nullary sorts *)
 let dico_nullary_individuals = (new dictionary 11: (sort, (int * term list)) dictionary)

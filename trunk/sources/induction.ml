@@ -454,7 +454,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 		    (* add the treated conjecture as premise  *)
 		  let () = 
 		    if add_hyp then 
-		      hypotheses_system#append [c] 
+		      hypotheses_system#append [c] (fun c -> ())
 		  in
 		  let is_case_analysis = List.for_all (fun (cinst, res) -> if !dracula_mode then true else clause_geq false false cinst res) lcres in
 		    if is_case_analysis then 

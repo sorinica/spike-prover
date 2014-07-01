@@ -21,6 +21,8 @@ open Normalize
 open Critical_context_set
 open Context
 open Induction
+open Smt
+
   (* Arguments for induction are:
      - a boolean specifying whether or not we print the result of this rule
      - a given clause
@@ -322,7 +324,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
         then (* réussite *)
 	  let () = result := !new_eq @ !result in
 (*           let () = conjectures_system#init ((list_all_but c_number e) @ !new_eq)  in *)
-          let () = hypotheses_system#init (c::h)  in
+          let () = hypotheses_system#init (c::h) (fun c -> ()) in
           let () = decr_indent indent_string in
           let () =
             if verbose
@@ -332,8 +334,8 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
           true
         else
           let () = decr_indent indent_string in
-          let () = conjectures_system#init e in
-          let () = hypotheses_system#init h  in
+          let () = conjectures_system#init e (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
+          let () = hypotheses_system#init h (fun c -> ()) in
           false in
 
   (* 5: attempt generate on different sets of symbols *)
@@ -345,7 +347,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
           let () = buffered_output (!indent_string ^ "Computing test sets on " ^ (sprint_induction_position_specification l')) in
           let ts = condition st l' in
           success_or_fail pos ts
-            or
+      ||
           fn l' t in
     match arg_indpos with
       [] -> fn Ind_pos_void !induction_symbols_priorities

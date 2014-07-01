@@ -158,7 +158,7 @@ val syntactic_equal : < syntactic_equal : 'a; .. > -> 'a
 val matrix_exists : ('a -> bool) -> 'a list list -> bool
 val matrix_map : ('a -> 'b) -> 'a list list -> 'b list list
 val list_special_map :
-  ((< string : string; .. > as 'a) -> 'b) -> exn -> 'a list -> 'b list
+  ((< string : string; .. > as 'a) -> 'b) -> exn -> string -> 'a list -> 'b list
 val cat_nonempty_strings : string list -> string
 val gcd : int -> int -> int
 val lcm : int -> int -> int 
