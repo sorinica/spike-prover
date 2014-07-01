@@ -229,82 +229,83 @@ type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CR
       method variables : (Symbols.var * Symbols.sort * bool) list
     end
 val preprocess_conjecture : 'a clause -> 'a clause list
-  class ['a] system :
-    'a list ->
-    object ('b)
-      method all_but : int -> 'a list
-      method append : 'a list -> unit
-      method clear : unit
-      method content : 'a list
-      method copy : 'b
-      method current_el : 'a
-      method exists : ('a -> bool) -> bool
-      method init : 'a list -> unit
-      method is_empty : bool
-      method iter : ('a -> unit) -> unit
-      method ith : int -> 'a
-      method length : int
-      method print : string -> unit
-      method replace : int -> 'a -> unit
-      method replace_w_list : int -> 'a list -> unit
-      method sprint_numbers : string
-      val mutable content : 'a list
-      constraint 'a =
-        < both_sides : Terms.term * Terms.term;
-                 build : (< both_sides : (< syntactic_equal : 'f -> bool;
+         class ['a] system :
+           'a list ->
+           object ('b)
+             constraint 'a =
+               < both_sides : Terms.term * Terms.term;
+                 build : (< both_sides : (< syntactic_equal : 'd -> bool;
                                             .. >
-                                          as 'f) *
-                                         'f;
-                            is_diff : bool; syntactic_equal : 'e -> bool;
+                                          as 'd) *
+                                         'd;
+                            is_diff : bool; syntactic_equal : 'c -> bool;
                             .. >
-                          as 'e)
+                          as 'c)
                          list ->
-                         (< syntactic_equal : 'g -> bool; .. > as 'g) list ->
+                         (< syntactic_equal : 'e -> bool; .. > as 'e) list ->
                          'a;
-                 content : 'e list * 'g list; equal : 'a -> bool;
-                 fill_peano_context : unit; negative_lits : 'h list;
-                 number : int; positive_lits : 'i list; string : string;
-                 syntactic_equal : 'a -> bool; .. >
-    end
-  class ['a] l_system :
-    'a list ->
-    object ('b)
-      method all_but : int -> 'a list
-      method append : 'a list -> unit
-      method clear : unit
-      method content : 'a list
-      method copy : 'b
-      method current_el : 'a
-      method exists : ('a -> bool) -> bool
-      method init : 'a list -> unit
-      method is_empty : bool
-      method iter : ('a -> unit) -> unit
-      method ith : int -> 'a
-      method length : int
-      method print : string -> unit
-      method replace : int -> 'a -> unit
-      method replace_w_list : int -> 'a list -> unit
-      method sprint_numbers : string
-      val mutable content : 'a list
-      constraint 'a =
-        < both_sides : Terms.term *
-                              Terms.term;
-                 build : (< both_sides : (< syntactic_equal : 'f -> bool;
+                 content : 'c list * 'e list; equal : 'a -> bool;
+                 fill_peano_context : unit; has_bit : int -> bool;
+                 negative_lits : 'f list; number : int;
+                 positive_lits : 'g list; set_bit : int -> unit;
+                 string : string; syntactic_equal : 'a -> bool; .. >
+             val mutable content : 'a list
+             method all_but : int -> 'a list
+             method append : 'a list -> ('a -> unit) -> unit
+             method clear : unit
+             method content : 'a list
+             method copy : 'b
+             method current_el : 'a
+             method exists : ('a -> bool) -> bool
+             method init : 'a list -> ('a -> unit) -> unit
+             method is_empty : bool
+             method iter : ('a -> unit) -> unit
+             method ith : int -> 'a
+             method length : int
+             method print : string -> unit
+             method replace : int -> 'a -> ('a -> unit) -> unit
+             method replace_w_list : int -> 'a list -> ('a -> unit) -> unit
+             method sprint_numbers : string
+           end
+           class ['a] l_system :
+           'a list ->
+           object ('b)
+             constraint 'a =
+               < both_sides : Terms.term * Terms.term;
+                 build : (< both_sides : (< syntactic_equal : 'd -> bool;
                                             .. >
-                                          as 'f) *
-                                         'f;
-                            is_diff : bool; syntactic_equal : 'e -> bool;
+                                          as 'd) *
+                                         'd;
+                            is_diff : bool; syntactic_equal : 'c -> bool;
                             .. >
-                          as 'e)
+                          as 'c)
                          list ->
-                         (< syntactic_equal : 'g -> bool; .. > as 'g) list ->
+                         (< syntactic_equal : 'e -> bool; .. > as 'e) list ->
                          'a;
-                 content : 'e list * 'g list; equal : 'a -> bool;
-                 fill_peano_context : unit; negative_lits : 'h list;
-                 number : int; positive_lits : 'i list;
-                 rename_from_zero : 'a; string : string;
+                 content : 'c list * 'e list; equal : 'a -> bool;
+                 fill_peano_context : unit; has_bit : int -> bool;
+                 negative_lits : 'f list; number : int;
+                 positive_lits : 'g list; rename_from_zero : 'a;
+                 set_bit : int -> unit; string : string;
                  syntactic_equal : 'a -> bool; try_to_orient : 'a; .. >
-    end
+             val mutable content : 'a list
+             method all_but : int -> 'a list
+             method append : 'a list -> ('a -> unit) -> unit
+             method clear : unit
+             method content : 'a list
+             method copy : 'b
+             method current_el : 'a
+             method exists : ('a -> bool) -> bool
+             method init : 'a list -> ('a -> unit) -> unit
+             method is_empty : bool
+             method iter : ('a -> unit) -> unit
+             method ith : int -> 'a
+             method length : int
+             method print : string -> unit
+             method replace : int -> 'a -> ('a -> unit) -> unit
+             method replace_w_list : int -> 'a list -> ('a -> unit) -> unit
+             method sprint_numbers : string
+           end
 class ['a] rw_system :
   'a list ->
   object

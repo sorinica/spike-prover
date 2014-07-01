@@ -6,14 +6,9 @@
 #
 
 NAME = spike
-OCAMLBUILD = ocamlbuild -use-ocamlfind 
+OCAMLBUILD = ocamlbuild -use-ocamlfind
 
-SOURCES_ML	= values.ml io.ml diverse.ml dicos.ml pi.ml \
-		  symbols.ml terms.ml context.ml order.ml npolynoms.ml max.ml min.ml zmaxmin.ml natlist.ml polynoms.ml terms_parser.ml literals.ml \
-		  clauses.ml coq.ml dummies.ml normalize.ml test_sets.ml critical_context_set.ml shell.ml \
-		  contextual_rewriting.ml case_rewriting.ml induction.ml induction_obs.ml generate_eq.ml \
-		  decomposition_set.ml delete_set.ml eliminate_set.ml auto_simplification.ml complement.ml harvey.ml \
-		  strategies.ml augment.ml extract.ml
+SOURCES_ML	= augment.ml	eliminate_set.ml pi.ml auto_simplification.ml	extract.ml polynoms.ml case_rewriting.ml generate_eq.ml shell.ml clauses.ml induction.ml	smt.ml complement.ml induction_obs.ml spike.ml context.ml io.ml strategies.ml contextual_rewriting.ml literals.ml symbols.ml coq.ml max.ml terms.ml critical_context_set.ml min.ml terms_parser.ml decomposition_set.ml misc.ml test_sets.ml delete_set.ml natlist.ml values.ml dicos.ml normalize.ml zmaxmin.ml diverse.ml npolynoms.ml dummies.ml order.ml
 
 TARGET		= spike.ml
 
@@ -29,7 +24,7 @@ build:
 	mv spike.d.byte spike_bc
 
 nc:
-	$(OCAMLBUILD) -libs unix -libs str spike.native
+	$(OCAMLBUILD) -annot -libs unix -libs str spike.native
 	mv spike.native spike_nc
 
 

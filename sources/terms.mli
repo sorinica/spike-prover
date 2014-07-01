@@ -289,6 +289,8 @@ val eliminate_redundant_literal_bit : int
 val eliminate_trivial_literal_bit : int
 val auto_simplification_bit : int
 val complement_bit : int
+val smt_bit : int
+val la_bit : int
 val congruence_closure_bit : int
 val dico_nullary_individuals :
   (Symbols.sort, int * term list) Dicos.dictionary

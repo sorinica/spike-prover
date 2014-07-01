@@ -108,6 +108,7 @@ let ident = '_' * ident_core '_' *
 let filename_ident = [ 'A'-'Z' 'a'-'z' '_' '0'-'9' '=' '+' '-' '/' '.' ]
 let comment = "%"[ ^'\010' ]*
 let coq_comment = "$"[ ^'\010' ]*
+let smt_comment = "@"[ ^'\010' ]*
 let string =  '[' integer ']' [ ^'\010' ]*
 
 rule token = parse
@@ -115,6 +116,7 @@ rule token = parse
 | newline                               { let () = incr linenumber in token lexbuf }
 | comment                               { token lexbuf }
 | coq_comment                           { let s = Lexing.lexeme lexbuf in let s' = String.sub s 1 ((String.length s) -1) in coq_inline := !coq_inline ^ s' ^ "\n"; token lexbuf}
+| smt_comment                           { let s = Lexing.lexeme lexbuf in let s' = String.sub s 1 ((String.length s) -1) in smt_inline := !smt_inline ^ s' ^ "\n"; token lexbuf}
 | ":"                                   { let () = gprint "TOK_COLUMN" in TOK_COLUMN }
 | ","                                   { let () = gprint "TOK_COMA" in TOK_COMA }
 | ";"                                   { let () = gprint "TOK_SEMICOLUMN" in TOK_SEMICOLUMN }

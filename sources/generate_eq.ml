@@ -317,7 +317,7 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
     else () 
   in
   (* add the treated conjecture as premise  *)
-  let () = if add_hyp then hypotheses_system#append [c] in
+  let () = if add_hyp then hypotheses_system#append [c] (fun c -> ()) in
   
   let () = i := 0 in
   

@@ -27,6 +27,7 @@ open Auto_simplification
 open Complement
 open Test_sets
 open Normalize
+open Smt
 
 let print_goals print_history =
 
@@ -370,8 +371,8 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 	if cxt2 <> empty_cxt then 
 	  let brez = st#apply_new_goal verbose c cxt2 is_strict in
 	  let new_goals = conjectures_system#content in 
-	  let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture e)) in (* restore *)
-	  let () = hypotheses_system#init h in
+	  let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture e)) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in (* restore *)
+	  let () = hypotheses_system#init h (fun c -> ()) in
 	  if brez then new_goals else failwith "apply_rm"
 	else
 	  failwith "apply_at_pos: the Id cannot exist in a list of reasoning modules"
@@ -431,7 +432,7 @@ class strategy (cs: concrete_strategy) =
 			      (* success *)
 			      (* 				let () = List.iter (fun c -> write_pos_clause c) l_new_conj in  *)
 			      (* 				let () = List.iter (fun c -> print_detailed_clause c) l_new_conj in  *)
-			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) in
+			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 			      (* 				let () = if !broken_order then () else hypotheses_system#append [phi] in *)
 			      true
 			    with (Failure "apply_rm") -> 
@@ -453,7 +454,7 @@ class strategy (cs: concrete_strategy) =
 			      (* 				let () = List.iter (fun c -> write_pos_clause c) l_new_conj in  *)
 			      (* 				let () = List.iter (fun c -> print_detailed_clause c) l_new_conj in  *)
 			      (* 				let () = List.iter (fun c -> print_detailed_position_clause c) l_new_conj in  *)
-			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) in
+			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 			      true
 			    with (Failure "apply_rm") -> 	
 			      (* 				let () = write_pos_clause phi in  *)
@@ -471,7 +472,7 @@ class strategy (cs: concrete_strategy) =
 			      if l_new_conj != [] then 
 				  failwith ("Delete failure on " ^ (rm_to_string rm) ^ " with " ^ phi#string)
 			      else
-				let () = conjectures_system#replace_w_list phi_number [] in
+				let () = conjectures_system#replace_w_list phi_number [] (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 				true
 			    with (Failure "apply_rm") -> 
 			      (* 				let () = write_pos_clause phi in  *)
@@ -487,7 +488,7 @@ class strategy (cs: concrete_strategy) =
 			      let l_new_conj = apply_rm rm cxt empty_cxt phi dummy_st is_strict  pp level verbose
 			      in (* success *)
 			      (* 				let () = List.iter (fun c -> if !maximal_output then write_pos_clause c) l_new_conj in  *)
-			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) in
+			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 			      true
 			    with (Failure "apply_rm") -> 
 			      (* 				let () = write_pos_clause phi in  *)
@@ -499,17 +500,17 @@ class strategy (cs: concrete_strategy) =
 			      Goto_smallest ->
 				let i = list_position_smallest_el (fun y x -> clause_greater false false x y) conjectures_system#content in
 				let l, l' = list_split_at_n i conjectures_system#content in
-				let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) in
+				let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 				true
 			    | Goto_greatest ->
 				let i = list_position_smallest_el (clause_greater false false) conjectures_system#content in
 				let l, l' = list_split_at_n i conjectures_system#content in
-				let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) in
+				let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 				true
 			    | Goto_number i ->
 				try
 				  let l, l' = list_split_at_n i conjectures_system#content in
-				  let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) in
+				  let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 				  true
 				with (Failure "list_split_at_n") -> false 
 		  in
@@ -585,8 +586,8 @@ class strategy (cs: concrete_strategy) =
     method apply_to_subgoals verbose (_: (peano_context) clause) (hyps: (peano_context) clause list) (goals: (peano_context) clause list) (is_strict: bool) =
 
       let e, h, l = (conjectures_system#content, hypotheses_system#content, lemmas_system#content) in
-      let () = hypotheses_system#init hyps in 
-      let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture goals)) in
+      let () = hypotheses_system#init hyps (fun c -> ()) in 
+      let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture goals)) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
       let () = buffer_next_level () in
       let boolval =
         try self#apply verbose ([],[]) is_strict && proof_found () with
@@ -600,15 +601,15 @@ class strategy (cs: concrete_strategy) =
       in
       let e' = List.map fn e in
       let () = buffer_collapse_level ()
-      and () = conjectures_system#init (List.flatten (List.map preprocess_conjecture e'))
-      and () = lemmas_system#init l
-      and () = hypotheses_system#init h in
+      and () = conjectures_system#init (List.flatten (List.map preprocess_conjecture e')) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content)
+      and () = lemmas_system#init l  (fun c -> ())
+      and () = hypotheses_system#init h (fun c -> ()) in
       boolval
 
     (* For generate *)
     method apply_new_goal verbose (c: (peano_context) clause) cxt is_strict =
       let () = real_conjectures_system := conjectures_system#content in
-      let () = conjectures_system#init [c] in (* (List.flatten (List.map preprocess_conjecture [c])) in *)
+      let () = conjectures_system#init [c] (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in (* (List.flatten (List.map preprocess_conjecture [c])) in *)
       try
         self#apply verbose cxt is_strict
       with Proof -> true
@@ -616,7 +617,7 @@ class strategy (cs: concrete_strategy) =
 
     (* For generate *)
     method apply_new_goal_at_pos verbose p (c: (peano_context) clause) level cxt (is_strict: bool) =
-      let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture [c])) in
+      let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture [c])) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
       try
         self#apply_at_pos verbose p (level + 1) cxt is_strict 
       with Proof -> true

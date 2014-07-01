@@ -73,22 +73,22 @@ Module Specif.
   Inductive symb : Set := \n"
   in
   let all_symb = List.fold_right (fun f l -> if f == 0 || f == 1 then l else f :: l) (!all_constructors @ !all_defined_functions) [] in
-  let symb = List.fold_right (fun f l -> "  | id_" ^ (dico_const_string#find f) ^ "\n" ^ l)  all_symb   "" in 
+  let symb = List.fold_right (fun f l -> "  | id_" ^ (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) ^ "\n" ^ l)  all_symb   "" in 
   let arity = "  .
 
   Definition arity (f:symb) := 
     match f with\n" in
-  let arity_iter =  List.fold_right (fun f l -> let (l_ar,r_ar) = dico_arities#find f in ("    | id_" ^ (dico_const_string#find f) ^ " => term_spec.Free " ^ (string_of_int (l_ar+r_ar)) ^ "\n" ^ l)) all_symb "" in
+  let arity_iter =  List.fold_right (fun f l -> let (l_ar,r_ar) = dico_arities#find f in ("    | id_" ^ (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) ^ " => term_spec.Free " ^ (string_of_int (l_ar+r_ar)) ^ "\n" ^ l)) all_symb "" in
   let arity_final = "    end. 
   
 " in
   let status = "Definition status (f:symb) := 
      match f with\n" in
-  let status_iter = List.fold_right (fun f l -> ("    | id_" ^ (dico_const_string#find f) ^ " => rpo." ^ (match dico_id_status#find f with Left| Right -> "Lex"| Multiset -> "Mul") ^ "\n") ^ l)  all_symb   "" in
+  let status_iter = List.fold_right (fun f l -> ("    | id_" ^ (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) ^ " => rpo." ^ (match dico_id_status#find f with Left| Right -> "Lex"| Multiset -> "Mul") ^ "\n") ^ l)  all_symb   "" in
   let status_final = "\n    end." in
   let prec = "\n  Definition index (f:symb) := 
      match f with\n" in
-  let prec_iter = List.fold_right (fun f l -> ("    | id_" ^ (dico_const_string#find f) ^ " => " ^ (string_of_int (List.assoc f prec_l)) ^ "\n") ^ l)  all_symb  "" in
+  let prec_iter = List.fold_right (fun f l -> ("    | id_" ^ (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) ^ " => " ^ (string_of_int (List.assoc f prec_l)) ^ "\n") ^ l)  all_symb  "" in
   let prec_final = "    end. 
 
   Definition max_size := " ^ (string_of_int 100 (*  (2 * max_term_size + 1) *) ) ^ ".
@@ -237,7 +237,7 @@ in
 
  let constructor_term_res sort_res =
     let lcons = ref [] in
-      (dico_const_profile#iter (fun i ls -> if (List.length ls) == 1 && List.hd ls == sort_res && is_constructor i then lcons := (dico_const_string#find i) :: !lcons ));
+      (dico_const_profile#iter (fun i ls -> if (List.length ls) == 1 && List.hd ls == sort_res && is_constructor i then lcons := (let s = dico_const_string#find i in if String.compare s "+" == 0 then "plus" else s) :: !lcons ));
       if !lcons == [] then
   	(* 	give a new chance to	build a constructor term  *)
   	let lcons_i = ref [] in
@@ -248,11 +248,11 @@ in
   	    let arity = dico_const_profile#find symb in
   	    let fn_constr_arg s =
   	      let lcons_arg = ref [] in
-  	      let () = (dico_const_profile#iter (fun i ls -> if (List.length ls) == 1 && List.hd ls == s && is_constructor i then lcons_arg := (dico_const_string#find i) :: !lcons_arg )) in
+  	      let () = (dico_const_profile#iter (fun i ls -> if (List.length ls) == 1 && List.hd ls == s && is_constructor i then lcons_arg := (let s = dico_const_string#find i in if String.compare s "+" == 0 then "plus" else s) :: !lcons_arg )) in
   		if !lcons_arg == [] then failwith ("coq_induction_schema: No constant constructor  for sort " ^ (dico_sort_string#find sort_res))
   		else List.hd !lcons_arg
   	    in
-  	      "(" ^ (dico_const_string#find symb) ^ " " ^ (List.fold_right (fun arg s -> let arg_s = fn_constr_arg arg in arg_s ^ " " ^ s) (List.tl arity) "") ^ ")"
+  	      "(" ^ (let s = dico_const_string#find symb in if String.compare s "+" == 0 then "plus" else s) ^ " " ^ (List.fold_right (fun arg s -> let arg_s = fn_constr_arg arg in arg_s ^ " " ^ s) (List.tl arity) "") ^ ")"
       else List.hd !lcons
   in
  let fn_string_f f =
@@ -413,7 +413,7 @@ preambule (*^ exists_f*) ^ stuff1 ^ exists ^ stuff2
 	  if compare pat_args "" == 0 then "" else 
 	    let fun_str = 
 	      match trm#content with 
-		| Term (f, _, _) -> (try dico_const_string#find f with Not_found -> failwith "fn_case_rew: symbol not found" )
+		| Term (f, _, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) with Not_found -> failwith "fn_case_rew: symbol not found" )
 		| Var_exist _ | Var_univ _ -> failwith "fn_case_rew : lhs is a variable" 
 	    in
 	      (* (if has_hyp then "try rewrite HFabs0.\n" else  *)"\npattern " ^ pat_args ^ ". simpl " ^ fun_str ^ ". cbv beta.\n"
@@ -572,7 +572,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
     in
    let fun_str = 
       match trm#content with 
-	| Term (f, _, _) -> (try dico_const_string#find f with Not_found -> failwith "fn_case_totalrew: symbol not found" )
+	| Term (f, _, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) with Not_found -> failwith "fn_case_totalrew: symbol not found" )
 	    | Var_exist _ | Var_univ _ -> failwith "fn_case_totalrew : lhs is a variable" 
    in
 let stuff12 = ")).\napply H1. trivial_in " ^ nth_str ^ ". unfold snd. unfold F_" ^ str_case ^ ". unfold F_" ^ orig_str ^ ". rewrite_model. abstract solve_rpo_mul.\nunfold fst. unfold F_" ^ orig_str ^ ". unfold F_" ^ str_case ^ ". unfold fst in HFabs0. unfold F_" ^ str_case ^ " in HFabs0. "  

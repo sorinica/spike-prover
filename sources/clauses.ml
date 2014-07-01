@@ -19,7 +19,7 @@ open Zmaxmin
 open Npolynoms
 open Natlist
 open Diverse
-
+(* open Smt *)
 
 exception Not_Horn
 
@@ -87,17 +87,17 @@ object (self)
   method all_but i =
     list_all_but i content
 
-  method append els =
+  method append els f_smt =
     
     let els', els_equal = List.partition (fun x -> not
       (generic_list_object_member x content)) els in
     let () = List.iter (print_redundant content) els_equal in
     let els'', content' = if !resolution_mode then resolution els' content else els', content in
-    self#replace_w_list (List.length content') els'' 
+    self#replace_w_list (List.length content') els'' f_smt 
 
-  method init (c: 'a list) =
+  method init (c: 'a list) f_smt =
     content <- [];
-    self#replace_w_list 0 c
+    self#replace_w_list 0 c f_smt
 
   method is_empty =
     match content with
@@ -110,10 +110,10 @@ object (self)
   method ith i = try List.nth content i with (Failure "nth") -> failwith "ith"
 
   (* Replace nth element. Put all previous elements at the tail of the list *)
-  method replace n el =
-    self#replace_w_list n [el]
+  method replace n el f_smt =
+    self#replace_w_list n [el] f_smt
       
-  method replace_w_list n (els: 'a list) =
+  method replace_w_list n (els: 'a list) f_smt =
     let els', els_equal = List.partition (fun x -> not
       (generic_list_object_member x content)) els in
     let () = if els_equal <> [] then 
@@ -159,7 +159,7 @@ object (self)
 		  else let _ = buffered_output ("\nThe Rnatlist module refuted the conjecture " ^ c#string) in  
 		       raise Refutation 
 		with Failure "natlist_norm" -> c
-	      else c) Inconsistent els'' 
+	      else c) Inconsistent "\nThe Rnatlist module validated the conjecture " els'' 
 	  else els''
 	in
 	let els_Rzmm = 
@@ -180,7 +180,7 @@ object (self)
 		  else let _ = buffered_output ("\nThe Rzmm module refuted the conjecture " ^ c#string) in  
 		       raise Refutation 
 		with Failure "zmm_norm" -> c
-	      else c) Inconsistent els_Rnatlist 
+	      else c) Inconsistent "\nThe Rzmm module validated the conjecture " els_Rnatlist 
 	  else els_Rnatlist
 	in
 	let els_Rmins0 = 
@@ -202,7 +202,7 @@ object (self)
 		  else let _ = buffered_output ("\nThe Rmins0 module refuted the conjecture " ^ c#string) in  
 		       raise Refutation 
 		with Failure "min_norm" -> c
-	      else c) Inconsistent els_Rzmm
+	      else c) Inconsistent "\nThe Rmins0 module validated the conjecture " els_Rzmm
 	  else els_Rzmm
 	in
 	let els_Rmaxs0 = 
@@ -223,7 +223,7 @@ object (self)
 		  else let _ = buffered_output ("\nThe Rmaxs0 module refuted the conjecture " ^ c#string) in  
 		       raise Refutation 
 		with Failure "max_norm" -> c
-	      else c) Inconsistent els_Rmins0
+	      else c) Inconsistent "\nThe Rmaxs0 module validated the conjecture " els_Rmins0
 	  else els_Rmins0
 	in
 	let els_Rmps0 = 
@@ -244,15 +244,21 @@ object (self)
 		  else let _ = buffered_output ("\nThe Rmps0 module refuted the conjecture " ^ c#string) in  
 		       raise Refutation 
 		with Failure "np_norm" -> c
-	      else c) Inconsistent els_Rmaxs0 
+	      else c) Inconsistent "\nThe Rmps0 module validated the conjecture " els_Rmaxs0 
 	  else els_Rmaxs0
 	in
 	let els_LA =
 	  if els_Rmps0 == [] then [] 
 	  else if !specif_LA_defined
 	  then 
-	    let () = if !maximal_output then buffered_output "\nTrying LA + CC !\n" in 
-	    list_special_map (fun c -> let () = c#fill_peano_context in c) Inconsistent els_Rmps0
+	    if  !smt_mode then 
+	      let () = if !maximal_output then buffered_output "\nTrying the z3 SMT solver !\n" in 
+	      list_special_map (fun c -> let () = f_smt c in c) Inconsistent ("\nAn inconsistency was produced by z3 while treating ") els_Rmps0
+ 	    else
+	      let () = if !maximal_output then buffered_output "\nTrying LA + CC !\n" in 
+	      let processed = (List.filter (fun c -> (c#has_bit la_bit)) els_Rmps0) in 
+	      let to_process = (List.filter (fun c ->  not (c#has_bit la_bit)) els_Rmps0) in 
+	      processed @ (list_special_map (fun c -> let () = c#set_bit la_bit in let () = c#fill_peano_context in c) Inconsistent ("\nAn inconsistency was produced by LA + CC while treating ") to_process)
       	  else els_Rmps0
 	in
 	els_LA
@@ -277,13 +283,13 @@ class ['a] l_system (ini_l : 'a list) =
 
     inherit ['a] system ini_l
 
-    method append els =
+    method append els f_smt =
       let els1 = generic_list_object_remove_doubles els in
       let els' = List.map (fun x -> x#try_to_orient) els1 in
       let els'' = List.filter (fun x -> not (generic_list_object_member x content)) els' in
       content <- content @ els''
 
-    method init (c : 'a list) =
+    method init (c : 'a list) f_smt =
       let c' = generic_list_object_remove_doubles c in
       let c'' = List.map (fun x -> x#try_to_orient) c' in
       content <- List.map (fun x -> x#rename_from_zero) c'' ;

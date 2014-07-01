@@ -57,7 +57,9 @@ let rec indent_blank n = if n = 0 then "" else indent_blank (n-1) ^ " ";;
 
 let debug_mode = ref false;;
 
-let harvey_mode = ref false;;
+let smt_inline = ref "";;
+
+let smt_mode = ref false;;
 
 let coqc_spec_mode = ref false;;
 

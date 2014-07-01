@@ -21,7 +21,7 @@ open Parser
 open Shell
 open Delete_set
 open Normalize
-open Harvey
+open Smt
 open Coq
 
 let all_lemmas = ref [];;
@@ -115,7 +115,7 @@ let () =  main_interact  := fun () ->
 		let lit = new literal (Lit_equal (t, t)) in
 		let cl = new clause ([], [lit]) [] ("",0,([],[])) in
 		(* build current state *)
-		let () = conjectures_system#init ([cl#update_pos]) in
+		let () = conjectures_system#init ([cl#update_pos]) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 		let normal_strat = new Strategies.strategy (Named_strategy "normalize") in
 		(* proof  *)
 		let _ = 
@@ -317,7 +317,7 @@ let process_problem_token = function
       let () = buffered_output ("The strategy for augmentation is " ^ s#string) in
       true
   | Hypotheses_token l ->
-      let () = hypotheses_system#init l in
+      let () = hypotheses_system#init l (fun c -> ()) in
       true
   | Conjectures_token l ->
       let fn c = 
@@ -332,7 +332,7 @@ let process_problem_token = function
       in
       (* let () = all_conjectures_system#append l in *)
       let () = initial_conjectures := conjectures_system#content in
-      let () = lemmas_system#init !all_lemmas in
+      let () = lemmas_system#init !all_lemmas (fun c -> ()) in
       (* all_lemmas is updated with the proved conjectures from l *)
       let () = buffered_output   "\n************************  Proving  *************************" in
       let () = List.iter (fun x -> buffered_output x#string) (* conjectures_system#content *) l  in
@@ -360,7 +360,7 @@ let process_problem_token = function
       let () = buffered_output (!global_strat#string  ^ (if !dracula_mode then " mixed with DRaCuLa" else ""))in
       let () = buffered_output "************************************************************" in
       let l' = List.map fn l in
-      let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture l')) in
+      let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture l')) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
       let b =
         try
           if !global_strat#apply true ([],[]) false && proof_found ()
@@ -442,7 +442,7 @@ let process_problem_token = function
               let () = exit_code := (-1) in
               false 
       in
-      let () = hypotheses_system#init [] in
+      let () = hypotheses_system#init [] (fun c -> ()) in
       let () = buffered_output ("Elapsed time: " ^ (string_of_float (Sys.time ())) ^ " s") in
       let () = buffered_output (sprint_useful_values ()) in
       b
@@ -480,7 +480,7 @@ let process_problem_token = function
 	    res_trm @ res_tl
       in
       let old_content = complete_lemmas_system#content in
-      let () = complete_lemmas_system#init (old_content @ (fn l)) in 
+      let () = complete_lemmas_system#init (old_content @ (fn l)) (fun c -> ()) in 
       true
   | Norm_token l ->
       let f t =
@@ -594,7 +594,7 @@ let mainloop s =
          else buffered_output ("\n\nWe failed\n\n")
      else ()
    in
-   let () = if !harvey_mode then print_harvey s else () in
+   (* let () = if !smt_mode then print_smt s else () in *)
    let () = if !coqc_mode then close_out !out in
      ()
  else ()
@@ -610,7 +610,7 @@ let rec speclist =
     ("-dracula", Arg.Set dracula_mode, ": D-proof mode") ;
     ("-debug", Arg.Set debug_mode, ": debug mode") ;
     ("-exclude_nullary", Arg.Set exclude_nullary_mode, ": don't add nullary variables to induction variables") ;
-    ("-harvey", Arg.Set harvey_mode, ": output the specification in a HarVey friendly way") ;
+    ("-smt", Arg.Set smt_mode, ": for specifications including `use' applies the z3 SMT solver on each conjecture. The specification format for z3 is smt2.") ;
     ("-help", Arg.Unit (fun () -> let () = Arg.usage speclist usage_string in incr specif_counter), ": print this message") ;
     ("-include_nullary", Arg.Clear exclude_nullary_mode, ": add nullary variables to induction variables (default)") ;
     ("-k", Arg.Set continue_mode, ": continue even if a proof fails") ;
