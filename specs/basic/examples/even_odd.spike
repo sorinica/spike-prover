@@ -134,7 +134,7 @@ negative_clash_rule              = Delete(id, [negative_clash]);
 
 % instances of Simplify
 decomposition_rule = simplify(id, [negative_decomposition]);
-rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|C|R, *)]);
 total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
 
 

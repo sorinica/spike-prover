@@ -202,12 +202,12 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
         let () = c#set_bit contextual_rewriting_bit in
         false (* échec *)
     | C::t -> 
-	 (List.exists (absolutely_all_conditions C 2) cxt2) or (List.exists (absolutely_all_conditions C 1) cxt1) or fn t 
+      let res1 = (List.exists (absolutely_all_conditions C 2) cxt2) or (List.exists (absolutely_all_conditions C 1) cxt1) in let res2 = fn t  in res1 or res2
     | R::t ->
         if c#has_bit contextual_rewriting_bit
         then fn t
-        else rewrite_system#exists (all_conditions R 0) or fn t
-    | L::t -> lemmas_system#exists (lemmas_all_conditions L) or fn t 
+        else let res1 = rewrite_system#exists (all_conditions R 0) in let res2 =  fn t in res1 or res2
+    | L::t -> let res1 = lemmas_system#exists (lemmas_all_conditions L) in let res2 = fn t  in res1 or res2
   in
 
   (* 10: let's do it ! *)
