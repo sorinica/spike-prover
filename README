@@ -21,10 +21,10 @@ Similarly, examples of certified proofs are given in the `certify' directories. 
 
 To setup the path to Coccinelle, here is an example of the file .coqrc from your home directory
 
-Add LoadPath "<path_to_spike_prover>/trunk/Coccinelle/basis".
-Add LoadPath "<path_to_spike_prover>/trunk/Coccinelle/list_extensions". 
-Add LoadPath "<path_to_spike_prover>/trunk/Coccinelle/term_algebra". 
-Add LoadPath "<path_to_spike_prover>/trunk/Coccinelle/term_orderings". 
+Add LoadPath "<path_to_spike_prover>/Coccinelle/basis".
+Add LoadPath "<path_to_spike_prover>/Coccinelle/list_extensions". 
+Add LoadPath "<path_to_spike_prover>/Coccinelle/term_algebra". 
+Add LoadPath "<path_to_spike_prover>/Coccinelle/term_orderings". 
 
 In case of problems, please contact Sorin (sorin.stratulat@univ-lorraine.fr).
 
