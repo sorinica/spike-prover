@@ -9,20 +9,18 @@
 (*           *                                                            *)
 (**************************************************************************)
 
-Add LoadPath "basis".
-
 
 (** * Permutation over lists, and finite multisets. *)
 
 Set Implicit Arguments. 
 
-Require Import decidable_set.
 Require Import List.
 Require Import more_list.
 Require Import equiv_list.
 Require Import Relations.
 Require Import Arith.
 Require Import Setoid.
+Require Import decidable_set.
 
 Inductive permut0 (A B : Set) (R : A -> B -> Prop) : (list A -> list B -> Prop) :=
   | Pnil : permut0 R nil nil
@@ -57,7 +55,7 @@ intros A B R a1 a2 l1; induction l1 as [ | u1 l1];
 intros k1 l2 k2 a1_R_a2 P.
 apply (@Pcons _ _ R a1 a2 k1 l2 k2); trivial.
 inversion P as [ | b1 b2 l k k' b1_R_b2 Q]; clear P; subst.
-destruct (split_list _ _ _ _ H) as [H' | H']; clear H.
+destruct (split_list _ _ _ _ H1) as [H' | H']; clear H1.
 destruct H' as [l [H1 H2]]; subst; simpl.
 assert (Q' := @Pcons _ _ R u1 b2 (l1 ++ a1 :: k1) (l2 ++ a2 :: l) k' b1_R_b2).
 do 2 rewrite <- ass_app in Q'; simpl in Q'; apply Q'.
@@ -111,7 +109,7 @@ Proof.
 intros A R b l1; generalize b; clear b; 
 induction l1 as [ | a1 l1]; intros b l2 P;
 inversion P as [ | a b' l' l1' l2' a_R_b' Q H]; subst.
-destruct l1' as [ | a1' l1']; injection H2; clear H2; intros; subst.
+destruct l1' as [ | a1' l1']; injection H1; clear H1; intros; subst.
 exists a1; exists (@nil A); exists l1; repeat split; trivial.
 simpl in Q; destruct (IHl1 _ _ Q) as [a [k1' [k1'' [a_R_b [H Q']]]]]; subst.
 exists a; exists (a1 :: k1'); exists k1''; repeat split; trivial.
@@ -127,7 +125,7 @@ intros A B R b l1; generalize b; clear b;
 induction l1 as [ | a1 l1]; intros b l2' l2'' P;
 inversion P as [ | a b' l' l1' k2 a_R_b' Q H]; subst.
 destruct l2'; discriminate.
-destruct (in_in_split_set _ _ _ _ _ _ H2) as [[H2' | H2'] | H2']; clear H2.
+destruct (in_in_split_set _ _ _ _ _ _ H1) as [[H2' | H2'] | H2']; clear H1.
 destruct H2' as [l [H2 H3]]; subst.
 rewrite <- ass_app in Q; simpl in Q; 
 destruct (IHl1 b _ _ Q) as [a [l1' [l1'' [a_R_b [H Q']]]]]; subst.
@@ -228,7 +226,7 @@ apply trans_R with b a1'; trivial.
 right; apply in_or_app; right; left; trivial.
 apply in_or_app; right; left; trivial.
 left; trivial.
-apply in_insert; rewrite <- H; apply in_or_app; right; left; trivial.
+apply in_insert; rewrite <- H1; apply in_or_app; right; left; trivial.
 Qed.
 
 Lemma permut_add_inside :
@@ -769,12 +767,12 @@ rewrite <- permut0_cons_inside in P; trivial.
 rewrite app_ass in P;
 destruct (IHl1 l2 l3 (l4' ++ l4'') P) as [u1 [u2 [u3 [u4 [P1 [P2 [P3 P4]]]]]]];
 exists u1; exists (a1 :: u2); exists u3; exists u4; intuition; simpl; trivial.
-rewrite <- permut0_cons_inside; trivial. constructor;assumption.
+rewrite <- permut0_cons_inside; trivial. apply equiv_refl.  assumption.
 apply permut0_sym; [constructor;auto|].
-rewrite <- permut0_cons_inside; trivial.
+apply equiv_refl. assumption.
+apply equiv_trans. assumption.
+apply equiv_sym. assumption. rewrite <- permut0_cons_inside; trivial.
 apply permut0_sym; trivial.
-constructor;assumption.
-constructor;assumption.
 Qed.
 
 

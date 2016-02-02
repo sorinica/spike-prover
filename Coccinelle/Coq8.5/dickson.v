@@ -9,8 +9,6 @@
 (*           *                                                            *)
 (**************************************************************************)
 
-Add LoadPath "basis". 
-
 (**  *Dickson Lemma: the multiset extension of a well-founded ordering is well-founded.
  *)
 
@@ -19,12 +17,12 @@ Set Implicit Arguments.
 Require Export Setoid.
 Require Import Relations.
 Require Import List.
-Require Import closure.
 Require Import more_list.
 Require Import Multiset.
 Require Import list_permut.
 Require Import ordered_set.
 Require Import Arith.
+Require Import closure.
 
 Ltac dummy a b a_eq_b :=
 assert (Dummy : a = b); [exact a_eq_b | clear a_eq_b; rename Dummy into a_eq_b].
