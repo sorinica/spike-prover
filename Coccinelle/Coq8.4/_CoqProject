@@ -1,0 +1,3 @@
+-R "." Coccinelle TransClosure.v	dickson.v	list_set.v	rpo.v
+closure.v	equiv_list.v	more_list.v	term.v
+decidable_set.v	list_permut.v	ordered_set.v	term_spec.v
