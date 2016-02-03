@@ -1,3 +1,15 @@
+(* Sorin Stratulat - February 2016 *)
+
+We provide compatibility with Coq8.5 and Coq8.4 (version pl6). Compile the sources of Coccinelle and CoLoR for your Coq version (see the new structure of Coccinelle et CoLoR directories).
+
+The file .coqrc should be
+
+-------
+Add LoadPath "<path_to_spike_prover>/CoLoR/Coq8.4/" as CoLoR.
+
+Add LoadPath "<path_to_spike_prover>/Coccinelle/Coq8.4/" as Coccinelle.
+-------
+
 (* Sorin Stratulat - April 2013 *)
 
 The `trunk' directory contains the following information:
@@ -6,7 +18,7 @@ The `trunk' directory contains the following information:
 - sources directory - the SPIKE sources. To create `spike_bc', run `make' in the directory (you need ocaml installed).
 - specs directory - the SPIKE specification files. The files related to the ABR proof are in the 'abr' subdirectory. Simpler examples are in the 'basic' subdirectory.
 
-NEW: we have added two subdirectories to the `abr' directory: 1) the `rm' subdirectory has ABR conjectures that can be proved using a reasoning module combining a semi-decision procedure for linear arithmetic and a congruence closure procedure, and 2)  the `no_rm' subdirectory has ABR conjectures that can be proved without the reasoning module. The proof for a spec file <file.spike> can be launched with '../../../sources/spike_bc <file.spike>'.
+We have added two subdirectories to the `abr' directory: 1) the `rm' subdirectory has ABR conjectures that can be proved using a reasoning module combining a semi-decision procedure for linear arithmetic and a congruence closure procedure, and 2)  the `no_rm' subdirectory has ABR conjectures that can be proved without the reasoning module. The proof for a spec file <file.spike> can be launched with '../../../sources/spike_bc <file.spike>'.
 
 - Coccinelle directory - It allows to certify the implicit induction proofs issued by SPIKE with Coq (see below). However, the `dracula'- and the `reasoning module'-based proofs cannot be certified in this version.
  
@@ -21,11 +33,12 @@ Similarly, examples of certified proofs are given in the `certify' directories. 
 
 To setup the path to Coccinelle, here is an example of the file .coqrc from your home directory
 
+-------
 Add LoadPath "<path_to_spike_prover>/Coccinelle/basis".
 Add LoadPath "<path_to_spike_prover>/Coccinelle/list_extensions". 
 Add LoadPath "<path_to_spike_prover>/Coccinelle/term_algebra". 
 Add LoadPath "<path_to_spike_prover>/Coccinelle/term_orderings". 
-
+-------
 In case of problems, please contact Sorin (sorin.stratulat@univ-lorraine.fr).
 
 
