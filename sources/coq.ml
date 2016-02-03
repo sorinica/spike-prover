@@ -211,7 +211,7 @@ in
 let print_coq_proof f = 
 
   
-    (* processing lemmas *)
+  (* processing lemmas *)
 
   let j = ref 0 in
   let () = coq_all_lemmas := List.map (fun lem -> 
@@ -247,7 +247,7 @@ let print_coq_proof f =
     let lcons = ref [] in
     (dico_const_profile#iter (fun i ls -> if (List.length ls) == 1 && List.hd ls == sort_res && is_constructor i then lcons := (let s = dico_const_string#find i in if String.compare s "+" == 0 then "plus" else s) :: !lcons ));
     if !lcons == [] then
-  	(* 	give a new chance to	build a constructor term  *)
+      (* 	give a new chance to	build a constructor term  *)
       let lcons_i = ref [] in
       let () = dico_const_profile#iter (fun (i:int) ls ->  if  List.hd ls == sort_res  then lcons_i := i :: !lcons_i ) in
       if !lcons_i == [] then failwith ("coq_induction_schema: No constructors for sort " ^ (dico_sort_string#find sort_res))
@@ -351,10 +351,10 @@ intros F HF " ^ (fn_var total_number_vars 1 true) ^ "; case_In HF; intro Hind.\n
       s  ^ (intros_extra_vars t)
     ) subst "") ^ " intro HFabs0.\n" 
     in
-     (*let stuff1 = "split. trivial_in " ^ (string_of_int (npos 0 n_case_string !coq_formulas_with_numbers)) ^ ".
-       unfold snd.
-       unfold fst.\n" 
-       in*)
+    (*let stuff1 = "split. trivial_in " ^ (string_of_int (npos 0 n_case_string !coq_formulas_with_numbers)) ^ ".
+      unfold snd.
+      unfold fst.\n" 
+      in*)
     let str_case = string_of_int num_case in
     let orig_str = string_of_int orig_case in
     let ind_case = (string_of_int (npos 0 n_case_string !coq_formulas_with_numbers)) in
@@ -420,13 +420,23 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
     let pat_str =
       if has_lemma   then "" else 
 	let pat_args = (sprint_list ", " (fun (_, t) -> t#compute_string_coq_with_quantifiers []) pat_subst) in 
-	if compare pat_args "" == 0 then "" else 
-	  let fun_str = 
+	if compare pat_args "" == 0 then "" else
+	  let fun_arg_str =
+	    let rec n_underscore l =
+	      match l with
+		| [] -> ""
+		| _ :: l' -> " _" ^ (n_underscore l')
+	    in
 	    match trm#content with 
-	      | Term (f, _, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) with Not_found -> failwith "fn_case_rew: symbol not found" )
+	      | Term (f, l, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else ("(" ^ s ^ (n_underscore l) ^ ")")) with Not_found -> failwith "fn_case_rew: symbol not found" )
 	      | Var_exist _ | Var_univ _ -> failwith "fn_case_rew : lhs is a variable" 
 	  in
-	      (* (if has_hyp then "try rewrite HFabs0.\n" else  *)"\npattern " ^ pat_args ^ ". simpl " ^ fun_str ^ ". cbv beta.\n"
+	  let fun_str = 
+	    match trm#content with 
+	      | Term (f, l, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) with Not_found -> failwith "fn_case_rew: symbol not found" )
+	      | Var_exist _ | Var_univ _ -> failwith "fn_case_rew : lhs is a variable" 
+	  in
+	      (* (if has_hyp then "try rewrite HFabs0.\n" else  *)"\npattern " ^ pat_args ^ ". simpl " ^ fun_arg_str ^ ". cbv beta.\n"
     in
 
     let lemma_str = 
@@ -484,10 +494,10 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
   let fn_case_negdec orig_case n_case = 
     let h_subst = ref [] in 
     let (n_case_string, nvars_case, num_case) = try List.assoc n_case !coq_formulas_with_numbers with Not_found ->  (try let ch, s, _ = List.assoc n_case !coq_replacing_clauses  in h_subst := s; List.assoc ch#number !coq_formulas_with_numbers with Not_found ->  failwith ("fn_case_negdec: clause " ^ (string_of_int n_case) ^ " used but not registered")) in
-     (*let stuff1 = "split. trivial_in " ^ (string_of_int (npos 0 n_case_string !coq_formulas_with_numbers)) ^ ".
-       unfold snd.
-       unfold fst.\n" in
-     *)
+    (*let stuff1 = "split. trivial_in " ^ (string_of_int (npos 0 n_case_string !coq_formulas_with_numbers)) ^ ".
+      unfold snd.
+      unfold fst.\n" in
+    *)
     let orig_str = string_of_int orig_case in
     let str_case = string_of_int num_case in
     let nth_str = string_of_int (npos 0 n_case_string !coq_formulas_with_numbers) in 
@@ -587,10 +597,20 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 	| Term (f, _, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) with Not_found -> failwith "fn_case_totalrew: symbol not found" )
 	| Var_exist _ | Var_univ _ -> failwith "fn_case_totalrew : lhs is a variable" 
     in
+    let fun_arg_str =
+      let rec n_underscore l =
+	match l with
+	  | [] -> ""
+	  | _ :: l' -> " _" ^ (n_underscore l')
+      in
+      match trm#content with 
+	| Term (f, l, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else ("(" ^ s ^ (n_underscore l) ^ ")")) with Not_found -> failwith "fn_case_totalrew: symbol not found" )
+	| Var_exist _ | Var_univ _ -> failwith "fn_case_totalrew : lhs is a variable" 
+    in
     let stuff12 = ")).\napply H1. trivial_in " ^ nth_str ^ ". unfold snd. unfold F_" ^ str_case ^ ". unfold F_" ^ orig_str ^ ". rewrite_model. abstract solve_rpo_mul.\nunfold fst. unfold F_" ^ orig_str ^ ". unfold F_" ^ str_case ^ ". unfold fst in HFabs0. unfold F_" ^ str_case ^ " in HFabs0. simpl in HFabs0. "  
     in
     let stuff2 = 
-      pat_str ^ "\nsimpl " ^ fun_str ^ ". cbv beta. try unfold " ^ fun_str ^ ". try rewrite H. try rewrite H0. try unfold " ^ fun_str ^ " in HFabs0. try rewrite H in HFabs0. try rewrite H0 in HFabs0. auto.\n"
+      pat_str ^ "\nsimpl " ^ fun_arg_str ^ ". cbv beta. try unfold " ^ fun_str ^ ". try rewrite H. try rewrite H0. try unfold " ^ fun_str ^ " in HFabs0. try rewrite H in HFabs0. try rewrite H0 in HFabs0. auto.\n"
     in
     (*   let less_clause = cl_case#number in *)
     (*   let greater_clause = try List.assoc less_clause (List.map (fun (c1, c2) -> (c1#number, c2#number)) !coq_less_clauses) with Not_found -> failwith "less_clause not found !" in *)
