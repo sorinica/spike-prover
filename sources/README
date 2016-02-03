@@ -1,3 +1,6 @@
 do `make'
 
-you need to previously install ocaml (http://ocaml.org/) and findlib (http://projects.camlcity.org/projects/findlib.html)
+you need to previously install
+
+- ocaml (http://ocaml.org/)
+- otags (http://askra.de/software/otags/)
