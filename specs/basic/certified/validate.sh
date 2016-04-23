@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 echo "***************   Starting computation  **********************"
 
 j=0
