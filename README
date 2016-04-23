@@ -5,9 +5,9 @@ We provide compatibility with Coq, for the 8.5 and 8.4pl6 versions. Compile the 
 The file .coqrc should be adapted. For example, if you use Coq 8.5, its content must include
 
 -------
-Add LoadPath "<path_to_spike_prover>/CoLoR/Coq8.5/" as CoLoR.
+Add Rec LoadPath "<path_to_spike_prover>/CoLoR/Coq8.5/" as CoLoR.
 
-Add LoadPath "<path_to_spike_prover>/Coccinelle/Coq8.5/" as Coccinelle.
+Add Rec LoadPath "<path_to_spike_prover>/Coccinelle/Coq8.5/" as Coccinelle.
 -------
 
 (* Sorin Stratulat - April 2013 *)
