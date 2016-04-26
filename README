@@ -1,4 +1,4 @@
-(* Sorin Stratulat - February 2016 *)
+(* Sorin Stratulat - April 2016 *)
 
 We provide compatibility with Coq, for the 8.5 and 8.4pl6 versions. Compile the sources of Coccinelle and CoLoR for the Coq version of your choice (see the new structure of Coccinelle et CoLoR directories).
 
@@ -9,6 +9,8 @@ Add Rec LoadPath "<path_to_spike_prover>/CoLoR/Coq8.5/" as CoLoR.
 
 Add Rec LoadPath "<path_to_spike_prover>/Coccinelle/Coq8.5/" as Coccinelle.
 -------
+
+where <path_to_spike_prover> is the _absolute_ path to the "spike-prover" directory (thanks to Paul Iannetta for the remark on the absolute path)
 
 (* Sorin Stratulat - April 2013 *)
 
