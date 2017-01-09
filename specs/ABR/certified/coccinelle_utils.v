@@ -1,8 +1,8 @@
 Require Import List.
 Require Import Relations.
 
-Require Import term.
-Require Import rpo.
+Require Import Coccinelle.term.
+Require Import Coccinelle.rpo.
 Require Import list_permut.
 Require Import Setoid.
 
@@ -12,9 +12,6 @@ Module Make
   Module R := rpo.Make T1.
   Export T1.
   Export R.
-
-
-
 
   (** Multiset extension of rpo is well-founded *)
   Lemma wf_rpo_mul : forall pr, well_founded (prec pr) -> forall bb, well_founded (rpo_mul pr bb).
@@ -74,9 +71,9 @@ reflexivity. rewrite H1. apply permut_refl. intros. apply Eq.
   simpl in IHl; simpl in H; assert (H' := IHl i H).
   inversion H' as [a lg ls lc l' l'' ls_lt_alg P1 P2]; subst.
   apply (@List_mul pr bb0 a lg ls (u :: lc)); trivial.
-  rewrite <- permut0_cons_inside; trivial; try reflexivity. apply equiv_equiv. apply equiv_equiv.
+  rewrite <- permut0_cons_inside; trivial; try reflexivity. apply equiv_equiv. apply equiv_refl. apply equiv_equiv. 
   rewrite app_comm_cons.
-  rewrite <- permut0_cons_inside; trivial; try reflexivity. apply equiv_equiv. apply equiv_equiv.
+  rewrite <- permut0_cons_inside; trivial; try reflexivity. apply equiv_equiv.  apply equiv_refl. apply equiv_equiv.
   Qed.
 
 
@@ -84,11 +81,11 @@ reflexivity. rewrite H1. apply permut_refl. intros. apply Eq.
 
   (* Tell if the term [var] is in the list [lvar] *)
   Ltac mem_assoc var lvar :=
-  match constr:lvar with
-  | nil => constr:false
+  match constr:(lvar) with
+  | nil => constr:(false)
   | ?X1 :: ?X2 =>
       match constr:(X1 = var) with
-      | (?X1 = ?X1) => constr:true
+      | (?X1 = ?X1) => constr:(true)
       | _ => mem_assoc var X2
       end
   end.
@@ -96,7 +93,7 @@ reflexivity. rewrite H1. apply permut_refl. intros. apply Eq.
   (* Build a substitution from the list of elements [lvar] *)
   Ltac build_subst lvar :=
   let rec build_aux lvar cpt :=
-    match constr:lvar with
+    match constr:(lvar) with
     | (@nil ?X1) => constr:(@nil (prod nat X1))
     | ?X2 :: ?X3 =>
         let l2 := build_aux X3 (S cpt) in
@@ -106,19 +103,19 @@ reflexivity. rewrite H1. apply permut_refl. intros. apply Eq.
 
   (* Create the substitution associated to the term [trm] *)
   Ltac seek_var lvar trm :=
-    match constr:trm with
-    | Var ?X1 => constr:lvar
+    match constr:(trm) with
+    | Var ?X1 => constr:(lvar)
     | Term ?X1 ?X2 => seek_var_list lvar X2
     | ?X1 =>
         let res := mem_assoc X1 lvar in
-        match constr:res with
-        | true => constr:lvar
+        match constr:(res) with
+        | true => constr:(lvar)
         | false => constr:(X1 :: lvar)
         end
     end
 
   with seek_var_list lvar lst :=
-    match constr:lst with
+    match constr:(lst) with
     | nil => lvar
     | cons ?X1 ?X2 =>
       let l1 := seek_var lvar X1 in
@@ -127,11 +124,11 @@ reflexivity. rewrite H1. apply permut_refl. intros. apply Eq.
 
   (* Return the integer associated to [elt] in [lst] *)
   Ltac assoc elt lst :=
-  match constr:lst with
+  match constr:(lst) with
   | nil => fail
   | (?X1,?X2) :: ?X3 =>
       match constr:(elt = X2) with
-      | (?X2 = ?X2) => constr:X1
+      | (?X2 = ?X2) => constr:(X1)
       | _ => assoc elt X3
       end
   end.
@@ -140,8 +137,8 @@ reflexivity. rewrite H1. apply permut_refl. intros. apply Eq.
   everything different from [Var _] or [Term _ _] is replaced
   by [Var n]. *)
   Ltac interp lvar trm :=
-    match constr:trm with
-    | Var _ => constr:trm
+    match constr:(trm) with
+    | Var _ => constr:(trm)
     | Term ?X1 ?X2 => let l := interp_list lvar X2 in
       constr:(Term X1 l)
     | ?X1 => let idx := assoc X1 lvar in
@@ -149,8 +146,8 @@ reflexivity. rewrite H1. apply permut_refl. intros. apply Eq.
     end
 
   with interp_list lvar lst :=
-  match constr:lst with
-  | nil => constr:lst
+  match constr:(lst) with
+  | nil => constr:(lst)
   | ?X1::?X2 =>
     let x := interp lvar X1 in
     let l := interp_list lvar X2 in
