@@ -918,7 +918,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 (* the set of all formula instances from the proof *)
 Definition S_" ^ id ^ " := fun f => exists F, In F LF_" ^ id ^ " /\\ "  ^ (repeat_str "exists e" nr_args "" "" ", ") ^ ", f = F" ^ (repeat_str " e" nr_args "" "" "") ^ ".\n\nTheorem all_true_" ^ id ^  ": forall F, In F LF_" ^  id ^ " -> " ^ forall_str ^ (if compare forall_str "" == 0 then "" else ", ") ^ "fst (F" ^ (j:= 1; List.fold_right (fun (s, i) str -> j:= !j + i; let res = (fn_var_sort i (!j - i) "" s true false " ") in str ^ res) (List.rev !vsl) "") ^ ").
 Proof.
-let n := constr:" ^ (string_of_int nr_args) ^ " in
+let n := constr:(" ^ (string_of_int nr_args) ^ ") in
 let p := constr:(S(S(n))) in
 intros;
 let G := fresh \"G\" in
