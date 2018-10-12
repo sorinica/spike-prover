@@ -1,6 +1,10 @@
+(* Sorin Stratulat - October 2018 *)
+
+Updating for Coq 8.8.
+
 (* Sorin Stratulat - April 2016 *)
 
-We provide compatibility with Coq, for the 8.4, 8.5, 8.6 and 8.8 versions. Compile the sources of Coccinelle and CoLoR for the Coq version of your choice (see the new structure of Coccinelle et CoLoR directories).
+We provide compatibility with Coq, for the 8.4, 8.5 and 8.6 versions. Compile the sources of Coccinelle and CoLoR for the Coq version of your choice (see the new structure of Coccinelle et CoLoR directories).
 
 The file .coqrc should be adapted. For example, if you use Coq 8.8, its content must include
 
