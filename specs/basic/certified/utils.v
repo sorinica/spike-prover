@@ -268,5 +268,5 @@ Section flatten_list.
   Qed.
 
 End flatten_list.
-Implicit Arguments flatten [A] .
-Implicit Arguments combine [A].
+ Arguments flatten [A] .
+ Arguments combine [A].
