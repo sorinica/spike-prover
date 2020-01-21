@@ -1,0 +1,419 @@
+DIGEST cd44b35dec8f332fdc3dd71c267e8458
+Fsorted_spec
+R15:18 Coq.Lists.List <> <> lib
+R37:40 Coccinelle.term <> <> lib
+R58:60 Coccinelle.rpo <> <> lib
+R79:83 utils <> <> lib
+R101:116 coccinelle_utils <> <> lib
+mod 167:172 <> Specif
+ind 190:193 Specif symb
+constr 209:212 Specif id_0
+constr 218:221 Specif id_S
+constr 227:232 Specif id_Nil
+constr 238:244 Specif id_Cons
+constr 250:256 Specif id_true
+constr 262:269 Specif id_false
+constr 275:283 Specif id_sorted
+constr 289:294 Specif id_leq
+constr 300:308 Specif id_length
+constr 314:322 Specif id_insert
+constr 328:335 Specif id_isort
+constr 341:349 Specif id_eq_nat
+R213:213 sorted_spec <> symb ind
+R222:222 sorted_spec <> symb ind
+R233:233 sorted_spec <> symb ind
+R245:245 sorted_spec <> symb ind
+R257:257 sorted_spec <> symb ind
+R270:270 sorted_spec <> symb ind
+R284:284 sorted_spec <> symb ind
+R295:295 sorted_spec <> symb ind
+R309:309 sorted_spec <> symb ind
+R323:323 sorted_spec <> symb ind
+R336:336 sorted_spec <> symb ind
+R350:350 sorted_spec <> symb ind
+def 369:373 Specif arity
+R378:381 sorted_spec Specif symb ind
+R398:398 sorted_spec <> f var
+R411:414 sorted_spec Specif id_0 constr
+R419:432 Coccinelle.term_spec <> Free constr
+R442:445 sorted_spec Specif id_S constr
+R450:463 Coccinelle.term_spec <> Free constr
+R473:478 sorted_spec Specif id_Nil constr
+R483:496 Coccinelle.term_spec <> Free constr
+R506:512 sorted_spec Specif id_Cons constr
+R517:530 Coccinelle.term_spec <> Free constr
+R540:546 sorted_spec Specif id_true constr
+R551:564 Coccinelle.term_spec <> Free constr
+R574:581 sorted_spec Specif id_false constr
+R586:599 Coccinelle.term_spec <> Free constr
+R609:617 sorted_spec Specif id_sorted constr
+R622:635 Coccinelle.term_spec <> Free constr
+R645:650 sorted_spec Specif id_leq constr
+R655:668 Coccinelle.term_spec <> Free constr
+R678:686 sorted_spec Specif id_length constr
+R691:704 Coccinelle.term_spec <> Free constr
+R714:722 sorted_spec Specif id_insert constr
+R727:740 Coccinelle.term_spec <> Free constr
+R750:757 sorted_spec Specif id_isort constr
+R762:775 Coccinelle.term_spec <> Free constr
+R785:793 sorted_spec Specif id_eq_nat constr
+R798:811 Coccinelle.term_spec <> Free constr
+def 839:844 Specif status
+R849:852 sorted_spec Specif symb ind
+R870:870 sorted_spec <> f var
+R883:886 sorted_spec Specif id_0 constr
+R891:897 Coccinelle.rpo <> Mul constr
+R905:908 sorted_spec Specif id_S constr
+R913:919 Coccinelle.rpo <> Mul constr
+R927:932 sorted_spec Specif id_Nil constr
+R937:943 Coccinelle.rpo <> Mul constr
+R951:957 sorted_spec Specif id_Cons constr
+R962:968 Coccinelle.rpo <> Mul constr
+R976:982 sorted_spec Specif id_true constr
+R987:993 Coccinelle.rpo <> Mul constr
+R1001:1008 sorted_spec Specif id_false constr
+R1013:1019 Coccinelle.rpo <> Mul constr
+R1027:1035 sorted_spec Specif id_sorted constr
+R1040:1046 Coccinelle.rpo <> Mul constr
+R1054:1059 sorted_spec Specif id_leq constr
+R1064:1070 Coccinelle.rpo <> Mul constr
+R1078:1086 sorted_spec Specif id_length constr
+R1091:1097 Coccinelle.rpo <> Mul constr
+R1105:1113 sorted_spec Specif id_insert constr
+R1118:1124 Coccinelle.rpo <> Mul constr
+R1132:1139 sorted_spec Specif id_isort constr
+R1144:1150 Coccinelle.rpo <> Mul constr
+R1158:1166 sorted_spec Specif id_eq_nat constr
+R1171:1177 Coccinelle.rpo <> Mul constr
+def 1202:1206 Specif index
+R1211:1214 sorted_spec Specif symb ind
+R1232:1232 sorted_spec <> f var
+R1245:1248 sorted_spec Specif id_0 constr
+R1261:1264 sorted_spec Specif id_S constr
+R1277:1282 sorted_spec Specif id_Nil constr
+R1295:1301 sorted_spec Specif id_Cons constr
+R1314:1320 sorted_spec Specif id_true constr
+R1333:1340 sorted_spec Specif id_false constr
+R1353:1361 sorted_spec Specif id_sorted constr
+R1375:1380 sorted_spec Specif id_leq constr
+R1394:1402 sorted_spec Specif id_length constr
+R1416:1424 sorted_spec Specif id_insert constr
+R1438:1445 sorted_spec Specif id_isort constr
+R1459:1467 sorted_spec Specif id_eq_nat constr
+def 1499:1506 Specif max_size
+R1521:1526 sorted_spec Specif <> mod
+R1571:1585 Coccinelle.decidable_set S <> mod
+mod 1564:1566 <> Nat
+def 1602:1602 Nat A
+R1605:1607 Coq.Init.Datatypes <> nat ind
+def 1623:1629 Nat eq_bool
+R1634:1646 utils <> beq_nat def
+def 1662:1671 Nat eq_bool_ok
+R1676:1691 utils <> beq_nat_ok thm
+R1699:1701 sorted_spec Nat <> mod
+R1782:1800 Coccinelle.term_spec Signature <> mod
+mod 1771:1777 <> Symbols
+R1821:1835 Coccinelle.decidable_set S <> mod
+mod 1813:1816 <> Symbols.Symb
+def 1854:1854 Symbols.Symb A
+R1857:1867 sorted_spec Specif symb ind
+prf 1883:1893 Symbols.Symb symb_eq_dec
+R1907:1907 sorted_spec Symbols.Symb A def
+R1910:1910 Coq.Init.Specif <> :type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R1914:1916 Coq.Init.Specif <> :type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R1921:1921 Coq.Init.Specif <> :type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R1912:1912 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1911:1911 sorted_spec <> x var
+R1913:1913 sorted_spec <> y var
+R1918:1919 Coq.Init.Logic <> :type_scope:x_'<>'_x not
+R1917:1917 sorted_spec <> x var
+R1920:1920 sorted_spec <> y var
+def 1985:1991 Symbols.Symb eq_bool
+R1996:2008 utils <> eq_bool def
+R2012:2022 sorted_spec Symbols.Symb symb_eq_dec thm
+R2010:2010 sorted_spec Symbols.Symb A def
+def 2040:2049 Symbols.Symb eq_bool_ok
+R2054:2069 utils <> eq_bool_ok thm
+R2073:2083 sorted_spec Symbols.Symb symb_eq_dec thm
+R2071:2071 sorted_spec Symbols.Symb A def
+R2093:2096 sorted_spec Symbols.Symb <> mod
+def 2142:2146 Symbols arity
+R2151:2162 sorted_spec Specif arity def
+R2170:2176 sorted_spec Symbols <> mod
+R2232:2245 Coccinelle.term_spec Term <> mod
+R2250:2259 Coccinelle.term Make' <> modtype
+R2261:2267 sorted_spec Symbols <> modtype
+R2269:2271 sorted_spec Nat <> modtype
+mod 2223:2227 <> Terms
+R2288:2308 coccinelle_utils Make <> modtype
+R2310:2314 sorted_spec Terms <> modtype
+mod 2281:2283 <> Rpo
+prf 2354:2367 <> prec_eq_status
+R2411:2414 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R2423:2425 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2415:2420 sorted_spec <> status def
+R2422:2422 sorted_spec <> f var
+R2426:2431 sorted_spec <> status def
+R2433:2433 sorted_spec <> g var
+R2383:2395 utils <> prec_eq def
+R2410:2410 sorted_spec <> g var
+R2408:2408 sorted_spec <> f var
+R2402:2406 sorted_spec <> index def
+R2397:2400 sorted_spec <> symb ind
+def 2501:2501 <> P
+R2506:2525 Coccinelle.rpo <> Build_Precedence constr
+R2938:2951 sorted_spec <> prec_eq_status thm
+R2902:2923 utils <> prec_not_prec_eq thm
+R2930:2934 sorted_spec <> index def
+R2925:2928 sorted_spec <> symb ind
+R2871:2887 utils <> prec_eq_sym thm
+R2894:2898 sorted_spec <> index def
+R2889:2892 sorted_spec <> symb ind
+R2838:2856 utils <> prec_eq_prec2 thm
+R2863:2867 sorted_spec <> index def
+R2858:2861 sorted_spec <> symb ind
+R2805:2823 utils <> prec_eq_prec1 thm
+R2830:2834 sorted_spec <> index def
+R2825:2828 sorted_spec <> symb ind
+R2770:2790 utils <> prec_eq_bool_ok thm
+R2797:2801 sorted_spec <> index def
+R2792:2795 sorted_spec <> symb ind
+R2738:2755 utils <> prec_eq_refl thm
+R2762:2766 sorted_spec <> index def
+R2757:2760 sorted_spec <> symb ind
+R2700:2723 utils <> prec_eq_transitive thm
+R2730:2734 sorted_spec <> index def
+R2725:2728 sorted_spec <> symb ind
+R2668:2685 utils <> prec_eq_bool def
+R2692:2696 sorted_spec <> index def
+R2687:2690 sorted_spec <> symb ind
+R2633:2653 utils <> prec_transitive thm
+R2660:2664 sorted_spec <> index def
+R2655:2658 sorted_spec <> symb ind
+R2601:2618 utils <> prec_antisym thm
+R2625:2629 sorted_spec <> index def
+R2620:2623 sorted_spec <> symb ind
+R2568:2585 utils <> prec_bool_ok thm
+R2592:2596 sorted_spec <> index def
+R2587:2590 sorted_spec <> symb ind
+R2539:2553 utils <> prec_bool def
+R2560:2564 sorted_spec <> index def
+R2555:2558 sorted_spec <> symb ind
+R2527:2532 sorted_spec <> status def
+syndef 2965:2968 <> less
+R2974:2980 sorted_spec <> rpo_mul ind
+R2985:2986 sorted_spec <> bb proj
+R2989:3003 sorted_spec <> empty_rpo_infos def
+R3007:3014 sorted_spec <> max_size def
+R3005:3005 sorted_spec <> P def
+R2982:2982 sorted_spec <> P def
+def 3124:3132 <> model_nat
+R3138:3140 Coq.Init.Datatypes <> nat ind
+R3144:3147 sorted_spec <> term ind
+R3158:3158 sorted_spec <> v var
+R3167:3167 Coq.Init.Datatypes <> O constr
+R3173:3176 sorted_spec <> Term constr
+R3183:3185 Coq.Init.Datatypes <> nil constr
+R3178:3181 sorted_spec <> id_0 constr
+R3191:3191 Coq.Init.Datatypes <> S constr
+R3209:3217 sorted_spec <> model_nat def
+R3227:3230 sorted_spec <> Term constr
+R3240:3241 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R3238:3239 sorted_spec <> x' var
+R3242:3244 Coq.Init.Datatypes <> nil constr
+R3232:3235 sorted_spec <> id_S constr
+def 3264:3273 <> model_bool
+R3279:3282 Coq.Init.Datatypes <> bool ind
+R3286:3289 sorted_spec <> term ind
+R3300:3300 sorted_spec <> v var
+R3308:3311 Coq.Init.Datatypes <> true constr
+R3317:3320 sorted_spec <> Term constr
+R3330:3332 Coq.Init.Datatypes <> nil constr
+R3322:3328 sorted_spec <> id_true constr
+R3336:3340 Coq.Init.Datatypes <> false constr
+R3346:3349 sorted_spec <> Term constr
+R3360:3362 Coq.Init.Datatypes <> nil constr
+R3351:3358 sorted_spec <> id_false constr
+ind 3381:3384 <> list
+constr 3396:3398 <> Nil
+constr 3408:3411 <> Cons
+R3402:3405 sorted_spec <> list ind
+R3418:3421 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R3426:3429 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R3430:3433 sorted_spec <> list ind
+R3422:3425 sorted_spec <> list ind
+R3415:3417 Coq.Init.Datatypes <> nat ind
+def 3446:3455 <> model_list
+R3460:3463 sorted_spec <> list ind
+R3468:3471 sorted_spec <> term ind
+R3482:3482 sorted_spec <> v var
+R3491:3493 sorted_spec <> Nil constr
+R3499:3502 sorted_spec <> Term constr
+R3511:3513 Coq.Init.Datatypes <> nil constr
+R3504:3509 sorted_spec <> id_Nil constr
+R3519:3522 sorted_spec <> Cons constr
+R3542:3550 sorted_spec <> model_nat def
+R3567:3576 sorted_spec <> model_list def
+R3584:3587 sorted_spec <> Term constr
+R3600:3603 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R3598:3599 sorted_spec <> x' var
+R3606:3609 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R3604:3605 sorted_spec <> l' var
+R3610:3612 Coq.Init.Datatypes <> nil constr
+R3589:3595 sorted_spec <> id_Cons constr
+def 3633:3638 <> eq_nat
+R3644:3646 Coq.Init.Datatypes <> nat ind
+R3653:3655 Coq.Init.Datatypes <> nat ind
+R3659:3662 Coq.Init.Datatypes <> bool ind
+R3677:3678 sorted_spec <> n2 var
+R3673:3674 sorted_spec <> n1 var
+R3687:3687 Coq.Init.Datatypes <> O constr
+R3690:3690 Coq.Init.Datatypes <> O constr
+R3695:3698 Coq.Init.Datatypes <> true constr
+R3702:3702 Coq.Init.Datatypes <> O constr
+R3710:3714 Coq.Init.Datatypes <> false constr
+R3721:3721 Coq.Init.Datatypes <> O constr
+R3726:3730 Coq.Init.Datatypes <> false constr
+R3735:3735 Coq.Init.Datatypes <> S constr
+R3742:3742 Coq.Init.Datatypes <> S constr
+R3750:3755 sorted_spec <> eq_nat def
+def 3776:3778 <> leq
+R3784:3786 Coq.Init.Datatypes <> nat ind
+R3794:3796 Coq.Init.Datatypes <> nat ind
+R3801:3804 Coq.Init.Datatypes <> bool ind
+R3820:3821 sorted_spec <> n2 var
+R3816:3817 sorted_spec <> n1 var
+R3829:3829 Coq.Init.Datatypes <> O constr
+R3837:3840 Coq.Init.Datatypes <> true constr
+R3852:3856 Coq.Init.Datatypes <> false constr
+R3861:3861 Coq.Init.Datatypes <> S constr
+R3868:3868 Coq.Init.Datatypes <> S constr
+R3876:3878 sorted_spec <> leq def
+def 3899:3904 <> length
+R3909:3912 sorted_spec <> list ind
+R3916:3918 Coq.Init.Datatypes <> nat ind
+R3929:3929 sorted_spec <> l var
+R3938:3940 sorted_spec <> Nil constr
+R3945:3945 Coq.Init.Datatypes <> O constr
+R3949:3952 sorted_spec <> Cons constr
+R3961:3961 Coq.Init.Datatypes <> S constr
+R3964:3969 sorted_spec <> length def
+def 3989:3994 <> insert
+R3999:4001 Coq.Init.Datatypes <> nat ind
+R4007:4010 sorted_spec <> list ind
+R4014:4017 sorted_spec <> list ind
+R4028:4028 sorted_spec <> l var
+R4036:4038 sorted_spec <> Nil constr
+R4043:4046 sorted_spec <> Cons constr
+R4050:4052 sorted_spec <> Nil constr
+R4048:4048 sorted_spec <> x var
+R4055:4058 sorted_spec <> Cons constr
+R4074:4076 sorted_spec <> leq def
+R4078:4078 sorted_spec <> x var
+R4088:4091 Coq.Init.Datatypes <> true constr
+R4096:4099 sorted_spec <> Cons constr
+R4103:4103 sorted_spec <> l var
+R4101:4101 sorted_spec <> x var
+R4106:4110 Coq.Init.Datatypes <> false constr
+R4115:4118 sorted_spec <> Cons constr
+R4123:4128 sorted_spec <> insert def
+R4130:4130 sorted_spec <> x var
+def 4155:4159 <> isort
+R4164:4167 sorted_spec <> list ind
+R4171:4174 sorted_spec <> list ind
+R4184:4184 sorted_spec <> l var
+R4192:4194 sorted_spec <> Nil constr
+R4199:4201 sorted_spec <> Nil constr
+R4204:4207 sorted_spec <> Cons constr
+R4216:4221 sorted_spec <> insert def
+R4226:4230 sorted_spec <> isort def
+def 4253:4263 <> head_sorted
+R4270:4273 sorted_spec <> list ind
+R4278:4281 Coq.Init.Datatypes <> bool ind
+R4292:4292 sorted_spec <> l var
+R4299:4302 sorted_spec <> Cons constr
+R4307:4310 sorted_spec <> Cons constr
+R4320:4322 sorted_spec <> leq def
+R4335:4338 Coq.Init.Datatypes <> true constr
+def 4355:4360 <> sorted
+R4367:4370 sorted_spec <> list ind
+R4375:4378 Coq.Init.Datatypes <> bool ind
+R4389:4389 sorted_spec <> l var
+R4396:4399 sorted_spec <> Cons constr
+R4412:4422 sorted_spec <> head_sorted def
+R4425:4428 sorted_spec <> Cons constr
+R4456:4460 Coq.Init.Datatypes <> false constr
+R4441:4446 sorted_spec <> sorted def
+R4464:4466 sorted_spec <> Nil constr
+R4471:4474 Coq.Init.Datatypes <> true constr
+prf 4530:4540 <> model_nat_0
+R4554:4557 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4571:4571 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4543:4551 sorted_spec <> model_nat def
+R4558:4561 sorted_spec <> Term constr
+R4568:4570 Coq.Init.Datatypes <> nil constr
+R4563:4566 sorted_spec <> id_0 constr
+prf 4599:4609 <> model_nat_S
+R4624:4626 Coq.Init.Datatypes <> nat ind
+R4646:4649 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4681:4681 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4630:4638 sorted_spec <> model_nat def
+R4641:4641 Coq.Init.Datatypes <> S constr
+R4643:4644 sorted_spec <> u1 var
+R4650:4653 sorted_spec <> Term constr
+R4661:4661 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R4674:4676 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R4662:4670 sorted_spec <> model_nat def
+R4672:4673 sorted_spec <> u1 var
+R4677:4679 Coq.Init.Datatypes <> nil constr
+R4655:4658 sorted_spec <> id_S constr
+prf 4709:4722 <> model_list_Nil
+R4739:4742 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4758:4758 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4725:4734 sorted_spec <> model_list def
+R4736:4738 sorted_spec <> Nil constr
+R4743:4746 sorted_spec <> Term constr
+R4755:4757 Coq.Init.Datatypes <> nil constr
+R4748:4753 sorted_spec <> id_Nil constr
+prf 4786:4800 <> model_list_Cons
+R4815:4817 Coq.Init.Datatypes <> nat ind
+R4833:4836 sorted_spec <> list ind
+R4863:4866 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4919:4919 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4840:4849 sorted_spec <> model_list def
+R4852:4855 sorted_spec <> Cons constr
+R4860:4861 sorted_spec <> u2 var
+R4857:4858 sorted_spec <> u1 var
+R4867:4870 sorted_spec <> Term constr
+R4881:4881 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R4894:4897 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R4882:4890 sorted_spec <> model_nat def
+R4892:4893 sorted_spec <> u1 var
+R4898:4898 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R4912:4914 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R4899:4908 sorted_spec <> model_list def
+R4910:4911 sorted_spec <> u2 var
+R4915:4917 Coq.Init.Datatypes <> nil constr
+R4872:4878 sorted_spec <> id_Cons constr
+prf 4947:4961 <> model_bool_true
+R4979:4982 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4999:4999 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4964:4973 sorted_spec <> model_bool def
+R4975:4978 Coq.Init.Datatypes <> true constr
+R4983:4986 sorted_spec <> Term constr
+R4996:4998 Coq.Init.Datatypes <> nil constr
+R4988:4994 sorted_spec <> id_true constr
+prf 5027:5042 <> model_bool_false
+R5061:5064 Coq.Init.Logic <> :type_scope:x_'='_x not
+R5082:5082 Coq.Init.Logic <> :type_scope:x_'='_x not
+R5045:5054 sorted_spec <> model_bool def
+R5056:5060 Coq.Init.Datatypes <> false constr
+R5065:5068 sorted_spec <> Term constr
+R5079:5081 Coq.Init.Datatypes <> nil constr
+R5070:5077 sorted_spec <> id_false constr
+R5119:5132 sorted_spec <> model_list_Nil thm
+R5134:5148 sorted_spec <> model_list_Cons thm
+R5177:5187 sorted_spec <> model_nat_0 thm
+R5189:5199 sorted_spec <> model_nat_S thm
+R5227:5241 sorted_spec <> model_bool_true thm
+R5243:5258 sorted_spec <> model_bool_false thm

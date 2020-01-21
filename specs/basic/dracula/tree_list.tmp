@@ -1,0 +1,468 @@
+Resetting all values
+Opening ../examples/tree_list.spike
+
+Successfully parsed sorts
+
+Successfully parsed constructors
+
+Successfully parsed functions
+
+Successfully parsed axioms
+All constructors are free
+dico_const_string:
+2 --> 0
+7 --> true
+-1 --> app
+5 --> Noeud
+6 --> false
+-2 --> flat
+9 --> Cons
+-3 --> ins
+3 --> S
+8 --> Nil
+4 --> Feuille
+
+Successfully parsed statuses
+dico_id_status:
+Completing status dico with default status "Multiset"
+AC symbols: 
+Case 0: no AC symbols
+Orienting axioms
+	[ 6 ] app (Nil, u1) -> u1 ;
+	[ 7 ] app (Cons (u1, u2), u3) -> Cons (u1, app (u2, u3)) ;
+	[ 8 ] flat (Feuille (u1)) -> Cons (u1, Nil) ;
+	[ 9 ] flat (Noeud (u1, u2)) -> app (flat (u1), flat (u2)) ;
+	[ 10 ] ins (u1, Feuille (u2)) -> Noeud (Feuille (u1), Feuille (u2)) ;
+	[ 11 ] ins (u1, Noeud (u2, u3)) -> Noeud (ins (u1, u2), u3) ;
+dico_order:
+app: Nil Cons;
+flat: app Nil Cons;
+ins: Feuille Noeud;
+dico_equivalence:
+Computing nullary sorts
+Sort "nat" is not nullary
+Sort "list" is not nullary
+Sort "bool" is nullary
+Sort "nat" is not nullary
+Sort "nat" is not nullary
+Sort "tree" is not nullary
+Computing nullary individuals
+We do not have a boolean specification
+
+Successfully parsed properties
+Computing default priorities
+Using default priorities
+Generate will be attempted on the following positions:
+Ind_pos_position ()
+
+Successfully parsed strategies
+
+Successfully parsed startpoint
+
+Successfully parsed conjectures
+	[ 12 ] flat (ins (u1, u2)) = Cons (u1, flat (u2)) ;
+Closing ../examples/tree_list.spike
+
+Successfully parsed conjectures
+	[ 13 ] app (u1, app (u2, u3)) = app (app (u1, u2), u3) ;
+
+
+************************************************************
+******************* Starting computation *******************
+************************************************************
+
+
+dico_st:
+fullind = (repeat (stra, inst_var_rule), print_goals_history)
+negative_clash_rule = delete(id,[try (negative_clash)])
+subsumption_rule = delete(id,[try (subsumption (L&C))])
+normalize = repeat try (delete(id,[negative_clash]), simplify(id,[eliminate_redundant_literal]), simplify(id,[eliminate_trivial_literal]), simplify(id,[positive_clash]), simplify(id,[congruence_closure]), simplify(id,[negative_decomposition]), simplify(id,[auto_simplification]), simplify(id,[rewriting (normalize, L&R, *)]), delete(id,[subsumption (L&C)]), simplify(id,[total_case_rewriting (builtin, R, *)]))
+stra = repeat (try (tautology_rule, negative_clash_rule, subsumption_rule, decomposition_rule, rewriting_rule, print_goals, total_case_rewriting_add_premise_rule))
+inst_var_rule = add_premise(generate,[try (id)])
+recursive = try (delete, rewrite, add_premise(id,[generate]))
+query = ?
+generate_reduce = try (delete(id,[tautology]), rewrite)
+rewriting_rule = simplify(id,[try (rewriting (rewrite, L&R&C, *))])
+tautology_rule = delete(id,[try (tautology)])
+total_case_rewriting_add_premise_rule = add_premise(total_case_rewriting (simplify_strat, R, *),[try (id)])
+decompose = saturate (simplify(id,[positive_decomposition]), simplify(id,[negative_decomposition]))
+clean = saturate (simplify(id,[eliminate_redundant_literal]), simplify(id,[eliminate_trivial_literal]), simplify(id,[positive_clash]))
+simplify = saturate (delete, clean, decompose, simplify(id,[auto_simplification]))
+total_case_rewriting_rule = simplify(id,[try (total_case_rewriting (simplify_strat, R, *))])
+rewrite = try (simplify(id,[rewriting (normalize, R, *)]), simplify(id,[equational_rewriting (*)]), simplify(id,[partial_case_rewriting (R&L, *)]))
+builtin = try (delete, rewrite, add_premise(id,[generate]))
+decomposition_rule = simplify(id,[try (negative_decomposition)])
+delete = saturate (delete(id,[tautology]), delete(id,[subsumption (R&L)]), delete(id,[negative_clash]))
+Start point is now fullind
+
+************************  Proving  *************************
+[ 14 ] flat (ins (u1, u2)) = Cons (u1, flat (u2)) ;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+using strategy 
+
+fullind mixed with DRaCuLa
+************************************************************
+
+Current goals E1 (1):
+[ 14 ] flat (ins (u1, u2)) = Cons (u1, flat (u2)) ;
+
+
+GENERATE 1 on
+« [ 14 ] flat (ins (u1, u2)) = Cons (u1, flat (u2)) ;
+
+from the positions:
+	true/1/[1] --> flat (ins (u1, u2))
+	true/1/[1-1] --> ins (u1, u2)
+	
+at true/1/[1-1] on 	ins (u1, u2) 	 using the test substitutions:
+
+ 1) <! u2, Feuille (u4) !>
+ 2) <! u2, Noeud (u4, u5) !>
+
+We obtain :
+
+1) [ 24 ] flat (Noeud (Feuille (u1), Feuille (u4))) = Cons (u1, flat (Feuille (u4))) ;
+
+using the rule [ 10 ] ins (u1, Feuille (u2)) -> Noeud (Feuille (u1), Feuille (u2)) ;
+2) [ 30 ] flat (Noeud (ins (u1, u4), u5)) = Cons (u1, flat (Noeud (u4, u5))) ;
+
+using the rule [ 11 ] ins (u1, Noeud (u2, u3)) -> Noeud (ins (u1, u2), u3) ;
+
+
+REWRITING 1: simplify by rewriting 
+« [ 24 ] flat (Noeud (Feuille (u1), Feuille (u4))) = Cons (u1, flat (Feuille (u4))) ;
+
+
+- rewriting at the position true/1/[1]:
+
+flat (Noeud (Feuille (u1), Feuille (u4)))
+   is simplified by : flat (Noeud (u1, u2)) -> app (flat (u1), flat (u2))   (from [ 9 ] of R)
+   with substitution: <! u1, Feuille (u1) ; u2, Feuille (u4) !> into
+app (flat (Feuille (u1)), flat (Feuille (u4)))
+
+
+» [ 36 ] app (flat (Feuille (u1)), flat (Feuille (u4))) = Cons (u1, flat (Feuille (u4))) ;
+
+
+REWRITING 2: simplify by rewriting 
+« [ 30 ] flat (Noeud (ins (u1, u4), u5)) = Cons (u1, flat (Noeud (u4, u5))) ;
+
+
+- rewriting at the position true/1/[1]:
+
+flat (Noeud (ins (u1, u4), u5))
+   is simplified by : flat (Noeud (u1, u2)) -> app (flat (u1), flat (u2))   (from [ 9 ] of R)
+   with substitution: <! u1, ins (u1, u4) ; u2, u5 !> into
+app (flat (ins (u1, u4)), flat (u5))
+
+
+» [ 40 ] app (flat (ins (u1, u4)), flat (u5)) = Cons (u1, flat (Noeud (u4, u5))) ;
+
+
+REWRITING 3: simplify by rewriting 
+« [ 36 ] app (flat (Feuille (u1)), flat (Feuille (u4))) = Cons (u1, flat (Feuille (u4))) ;
+
+
+- rewriting at the position true/1/[1-1]:
+
+flat (Feuille (u1))
+   is simplified by : flat (Feuille (u1)) -> Cons (u1, Nil)   (from [ 8 ] of R)
+   with substitution: <! u1, u1 !> into
+Cons (u1, Nil)
+
+
+» [ 45 ] app (Cons (u1, Nil), flat (Feuille (u4))) = Cons (u1, flat (Feuille (u4))) ;
+
+
+REWRITING 4: simplify by rewriting 
+« [ 40 ] app (flat (ins (u1, u4)), flat (u5)) = Cons (u1, flat (Noeud (u4, u5))) ;
+
+- rewriting at the position true/1/[1-1]:
+
+flat (ins (u1, u4))
+   is simplified by : flat (ins (u1, u2)) -> Cons (u1, flat (u2))   (from [ 14 ] of C1)
+   with substitution: <! u1, u1 ; u2, u4 !> into
+Cons (u1, flat (u4))
+
+» [ 50 ] app (Cons (u1, flat (u4)), flat (u5)) = Cons (u1, flat (Noeud (u4, u5))) ;
+
+
+
+The IH ([ 14 ] flat (ins (u1, u2)) = Cons (u1, flat (u2)) ; <! u1, u1 ; u2, u4 !>) is checked by the 1-cycle
+
+	([ 14 ] flat (ins (u1, u2)) = Cons (u1, flat (u2)) ; <! u2, Noeud (u4, u5) !>)
+	([ 30 ] flat (Noeud (ins (u1, u4), u5)) = Cons (u1, flat (Noeud (u4, u5))) ; <!  !>)
+
+
+REWRITING 5: simplify by rewriting 
+« [ 45 ] app (Cons (u1, Nil), flat (Feuille (u4))) = Cons (u1, flat (Feuille (u4))) ;
+
+
+- rewriting at the position true/1/[1-2]:
+
+flat (Feuille (u4))
+   is simplified by : flat (Feuille (u1)) -> Cons (u1, Nil)   (from [ 8 ] of R)
+   with substitution: <! u1, u4 !> into
+Cons (u4, Nil)
+
+
+» [ 58 ] app (Cons (u1, Nil), Cons (u4, Nil)) = Cons (u1, flat (Feuille (u4))) ;
+
+
+REWRITING 6: simplify by rewriting 
+« [ 50 ] app (Cons (u1, flat (u4)), flat (u5)) = Cons (u1, flat (Noeud (u4, u5))) ;
+
+
+- rewriting at the position true/1/[2-2]:
+
+flat (Noeud (u4, u5))
+   is simplified by : flat (Noeud (u1, u2)) -> app (flat (u1), flat (u2))   (from [ 9 ] of R)
+   with substitution: <! u1, u4 ; u2, u5 !> into
+app (flat (u4), flat (u5))
+
+
+» [ 63 ] app (Cons (u1, flat (u4)), flat (u5)) = Cons (u1, app (flat (u4), flat (u5))) ;
+
+
+REWRITING 7: simplify by rewriting 
+« [ 58 ] app (Cons (u1, Nil), Cons (u4, Nil)) = Cons (u1, flat (Feuille (u4))) ;
+
+
+- rewriting at the position true/1/[2-2]:
+
+flat (Feuille (u4))
+   is simplified by : flat (Feuille (u1)) -> Cons (u1, Nil)   (from [ 8 ] of R)
+   with substitution: <! u1, u4 !> into
+Cons (u4, Nil)
+
+
+» [ 68 ] app (Cons (u1, Nil), Cons (u4, Nil)) = Cons (u1, Cons (u4, Nil)) ;
+
+
+REWRITING 8: simplify by rewriting 
+« [ 63 ] app (Cons (u1, flat (u4)), flat (u5)) = Cons (u1, app (flat (u4), flat (u5))) ;
+
+
+- rewriting at the position true/1/[1]:
+
+app (Cons (u1, flat (u4)), flat (u5))
+   is simplified by : app (Cons (u1, u2), u3) -> Cons (u1, app (u2, u3))   (from [ 7 ] of R)
+   with substitution: <! u1, u1 ; u2, flat (u4) ; u3, flat (u5) !> into
+Cons (u1, app (flat (u4), flat (u5)))
+
+
+» [ 72 ] Cons (u1, app (flat (u4), flat (u5))) = Cons (u1, app (flat (u4), flat (u5))) ;
+
+TAUTOLOGY: delete
+« [ 72 ] Cons (u1, app (flat (u4), flat (u5))) = Cons (u1, app (flat (u4), flat (u5))) ;
+
+
+REWRITING 9: simplify by rewriting 
+« [ 68 ] app (Cons (u1, Nil), Cons (u4, Nil)) = Cons (u1, Cons (u4, Nil)) ;
+
+
+- rewriting at the position true/1/[1]:
+
+app (Cons (u1, Nil), Cons (u4, Nil))
+   is simplified by : app (Cons (u1, u2), u3) -> Cons (u1, app (u2, u3))   (from [ 7 ] of R)
+   with substitution: <! u1, u1 ; u2, Nil ; u3, Cons (u4, Nil) !> into
+Cons (u1, app (Nil, Cons (u4, Nil)))
+
+
+» [ 75 ] Cons (u1, app (Nil, Cons (u4, Nil))) = Cons (u1, Cons (u4, Nil)) ;
+
+POSITIVE DECOMPOSITION : simplify
+« [ 75 ] Cons (u1, app (Nil, Cons (u4, Nil))) = Cons (u1, Cons (u4, Nil)) ;
+
+» [ 77 ] u1 = u1 ;
+» [ 78 ] app (Nil, Cons (u4, Nil)) = Cons (u4, Nil) ;
+
+TAUTOLOGY: delete
+« [ 77 ] u1 = u1 ;
+
+
+REWRITING 10: simplify by rewriting 
+« [ 78 ] app (Nil, Cons (u4, Nil)) = Cons (u4, Nil) ;
+
+
+- rewriting at the position true/1/[1]:
+
+app (Nil, Cons (u4, Nil))
+   is simplified by : app (Nil, u1) -> u1   (from [ 6 ] of R)
+   with substitution: <! u1, Cons (u4, Nil) !> into
+Cons (u4, Nil)
+
+
+» [ 82 ] Cons (u4, Nil) = Cons (u4, Nil) ;
+
+TAUTOLOGY: delete
+« [ 82 ] Cons (u4, Nil) = Cons (u4, Nil) ;
+
+
+
+The following initial conjectures are inductive consequences of R
+
+[ 14 ] flat (ins (u1, u2)) = Cons (u1, flat (u2)) ;
+Elapsed time: 0.020101 s
+
+--- Global statistics of the main successful operations ---
+
+- tautology               : 3 of 25 tries.
+- rewriting               : 10 of 11 tries.
+- augmentation            : 0 of 0 tries.
+- subsumption             : 0 of 20 tries.
+- total_case_rewriting    : 0 of 1 tries.
+- generate                : 1 of 1 tries.
+
+-----------
+  Total clauses: 82
+
+-----------
+  Total lemmas: 0
+
+  Max depth    : 1
+
+************************  Proving  *************************
+[ 83 ] app (u1, app (u2, u3)) = app (app (u1, u2), u3) ;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+using lemmas
+
+[ 14 ] flat (ins (u1, u2)) -> Cons (u1, flat (u2)) ;
+
+
+using strategy 
+
+fullind mixed with DRaCuLa
+************************************************************
+
+Current goals E2 (1):
+[ 83 ] app (u1, app (u2, u3)) = app (app (u1, u2), u3) ;
+
+
+GENERATE 2 on
+« [ 83 ] app (u1, app (u2, u3)) = app (app (u1, u2), u3) ;
+
+from the positions:
+	true/1/[1] --> app (u1, app (u2, u3))
+	true/1/[1-2] --> app (u2, u3)
+	true/1/[2] --> app (app (u1, u2), u3)
+	true/1/[2-1] --> app (u1, u2)
+	
+at true/1/[1] on 	app (u1, app (u2, u3)) 	 using the test substitutions:
+
+ 1) <! u1, Nil !>
+ 2) <! u1, Cons (u4, u5) !>
+
+We obtain :
+
+1) [ 94 ] app (u2, u3) = app (app (Nil, u2), u3) ;
+
+using the rule [ 6 ] app (Nil, u1) -> u1 ;
+2) [ 100 ] Cons (u4, app (u5, app (u2, u3))) = app (app (Cons (u4, u5), u2), u3) ;
+
+using the rule [ 7 ] app (Cons (u1, u2), u3) -> Cons (u1, app (u2, u3)) ;
+
+
+REWRITING 11: simplify by rewriting 
+« [ 94 ] app (u2, u3) = app (app (Nil, u2), u3) ;
+
+
+- rewriting at the position true/1/[2-1]:
+
+app (Nil, u2)
+   is simplified by : app (Nil, u1) -> u1   (from [ 6 ] of R)
+   with substitution: <! u1, u2 !> into
+u2
+
+
+» [ 109 ] app (u2, u3) = app (u2, u3) ;
+
+TAUTOLOGY: delete
+« [ 109 ] app (u2, u3) = app (u2, u3) ;
+
+
+REWRITING 12: simplify by rewriting 
+« [ 100 ] Cons (u4, app (u5, app (u2, u3))) = app (app (Cons (u4, u5), u2), u3) ;
+
+
+- rewriting at the position true/1/[2-1]:
+
+app (Cons (u4, u5), u2)
+   is simplified by : app (Cons (u1, u2), u3) -> Cons (u1, app (u2, u3))   (from [ 7 ] of R)
+   with substitution: <! u1, u4 ; u2, u5 ; u3, u2 !> into
+Cons (u4, app (u5, u2))
+
+
+» [ 113 ] Cons (u4, app (u5, app (u2, u3))) = app (Cons (u4, app (u5, u2)), u3) ;
+
+
+REWRITING 13: simplify by rewriting 
+« [ 113 ] Cons (u4, app (u5, app (u2, u3))) = app (Cons (u4, app (u5, u2)), u3) ;
+
+
+- rewriting at the position true/1/[2]:
+
+app (Cons (u4, app (u5, u2)), u3)
+   is simplified by : app (Cons (u1, u2), u3) -> Cons (u1, app (u2, u3))   (from [ 7 ] of R)
+   with substitution: <! u1, u4 ; u2, app (u5, u2) ; u3, u3 !> into
+Cons (u4, app (app (u5, u2), u3))
+
+
+» [ 118 ] Cons (u4, app (u5, app (u2, u3))) = Cons (u4, app (app (u5, u2), u3)) ;
+
+POSITIVE DECOMPOSITION : simplify
+« [ 118 ] Cons (u4, app (u5, app (u2, u3))) = Cons (u4, app (app (u5, u2), u3)) ;
+
+» [ 121 ] u4 = u4 ;
+» [ 122 ] app (u5, app (u2, u3)) = app (app (u5, u2), u3) ;
+
+TAUTOLOGY: delete
+« [ 121 ] u4 = u4 ;
+
+
+SUBSUMPTION: delete
+« [ 122 ] app (u5, app (u2, u3)) = app (app (u5, u2), u3) ;
+
+Subsumed in C1 by [ 83 ] app (u1, app (u2, u3)) = app (app (u1, u2), u3) ;
+
+	with epsilon = <! u1, u5 ; u2, u2 ; u3, u3 !>
+
+The IH ([ 83 ] app (u1, app (u2, u3)) = app (app (u1, u2), u3) ; <! u1, u5 ; u2, u2 ; u3, u3 !>) is checked by the 1-cycle
+
+	([ 83 ] app (u1, app (u2, u3)) = app (app (u1, u2), u3) ; <! u1, Cons (u4, u5) !>)
+	([ 100 ] Cons (u4, app (u5, app (u2, u3))) = app (app (Cons (u4, u5), u2), u3) ; <!  !>)
+	([ 113 ] Cons (u4, app (u5, app (u2, u3))) = app (Cons (u4, app (u5, u2)), u3) ; <!  !>)
+	([ 118 ] Cons (u4, app (u5, app (u2, u3))) = Cons (u4, app (app (u5, u2), u3)) ; <!  !>)
+
+
+
+The following initial conjectures are inductive consequences of R
+
+[ 83 ] app (u1, app (u2, u3)) = app (app (u1, u2), u3) ;
+Elapsed time: 0.023687 s
+
+--- Global statistics of the main successful operations ---
+
+- tautology               : 5 of 36 tries.
+- rewriting               : 13 of 15 tries.
+- augmentation            : 0 of 0 tries.
+- subsumption             : 0 of 27 tries.
+- total_case_rewriting    : 0 of 2 tries.
+- generate                : 2 of 2 tries.
+
+-----------
+  Total clauses: 130
+
+-----------
+  Total lemmas: 1
+
+  Max depth    : 1
+
+
+All sets of conjectures were successfully processed
+
+

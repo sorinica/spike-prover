@@ -1,0 +1,1733 @@
+
+augment.ml,189
+Augment1,0
+let true_by_contexttrue_by_context20,299
+let true_by_strategytrue_by_strategy34,727
+let is_conservativeis_conservative44,1262
+let augment_polynomaugment_polynom69,2428
+
+eliminate_set.ml,150
+Eliminate_set1,0
+let eliminate_redundant_literaleliminate_redundant_literal19,265
+let eliminate_trivial_literaleliminate_trivial_literal71,2037
+
+pi.ml,153
+Pi1,0
+class virtual pi_objectpi_object10,135
+    val mutable is_piis_pi14,213
+    method is_piis_pi16,266
+let name_strat_piname_strat_pi26,460
+
+auto_simplification.ml,76
+Auto_simplification1,0
+let auto_simplificationauto_simplification20,244
+
+extract.ml,281
+Extract1,0
+let filedefaultfiledefault13,208
+let appended_fileappended_file15,260
+let filedefault_initfiledefault_init21,422
+let filedefault_setfiledefault_set24,495
+let sprint_underscoresprint_underscore31,759
+let rec extract_specificationextract_specification38,890
+
+polynoms.ml,1578
+Polynoms1,0
+exception InconsistentInconsistent16,179
+let preprocess_acpreprocess_ac19,279
+let rec well_foundedwell_founded33,624
+let rec count_scount_s47,1075
+let rec count_pcount_p60,1446
+let order_twoorder_two73,1830
+let rec elim_null_monomselim_null_monoms77,1915
+let multiply_termmultiply_term84,2066
+let multiply_constmultiply_const96,2360
+let multiply_monomsmultiply_monoms100,2440
+let rec normalize_monom_listnormalize_monom_list112,2908
+and process_monomprocess_monom128,3549
+class polynompolynom182,5815
+    val contentcontent198,6505
+    val constantconstant199,6583
+    val lengthlength200,6624
+    val historyhistory201,6667
+    method contentcontent203,6690
+    method constantconstant204,6720
+    method lengthlength205,6752
+    method historyhistory206,6780
+    method pprintpprint210,6845
+    method compute_stringcompute_string212,6919
+    method equalequal243,7908
+    method syntactic_equalsyntactic_equal250,8103
+    method vacuousvacuous257,8313
+    method impossibleimpossible258,8399
+    method addadd261,8465
+    method maximal_monomialmaximal_monomial271,8854
+    method maximal_multiplicandmaximal_multiplicand275,8972
+    method cross_multiply_addcross_multiply_add277,9035
+    method combinationcombination303,9936
+    method independentindependent312,10227
+    method multiplicandsmultiplicands314,10260
+    method coefficientscoefficients316,10311
+let new_polynomnew_polynom320,10371
+let poly_0_leq_0poly_0_leq_0323,10452
+let add_nat_variablesadd_nat_variables327,10571
+
+case_rewriting.ml,357
+Case_rewriting1,0
+let axiom_numbersaxiom_numbers19,251
+let case_rw_condition_1case_rw_condition_124,380
+let case_rw_condition_2_with_p_givencase_rw_condition_2_with_p_given32,622
+let generate_cond_and_eqgenerate_cond_and_eq133,4453
+let partial_case_rewritingpartial_case_rewriting178,6124
+let total_case_rewritingtotal_case_rewriting322,11801
+
+generate_eq.ml,53
+Generate_eq1,0
+let generate_eqgenerate_eq44,1057
+
+shell.ml,46
+Shell1,0
+let print_dicosprint_dicos17,195
+
+clauses.ml,13216
+Clauses1,0
+exception Not_HornNot_Horn24,294
+let rec fn_for_capital_dfn_for_capital_d30,604
+let rec print_redundantprint_redundant45,1061
+exception ProofProof54,1361
+exception RefutationRefutation55,1378
+exception MyExitMyExit56,1400
+class ['a] systemsystem59,1458
+  val mutable contentcontent63,1515
+  method contentcontent65,1548
+  method copycopy67,1578
+  method lengthlength69,1603
+  method sprint_numberssprint_numbers71,1644
+  method existsexists76,1859
+  method iteriter79,1909
+  method current_elcurrent_el82,1955
+  method all_butall_but87,2050
+  method appendappend90,2102
+  method initinit98,2471
+  method is_emptyis_empty102,2564
+  method printprint107,2651
+  method ithith110,2746
+  method replacereplace113,2908
+  method replace_w_listreplace_w_list116,2985
+  method clearclear274,10727
+class ['a] l_systeml_system280,10805
+    method appendappend286,10897
+    method initinit292,11179
+class ['a] rw_systemrw_system299,11407
+    val mutable contentcontent303,11469
+    method contentcontent305,11504
+    method initinit307,11536
+    method existsexists311,11641
+    method iteriter314,11695
+    method minusminus318,11780
+    method ithith322,11868
+    method lefthand_sideslefthand_sides325,12020
+    method is_left_linearis_left_linear330,12155
+    method depthdepth341,12465
+    method strict_depthstrict_depth346,12617
+    method capital_dcapital_d351,12755
+    method depth_per_sortdepth_per_sort359,12961
+    method strict_depth_per_sortstrict_depth_per_sort364,13141
+    method capital_d_per_sortcapital_d_per_sort369,13314
+    method compute_induction_positions_v0compute_induction_positions_v0384,13879
+    method compute_induction_positions_v1compute_induction_positions_v1416,15168
+    method stringstring425,15514
+type concrete_peano_literalconcrete_peano_literal431,15600
+    Peano_equalPeano_equal432,15631
+  | Peano_diffPeano_diff433,15677
+  | Peano_lessPeano_less434,15722
+  | Peano_leqPeano_leq435,15767
+let peano_memberspeano_members437,15813
+let is_peano_equalis_peano_equal443,15977
+let is_peano_diffis_peano_diff447,16093
+let is_peano_lessis_peano_less451,16209
+let is_peano_leqis_peano_leq455,16324
+class peano_literalpeano_literal459,16438
+    val contentcontent471,16905
+    val variablesvariables473,16932
+    method contentcontent477,17062
+    method membersmembers479,17094
+    method pprintpprint482,17171
+    method compute_picompute_pi484,17251
+    method compute_stringcompute_string502,18111
+    method both_sidesboth_sides509,18407
+    method syntactic_equalsyntactic_equal511,18456
+    method is_subtermis_subterm523,19372
+let rec invert_literalinvert_literal535,19691
+and convert_literalconvert_literal581,21298
+let linearizelinearize626,22846
+let literalizeliteralize670,24910
+let peano_literal_tautologypeano_literal_tautology682,25470
+let oracle_aoracle_a684,25558
+let normal_formnormal_form689,25763
+let critical_pairscritical_pairs717,26654
+let inconsistentinconsistent737,27255
+let reducesreduces747,27534
+let apply_ccapply_cc753,27668
+let implicit_equationsimplicit_equations809,29876
+let apply_laapply_la839,31141
+let normalize_cx_lnormalize_cx_l889,33448
+let normalize_litnormalize_lit902,33948
+type rulerule914,34523
+type rule = Augment_LAugment_L914,34523
+type rule = Augment_L | Augment_GAugment_G914,34523
+type rule = Augment_L | Augment_G | A2LA2L914,34523
+type rule = Augment_L | Augment_G | A2L | A2GA2G914,34523
+type rule = Augment_L | Augment_G | A2L | A2G | L2GL2G914,34523
+type rule = Augment_L | Augment_G | A2L | A2G | L2G | G2CRG2CR914,34523
+class peano_contextpeano_context916,34585
+    val mutable cx_crcx_cr930,35462
+    val mutable cx_acx_a931,35490
+    val mutable cx_gcx_g932,35527
+    val mutable cx_lcx_l933,35553
+    method cx_crcx_cr935,35581
+    method cx_acx_a936,35607
+    method cx_gcx_g937,35631
+    method cx_lcx_l938,35655
+    method cx_pcx_p939,35679
+    method cx_iecx_ie940,35707
+    method pprintpprint942,35767
+    method compute_stringcompute_string944,35847
+    method g_2_crg_2_cr956,36914
+    method a_2_ga_2_g996,38350
+    method l_2_gl_2_g1007,38669
+    method a_2_la_2_l1018,39002
+    method apply_laapply_la1071,41287
+    method check_inconsistenciescheck_inconsistencies1075,41407
+    method augment_laugment_l1128,43353
+    method augment_gaugment_g1156,44979
+class ['peano] clauseclause1160,45017
+    val contentcontent1167,45137
+    val variablesvariables1168,45160
+    val numbernumber1173,45405
+    val mutable subsumption_failuresubsumption_failure1174,45444
+    val mutable augmentation_failureaugmentation_failure1175,45498
+    val mutable augmentation_literalsaugmentation_literals1176,45553
+    val mutable inference_bitstreaminference_bitstream1177,45613
+    val neg_cardneg_card1178,45654
+    val pos_cardpos_card1179,45696
+    val cardcard1180,45738
+    val mutable historyhistory1181,45800
+    val mutable standbystandby1182,45865
+    val mutable delete_standbydelete_standby1183,45898
+    val mutable sb_stringsb_string1184,45938
+    val mutable sb_IHssb_IHs1185,45970
+    val mutable sb_newconjssb_newconjs1186,46047
+    val mutable broken_infobroken_info1187,46092
+    val is_hornis_horn1188,46197
+    val mutable peano_contextpeano_context1195,46374
+    val mutable orientedoriented1196,46435
+    val mutable maximal_termsmaximal_terms1197,46489
+    method set_broken_infoset_broken_info1200,46569
+    method get_broken_infoget_broken_info1201,46624
+    method augmentation_literalsaugmentation_literals1203,46668
+    method add_augmentationadd_augmentation1205,46728
+    method pprintpprint1211,46979
+    method orientedoriented1213,47052
+    method compute_peano_contextcompute_peano_context1221,47245
+    method peano_contextpeano_context1227,47446
+    method fill_peano_contextfill_peano_context1236,47670
+    method cachedstringcachedstring1243,47871
+    method contentcontent1245,47985
+    method variablesvariables1247,48017
+    method numbernumber1249,48053
+    method is_hornis_horn1251,48083
+    method lefthand_sidelefthand_side1254,48172
+    method headhead1260,48345
+    method righthand_siderighthand_side1266,48476
+    method both_sidesboth_sides1272,48624
+    method conditionsconditions1277,48748
+    method l_2_rl_2_r1282,48844
+    method swap_ruleswap_rule1289,49034
+    method force_orientationforce_orientation1298,49349
+    method orientorient1309,49781
+    method update_posupdate_pos1334,50679
+    method try_to_orienttry_to_orient1340,50897
+    method orientableorientable1344,51062
+    method is_left_linearis_left_linear1358,51428
+    method set_bitset_bit1361,51533
+    method has_bithas_bit1365,51653
+    method negative_cardinalnegative_cardinal1368,51734
+    method positive_cardinalpositive_cardinal1370,51777
+    method cardinalcardinal1372,51820
+    method is_non_emptyis_non_empty1374,51850
+    method is_emptyis_empty1379,51945
+    method greatest_varcodegreatest_varcode1384,52036
+    method compute_stringcompute_string1397,52567
+    method compute_string_coq_with_quantifierscompute_string_coq_with_quantifiers1411,53086
+    method compute_string_coq_for_ordercompute_string_coq_for_order1425,53773
+    method def_symbolsdef_symbols1429,54004
+    method bijective_renamingbijective_renaming1436,54316
+    method equalequal1444,54695
+    method negative_litsnegative_lits1451,54880
+    method positive_litspositive_lits1453,54922
+    method is_unitis_unit1455,54964
+    method lit_at_positionlit_at_position1457,55038
+    method subterm_at_positionsubterm_at_position1464,55332
+    method all_neg_termsall_neg_terms1472,55652
+    method all_pos_termsall_pos_terms1476,55780
+    method all_termsall_terms1480,55908
+    method all_maximal_termsall_maximal_terms1484,56086
+    method copycopy1493,56433
+    method apply_to_clauseapply_to_clause1496,56498
+    method historyhistory1503,56767
+    method standbystandby1504,56797
+    method delete_standbydelete_standby1505,56827
+    method sb_stringsb_string1506,56871
+    method sb_newconjssb_newconjs1507,56905
+    method sb_IHssb_IHs1508,56943
+    method add_historyadd_history1509,56972
+    method set_historyset_history1511,57057
+    method set_standbyset_standby1513,57105
+    method set_delete_standbyset_delete_standby1514,57148
+    method set_sb_stringset_sb_string1515,57205
+    method set_sb_newconjsset_sb_newconjs1516,57254
+    method set_sb_IHsset_sb_IHs1517,57307
+    method substitutesubstitute1520,57376
+    method substitute_and_renamesubstitute_and_rename1526,57673
+    method replace_subterm_at_posreplace_subterm_at_pos1551,58660
+    method flattenflatten1568,59203
+    method subterm_matchingsubterm_matching1578,59643
+    method expand_sortsexpand_sorts1591,60172
+    method subterm_matching_at_possubterm_matching_at_pos1597,60376
+    method syntactic_equalsyntactic_equal1619,61184
+    method add_failed_subsumptionadd_failed_subsumption1628,61486
+    method subsumption_has_failedsubsumption_has_failed1631,61601
+    method add_failed_augmentationadd_failed_augmentation1634,61695
+    method augmentation_has_failedaugmentation_has_failed1637,61813
+    method is_booleanis_boolean1640,61909
+    method renamerename1644,62053
+    method rename_from_zerorename_from_zero1656,62568
+    method depthdepth1660,62661
+    method try_on_boolean_horn_variantstry_on_boolean_horn_variants1667,62981
+    method expandexpand1694,64204
+    method build_best_contextbuild_best_context1703,64684
+    method is_subtermis_subterm1713,65015
+    method buildbuild1725,65336
+let all_nonvariable_symbolsall_nonvariable_symbols1754,66312
+let orient_clauseorient_clause1773,67092
+let try_to_orient_clausetry_to_orient_clause1781,67332
+let print_clause_listprint_clause_list1783,67413
+type which_systemwhich_system1786,67575
+type which_system = CC1786,67575
+type which_system = C | RR1786,67575
+type which_system = C | R | LL1786,67575
+let sprint_which_system_listsprint_which_system_list1788,67608
+let sprint_which_rw_system_listsprint_which_rw_system_list1789,67698
+let check_sufficient_completenesscheck_sufficient_completeness1792,67850
+type list_of_systems_argumentlist_of_systems_argument1800,68053
+    LOS_definedLOS_defined1801,68086
+  | LOS_queryLOS_query1802,68124
+let sprint_which_system_list_argsprint_which_system_list_arg1804,68141
+let sprint_which_rw_system_list_argsprint_which_rw_system_list_arg1808,68263
+let hypotheses_systemhypotheses_system1814,68430
+let conjectures_systemconjectures_system1815,68469
+let rewrite_systemrewrite_system1816,68509
+let lemmas_systemlemmas_system1817,68548
+let real_conjectures_systemreal_conjectures_system1818,68585
+let complete_lemmas_systemcomplete_lemmas_system1820,68628
+let all_conjectures_systemall_conjectures_system1821,68674
+let coq_formulascoq_formulas1823,68720
+let coq_all_lemmascoq_all_lemmas1825,68752
+let coq_formulas_with_infoscoq_formulas_with_infos1827,68786
+let coq_less_clausescoq_less_clauses1829,68828
+let coq_spec_lemmascoq_spec_lemmas1831,68864
+let coq_main_lemmacoq_main_lemma1833,68899
+let main_lemma_proofmain_lemma_proof1835,68932
+let coq_induction_schemascoq_induction_schemas1837,68967
+let coq_generate_condcoq_generate_cond1839,69007
+let rewriting_clausesrewriting_clauses1841,69043
+let coq_replacing_clausescoq_replacing_clauses1843,69080
+let sprint_lemmassprint_lemmas1845,69122
+let sprint_axiomssprint_axioms1848,69210
+let sprint_goalssprint_goals1851,69299
+let sprint_hypothesessprint_hypotheses1854,69391
+let proof_foundproof_found1857,69487
+let update_dico_free_constructorsupdate_dico_free_constructors1861,69642
+let is_free_constructoris_free_constructor1881,70144
+let sufficient_completeness_testsufficient_completeness_test1884,70229
+let strongly_sufficient_completeness_teststrongly_sufficient_completeness_test1888,70385
+let ground_convergence_testground_convergence_test1892,70545
+let preprocess_conjecturepreprocess_conjecture1896,70648
+let recursive_new_hypsrecursive_new_hyps1937,72692
+let print_detailed_clauseprint_detailed_clause1951,73112
+let print_detailed_position_clauseprint_detailed_position_clause1986,74585
+let all_defined_positionsall_defined_positions2018,75943
+let sprint_clausal_positionsprint_clausal_position2033,76647
+let initial_conjecturesinitial_conjectures2035,76776
+let write_pos_clausewrite_pos_clause2037,76845
+let write_pos_term_clausewrite_pos_term_clause2060,78393
+let list_exists_w_numberlist_exists_w_number2079,79424
+let rec expand_nullaryexpand_nullary2092,79749
+let counterexamplecounterexample2146,81685
+let clause_ground_instanceclause_ground_instance2235,85775
+let print_historyprint_history2273,87208
+let print_history_instanceprint_history_instance2306,88659
+let compute_string_clause_camlcompute_string_clause_caml2324,89237
+let oracle_goracle_g2334,89589
+ let concrete_system_listconcrete_system_list2337,89785
+
+induction.ml,45
+Induction1,0
+let generategenerate41,1005
+
+smt.ml,599
+Smt1,0
+let openoutopenout26,323
+let outputfileoutputfile33,395
+let print_constructorsprint_constructors39,482
+let rec sprint_termsprint_term88,2067
+let sprint_sort_smtsprint_sort_smt103,2669
+let sprint_litsprint_lit108,2829
+let print_andprint_and131,4028
+let print_orprint_or145,4542
+let print_axiomprint_axiom151,4735
+let print_axiomsprint_axioms194,6536
+let sprint_profile_smtsprint_profile_smt198,6664
+let print_functionprint_function204,6826
+let print_functionsprint_functions217,7267
+let print_conjecturesprint_conjectures267,9251
+let print_smtprint_smt275,9399
+
+complement.ml,78
+Complement1,0
+let compresscompress17,229
+let complementcomplement32,760
+
+induction_obs.ml,56
+Induction_obs1,0
+let generate_obsgenerate_obs35,812
+
+spike.ml,608
+Spike1,0
+let all_lemmasall_lemmas27,353
+let sprint_useful_valuessprint_useful_values29,382
+let string_to_termstring_to_term43,1458
+let string_to_clausestring_to_clause51,1637
+let  interactinteract62,1917
+let return_codereturn_code176,6096
+let go_parsinggo_parsing178,6119
+let reset_allreset_all205,6931
+let outout299,9836
+let out_proofout_proof300,9860
+let process_problem_tokenprocess_problem_token302,9892
+let specif_counterspecif_counter551,21778
+let mainloopmainloop557,21862
+let usage_stringusage_string603,23937
+let rec speclistspeclist605,24053
+let mainmain639,27077
+
+context.ml,458
+Context1,0
+let obs_sort_counterobs_sort_counter15,161
+class contextcontext17,194
+    val mutable var_contvar_cont21,296
+    method contextual_varcontextual_var24,341
+    method sort_var_contsort_var_cont26,381
+    method stringstring34,680
+    method has_no_obs_strict_subcontexthas_no_obs_strict_subcontext36,789
+    method vars_but_context_varvars_but_context_var43,1163
+    method is_not_ground_reducibleis_not_ground_reducible46,1406
+
+io.ml,266
+Io1,0
+let buffers_stackbuffers_stack10,131
+let current_buffercurrent_buffer11,170
+let sub_buffersub_buffer12,201
+let buffered_outputbuffered_output15,304
+let buffer_next_levelbuffer_next_level21,495
+let buffer_collapse_levelbuffer_collapse_level29,743
+
+strategies.ml,3689
+Strategies1,0
+let print_goalsprint_goals32,471
+type reasoning_modulereasoning_module64,1660
+    Contextual_rewritingContextual_rewriting65,1686
+  | Equational_rewritingEquational_rewriting66,1771
+  | Congruence_closureCongruence_closure67,1818
+  | RewritingRewriting68,1842
+  | Partial_case_rewritingPartial_case_rewriting69,1912
+  | Total_case_rewritingTotal_case_rewriting70,1988
+  | GenerateGenerate71,2073
+  | Generate_eqGenerate_eq72,2135
+  | Generate_obsGenerate_obs73,2200
+  | Positive_decompositionPositive_decomposition74,2266
+  | Negative_decompositionNegative_decomposition75,2294
+  | Positive_clashPositive_clash76,2322
+  | TautologyTautology77,2342
+  | SubsumptionSubsumption78,2357
+  | AugmentationAugmentation79,2402
+  | Negative_clashNegative_clash80,2448
+  | Eliminate_redundant_literalEliminate_redundant_literal81,2468
+  | Eliminate_trivial_literalEliminate_trivial_literal82,2501
+  | Auto_simplificationAuto_simplification83,2532
+  | ComplementComplement84,2557
+  | IdId85,2573
+let rm_to_stringrm_to_string88,2604
+type goto_typegoto_type152,5332
+type goto_type = Goto_numberGoto_number152,5332
+type goto_type = Goto_number of int | Goto_smallestGoto_smallest152,5332
+type goto_type = Goto_number of int | Goto_smallest | Goto_greatestGoto_greatest152,5332
+type concrete_strategyconcrete_strategy155,5454
+  | Inference_ruleInference_rule156,5480
+  | SeriesSeries157,5518
+  | Try_Try_158,5547
+  | RepeatRepeat159,5574
+  | Repeat_plusRepeat_plus160,5598
+  | SaturateSaturate161,5627
+  | Named_strategyNamed_strategy162,5658
+  | QueryQuery163,5688
+  | Print_goalsPrint_goals164,5699
+and inference_ruleinference_rule165,5731
+    AddPremiseAddPremise166,5753
+  | SimplifySimplify167,5800
+  | DeleteDelete168,5845
+  | GotoGoto169,5888
+  | Id_stId_st170,5911
+let strategy_to_stringstrategy_to_string172,5944
+let apply_rmapply_rm205,7160
+class strategystrategy382,14695
+    val contentcontent388,14794
+    method pprintpprint391,14849
+    method applyapply394,14953
+    method apply_at_posapply_at_pos397,15096
+    method apply_to_subgoalsapply_to_subgoals586,24130
+    method apply_new_goalapply_new_goal610,25390
+    method apply_new_goal_at_posapply_new_goal_at_pos619,25867
+    method compute_stringcompute_string626,26268
+    method fullstringfullstring628,26326
+    method is_queryis_query633,26619
+let name_strat_deletename_strat_delete643,26947
+let name_strat_cleanname_strat_clean644,26981
+let name_strat_decomposename_strat_decompose645,27013
+let name_strat_simplifyname_strat_simplify646,27053
+let name_strat_rewritename_strat_rewrite647,27091
+let name_strat_recursivename_strat_recursive648,27127
+let name_strat_builtinname_strat_builtin649,27167
+let name_strat_normalizename_strat_normalize650,27203
+let global_stratglobal_strat652,27245
+let augmentation_strataugmentation_strat653,27311
+let dico_st_refilldico_st_refill656,27414
+type problem_tokenproblem_token733,33392
+    Strat_tokenStrat_token734,33414
+  | Conjectures_tokenConjectures_token735,33459
+  | Hypotheses_tokenHypotheses_token736,33513
+  | Lemmas_tokenLemmas_token737,33566
+  | Startpoint_tokenStartpoint_token738,33615
+  | Augmentation_tokenAugmentation_token739,33649
+  | Norm_tokenNorm_token740,33685
+  | Cterm_tokenCterm_token741,33714
+  | Rpo_tokenRpo_token742,33744
+  | Compare_tokenCompare_token743,33776
+  | Compare_max_tokenCompare_max_token744,33844
+  | Match_tokenMatch_token745,33916
+  | Message_tokenMessage_token746,33950
+  | Ac_tokenAc_token747,33979
+let yy_queueyy_queue749,34022
+let yy_axiomsyy_axioms752,34098
+
+contextual_rewriting.ml,282
+Contextual_rewriting1,0
+let contextual_rewritingcontextual_rewriting29,553
+let equational_rewritingequational_rewriting226,9558
+let all_posall_pos332,14205
+let all_terms_posall_terms_pos348,14821
+let reduce_clausereduce_clause359,15428
+let rewritingrewriting408,17481
+
+literals.ml,3047
+Literals1,0
+type concrete_literalconcrete_literal15,184
+    Lit_ruleLit_rule16,209
+  | Lit_equalLit_equal17,238
+  | Lit_diffLit_diff18,268
+let print_both_termsprint_both_terms21,301
+let test_well_founded_littest_well_founded_lit29,579
+let constr_headsconstr_heads42,1272
+class literalliteral49,1500
+    val contentcontent59,1706
+    val variablesvariables61,1731
+    val mutable pos_positive_decompositionpos_positive_decomposition69,1996
+    val mutable pos_negative_decompositionpos_negative_decomposition70,2066
+    val mutable pos_positive_clashpos_positive_clash71,2137
+    val mutable pos_negative_clashpos_negative_clash72,2198
+    val mutable pos_eliminate_trivial_literalpos_eliminate_trivial_literal73,2261
+    method pos_positive_decompositionpos_positive_decomposition75,2337
+    method pos_negative_decompositionpos_negative_decomposition76,2407
+    method pos_positive_clashpos_positive_clash77,2477
+    method pos_negative_clashpos_negative_clash78,2531
+    method pos_eliminate_trivial_literalpos_eliminate_trivial_literal79,2585
+    method contentcontent81,2663
+    method variablesvariables83,2695
+    method pprintpprint86,2762
+    method update_posupdate_pos89,2838
+    method  expand_sortsexpand_sorts95,3140
+    method compute_stringcompute_string101,3519
+    method compute_string_coqcompute_string_coq107,3753
+    method compute_string_coq_with_quantifierscompute_string_coq_with_quantifiers113,4147
+    method def_symbolsdef_symbols119,4589
+    method apply_to_litapply_to_lit127,4892
+    method left_apply_to_litleft_apply_to_lit149,5729
+    method right_apply_to_litright_apply_to_lit168,6497
+    method swapswap187,7230
+    method substitutesubstitute195,7548
+    method bijective_renamingbijective_renaming200,7723
+    method copycopy224,8746
+    method equalequal233,9032
+    method syntactic_equalsyntactic_equal240,9195
+    method is_orientedis_oriented248,9580
+    method lefthand_sidelefthand_side253,9705
+    method righthand_siderighthand_side259,9852
+    method both_sidesboth_sides265,10006
+    method subterm_at_positionsubterm_at_position272,10196
+    method replace_subterm_at_posreplace_subterm_at_pos282,10874
+    method replace_subtermsreplace_subterms290,11235
+    method subterm_matchingsubterm_matching311,12330
+    method subterm_matching_at_possubterm_matching_at_pos344,13770
+    method matching_corematching_core365,14499
+    method treesizetreesize377,15219
+    method flattenflatten382,15342
+    method both_sides_w_orboth_sides_w_or392,15859
+    method is_booleanis_boolean399,16021
+    method revert_booleanrevert_boolean407,16344
+    method is_diffis_diff440,17503
+    method rename_corerename_core444,17613
+    method renamerename447,17703
+    method depthdepth451,17847
+    method rpos_greaterrpos_greater455,17947
+    method compute_picompute_pi470,18478
+    method is_subtermis_subterm478,18762
+let compute_string_literal_camlcompute_string_literal_caml489,18976
+
+symbols.ml,7691
+Symbols1,0
+type varvar16,229
+and constconst17,245
+and sortsort18,262
+and sort = Def_sortDef_sort18,262
+and sort = Def_sort of int | Abstr_sort0Abstr_sort018,262
+and sort = Def_sort of int | Abstr_sort0 of string | Abstr_sort1Abstr_sort118,262
+and sort = Def_sort of int | Abstr_sort0 of string | Abstr_sort1 of int * sort | Abstr_sort2Abstr_sort218,262
+and positionposition19,377
+and pathpath20,402
+and arityarity21,433
+type parameterized_sortparameterized_sort28,617
+    Actual_sortActual_sort29,644
+  | Variable_sortVariable_sort30,669
+type orderorder33,736
+type order = GRGR33,736
+type order = GR | EQEQ33,736
+type order = GR | EQ | NGENGE33,736
+let var_equalvar_equal36,768
+and var_infvar_inf37,791
+and const_equalconst_equal38,812
+and const_infconst_inf39,837
+and sort_equalsort_equal40,860
+and sort_infsort_inf41,884
+let def_sort_iddef_sort_id43,910
+let rec is_abstractis_abstract48,1051
+let sprint_varsprint_var54,1275
+let dico_sort_stringdico_sort_string64,1595
+let print_dico_sort_stringprint_dico_sort_string68,1695
+let rec sprint_sortsprint_sort80,2030
+let sprint_substsprint_subst95,2678
+let specif_LA_definedspecif_LA_defined102,2968
+let specif_Rmaxs0_definedspecif_Rmaxs0_defined105,3079
+let specif_Rmins0_definedspecif_Rmins0_defined108,3194
+let specif_Rzmm_definedspecif_Rzmm_defined111,3311
+let specif_Rmps0_definedspecif_Rmps0_defined114,3431
+let specif_Rnatlist_definedspecif_Rnatlist_defined117,3598
+let subsumessubsumes121,3693
+let subsumes_w_restsubsumes_w_rest151,4832
+let sprint_positionsprint_position170,5257
+let is_constructoris_constructor172,5362
+let is_definedis_defined173,5395
+let greatest_vargreatest_var176,5462
+let newvarnewvar177,5490
+let update_greatest_varupdate_greatest_var179,5557
+let sort_countersort_counter184,5681
+let new_sortnew_sort185,5709
+let obs_sort_counterobs_sort_counter187,5798
+let constructor_counterconstructor_counter189,5830
+let new_constructornew_constructor190,5865
+let function_counterfunction_counter194,5971
+let new_functionnew_function195,6006
+let all_defined_functionsall_defined_functions200,6139
+let all_constructorsall_constructors201,6192
+let all_induction_positionsall_induction_positions203,6242
+let all_induction_pathsall_induction_paths204,6320
+let clause_counterclause_counter206,6372
+let new_clause_numbernew_clause_number207,6402
+let rec occurs_stroccurs_str212,6502
+let yy_tmp_param_sortsyy_tmp_param_sorts220,6744
+let insert_shorteninsert_shorten222,6847
+let unify_sortsunify_sorts253,8264
+let equal_sortsequal_sorts298,10433
+let sprint_param_sortsprint_param_sort305,10614
+let rec expand_sortsexpand_sorts311,10811
+let dico_obs_sortdico_obs_sort325,11341
+let is_obs_sortis_obs_sort328,11559
+let print_dico_obs_sortprint_dico_obs_sort330,11639
+let dico_const_stringdico_const_string341,12003
+let print_dico_const_stringprint_dico_const_string345,12105
+let sort_main_stringsort_main_string352,12332
+let dico_const_profiledico_const_profile364,12662
+let sprint_profilesprint_profile368,12770
+let print_dico_const_profileprint_dico_const_profile375,12955
+let dico_const_sortdico_const_sort386,13314
+let print_dico_const_sortprint_dico_const_sort390,13414
+type symbol_propsymbol_prop399,13765
+type symbol_prop = Prop_acProp_ac399,13765
+type symbol_prop = Prop_ac | Prop_assocProp_assoc399,13765
+type symbol_prop = Prop_ac | Prop_assoc | Prop_peanoProp_peano399,13765
+let string_of_propstring_of_prop401,13823
+let dico_propertiesdico_properties408,13938
+let print_dico_propertiesprint_dico_properties412,14035
+let symbol_is_acsymbol_is_ac422,14316
+let symbol_is_assocsymbol_is_assoc426,14420
+let symbol_is_peanosymbol_is_peano430,14530
+class dictionary_aritiesdictionary_arities436,14683
+    method left_arleft_ar439,14781
+    method right_arright_ar440,14864
+    method total_artotal_ar441,14949
+let dico_aritiesdico_arities444,15061
+let print_dico_aritiesprint_dico_arities446,15112
+let dico_sort_nullaritydico_sort_nullarity457,15519
+let print_dico_sort_nullarityprint_dico_sort_nullarity459,15595
+let is_nullaryis_nullary468,15923
+let is_nullary_sortis_nullary_sort469,16008
+let compute_sort_nullaritycompute_sort_nullarity472,16126
+let update_dico_sort_nullarityupdate_dico_sort_nullarity531,17768
+let dico_free_constructorsdico_free_constructors544,18239
+let print_dico_sort_nullarityprint_dico_sort_nullarity546,18319
+let print_dico_free_constructorsprint_dico_free_constructors554,18624
+let dico_orderdico_order562,18916
+let dico_infsdico_infs565,19042
+let dico_order_ccdico_order_cc569,19132
+let print_dico_orderprint_dico_order571,19182
+let print_dico_equivalenceprint_dico_equivalence582,19592
+let print_dico_eqprint_dico_eq595,20140
+type statusstatus600,20276
+type status = LeftLeft600,20276
+type status = Left | RightRight600,20276
+type status = Left | Right | MultisetMultiset600,20276
+let sprint_statussprint_status602,20319
+let default_statusdefault_status609,20428
+let change_default_statuschange_default_status611,20467
+let dico_id_statusdico_id_status620,20737
+let print_dico_id_statusprint_dico_id_status622,20809
+let complete_status_dicocomplete_status_dico635,21238
+let get_statusget_status651,21687
+let greatergreater653,21833
+let equivalentequivalent663,22020
+let inf_syminf_sym676,22281
+let minimalminimal691,22760
+let check_status_equivalent_symbolscheck_status_equivalent_symbols702,23000
+let sprint_pathsprint_path715,23341
+let dico_ind_positions_v0dico_ind_positions_v0732,24107
+let dico_ind_positions_v1dico_ind_positions_v1735,24220
+let print_dico_ind_positions_v0print_dico_ind_positions_v0739,24311
+let print_dico_ind_positions_v1print_dico_ind_positions_v1763,25169
+let default_fill_order_dico_ccdefault_fill_order_dico_cc776,25543
+let update_profileupdate_profile794,26066
+let all_specifsall_specifs814,26714
+let add_specifadd_specif820,27001
+let predefined_specif_tablepredefined_specif_table854,28032
+let add_predefined_specifadd_predefined_specif857,28126
+let id_sort_boolid_sort_bool863,28311
+and id_symbol_trueid_symbol_true864,28343
+and id_symbol_falseid_symbol_false865,28384
+let add_bool_specifadd_bool_specif867,28430
+let nat_specif_definednat_specif_defined879,28759
+let id_sort_natid_sort_nat880,28797
+let id_symbol_zeroid_symbol_zero881,28830
+let id_symbol_sid_symbol_s882,28873
+let add_lists_specifadd_lists_specif886,28947
+let id_symbol_lessid_symbol_less903,29626
+let id_symbol_leqid_symbol_leq904,29666
+let id_symbol_greaterid_symbol_greater905,29705
+let id_symbol_geqid_symbol_geq906,29748
+let id_symbol_plusid_symbol_plus907,29787
+let id_symbol_timesid_symbol_times908,29827
+let id_symbol_minusid_symbol_minus909,29868
+let id_symbol_minus_natid_symbol_minus_nat910,29909
+let id_symbol_minid_symbol_min914,29994
+let id_symbol_maxid_symbol_max915,30033
+let add_nat_specifadd_nat_specif919,30116
+let int_specif_definedint_specif_defined960,31826
+let id_sort_intid_sort_int961,31864
+let id_symbol_pid_symbol_p962,31897
+let add_int_specifadd_int_specif964,31939
+let list_specif_definedlist_specif_defined1004,33559
+let id_sort_listid_sort_list1005,33598
+let id_symbol_nilid_symbol_nil1006,33632
+let id_symbol_consid_symbol_cons1007,33674
+let id_symbol_revid_symbol_rev1010,33721
+let id_symbol_lenid_symbol_len1011,33760
+let id_symbol_appid_symbol_app1012,33799
+let id_symbol_singleid_symbol_single1013,33838
+let add_list_specifadd_list_specif1017,33886
+let sprint_term_listsprint_term_list1049,35124
+let lenvar_llenvar_l1055,35345
+
+coq.ml,197
+Coq1,0
+let dummy_termdummy_term15,119
+let buffered_output_coqbuffered_output_coq25,404
+let print_coq_specificationprint_coq_specification30,478
+let print_coq_proofprint_coq_proof211,8782
+
+max.ml,300
+Max1,0
+let zero_tzero_t8,69
+let rec max_propagate_smax_propagate_s10,133
+let rec max_smallermax_smaller46,1819
+let rec max_deletemax_delete78,3149
+let rec max_listmax_list87,3387
+let rec build_maxbuild_max101,3788
+let rec max_orderedmax_ordered110,4005
+let max_normmax_norm117,4212
+
+terms.ml,8341
+Terms1,0
+type 'a concrete_termconcrete_term14,198
+    Var_existVar_exist15,223
+  | Var_univVar_univ16,252
+  | TermTerm17,280
+let compute_depthcompute_depth19,318
+let get_sortget_sort25,454
+let is_existential_varis_existential_var28,549
+let is_universal_varis_universal_var33,675
+let all_defined_positionsall_defined_positions38,799
+class termterm48,1103
+    val contentcontent75,1863
+    val variablesvariables77,1889
+    val depthdepth82,2107
+    val mutable pos_rewritingpos_rewriting87,2237
+    val mutable pos_contextual_rewritingpos_contextual_rewriting88,2274
+    val mutable pos_partial_case_rewritingpos_partial_case_rewriting89,2323
+    val mutable pos_total_case_rewritingpos_total_case_rewriting90,2372
+    val mutable pos_equational_rewritingpos_equational_rewriting91,2421
+    method contentcontent94,2549
+    method variablesvariables96,2582
+    method copycopy98,2619
+    method pos_rewritingpos_rewriting100,2646
+    method pos_contextual_rewritingpos_contextual_rewriting101,2689
+    method pos_partial_case_rewritingpos_partial_case_rewriting102,2755
+    method pos_total_case_rewritingpos_total_case_rewriting103,2823
+    method pos_equational_rewritingpos_equational_rewriting104,2889
+    method resetpos_rewritingresetpos_rewriting105,2955
+    method resetpos_contextual_rewritingresetpos_contextual_rewriting114,3252
+    method resetpos_partial_case_rewritingresetpos_partial_case_rewriting122,3502
+    method resetpos_total_case_rewritingresetpos_total_case_rewriting130,3759
+    method resetpos_equational_rewritingresetpos_equational_rewriting138,4011
+    method delpos_rewritingdelpos_rewriting147,4264
+    method delpos_partial_case_rewritingdelpos_partial_case_rewriting173,5391
+    method delpos_contextual_rewritingdelpos_contextual_rewriting192,6284
+    method delpos_total_case_rewritingdelpos_total_case_rewriting211,7168
+    method delpos_equational_rewritingdelpos_equational_rewriting230,8050
+    method depthdepth250,8960
+    method expand_sortsexpand_sorts253,8991
+    method update_posupdate_pos265,9662
+    method replace_subtermsreplace_subterms280,10258
+    method replace_subterm_at_posreplace_subterm_at_pos325,12440
+    method get_ac_f_argsget_ac_f_args377,14977
+    method strict_positionsstrict_positions386,15285
+    method defined_positionsdefined_positions395,15616
+    method all_positions_w_sortall_positions_w_sort399,15781
+    method variable_positions_w_sortvariable_positions_w_sort408,16184
+    method strict_positions_w_sortstrict_positions_w_sort417,16546
+    method sortsort425,16862
+    method variable_positionsvariable_positions431,17068
+    method vars_n_posvars_n_pos440,17418
+    method flattenflatten462,18157
+    method depth_per_sortdepth_per_sort480,18787
+    method strict_depth_corestrict_depth_core490,19222
+    method strict_depthstrict_depth499,19541
+    method strict_depth_per_sortstrict_depth_per_sort505,19783
+    method check_propertycheck_property515,20197
+    method all_positionsall_positions522,20483
+    method occuroccur532,20788
+    method is_constructor_termis_constructor_term538,21019
+    method substitutesubstitute544,21242
+    method has_constructor_argumentshas_constructor_arguments577,22954
+    method treesizetreesize583,23197
+    method def_symbolsdef_symbols590,23435
+    method syntactic_equalsyntactic_equal599,23769
+    method equalequal617,24649
+    method bijective_renamingbijective_renaming625,24904
+    method bijective_renaming_corebijective_renaming_core633,25158
+    method headhead673,26635
+    method sonssons678,26764
+    method head_n_sonshead_n_sons683,26893
+    method is_termis_term688,27039
+    method var_contentvar_content693,27156
+    method is_a_naturalis_a_natural699,27343
+    method term_congruenceterm_congruence726,28128
+    method linear_variableslinear_variables741,28901
+    method linear_positionslinear_positions744,29080
+    method linear_valueslinear_values747,29205
+    method non_linear_variablesnon_linear_variables750,29333
+    method non_linear_positionsnon_linear_positions753,29516
+    method non_linear_valuesnon_linear_values756,29648
+    method is_linearis_linear759,29777
+    method private compute_basic_stringcompute_basic_string761,29886
+    method compute_stringcompute_string772,30503
+    method pprintpprint820,32883
+    method compute_string_coqcompute_string_coq822,33005
+    method compute_string_coq_with_quantifierscompute_string_coq_with_quantifiers834,33912
+    method core_ind_positions_v1core_ind_positions_v1849,34917
+    method ind_positions_v1ind_positions_v1860,35438
+    method core_ind_positions_v2core_ind_positions_v2864,35632
+    method ind_positions_v2ind_positions_v2875,36126
+    method variable_pathsvariable_paths885,36593
+    method replace_sortreplace_sort894,36932
+    method matching_corematching_core903,37348
+    method leqleq1066,44342
+    method matchingmatching1080,44850
+    method subterm_matchingsubterm_matching1085,45098
+    method equal_mod_varequal_mod_var1108,45852
+    method subterm_matching_at_possubterm_matching_at_pos1116,46207
+    method subterm_at_positionsubterm_at_position1126,46643
+    method subtermsubterm1135,47016
+    method rename_corerename_core1158,47491
+    method renamerename1182,48418
+    method is_natis_nat1188,48693
+    method is_intis_int1193,48994
+    method contextual_varcontextual_var1196,49138
+    method has_no_obs_strict_subcontexthas_no_obs_strict_subcontext1197,49169
+    method subtermssubterms1198,49217
+    method is_not_ground_reducibleis_not_ground_reducible1199,49296
+    method vars_but_context_varvars_but_context_var1200,49340
+    method sort_var_contsort_var_cont1201,49399
+and ground_termground_term1208,49557
+    method matchingmatching1215,49702
+let term_trueterm_true1223,49851
+and term_falseterm_false1224,49919
+let rec term_natterm_nat1227,49993
+let subst_is_primitivesubst_is_primitive1234,50329
+let contextual_rewriting_bitcontextual_rewriting_bit1240,50637
+let equational_rewriting_bitequational_rewriting_bit1241,50732
+let rewriting_bitrewriting_bit1242,50827
+let partial_case_rewriting_bitpartial_case_rewriting_bit1243,50910
+let total_case_rewriting_bittotal_case_rewriting_bit1244,51005
+let induction_bitinduction_bit1245,51100
+let positive_decomposition_bitpositive_decomposition_bit1246,51195
+let negative_decomposition_bitnegative_decomposition_bit1247,51290
+let positive_clash_bitpositive_clash_bit1248,51385
+let tautology_bittautology_bit1249,51480
+let subsumption_bitsubsumption_bit1250,51575
+let negative_clash_bitnegative_clash_bit1251,51670
+let eliminate_redundant_literal_biteliminate_redundant_literal_bit1252,51765
+let eliminate_trivial_literal_biteliminate_trivial_literal_bit1253,51860
+let auto_simplification_bitauto_simplification_bit1254,51955
+let complement_bitcomplement_bit1255,52050
+let congruence_closure_bitcongruence_closure_bit1256,52145
+let augmentation_bitaugmentation_bit1257,52240
+let smt_bitsmt_bit1258,52335
+let la_bitla_bit1259,52431
+let dico_nullary_individualsdico_nullary_individuals1262,52591
+let print_dico_nullary_individualsprint_dico_nullary_individuals1264,52683
+let deepest_depthdeepest_depth1271,53106
+let rec nullary_individualsnullary_individuals1284,53398
+let update_dico_nullary_individualsupdate_dico_nullary_individuals1306,54118
+let produce_nullary_instancesproduce_nullary_instances1330,54904
+let complete_substitutioncomplete_substitution1341,55442
+let make_unary_termmake_unary_term1360,56079
+let term_is_trueterm_is_true1368,56264
+and term_is_falseterm_is_false1369,56310
+let expand_sorts_listexpand_sorts_list1372,56366
+let print_detailed_termprint_detailed_term1375,56436
+let sprint_detailed_termsprint_detailed_term1384,56774
+let print_detailed_position_termprint_detailed_position_term1392,57080
+let rec expand_termsexpand_terms1401,57507
+let unify_termsunify_terms1416,58076
+let sprint_detailed_substsprint_detailed_subst1501,62123
+let write_pos_termwrite_pos_term1507,62350
+let dico_rpo_greaterdico_rpo_greater1525,63092
+let order_termsorder_terms1527,63178
+let rec compute_string_camlcompute_string_caml1575,65212
+
+critical_context_set.ml,782
+Critical_context_set1,0
+let critical_context_setcritical_context_set20,270
+let critical_context_set_by_varcritical_context_set_by_var23,420
+let print_critical_context_setprint_critical_context_set26,559
+let generate_all_terms_CC0generate_all_terms_CC035,1004
+let generate_all_terms_T0generate_all_terms_T063,2082
+let generate_all_contexts_CC0generate_all_contexts_CC088,3056
+let generate_all_contexts_T0generate_all_contexts_T093,3366
+let instanceinstance98,3686
+let is_not_ground_reducibleis_not_ground_reducible109,4265
+let flag_crit_contextflag_crit_context126,5079
+let set_flag_crit_contextset_flag_crit_context128,5116
+let cc0cc0130,5178
+let t0t0131,5196
+let stopstop132,5214
+let compute_critical_context_setcompute_critical_context_set135,5277
+
+min.ml,300
+Min1,0
+let zero_tzero_t8,69
+let rec min_propagate_smin_propagate_s10,133
+let rec min_greatermin_greater47,1917
+let rec min_deletemin_delete85,3293
+let rec min_listmin_list94,3531
+let rec build_minbuild_min106,3888
+let rec min_orderedmin_ordered115,4105
+let min_normmin_norm122,4312
+
+terms_parser.ml,2411
+Terms_parser1,0
+type incomplete_treeincomplete_tree16,329
+    IvarIvar17,353
+  | ItermIterm18,370
+let  sprint_incomplete_tree_pointersprint_incomplete_tree_pointer20,423
+let rec sprint_incomplete_treesprint_incomplete_tree33,853
+type term_tokenterm_token44,1226
+    TT_identTT_ident45,1245
+  | TT_treeTT_tree46,1269
+let print_term_tokenprint_term_token48,1303
+let yy_incomplete_treeyy_incomplete_tree58,1687
+let yy_terms_stackyy_terms_stack59,1754
+let yy_tmp_varsyy_tmp_vars60,1827
+let yy_tmp_sortsyy_tmp_sorts61,1916
+let yy_tmp_vars2yy_tmp_vars262,2002
+let yy_tmp_sorts2yy_tmp_sorts263,2092
+let yy_tmp_equiv_dicoyy_tmp_equiv_dico64,2179
+let reset_yy_valuesreset_yy_values67,2341
+let rec fill_yy_valuesfill_yy_values76,2592
+let pick_pos_codespick_pos_codes86,3015
+let code_of_varcode_of_var89,3137
+let incomplete_tree_is_completeincomplete_tree_is_complete103,3671
+let parse_failwithparse_failwith114,4034
+let rec nthnth125,4507
+type asl_typeasl_type129,4621
+   | UnknownUnknown130,4638
+   | NumberNumber131,4652
+   | TypeVarTypeVar132,4665
+   | ArrowArrow133,4690
+and vartypevartype135,4727
+and vartype = VTVT135,4727
+and asl_type_schemeasl_type_scheme136,4763
+and asl_type_scheme = ForallForall136,4763
+type aslasl139,4822
+   | Const_aslConst_asl140,4834
+   | Var_aslVar_asl141,4857
+   | CondCond142,4878
+   | AppApp143,4908
+   | AbsAbs144,4931
+and top_asltop_asl146,4959
+and top_asl = DeclDecl146,4959
+exception TypingBugTypingBug148,4999
+let countercounter150,5034
+let new_vartypenew_vartype154,5102
+let reset_vartypesreset_vartypes157,5175
+let rec shortenshorten159,5215
+exception TypeClashTypeClash172,5842
+let occursoccurs174,5888
+let rec unifyunify186,6330
+let init_envinit_env242,10071
+let global_envglobal_env244,10128
+let init_typing_envinit_typing_env246,10162
+let global_typing_envglobal_typing_env252,10296
+let vars_of_typevars_of_type254,10343
+let flatflat266,10780
+let subtractsubtract268,10821
+let rec make_setmake_set279,11056
+let unknowns_of_typeunknowns_of_type285,11174
+let unknowns_of_type_envunknowns_of_type_env287,11237
+let generalise_typegeneralise_type291,11351
+let gen_instancegen_instance297,11508
+let rec asl_typing_exprasl_typing_expr314,12179
+let tvar_nametvar_name350,13468
+let print_type_schemeprint_type_scheme362,13883
+let typingtyping390,14898
+
+decomposition_set.ml,387
+Decomposition_set1,0
+let decomposedecompose23,353
+let main_functionmain_function52,1210
+let positive_decompositionpositive_decomposition131,4719
+let negative_decompositionnegative_decomposition134,4871
+let positive_clashpositive_clash142,5029
+let insert_eqinsert_eq218,7762
+let build_equalitiesbuild_equalities253,9319
+let congruence_closurecongruence_closure284,10298
+
+misc.ml,6623
+Misc1,0
+let dummybreakdummybreak20,431
+let list_insertlist_insert23,510
+let list_unionlist_union38,865
+let generic_list_uniongeneric_list_union43,1038
+let ord_assocord_assoc48,1205
+let rec generic_assoc2generic_assoc262,1566
+let insert_sortedinsert_sorted73,1865
+let merge_sorted_listsmerge_sorted_lists89,2284
+let multiset_merge_sorted_listsmultiset_merge_sorted_lists105,2737
+let assoc_merge_sorted_listsassoc_merge_sorted_lists124,3296
+let assoc_insert_sortedassoc_insert_sorted144,3827
+let assoc_insertassoc_insert161,4254
+let remove_sortedremove_sorted178,4652
+let remove_sorted_listsremove_sorted_lists193,5018
+let setminussetminus209,5439
+let remove_elremove_el225,5889
+let unsorted_setminusunsorted_setminus236,6114
+let unsorted_sloppy_setminusunsorted_sloppy_setminus242,6285
+let remove_all_elremove_all_el253,6622
+let intersection_sorted_listsintersection_sorted_lists265,6905
+let what_is_newwhat_is_new282,7325
+let differencedifference294,7613
+let intersection_and_rest_sorted_listsintersection_and_rest_sorted_lists307,7984
+let is_subsetis_subset326,8602
+let list_maxlist_max340,8926
+let rec list_memberlist_member357,9223
+let rec list_remove_doubleslist_remove_doubles366,9467
+let generic_ord_assocgeneric_ord_assoc380,9823
+let generic_insert_sortedgeneric_insert_sorted382,9884
+let generic_merge_sorted_listsgeneric_merge_sorted_lists384,9953
+let subst_composesubst_compose388,10102
+let generic_multiset_merge_sorted_listsgeneric_multiset_merge_sorted_lists394,10267
+let generic_assoc_merge_sorted_listsgeneric_assoc_merge_sorted_lists396,10349
+let generic_assoc_insert_sortedgeneric_assoc_insert_sorted400,10439
+let generic_remove_sortedgeneric_remove_sorted402,10520
+let generic_remove_sorted_listsgeneric_remove_sorted_lists404,10589
+let generic_setminusgeneric_setminus406,10670
+let generic_remove_elgeneric_remove_el408,10729
+let generic_intersection_sorted_listsgeneric_intersection_sorted_lists410,10784
+let generic_intersection_and_rest_sorted_listsgeneric_intersection_and_rest_sorted_lists414,10882
+let generic_is_subsetgeneric_is_subset418,10998
+let generic_list_maxgeneric_list_max420,11053
+let generic_merge_set_of_listsgeneric_merge_set_of_lists422,11098
+let generic_list_object_membergeneric_list_object_member426,11190
+let generic_list_object_remove_doublesgeneric_list_object_remove_doubles428,11267
+let rec generic_list_sorted_memgeneric_list_sorted_mem432,11361
+let sprint_listsprint_list445,11742
+let print_listprint_list457,11972
+let print_tab_listprint_tab_list472,12217
+let sprint_string_listsprint_string_list491,12587
+let sprint_int_listsprint_int_list501,12733
+let rec list_grouplist_group504,12851
+let rec lists_synclists_sync518,13210
+let check_on_permutationscheck_on_permutations537,13848
+let ac_eqac_eq562,14481
+let check_on_subsetscheck_on_subsets590,15179
+let check_on_variantscheck_on_variants614,15883
+let rec list_special_existslist_special_exists629,16204
+let subsumessubsumes638,16472
+let subsumes_w_restsubsumes_w_rest653,16974
+let apply_f_to_element_napply_f_to_element_n672,17473
+let is_includedis_included690,17920
+let extractextract707,18321
+let all_couples_from_listall_couples_from_list719,18594
+let rec all_combinations_from_listall_combinations_from_list732,18945
+let rec last_ellast_el744,19220
+let rec list_all_but_last_ellist_all_but_last_el751,19326
+let list_all_butlist_all_but760,19534
+let rec list_truncatelist_truncate775,19877
+let rec uncouple_listuncouple_list788,20238
+let max_assocmax_assoc799,20552
+let rec max_assoc_mergemax_assoc_merge815,20899
+let megamixmegamix831,21407
+let process_underscoresprocess_underscores866,22396
+type ginputginput879,22883
+let openinopenin882,22959
+let closeinclosein892,23165
+type 'a pointerpointer901,23363
+type 'a pointer = UndefinedUndefined901,23363
+type 'a pointer = Undefined | DefinedDefined901,23363
+let pointer_is_definedpointer_is_defined903,23412
+let pointer_is_undefinedpointer_is_undefined909,23503
+let defined_contentdefined_content915,23596
+let pointer_maxpointer_max921,23702
+let pointer_incrpointer_incr931,23930
+let list_initlist_init938,24103
+let pop_n_timespop_n_times950,24398
+let rec list_split_at_nlist_split_at_n955,24578
+let array_existsarray_exists967,24904
+let list_is_suffixlist_is_suffix976,25123
+let rec list_2_2_maplist_2_2_map994,25634
+let list_replace_elementlist_replace_element1013,26022
+let list_replace_element_w_listlist_replace_element_w_list1025,26288
+let list_insert_at_positionlist_insert_at_position1037,26549
+let rec list_2_list_of_coupleslist_2_list_of_couples1048,26851
+let rec list_select_maximal_elementslist_select_maximal_elements1057,27154
+let list_createlist_create1082,27890
+let list_singletonlist_singleton1092,28154
+let rec get_leading_elget_leading_el1099,28312
+let list_exists_and_proceedlist_exists_and_proceed1113,28792
+let list_exists_and_proceed_2list_exists_and_proceed_21133,29230
+let list_remove_truelist_remove_true1154,29761
+let list_number_elslist_number_els1176,30222
+let list_position_smallest_ellist_position_smallest_el1186,30414
+type goto_typegoto_type1196,30726
+type goto_type = Goto_numberGoto_number1196,30726
+type goto_type = Goto_number of int | Goto_smallestGoto_smallest1196,30726
+type goto_type = Goto_number of int | Goto_smallest | Goto_greatestGoto_greatest1196,30726
+let list_exists_w_numberlist_exists_w_number1199,30871
+let mstringmstring1209,31040
+let rec print_bitstreamprint_bitstream1212,31107
+let rec powerpower1219,31281
+let get_bitstreamget_bitstream1225,31360
+let list_head_to_taillist_head_to_tail1243,31744
+let rec print_list_tboxprint_list_tbox1252,31921
+let rec list_assoc_2list_assoc_21260,32177
+let repeatrepeat1267,32340
+let queue_forallqueue_forall1275,32477
+class virtual genericgeneric1285,32665
+  object ((self : 'a)) method virtual equalequal1286,32690
+class virtual printable_objectprintable_object1288,32756
+    val mutable stringstring1290,32814
+    method stringstring1291,32869
+let subsetsubset1298,33048
+let do_nothingdo_nothing1307,33229
+let rec n_spacesn_spaces1309,33267
+let syntactic_equalsyntactic_equal1315,33351
+let matrix_existsmatrix_exists1317,33398
+let matrix_mapmatrix_map1330,33684
+let list_special_maplist_special_map1342,33904
+let rec cat_nonempty_stringscat_nonempty_strings1356,34246
+let rec gcdgcd1375,34678
+let lcmlcm1384,34949
+let substringsubstring1387,35026
+let print_indent_stringprint_indent_string1404,35367
+
+test_sets.ml,3549
+Test_sets1,0
+let generate_constructor_termsgenerate_constructor_terms22,405
+let cs_termscs_terms81,2632
+type induction_position_specificationinduction_position_specification96,3281
+    Ind_pos_voidInd_pos_void97,3322
+  | Ind_pos_positionInd_pos_position98,3340
+  | Ind_pos_pathInd_pos_path99,3399
+let sprint_induction_position_specificationsprint_induction_position_specification102,3434
+let merge_induction_positionsmerge_induction_positions109,3880
+let induction_symbols_prioritiesinduction_symbols_priorities117,4417
+let print_induction_symbols_prioritiesprint_induction_symbols_priorities119,4503
+let fill_default_induction_positions_v0fill_default_induction_positions_v0122,4658
+let fill_default_induction_positionsfill_default_induction_positions138,5422
+let sprint_fun_pathsprint_fun_path140,5504
+let compute_induction_posvarcompute_induction_posvar142,5665
+let update_dico_rulesupdate_dico_rules161,6350
+let test_set_versiontest_set_version188,6916
+let dico_test_set_v0dico_test_set_v0192,7055
+let dico_test_set_v1dico_test_set_v1193,7130
+let dico_test_set_v2dico_test_set_v2194,7213
+let print_dico_test_set_v0print_dico_test_set_v0196,7290
+let print_dico_test_set_v1print_dico_test_set_v1203,7653
+let print_dico_test_set_v2print_dico_test_set_v2210,8062
+let print_dico_test_setprint_dico_test_set216,8325
+let fill_default_induction_positions_v1fill_default_induction_positions_v1219,8383
+let fill_default_induction_positions_v2fill_default_induction_positions_v2233,9047
+let induction_variables_v0induction_variables_v0250,9825
+let induction_variables_v1induction_variables_v1298,11610
+let induction_variables_v2induction_variables_v2318,12580
+let compute_test_set_v0compute_test_set_v0331,13051
+let compute_test_set_v1compute_test_set_v1348,13575
+let compute_test_set_v2compute_test_set_v2360,13970
+let compute_test_setcompute_test_set387,15017
+let has_induction_variables_v0has_induction_variables_v0391,15206
+let has_induction_variables_v1has_induction_variables_v1394,15317
+let has_induction_variables_v2has_induction_variables_v2395,15412
+let has_induction_variableshas_induction_variables396,15486
+let have_same_induction_variables_v0have_same_induction_variables_v0399,15616
+let have_same_induction_variables_v1have_same_induction_variables_v1400,15764
+let have_same_induction_variables_v2have_same_induction_variables_v2401,15904
+let have_same_induction_variableshave_same_induction_variables402,16002
+let generate_test_substitutions_core_v0generate_test_substitutions_core_v0405,16113
+let generate_test_substitutions_v0generate_test_substitutions_v0415,16394
+let generate_test_substitutions_for_clause_v0generate_test_substitutions_for_clause_v0422,16660
+let generate_test_substitutions_core_v1generate_test_substitutions_core_v1431,17037
+let generate_test_substitutions_v1generate_test_substitutions_v1440,17420
+let generate_test_substitutions_for_clause_v1generate_test_substitutions_for_clause_v1446,17663
+let induction_setsinduction_sets454,18025
+let generate_test_substitutions_core_v2generate_test_substitutions_core_v2467,18567
+let generate_test_substitutions_v2generate_test_substitutions_v2474,18824
+let generate_test_substitutions_for_clause_v2generate_test_substitutions_for_clause_v2481,19087
+let generate_test_substitutionsgenerate_test_substitutions492,19572
+let generate_test_substitutions_for_clausegenerate_test_substitutions_for_clause493,19659
+let update_test_set_versionupdate_test_set_version495,19770
+
+delete_set.ml,673
+Delete_set1,0
+let tautologytautology22,303
+let subsumption_init_arraysubsumption_init_array76,2415
+let subsumption_retrieve_equivalence_classessubsumption_retrieve_equivalence_classes82,2713
+let rec subsumption_retrieve_greatest_simple_clausesubsumption_retrieve_greatest_simple_clause89,2886
+let subsumption_select_l_topsubsumption_select_l_top105,3468
+let subsumption_lit_matching_coresubsumption_lit_matching_core111,3619
+let fn_symbfn_symb120,3965
+let fn_varefn_vare125,4180
+let subsumption_subsumessubsumption_subsumes133,4418
+let subsumptionsubsumption216,8219
+let negative_clashnegative_clash454,21746
+let augmentationaugmentation526,24624
+
+natlist.ml,231
+Natlist1,0
+let nil_termnil_term9,84
+let rec fn_spacesfn_spaces11,150
+let rec purifypurify14,226
+let rec list_propagatelist_propagate40,1252
+and  nat_propagatenat_propagate101,3784
+let natlist_normnatlist_norm157,6235
+
+values.ml,4009
+Values1,0
+let interaction_modeinteraction_mode7,107
+let max_counter_augmentationmax_counter_augmentation9,145
+let spike_versionspike_version11,187
+let in_a_filein_a_file13,218
+let parsed_gfileparsed_gfile15,291
+let linenumberlinenumber17,358
+let broken_orderbroken_order19,421
+let file_n_linefile_n_line22,535
+let stop_clausestop_clause29,699
+let error_messageerror_message31,780
+let spec_filespec_file33,837
+let proof_fileproof_file35,899
+let gen_proof_filenamegen_proof_filename37,954
+let change_proof_file_namechange_proof_file_name44,1145
+let output_verbosityoutput_verbosity46,1197
+let maximal_outputmaximal_output48,1267
+let indent_stringindent_string50,1307
+let incr_indentincr_indent52,1339
+let decr_indentdecr_indent54,1379
+let rec indent_blankindent_blank56,1448
+let debug_modedebug_mode58,1525
+let smt_inlinesmt_inline60,1557
+let smt_modesmt_mode62,1586
+let z3_pathz3_path64,1616
+let coqc_spec_modecoqc_spec_mode66,1642
+let coq_inlinecoq_inline68,1678
+let coqc_modecoqc_mode70,1707
+let dracula_modedracula_mode72,1738
+let induction_modeinduction_mode74,1772
+let specif_parameterizedspecif_parameterized76,1807
+let augmentation_modeaugmentation_mode78,1849
+let resolution_moderesolution_mode80,1888
+let continue_modecontinue_mode82,1925
+let exclude_nullary_modeexclude_nullary_mode84,1998
+let system_is_sufficiently_completesystem_is_sufficiently_complete87,2114
+let system_is_strongly_sufficiently_completesystem_is_strongly_sufficiently_complete90,2218
+let system_is_ground_convergentsystem_is_ground_convergent93,2338
+let free_constructorsfree_constructors96,2430
+let boolean_specificationboolean_specification99,2527
+let observational_proofobservational_proof102,2617
+let ac_symbols_categoryac_symbols_category114,3070
+let dico_infs_flagdico_infs_flag116,3107
+let list_ind_prioritieslist_ind_priorities117,3141
+let ac_symbols_orderedac_symbols_ordered125,3385
+and unary_symbols_orderedunary_symbols_ordered126,3431
+let ac_symbol_1ac_symbol_1130,3555
+and ac_symbol_2ac_symbol_2131,3580
+and unary_symbol_1unary_symbol_1132,3605
+let contextual_rewriting_countercontextual_rewriting_counter135,3733
+let equational_rewriting_counterequational_rewriting_counter136,3777
+let rewriting_counterrewriting_counter137,3821
+let partial_case_rewriting_counterpartial_case_rewriting_counter138,3854
+let total_case_rewriting_countertotal_case_rewriting_counter139,3900
+let generate_countergenerate_counter140,3944
+let generate_eq_countergenerate_eq_counter141,3976
+let subsumption_countersubsumption_counter142,4011
+let augmentation_counteraugmentation_counter143,4046
+let tautology_countertautology_counter144,4082
+let augmentation_counter_sucaugmentation_counter_suc145,4115
+let contextual_rewriting_counter_succontextual_rewriting_counter_suc146,4155
+let equational_rewriting_counter_sucequational_rewriting_counter_suc147,4203
+let rewriting_counter_sucrewriting_counter_suc148,4251
+let partial_case_rewriting_counter_sucpartial_case_rewriting_counter_suc149,4288
+let total_case_rewriting_counter_suctotal_case_rewriting_counter_suc150,4338
+let generate_counter_sucgenerate_counter_suc151,4386
+let generate_eq_counter_sucgenerate_eq_counter_suc152,4422
+let subsumption_counter_sucsubsumption_counter_suc153,4461
+let tautology_counter_suctautology_counter_suc154,4500
+let spec_namespec_name156,4539
+let pgoals_counterpgoals_counter158,4567
+let depth_counterdepth_counter163,4722
+let maxdepth_countermaxdepth_counter164,4784
+let step_counterstep_counter169,4942
+let exit_codeexit_code171,5005
+let max_lemmasmax_lemmas173,5032
+let use_orderuse_order177,5129
+let actually_processactually_process180,5181
+let enable_arithmeticenable_arithmetic182,5286
+let pgoalspgoals185,5355
+let print_contextprint_context188,5502
+let param_sort_counterparam_sort_counter190,5565
+let normalize_flagnormalize_flag192,5677
+let ctrlc_allowedctrlc_allowed194,5755
+
+dicos.ml,2537
+Dicos1,0
+class ['a, 'b] dictionarydictionary12,176
+    val valuevalue14,231
+    method addadd15,295
+    method removeremove16,339
+    method findfind17,385
+    method iteriter18,427
+    method replacereplace19,469
+    method sizesize21,559
+    method emptyempty23,651
+    method clearclear24,685
+    method apply_fapply_f25,725
+let htbl_updatehtbl_update33,972
+let htbl_update_listhtbl_update_list43,1251
+class ['a, 'b] reversible_dictionaryreversible_dictionary53,1550
+    val revert_valuerevert_value56,1664
+    method addadd57,1740
+    method removeremove64,1920
+    method find_keysfind_keys73,2270
+    method clearclear74,2324
+class ['a, 'b] bijective_dictionarybijective_dictionary78,2442
+    val revert_valuerevert_value81,2558
+    method addadd82,2629
+    method removeremove83,2695
+    method find_keyfind_key88,2884
+    method clearclear90,2987
+class ['a, 'b] assoc_dictionaryassoc_dictionary97,3369
+    val valuevalue99,3430
+    val revert_valuerevert_value100,3499
+    method sizesize101,3575
+    method emptyempty103,3667
+    method addadd104,3701
+    method mergemerge105,3775
+    method existsexists108,3893
+    method findfind111,3997
+    method find_keysfind_keys112,4039
+    method clearclear113,4093
+    method iteriter114,4161
+class virtual ['a] relation_dictionaryrelation_dictionary122,4405
+    method add_coupleadd_couple125,4520
+    method relatedrelated129,4657
+    method dubdub132,4763
+    method virtual rehashrehash133,4799
+class ['a] equivalence_dictionaryequivalence_dictionary136,4844
+    val contentcontent138,4907
+    val rootsroots140,4980
+    method initinit142,5046
+    method add_coupleadd_couple145,5148
+    method printprint184,6649
+    method fillfill188,6782
+    method iteriter198,7039
+    method findfind199,7083
+    method clearclear200,7159
+    method removeremove202,7235
+    method sizesize206,7417
+    method emptyempty208,7511
+let dico_equivalencedico_equivalence212,7558
+class ['a] order_dictionaryorder_dictionary217,7681
+    val contentcontent219,7738
+    method initinit221,7811
+    method relatedrelated224,7884
+    method add_coupleadd_couple229,8061
+    method findfind292,10496
+    method add_equivadd_equiv294,10542
+    method iteriter326,11818
+    method sizesize328,11864
+    method emptyempty331,11960
+    method clearclear333,11996
+    method keyskeys335,12040
+    method merge_equivalence_relationmerge_equivalence_relation339,12154
+
+normalize.ml,191
+Normalize1,0
+let norm_stringnorm_string20,245
+let broken_symbsbroken_symbs21,271
+let rewriterewrite24,419
+let  normalizenormalize145,5510
+let normalize_plusnormalize_plus173,6990
+
+zmaxmin.ml,411
+Zmaxmin1,0
+let zero_tzero_t9,70
+let rec fn_spacesfn_spaces11,133
+let rec zmm_propagate_minzmm_propagate_min14,209
+let rec zmm_greaterzmm_greater97,4167
+let rec zmm_deletezmm_delete109,4583
+let rec zmm_listzmm_list120,4967
+let rec min_termmin_term146,5773
+let l_sortedl_sorted154,5989
+let rec zmm_orderedzmm_ordered164,6225
+let rec build_zmmbuild_zmm179,6739
+let zmm_normzmm_norm189,6995
+
+diverse.ml,7267
+Diverse1,0
+let dummybreakdummybreak20,441
+let list_insertlist_insert23,520
+let list_unionlist_union38,875
+let generic_list_uniongeneric_list_union43,1048
+let ord_assocord_assoc48,1215
+let rec generic_assoc2generic_assoc262,1586
+let insert_sortedinsert_sorted73,1895
+let rec insert_sorted_dupinsert_sorted_dup88,2257
+let merge_sorted_listsmerge_sorted_lists101,2587
+let multiset_merge_sorted_listsmultiset_merge_sorted_lists118,3060
+let assoc_merge_sorted_listsassoc_merge_sorted_lists137,3619
+let assoc_insert_sortedassoc_insert_sorted157,4150
+let assoc_insertassoc_insert174,4577
+let remove_sortedremove_sorted191,4975
+let remove_sorted_listsremove_sorted_lists206,5359
+let setminussetminus222,5780
+let remove_elremove_el238,6223
+let unsorted_setminusunsorted_setminus249,6453
+let unsorted_sloppy_setminusunsorted_sloppy_setminus255,6685
+let remove_all_elremove_all_el266,7032
+let intersection_sorted_listsintersection_sorted_lists278,7315
+let what_is_newwhat_is_new295,7735
+let differencedifference307,8023
+let intersection_and_rest_sorted_listsintersection_and_rest_sorted_lists320,8394
+let is_subsetis_subset339,9012
+let list_maxlist_max353,9336
+let rec list_memberlist_member370,9633
+let list_remove_doubleslist_remove_doubles379,9877
+let generic_ord_assocgeneric_ord_assoc392,10189
+let generic_insert_sortedgeneric_insert_sorted394,10256
+let generic_merge_sorted_listsgeneric_merge_sorted_lists396,10331
+let subst_composesubst_compose400,10480
+let generic_multiset_merge_sorted_listsgeneric_multiset_merge_sorted_lists406,10672
+let generic_assoc_merge_sorted_listsgeneric_assoc_merge_sorted_lists408,10754
+let generic_assoc_insert_sortedgeneric_assoc_insert_sorted412,10844
+let generic_remove_sortedgeneric_remove_sorted414,10925
+let generic_remove_sorted_listsgeneric_remove_sorted_lists416,10994
+let generic_setminusgeneric_setminus418,11075
+let generic_remove_elgeneric_remove_el420,11134
+let generic_intersection_sorted_listsgeneric_intersection_sorted_lists422,11250
+let generic_intersection_and_rest_sorted_listsgeneric_intersection_and_rest_sorted_lists426,11348
+let generic_is_subsetgeneric_is_subset430,11464
+let generic_list_maxgeneric_list_max432,11519
+let generic_merge_set_of_listsgeneric_merge_set_of_lists434,11564
+let generic_list_object_membergeneric_list_object_member438,11656
+let generic_list_object_remove_doublesgeneric_list_object_remove_doubles440,11733
+let rec generic_list_sorted_memgeneric_list_sorted_mem444,11827
+let sprint_listsprint_list457,12208
+let print_listprint_list469,12438
+let print_tab_listprint_tab_list484,12700
+let sprint_string_listsprint_string_list502,13035
+let sprint_int_listsprint_int_list512,13181
+let rec list_grouplist_group515,13299
+let rec lists_synclists_sync529,13657
+let check_on_permutationscheck_on_permutations548,14295
+let ac_eqac_eq573,14928
+let check_on_subsetscheck_on_subsets601,15626
+let check_on_variantscheck_on_variants625,16320
+let rec list_special_existslist_special_exists640,16641
+let rec n_spacesn_spaces649,16821
+let apply_f_to_element_napply_f_to_element_n657,16983
+let is_includedis_included675,17430
+let extractextract692,17831
+let all_couples_from_listall_couples_from_list704,18104
+let rec all_combinations_from_listall_combinations_from_list717,18455
+let rec last_ellast_el729,18730
+let rec list_all_but_last_ellist_all_but_last_el736,18836
+let list_all_butlist_all_but745,19044
+let rec first_nfirst_n760,19361
+let last_nlast_n775,19644
+let rec uncouple_listuncouple_list791,20032
+let max_assocmax_assoc802,20346
+let rec max_assoc_mergemax_assoc_merge818,20693
+let megamixmegamix834,21201
+let process_underscoresprocess_underscores877,22285
+type ginputginput890,22772
+let openinopenin893,22848
+let closeinclosein903,23054
+type 'a pointerpointer912,23252
+type 'a pointer = UndefinedUndefined912,23252
+type 'a pointer = Undefined | DefinedDefined912,23252
+let pointer_is_definedpointer_is_defined914,23301
+let pointer_is_undefinedpointer_is_undefined920,23392
+let defined_contentdefined_content926,23485
+let pointer_maxpointer_max932,23591
+let pointer_incrpointer_incr942,23855
+let list_initlist_init949,24028
+let pop_n_timespop_n_times961,24323
+let rec list_split_at_nlist_split_at_n966,24503
+let array_existsarray_exists978,24829
+let list_is_suffixlist_is_suffix987,25048
+let rec list_2_2_maplist_2_2_map1005,25559
+let list_replace_elementlist_replace_element1024,25947
+let list_replace_element_w_listlist_replace_element_w_list1035,26190
+let list_replace_element2list_replace_element21044,26390
+let replace_sorted_listreplace_sorted_list1053,26554
+let list_insert_at_positionlist_insert_at_position1067,26915
+let rec list_2_list_of_coupleslist_2_list_of_couples1078,27217
+let rec list_select_maximal_elementslist_select_maximal_elements1087,27520
+let list_createlist_create1112,28256
+let list_singletonlist_singleton1122,28520
+let rec get_leading_elget_leading_el1129,28678
+let list_exists_and_proceedlist_exists_and_proceed1143,29158
+let list_exists_and_proceed_2list_exists_and_proceed_21163,29596
+let list_remove_truelist_remove_true1184,30127
+let list_number_elslist_number_els1206,30588
+let list_position_smallest_ellist_position_smallest_el1216,30780
+let list_exists_w_number_and_exclist_exists_w_number_and_exc1226,31161
+let mstringmstring1237,31389
+let rec print_bitstreamprint_bitstream1240,31456
+let rec powerpower1247,31630
+let get_bitstreamget_bitstream1253,31709
+let list_head_to_taillist_head_to_tail1271,32093
+let rec print_list_tboxprint_list_tbox1280,32270
+let rec list_assoc_2list_assoc_21288,32526
+let repeatrepeat1295,32697
+let queue_forallqueue_forall1303,32834
+type 'a pprinterpprinter1316,33138
+type 'a fprinterfprinter1317,33188
+type 'a sprintersprinter1318,33237
+let pprinter_of_pprinterpprinter_of_pprinter1321,33368
+let fprinter_of_pprinterfprinter_of_pprinter1323,33481
+let sprinter_of_pprintersprinter_of_pprinter1325,33615
+let printer_of_pprinterprinter_of_pprinter1331,33880
+let eprinter_of_pprintereprinter_of_pprinter1333,33962
+let pprinterpprinter1337,34124
+let fprinterfprinter1339,34206
+let sprintersprinter1340,34275
+let pprintpprint1343,34424
+let fprintfprint1344,34493
+let sprintsprint1345,34562
+let printprint1348,34711
+let eprinteprint1349,34780
+class virtual genericgeneric1353,34893
+  object ((_ : 'a)) method virtual equalequal1354,34918
+class virtual printable_objectprintable_object1356,34981
+    val mutable stringstring1358,35069
+    method stringstring1359,35124
+    method pprintpprint1364,35292
+    method fprintfprint1366,35363
+    method sprintsprint1367,35400
+let subsetsubset1370,35448
+let do_nothingdo_nothing1379,35629
+let syntactic_equalsyntactic_equal1381,35667
+let matrix_existsmatrix_exists1383,35714
+let matrix_mapmatrix_map1396,36000
+let list_special_maplist_special_map1408,36220
+let rec cat_nonempty_stringscat_nonempty_strings1429,36591
+let rec gcdgcd1448,37023
+let lcmlcm1457,37294
+let substringsubstring1460,37371
+let print_indent_stringprint_indent_string1477,37712
+let  resolutionresolution1483,37924
+
+npolynoms.ml,376
+Npolynoms1,0
+let zero_tzero_t19,258
+let one_tone_t20,322
+let two_ttwo_t21,389
+let rec fn_spacesfn_spaces23,456
+let measuremeasure26,535
+let heavierheavier46,1437
+let rec add_natadd_nat68,1883
+let rec mult_natmult_nat81,2345
+let rec propagate_onepropagate_one93,2789
+and np_addnp_add112,3634
+and np_timesnp_times326,13664
+and  np_normnp_norm391,16473
+
+dummies.ml,2115
+Dummies1,0
+type literal_positionliteral_position20,535
+type clausal_positionclausal_position21,571
+type position_argumentposition_argument29,741
+    Pos_definedPos_defined30,767
+  | Pos_litdefinedPos_litdefined31,804
+  | Pos_allPos_all32,840
+  | Pos_queryPos_query33,853
+  | Pos_dumbPos_dumb34,868
+let sprint_position_argumentsprint_position_argument36,884
+class strategystrategy43,1164
+    method applyapply47,1210
+    method apply_at_posapply_at_pos48,1318
+    method apply_new_goalapply_new_goal49,1465
+    method apply_new_goal_at_posapply_new_goal_at_pos50,1610
+    method apply_to_subgoalsapply_to_subgoals51,1793
+    method compute_stringcompute_string53,1951
+    method fullstringfullstring54,1983
+    method is_queryis_query55,2011
+    method stringstring56,2039
+    method pprintpprint57,2063
+    method fprintfprint59,2134
+    method sprintsprint60,2171
+let dico_stdico_st66,2267
+let print_dico_stprint_dico_st68,2336
+let sprint_dico_stsprint_dico_st73,2473
+let name_strat_queryname_strat_query79,2625
+let name_strat_generate_reducename_strat_generate_reduce81,2659
+let spike_parse_strategyspike_parse_strategy84,2777
+let spike_parse_list_of_systemsspike_parse_list_of_systems87,2912
+let spike_parse_clausal_lhs_positionspike_parse_clausal_lhs_position90,3061
+let spike_parse_literal_position_in_clausespike_parse_literal_position_in_clause93,3235
+let spike_parse_substitutionspike_parse_substitution96,3403
+let spike_parse_positive_intspike_parse_positive_int99,3541
+let main_interactmain_interact102,3685
+type shell_commandsshell_commands107,3813
+    Command_strategyCommand_strategy108,3836
+  | Command_nextCommand_next109,3870
+  | Command_runCommand_run110,3888
+  | Command_previousCommand_previous111,3905
+  | Command_displayCommand_display112,3927
+  | Command_exitCommand_exit113,3948
+  | Command_errorCommand_error114,3966
+let spike_parse_shell_commandspike_parse_shell_command117,4013
+let dico_patternsdico_patterns121,4121
+let dico_rulesdico_rules123,4233
+let print_dico_rulesprint_dico_rules125,4337
+
+order.ml,1282
+Order1,0
+let rec lexlex16,267
+let rec rem1rem129,523
+let rec mdiffmdiff39,715
+let rec mulmul43,821
+let multiset_greatermultiset_greater50,1064
+let multiset_equivalentmultiset_equivalent52,1123
+let multiset_geqmultiset_geq54,1185
+let rec rporpo58,1327
+let rpo_greaterrpo_greater98,2718
+let rpo_equivalentrpo_equivalent100,2780
+let rpo_geqrpo_geq102,2832
+let rpo_incomparablerpo_incomparable104,2892
+let rec consecutive_elementsconsecutive_elements109,3106
+let unary_symbolsunary_symbols115,3279
+let constant_symbolsconstant_symbols124,3477
+let ground_greaterground_greater246,8208
+let rpos_greaterrpos_greater258,8672
+and rpos_geqrpos_geq259,8708
+and rposrpos260,8737
+let heavierheavier263,8761
+let clause_greaterclause_greater275,9212
+let clause_equivclause_equiv285,9767
+let clause_geqclause_geq294,10321
+let ac_distribute_ac_acac_distribute_ac_ac305,10724
+let ac_distribute_un_unac_distribute_un_un334,11701
+let ac_distribute_unac_distribute_un353,12293
+let ac_distribute_ac_unac_distribute_ac_un372,12860
+let ac_normalize_1ac_normalize_1403,13754
+let ac_normalize_2ac_normalize_2413,14036
+let ac_normalize_3ac_normalize_3424,14321
+let determine_ac_categorydetermine_ac_category427,14410
+let orientorient599,21681
+
+spike.ml,608
+Spike1,0
+let all_lemmasall_lemmas27,353
+let sprint_useful_valuessprint_useful_values29,382
+let string_to_termstring_to_term43,1458
+let string_to_clausestring_to_clause51,1637
+let  interactinteract62,1917
+let return_codereturn_code176,6096
+let go_parsinggo_parsing178,6119
+let reset_allreset_all205,6931
+let outout299,9836
+let out_proofout_proof300,9860
+let process_problem_tokenprocess_problem_token302,9892
+let specif_counterspecif_counter551,21778
+let mainloopmainloop557,21862
+let usage_stringusage_string603,23937
+let rec speclistspeclist605,24053
+let mainmain639,27077

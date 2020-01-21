@@ -1,0 +1,936 @@
+DIGEST 26f55be3b436161d4fb65b61778f4d61
+Fmember_t_insin_spec
+R15:18 Coq.Lists.List <> <> lib
+R37:40 Coccinelle.term <> <> lib
+R58:60 Coccinelle.rpo <> <> lib
+R79:83 utils <> <> lib
+R101:116 coccinelle_utils <> <> lib
+mod 167:172 <> Specif
+ind 190:193 Specif symb
+constr 209:212 Specif id_0
+constr 218:221 Specif id_S
+constr 227:233 Specif id_true
+constr 239:246 Specif id_false
+constr 252:255 Specif id_C
+constr 261:266 Specif id_Nil
+constr 272:278 Specif id_Cons
+constr 284:293 Specif id_PLAN_eq
+constr 299:307 Specif id_OBJ_eq
+constr 313:321 Specif id_nat_eq
+constr 327:333 Specif id_plus
+constr 339:343 Specif id_le
+constr 349:355 Specif id_time
+constr 361:368 Specif id_timel
+constr 374:378 Specif id_er
+constr 384:389 Specif id_erl
+constr 395:404 Specif id_memberC
+constr 410:419 Specif id_memberT
+constr 425:434 Specif id_memberE
+constr 440:449 Specif id_sortedT
+constr 455:464 Specif id_sortedE
+constr 470:480 Specif id_listUpTo
+constr 486:492 Specif id_wind
+constr 498:505 Specif id_maxEr
+constr 511:516 Specif id_acr
+constr 522:529 Specif id_insAt
+constr 535:542 Specif id_insIn
+constr 548:556 Specif id_progAt
+constr 562:570 Specif id_timeAt
+constr 576:585 Specif id_firstAt
+constr 591:599 Specif id_listAt
+constr 605:611 Specif id_prog
+constr 617:623 Specif id_acr1
+R213:213 member_t_insin_spec <> symb ind
+R222:222 member_t_insin_spec <> symb ind
+R234:234 member_t_insin_spec <> symb ind
+R247:247 member_t_insin_spec <> symb ind
+R256:256 member_t_insin_spec <> symb ind
+R267:267 member_t_insin_spec <> symb ind
+R279:279 member_t_insin_spec <> symb ind
+R294:294 member_t_insin_spec <> symb ind
+R308:308 member_t_insin_spec <> symb ind
+R322:322 member_t_insin_spec <> symb ind
+R334:334 member_t_insin_spec <> symb ind
+R344:344 member_t_insin_spec <> symb ind
+R356:356 member_t_insin_spec <> symb ind
+R369:369 member_t_insin_spec <> symb ind
+R379:379 member_t_insin_spec <> symb ind
+R390:390 member_t_insin_spec <> symb ind
+R405:405 member_t_insin_spec <> symb ind
+R420:420 member_t_insin_spec <> symb ind
+R435:435 member_t_insin_spec <> symb ind
+R450:450 member_t_insin_spec <> symb ind
+R465:465 member_t_insin_spec <> symb ind
+R481:481 member_t_insin_spec <> symb ind
+R493:493 member_t_insin_spec <> symb ind
+R506:506 member_t_insin_spec <> symb ind
+R517:517 member_t_insin_spec <> symb ind
+R530:530 member_t_insin_spec <> symb ind
+R543:543 member_t_insin_spec <> symb ind
+R557:557 member_t_insin_spec <> symb ind
+R571:571 member_t_insin_spec <> symb ind
+R586:586 member_t_insin_spec <> symb ind
+R600:600 member_t_insin_spec <> symb ind
+R612:612 member_t_insin_spec <> symb ind
+R624:624 member_t_insin_spec <> symb ind
+def 643:647 Specif arity
+R652:655 member_t_insin_spec Specif symb ind
+R672:672 member_t_insin_spec <> f var
+R685:688 member_t_insin_spec Specif id_0 constr
+R693:706 Coccinelle.term_spec <> Free constr
+R716:719 member_t_insin_spec Specif id_S constr
+R724:737 Coccinelle.term_spec <> Free constr
+R747:753 member_t_insin_spec Specif id_true constr
+R758:771 Coccinelle.term_spec <> Free constr
+R781:788 member_t_insin_spec Specif id_false constr
+R793:806 Coccinelle.term_spec <> Free constr
+R816:819 member_t_insin_spec Specif id_C constr
+R824:837 Coccinelle.term_spec <> Free constr
+R847:852 member_t_insin_spec Specif id_Nil constr
+R857:870 Coccinelle.term_spec <> Free constr
+R880:886 member_t_insin_spec Specif id_Cons constr
+R891:904 Coccinelle.term_spec <> Free constr
+R914:923 member_t_insin_spec Specif id_PLAN_eq constr
+R928:941 Coccinelle.term_spec <> Free constr
+R951:959 member_t_insin_spec Specif id_OBJ_eq constr
+R964:977 Coccinelle.term_spec <> Free constr
+R987:995 member_t_insin_spec Specif id_nat_eq constr
+R1000:1013 Coccinelle.term_spec <> Free constr
+R1023:1029 member_t_insin_spec Specif id_plus constr
+R1034:1047 Coccinelle.term_spec <> Free constr
+R1057:1061 member_t_insin_spec Specif id_le constr
+R1066:1079 Coccinelle.term_spec <> Free constr
+R1089:1095 member_t_insin_spec Specif id_time constr
+R1100:1113 Coccinelle.term_spec <> Free constr
+R1123:1130 member_t_insin_spec Specif id_timel constr
+R1135:1148 Coccinelle.term_spec <> Free constr
+R1158:1162 member_t_insin_spec Specif id_er constr
+R1167:1180 Coccinelle.term_spec <> Free constr
+R1190:1195 member_t_insin_spec Specif id_erl constr
+R1200:1213 Coccinelle.term_spec <> Free constr
+R1223:1232 member_t_insin_spec Specif id_memberC constr
+R1237:1250 Coccinelle.term_spec <> Free constr
+R1260:1269 member_t_insin_spec Specif id_memberT constr
+R1274:1287 Coccinelle.term_spec <> Free constr
+R1297:1306 member_t_insin_spec Specif id_memberE constr
+R1311:1324 Coccinelle.term_spec <> Free constr
+R1334:1343 member_t_insin_spec Specif id_sortedT constr
+R1348:1361 Coccinelle.term_spec <> Free constr
+R1371:1380 member_t_insin_spec Specif id_sortedE constr
+R1385:1398 Coccinelle.term_spec <> Free constr
+R1408:1418 member_t_insin_spec Specif id_listUpTo constr
+R1423:1436 Coccinelle.term_spec <> Free constr
+R1446:1452 member_t_insin_spec Specif id_wind constr
+R1457:1470 Coccinelle.term_spec <> Free constr
+R1480:1487 member_t_insin_spec Specif id_maxEr constr
+R1492:1505 Coccinelle.term_spec <> Free constr
+R1515:1520 member_t_insin_spec Specif id_acr constr
+R1525:1538 Coccinelle.term_spec <> Free constr
+R1548:1555 member_t_insin_spec Specif id_insAt constr
+R1560:1573 Coccinelle.term_spec <> Free constr
+R1583:1590 member_t_insin_spec Specif id_insIn constr
+R1595:1608 Coccinelle.term_spec <> Free constr
+R1618:1626 member_t_insin_spec Specif id_progAt constr
+R1631:1644 Coccinelle.term_spec <> Free constr
+R1654:1662 member_t_insin_spec Specif id_timeAt constr
+R1667:1680 Coccinelle.term_spec <> Free constr
+R1690:1699 member_t_insin_spec Specif id_firstAt constr
+R1704:1717 Coccinelle.term_spec <> Free constr
+R1727:1735 member_t_insin_spec Specif id_listAt constr
+R1740:1753 Coccinelle.term_spec <> Free constr
+R1763:1769 member_t_insin_spec Specif id_prog constr
+R1774:1787 Coccinelle.term_spec <> Free constr
+R1797:1803 member_t_insin_spec Specif id_acr1 constr
+R1808:1821 Coccinelle.term_spec <> Free constr
+def 1849:1854 Specif status
+R1859:1862 member_t_insin_spec Specif symb ind
+R1880:1880 member_t_insin_spec <> f var
+R1893:1896 member_t_insin_spec Specif id_0 constr
+R1901:1907 Coccinelle.rpo <> Mul constr
+R1915:1918 member_t_insin_spec Specif id_S constr
+R1923:1929 Coccinelle.rpo <> Mul constr
+R1937:1943 member_t_insin_spec Specif id_true constr
+R1948:1954 Coccinelle.rpo <> Mul constr
+R1962:1969 member_t_insin_spec Specif id_false constr
+R1974:1980 Coccinelle.rpo <> Mul constr
+R1988:1991 member_t_insin_spec Specif id_C constr
+R1996:2002 Coccinelle.rpo <> Mul constr
+R2010:2015 member_t_insin_spec Specif id_Nil constr
+R2020:2026 Coccinelle.rpo <> Mul constr
+R2034:2040 member_t_insin_spec Specif id_Cons constr
+R2045:2051 Coccinelle.rpo <> Mul constr
+R2059:2068 member_t_insin_spec Specif id_PLAN_eq constr
+R2073:2079 Coccinelle.rpo <> Mul constr
+R2087:2095 member_t_insin_spec Specif id_OBJ_eq constr
+R2100:2106 Coccinelle.rpo <> Mul constr
+R2114:2122 member_t_insin_spec Specif id_nat_eq constr
+R2127:2133 Coccinelle.rpo <> Mul constr
+R2141:2147 member_t_insin_spec Specif id_plus constr
+R2152:2158 Coccinelle.rpo <> Mul constr
+R2166:2170 member_t_insin_spec Specif id_le constr
+R2175:2181 Coccinelle.rpo <> Mul constr
+R2189:2195 member_t_insin_spec Specif id_time constr
+R2200:2206 Coccinelle.rpo <> Mul constr
+R2214:2221 member_t_insin_spec Specif id_timel constr
+R2226:2232 Coccinelle.rpo <> Mul constr
+R2240:2244 member_t_insin_spec Specif id_er constr
+R2249:2255 Coccinelle.rpo <> Mul constr
+R2263:2268 member_t_insin_spec Specif id_erl constr
+R2273:2279 Coccinelle.rpo <> Mul constr
+R2287:2296 member_t_insin_spec Specif id_memberC constr
+R2301:2307 Coccinelle.rpo <> Mul constr
+R2315:2324 member_t_insin_spec Specif id_memberT constr
+R2329:2335 Coccinelle.rpo <> Mul constr
+R2343:2352 member_t_insin_spec Specif id_memberE constr
+R2357:2363 Coccinelle.rpo <> Mul constr
+R2371:2380 member_t_insin_spec Specif id_sortedT constr
+R2385:2391 Coccinelle.rpo <> Mul constr
+R2399:2408 member_t_insin_spec Specif id_sortedE constr
+R2413:2419 Coccinelle.rpo <> Mul constr
+R2427:2437 member_t_insin_spec Specif id_listUpTo constr
+R2442:2448 Coccinelle.rpo <> Mul constr
+R2456:2462 member_t_insin_spec Specif id_wind constr
+R2467:2473 Coccinelle.rpo <> Mul constr
+R2481:2488 member_t_insin_spec Specif id_maxEr constr
+R2493:2499 Coccinelle.rpo <> Mul constr
+R2507:2512 member_t_insin_spec Specif id_acr constr
+R2517:2523 Coccinelle.rpo <> Mul constr
+R2531:2538 member_t_insin_spec Specif id_insAt constr
+R2543:2549 Coccinelle.rpo <> Mul constr
+R2557:2564 member_t_insin_spec Specif id_insIn constr
+R2569:2575 Coccinelle.rpo <> Mul constr
+R2583:2591 member_t_insin_spec Specif id_progAt constr
+R2596:2602 Coccinelle.rpo <> Mul constr
+R2610:2618 member_t_insin_spec Specif id_timeAt constr
+R2623:2629 Coccinelle.rpo <> Mul constr
+R2637:2646 member_t_insin_spec Specif id_firstAt constr
+R2651:2657 Coccinelle.rpo <> Mul constr
+R2665:2673 member_t_insin_spec Specif id_listAt constr
+R2678:2684 Coccinelle.rpo <> Mul constr
+R2692:2698 member_t_insin_spec Specif id_prog constr
+R2703:2709 Coccinelle.rpo <> Mul constr
+R2717:2723 member_t_insin_spec Specif id_acr1 constr
+R2728:2734 Coccinelle.rpo <> Mul constr
+def 2759:2763 Specif index
+R2768:2771 member_t_insin_spec Specif symb ind
+R2789:2789 member_t_insin_spec <> f var
+R2802:2805 member_t_insin_spec Specif id_0 constr
+R2818:2821 member_t_insin_spec Specif id_S constr
+R2834:2840 member_t_insin_spec Specif id_true constr
+R2853:2860 member_t_insin_spec Specif id_false constr
+R2873:2876 member_t_insin_spec Specif id_C constr
+R2889:2894 member_t_insin_spec Specif id_Nil constr
+R2907:2913 member_t_insin_spec Specif id_Cons constr
+R2927:2936 member_t_insin_spec Specif id_PLAN_eq constr
+R2950:2958 member_t_insin_spec Specif id_OBJ_eq constr
+R2972:2980 member_t_insin_spec Specif id_nat_eq constr
+R2994:3000 member_t_insin_spec Specif id_plus constr
+R3014:3018 member_t_insin_spec Specif id_le constr
+R3032:3038 member_t_insin_spec Specif id_time constr
+R3051:3058 member_t_insin_spec Specif id_timel constr
+R3072:3076 member_t_insin_spec Specif id_er constr
+R3089:3094 member_t_insin_spec Specif id_erl constr
+R3108:3117 member_t_insin_spec Specif id_memberC constr
+R3131:3140 member_t_insin_spec Specif id_memberT constr
+R3154:3163 member_t_insin_spec Specif id_memberE constr
+R3177:3186 member_t_insin_spec Specif id_sortedT constr
+R3200:3209 member_t_insin_spec Specif id_sortedE constr
+R3223:3233 member_t_insin_spec Specif id_listUpTo constr
+R3247:3253 member_t_insin_spec Specif id_wind constr
+R3267:3274 member_t_insin_spec Specif id_maxEr constr
+R3288:3293 member_t_insin_spec Specif id_acr constr
+R3307:3314 member_t_insin_spec Specif id_insAt constr
+R3328:3335 member_t_insin_spec Specif id_insIn constr
+R3349:3357 member_t_insin_spec Specif id_progAt constr
+R3371:3379 member_t_insin_spec Specif id_timeAt constr
+R3393:3402 member_t_insin_spec Specif id_firstAt constr
+R3416:3424 member_t_insin_spec Specif id_listAt constr
+R3438:3444 member_t_insin_spec Specif id_prog constr
+R3458:3464 member_t_insin_spec Specif id_acr1 constr
+def 3496:3503 Specif max_size
+R3518:3523 member_t_insin_spec Specif <> mod
+R3568:3582 Coccinelle.decidable_set S <> mod
+mod 3561:3563 <> Nat
+def 3599:3599 Nat A
+R3602:3604 Coq.Init.Datatypes <> nat ind
+def 3620:3626 Nat eq_bool
+R3631:3643 utils <> beq_nat def
+def 3659:3668 Nat eq_bool_ok
+R3673:3688 utils <> beq_nat_ok thm
+R3696:3698 member_t_insin_spec Nat <> mod
+R3779:3797 Coccinelle.term_spec Signature <> mod
+mod 3768:3774 <> Symbols
+R3818:3832 Coccinelle.decidable_set S <> mod
+mod 3810:3813 <> Symbols.Symb
+def 3851:3851 Symbols.Symb A
+R3854:3864 member_t_insin_spec Specif symb ind
+prf 3880:3890 Symbols.Symb symb_eq_dec
+R3904:3904 member_t_insin_spec Symbols.Symb A def
+R3907:3907 Coq.Init.Specif <> :type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R3911:3913 Coq.Init.Specif <> :type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R3918:3918 Coq.Init.Specif <> :type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R3909:3909 Coq.Init.Logic <> :type_scope:x_'='_x not
+R3908:3908 member_t_insin_spec <> x var
+R3910:3910 member_t_insin_spec <> y var
+R3915:3916 Coq.Init.Logic <> :type_scope:x_'<>'_x not
+R3914:3914 member_t_insin_spec <> x var
+R3917:3917 member_t_insin_spec <> y var
+def 3982:3988 Symbols.Symb eq_bool
+R3993:4005 utils <> eq_bool def
+R4009:4019 member_t_insin_spec Symbols.Symb symb_eq_dec thm
+R4007:4007 member_t_insin_spec Symbols.Symb A def
+def 4037:4046 Symbols.Symb eq_bool_ok
+R4051:4066 utils <> eq_bool_ok thm
+R4070:4080 member_t_insin_spec Symbols.Symb symb_eq_dec thm
+R4068:4068 member_t_insin_spec Symbols.Symb A def
+R4090:4093 member_t_insin_spec Symbols.Symb <> mod
+def 4139:4143 Symbols arity
+R4148:4159 member_t_insin_spec Specif arity def
+R4167:4173 member_t_insin_spec Symbols <> mod
+R4229:4242 Coccinelle.term_spec Term <> mod
+R4247:4256 Coccinelle.term Make' <> modtype
+R4258:4264 member_t_insin_spec Symbols <> modtype
+R4266:4268 member_t_insin_spec Nat <> modtype
+mod 4220:4224 <> Terms
+R4285:4305 coccinelle_utils Make <> modtype
+R4307:4311 member_t_insin_spec Terms <> modtype
+mod 4278:4280 <> Rpo
+prf 4351:4364 <> prec_eq_status
+R4408:4411 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R4420:4422 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4412:4417 member_t_insin_spec <> status def
+R4419:4419 member_t_insin_spec <> f var
+R4423:4428 member_t_insin_spec <> status def
+R4430:4430 member_t_insin_spec <> g var
+R4380:4392 utils <> prec_eq def
+R4407:4407 member_t_insin_spec <> g var
+R4405:4405 member_t_insin_spec <> f var
+R4399:4403 member_t_insin_spec <> index def
+R4394:4397 member_t_insin_spec <> symb ind
+def 4498:4498 <> P
+R4503:4522 Coccinelle.rpo <> Build_Precedence constr
+R4935:4948 member_t_insin_spec <> prec_eq_status thm
+R4899:4920 utils <> prec_not_prec_eq thm
+R4927:4931 member_t_insin_spec <> index def
+R4922:4925 member_t_insin_spec <> symb ind
+R4868:4884 utils <> prec_eq_sym thm
+R4891:4895 member_t_insin_spec <> index def
+R4886:4889 member_t_insin_spec <> symb ind
+R4835:4853 utils <> prec_eq_prec2 thm
+R4860:4864 member_t_insin_spec <> index def
+R4855:4858 member_t_insin_spec <> symb ind
+R4802:4820 utils <> prec_eq_prec1 thm
+R4827:4831 member_t_insin_spec <> index def
+R4822:4825 member_t_insin_spec <> symb ind
+R4767:4787 utils <> prec_eq_bool_ok thm
+R4794:4798 member_t_insin_spec <> index def
+R4789:4792 member_t_insin_spec <> symb ind
+R4735:4752 utils <> prec_eq_refl thm
+R4759:4763 member_t_insin_spec <> index def
+R4754:4757 member_t_insin_spec <> symb ind
+R4697:4720 utils <> prec_eq_transitive thm
+R4727:4731 member_t_insin_spec <> index def
+R4722:4725 member_t_insin_spec <> symb ind
+R4665:4682 utils <> prec_eq_bool def
+R4689:4693 member_t_insin_spec <> index def
+R4684:4687 member_t_insin_spec <> symb ind
+R4630:4650 utils <> prec_transitive thm
+R4657:4661 member_t_insin_spec <> index def
+R4652:4655 member_t_insin_spec <> symb ind
+R4598:4615 utils <> prec_antisym thm
+R4622:4626 member_t_insin_spec <> index def
+R4617:4620 member_t_insin_spec <> symb ind
+R4565:4582 utils <> prec_bool_ok thm
+R4589:4593 member_t_insin_spec <> index def
+R4584:4587 member_t_insin_spec <> symb ind
+R4536:4550 utils <> prec_bool def
+R4557:4561 member_t_insin_spec <> index def
+R4552:4555 member_t_insin_spec <> symb ind
+R4524:4529 member_t_insin_spec <> status def
+syndef 4962:4965 <> less
+R4971:4977 member_t_insin_spec <> rpo_mul ind
+R4982:4983 member_t_insin_spec <> bb proj
+R4986:5000 member_t_insin_spec <> empty_rpo_infos def
+R5004:5011 member_t_insin_spec <> max_size def
+R5002:5002 member_t_insin_spec <> P def
+R4979:4979 member_t_insin_spec <> P def
+ind 5120:5122 <> OBJ
+constr 5131:5131 <> C
+R5137:5140 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R5144:5147 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R5148:5150 member_t_insin_spec <> OBJ ind
+R5141:5143 Coq.Init.Datatypes <> nat ind
+R5134:5136 Coq.Init.Datatypes <> nat ind
+ind 5163:5166 <> PLAN
+constr 5175:5177 <> Nil
+constr 5181:5184 <> Cons
+R5178:5178 member_t_insin_spec <> PLAN ind
+R5190:5193 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R5198:5201 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R5202:5205 member_t_insin_spec <> PLAN ind
+R5194:5197 member_t_insin_spec <> PLAN ind
+R5187:5189 member_t_insin_spec <> OBJ ind
+def 5218:5223 <> nat_eq
+R5230:5232 Coq.Init.Datatypes <> nat ind
+R5237:5240 Coq.Init.Datatypes <> bool ind
+R5254:5254 member_t_insin_spec <> n var
+R5251:5251 member_t_insin_spec <> m var
+R5270:5273 Coq.Init.Datatypes <> true constr
+R5285:5289 Coq.Init.Datatypes <> false constr
+R5301:5305 Coq.Init.Datatypes <> false constr
+R5309:5309 Coq.Init.Datatypes <> S constr
+R5314:5314 Coq.Init.Datatypes <> S constr
+R5321:5326 member_t_insin_spec <> nat_eq def
+def 5349:5354 <> OBJ_eq
+R5362:5364 member_t_insin_spec <> OBJ ind
+R5369:5372 Coq.Init.Datatypes <> bool ind
+R5386:5386 member_t_insin_spec <> n var
+R5383:5383 member_t_insin_spec <> m var
+R5395:5395 member_t_insin_spec <> C constr
+R5404:5404 member_t_insin_spec <> C constr
+R5415:5418 Coq.Init.Datatypes <> andb def
+R5436:5441 member_t_insin_spec <> nat_eq def
+R5421:5426 member_t_insin_spec <> nat_eq def
+def 5465:5471 <> PLAN_eq
+R5479:5482 member_t_insin_spec <> PLAN ind
+R5487:5490 Coq.Init.Datatypes <> bool ind
+R5504:5504 member_t_insin_spec <> n var
+R5501:5501 member_t_insin_spec <> m var
+R5513:5515 member_t_insin_spec <> Nil constr
+R5518:5520 member_t_insin_spec <> Nil constr
+R5525:5528 Coq.Init.Datatypes <> true constr
+R5532:5534 member_t_insin_spec <> Nil constr
+R5537:5540 member_t_insin_spec <> Cons constr
+R5549:5553 Coq.Init.Datatypes <> false constr
+R5557:5560 member_t_insin_spec <> Cons constr
+R5567:5569 member_t_insin_spec <> Nil constr
+R5574:5578 Coq.Init.Datatypes <> false constr
+R5582:5585 member_t_insin_spec <> Cons constr
+R5594:5597 member_t_insin_spec <> Cons constr
+R5616:5621 member_t_insin_spec <> OBJ_eq def
+R5638:5641 Coq.Init.Datatypes <> true constr
+R5646:5652 member_t_insin_spec <> PLAN_eq def
+R5664:5668 Coq.Init.Datatypes <> false constr
+R5673:5677 Coq.Init.Datatypes <> false constr
+def 5699:5700 <> le
+R5707:5709 Coq.Init.Datatypes <> nat ind
+R5713:5716 Coq.Init.Datatypes <> bool ind
+R5729:5729 member_t_insin_spec <> n var
+R5727:5727 member_t_insin_spec <> m var
+R5745:5748 Coq.Init.Datatypes <> true constr
+R5761:5765 Coq.Init.Datatypes <> false constr
+R5769:5769 Coq.Init.Datatypes <> S constr
+R5774:5774 Coq.Init.Datatypes <> S constr
+R5781:5782 member_t_insin_spec <> le def
+def 5805:5808 <> time
+R5813:5815 member_t_insin_spec <> OBJ ind
+R5820:5822 Coq.Init.Datatypes <> nat ind
+R5833:5833 member_t_insin_spec <> o var
+R5842:5842 member_t_insin_spec <> C constr
+def 5868:5874 <> memberC
+R5880:5882 member_t_insin_spec <> OBJ ind
+R5889:5892 member_t_insin_spec <> PLAN ind
+R5896:5899 Coq.Init.Datatypes <> bool ind
+R5910:5911 member_t_insin_spec <> p1 var
+R5919:5921 member_t_insin_spec <> Nil constr
+R5926:5930 Coq.Init.Datatypes <> false constr
+R5934:5937 member_t_insin_spec <> Cons constr
+R5958:5963 member_t_insin_spec <> OBJ_eq def
+R5965:5966 member_t_insin_spec <> o1 var
+R5979:5982 Coq.Init.Datatypes <> true constr
+R5987:5990 Coq.Init.Datatypes <> true constr
+R5995:5999 Coq.Init.Datatypes <> false constr
+R6004:6010 member_t_insin_spec <> memberC def
+R6012:6013 member_t_insin_spec <> o1 var
+def 6038:6044 <> memberT
+R6050:6052 Coq.Init.Datatypes <> nat ind
+R6059:6062 member_t_insin_spec <> PLAN ind
+R6066:6069 Coq.Init.Datatypes <> bool ind
+R6080:6081 member_t_insin_spec <> p1 var
+R6089:6091 member_t_insin_spec <> Nil constr
+R6096:6100 Coq.Init.Datatypes <> false constr
+R6104:6107 member_t_insin_spec <> Cons constr
+R6110:6110 member_t_insin_spec <> C constr
+R6134:6139 member_t_insin_spec <> nat_eq def
+R6141:6142 member_t_insin_spec <> t1 var
+R6155:6158 Coq.Init.Datatypes <> true constr
+R6163:6166 Coq.Init.Datatypes <> true constr
+R6171:6175 Coq.Init.Datatypes <> false constr
+R6180:6186 member_t_insin_spec <> memberT def
+R6188:6189 member_t_insin_spec <> t1 var
+def 6214:6220 <> memberE
+R6226:6228 Coq.Init.Datatypes <> nat ind
+R6235:6238 member_t_insin_spec <> PLAN ind
+R6242:6245 Coq.Init.Datatypes <> bool ind
+R6256:6257 member_t_insin_spec <> p1 var
+R6265:6267 member_t_insin_spec <> Nil constr
+R6272:6276 Coq.Init.Datatypes <> false constr
+R6280:6283 member_t_insin_spec <> Cons constr
+R6286:6286 member_t_insin_spec <> C constr
+R6310:6315 member_t_insin_spec <> nat_eq def
+R6317:6318 member_t_insin_spec <> e1 var
+R6331:6334 Coq.Init.Datatypes <> true constr
+R6339:6342 Coq.Init.Datatypes <> true constr
+R6347:6351 Coq.Init.Datatypes <> false constr
+R6356:6362 member_t_insin_spec <> memberE def
+R6364:6365 member_t_insin_spec <> e1 var
+def 6392:6396 <> timel
+R6401:6404 member_t_insin_spec <> PLAN ind
+R6408:6410 Coq.Init.Datatypes <> nat ind
+R6421:6421 member_t_insin_spec <> o var
+R6431:6433 member_t_insin_spec <> Nil constr
+R6442:6445 member_t_insin_spec <> Cons constr
+R6454:6457 member_t_insin_spec <> time def
+R6459:6459 member_t_insin_spec <> o var
+def 6478:6479 <> er
+R6484:6486 member_t_insin_spec <> OBJ ind
+R6491:6493 Coq.Init.Datatypes <> nat ind
+R6504:6504 member_t_insin_spec <> o var
+R6513:6513 member_t_insin_spec <> C constr
+def 6541:6543 <> erl
+R6548:6551 member_t_insin_spec <> PLAN ind
+R6556:6558 Coq.Init.Datatypes <> nat ind
+R6569:6569 member_t_insin_spec <> p var
+R6578:6580 member_t_insin_spec <> Nil constr
+R6589:6592 member_t_insin_spec <> Cons constr
+R6602:6603 member_t_insin_spec <> er def
+def 6622:6628 <> sortedT
+R6633:6636 member_t_insin_spec <> PLAN ind
+R6641:6644 Coq.Init.Datatypes <> bool ind
+R6655:6655 member_t_insin_spec <> p var
+R6664:6666 member_t_insin_spec <> Nil constr
+R6671:6674 Coq.Init.Datatypes <> true constr
+R6678:6681 member_t_insin_spec <> Cons constr
+R6684:6684 member_t_insin_spec <> C constr
+R6720:6722 member_t_insin_spec <> Nil constr
+R6727:6730 Coq.Init.Datatypes <> true constr
+R6736:6739 member_t_insin_spec <> Cons constr
+R6742:6742 member_t_insin_spec <> C constr
+R6769:6770 member_t_insin_spec <> le def
+R6792:6795 Coq.Init.Datatypes <> true constr
+R6800:6806 member_t_insin_spec <> sortedT def
+R6820:6824 Coq.Init.Datatypes <> false constr
+R6829:6833 Coq.Init.Datatypes <> false constr
+def 6865:6871 <> sortedE
+R6876:6879 member_t_insin_spec <> PLAN ind
+R6884:6887 Coq.Init.Datatypes <> bool ind
+R6898:6898 member_t_insin_spec <> p var
+R6907:6909 member_t_insin_spec <> Nil constr
+R6914:6917 Coq.Init.Datatypes <> true constr
+R6921:6924 member_t_insin_spec <> Cons constr
+R6927:6927 member_t_insin_spec <> C constr
+R6963:6965 member_t_insin_spec <> Nil constr
+R6970:6973 Coq.Init.Datatypes <> true constr
+R6979:6982 member_t_insin_spec <> Cons constr
+R6985:6985 member_t_insin_spec <> C constr
+R7012:7013 member_t_insin_spec <> le def
+R7035:7039 Coq.Init.Datatypes <> false constr
+R7044:7050 member_t_insin_spec <> sortedE def
+R7064:7067 Coq.Init.Datatypes <> true constr
+R7072:7076 Coq.Init.Datatypes <> false constr
+def 7108:7115 <> listUpTo
+R7120:7123 member_t_insin_spec <> PLAN ind
+R7129:7131 Coq.Init.Datatypes <> nat ind
+R7136:7139 member_t_insin_spec <> PLAN ind
+R7150:7150 member_t_insin_spec <> p var
+R7158:7160 member_t_insin_spec <> Nil constr
+R7166:7168 member_t_insin_spec <> Nil constr
+R7171:7174 member_t_insin_spec <> Cons constr
+R7177:7177 member_t_insin_spec <> C constr
+R7201:7202 member_t_insin_spec <> le def
+R7207:7207 member_t_insin_spec <> t var
+R7219:7222 Coq.Init.Datatypes <> true constr
+R7227:7230 member_t_insin_spec <> Cons constr
+R7242:7244 member_t_insin_spec <> Nil constr
+R7233:7233 member_t_insin_spec <> C constr
+R7251:7255 Coq.Init.Datatypes <> false constr
+R7260:7263 member_t_insin_spec <> Cons constr
+R7276:7283 member_t_insin_spec <> listUpTo def
+R7288:7288 member_t_insin_spec <> t var
+R7266:7266 member_t_insin_spec <> C constr
+def 7312:7315 <> wind
+R7321:7324 member_t_insin_spec <> PLAN ind
+R7337:7339 Coq.Init.Datatypes <> nat ind
+R7344:7347 member_t_insin_spec <> PLAN ind
+R7358:7359 member_t_insin_spec <> p' var
+R7367:7369 member_t_insin_spec <> Nil constr
+R7374:7376 member_t_insin_spec <> Nil constr
+R7379:7382 member_t_insin_spec <> Cons constr
+R7385:7385 member_t_insin_spec <> C constr
+R7407:7408 member_t_insin_spec <> le def
+R7423:7423 member_t_insin_spec <> t var
+R7411:7414 Coq.Init.Peano <> plus syndef
+R7419:7420 member_t_insin_spec <> t2 var
+R7434:7438 Coq.Init.Datatypes <> false constr
+R7443:7446 member_t_insin_spec <> wind def
+R7456:7457 member_t_insin_spec <> t2 var
+R7453:7454 member_t_insin_spec <> t1 var
+R7450:7450 member_t_insin_spec <> t var
+R7463:7466 Coq.Init.Datatypes <> true constr
+R7482:7483 member_t_insin_spec <> le def
+R7498:7498 member_t_insin_spec <> t var
+R7486:7489 Coq.Init.Peano <> plus syndef
+R7494:7495 member_t_insin_spec <> t1 var
+R7514:7517 Coq.Init.Datatypes <> true constr
+R7522:7525 member_t_insin_spec <> Cons constr
+R7537:7539 member_t_insin_spec <> Nil constr
+R7528:7528 member_t_insin_spec <> C constr
+R7550:7554 Coq.Init.Datatypes <> false constr
+R7559:7562 member_t_insin_spec <> Cons constr
+R7575:7578 member_t_insin_spec <> wind def
+R7587:7588 member_t_insin_spec <> t2 var
+R7584:7585 member_t_insin_spec <> t1 var
+R7582:7582 member_t_insin_spec <> t var
+R7565:7565 member_t_insin_spec <> C constr
+def 7619:7623 <> maxEr
+R7629:7632 member_t_insin_spec <> PLAN ind
+R7637:7639 Coq.Init.Datatypes <> nat ind
+R7650:7651 member_t_insin_spec <> p' var
+R7659:7661 member_t_insin_spec <> Nil constr
+R7669:7672 member_t_insin_spec <> Cons constr
+R7675:7675 member_t_insin_spec <> C constr
+R7696:7697 member_t_insin_spec <> le def
+R7700:7704 member_t_insin_spec <> maxEr def
+R7721:7724 Coq.Init.Datatypes <> true constr
+R7735:7739 Coq.Init.Datatypes <> false constr
+R7744:7748 member_t_insin_spec <> maxEr def
+def 7774:7776 <> acr
+R7782:7785 member_t_insin_spec <> PLAN ind
+R7798:7800 Coq.Init.Datatypes <> nat ind
+R7805:7807 Coq.Init.Datatypes <> nat ind
+R7822:7828 member_t_insin_spec <> sortedT def
+R7830:7830 member_t_insin_spec <> p var
+R7843:7846 Coq.Init.Datatypes <> true constr
+R7858:7859 member_t_insin_spec <> le def
+R7864:7865 member_t_insin_spec <> t3 var
+R7861:7862 member_t_insin_spec <> t2 var
+R7897:7901 Coq.Init.Datatypes <> false constr
+R7905:7909 member_t_insin_spec <> maxEr def
+R7912:7915 member_t_insin_spec <> wind def
+R7924:7925 member_t_insin_spec <> t3 var
+R7921:7922 member_t_insin_spec <> t2 var
+R7919:7919 member_t_insin_spec <> t var
+R7917:7917 member_t_insin_spec <> p var
+R7952:7955 Coq.Init.Datatypes <> true constr
+R7995:7999 Coq.Init.Datatypes <> false constr
+def 8023:8027 <> insAt
+R8032:8035 member_t_insin_spec <> PLAN ind
+R8043:8045 Coq.Init.Datatypes <> nat ind
+R8050:8053 member_t_insin_spec <> PLAN ind
+R8064:8064 member_t_insin_spec <> p var
+R8073:8075 member_t_insin_spec <> Nil constr
+R8080:8083 member_t_insin_spec <> Cons constr
+R8092:8094 member_t_insin_spec <> Nil constr
+R8085:8085 member_t_insin_spec <> C constr
+R8089:8089 member_t_insin_spec <> e var
+R8087:8087 member_t_insin_spec <> t var
+R8098:8101 member_t_insin_spec <> Cons constr
+R8119:8120 member_t_insin_spec <> le def
+R8131:8131 member_t_insin_spec <> t var
+R8123:8126 member_t_insin_spec <> time def
+R8142:8145 Coq.Init.Datatypes <> true constr
+R8150:8153 member_t_insin_spec <> Cons constr
+R8164:8167 member_t_insin_spec <> Cons constr
+R8156:8156 member_t_insin_spec <> C constr
+R8160:8160 member_t_insin_spec <> e var
+R8158:8158 member_t_insin_spec <> t var
+R8179:8183 Coq.Init.Datatypes <> false constr
+R8188:8192 member_t_insin_spec <> insAt def
+R8199:8199 member_t_insin_spec <> e var
+R8197:8197 member_t_insin_spec <> t var
+def 8222:8226 <> insIn
+R8232:8235 member_t_insin_spec <> PLAN ind
+R8243:8245 Coq.Init.Datatypes <> nat ind
+R8250:8253 member_t_insin_spec <> PLAN ind
+R8264:8264 member_t_insin_spec <> p var
+R8273:8275 member_t_insin_spec <> Nil constr
+R8280:8283 member_t_insin_spec <> Cons constr
+R8292:8294 member_t_insin_spec <> Nil constr
+R8285:8285 member_t_insin_spec <> C constr
+R8289:8289 member_t_insin_spec <> e var
+R8287:8287 member_t_insin_spec <> t var
+R8298:8301 member_t_insin_spec <> Cons constr
+R8319:8320 member_t_insin_spec <> le def
+R8329:8329 member_t_insin_spec <> e var
+R8323:8324 member_t_insin_spec <> er def
+R8340:8343 Coq.Init.Datatypes <> true constr
+R8348:8352 member_t_insin_spec <> insIn def
+R8366:8366 member_t_insin_spec <> e var
+R8358:8361 member_t_insin_spec <> time def
+R8372:8376 Coq.Init.Datatypes <> false constr
+R8381:8384 member_t_insin_spec <> Cons constr
+R8395:8398 member_t_insin_spec <> Cons constr
+R8387:8387 member_t_insin_spec <> C constr
+R8391:8391 member_t_insin_spec <> e var
+R8389:8389 member_t_insin_spec <> t var
+R8430:8431 member_t_insin_spec <> er def
+R8447:8450 member_t_insin_spec <> time def
+def 8463:8468 <> progAt
+R8473:8476 member_t_insin_spec <> PLAN ind
+R8482:8484 Coq.Init.Datatypes <> nat ind
+R8489:8491 Coq.Init.Datatypes <> nat ind
+R8502:8502 member_t_insin_spec <> p var
+R8511:8513 member_t_insin_spec <> Nil constr
+R8522:8525 member_t_insin_spec <> Cons constr
+R8543:8544 member_t_insin_spec <> le def
+R8555:8555 member_t_insin_spec <> t var
+R8547:8550 member_t_insin_spec <> time def
+R8566:8569 Coq.Init.Datatypes <> true constr
+R8574:8575 member_t_insin_spec <> er def
+R8583:8587 Coq.Init.Datatypes <> false constr
+R8592:8597 member_t_insin_spec <> progAt def
+R8602:8602 member_t_insin_spec <> t var
+def 8625:8630 <> timeAt
+R8636:8639 member_t_insin_spec <> PLAN ind
+R8645:8647 Coq.Init.Datatypes <> nat ind
+R8652:8654 Coq.Init.Datatypes <> nat ind
+R8665:8665 member_t_insin_spec <> p var
+R8673:8675 member_t_insin_spec <> Nil constr
+R8683:8686 member_t_insin_spec <> Cons constr
+R8705:8706 member_t_insin_spec <> le def
+R8717:8717 member_t_insin_spec <> t var
+R8709:8712 member_t_insin_spec <> time def
+R8729:8732 Coq.Init.Datatypes <> true constr
+R8737:8740 member_t_insin_spec <> time def
+R8749:8753 Coq.Init.Datatypes <> false constr
+R8758:8763 member_t_insin_spec <> timeAt def
+R8768:8768 member_t_insin_spec <> t var
+def 8791:8797 <> firstAt
+R8802:8805 member_t_insin_spec <> PLAN ind
+R8811:8813 Coq.Init.Datatypes <> nat ind
+R8818:8820 member_t_insin_spec <> OBJ ind
+R8831:8831 member_t_insin_spec <> p var
+R8840:8842 member_t_insin_spec <> Nil constr
+R8847:8847 member_t_insin_spec <> C constr
+R8855:8858 member_t_insin_spec <> Cons constr
+R8877:8878 member_t_insin_spec <> le def
+R8889:8889 member_t_insin_spec <> t var
+R8881:8884 member_t_insin_spec <> time def
+R8902:8905 Coq.Init.Datatypes <> true constr
+R8918:8922 Coq.Init.Datatypes <> false constr
+R8927:8933 member_t_insin_spec <> firstAt def
+R8938:8938 member_t_insin_spec <> t var
+def 8962:8967 <> listAt
+R8973:8976 member_t_insin_spec <> PLAN ind
+R8983:8985 Coq.Init.Datatypes <> nat ind
+R8990:8993 member_t_insin_spec <> PLAN ind
+R9004:9004 member_t_insin_spec <> p var
+R9013:9015 member_t_insin_spec <> Nil constr
+R9020:9022 member_t_insin_spec <> Nil constr
+R9025:9028 member_t_insin_spec <> Cons constr
+R9047:9048 member_t_insin_spec <> le def
+R9059:9059 member_t_insin_spec <> t var
+R9051:9054 member_t_insin_spec <> time def
+R9072:9075 Coq.Init.Datatypes <> true constr
+R9080:9083 member_t_insin_spec <> Cons constr
+R9096:9100 Coq.Init.Datatypes <> false constr
+R9105:9110 member_t_insin_spec <> listAt def
+R9115:9115 member_t_insin_spec <> t var
+def 9139:9142 <> prog
+R9147:9150 member_t_insin_spec <> PLAN ind
+R9160:9162 Coq.Init.Datatypes <> nat ind
+R9167:9170 member_t_insin_spec <> PLAN ind
+R9181:9181 member_t_insin_spec <> p var
+R9190:9192 member_t_insin_spec <> Nil constr
+R9197:9199 member_t_insin_spec <> Nil constr
+R9203:9206 member_t_insin_spec <> Cons constr
+R9223:9224 member_t_insin_spec <> le def
+R9270:9271 member_t_insin_spec <> er def
+R9227:9232 member_t_insin_spec <> progAt def
+R9250:9253 Coq.Init.Peano <> plus syndef
+R9264:9265 member_t_insin_spec <> t3 var
+R9256:9259 member_t_insin_spec <> time def
+R9235:9238 member_t_insin_spec <> prog def
+R9245:9246 member_t_insin_spec <> t3 var
+R9242:9243 member_t_insin_spec <> t2 var
+R9240:9240 member_t_insin_spec <> p var
+R9285:9288 Coq.Init.Datatypes <> true constr
+R9293:9297 member_t_insin_spec <> insAt def
+R9334:9335 member_t_insin_spec <> er def
+R9315:9318 Coq.Init.Peano <> plus syndef
+R9329:9330 member_t_insin_spec <> t3 var
+R9321:9324 member_t_insin_spec <> time def
+R9300:9303 member_t_insin_spec <> prog def
+R9310:9311 member_t_insin_spec <> t3 var
+R9307:9308 member_t_insin_spec <> t2 var
+R9305:9305 member_t_insin_spec <> p var
+R9345:9349 Coq.Init.Datatypes <> false constr
+R9354:9358 member_t_insin_spec <> insIn def
+R9395:9396 member_t_insin_spec <> er def
+R9376:9379 Coq.Init.Peano <> plus syndef
+R9390:9391 member_t_insin_spec <> t2 var
+R9382:9385 member_t_insin_spec <> time def
+R9361:9364 member_t_insin_spec <> prog def
+R9371:9372 member_t_insin_spec <> t3 var
+R9368:9369 member_t_insin_spec <> t2 var
+R9366:9366 member_t_insin_spec <> p var
+def 9422:9430 <> model_nat
+R9435:9437 Coq.Init.Datatypes <> nat ind
+R9442:9445 member_t_insin_spec <> term ind
+R9456:9456 member_t_insin_spec <> n var
+R9470:9473 member_t_insin_spec <> Term constr
+R9480:9482 Coq.Init.Datatypes <> nil constr
+R9475:9478 member_t_insin_spec <> id_0 constr
+R9486:9486 Coq.Init.Datatypes <> S constr
+R9494:9497 member_t_insin_spec <> Term constr
+R9505:9505 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9518:9520 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9506:9514 member_t_insin_spec <> model_nat def
+R9521:9523 Coq.Init.Datatypes <> nil constr
+R9499:9502 member_t_insin_spec <> id_S constr
+def 9543:9552 <> model_bool
+R9557:9560 Coq.Init.Datatypes <> bool ind
+R9565:9568 member_t_insin_spec <> term ind
+R9579:9579 member_t_insin_spec <> b var
+R9588:9591 Coq.Init.Datatypes <> true constr
+R9596:9599 member_t_insin_spec <> Term constr
+R9609:9611 Coq.Init.Datatypes <> nil constr
+R9601:9607 member_t_insin_spec <> id_true constr
+R9615:9619 Coq.Init.Datatypes <> false constr
+R9624:9627 member_t_insin_spec <> Term constr
+R9638:9640 Coq.Init.Datatypes <> nil constr
+R9629:9636 member_t_insin_spec <> id_false constr
+def 9659:9667 <> model_OBJ
+R9672:9674 member_t_insin_spec <> OBJ ind
+R9679:9682 member_t_insin_spec <> term ind
+R9693:9693 member_t_insin_spec <> o var
+R9702:9702 member_t_insin_spec <> C constr
+R9711:9714 member_t_insin_spec <> Term constr
+R9722:9722 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9734:9736 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9723:9731 member_t_insin_spec <> model_nat def
+R9737:9737 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9749:9751 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9738:9746 member_t_insin_spec <> model_nat def
+R9752:9754 Coq.Init.Datatypes <> nil constr
+R9716:9719 member_t_insin_spec <> id_C constr
+def 9772:9781 <> model_PLAN
+R9786:9789 member_t_insin_spec <> PLAN ind
+R9794:9797 member_t_insin_spec <> term ind
+R9808:9808 member_t_insin_spec <> p var
+R9817:9819 member_t_insin_spec <> Nil constr
+R9824:9827 member_t_insin_spec <> Term constr
+R9836:9838 Coq.Init.Datatypes <> nil constr
+R9829:9834 member_t_insin_spec <> id_Nil constr
+R9842:9845 member_t_insin_spec <> Cons constr
+R9854:9857 member_t_insin_spec <> Term constr
+R9868:9868 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9880:9882 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9869:9877 member_t_insin_spec <> model_OBJ def
+R9883:9883 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9896:9898 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R9884:9893 member_t_insin_spec <> model_PLAN def
+R9895:9895 member_t_insin_spec <> p var
+R9899:9901 Coq.Init.Datatypes <> nil constr
+R9859:9865 member_t_insin_spec <> id_Cons constr
+def 9921:9924 <> acr1
+R9930:9933 member_t_insin_spec <> PLAN ind
+R9946:9948 Coq.Init.Datatypes <> nat ind
+R9953:9955 Coq.Init.Datatypes <> nat ind
+R9970:9976 member_t_insin_spec <> sortedT def
+R9978:9978 member_t_insin_spec <> p var
+R9991:9994 Coq.Init.Datatypes <> true constr
+R10006:10007 member_t_insin_spec <> le def
+R10012:10013 member_t_insin_spec <> t3 var
+R10009:10010 member_t_insin_spec <> t2 var
+R10045:10049 Coq.Init.Datatypes <> false constr
+R10054:10059 member_t_insin_spec <> progAt def
+R10076:10076 member_t_insin_spec <> t var
+R10062:10065 member_t_insin_spec <> prog def
+R10072:10073 member_t_insin_spec <> t3 var
+R10069:10070 member_t_insin_spec <> t2 var
+R10067:10067 member_t_insin_spec <> p var
+R10103:10106 Coq.Init.Datatypes <> true constr
+R10146:10150 Coq.Init.Datatypes <> false constr
+prf 10214:10224 <> model_nat_0
+R10238:10241 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10255:10255 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10227:10235 member_t_insin_spec <> model_nat def
+R10242:10245 member_t_insin_spec <> Term constr
+R10252:10254 Coq.Init.Datatypes <> nil constr
+R10247:10250 member_t_insin_spec <> id_0 constr
+prf 10283:10293 <> model_nat_S
+R10308:10310 Coq.Init.Datatypes <> nat ind
+R10330:10333 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10365:10365 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10314:10322 member_t_insin_spec <> model_nat def
+R10325:10325 Coq.Init.Datatypes <> S constr
+R10327:10328 member_t_insin_spec <> u1 var
+R10334:10337 member_t_insin_spec <> Term constr
+R10345:10345 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10358:10360 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10346:10354 member_t_insin_spec <> model_nat def
+R10356:10357 member_t_insin_spec <> u1 var
+R10361:10363 Coq.Init.Datatypes <> nil constr
+R10339:10342 member_t_insin_spec <> id_S constr
+prf 10393:10407 <> model_bool_true
+R10425:10428 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10445:10445 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10410:10419 member_t_insin_spec <> model_bool def
+R10421:10424 Coq.Init.Datatypes <> true constr
+R10429:10432 member_t_insin_spec <> Term constr
+R10442:10444 Coq.Init.Datatypes <> nil constr
+R10434:10440 member_t_insin_spec <> id_true constr
+prf 10473:10488 <> model_bool_false
+R10507:10510 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10528:10528 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10491:10500 member_t_insin_spec <> model_bool def
+R10502:10506 Coq.Init.Datatypes <> false constr
+R10511:10514 member_t_insin_spec <> Term constr
+R10525:10527 Coq.Init.Datatypes <> nil constr
+R10516:10523 member_t_insin_spec <> id_false constr
+prf 10556:10566 <> model_OBJ_C
+R10581:10583 Coq.Init.Datatypes <> nat ind
+R10599:10601 Coq.Init.Datatypes <> nat ind
+R10624:10627 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10676:10676 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10605:10613 member_t_insin_spec <> model_OBJ def
+R10616:10616 member_t_insin_spec <> C constr
+R10621:10622 member_t_insin_spec <> u2 var
+R10618:10619 member_t_insin_spec <> u1 var
+R10628:10631 member_t_insin_spec <> Term constr
+R10639:10639 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10652:10655 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10640:10648 member_t_insin_spec <> model_nat def
+R10650:10651 member_t_insin_spec <> u1 var
+R10656:10656 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10669:10671 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10657:10665 member_t_insin_spec <> model_nat def
+R10667:10668 member_t_insin_spec <> u2 var
+R10672:10674 Coq.Init.Datatypes <> nil constr
+R10633:10636 member_t_insin_spec <> id_C constr
+prf 10704:10717 <> model_PLAN_Nil
+R10734:10737 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10753:10753 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10720:10729 member_t_insin_spec <> model_PLAN def
+R10731:10733 member_t_insin_spec <> Nil constr
+R10738:10741 member_t_insin_spec <> Term constr
+R10750:10752 Coq.Init.Datatypes <> nil constr
+R10743:10748 member_t_insin_spec <> id_Nil constr
+prf 10781:10795 <> model_PLAN_Cons
+R10810:10812 member_t_insin_spec <> OBJ ind
+R10828:10831 member_t_insin_spec <> PLAN ind
+R10858:10861 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10914:10914 Coq.Init.Logic <> :type_scope:x_'='_x not
+R10835:10844 member_t_insin_spec <> model_PLAN def
+R10847:10850 member_t_insin_spec <> Cons constr
+R10855:10856 member_t_insin_spec <> u2 var
+R10852:10853 member_t_insin_spec <> u1 var
+R10862:10865 member_t_insin_spec <> Term constr
+R10876:10876 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10889:10892 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10877:10885 member_t_insin_spec <> model_OBJ def
+R10887:10888 member_t_insin_spec <> u1 var
+R10893:10893 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10907:10909 Coq.Init.Datatypes <> :list_scope:x_'::'_x not
+R10894:10903 member_t_insin_spec <> model_PLAN def
+R10905:10906 member_t_insin_spec <> u2 var
+R10910:10912 Coq.Init.Datatypes <> nil constr
+R10867:10873 member_t_insin_spec <> id_Cons constr
+R10951:10964 member_t_insin_spec <> model_PLAN_Nil thm
+R10966:10980 member_t_insin_spec <> model_PLAN_Cons thm
+R11009:11023 member_t_insin_spec <> model_bool_true thm
+R11025:11040 member_t_insin_spec <> model_bool_false thm
+R11069:11079 member_t_insin_spec <> model_nat_0 thm
+R11081:11091 member_t_insin_spec <> model_nat_S thm
+R11119:11129 member_t_insin_spec <> model_OBJ_C thm

@@ -1,0 +1,71 @@
+specification : even2odd
+
+sorts : nat  bool;
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+True : bool;
+False : bool;
+ 
+
+defined functions:
+
+p__ : nat nat -> bool;
+
+axioms:
+% The 2-Hydra problem from Berardi/Matsuta's paper
+
+p(0,  0) = True;
+p(S(0),0) = True;
+p(x, S(0)) = True;
+p(S(x), S(S(y))) = p(x, y);
+p(0, S(S(y))) = p(S(y), y);
+p(S(S(x)), 0) = p(S(x), x);
+
+greater: 
+
+p : S True; 
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+
+
+% instances of AddPremise
+case_rewriting_rule = add_premise(total_case_rewriting(simplify_strat, r, *),[id]);
+split_rule = add_premise(generate,[id]);
+
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    rewriting_rule,      
+                    print_goals,
+                    case_rewriting_rule
+));
+
+fullind = (repeat(stra, split_rule), print_goals_with_history);
+
+start_with: fullind
+
+conjectures:
+p(x,y) = True;

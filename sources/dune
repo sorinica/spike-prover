@@ -1,0 +1,11 @@
+
+ (ocamlyacc (modules parser) (mode standard))
+(ocamllex (modules lexer) (mode standard))
+
+(executable 
+  (name spike)
+  (flags )
+  (modules lexer parser case_rewriting normalize induction generate_eq induction_obs decomposition_set critical_context_set delete_set eliminate_set auto_simplification complement coq shell smt context extract contextual_rewriting natlist npolynoms terms_parser zmaxmin min max pi order test_sets literals polynoms terms clauses io values diverse dicos symbols dummies strategies spike)
+  (libraries unix str)
+  )
+

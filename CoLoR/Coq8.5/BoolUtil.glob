@@ -1,0 +1,460 @@
+DIGEST 7375af94c76e18786c04018848df7eaa
+FCoLoR.BoolUtil
+R198:206 CoLoR.LogicUtil <> <> lib
+R208:212 Coq.Arith.Arith <> <> lib
+R230:233 Coq.Bool.Bool <> <> lib
+R251:256 Coq.Setoids.Setoid <> <> lib
+R258:262 Coq.omega.Omega <> <> lib
+R285:298 Coq.Bool.Bool <> orb_false_elim thm
+R328:340 Coq.Bool.Bool <> orb_true_elim thm
+R365:372 Coq.Bool.Bool <> negb_orb thm
+R374:382 Coq.Bool.Bool <> negb_andb thm
+R384:398 Coq.Bool.Bool <> negb_involutive thm
+R400:408 Coq.Bool.Bool <> eqb_negb1 thm
+R410:418 Coq.Bool.Bool <> eqb_negb2 thm
+R422:431 Coq.Bool.Bool <> orb_true_r thm
+R433:442 Coq.Bool.Bool <> orb_true_l thm
+R444:454 Coq.Bool.Bool <> orb_false_r thm
+R456:466 Coq.Bool.Bool <> orb_false_l thm
+R468:477 Coq.Bool.Bool <> orb_negb_r thm
+R479:487 Coq.Bool.Bool <> orb_assoc thm
+R491:502 Coq.Bool.Bool <> andb_false_r thm
+R504:515 Coq.Bool.Bool <> andb_false_l thm
+R517:527 Coq.Bool.Bool <> andb_true_r thm
+R529:539 Coq.Bool.Bool <> andb_true_l thm
+R541:551 Coq.Bool.Bool <> andb_negb_r thm
+R553:562 Coq.Bool.Bool <> andb_assoc thm
+R566:579 Coq.Bool.Bool <> absoption_andb syndef
+R581:593 Coq.Bool.Bool <> absoption_orb syndef
+R597:608 Coq.Bool.Bool <> xorb_false_r thm
+R610:621 Coq.Bool.Bool <> xorb_false_l thm
+R623:636 Coq.Bool.Bool <> xorb_nilpotent thm
+R638:655 Coq.Bool.Bool <> xorb_assoc_reverse thm
+prf 802:815 <> false_not_true
+R838:842 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R830:832 Coq.Init.Logic <> :type_scope:x_'='_x not
+R829:829 CoLoR.BoolUtil <> b var
+R833:837 Coq.Init.Datatypes <> false constr
+R843:844 Coq.Init.Logic <> :type_scope:'~'_x not
+R853:853 Coq.Init.Logic <> :type_scope:'~'_x not
+R846:848 Coq.Init.Logic <> :type_scope:x_'='_x not
+R845:845 CoLoR.BoolUtil <> b var
+R849:852 Coq.Init.Datatypes <> true constr
+prf 899:906 <> beq_true
+R927:932 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R954:954 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R923:925 Coq.Init.Logic <> :type_scope:x_'='_x not
+R922:922 CoLoR.BoolUtil <> b var
+R926:926 CoLoR.BoolUtil <> c var
+R941:945 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R934:936 Coq.Init.Logic <> :type_scope:x_'='_x not
+R933:933 CoLoR.BoolUtil <> b var
+R937:940 Coq.Init.Datatypes <> true constr
+R947:949 Coq.Init.Logic <> :type_scope:x_'='_x not
+R946:946 CoLoR.BoolUtil <> c var
+R950:953 Coq.Init.Datatypes <> true constr
+R1026:1039 CoLoR.BoolUtil <> false_not_true thm
+R1026:1039 CoLoR.BoolUtil <> false_not_true thm
+R1026:1039 CoLoR.BoolUtil <> false_not_true thm
+prf 1159:1164 <> implb1
+R1187:1189 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1178:1182 Coq.Init.Datatypes <> implb def
+R1186:1186 CoLoR.BoolUtil <> b var
+R1184:1184 CoLoR.BoolUtil <> b var
+R1190:1193 Coq.Init.Datatypes <> true constr
+prf 1235:1240 <> implb2
+R1266:1268 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1254:1258 Coq.Init.Datatypes <> implb def
+R1262:1265 Coq.Init.Datatypes <> true constr
+R1260:1260 CoLoR.BoolUtil <> b var
+R1269:1272 Coq.Init.Datatypes <> true constr
+prf 1408:1416 <> andb_elim
+R1445:1448 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R1457:1460 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R1450:1452 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1449:1449 CoLoR.BoolUtil <> b var
+R1453:1456 Coq.Init.Datatypes <> true constr
+R1462:1464 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1461:1461 CoLoR.BoolUtil <> c var
+R1465:1468 Coq.Init.Datatypes <> true constr
+R1438:1440 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1433:1436 Coq.Init.Datatypes <> :bool_scope:x_'&&'_x not
+R1432:1432 CoLoR.BoolUtil <> b var
+R1437:1437 CoLoR.BoolUtil <> c var
+R1441:1444 Coq.Init.Datatypes <> true constr
+R1539:1547 CoLoR.BoolUtil <> andb_elim thm
+prf 1563:1572 <> andb_eliml
+R1601:1604 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R1606:1608 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1605:1605 CoLoR.BoolUtil <> b var
+R1609:1612 Coq.Init.Datatypes <> true constr
+R1594:1596 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1589:1592 Coq.Init.Datatypes <> :bool_scope:x_'&&'_x not
+R1588:1588 CoLoR.BoolUtil <> b var
+R1593:1593 CoLoR.BoolUtil <> c var
+R1597:1600 Coq.Init.Datatypes <> true constr
+R1683:1692 CoLoR.BoolUtil <> andb_eliml thm
+prf 1708:1717 <> andb_elimr
+R1746:1749 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R1751:1753 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1750:1750 CoLoR.BoolUtil <> c var
+R1754:1757 Coq.Init.Datatypes <> true constr
+R1739:1741 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1734:1737 Coq.Init.Datatypes <> :bool_scope:x_'&&'_x not
+R1733:1733 CoLoR.BoolUtil <> b var
+R1738:1738 CoLoR.BoolUtil <> c var
+R1742:1745 Coq.Init.Datatypes <> true constr
+R1828:1837 CoLoR.BoolUtil <> andb_elimr thm
+prf 1853:1862 <> andb_intro
+R1886:1889 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R1898:1901 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R1908:1910 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1903:1906 Coq.Init.Datatypes <> :bool_scope:x_'&&'_x not
+R1902:1902 CoLoR.BoolUtil <> b var
+R1907:1907 CoLoR.BoolUtil <> c var
+R1911:1914 Coq.Init.Datatypes <> true constr
+R1891:1893 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1890:1890 CoLoR.BoolUtil <> c var
+R1894:1897 Coq.Init.Datatypes <> true constr
+R1879:1881 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1878:1878 CoLoR.BoolUtil <> b var
+R1882:1885 Coq.Init.Datatypes <> true constr
+prf 1969:1975 <> andb_eq
+R2004:2008 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R1997:1999 Coq.Init.Logic <> :type_scope:x_'='_x not
+R1992:1995 Coq.Init.Datatypes <> :bool_scope:x_'&&'_x not
+R1991:1991 CoLoR.BoolUtil <> b var
+R1996:1996 CoLoR.BoolUtil <> c var
+R2000:2003 Coq.Init.Datatypes <> true constr
+R2017:2020 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R2010:2012 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2009:2009 CoLoR.BoolUtil <> b var
+R2013:2016 Coq.Init.Datatypes <> true constr
+R2022:2024 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2021:2021 CoLoR.BoolUtil <> c var
+R2025:2028 Coq.Init.Datatypes <> true constr
+R2059:2067 CoLoR.BoolUtil <> andb_elim thm
+R2059:2067 CoLoR.BoolUtil <> andb_elim thm
+prf 2098:2110 <> andb_eq_false
+R2140:2144 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R2132:2134 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2127:2130 Coq.Init.Datatypes <> :bool_scope:x_'&&'_x not
+R2126:2126 CoLoR.BoolUtil <> b var
+R2131:2131 CoLoR.BoolUtil <> c var
+R2135:2139 Coq.Init.Datatypes <> false constr
+R2154:2157 Coq.Init.Logic <> :type_scope:x_'\/'_x not
+R2146:2148 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2145:2145 CoLoR.BoolUtil <> b var
+R2149:2153 Coq.Init.Datatypes <> false constr
+R2159:2161 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2158:2158 CoLoR.BoolUtil <> c var
+R2162:2166 Coq.Init.Datatypes <> false constr
+def 2326:2328 <> neg
+R2347:2348 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R2350:2351 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R2352:2355 Coq.Init.Datatypes <> bool ind
+R2349:2349 CoLoR.BoolUtil <> A var
+R2346:2346 CoLoR.BoolUtil <> A var
+R2365:2368 Coq.Init.Datatypes <> negb def
+R2371:2371 CoLoR.BoolUtil <> f var
+R2375:2375 CoLoR.BoolUtil <> y var
+R2373:2373 CoLoR.BoolUtil <> x var
+prf 2386:2392 <> negb_lr
+R2418:2422 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R2414:2416 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2408:2411 Coq.Init.Datatypes <> negb def
+R2413:2413 CoLoR.BoolUtil <> b var
+R2417:2417 CoLoR.BoolUtil <> c var
+R2424:2426 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2423:2423 CoLoR.BoolUtil <> b var
+R2427:2430 Coq.Init.Datatypes <> negb def
+R2432:2432 CoLoR.BoolUtil <> c var
+prf 2584:2593 <> orb_intror
+R2617:2620 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R2627:2629 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2622:2625 Coq.Init.Datatypes <> :bool_scope:x_'||'_x not
+R2621:2621 CoLoR.BoolUtil <> b var
+R2626:2626 CoLoR.BoolUtil <> c var
+R2630:2633 Coq.Init.Datatypes <> true constr
+R2610:2612 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2609:2609 CoLoR.BoolUtil <> c var
+R2613:2616 Coq.Init.Datatypes <> true constr
+prf 2683:2692 <> orb_introl
+R2716:2719 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R2726:2728 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2721:2724 Coq.Init.Datatypes <> :bool_scope:x_'||'_x not
+R2720:2720 CoLoR.BoolUtil <> b var
+R2725:2725 CoLoR.BoolUtil <> c var
+R2729:2732 Coq.Init.Datatypes <> true constr
+R2709:2711 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2708:2708 CoLoR.BoolUtil <> c var
+R2712:2715 Coq.Init.Datatypes <> true constr
+prf 2782:2787 <> orb_eq
+R2816:2820 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R2809:2811 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2804:2807 Coq.Init.Datatypes <> :bool_scope:x_'||'_x not
+R2803:2803 CoLoR.BoolUtil <> b var
+R2808:2808 CoLoR.BoolUtil <> c var
+R2812:2815 Coq.Init.Datatypes <> true constr
+R2829:2832 Coq.Init.Logic <> :type_scope:x_'\/'_x not
+R2822:2824 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2821:2821 CoLoR.BoolUtil <> b var
+R2825:2828 Coq.Init.Datatypes <> true constr
+R2834:2836 Coq.Init.Logic <> :type_scope:x_'='_x not
+R2833:2833 CoLoR.BoolUtil <> c var
+R2837:2840 Coq.Init.Datatypes <> true constr
+prf 2983:2991 <> eqb_equiv
+R3014:3019 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R3042:3042 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R3009:3011 Coq.Init.Logic <> :type_scope:x_'='_x not
+R3008:3008 CoLoR.BoolUtil <> b var
+R3012:3013 CoLoR.BoolUtil <> b' var
+R3028:3032 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R3021:3023 Coq.Init.Logic <> :type_scope:x_'='_x not
+R3020:3020 CoLoR.BoolUtil <> b var
+R3024:3027 Coq.Init.Datatypes <> true constr
+R3035:3037 Coq.Init.Logic <> :type_scope:x_'='_x not
+R3033:3034 CoLoR.BoolUtil <> b' var
+R3038:3041 Coq.Init.Datatypes <> true constr
+sec 3286:3288 <> dec
+var 3305:3305 dec A
+var 3316:3316 dec P
+var 3336:3336 dec f
+var 3352:3355 dec f_ok
+R3321:3324 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R3320:3320 CoLoR.BoolUtil <> A var
+R3341:3344 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R3345:3348 Coq.Init.Datatypes <> bool ind
+R3340:3340 CoLoR.BoolUtil <> A var
+R3379:3383 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R3372:3374 Coq.Init.Logic <> :type_scope:x_'='_x not
+R3369:3369 CoLoR.BoolUtil <> f var
+R3371:3371 CoLoR.BoolUtil <> x var
+R3375:3378 Coq.Init.Datatypes <> true constr
+R3384:3384 CoLoR.BoolUtil <> P var
+R3386:3386 CoLoR.BoolUtil <> x var
+prf 3399:3400 <> ko
+R3425:3429 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R3417:3419 Coq.Init.Logic <> :type_scope:x_'='_x not
+R3414:3414 CoLoR.BoolUtil <> dec.f var
+R3416:3416 CoLoR.BoolUtil <> x var
+R3420:3424 Coq.Init.Datatypes <> false constr
+R3430:3430 Coq.Init.Logic <> :type_scope:'~'_x not
+R3431:3431 CoLoR.BoolUtil <> dec.P var
+R3433:3433 CoLoR.BoolUtil <> x var
+R3466:3469 CoLoR.BoolUtil <> dec.f_ok var
+R3466:3469 CoLoR.BoolUtil <> dec.f_ok var
+R3466:3469 CoLoR.BoolUtil <> dec.f_ok var
+R3482:3482 CoLoR.BoolUtil <> dec.f var
+R3482:3482 CoLoR.BoolUtil <> dec.f var
+prf 3520:3522 <> dec
+R3536:3536 Coq.Init.Specif <> :type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R3540:3542 Coq.Init.Specif <> :type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R3547:3547 Coq.Init.Specif <> :type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R3537:3537 CoLoR.BoolUtil <> dec.P var
+R3539:3539 CoLoR.BoolUtil <> x var
+R3543:3543 Coq.Init.Logic <> :type_scope:'~'_x not
+R3544:3544 CoLoR.BoolUtil <> dec.P var
+R3546:3546 CoLoR.BoolUtil <> x var
+R3582:3582 CoLoR.BoolUtil <> dec.f var
+R3582:3582 CoLoR.BoolUtil <> dec.f var
+R3617:3620 CoLoR.BoolUtil <> dec.f_ok var
+R3617:3620 CoLoR.BoolUtil <> dec.f_ok var
+R3617:3620 CoLoR.BoolUtil <> dec.f_ok var
+R3646:3647 CoLoR.BoolUtil <> ko thm
+R3646:3647 CoLoR.BoolUtil <> ko thm
+R3646:3647 CoLoR.BoolUtil <> ko thm
+R3671:3673 CoLoR.BoolUtil dec <> sec
+R3696:3697 CoLoR.BoolUtil <> ko thm
+R3727:3729 CoLoR.BoolUtil <> dec thm
+sec 3895:3901 <> bool_ok
+var 3918:3918 bool_ok A
+var 3929:3929 bool_ok P
+var 3931:3931 bool_ok Q
+var 3945:3946 bool_ok bP
+var 3948:3949 bool_ok bQ
+var 3968:3972 bool_ok bP_ok
+var 4012:4016 bool_ok bQ_ok
+R3936:3937 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R3935:3935 CoLoR.BoolUtil <> A var
+R3954:3956 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R3957:3960 Coq.Init.Datatypes <> bool ind
+R3953:3953 CoLoR.BoolUtil <> A var
+R3997:4001 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R3990:3992 Coq.Init.Logic <> :type_scope:x_'='_x not
+R3986:3987 CoLoR.BoolUtil <> bP var
+R3989:3989 CoLoR.BoolUtil <> x var
+R3993:3996 Coq.Init.Datatypes <> true constr
+R4002:4002 CoLoR.BoolUtil <> P var
+R4004:4004 CoLoR.BoolUtil <> x var
+R4041:4045 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R4034:4036 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4030:4031 CoLoR.BoolUtil <> bQ var
+R4033:4033 CoLoR.BoolUtil <> x var
+R4037:4040 Coq.Init.Datatypes <> true constr
+R4046:4046 CoLoR.BoolUtil <> Q var
+R4048:4048 CoLoR.BoolUtil <> x var
+prf 4061:4067 <> negb_ok
+R4099:4103 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R4092:4094 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4081:4084 Coq.Init.Datatypes <> negb def
+R4087:4088 CoLoR.BoolUtil <> bool_ok.bP var
+R4090:4090 CoLoR.BoolUtil <> x var
+R4095:4098 Coq.Init.Datatypes <> true constr
+R4104:4104 Coq.Init.Logic <> :type_scope:'~'_x not
+R4105:4105 CoLoR.BoolUtil <> bool_ok.P var
+R4107:4107 CoLoR.BoolUtil <> x var
+R4139:4140 CoLoR.BoolUtil <> ko thm
+R4142:4146 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4139:4140 CoLoR.BoolUtil <> ko thm
+R4142:4146 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4139:4140 CoLoR.BoolUtil <> ko thm
+R4142:4146 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4160:4161 CoLoR.BoolUtil <> bool_ok.bP var
+R4160:4161 CoLoR.BoolUtil <> bool_ok.bP var
+prf 4199:4205 <> andb_ok
+R4238:4242 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R4231:4233 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4223:4226 Coq.Init.Datatypes <> :bool_scope:x_'&&'_x not
+R4219:4220 CoLoR.BoolUtil <> bool_ok.bP var
+R4222:4222 CoLoR.BoolUtil <> x var
+R4227:4228 CoLoR.BoolUtil <> bool_ok.bQ var
+R4230:4230 CoLoR.BoolUtil <> x var
+R4234:4237 Coq.Init.Datatypes <> true constr
+R4246:4249 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R4243:4243 CoLoR.BoolUtil <> bool_ok.P var
+R4245:4245 CoLoR.BoolUtil <> x var
+R4250:4250 CoLoR.BoolUtil <> bool_ok.Q var
+R4252:4252 CoLoR.BoolUtil <> x var
+R4280:4286 CoLoR.BoolUtil <> andb_eq thm
+R4289:4293 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4296:4300 CoLoR.BoolUtil <> bool_ok.bQ_ok var
+R4280:4286 CoLoR.BoolUtil <> andb_eq thm
+R4280:4286 CoLoR.BoolUtil <> andb_eq thm
+R4289:4293 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4289:4293 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4296:4300 CoLoR.BoolUtil <> bool_ok.bQ_ok var
+R4296:4300 CoLoR.BoolUtil <> bool_ok.bQ_ok var
+prf 4323:4328 <> orb_ok
+R4361:4365 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R4354:4356 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4346:4349 Coq.Init.Datatypes <> :bool_scope:x_'||'_x not
+R4342:4343 CoLoR.BoolUtil <> bool_ok.bP var
+R4345:4345 CoLoR.BoolUtil <> x var
+R4350:4351 CoLoR.BoolUtil <> bool_ok.bQ var
+R4353:4353 CoLoR.BoolUtil <> x var
+R4357:4360 Coq.Init.Datatypes <> true constr
+R4369:4372 Coq.Init.Logic <> :type_scope:x_'\/'_x not
+R4366:4366 CoLoR.BoolUtil <> bool_ok.P var
+R4368:4368 CoLoR.BoolUtil <> x var
+R4373:4373 CoLoR.BoolUtil <> bool_ok.Q var
+R4375:4375 CoLoR.BoolUtil <> x var
+R4403:4408 CoLoR.BoolUtil <> orb_eq thm
+R4411:4415 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4418:4422 CoLoR.BoolUtil <> bool_ok.bQ_ok var
+R4403:4408 CoLoR.BoolUtil <> orb_eq thm
+R4403:4408 CoLoR.BoolUtil <> orb_eq thm
+R4411:4415 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4411:4415 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4418:4422 CoLoR.BoolUtil <> bool_ok.bQ_ok var
+R4418:4422 CoLoR.BoolUtil <> bool_ok.bQ_ok var
+prf 4445:4452 <> implb_ok
+R4492:4497 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R4508:4508 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R4485:4487 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4466:4470 Coq.Init.Datatypes <> implb def
+R4480:4481 CoLoR.BoolUtil <> bool_ok.bQ var
+R4483:4483 CoLoR.BoolUtil <> x var
+R4473:4474 CoLoR.BoolUtil <> bool_ok.bP var
+R4476:4476 CoLoR.BoolUtil <> x var
+R4488:4491 Coq.Init.Datatypes <> true constr
+R4501:4504 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R4505:4505 CoLoR.BoolUtil <> bool_ok.Q var
+R4507:4507 CoLoR.BoolUtil <> x var
+R4498:4498 CoLoR.BoolUtil <> bool_ok.P var
+R4500:4500 CoLoR.BoolUtil <> x var
+R4541:4545 Coq.Init.Datatypes <> implb def
+R4557:4558 CoLoR.BoolUtil <> bool_ok.bP var
+R4557:4558 CoLoR.BoolUtil <> bool_ok.bP var
+R4576:4580 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4583:4587 CoLoR.BoolUtil <> bool_ok.bQ_ok var
+R4576:4580 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4576:4580 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4583:4587 CoLoR.BoolUtil <> bool_ok.bQ_ok var
+R4583:4587 CoLoR.BoolUtil <> bool_ok.bQ_ok var
+R4610:4611 CoLoR.BoolUtil <> ko thm
+R4613:4617 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4610:4611 CoLoR.BoolUtil <> ko thm
+R4613:4617 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4610:4611 CoLoR.BoolUtil <> ko thm
+R4613:4617 CoLoR.BoolUtil <> bool_ok.bP_ok var
+R4640:4646 CoLoR.BoolUtil bool_ok <> sec
+sec 4778:4787 <> bforall_lt
+var 4804:4804 bforall_lt P
+var 4820:4821 bforall_lt bP
+var 4841:4845 bforall_lt bP_ok
+R4811:4812 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R4808:4810 Coq.Init.Datatypes <> nat ind
+R4828:4829 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R4830:4833 Coq.Init.Datatypes <> bool ind
+R4825:4827 Coq.Init.Datatypes <> nat ind
+R4870:4874 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R4863:4865 Coq.Init.Logic <> :type_scope:x_'='_x not
+R4859:4860 CoLoR.BoolUtil <> bP var
+R4862:4862 CoLoR.BoolUtil <> x var
+R4866:4869 Coq.Init.Datatypes <> true constr
+R4875:4875 CoLoR.BoolUtil <> P var
+R4877:4877 CoLoR.BoolUtil <> x var
+def 4895:4903 <> forall_lt
+R4925:4928 Coq.Init.Logic <> :type_scope:x_'->'_x not
+R4929:4929 CoLoR.BoolUtil <> bforall_lt.P var
+R4931:4931 CoLoR.BoolUtil <> i var
+R4921:4923 Coq.Init.Peano <> :nat_scope:x_'<'_x not
+R4920:4920 CoLoR.BoolUtil <> i var
+R4924:4924 CoLoR.BoolUtil <> n var
+def 4946:4959 <> bforall_lt_aux
+R4969:4976 Coq.Init.Datatypes <> :bool_scope:x_'&&'_x not
+R4968:4968 CoLoR.BoolUtil <> b var
+R4983:4983 CoLoR.BoolUtil <> n var
+R5003:5006 Coq.Init.Datatypes <> true constr
+R5016:5016 Coq.Init.Datatypes <> S constr
+R5024:5037 CoLoR.BoolUtil <> bforall_lt_aux def
+R5040:5041 CoLoR.BoolUtil <> bforall_lt.bP var
+prf 5068:5084 <> bforall_lt_aux_ok
+R5129:5133 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R5122:5124 Coq.Init.Logic <> :type_scope:x_'='_x not
+R5104:5117 CoLoR.BoolUtil <> bforall_lt_aux def
+R5121:5121 CoLoR.BoolUtil <> n var
+R5119:5119 CoLoR.BoolUtil <> b var
+R5125:5128 Coq.Init.Datatypes <> true constr
+R5142:5145 Coq.Init.Logic <> :type_scope:x_'/\'_x not
+R5135:5137 Coq.Init.Logic <> :type_scope:x_'='_x not
+R5134:5134 CoLoR.BoolUtil <> b var
+R5138:5141 Coq.Init.Datatypes <> true constr
+R5146:5154 CoLoR.BoolUtil <> forall_lt def
+R5156:5156 CoLoR.BoolUtil <> n var
+R5180:5188 CoLoR.BoolUtil <> forall_lt def
+R5245:5251 CoLoR.BoolUtil <> andb_eq thm
+R5259:5263 CoLoR.BoolUtil <> bforall_lt.bP_ok var
+R5245:5251 CoLoR.BoolUtil <> andb_eq thm
+R5245:5251 CoLoR.BoolUtil <> andb_eq thm
+R5259:5263 CoLoR.BoolUtil <> bforall_lt.bP_ok var
+R5259:5263 CoLoR.BoolUtil <> bforall_lt.bP_ok var
+R5291:5300 Coq.Arith.Peano_dec <> eq_nat_dec syndef
+R5291:5300 Coq.Arith.Peano_dec <> eq_nat_dec syndef
+def 5358:5367 <> bforall_lt
+R5372:5385 CoLoR.BoolUtil <> bforall_lt_aux def
+R5387:5390 Coq.Init.Datatypes <> true constr
+prf 5402:5414 <> bforall_lt_ok
+R5447:5451 Coq.Init.Logic <> :type_scope:x_'<->'_x not
+R5440:5442 Coq.Init.Logic <> :type_scope:x_'='_x not
+R5428:5437 CoLoR.BoolUtil <> bforall_lt def
+R5439:5439 CoLoR.BoolUtil <> n var
+R5443:5446 Coq.Init.Datatypes <> true constr
+R5452:5460 CoLoR.BoolUtil <> forall_lt def
+R5462:5462 CoLoR.BoolUtil <> n var
+R5489:5498 CoLoR.BoolUtil <> bforall_lt def
+R5509:5525 CoLoR.BoolUtil <> bforall_lt_aux_ok thm
+R5509:5525 CoLoR.BoolUtil <> bforall_lt_aux_ok thm
+R5509:5525 CoLoR.BoolUtil <> bforall_lt_aux_ok thm
+R5545:5554 CoLoR.BoolUtil bforall_lt <> sec

@@ -24,7 +24,7 @@ build:
 	mv spike.d.byte spike_bc
 
 nc:
-	$(OCAMLBUILD) -annot -libs unix -libs str spike.native
+	$(OCAMLBUILD) -libs unix -libs str spike.native
 	mv spike.native spike_nc
 
 

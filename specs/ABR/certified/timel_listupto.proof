@@ -1,0 +1,358 @@
+Resetting all values
+Opening ../no_rm/timel_listupto.spike
+
+Successfully parsed sorts
+
+Successfully parsed constructors
+
+Successfully parsed functions
+
+Successfully parsed axioms
+All constructors are free
+dico_const_string:
+2 --> 0
+-23 --> firstAt
+7 --> Nil
+-16 --> wind
+-1 --> PLAN_eq
+-24 --> listAt
+5 --> false
+-12 --> memberE
+-11 --> memberT
+6 --> C
+-21 --> progAt
+-22 --> timeAt
+-6 --> time
+-10 --> memberC
+-2 --> OBJ_eq
+-13 --> sortedT
+-4 --> plus
+-17 --> maxEr
+-5 --> le
+-19 --> insAt
+-3 --> nat_eq
+3 --> S
+-8 --> er
+-15 --> listUpTo
+-25 --> prog
+-26 --> acr1
+-18 --> acr
+8 --> Cons
+-7 --> timel
+-20 --> insIn
+4 --> true
+-9 --> erl
+-14 --> sortedE
+
+Successfully parsed statuses
+dico_id_status:
+Completing status dico with default status "Multiset"
+AC symbols: 
+Case 0: no AC symbols
+Orienting axioms
+	[ 77 ] PLAN_eq (Nil, Nil) -> true ;
+	[ 78 ] PLAN_eq (Cons (u1, u2), Nil) -> false ;
+	[ 79 ] PLAN_eq (Nil, Cons (u1, u2)) -> false ;
+	[ 80 ] OBJ_eq (u1, u2) = true => PLAN_eq (Cons (u1, u3), Cons (u2, u4)) -> PLAN_eq (u3, u4) ;
+	[ 81 ] OBJ_eq (u1, u2) = false => PLAN_eq (Cons (u1, u3), Cons (u2, u4)) -> false ;
+	[ 82 ] nat_eq (u1, u2) = true /\ nat_eq (u3, u4) = true => OBJ_eq (C (u1, u3), C (u2, u4)) -> true ;
+	[ 83 ] nat_eq (u1, u2) = false => OBJ_eq (C (u1, u3), C (u2, u4)) -> false ;
+	[ 84 ] nat_eq (u1, u2) = true /\ nat_eq (u3, u4) = false => OBJ_eq (C (u1, u3), C (u2, u4)) -> false ;
+	[ 85 ] nat_eq (0, 0) -> true ;
+	[ 86 ] nat_eq (0, S (u1)) -> false ;
+	[ 87 ] nat_eq (S (u1), 0) -> false ;
+	[ 88 ] nat_eq (S (u1), S (u2)) -> nat_eq (u1, u2) ;
+	[ 89 ] memberC (u1, Nil) -> false ;
+	[ 90 ] OBJ_eq (u1, u2) = true => memberC (u1, Cons (u2, u3)) -> true ;
+	[ 91 ] OBJ_eq (u1, u2) = false => memberC (u1, Cons (u2, u3)) -> memberC (u1, u3) ;
+	[ 92 ] memberT (u1, Nil) -> false ;
+	[ 93 ] nat_eq (u1, u2) = true => memberT (u1, Cons (C (u2, u3), u4)) -> true ;
+	[ 94 ] nat_eq (u1, u2) = false => memberT (u1, Cons (C (u2, u3), u4)) -> memberT (u1, u4) ;
+	[ 95 ] memberE (u1, Nil) -> false ;
+	[ 96 ] nat_eq (u1, u2) = true => memberE (u1, Cons (C (u3, u2), u4)) -> true ;
+	[ 97 ] nat_eq (u1, u2) = false => memberE (u1, Cons (C (u3, u2), u4)) -> memberE (u1, u4) ;
+	[ 98 ] timel (Nil) -> 0 ;
+	[ 99 ] timel (Cons (u1, u2)) -> time (u1) ;
+	[ 100 ] plus (0, u1) -> u1 ;
+	[ 101 ] plus (S (u1), u2) -> S (plus (u1, u2)) ;
+	[ 102 ] le (0, u1) -> true ;
+	[ 103 ] le (S (u1), 0) -> false ;
+	[ 104 ] le (S (u1), S (u2)) -> le (u1, u2) ;
+	[ 105 ] time (C (u1, u2)) -> u1 ;
+	[ 106 ] er (C (u1, u2)) -> u2 ;
+	[ 107 ] sortedT (Nil) -> true ;
+	[ 108 ] sortedT (Cons (u1, Nil)) -> true ;
+	[ 109 ] le (u1, u2) = true => sortedT (Cons (C (u2, u3), Cons (C (u1, u4), u5))) -> sortedT (Cons (C (u1, u4), u5)) ;
+	[ 110 ] le (u1, u2) = false => sortedT (Cons (C (u2, u3), Cons (C (u1, u4), u5))) -> false ;
+	[ 111 ] sortedE (Nil) -> true ;
+	[ 112 ] sortedE (Cons (u1, Nil)) -> true ;
+	[ 113 ] le (u1, u2) = true => sortedE (Cons (C (u3, u2), Cons (C (u4, u1), u5))) -> false ;
+	[ 114 ] le (u1, u2) = false => sortedE (Cons (C (u3, u2), Cons (C (u4, u1), u5))) -> sortedE (Cons (C (u4, u1), u5)) ;
+	[ 115 ] listUpTo (Nil, u1) -> Nil ;
+	[ 116 ] le (u1, u2) = true => listUpTo (Cons (C (u1, u3), u4), u2) -> Cons (C (u1, u3), Nil) ;
+	[ 117 ] le (u1, u2) = false => listUpTo (Cons (C (u1, u3), u4), u2) -> Cons (C (u1, u3), listUpTo (u4, u2)) ;
+	[ 118 ] wind (Nil, u1, u2, u3) -> Nil ;
+	[ 119 ] le (plus (u1, u2), u3) = true /\ le (plus (u1, u4), u3) = false => wind (Cons (C (u1, u5), u6), u3, u4, u2) -> Cons (C (u1, u5), wind (u6, u3, u4, u2)) ;
+	[ 120 ] le (plus (u1, u2), u3) = false => wind (Cons (C (u1, u4), u5), u3, u6, u2) -> wind (u5, u3, u6, u2) ;
+	[ 121 ] le (plus (u1, u2), u3) = true /\ le (plus (u1, u4), u3) = true => wind (Cons (C (u1, u5), u6), u3, u4, u2) -> Cons (C (u1, u5), Nil) ;
+	[ 122 ] maxEr (Nil) -> 0 ;
+	[ 123 ] le (maxEr (u1), u2) = true => maxEr (Cons (C (u3, u2), u1)) -> u2 ;
+	[ 124 ] le (maxEr (u1), u2) = false => maxEr (Cons (C (u3, u2), u1)) -> maxEr (u1) ;
+	[ 125 ] sortedT (u1) = true /\ le (u2, u3) = false => acr (u1, u4, u2, u3) -> maxEr (wind (u1, u4, u2, u3)) ;
+	[ 126 ] sortedT (u1) = false => acr (u1, u2, u3, u4) -> 0 ;
+	[ 127 ] sortedT (u1) = true /\ le (u2, u3) = true => acr (u1, u4, u2, u3) -> 0 ;
+	[ 128 ] erl (Nil) -> 0 ;
+	[ 129 ] erl (Cons (u1, u2)) -> er (u1) ;
+	[ 130 ] insAt (Nil, u1, u2) -> Cons (C (u1, u2), Nil) ;
+	[ 131 ] le (time (u1), u2) = true => insAt (Cons (u1, u3), u2, u4) -> Cons (C (u2, u4), Cons (u1, u3)) ;
+	[ 132 ] le (time (u1), u2) = false => insAt (Cons (u1, u3), u2, u4) -> insAt (u3, u2, u4) ;
+	[ 133 ] insIn (Nil, u1, u2) -> Cons (C (u1, u2), Nil) ;
+	[ 134 ] le (er (u1), u2) = true => insIn (Cons (u1, u3), u4, u2) -> insIn (u3, time (u1), u2) ;
+	[ 135 ] le (er (u1), u2) = false => insIn (Cons (u1, u3), u4, u2) -> Cons (C (u4, u2), Cons (u1, u3)) ;
+	[ 136 ] progAt (Nil, u1) -> 0 ;
+	[ 137 ] le (time (u1), u2) = true => progAt (Cons (u1, u3), u2) -> er (u1) ;
+	[ 138 ] le (time (u1), u2) = false => progAt (Cons (u1, u3), u2) -> progAt (u3, u2) ;
+	[ 139 ] timeAt (Nil, u1) -> 0 ;
+	[ 140 ] le (time (u1), u2) = true => timeAt (Cons (u1, u3), u2) -> time (u1) ;
+	[ 141 ] le (time (u1), u2) = false => timeAt (Cons (u1, u3), u2) -> timeAt (u3, u2) ;
+	[ 142 ] firstAt (Nil, u1) -> C (0, 0) ;
+	[ 143 ] le (time (u1), u2) = true => firstAt (Cons (u1, u3), u2) -> u1 ;
+	[ 144 ] le (time (u1), u2) = false => firstAt (Cons (u1, u3), u2) -> firstAt (u3, u2) ;
+	[ 145 ] listAt (Nil, u1) -> Nil ;
+	[ 146 ] le (time (u1), u2) = true => listAt (Cons (u1, u3), u2) -> Cons (u1, u3) ;
+	[ 147 ] le (time (u1), u2) = false => listAt (Cons (u1, u3), u2) -> listAt (u3, u2) ;
+	[ 148 ] prog (Nil, u1, u2) -> Nil ;
+	[ 149 ] le (progAt (prog (u1, u2, u3), plus (time (u4), u3)), er (u4)) = true => prog (Cons (u4, u1), u2, u3) -> insAt (prog (u1, u2, u3), plus (time (u4), u3), er (u4)) ;
+	[ 150 ] le (progAt (prog (u1, u2, u3), plus (time (u4), u3)), er (u4)) = false => prog (Cons (u4, u1), u2, u3) -> insIn (prog (u1, u2, u3), plus (time (u4), u2), er (u4)) ;
+	[ 151 ] sortedT (u1) = true /\ le (u2, u3) = false => acr1 (u1, u4, u2, u3) -> progAt (prog (u1, u2, u3), u4) ;
+	[ 152 ] sortedT (u1) = false => acr1 (u1, u2, u3, u4) -> 0 ;
+	[ 153 ] sortedT (u1) = true /\ le (u2, u3) = true => acr1 (u1, u4, u2, u3) -> 0 ;
+dico_order:
+firstAt: er time le 0 S true false C;
+wind: time le plus 0 S true false C Nil Cons;
+PLAN_eq: nat_eq OBJ_eq true false;
+listAt: er time le 0 S true false C Nil Cons;
+memberE: nat_eq true false;
+memberT: nat_eq true false;
+progAt: er time le 0 S true false C Nil Cons;
+timeAt: er time le 0 S true false C;
+time: C;
+memberC: nat_eq OBJ_eq true false;
+OBJ_eq: nat_eq true false;
+sortedT: timel time le 0 S true false C Nil Cons;
+plus: 0 S;
+maxEr: le 0 S true false;
+le: 0 S true false;
+insAt: time le 0 S true false C Nil Cons;
+nat_eq: true false;
+er: C;
+listUpTo: time le 0 S true false C Nil Cons;
+prog: progAt insIn insAt er time le plus 0 S true false C Nil Cons;
+acr1: prog progAt insIn insAt sortedT er timel time le plus 0 S true false C Nil Cons;
+acr: maxEr wind sortedT timel time le plus 0 S true false C Nil Cons;
+Cons: time C;
+timel: 0 S;
+insIn: er time le 0 S true false C Nil Cons;
+erl: er time 0 S C Nil Cons;
+sortedE: erl er time le 0 S true false C Nil Cons;
+dico_equivalence:
+Computing nullary sorts
+Sort "nat" is not nullary
+Sort "OBJ" is not nullary
+Sort "PLAN" is not nullary
+Sort "bool" is nullary
+Sort "nat" is not nullary
+Sort "nat" is not nullary
+Sort "OBJ" is not nullary
+Computing nullary individuals
+We do not have a boolean specification
+
+Successfully parsed properties
+Computing default priorities
+Using default priorities
+Generate will be attempted on the following positions:
+Ind_pos_position ()
+
+Successfully parsed strategies
+
+Successfully parsed startpoint
+Closing ../no_rm/timel_listupto.spike
+
+Successfully parsed conjectures
+	[ 154 ] timel (listUpTo (u1, u2)) = timel (u1) ;
+
+
+************************************************************
+******************* Starting computation *******************
+************************************************************
+
+
+dico_st:
+fullind = (repeat (stra, inst_var_rule), print_goals_history)
+negative_clash_rule = delete(id,[try (negative_clash)])
+subsumption_rule = delete(id,[try (subsumption (L&C))])
+normalize = repeat try (delete(id,[negative_clash]), simplify(id,[eliminate_redundant_literal]), simplify(id,[eliminate_trivial_literal]), simplify(id,[positive_clash]), simplify(id,[congruence_closure]), simplify(id,[negative_decomposition]), simplify(id,[auto_simplification]), simplify(id,[rewriting (normalize, L&R, *)]), delete(id,[subsumption (L&C)]), simplify(id,[total_case_rewriting (builtin, R, *)]))
+augment_rule = simplify(id,[try (augmentation (L))])
+stra = repeat (try (tautology_rule, negative_clash_rule, decomposition_rule, rewriting_rule, subsumption_rule, print_goals, total_case_rewriting_add_premise_rule))
+inst_var_rule = add_premise(generate,[try (id)])
+recursive = try (delete, rewrite, add_premise(id,[generate]))
+query = ?
+generate_reduce = try (delete(id,[tautology]), rewrite)
+rewriting_rule = simplify(id,[try (rewriting (rewrite, L&R&C, *))])
+tautology_rule = delete(id,[try (tautology)])
+total_case_rewriting_add_premise_rule = add_premise(total_case_rewriting (simplify_strat, R, *),[try (id)])
+decompose = saturate (simplify(id,[positive_decomposition]), simplify(id,[negative_decomposition]))
+fullind_aug = (repeat (stra_aug, inst_var_rule), print_goals_history)
+clean = saturate (simplify(id,[eliminate_redundant_literal]), simplify(id,[eliminate_trivial_literal]), simplify(id,[positive_clash]))
+simplify = saturate (delete, clean, decompose, simplify(id,[auto_simplification]))
+stra_aug = repeat (try (tautology_rule, negative_clash_rule, decomposition_rule, rewriting_rule, augment_rule, subsumption_rule, print_goals, total_case_rewriting_add_premise_rule))
+total_case_rewriting_rule = simplify(id,[try (total_case_rewriting (simplify_strat, R, *))])
+rewrite = try (simplify(id,[rewriting (normalize, R, *)]), simplify(id,[equational_rewriting (*)]), simplify(id,[partial_case_rewriting (R&L, *)]))
+builtin = try (delete, rewrite, add_premise(id,[generate]))
+decomposition_rule = simplify(id,[try (negative_decomposition)])
+delete = saturate (delete(id,[tautology]), delete(id,[subsumption (R&L)]), delete(id,[negative_clash]))
+Start point is now fullind
+
+************************  Proving  *************************
+[ 155 ] timel (listUpTo (u1, u2)) = timel (u1) ;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+using strategy 
+
+fullind
+************************************************************
+
+Current goals E1 (1):
+[ 155 ] timel (listUpTo (u1, u2)) = timel (u1) ;
+
+
+GENERATE 1 on
+« [ 155 ] timel (listUpTo (u1, u2)) = timel (u1) ;
+
+from the positions:
+	true/1/[1] --> timel (listUpTo (u1, u2))
+	true/1/[1-1] --> listUpTo (u1, u2)
+	
+at true/1/[1-1] on 	listUpTo (u1, u2) 	 using the test substitutions:
+
+ 1) <! u1, Nil !>
+ 2) <! u1, Cons (C (u3, u5), u6) !>
+ 3) <! u1, Cons (C (u3, u5), u6) !>
+
+We obtain :
+
+1) [ 167 ] timel (Nil) = timel (Nil) ;
+
+using the rule [ 115 ] listUpTo (Nil, u1) -> Nil ;
+2) [ 173 ] le (u3, u2) = true => timel (Cons (C (u3, u5), Nil)) = timel (Cons (C (u3, u5), u6)) ;
+
+using the rule [ 116 ] le (u1, u2) = true => listUpTo (Cons (C (u1, u3), u4), u2) -> Cons (C (u1, u3), Nil) ;
+3) [ 179 ] le (u3, u2) = false => timel (Cons (C (u3, u5), listUpTo (u6, u2))) = timel (Cons (C (u3, u5), u6)) ;
+
+using the rule [ 117 ] le (u1, u2) = false => listUpTo (Cons (C (u1, u3), u4), u2) -> Cons (C (u1, u3), listUpTo (u4, u2)) ;
+
+TAUTOLOGY: delete
+« [ 167 ] timel (Nil) = timel (Nil) ;
+
+
+REWRITING 1: simplify by rewriting 
+« [ 173 ] le (u3, u2) = true => timel (Cons (C (u3, u5), Nil)) = timel (Cons (C (u3, u5), u6)) ;
+
+
+- rewriting at the position true/1/[1]:
+
+timel (Cons (C (u3, u5), Nil))
+   is simplified by : timel (Cons (u1, u2)) -> time (u1)   (from [ 99 ] of R)
+   with substitution: <! u1, C (u3, u5) ; u2, Nil !> into
+time (C (u3, u5))
+
+
+» [ 182 ] le (u3, u2) = true => time (C (u3, u5)) = timel (Cons (C (u3, u5), u6)) ;
+
+
+REWRITING 2: simplify by rewriting 
+« [ 179 ] le (u3, u2) = false => timel (Cons (C (u3, u5), listUpTo (u6, u2))) = timel (Cons (C (u3, u5), u6)) ;
+
+
+- rewriting at the position true/1/[1]:
+
+timel (Cons (C (u3, u5), listUpTo (u6, u2)))
+   is simplified by : timel (Cons (u1, u2)) -> time (u1)   (from [ 99 ] of R)
+   with substitution: <! u1, C (u3, u5) ; u2, listUpTo (u6, u2) !> into
+time (C (u3, u5))
+
+
+» [ 185 ] le (u3, u2) = false => time (C (u3, u5)) = timel (Cons (C (u3, u5), u6)) ;
+
+
+REWRITING 3: simplify by rewriting 
+« [ 182 ] le (u3, u2) = true => time (C (u3, u5)) = timel (Cons (C (u3, u5), u6)) ;
+
+
+- rewriting at the position true/1/[2]:
+
+timel (Cons (C (u3, u5), u6))
+   is simplified by : timel (Cons (u1, u2)) -> time (u1)   (from [ 99 ] of R)
+   with substitution: <! u1, C (u3, u5) ; u2, u6 !> into
+time (C (u3, u5))
+
+
+» [ 188 ] le (u3, u2) = true => time (C (u3, u5)) = time (C (u3, u5)) ;
+
+TAUTOLOGY: delete
+« [ 188 ] le (u3, u2) = true => time (C (u3, u5)) = time (C (u3, u5)) ;
+
+
+REWRITING 4: simplify by rewriting 
+« [ 185 ] le (u3, u2) = false => time (C (u3, u5)) = timel (Cons (C (u3, u5), u6)) ;
+
+
+- rewriting at the position true/1/[2]:
+
+timel (Cons (C (u3, u5), u6))
+   is simplified by : timel (Cons (u1, u2)) -> time (u1)   (from [ 99 ] of R)
+   with substitution: <! u1, C (u3, u5) ; u2, u6 !> into
+time (C (u3, u5))
+
+
+» [ 191 ] le (u3, u2) = false => time (C (u3, u5)) = time (C (u3, u5)) ;
+
+TAUTOLOGY: delete
+« [ 191 ] le (u3, u2) = false => time (C (u3, u5)) = time (C (u3, u5)) ;
+
+
+
+The following initial conjectures are inductive consequences of R
+
+[ 155 ] timel (listUpTo (u1, u2)) = timel (u1) ;
+
+
+(* Generating the COQ proof of the conjectures:
+
+  forall u1 u2, (timel (listUpTo u1 u2)) = (timel u1)
+
+*)
+Elapsed time: 0.039571 s
+
+--- Global statistics of the main successful operations ---
+
+- tautology               : 3 of 12 tries.
+- rewriting               : 4 of 5 tries.
+- augmentation            : 0 of 0 tries.
+- subsumption             : 0 of 1 tries.
+- total_case_rewriting    : 0 of 1 tries.
+- generate                : 1 of 1 tries.
+
+-----------
+  Total clauses: 191
+
+-----------
+  Total lemmas: 0
+
+  Max depth    : 1
+
+
+All sets of conjectures were successfully processed
+
+
