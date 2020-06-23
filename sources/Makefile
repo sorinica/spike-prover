@@ -17,7 +17,7 @@ default: dev
 
 dev:
 	make build
-	make tags
+#	make tags
 
 build:
 	$(OCAMLBUILD) -libs unix -libs str spike.d.byte
@@ -29,7 +29,7 @@ nc:
 
 
 tags:
-	otags -v $(SOURCES_ML)  $(TARGET)
+	$(OCAMLBUILD) -tags annot $(SOURCES_ML)  $(TARGET)
 
 
 all:

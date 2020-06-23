@@ -23,7 +23,7 @@ let preprocess_ac t =
     | Term (f, l, s) -> 
 	let l' = List.map fn l in
 	if symbol_is_ac f then 
-	  let l'_sorted = Sort.list (fun x y -> heavier y x) l' in
+	  let l'_sorted = List.sort (fun x y -> if heavier y x then -1 else if x == y then 0 else 1) l' in
 	  new term (Term (f, l'_sorted, s))
       	else new term (Term (f, l', s))
 
@@ -122,14 +122,14 @@ let rec normalize_monom_list l =
   in
   let const, treated_monoms = treat_monoms l in
   let no_null = elim_null_monoms treated_monoms in 
-  let sorted_monoms = Sort.list (fun (_, t1) (_, t2) -> heavier 
-    t1 t2) no_null in 
+  let sorted_monoms = List.sort (fun (_, t1) (_, t2) -> if heavier 
+    t1 t2 then -1 else if t1#syntactic_equal t2 then 0 else 1) no_null in 
   const, sorted_monoms
 and process_monom (c,m) =  
   match m#content with
       Term (symb,l,_)-> 	
 	(if symb = id_symbol_plus then
-	let l_sorted = Sort.list (fun x y -> heavier y x) l in 
+	let l_sorted = List.sort (fun x y -> if heavier y x then -1 else if x == y then 0 else 1) l in 
 	let lc = List.map (fun x -> (c, x)) l_sorted in 
 	normalize_monom_list lc 
       else if symb = (id_symbol_zero) then 0,[]
@@ -162,7 +162,7 @@ and process_monom (c,m) =
 	    let ci, pi = normalize_monom_list [1, ti] in
 	    multiply_monoms p ((ci + si), pi)
 	  in 
-	  let l_sorted = Sort.list (fun x y -> heavier y x) l in
+	  let l_sorted = List.sort (fun x y -> if heavier y x then -1 else if x == y then 0 else 1) l in
 	  let const_pi, mult_pi = List.fold_right fn l_sorted (normalize_monom_list [1, (term_nat 1)]) in
 	  let true_pi = (elim_null_monoms mult_pi) in 
 	  if List.length true_pi = 1 then (c * const_pi, (multiply_const (c,true_pi)))

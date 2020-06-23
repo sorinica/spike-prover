@@ -1268,7 +1268,7 @@ specif_fun_with_positions:
     in 
     try
       let l = (dico_ind_positions_v0#find n) in
-      let all_ind_pos = Sort.list (<=) (List.map (fun p -> n, p) (list_remove_doubles (=) (List.flatten l))) in
+      let all_ind_pos = List.sort (fun x y -> if x < y then -1 else if x == y then 0 else 1) (List.map (fun p -> n, p) (list_remove_doubles (=) (List.flatten l))) in
       Ind_pos_position all_ind_pos
     with Not_found -> parse_failwith ("symbol \"" ^ $1 ^ "\" has no induction positions") }
 | TOK_IDENT TOK_LPAR list_of_positions TOK_RPAR
@@ -1284,7 +1284,7 @@ specif_fun_with_positions:
       let l = dico_ind_positions_v0#find n in
       let all_ind_pos = list_remove_doubles (=) (List.flatten l) in
       let _ = generic_setminus all_ind_pos $3
-      in Ind_pos_position ((Sort.list (<=) (List.map (fun p -> n, p) $3)))
+      in Ind_pos_position (List.sort (fun x y -> if x < y then -1 else if x == y then 0 else 1) (List.map (fun p -> n, p) $3))
     with Not_found -> parse_failwith ("symbol \"" ^ $1 ^ "\" has no induction positions")
       | (Failure "setminus") -> parse_failwith ("provided induction positions of symbol \"" ^ $1 ^
         "\" are not a subset of actual positions") }

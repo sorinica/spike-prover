@@ -425,7 +425,7 @@ let ac_normalize_3 t = t (* TODO *)
 
 (* Tests must be performed in the right order *)
 let determine_ac_category () =
-  let l_ac = try Sort.list (<=) (dico_properties#find_keys Prop_ac) with Not_found -> []
+  let l_ac = try List.sort (fun x y -> if x < y then -1 else if x == y then 0 else 1) (dico_properties#find_keys Prop_ac) with Not_found -> []
   and l_const = constant_symbols ()
   and l_un = unary_symbols () in
   let fn l = 

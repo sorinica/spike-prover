@@ -90,7 +90,7 @@ let rec insert_sorted_dup eq_f inf_f el l =
     function
       [] -> [el]
     | h :: t as l' ->
-        if inf_f el h or eq_f el h then el :: l' else  h :: fn t
+        if inf_f el h || eq_f el h then el :: l' else  h :: fn t
   in
   fn l
 ;;
@@ -300,7 +300,7 @@ let what_is_new fn_equiv l l' =
   let subset l l' = 
     List.for_all (fun x -> member x l') l
   in
-  (l = []) or not (subset l l')
+  (l = []) || not (subset l l')
 
 
   (* computes l \ l'  *)
@@ -342,7 +342,7 @@ let is_subset equiv_f v v' =
       [], _ -> true
     | _, [] -> false
     | (h :: t as l), h' :: t' ->
-        if equiv_f h h' then fn (t, t') or fn (l, t') else fn (l, t')
+        if equiv_f h h' then fn (t, t') || fn (l, t') else fn (l, t')
   in
   fn (v, v')
 ;;
@@ -551,7 +551,7 @@ let check_on_permutations pred l l' =
       function
         [] -> false
       | h' :: t' ->
-          if pred h h' then fn3 (acc @ t') t or fn2 (acc @ [h']) t'
+          if pred h h' then fn3 (acc @ t') t || fn2 (acc @ [h']) t'
           else fn2 (acc @ [h']) t'
     in
     fn2 [] l
@@ -886,7 +886,7 @@ let process_underscores s =
 
 assert (process_underscores "__ArbitraryText___" = ("ArbitraryText", 2, 3));;
 
-(* A type for input files: either stdin or a plain file *)
+(* A type for input files: either stdin || a plain file *)
 type ginput = string * in_channel;;
 
 (* Open relevant file descriptor *)
@@ -1215,7 +1215,7 @@ let list_number_els l =
 (* Get the position of the minimal element in a list *)
 let list_position_smallest_el inf_f l =
   let l' = list_number_els l in
-  let l'' = Sort.list (fun (_, x) (_, x') -> inf_f x x') l' in
+  let l'' = List.sort (fun (_, x) (_, x') -> if inf_f x x' then -1 else if x == x' then 0 else 1) l' in
   try fst (List.hd l'') with
     Failure "hd" -> failwith "list_position_smallest_el"
 ;;
@@ -1384,7 +1384,7 @@ let matrix_exists f =
   let rec fn =
     function
       [] -> false
-    | h :: t -> List.exists f h or fn t
+    | h :: t -> List.exists f h || fn t
   in
   fn
 ;;
@@ -1497,8 +1497,8 @@ let  resolution (lc: 'a list) (lc': 'a list) =
 		let lit' = List.hd pl' in
 		let t1, t2 = lit#both_sides in
 		let t1', t2' = lit'#both_sides in
-		let test1 = (lit#is_diff && (not lit'#is_diff)) or (lit'#is_diff && (not lit#is_diff)) in
-		let test2 = ((t1#syntactic_equal t1') && (t2#syntactic_equal t2')) or ((t1#syntactic_equal t2') && (t2#syntactic_equal t1')) in
+		let test1 = (lit#is_diff && (not lit'#is_diff)) || (lit'#is_diff && (not lit#is_diff)) in
+		let test2 = ((t1#syntactic_equal t1') && (t2#syntactic_equal t2')) || ((t1#syntactic_equal t2') && (t2#syntactic_equal t1')) in
 		if test1 && test2 then 
 		  let l_res = try remove_el fn_eq lit n with Failure "remove_el" -> failwith "resolution" in
 		  let res = c#build l_res p in
