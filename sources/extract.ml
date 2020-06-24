@@ -94,7 +94,7 @@ let rec extract_specification ls =
     in
     let fn5 c = 
       let p = List.hd (dico_const_profile#find c) in
-      if List.exists (fun s -> list_member (fun x y -> try let _ = unify_sorts (Actual_sort x) y in true with Failure "unify_sorts" -> false) s all_sorts) [p] then [c] else []
+      if List.exists (fun s -> list_member (fun x y -> try let _ = unify_sorts (Actual_sort x) y in true with Failure _ -> false) s all_sorts) [p] then [c] else []
     in
 
     let current_c = List.fold_right (fun x y -> merge_sorted_lists ( < ) x y) (List.map fn5 all_c) [] in
@@ -139,7 +139,7 @@ let rec extract_specification ls =
     let profile = dico_const_profile#find c in 
     let (lar, rar) = dico_arities#find c in
     let constr = dico_const_string#find c in
-    if (String.lowercase constr) <> "true" && (String.lowercase constr) <> "false" then
+    if (String.lowercase_ascii constr) <> "true" && (String.lowercase_ascii constr) <> "false" then
       output_string !filedefault ("\n\t" ^ (sprint_underscore lar) ^ constr ^ (sprint_underscore rar) ^ ": " ^ (sprint_profile profile) ^ ";")) c_constr
   in
 
@@ -195,7 +195,7 @@ let rec extract_specification ls =
     try 
       let id = dico_const_string#find_key str_s' in 
       if list_member ( = ) id l' then str_s' else "" 
-    with  Failure "find_key" -> "" 
+    with  Failure _ -> "" 
   in 
   
   let () = output_string !filedefault "\n\nind_priorities:" in

@@ -38,7 +38,7 @@ let eliminate_redundant_literal verbose c level =
     in
     let n' = fn2 false n in
     let p' = fn2 true p in
-    if List.length n > List.length n' or List.length p > List.length p'
+    if List.length n > List.length n' || List.length p > List.length p'
     then
       let c' = c#build n' p' in
       let () = c'#set_bit eliminate_redundant_literal_bit in
@@ -64,7 +64,7 @@ let eliminate_redundant_literal verbose c level =
   else
     let _ = if !maximal_output then buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule ELIMINATE REDUNDANT LITERAL " ^ " on " ^ (string_of_int c#number)) in
 (*     let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
-    let new_c = try fn c with (Failure "fn") -> failwith "eliminate_redundant_literal" in
+    let new_c = try fn c with (Failure _) -> failwith "eliminate_redundant_literal" in
     [new_c]
 
             (* Eliminate trivial literal  and literals of the form v = t, where v is a unique variable in the clause *)
@@ -89,35 +89,35 @@ let eliminate_trivial_literal verbose c level =
   let lsubst = ref [] in
 
   let elim_lit lit is_pos = 
-    (* true if lit has as a lhs or rhs a unique variable in c *)
+    (* true if lit has as a lhs || rhs a unique variable in c *)
     let lhs', rhs' = lit#both_sides in
     let fn t t_subst = 
-      let not_apply_exist = t#is_term or (is_pos && is_existential_var t) or ((not is_pos) && (not (is_existential_var t))) in
+      let not_apply_exist = t#is_term || (is_pos && is_existential_var t) || ((not is_pos) && (not (is_existential_var t))) in
       if not_apply_exist then 
-	let not_apply_univ = t#is_term or 
+	let not_apply_univ = t#is_term || 
 (is_pos && 
-  ((not (is_existential_var t) && (not lit#is_diff))) or
+  ((not (is_existential_var t) && (not lit#is_diff))) ||
    ((is_existential_var t) && lit#is_diff))
-   or
+   ||
 ((not is_pos) && 
-        ((is_existential_var t) && (not lit#is_diff) or 
+        ((is_existential_var t) && (not lit#is_diff) || 
 	(not (is_existential_var t) && lit#is_diff))) in
 	if not_apply_univ then 
 	  false
 	else 
-	  let vars_c' = try remove_el (=) t#string vars_c with Failure "remove_el" -> failwith "elim_lit" in
+	  let vars_c' = try remove_el (=) t#string vars_c with Failure _ -> failwith "elim_lit" in
     	  let is_unique = (not (list_member (=) t#string vars_c')) in
 	  if is_unique then 
 	    let () = lsubst := (t#var_content, t_subst) :: !lsubst in
 	    true
 	  else false
       else 
-	let vars_c' = try remove_el (=) t#string vars_c with Failure "remove_el" -> failwith "elim_lit" in
+	let vars_c' = try remove_el (=) t#string vars_c with Failure _ -> failwith "elim_lit" in
     	(not (list_member (=) t#string vars_c'))
     in
 (*     let are_both_vars = (not lhs'#is_term) && (not rhs'#is_term) in *)
 (*     if not are_both_vars then  *)
-    (fn lhs' rhs') or (fn rhs' lhs') 
+    (fn lhs' rhs') || (fn rhs' lhs') 
   in
   
   (* 0: display *)
@@ -127,7 +127,7 @@ let eliminate_trivial_literal verbose c level =
       | h :: t ->
 
           let lhs, rhs = h#both_sides in
-          if (lhs#syntactic_equal rhs && ((b && h#is_diff) or ((not b) && (not h#is_diff)))) or elim_lit h b
+          if (lhs#syntactic_equal rhs && ((b && h#is_diff) || ((not b) && (not h#is_diff)))) || elim_lit h b
           then 
 	    let () = elits:= !elits ^ ("\n\t" ^ h#string ^ " is eliminated\n")  in
 	    fn2 b t
@@ -136,7 +136,7 @@ let eliminate_trivial_literal verbose c level =
 
     let n' = fn2 false n in
     let p' = fn2 true p in
-    if List.length n' < List.length n or List.length p' < List.length p
+    if List.length n' < List.length n || List.length p' < List.length p
     then
   (* at least a literal is eliminated  *)
       let c' = c#build n' p' in
@@ -165,7 +165,7 @@ let eliminate_trivial_literal verbose c level =
   else
     let _ = if !maximal_output then buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule ELIMINATE TRIVIAL LITERAL " ^ " on " ^ (string_of_int c#number)) in
 (*     let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
-    let new_c = try fn c with (Failure "fn") -> failwith "eliminate_trivial_literal" in
+    let new_c = try fn c with (Failure _) -> failwith "eliminate_trivial_literal" in
 (*     let n, p = new_c#content in *)
 (*     if List.length n = 0 && List.length p = 0 then [] else *)
     [new_c]

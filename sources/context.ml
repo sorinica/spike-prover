@@ -40,8 +40,7 @@ class context c_t   (varcont : int)  =
 (*       let obs_subcontexts = List.filter (fun s -> is_obs_sort s#sort) subcontexts in *)
 (*       obs_subcontexts = [] *)
     
-    method vars_but_context_var = try remove_el (=) (self#contextual_var, self#sort_var_cont, true) self#variables with Failure
-	"remove_el" -> failwith "vars_but_context_var"
+    method vars_but_context_var = try remove_el (=) (self#contextual_var, self#sort_var_cont, true) self#variables with Failure _ -> failwith "vars_but_context_var"
                                                                
     method is_not_ground_reducible = true                                
   end

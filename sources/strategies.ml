@@ -214,14 +214,14 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 	  in
 	  try 
 	    contextual_rewriting verbose st los np cxt1 c is_strict level
-	  with (Failure "contextual_rewriting") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Contextual_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Congruence_closure ->
 	if cxt2 = empty_cxt then 
 	  (try
 	    congruence_closure verbose c level
-	  with (Failure "congruence_closure") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Congruence_closure rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Equational_rewriting pos ->
@@ -232,7 +232,7 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 	  in
 	  try 
 	    equational_rewriting verbose np cxt1 c is_strict level
-	  with (Failure "equational_rewriting") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Equational_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Rewriting (b, sl, pos) ->
@@ -243,7 +243,7 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 	  in
 	  try 
 	    rewriting verbose b sl np cxt1 c is_strict level
-	  with (Failure "rewriting") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Partial_case_rewriting (los, pos) ->
@@ -254,7 +254,7 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 	  in
 	  try 
 	    partial_case_rewriting verbose los np cxt1 c is_strict level
-	  with (Failure "partial_case_rewriting") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Partial_case_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Total_case_rewriting (st, los, pos) ->
@@ -265,105 +265,105 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 			      in
 			      try 
 				total_case_rewriting verbose st los np cxt1 c is_strict level
-			      with (Failure "total_case_rewriting") -> failwith "apply_rm")
+			      with (Failure _) -> failwith "apply_rm")
 (* 	else  *)
 (* 	  failwith "apply_at_pos: the Total_case_rewriting rule is used as a first arg. of a AddPremise/Simplify/Delete rule" *)
     | Generate (_, _) ->
 	if cxt2 <> empty_cxt then 
 	  (try
 	    generate verbose cxt1 cxt2 c is_strict 
-	  with (Failure "generate") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Generate rule cannot exist in a list of reasoning modules"
     | Generate_eq (_, _) ->
 	if cxt2 <> empty_cxt then 
 	  (try
 	    generate_eq verbose cxt1 cxt2 c is_strict 
-	  with (Failure "generate_eq") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Generate rule cannot exist in a list of reasoning modules"
     | Generate_obs (b, lpos) ->
 	if cxt2 <> empty_cxt then 
 	  (try
 	    generate_obs verbose b lpos c#number c  
-	  with (Failure "generate_obs") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Generate_obs rule cannot exist in a list of reasoning modules"
     | Positive_decomposition ->
 	if cxt2 = empty_cxt then 
 	  (try
 	    positive_decomposition verbose c level
-	  with (Failure "positive_decomposition") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else 
 	  failwith "apply_at_pos: the Positive_decomposition rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Negative_decomposition ->
 	if cxt2 = empty_cxt then 
 	  (try
 	    negative_decomposition verbose c level
-	  with (Failure "negative_decomposition") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else
 	  failwith "apply_at_pos: the Negative_decomposition rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Positive_clash ->
 	if cxt2 = empty_cxt then 
 	  (try
 	    positive_clash verbose c level
-	  with (Failure "positive_clash") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else
 	  failwith "apply_at_pos: the Positive_clash rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Auto_simplification ->
 	if cxt2 = empty_cxt then 
 	  (try
 	    auto_simplification verbose c is_strict level
-	  with (Failure "auto_simplification") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else
 	  failwith "apply_at_pos: the Auto_simplification rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Complement ->
 	if cxt2 = empty_cxt then 
 	  (try
 	    complement verbose c is_strict level
-	  with (Failure "complement") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else
 	  failwith "apply_at_pos: the Complement rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Tautology ->
 	if cxt2 = empty_cxt then 
 	  (try
 	    tautology verbose c level
-	  with (Failure "tautology") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else
 	  failwith "apply_at_pos: the Tautology rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Subsumption (los) ->
 	if cxt2 = empty_cxt then 
 			      (try
 				subsumption verbose c los  cxt1 level
-			      with (Failure "subsumption") -> failwith "apply_rm")
+			      with (Failure _) -> failwith "apply_rm")
 	else
 	  failwith "apply_at_pos: the Subsumption rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Augmentation (los) ->
 	if cxt2 = empty_cxt then 
 			      (try
 				augmentation verbose c los  cxt1 level
-			      with (Failure "augmentation") -> failwith "apply_rm")
+			      with (Failure _) -> failwith "apply_rm")
 	else
 	  failwith "apply_at_pos: the Augmentation rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Negative_clash ->
 	if cxt2 = empty_cxt then 
 			      (try 
 				negative_clash verbose c level
-			      with (Failure "negative_clash") -> failwith "apply_rm")
+			      with (Failure _) -> failwith "apply_rm")
 	else
 	  failwith "apply_at_pos: the Negative_clash rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Eliminate_redundant_literal ->
 	if cxt2 = empty_cxt then 
 	  (try
 				eliminate_redundant_literal verbose c level
-	  with (Failure "eliminate_redundant_literal") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else
 	  failwith "apply_at_pos: the Eliminate_redundant_literal rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Eliminate_trivial_literal ->
 	if cxt2 = empty_cxt then 
 	  (try
 	    eliminate_trivial_literal verbose c level
-	  with (Failure "eliminate_trivial_literal") -> failwith "apply_rm")
+	  with (Failure _) -> failwith "apply_rm")
 	else
 			      failwith "apply_at_pos: the Eliminate_trivial_literal rule is used as a first arg. of a AddPremise/Simplify/Delete rule"
     | Id -> 
@@ -425,7 +425,7 @@ class strategy (cs: concrete_strategy) =
 			  (
 			    try 
 			      (* 				let () = write_pos_clause phi in  *)
-			      let l_new_conj = apply_rm rm cxt1 cxt2 phi st true  pp level verbose in
+			      let l_new_conj = try apply_rm rm cxt1 cxt2 phi st true  pp level verbose with Failure _ -> failwith "apply_at_pos" in
 			      let _ = List.iter (fun cl -> if cl#number = !stop_clause then let () = print_detailed_position_clause cl in
 			      let () = print_detailed_clause cl in
 			      let () = print_history normalize cl true in  raise (MyExit "stop on clause ")) l_new_conj in
@@ -435,7 +435,7 @@ class strategy (cs: concrete_strategy) =
 			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 			      (* 				let () = if !broken_order then () else hypotheses_system#append [phi] in *)
 			      true
-			    with (Failure "apply_rm") -> 
+			    with (Failure _) -> 
 			      (* 				let () = write_pos_clause phi in  *)
 			      false
 			  )
@@ -446,7 +446,7 @@ class strategy (cs: concrete_strategy) =
 			    try 
 			      (* 				let () = write_pos_clause phi in  *)
 			      (* 				let () = print_detailed_position_clause phi in  *)
-			      let l_new_conj = apply_rm rm cxt1 cxt2 phi st false pp level verbose 
+			      let l_new_conj = try apply_rm rm cxt1 cxt2 phi st false pp level verbose with Failure _ -> failwith "apply_at_pos" 
 			      in (* success *)
 			      let _ = List.iter (fun cl -> if cl#number = !stop_clause then let () = print_detailed_position_clause cl
 			      in let () = print_detailed_clause cl in 
@@ -456,7 +456,7 @@ class strategy (cs: concrete_strategy) =
 			      (* 				let () = List.iter (fun c -> print_detailed_position_clause c) l_new_conj in  *)
 			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 			      true
-			    with (Failure "apply_rm") -> 	
+			    with (Failure _) -> 	
 			      (* 				let () = write_pos_clause phi in  *)
 			      false
 			  )
@@ -467,14 +467,14 @@ class strategy (cs: concrete_strategy) =
 			    try 
 			      (* 				let () = write_pos_clause phi in  *)
 			      (* 				let () = print_detailed_position_clause phi in  *)
-			      let l_new_conj = apply_rm rm cxt1 cxt2 phi st false  pp level verbose 
+			      let l_new_conj = try apply_rm rm cxt1 cxt2 phi st false  pp level verbose with Failure _ -> failwith "apply_at_pos" 
 			      in (* success *)
 			      if l_new_conj != [] then 
 				  failwith ("Delete failure on " ^ (rm_to_string rm) ^ " with " ^ phi#string)
 			      else
 				let () = conjectures_system#replace_w_list phi_number [] (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 				true
-			    with (Failure "apply_rm") -> 
+			    with (Failure _) -> 
 			      (* 				let () = write_pos_clause phi in  *)
 			      false
 			  )
@@ -485,12 +485,12 @@ class strategy (cs: concrete_strategy) =
 			  (
 			    try 
 			      (* 				let () = write_pos_clause phi in  *)
-			      let l_new_conj = apply_rm rm cxt empty_cxt phi dummy_st is_strict  pp level verbose
+			      let l_new_conj = try apply_rm rm cxt empty_cxt phi dummy_st is_strict  pp level verbose with Failure _ -> failwith "apply_at_pos" 
 			      in (* success *)
 			      (* 				let () = List.iter (fun c -> if !maximal_output then write_pos_clause c) l_new_conj in  *)
 			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 			      true
-			    with (Failure "apply_rm") -> 
+			    with (Failure _) -> 
 			      (* 				let () = write_pos_clause phi in  *)
 			      false
 			  )
@@ -499,20 +499,20 @@ class strategy (cs: concrete_strategy) =
 			  match g with
 			      Goto_smallest ->
 				let i = list_position_smallest_el (fun y x -> clause_greater false false x y) conjectures_system#content in
-				let l, l' = list_split_at_n i conjectures_system#content in
+				let l, l' = try list_split_at_n i conjectures_system#content with Failure _ -> failwith "apply_at_pos" in
 				let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 				true
 			    | Goto_greatest ->
 				let i = list_position_smallest_el (clause_greater false false) conjectures_system#content in
-				let l, l' = list_split_at_n i conjectures_system#content in
+				let l, l' = try list_split_at_n i conjectures_system#content with Failure _ -> failwith "apply_at_pos" in
 				let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 				true
 			    | Goto_number i ->
 				try
-				  let l, l' = list_split_at_n i conjectures_system#content in
+				  let l, l' = try list_split_at_n i conjectures_system#content with Failure _ -> failwith "apply_at_pos" in
 				  let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture (l' @ l))) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
 				  true
-				with (Failure "list_split_at_n") -> false 
+				with (Failure _) -> false 
 		  in
 	    	  let succes = list_exists_w_number result conjectures_system#content in
 		  let () =  
@@ -557,7 +557,7 @@ class strategy (cs: concrete_strategy) =
 		      [] -> b
                     | h::t ->
 			let b' = h#apply_at_pos verbose pp (level + 1) cxt is_strict in
-			fn (b or b') t in
+			fn (b || b') t in
                   fn false l
 	      | Named_strategy s ->
                   let st =

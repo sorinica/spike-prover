@@ -34,7 +34,7 @@ let complement verbose clause is_strict level =
   let fn c =
     let () = incr comp_count in
     let n, p = c#content in
-    let n1, n2 = List.partition (fun x -> (x#is_boolean or x#is_diff)) n
+    let n1, n2 = List.partition (fun x -> (x#is_boolean || x#is_diff)) n
     and p1, p2 = List.partition (fun x -> x#is_boolean) p in
     let n'1 = List.map (fun x -> x#revert_boolean) n1 in
     let suf_f = 
@@ -65,5 +65,5 @@ let complement verbose clause is_strict level =
   else (* réussite *)
     let _ = if !maximal_output then buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule Complement " ) in
 (*     let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ clause#string); flush stdout  in *)
-    let new_c = try fn clause with (Failure "fn") -> failwith "complement" in
+    let new_c = try fn clause with (Failure _) -> failwith "complement" in
     [new_c]

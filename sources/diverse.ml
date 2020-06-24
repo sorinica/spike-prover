@@ -247,7 +247,7 @@ let remove_el equiv_f el set =
 assert (remove_el ( = ) 3 [1; 5; 3; 4] = [1; 5; 4]);;
 
 let unsorted_setminus equiv_f l l' =
-  try List.fold_left (fun l el -> remove_el equiv_f el l) l l' with Failure "remove_el" -> failwith "unsorted_setminus"
+  try List.fold_left (fun l el -> remove_el equiv_f el l) l l' with Failure _ -> failwith "unsorted_setminus"
 ;;
 
 assert (unsorted_setminus ( = ) [1; 2; 3; 4] [2; 3; 4] = [1]);;
@@ -256,7 +256,7 @@ let unsorted_sloppy_setminus equiv_f l l' =
   List.fold_left
     (fun l el ->
        try remove_el equiv_f el l with
-         Failure "remove_el" -> l)
+         Failure _ -> l)
     l l'
 ;;
 
@@ -417,7 +417,7 @@ let generic_remove_sorted_lists l l' = remove_sorted_lists ( = ) ( < ) l l';;
 
 let generic_setminus l l' = setminus ( = ) ( < ) l l';;
 
-let generic_remove_el l l' = try remove_el ( = ) l l' with Failure "remove_el" -> failwith "generic_remove_el";;
+let generic_remove_el l l' = try remove_el ( = ) l l' with Failure _ -> failwith "generic_remove_el";;
 
 let generic_intersection_sorted_lists l l' =
   intersection_sorted_lists ( = ) ( < ) l l'
@@ -612,7 +612,7 @@ let check_on_subsets _ =
         let () = flush stdout in failwith "check_on_subsets"
     | h :: t ->
         try fn [] ((h :: l1) :: l2) t with
-          Failure "check_on_subsets" -> fn (h :: l1) l2 t
+          Failure _ -> fn (h :: l1) l2 t
   in
   fn [] []
 ;;
@@ -632,7 +632,7 @@ let check_on_variants proceed_fun =
       [] -> failwith "check_on_variants"
     | h :: t ->
         try fn (h :: l) tl with
-          Failure "check_on_variants" -> fn2 l tl t
+          Failure _ -> fn2 l tl t
   in
   fn []
 ;;
@@ -1100,7 +1100,7 @@ let rec list_select_maximal_elements sup_f =
         let (m, u, o) = fn h t in
         let (m', o') = list_select_maximal_elements sup_f u in m :: m', o @ o'
       with
-        Failure "fn" ->
+        Failure _ ->
           let (m', o') = list_select_maximal_elements sup_f t in m', h :: o'
 ;;
 
@@ -1217,7 +1217,7 @@ let list_position_smallest_el inf_f l =
   let l' = list_number_els l in
   let l'' = List.sort (fun (_, x) (_, x') -> if inf_f x x' then -1 else if x == x' then 0 else 1) l' in
   try fst (List.hd l'') with
-    Failure "hd" -> failwith "list_position_smallest_el"
+    Failure _ -> failwith "list_position_smallest_el"
 ;;
 
 assert (list_position_smallest_el ( < ) [3; 2; 1; 5] = 2);;
@@ -1500,7 +1500,7 @@ let  resolution (lc: 'a list) (lc': 'a list) =
 		let test1 = (lit#is_diff && (not lit'#is_diff)) || (lit'#is_diff && (not lit#is_diff)) in
 		let test2 = ((t1#syntactic_equal t1') && (t2#syntactic_equal t2')) || ((t1#syntactic_equal t2') && (t2#syntactic_equal t1')) in
 		if test1 && test2 then 
-		  let l_res = try remove_el fn_eq lit n with Failure "remove_el" -> failwith "resolution" in
+		  let l_res = try remove_el fn_eq lit n with Failure _ -> failwith "resolution" in
 		  let res = c#build l_res p in
 		  let () = print_string ("\n Resolution: the clause " ^ c'#string ^ "\n is eliminated  and the clause " ^ c#string ^ "\n is modified to " ^ res#string) in
 		  res, (new_l @ t)

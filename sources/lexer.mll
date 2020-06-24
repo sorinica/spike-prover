@@ -164,7 +164,7 @@ rule token = parse
 (*                                             in let () = gprint "TOK_IDENT_LIST" in TOK_IDENT_LIST (fn (int_of_string s)) *)
                                           else
                                             try
-                                              let x = Hashtbl.find keyword_table (String.lowercase s) in
+                                              let x = Hashtbl.find keyword_table (String.lowercase_ascii s) in
                                               let () = gprint ("TOK_KWD_" ^ s)
                                               in x
                                             with Not_found ->
@@ -173,7 +173,7 @@ rule token = parse
                                          }
 | ident                                 { let s = Lexing.lexeme lexbuf
                                           in try
-                                            let x = Hashtbl.find keyword_table (String.lowercase s) in
+                                            let x = Hashtbl.find keyword_table  (String.lowercase_ascii s) in
                                             let () = gprint ("TOK_KWD_" ^ s)
                                             in x
                                           with Not_found ->
@@ -266,7 +266,7 @@ let _ =
               0::t ->
                 begin (* Discards PM on exceptions *)
                   try let _ = c#subterm_at_position (neg_pos, n, p') in Pos_defined (neg_pos, n, t)
-                  with (Failure "subterm_at_position") ->
+                  with (Failure _) ->
                     print_string "Invalid position" ;
                     print_newline () ;
                     fn ()
@@ -279,7 +279,7 @@ let _ =
       | Pos_litdefined p' ->
           begin
             try let _ = c#lit_at_position p' in p
-            with (Failure "lit_at_position") ->
+            with (Failure _) ->
               print_string "Invalid position" ;
               print_newline () ;
               fn ()
@@ -301,7 +301,7 @@ let _ =
       | Pos_defined (b, n, p') ->
           begin
             try let _ = c#subterm_at_position (b, n, p') in p
-            with (Failure "subterm_at_position") ->
+            with (Failure _) ->
               print_string "Invalid position" ;
               print_newline () ;
               fn ()
@@ -309,7 +309,7 @@ let _ =
       | Pos_litdefined (b, n) ->
           begin (* Discards second level PM *)
             try let _ = c#lit_at_position (b, n) in p
-            with (Failure "lit_at_position") ->
+            with (Failure _) ->
               print_string "Invalid position" ;
               print_newline () ;
               fn ()
@@ -336,7 +336,7 @@ let _ =
 
         let _ = c#lit_at_position (true, p)
         in p
-      with (Failure "lit_at_position") -> fn ()
+      with (Failure _) -> fn ()
     in fn ()
 
 let spike_parse_term () =

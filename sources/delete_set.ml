@@ -31,7 +31,7 @@ let tautology verbose c level =
     let lneg = pd @ ne in
     let fn' lhs1 rhs1 l2 = 
       let lhs2, rhs2 = l2#both_sides in
-      ((lhs1#syntactic_equal lhs2) && (rhs1#syntactic_equal rhs2)) or
+      ((lhs1#syntactic_equal lhs2) && (rhs1#syntactic_equal rhs2)) ||
       ((lhs1#syntactic_equal rhs2) && (rhs1#syntactic_equal lhs2)) 
     in    
     let fn1 lhs rhs = 
@@ -42,7 +42,7 @@ let tautology verbose c level =
 
     if
       List.exists (fun x -> let lhs, rhs = x#both_sides in  fn1 rhs lhs) lpos
-      or List.exists (fun l1 -> let lhs1, rhs1 = l1#both_sides in List.exists (fn' lhs1 rhs1) lpos) lneg
+      || List.exists (fun l1 -> let lhs1, rhs1 = l1#both_sides in List.exists (fn' lhs1 rhs1) lpos) lneg
     then
       let () = incr tautology_counter_suc in
       let () = 
@@ -59,11 +59,11 @@ let tautology verbose c level =
   in
   let _ = if !maximal_output then buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule TAUTOLOGY " ^ " on " ^ (string_of_int c#number)) in
 (*   let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
-  if c#has_bit tautology_bit or c#standby
+  if c#has_bit tautology_bit || c#standby
   then
     failwith "tautology"
   else
-    let _ = try fn c with (Failure "fn") -> failwith "tautology" in
+    let _ = try fn c with (Failure _) -> failwith "tautology" in
     let () =  coq_formulas_with_infos := !coq_formulas_with_infos @ [("tautology", c#number, [], [], [])] in
     let () = coq_formulas := !coq_formulas @ [c] in   
 
@@ -119,7 +119,7 @@ let subsumption_lit_matching_core proceed_fun sigma (b, (lit:literal)) (b', (lit
   (* getting the head symbols of the terms from c  *)
 let fn_symb c = 
   let all_t = c#all_terms in
-  List.fold_right (fun t l -> try let i = t#head in insert_sorted ( = ) ( < ) i l with Failure "head" -> l) all_t [] 
+  List.fold_right (fun t l -> try let i = t#head in insert_sorted ( = ) ( < ) i l with Failure _ -> l) all_t [] 
 
   (* getting the existential vars from c  *)
 let fn_vare c = 
@@ -144,15 +144,14 @@ let subsumption_subsumes _ system_string c' c orig_c _ =
     if is_existential_var t then
       not (List.mem t#var_content lvare_c)
     else 
-      try 
-	let i = t#head in
-	not (List.mem i lsymb_c)
-      with Failure "head" -> false
+      match t#head with
+        | exception (Failure _) -> false
+        | i -> not (List.mem i lsymb_c)
   in
   
   let has_c'_uvars = List.exists (fun x -> is_universal_var x) c'#all_terms in
   
-  if (has_c'_uvars && c'#cardinal > c#cardinal) or ((not has_c'_uvars) && List.exists fn_filter c'#all_terms)
+  if (has_c'_uvars && c'#cardinal > c#cardinal) || ((not has_c'_uvars) && List.exists fn_filter c'#all_terms)
   then (false, [])
   else 
       let a = subsumption_init_array c' in
@@ -201,14 +200,13 @@ let subsumption_subsumes _ system_string c' c orig_c _ =
 	let _ = match system_string with (* detect the cases when the procedure fails *)
 	    "C2" -> 
 	      if not(clause_greater false false orig_c c_sigma) then
-		failwith "subsumption_subsumes: comparison"
+		failwith "subsumption_subsumes"
 	  | "C1" -> if not(clause_geq false false orig_c c_sigma) 
-	    then failwith "subsumption_subsumes: comparison" 
+	    then failwith "subsumption_subsumes" 
 	  | _ -> () in
 	(* success *)
 	(true, sigma)
-      with (Failure "matching") 
-	| (Failure "subsumption_subsumes: comparison") ->
+      with (Failure _ ) ->
 	    (false, [])
 	      
 (* Actual subsumption.  Default order for browsing systems is   [R;L;E;H] *) 
@@ -228,36 +226,36 @@ let subsumption verbose c los (cxt1,cxt2) level =
     (* else *)
     let ls =
       match los with
-	  LOS_defined l -> l
-	| LOS_query -> !spike_parse_list_of_systems ()
+	LOS_defined l -> l
+      | LOS_query -> !spike_parse_list_of_systems ()
     in
     let delayed = ref false in  
     let () = incr subsumption_counter in
     let fn c (_,_) = 
       let c' = c#expand in
       let apply ss cH = 
-	if c#number = cH#number or c#subsumption_has_failed cH#number then false 
+	if c#number = cH#number || c#subsumption_has_failed cH#number then false 
 	else
 	  let _ = if !maximal_output then buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule SUBSUMPTION on " ^ (string_of_int c#number) ^ " with " ^ (string_of_int cH#number) ^ " from " ^ ss) in
-	  let ih_greater = ((compare ss "C1" == 0) or (compare ss "C2" == 0)) && clause_greater false false cH c in (* no IH instance can be used *)
+	  let ih_greater = ((compare ss "C1" == 0) || (compare ss "C2" == 0)) && clause_greater false false cH c in (* no IH instance can be used *)
 	  if ih_greater then 
 	    let () = c#add_failed_subsumption cH#number in
 	    false 
 	  else
 	    let (success, epsilon) = subsumption_subsumes verbose ss cH c' c level  in
 	    let cHepsilon = cH#substitute epsilon in
-	    let test_hyp = (compare ss "L" == 0) or (compare ss "R" == 0) or (compare ss "C2" == 0 && clause_greater false false c cHepsilon) or (compare ss "C1" == 0 && clause_geq false false c cHepsilon) in
+	    let test_hyp = (compare ss "L" == 0) || (compare ss "R" == 0) || (compare ss "C2" == 0 && clause_greater false false c cHepsilon) || (compare ss "C1" == 0 && clause_geq false false c cHepsilon) in
 	    if not test_hyp then 
 	      let () = c#add_failed_subsumption cH#number in
 	      false
 	    else
 	      if  success then 
 		let success_str = (!indent_string ^ "\nSUBSUMPTION: delete\n" ^
-				      !indent_string ^ "\171 " ^ c#string ^ "\n\n" ^
-				      !indent_string ^ "Subsumed in " ^ ss ^ " by " ^ cH#string ^
-				      !indent_string ^ "\n\n\twith epsilon = " ^ (sprint_subst epsilon) ^ "\n")
+				     !indent_string ^ "\171 " ^ c#string ^ "\n\n" ^
+				       !indent_string ^ "Subsumed in " ^ ss ^ " by " ^ cH#string ^
+				         !indent_string ^ "\n\n\twith epsilon = " ^ (sprint_subst epsilon) ^ "\n")
 		in	   
-		if !dracula_mode &&  (compare ss "C1" == 0 or compare ss "C2" == 0) then
+		if !dracula_mode &&  (compare ss "C1" == 0 || compare ss "C2" == 0) then
 		  let current_conj_historying_cH = List.filter (fun c' -> List.mem cH#number (c'#number :: (all_hist c')))  !real_conjectures_system in
 		  if current_conj_historying_cH = [] then (* cH was already proved *)
 		    let () = buffered_output success_str in 
@@ -265,20 +263,20 @@ let subsumption verbose c los (cxt1,cxt2) level =
 		  else
 		    let rec fn_theta l c_rez str_rez cumulate c_ref =
 		      match l with
-			  [] -> (c_rez, str_rez)
-			| (subst, cl) :: tl ->
-			  let c' = c_rez#substitute subst in
-			  let str' = (str_rez ^ "\t(" ^ cl#string ^ " " ^ (sprint_subst subst) ^ ")\n") in
-			  if cl#number = c_ref#number then 
-			    fn_theta tl c' str' true c_ref 
-			  else 
-			    if cumulate then 
-			      fn_theta tl c' str' true c_ref
-			    else
-			      fn_theta tl c_rez str_rez false c_ref
+			[] -> (c_rez, str_rez)
+		      | (subst, cl) :: tl ->
+			 let c' = c_rez#substitute subst in
+			 let str' = (str_rez ^ "\t(" ^ cl#string ^ " " ^ (sprint_subst subst) ^ ")\n") in
+			 if cl#number = c_ref#number then 
+			   fn_theta tl c' str' true c_ref 
+			 else 
+			   if cumulate then 
+			     fn_theta tl c' str' true c_ref
+			   else
+			     fn_theta tl c_rez str_rez false c_ref
 		    in
 		    if List.mem cH#number (List.map (fun (_,cl)-> cl#number) c#history) then
-			  (* 1-cycle *)
+		      (* 1-cycle *)
 		      let cHtheta, chunk_str = fn_theta c#history cH "" false cH in
  		      if clause_greater false false cHtheta (cH#substitute epsilon) then 			   
 			let () = buffered_output success_str in 
@@ -291,32 +289,32 @@ let subsumption verbose c los (cxt1,cxt2) level =
 		      let rec fn_conj l = match l with
 			| [] -> failwith "fn_conj"
 			| sbc :: tl ->
-			  let iHs_sbc = sbc#sb_IHs in
-			  if (List.length iHs_sbc) <> 1 then fn_conj tl
-			  else 
-			    let (iH_sbc, delta) = List.hd iHs_sbc in
-			    if   List.mem iH_sbc#number (List.map (fun (_,cl)-> cl#number) c#history) then				    
-					(* testing 2-cycle *)
-			      let cH_theta_1, chunk_str1 = fn_theta sbc#history cH "" false cH in
-			      let iH_sbc_theta_2, chunk_str2 = fn_theta c#history iH_sbc  "" false iH_sbc in
-					  (* let () = buffered_output ("\nIH_sbc_theta_1 = " ^ iH_sbc_theta_1#string) in  *)
-					  (* let () = buffered_output  ("\n The IHs ([" ^ (string_of_int cH#number) ^ " ], " ^(sprint_subst epsilon) ^ ") and " ^ "([ " ^ (string_of_int iH_sbc#number) ^ " ], (" ^ (sprint_subst delta) ^ ") are checked by the 2-cycle: \n\n chunk_str1 = " ^ chunk_str1 ^ "\n chunk_str2 = " ^ chunk_str2 ^ "\n\n") in *)
-					  (* let () = buffered_output ("\nThe history of " ^ c#string ^ " is: \n") in *)
-					  (* let () = print_history normalize c false in  *)
-			      if (clause_greater false false cH_theta_1 (iH_sbc#substitute delta)) && 
-				(clause_greater false false iH_sbc_theta_2 (cH#substitute epsilon))
-			      then
-					    (* success *)
-				let () = buffered_output success_str  in
-				let () = buffered_output  ("\n A 2-cycle has been found using the standby conjecture " ^ sbc#string ^ "\n\nThe IHs ([" ^ (string_of_int cH#number) ^ " ], " ^(sprint_subst epsilon) ^ ") and " ^ "([ " ^ (string_of_int iH_sbc#number) ^ " ], (" ^ (sprint_subst delta) ^ ") are checked by the 2-cycle: \n\n" ^ chunk_str1 ^ "\n\n" ^ chunk_str2 ^ "\n\n") in
-				let () = buffered_output ("\n The 2-cycle unblocked the following operation on [ " ^ (string_of_int sbc#number) ^ " ]:\n") in  
-				let () = buffered_output sbc#sb_string in
-				let () = sbc#set_delete_standby true in
-				true
-			      else fn_conj tl
-			    else fn_conj tl
+			   let iHs_sbc = sbc#sb_IHs in
+			   if (List.length iHs_sbc) <> 1 then fn_conj tl
+			   else 
+			     let (iH_sbc, delta) = List.hd iHs_sbc in
+			     if   List.mem iH_sbc#number (List.map (fun (_,cl)-> cl#number) c#history) then				    
+			       (* testing 2-cycle *)
+			       let cH_theta_1, chunk_str1 = fn_theta sbc#history cH "" false cH in
+			       let iH_sbc_theta_2, chunk_str2 = fn_theta c#history iH_sbc  "" false iH_sbc in
+			       (* let () = buffered_output ("\nIH_sbc_theta_1 = " ^ iH_sbc_theta_1#string) in  *)
+			       (* let () = buffered_output  ("\n The IHs ([" ^ (string_of_int cH#number) ^ " ], " ^(sprint_subst epsilon) ^ ") and " ^ "([ " ^ (string_of_int iH_sbc#number) ^ " ], (" ^ (sprint_subst delta) ^ ") are checked by the 2-cycle: \n\n chunk_str1 = " ^ chunk_str1 ^ "\n chunk_str2 = " ^ chunk_str2 ^ "\n\n") in *)
+			       (* let () = buffered_output ("\nThe history of " ^ c#string ^ " is: \n") in *)
+			       (* let () = print_history normalize c false in  *)
+			       if (clause_greater false false cH_theta_1 (iH_sbc#substitute delta)) && 
+				    (clause_greater false false iH_sbc_theta_2 (cH#substitute epsilon))
+			       then
+				 (* success *)
+				 let () = buffered_output success_str  in
+				 let () = buffered_output  ("\n A 2-cycle has been found using the standby conjecture " ^ sbc#string ^ "\n\nThe IHs ([" ^ (string_of_int cH#number) ^ " ], " ^(sprint_subst epsilon) ^ ") and " ^ "([ " ^ (string_of_int iH_sbc#number) ^ " ], (" ^ (sprint_subst delta) ^ ") are checked by the 2-cycle: \n\n" ^ chunk_str1 ^ "\n\n" ^ chunk_str2 ^ "\n\n") in
+				 let () = buffered_output ("\n The 2-cycle unblocked the following operation on [ " ^ (string_of_int sbc#number) ^ " ]:\n") in  
+				 let () = buffered_output sbc#sb_string in
+				 let () = sbc#set_delete_standby true in
+				 true
+			       else fn_conj tl
+			     else fn_conj tl
 		      in
-		      try fn_conj sbconjs_historying_cH with Failure "fn_conj" -> 
+		      try fn_conj sbconjs_historying_cH with Failure _ -> 
 			let () = buffered_output ("\nFailed to find a cycle to check the iH (" ^ cH#string ^ " " ^ (sprint_subst epsilon) ^ "), so the conjecture [ " ^ (string_of_int c#number) ^ " ] is put on standby !\n\n") in
 			let () = c#set_standby true in
 			let () = c#set_sb_string success_str in
@@ -328,32 +326,32 @@ let subsumption verbose c los (cxt1,cxt2) level =
 		  if  verbose then 
 		    let () = buffered_output success_str in
 		    let () = incr subsumption_counter_suc in
-		    let () = if compare ss "C1" == 0 or compare ss "C2" == 0 then 
-			let () = coq_replacing_clauses := (c#number, (cH, epsilon, cH#number)) :: !coq_replacing_clauses  in
-			let lc = ref [] in
-			let cHinst = cH#substitute epsilon in 
-			let () =  List.iter (fun (c1, c2) -> if c1#number == c#number then lc := (cHinst, c2) :: !lc) !coq_less_clauses in 
-			coq_less_clauses := !lc @ !coq_less_clauses
-		      else
-			let () = coq_formulas := !coq_formulas @ [c] in
-			if compare ss "L" == 0 then
-			  coq_formulas_with_infos := !coq_formulas_with_infos @ [("subsumption", c#number, [], [(cH#number,epsilon)], [])]
-			else (* axioms *)
-			  coq_formulas_with_infos := !coq_formulas_with_infos @ [("subsumption", c#number, [], [], [])] 
+		    let () = if compare ss "C1" == 0 || compare ss "C2" == 0 then 
+			       let () = coq_replacing_clauses := (c#number, (cH, epsilon, cH#number)) :: !coq_replacing_clauses  in
+			       let lc = ref [] in
+			       let cHinst = cH#substitute epsilon in 
+			       let () =  List.iter (fun (c1, c2) -> if c1#number == c#number then lc := (cHinst, c2) :: !lc) !coq_less_clauses in 
+			       coq_less_clauses := !lc @ !coq_less_clauses
+		             else
+			       let () = coq_formulas := !coq_formulas @ [c] in
+			       if compare ss "L" == 0 then
+			         coq_formulas_with_infos := !coq_formulas_with_infos @ [("subsumption", c#number, [], [(cH#number,epsilon)], [])]
+			       else (* axioms *)
+			         coq_formulas_with_infos := !coq_formulas_with_infos @ [("subsumption", c#number, [], [], [])] 
 		    in  
 		    
 		    let member_symb s cl =
-			(* 		let () = print_history normalize cl false in *)
+		      (* 		let () = print_history normalize cl false in *)
 		      let hist = cl#history in
 		      let def_symbs = List.fold_right (fun (_, c) l -> c#def_symbols @ l) hist [] in
 		      List.mem s def_symbs
 		    in
 		    
 		    let br_symb, br_cl_number, (lnegs,lpos) = c#get_broken_info in
-		      (* 	      let () = buffered_output "\nThe current conjectures are: \n========================" in *)
-		      (* 	      let () = List.iter (fun x -> print_history normalize x false) !real_conjectures_system in *)
-		      (* 	      let () = buffered_output "\n====================" in *)
-		      (* 	      let () = buffered_output ("\nThe history of current conjectures having [ " ^ (string_of_int cH#number) ^ " ] as ancestor and broken symbol " ^ br_symb ^ " are: ") in *)
+		    (* 	      let () = buffered_output "\nThe current conjectures are: \n========================" in *)
+		    (* 	      let () = List.iter (fun x -> print_history normalize x false) !real_conjectures_system in *)
+		    (* 	      let () = buffered_output "\n====================" in *)
+		    (* 	      let () = buffered_output ("\nThe history of current conjectures having [ " ^ (string_of_int cH#number) ^ " ] as ancestor and broken symbol " ^ br_symb ^ " are: ") in *)
 		    let conjectures_historying_cH = List.filter (fun c' -> List.mem cH#number (all_hist c'))  !real_conjectures_system in
 		    let () = delayed := (br_symb <> "") && (List.exists (fun y -> not (member_symb br_symb y)) conjectures_historying_cH)  in
 		    let () = if !maximal_output then buffered_output ("Delayed = " ^ (string_of_bool !delayed)) in
@@ -364,26 +362,26 @@ let subsumption verbose c los (cxt1,cxt2) level =
 			let rec fn_gamma l c_rez is_on = match l with
 			    [] -> if is_on then c_rez else failwith "fn_gamma in subsumption: doesn't find cH"
 			  | (subst, cl') :: tl -> 
-			    let () = if !maximal_output then buffered_output ("\nTreating subst" ^ (sprint_subst subst) ^ " when is_on is " ^  (string_of_bool is_on)) in
-			    if is_on then 
-			      let c' = c_rez#substitute subst in
-			      fn_gamma tl c' true
-			    else
-			      if cl'#number == cH#number then let c' = cl'#substitute subst in fn_gamma tl c' true
-			      else fn_gamma tl c_rez false
+			     let () = if !maximal_output then buffered_output ("\nTreating subst" ^ (sprint_subst subst) ^ " when is_on is " ^  (string_of_bool is_on)) in
+			     if is_on then 
+			       let c' = c_rez#substitute subst in
+			       fn_gamma tl c' true
+			     else
+			       if cl'#number == cH#number then let c' = cl'#substitute subst in fn_gamma tl c' true
+			       else fn_gamma tl c_rez false
 			in 
 			let br_clause = c#build lnegs lpos in
 			let () = if !maximal_output then buffered_output ("\n br_clause = " ^ br_clause#string) in
 			let rec fn_sigma l c_rez is_on = match l with
 			    [] -> if is_on then c_rez else failwith "fn_sigma in subsumption: doesn't find br_clause"
 			  | (subst, cl') :: tl ->
-				  (* 			  let () = print_string ("\n\n" ^ (sprint_subst subst) ^ " \n \t on " ^ cl#string) in *)
-			    if is_on then 
-			      let c' = c_rez#substitute subst in
-			      fn_sigma tl c' true
-			    else
-			      if br_cl_number >= cl'#number then fn_sigma tl br_clause true
-			      else fn_sigma tl c_rez false
+			     (* 			  let () = print_string ("\n\n" ^ (sprint_subst subst) ^ " \n \t on " ^ cl#string) in *)
+			     if is_on then 
+			       let c' = c_rez#substitute subst in
+			       fn_sigma tl c' true
+			     else
+			       if br_cl_number >= cl'#number then fn_sigma tl br_clause true
+			       else fn_sigma tl c_rez false
 			in
 			let br_clause_sigma = fn_sigma c#history br_clause false in
 			let () = if !maximal_output then buffered_output ("\n br_clause_sigma = " ^ br_clause_sigma#string) in		      
@@ -393,11 +391,12 @@ let subsumption verbose c los (cxt1,cxt2) level =
 			let () = if !maximal_output then buffered_output ("\nepsilon = " ^ (sprint_subst epsilon)) in
 			let () = if !maximal_output then buffered_output ("\ncH = " ^ cH#string ^ "\n cH_epsilon = " ^ cH_epsilon#string) in
 			try
-			  let (rho1, rho2) = List.fold_right2 (fun t1 t2 (s1,s2) -> let (s1',s2') = unify_terms (t1#substitute s1) (t2#substitute s2) false in (s1@s1', s2@s2')) cH_gamma#all_terms cH_epsilon#all_terms ([],[])  in
+			  let (rho1, rho2) = List.fold_right2 (fun t1 t2 (s1,s2) -> 
+                                                 let (s1',s2') = try unify_terms (t1#substitute s1) (t2#substitute s2) false  with Failure _ -> failwith "subsumption" in (s1@s1', s2@s2')) cH_gamma#all_terms cH_epsilon#all_terms ([],[]) in
 			  let () = if !maximal_output then buffered_output ("\nrho1 = " ^ (sprint_subst rho1) ^ " \nrho2 =  " ^ (sprint_subst rho2)) in
 			  let () = if !maximal_output then buffered_output ("\nComparing br_clause_sigma substituted by rho2 " ^ (br_clause_sigma#substitute rho2)#string ^ "\nwith cf substituted by rho1 " ^ (cf#substitute rho1)#string) in
 			  clause_greater false false (br_clause_sigma#substitute rho2) (cf#substitute rho1)
-			with Failure "unify_terms" -> 
+			with Failure _ -> 
 			  let () = if !maximal_output then buffered_output "\nFail to unify cH_gamma and cH_epsilon" in 
 			  true
 		      in
@@ -425,20 +424,20 @@ let subsumption verbose c los (cxt1,cxt2) level =
 	      else 
 		let () = c#add_failed_subsumption c'#number in
 		false
-		  
+		
       in
       let rec test l = 
 	match l with 
-	    [] -> false
-	  | h :: tl -> 
-	    (match h with 
-		R -> List.exists (apply "R") rewrite_system#content 
-	      | L -> List.exists (apply "L") lemmas_system#content 
-	      | C  -> 
-		let c_hist = List.map snd c#history in
-		List.exists (apply "C1") cxt1 or List.exists (apply "C2") cxt2 or List.exists (apply "C1") c_hist
-	    )
-	    or test tl
+	  [] -> false
+	| h :: tl -> 
+	   (match h with 
+	      R -> List.exists (apply "R") rewrite_system#content 
+	    | L -> List.exists (apply "L") lemmas_system#content 
+	    | C  -> 
+	       let c_hist = List.map snd c#history in
+	       List.exists (apply "C1") cxt1 || List.exists (apply "C2") cxt2 || List.exists (apply "C1") c_hist
+	   )
+	   || test tl
       in	
       if (not (c#has_bit subsumption_bit)) && (test ls) then if !delayed then let () =  buffered_output "\n Delayed !" in failwith "fn" (* stuttering *) else [] 
       else
@@ -447,78 +446,79 @@ let subsumption verbose c los (cxt1,cxt2) level =
     in
     try 
       fn c (cxt1,cxt2) 
-    with (Failure "fn") -> 
+    with (Failure _) -> 
       failwith "subsumption" (* échec *)
     
 (* Applied on all negative literals *)
 let negative_clash verbose c level =
 
   let fn c =
-      let rec fn2 is_negative = function
-          [] -> let () = c#set_bit negative_clash_bit in false
-        | h::t ->
-              let lhs, rhs = h#both_sides in
-	      let fn_occur var t = 
-		let rec fn_constructor p = 
-		  match p with
-		      [] -> true
-		    | (s, _) :: t -> is_constructor s && fn_constructor t
-		in
-		let all_vars_with_pos = t#variable_paths in 
-		List.exists (fun ((v, _, _), path) -> v == var && fn_constructor path) all_vars_with_pos
-	      in
-	      let test_occur_check = 
-		((not lhs#is_term) && rhs#is_term && is_constructor rhs#head && (fn_occur lhs#var_content rhs)) || 
-		((not rhs#is_term) && rhs#is_term && is_constructor lhs#head && (fn_occur rhs#var_content lhs)) 
-	      in
-	      if test_occur_check && ((is_negative && not h#is_diff) or (not is_negative && h#is_diff)) then
-		let () = 
-                  if verbose
-                  then
-                    let () = buffered_output ("\n" ^ !indent_string ^ "NEGATIVE CLASH by occur check: delete\n" ^
-                    !indent_string ^ "\171 " ^ c#string) in
-                    buffered_output ""
-                  else () in
-                true
-	      else 
-		try
-		  let f = lhs#head
-		  and f' = rhs#head in
-		  let test1 = 
-		    f <> f' && is_free_constructor f &&
-		    is_free_constructor f' && 
-		    (((not h#is_diff) && is_negative) or 
-		    (h#is_diff && (not is_negative)))
-		  in
-		  if test1 then
-                    let () = 
-                      if verbose
-                      then
-			let () = buffered_output ("\n" ^ !indent_string ^ "NEGATIVE CLASH: delete\n" ^
-                        !indent_string ^ "\171 " ^ c#string) in
-			buffered_output ""
-                      else () in
-                    true
-		  else
-                    fn2 is_negative t
-		with (Failure "head") ->
-		  fn2 is_negative t in
-      let n, p = c#content in
-      if (fn2 true n) or (fn2 false p) then 
-	let () =  coq_formulas_with_infos := !coq_formulas_with_infos @ [("negative_clash", c#number, [], [], [])] in
-	let () = coq_formulas := !coq_formulas @ [c] in   
-	true
-      else failwith "fn"
+    let rec fn2 is_negative = function
+        [] -> let () = c#set_bit negative_clash_bit in false
+      | h::t ->
+         let lhs, rhs = h#both_sides in
+	 let fn_occur var t = 
+	   let rec fn_constructor p = 
+	     match p with
+	       [] -> true
+	     | (s, _) :: t -> is_constructor s && fn_constructor t
+	   in
+	   let all_vars_with_pos = t#variable_paths in 
+	   List.exists (fun ((v, _, _), path) -> v == var && fn_constructor path) all_vars_with_pos
+	 in
+	 let test_occur_check = 
+	   ((not lhs#is_term) && rhs#is_term && is_constructor rhs#head && (fn_occur lhs#var_content rhs)) || 
+	     ((not rhs#is_term) && rhs#is_term && is_constructor lhs#head && (fn_occur rhs#var_content lhs)) 
+	 in
+	 if test_occur_check && ((is_negative && not h#is_diff) || (not is_negative && h#is_diff)) then
+	   let () = 
+             if verbose
+             then
+               let () = buffered_output ("\n" ^ !indent_string ^ "NEGATIVE CLASH by occur check: delete\n" ^
+                                           !indent_string ^ "\171 " ^ c#string) in
+               buffered_output ""
+             else () in
+           true
+	 else 
+           match lhs#head with
+           | exception (Failure _) -> fn2 is_negative t 
+           | f -> match rhs#head with
+                  | exception (Failure _) -> fn2 is_negative t 
+                  | f' ->
+		     let test1 = 
+		       f <> f' && is_free_constructor f &&
+		         is_free_constructor f' && 
+		           (((not h#is_diff) && is_negative) || 
+		              (h#is_diff && (not is_negative)))
+		     in
+		     if test1 then
+                       let () = 
+                         if verbose
+                         then
+			   let () = buffered_output ("\n" ^ !indent_string ^ "NEGATIVE CLASH: delete\n" ^
+                                                       !indent_string ^ "\171 " ^ c#string) in
+			   buffered_output ""
+                         else () in
+                       true
+		     else
+                       fn2 is_negative t
+    in
+    let n, p = c#content in
+    if (fn2 true n) || (fn2 false p) then 
+      let () =  coq_formulas_with_infos := !coq_formulas_with_infos @ [("negative_clash", c#number, [], [], [])] in
+      let () = coq_formulas := !coq_formulas @ [c] in   
+      true
+    else failwith "fn"
   in
   let _ = if !maximal_output then buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule NEGATIVE CLASH " ^ " on " ^ (string_of_int c#number) ) in
-(*   let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
+  (*   let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
 
-(*   let () =  write_pos_clause c in  *)
+  (*   let () =  write_pos_clause c in  *)
 
-  if c#has_bit negative_clash_bit or c#standby
+  if c#has_bit negative_clash_bit || c#standby
   then failwith "negative_clash"
   else
-    let _ = try  fn c with (Failure "fn") -> failwith "negative_clash" in 
+    let _ = try  fn c with (Failure _) -> failwith "negative_clash" in 
     [] 
 
 (* Augmentation (c_eq, c) - adds to c the conclusion of a conditional equation if the conditions are subsumed by c
@@ -562,38 +562,38 @@ let augmentation verbose c los (cxt1,cxt2) level =
 (* 		    let () = buffered_output ("\n Treating lit = " ^ lit#string) in *)
 		    let is_bad = 
 		      let lhs, rhs = lit#both_sides in
-		      (lhs#syntactic_equal rhs) or
-		      (list_member (fun x y -> x#syntactic_equal y) lit c#negative_lits) or
+		      (lhs#syntactic_equal rhs) ||
+		      (list_member (fun x y -> x#syntactic_equal y) lit c#negative_lits) ||
 		      (let vars_xsigma = x_sigma#variables in
 		      (difference (fun (i1, s1, b1) (i2, s2, b2) -> i1 = i2 && s1 = s2 && b1 = b2) vars_xsigma c#variables) <> [])
 		    in
 		    let already_added = list_member (fun x y -> x#syntactic_equal y) lit c#augmentation_literals in
-		    if not (is_bad or already_added) then
+		    if not (is_bad || already_added) then
 		      let final_subst = List.map (fun (i, t) -> (i, t#substitute sigma)) subst   in
 		      let () = success_lc := list_insert (fun (x, _,_) (y, _, _) -> x#syntactic_equal y) (x1, ss, final_subst) !success_lc in
 		      let () = c#add_augmentation lit in
 		      [lit, x_sigma#negative_lits] 
 		    else let () = c#add_failed_augmentation x1#number in []
 		  in
-		  (* OR between the results  *)
+		  (* || between the results  *)
 		 List.flatten (List.map fn x_sigma#positive_lits)
 
 		in
 (* 		let () = buffered_output ("\n added lits : ") in *)
-(* 		let () = print_list " OR " (fun x -> print_string x#string) added_lits in *)
+(* 		let () = print_list " || " (fun x -> print_string x#string) added_lits in *)
 		(* eliminate the conditions common to new_c and  x_sigma and try again new augmentation possibilities *)
 		let new_ln = difference (fun x y -> x#syntactic_equal y) c'#negative_lits x_sigma#negative_lits in
 		if difference (fun x y -> x#syntactic_equal y) ln new_ln <> [] then
 		  let added_llits = fn1 new_ln in
 		  (* 		let () = buffered_output ("\n ADDED LLITS : ") in *)
-		  (* 		let () =   print_list "\n\tAND" (fun l -> let () = buffered_output "\nstart\t" in print_list " OR " (fun x -> print_string x#string) l) added_llits in *)
+		  (* 		let () =   print_list "\n\tAND" (fun l -> let () = buffered_output "\nstart\t" in print_list " || " (fun x -> print_string x#string) l) added_llits in *)
 		  let res = 
 		  if added_llits = [] then [added_lits] 
 		  else 
-		    (* OR between lists of AND *)
+		    (* || between lists of AND *)
 		    added_lits :: added_llits in
 		  (* 		let () = buffered_output ("\n ---> res : ") in *)
-		  (* 		let () = print_list "\n\tAND" (fun l -> let () = buffered_output "start\t" in print_list " OR " (fun x -> print_string x#string) l) res in *)
+		  (* 		let () = print_list "\n\tAND" (fun l -> let () = buffered_output "start\t" in print_list " || " (fun x -> print_string x#string) l) res in *)
 		  res
 		else
 		  let () = c#add_failed_augmentation x1#number in []
@@ -611,7 +611,7 @@ let augmentation verbose c los (cxt1,cxt2) level =
 		R -> List.flatten (List.map (apply "R") rewrite_system#content)
 	      | L -> let res = List.flatten (List.map (fun lit -> (apply "L" lit)) lemmas_system#content) in
 (* 		let () = buffered_output ("\n ---> RES : ") in *)
-(* 		let () = print_list "\n\tAND"  (fun l -> let () = buffered_output "start\t" in print_list " OR " (fun x -> print_string x#string) l) res in *)
+(* 		let () = print_list "\n\tAND"  (fun l -> let () = buffered_output "start\t" in print_list " || " (fun x -> print_string x#string) l) res in *)
 		res
 	      | C  -> 
 		  let c_hist = List.map snd c#history in
@@ -656,5 +656,5 @@ let augmentation verbose c los (cxt1,cxt2) level =
   in
   try 
     fn c (cxt1,cxt2) 
-  with (Failure "fn") -> 
+  with (Failure _) -> 
     failwith "augmentation" (* échec *)

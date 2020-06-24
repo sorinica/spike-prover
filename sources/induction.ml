@@ -96,7 +96,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 	let _ = rule'#number in
 	let lhs = rule'#lefthand_side in
 	  
-	let (s1, _) = try unify_terms t lhs is_gen with Failure "unify_terms" -> failwith "fn" in
+	let (s1, _) = try unify_terms t lhs is_gen with Failure _ -> failwith "fn" in
 	  (*     let () = buffered_output rule'#string in *)
 	  (*     let () = print_detailed_clause rule' in *)
 	  (*     let () = buffered_output ("\ns1 = " ^ (sprint_subst s1) ^ " s2 = " ^ (sprint_subst s2)) in *)
@@ -135,12 +135,12 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 	      try 
 		let tmp = fn subterm r max_v is_gen in 
 		  tmp :: (fn1 subterm tl max_v is_gen)  
-	      with Failure "fn" -> fn1 subterm tl max_v is_gen
+	      with Failure _ -> fn1 subterm tl max_v is_gen
       in
 	(* all the instances for a given subterm t *)
       let all_inst t max_v is_gen =
 	(*     let () = buffered_output ("\n treating t = " ^ t#string ^ " with is_gen = " ^ (string_of_bool is_gen)) in *)
-	let k = try t#head with Failure "head" -> failwith ("generate: fail on term " ^ t#string) in
+	let k = try t#head with Failure _ -> failwith ("generate: fail on term " ^ t#string) in
 	let rec fn_test1 n t l  =
 	  (*       let () = buffered_output ( "\n" ^ (n_spaces n) ^ "fn_test1 t = " ^ t#string ^ " l = " ^ (sprint_list ",  " (fun (symb, p) -> *)
 	  (* 	" symb = " ^ (dico_const_string#find symb) ^ " p = " ^ (string_of_int p)) l) ) in *)
@@ -155,7 +155,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 			  fn_test1 (n + 2) t'  tl 
 		      else false
 		    else false
-		  with Failure "head" -> 
+		  with Failure _ -> 
 		    (* t is a variable  *)
 		    if is_gen then not (is_abstract t#sort) else (not (is_existential_var t)) && not (is_abstract t#sort) 
 	  in
@@ -173,7 +173,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 			fn_test2 (n + 2) t'  tl 
 		    else false
 		  else (is_defined t#head)
-		with Failure "head" -> 
+		with Failure _ -> 
 		  (* t is a variable  *)
 		  if not is_gen then is_existential_var t else false
 	in
@@ -188,7 +188,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 	  (*     let () = buffered_output ("\n t = " ^ t#string ^ "\n \t test_indvar = " ^ (string_of_bool test_indvar) ^ " test_defsymb = " ^ (string_of_bool *)
 	  (*       test_defsymb)) in *)
 
-	  if (not test_indvar) or test_defsymb then 
+	  if (not test_indvar) || test_defsymb then 
 	    (*       let ()  = buffered_output ("\n the term is : " ^ t#string) in   *)
 	    failwith "all_inst"
 	  else 
@@ -201,26 +201,26 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 	
 	(* 	  let () = buffered_output ("\nTrying t = " ^ t#string) in *)
 	try 
-	  let ls = all_inst t max_v false in
+	  let ls = try all_inst t max_v false with  Failure _ -> failwith "fn2"  in
 	  let all_ts = List.map (fun (s1, _) -> List.map (fun (_, s) -> s) s1) ls in (* the terms for substitution in t *)
 	    
 	  let test = (List.exists (fun t -> not t#is_term) (List.flatten all_ts)) in
-	    if (ls = []) or test then failwith "fn2"
+	    if (ls = []) || test then failwith "fn2"
 	    else 
 	      (p, ls)
-	with Failure "all_inst" -> 
+	with Failure _ -> 
 	  if gen_on_term then 
 	    try 
 	      (* do again with generalization, this time  *)
-	      let ls = all_inst t max_v true in
+	      let ls = try all_inst t max_v true with  Failure _ -> failwith "fn2" in 
 	      let () = text := !text ^  "\n\n\t by the generalization of some existential variables to universal ones on term "
 		^ t#string in
 	      let all_ts = List.map (fun (s1, _) -> List.map (fun (_, s) -> s) s1) ls in (* the terms for substitution in t *)
 	      let test = (List.exists (fun t -> not t#is_term) (List.flatten all_ts)) in
-		if (ls = []) or test then failwith "fn2"
+		if (ls = []) || test then failwith "fn2"
 		else 
 		  (p, ls)
-	    with Failure "all_inst" -> 
+	    with Failure _  -> 
 	      failwith "fn2"
 	  else failwith "fn2"
       in
@@ -240,20 +240,20 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 		  let p, ls = 
 		    try 
 		      fn2 tested_pos max_var false
-		    with Failure "fn2" -> 
+		    with Failure _ -> 
 		      try 
 			(* do again with generalization, this time  *)
 			let res = fn2 tested_pos max_var true in
 			let () = text := !text ^  "\n\n\t by the generalization of some existential variables to universal ones " in
 			  res
-		      with Failure "fn2" ->
+		      with Failure _ ->
 			failwith "fn_tested_pos"
 		  in  
 		  let target_term = c#subterm_at_position p in
 		  let target_vars = List.map (fun (x,_,_) -> x) target_term#variables in
 		    
 		  (* expand the other terms whose variables have been instantiated  *)
-		  let res_pos = try remove_el (fun (p1, _) (p2, _) -> p1 = p2) (p, c#subterm_at_position p) ltested_pos with Failure "remove_el" -> failwith "remove_el: generate" in
+		  let res_pos = try remove_el (fun (p1, _) (p2, _) -> p1 = p2) (p, c#subterm_at_position p) ltested_pos with Failure _ -> failwith "remove_el: generate" in
 		    
 		  let rec fn6 i cl (s, r_orig) = 
 		    
@@ -278,7 +278,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 			    (* new substitutions for the first modified term  *)
 			    (* 	    	    let () = buffered_output ("\n" ^ (n_spaces i) ^ "trm = " ^ trm#string) in *)
 			    (* try fn2 without the generalization of variables ... to see if should be modified ? *)
-			    let _ ,ls =  try fn2 (p,trm) max_var false with Failure "fn2" -> (p, [])  in
+			    let _ ,ls =  try fn2 (p,trm) max_var false with Failure _ -> (p, [])  in
 			      (* eliminate the duplicates from ls  *)
 			    let rec eq_subst (s1,  tr1') (s2,  tr2') = 
 			      match s1 with
@@ -400,7 +400,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 		    (*     let () = buffered_output ("t1 = " ^ t1#string) in *)
 		    (*     let () = buffered_output ("t2 = " ^ t2#string) in *)
 		      
-		    let (_, s2) = try unify_terms t1 t2 false with Failure "unify_terms" -> failwith "\nError in Generate: please report it" in
+		    let (_, s2) = try unify_terms t1 t2 false with Failure _ -> failwith "\nError in Generate: please report it" in
 		    let r = (new_r#substitute s2)#expand_sorts in
 		      
 		    let cond = r#negative_lits in
@@ -462,9 +462,9 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 		      let () = str := !str ^ "\n" in
 			!str, lres
 		    else
-		      let () = if !maximal_output then str := !str ^  ("fail generate on position" ^ (sprint_clausal_position (fst tested_pos)) ^ "  \n Hint: ordering to be changed or be ready to reinitialize the hypotheses") in
+		      let () = if !maximal_output then str := !str ^  ("fail generate on position" ^ (sprint_clausal_position (fst tested_pos)) ^ "  \n Hint: ordering to be changed || be ready to reinitialize the hypotheses") in
 			fn_tested_pos tl_pos
-		with Failure "fn_tested_pos" -> fn_tested_pos tl_pos
+		with Failure _ -> fn_tested_pos tl_pos
       in
       let str_rez, lrez = fn_tested_pos ltested_pos in
       let () = buffered_output str_rez in

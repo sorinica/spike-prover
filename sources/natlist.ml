@@ -96,7 +96,7 @@ let rec list_propagate t i =
 	else if f == id_symbol_nil then t
 	else 
 	  let () = if !maximal_output then buffered_output ("list_propagate: symbol " ^ (dico_const_string#find f) ^ " not managed by Rnatlist") in
-	  failwith "outside natlist"
+	  failwith "list_propagate"
 	    
 and  nat_propagate t i = 
   let () = buffered_output ((fn_spaces i) ^ "nat_propagate t = " ^ t#string) in
@@ -150,20 +150,26 @@ and  nat_propagate t i =
 	in np_norm (purify t') 0
       else
 	let () = if !maximal_output then buffered_output ("nat_propagate: symbol " ^ (dico_const_string#find f) ^ " not managed by Rnatlist") in
-	failwith "outside natlist"
+	failwith "nat_propagate"
 
 
       
 let natlist_norm t i = 
   match t#content with
-    | Var_univ _ | Var_exist _ -> failwith "natlist_norm"
-    | Term (f, l, s) -> 
-      try 
-	if s == id_sort_nat then nat_propagate t 0
-	else if s == id_sort_list then list_propagate t 0
-	else failwith "natlist_norm"
-      with Failure "outside natlist" ->
-	let () = buffered_output "Here !!! "  in
-	failwith "natlist_norm"
-	
-	
+  | Var_univ _ | Var_exist _ -> failwith "natlist_norm"
+  | Term (f, l, s) ->      
+       if s == id_sort_nat then 
+         match nat_propagate t 0 with
+         | exception (Failure _) -> let () = buffered_output "Here !!! "  in
+	                            failwith "natlist_norm"
+         | res -> res
+       else if s == id_sort_list then
+         match list_propagate t 0 with
+         | exception (Failure _) -> let () = buffered_output "Here 1 !!! "  in
+	                            failwith "natlist_norm"
+         | res -> res
+       else failwith "natlist_norm"
+              
+	      
+	      
+	      

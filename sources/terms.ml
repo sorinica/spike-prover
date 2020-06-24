@@ -151,11 +151,11 @@ class term c_t' =
       let lpos' = 
 	try 
 	  remove_el (=) pos lpos 
-	with Failure "remove_el" -> 
+	with Failure _ -> 
 	  let () = if !maximal_output then  buffered_output ("WARNING: " ^ ("delpos_rewriting on " ^ self#string ^ " at position " ^ (sprint_position pos))) in
 	  try 
 	    remove_el (=) pos self#all_positions 
-	  with Failure "remove_el" -> failwith ("delpos_rewriting on " ^ self#string ^ " at position " ^ (sprint_position pos))  in
+	  with Failure _ -> failwith ("delpos_rewriting on " ^ self#string ^ " at position " ^ (sprint_position pos))  in
       let () = pos_rewriting <- lpos' in
 
       (* eliminating the positions from subterms   *)
@@ -174,7 +174,7 @@ class term c_t' =
       let lpos = self#pos_partial_case_rewriting in
 (*       let () = buffered_output ("\n part_case : Eliminating " ^ (sprint_position pos) ^ " from " ^ self#string ^ " having positions : ") in *)
 (*       let () = List.iter (fun x -> buffered_output (" " ^ (sprint_position x))) lpos in *)
-      let lpos' = try remove_el (=) pos lpos with Failure "remove_el" -> failwith "delpos_partial_case_rewriting" in
+      let lpos' = try remove_el (=) pos lpos with Failure _ -> failwith "delpos_partial_case_rewriting" in
       let () = pos_partial_case_rewriting <- lpos' in
 
       (* eliminating the positions from subterms   *)
@@ -193,7 +193,7 @@ class term c_t' =
       let lpos = self#pos_contextual_rewriting in
 (*       let () = buffered_output ("\n context_rewr:  Eliminating " ^ (sprint_position pos) ^ " from " ^ self#string ^ " having positions : ") in *)
 (*       let () = List.iter (fun x -> buffered_output (" " ^ (sprint_position x))) lpos in *)
-      let lpos' = try remove_el (=) pos lpos with Failure "remove_el" -> failwith "delpos_contextual_rewriting" in
+      let lpos' = try remove_el (=) pos lpos with Failure _ -> failwith "delpos_contextual_rewriting" in
       let () = pos_contextual_rewriting <- lpos' in
 
       (* eliminating the positions from subterms   *)
@@ -212,7 +212,7 @@ class term c_t' =
       let lpos = self#pos_total_case_rewriting in
 (*       let () = buffered_output ("\n total case : Eliminating " ^ (sprint_position pos) ^ " from " ^ self#string ^ " having positions : ") in *)
 (*       let () = List.iter (fun x -> buffered_output (" " ^ (sprint_position x))) lpos in *)
-      let lpos' = try remove_el (=) pos lpos with Failure "remove_el" -> failwith "delpos_total_case_rewriting" in
+      let lpos' = try remove_el (=) pos lpos with Failure _ -> failwith "delpos_total_case_rewriting" in
       let () = pos_total_case_rewriting <- lpos' in
 
       (* eliminating the positions from subterms   *)
@@ -231,7 +231,7 @@ class term c_t' =
       let lpos = self#pos_equational_rewriting in
 (*       let () = buffered_output ("\n equational rew: Eliminating " ^ (sprint_position pos) ^ " from " ^ self#string ^ " having positions : ") in *)
 (*       let () = List.iter (fun x -> buffered_output (" " ^ (sprint_position x))) lpos in *)
-      let lpos' = try remove_el (=) pos lpos with Failure "remove_el" -> failwith "delpos_equational_rewriting" in
+      let lpos' = try remove_el (=) pos lpos with Failure _ -> failwith "delpos_equational_rewriting" in
       let () = pos_equational_rewriting <- lpos' in
 
       (* eliminating the positions from subterms   *)
@@ -303,7 +303,7 @@ class term c_t' =
 		  let () = pos_total_case_rewriting <- (List.filter  fn' pos_total_case_rewriting) in
 		  let () = pos_equational_rewriting <- (List.filter  fn' pos_equational_rewriting) in
 		  let lpos_t = (List.map (fun p -> n :: p) t'#pos_equational_rewriting) in
-		  try if (((not t'#is_term) or (is_constructor t'#head)) && is_defined f) then generic_merge_sorted_lists [[]] lpos_t else lpos_t with Failure "head" -> lpos_t
+		  try if (((not t'#is_term) || (is_constructor t'#head)) && is_defined f) then generic_merge_sorted_lists [[]] lpos_t else lpos_t with Failure _ -> lpos_t
 		else
 		  []
 	      in
@@ -328,7 +328,7 @@ class term c_t' =
       | (hd :: tl, Term (f, l, s)) ->
           begin
             try
-              let l' = apply_f_to_element_n (fun x -> x#replace_subterm_at_pos tl t) hd l in
+              let l' = try apply_f_to_element_n (fun x -> x#replace_subterm_at_pos tl t) hd l with Failure _ -> failwith "replace_subterm_at_pos" in
               let v = generic_merge_set_of_lists (List.map (fun x -> x#variables) l') in
 
 	      let fn t t' n = 
@@ -348,10 +348,10 @@ class term c_t' =
 		  let lpos_t = (List.map (fun p -> n :: p) t'#pos_equational_rewriting) in
 (* 		  let () = buffered_output ("\nt' = " ^ t'#string) in *)
 		  try 
-		    if (((not t'#is_term) or (is_constructor t'#head)) && is_defined f)  
+		    if (((not t'#is_term) || (is_constructor t'#head)) && is_defined f)  
 		    then generic_merge_sorted_lists [[]] lpos_t 
 		    else lpos_t 
-		  with Failure "head" -> lpos_t
+		  with Failure _ -> lpos_t
 		else
 		  []
 	      in
@@ -368,8 +368,8 @@ class term c_t' =
 		 pos_equational_rewriting   = generic_merge_sorted_lists pos_equational_rewriting new_pos ;
                  string = Undefined >}
             with
-              (Failure "apply_f_to_element_n")
-            | (Invalid_argument "apply_f_to_element_n") -> failwith "replace_subterm_at_pos"
+              (Failure _)
+            | (Invalid_argument _) -> failwith "replace_subterm_at_pos"
           end
       | (_ :: _, Var_exist _) | (_ :: _, Var_univ _) -> failwith "replace_subterm_at_pos"
 	    
@@ -556,7 +556,7 @@ class term c_t' =
 	  let fn t t' n = 
 	    if t#string <> t'#string then 
 	      let lpos_t = (List.map (fun p -> n :: p) t'#pos_rewriting) in
-	      try if (is_constructor t'#head  or (not t'#is_term)) && is_defined f then generic_merge_sorted_lists [[]] lpos_t else lpos_t with Failure "head" -> lpos_t
+	      try if (is_constructor t'#head  || (not t'#is_term)) && is_defined f then generic_merge_sorted_lists [[]] lpos_t else lpos_t with Failure _ -> lpos_t
 	    else
 	      []
 	  in
@@ -618,7 +618,7 @@ class term c_t' =
       try
         let _ = self#bijective_renaming [] v in
         true
-      with (Failure "bijective_renaming") ->
+      with (Failure _) ->
         false
           
     (* Bijective renaming. The first argument is list of previous renamings *)
@@ -643,7 +643,7 @@ class term c_t' =
 	      try
                 let x'' = 
 		  try list_assoc_2 x' ren with 
-		      (Failure "list_assoc_2") -> failwith "bijective_renaming" 
+		      (Failure _) -> failwith "bijective_renaming" 
 		in
                 if var_equal x x''
                 then ren
@@ -703,22 +703,22 @@ class term c_t' =
 	    let id_symbol_s =
 	      try
 		dico_const_string#find_key "s"
-	      with Failure "find_key" -> 
+	      with Failure _ -> 
 		try
 		  dico_const_string#find_key  "S"
-		with Failure "find_key" -> failwith "id_symbol_s"
+		with Failure _ -> failwith "id_symbol_s"
 	    in
 	    let id_symbol_zero =
 	      try
 		dico_const_string#find_key "0"
-	      with Failure "find_key" -> failwith "id_symbol_zero"
+	      with Failure _ -> failwith "id_symbol_zero"
 	    in
-	    if f = id_symbol_s
+	    if f = try id_symbol_s with Failure _ -> failwith "is_a_natural"
             then List.for_all (fun x -> x#is_a_natural) l
-            else if f = id_symbol_zero
+            else if f = try id_symbol_zero  with Failure _ -> failwith "is_a_natural"
             then true
             else false
-	  with Failure "id_symbol_s"| Failure "id_symbol_zero" -> false
+	  with Failure _ -> false
 	  )
       | Var_exist _ | Var_univ _ -> false
 
@@ -773,7 +773,7 @@ class term c_t' =
 
       let rec fn2 v l_ar r_ar l =
         let rec fn3 l =
-          let l_args, r_args = try list_split_at_n l_ar l with Failure "list_split_at_n" -> failwith "compute_string" in
+          let l_args, r_args = try list_split_at_n l_ar l with Failure _ -> failwith "compute_string" in
           let s = match l_args with
             [] -> ""
           | [h] -> if h#depth = 1 then h#string ^ " " else "(" ^ h#string ^ ") "
@@ -813,7 +813,7 @@ class term c_t' =
                 sprint_string_list (" " ^ v ^ " ") ls
               else invalid_arg "string"
             else
-              let _, _ = try list_split_at_n l_ar l with Failure "list_split_at_n" -> failwith "compute_string" in
+              let _, _ = try list_split_at_n l_ar l with Failure _ -> failwith "compute_string" in
               fn2 v l_ar r_ar l
 
   (* pretty print function *)
@@ -922,7 +922,7 @@ class term c_t' =
 						 begin
 						   let new_v = 
 						     if !specif_parameterized then 
-						       let new_s = unify_sorts (Actual_sort s) s' in 
+						       let new_s = try unify_sorts (Actual_sort s) s' with Failure _ -> failwith "matching_core" in 
 						       v#replace_sort new_s else v
 						   in
 						   try
@@ -935,7 +935,7 @@ class term c_t' =
 						     let fn_inf = (fun (x, _) (x', _) -> x < x') in
 						     fn (insert_sorted fn_eq fn_inf  (x', new_v) sigma) t
 						 end
-					       with Failure "unify_sorts" -> failwith "matching"
+					       with Failure _ -> failwith "matching"
 					     )
 		| Term (f, l, s), Term (f', l', _) ->
                   if const_equal f f'
@@ -979,7 +979,7 @@ class term c_t' =
 
         (* Remove terms of sigma *)
         let lsigma' = List.flatten (List.map (fun x -> x#get_ac_f_args f) lsigma) in
-        let lt' = try unsorted_setminus syntactic_equal lt lsigma' with Failure "unsorted_setminus" -> failwith "matching" in
+        let lt' = try unsorted_setminus syntactic_equal lt lsigma' with Failure _ -> failwith "matching" in
         let ls, lv = List.partition (fun x -> x#is_term) l in
 
         (* Make a substitution out of a variable and a list of terms *)
@@ -1007,7 +1007,7 @@ class term c_t' =
                     try
                       let new_proceed_fun s = process_same_head proceed_fun s rest tail (acc @ tl) t in
                       self#matching_core new_proceed_fun sigma [ (hd, h) ]
-                    with (Failure "matching") -> fn (hd::acc) tl in
+                    with (Failure _) -> fn (hd::acc) tl in
               fn [] a
 
         (* n' parties de n éléments, avec multiplicités *)
@@ -1016,18 +1016,18 @@ class term c_t' =
           let rec fn s l l' =
             match l, l' with
               [], [] -> proceed_fun (subst_compose s sigma)
-            | _::_, [] -> failwith "matching"
+            | _::_, [] -> failwith "fn"
             | _, h::t ->
                 fn2 h s [] [] t l
                   
           and fn2 (i, v) s l l' tl = function
               [] ->
-                (match l with [] -> failwith "matching" | _ -> fn (generic_insert_sorted (build_ac_subst v#var_content l) s) l' tl)
+                (match l with [] -> failwith "fn2" | _ -> fn (generic_insert_sorted (build_ac_subst v#var_content l) s) l' tl)
             | (j, h)::t ->
                 if j >= i
                 then
                   try fn2 (i, v) s (h::l) l' tl (match i - j with 0 -> t | _ -> (j - i, h)::t)
-                  with (Failure "matching") -> fn2 (i, v) s l ((j, h)::l') tl t
+                  with (Failure _) -> fn2 (i, v) s l ((j, h)::l') tl t
                 else
                   fn2 (i, v) s l ((j, h)::l') tl t
                     
@@ -1045,13 +1045,13 @@ class term c_t' =
         and group_for_ac_matching l l' =
           match l, l' with
             _, [] -> [], l
-          | [], _ -> failwith "matching"
+          | [], _ -> failwith "group_for_ac_matching"
           | _::_, h'::_ ->
               let f' = h'#head in
               let l1, l2 = List.partition (fun x -> x#head = f') l
               and l'1, l'2 = List.partition (fun x -> x#head = f') l' in
               if List.length l1 < List.length l'1
-              then failwith "matching"
+              then failwith "group_for_ac_matching"
               else
                 let r, r' = group_for_ac_matching l2 l'2 in
                 (l1, l'1)::r, r' in
@@ -1090,16 +1090,16 @@ class term c_t' =
             try
               fn2 p l
 (*            (p, s#matching (proceed_fun p) t)*)
-            with (Failure "matching") ->
+            with (Failure _) ->
               (p, s#matching (proceed_fun p) t)
 (*            fn2 p l*)
       and fn2 p =
         let rec fn3 i = function
-            [] -> failwith "matching"
+            [] -> failwith "subterm_matching"
           | h::t ->
               try
                 fn (p @ [i]) h
-              with (Failure "matching") ->
+              with (Failure _) ->
                 fn3 (i + 1) t in
         fn3 0 in
       fn [] self
@@ -1109,7 +1109,7 @@ class term c_t' =
       try 
 	let s = self#subterm_matching_at_pos (fun x -> x) [] t in
 	(List.for_all (fun (_, t) -> (not t#is_term)) s)
-      with Failure "subterm_matching_at_pos" -> false 
+      with Failure _ -> false 
 
     (* Checks if the subterm of self at position p matches t (i.e. exists sigma, t.sigma = s[p])
        proceed_fun: substitution -> bool *)
@@ -1117,7 +1117,7 @@ class term c_t' =
       try
         let s = self#subterm_at_position p in
         s#matching proceed_fun t
-      with (Failure "subterm_at_position")| Failure "matching" -> failwith "subterm_matching_at_pos"
+      with Failure _ -> failwith "subterm_matching_at_pos"
 
     (*
      * Returns the subterm at a given position. A position is a list of integers.
@@ -1129,7 +1129,7 @@ class term c_t' =
       | _, Var_univ _ | _, Var_exist _ -> failwith "subterm_at_position"
       | h::t, Term (_, l', _) ->
           try (List.nth l' h)#subterm_at_position t
-          with (Failure "nth") -> failwith "subterm_at_position"
+          with (Failure _) -> failwith "subterm_at_position"
 
     (* Is self a subterm of t. Returns the position *)
     method subterm t =
@@ -1150,7 +1150,7 @@ class term c_t' =
 	    try
 	      let p = fn h
 	      in i::p
-	    with (Failure "subterm") -> fn2 (i + 1) t
+	    with (Failure _) -> fn2 (i + 1) t
 
       in fn t
 
@@ -1235,7 +1235,7 @@ let subst_is_primitive s =
   List.for_all (fun (_, t) -> t#is_constructor_term) s
 
 (* The inference rules bitstream. These values set bits to true once a rule has failed on a certain clause.
-   Next time the same rule is to be applied, failure will occur at once or special cases will be triggered *)
+   Next time the same rule is to be applied, failure will occur at once || special cases will be triggered *)
 
 let contextual_rewriting_bit        = get_bitstream [1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
 let equational_rewriting_bit        = get_bitstream [0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]
@@ -1352,7 +1352,7 @@ let complete_substitution sigma lv =
   let v = List.map fst sigma in
   let v' = fn lv v
   and () = try greatest_var := 1 + ((fun (x, _) -> x) (last_el lv)) with
-      (Failure "last_el") -> ()
+      (Failure _) -> ()
   in
   generic_merge_sorted_lists sigma (List.map (fun (x, s) -> (x, new term (Var_univ (newvar (), s)))) v')
 
@@ -1436,8 +1436,7 @@ let unify_terms tc tr is_gen =
 	  try 
 	    let cnt_t = t#var_content in
 	    if i = cnt_t then l else (i, t) :: (List.map (expand_terms (i, t)) l) 
-	  with Failure "var_content" -> (try (i, t) :: (List.map (expand_terms (i, t)) l) with Failure "expand_terms" -> failwith "unify_terms") 
-	    | Failure "expand_terms" -> failwith "unify_terms"
+	  with Failure _ -> (try (i, t) :: (List.map (expand_terms (i, t)) l) with Failure _ -> failwith "unify_terms") 	   
       else failwith "unify_terms"
     in
     match (is_var tc), (is_var tr) with
@@ -1489,14 +1488,14 @@ let unify_terms tc tr is_gen =
 	  if hd1 <> hd2 then failwith "fn"
 	  else List.iter2 (fun x y -> let x' = x#substitute !lc in let y' = y#substitute !lr in  fn x' lc y' lr) l1 l2 
   in 
-  try 
-    let () = fn tc lc tr lr in  (* get lc and lr *)
+ 
+    let () = try fn tc lc tr lr  with Failure _ -> (*  let () = buffered_output "Failure on unification" in *) failwith "unify_terms" in
+ (* get lc and lr *)
 (*     let () = buffered_output ("\nThe FINAL substitution lc = " ^ (sprint_subst !lc) ^ " and lr = " ^ (sprint_subst !lr) ^ "\n\n") in *)
     let s1 = List.map (fun (i, t) -> (i, t#expand_sorts)) !lc in
     let s2 = List.map (fun (i, t) -> (i, t#expand_sorts)) !lr in
-    (s1, s2) 
-  with Failure "fn" -> (*  let () = buffered_output "Failure on unification" in *) failwith "unify_terms";;
-
+    (s1, s2) ;;
+  
 
 let sprint_detailed_subst l =
   let f (x, t) =  sprint_var x (Def_sort 0) true ^ ", " ^ t#string  ^ (if !maximal_output then (" of sort " ^ (sprint_sort t#sort)) else 
@@ -1532,7 +1531,7 @@ let order_terms lp is_generate =
   
   let to_sort_terms, lt = 
     if !dico_infs_flag && is_generate
-    then List.partition (fun (_, t) -> try List.mem t#head !list_ind_priorities with Failure "head" -> let () = buffered_output ("\n t = "
+    then List.partition (fun (_, t) -> try List.mem t#head !list_ind_priorities with Failure _ -> let () = buffered_output ("\n t = "
     ^ t#string) in  false) pos_subterms' 
     else pos_subterms', []
 
@@ -1576,7 +1575,7 @@ let rec compute_string_caml t =
   
   let rec fn2 f v l_ar r_ar l =
     let rec fn3 l =
-      let l_args, r_args = try list_split_at_n l_ar l with Failure "list_split_at_n" -> failwith "compute_string_caml" in
+      let l_args, r_args = try list_split_at_n l_ar l with Failure _ -> failwith "compute_string_caml" in
       let s = match l_args with
           [] -> ""
 	    (*           | [h] -> if h#depth = 1 then (compute_string_caml h) ^ " " else "(" ^ (compute_string_caml h)^ ") " *)
@@ -1626,6 +1625,6 @@ let rec compute_string_caml t =
                 sprint_string_list (" " ^ v ^ " ") ls
               else invalid_arg "string"
             else
-              let _, _ = try list_split_at_n l_ar l with Failure "list_split_at_n" -> failwith "compute_string_caml" in
+              let _, _ = try list_split_at_n l_ar l with Failure _ -> failwith "compute_string_caml" in
               fn2 f v l_ar r_ar l
 

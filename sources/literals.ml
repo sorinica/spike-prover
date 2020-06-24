@@ -199,24 +199,28 @@ class literal c_l =
     (* Bijective renaming modulo AC properties of some constructors *)
     method bijective_renaming ren lit =
       let double_eq s s' t t' =
-        let ren' = s#bijective_renaming ren s' in
-        t#bijective_renaming ren' t' in
+        match s#bijective_renaming ren s' with
+        | exception (Failure _) -> failwith "double_eq"
+        | ren' -> match t#bijective_renaming ren' t' with
+                  | exception (Failure _) -> failwith "double_eq"
+                  | res -> res
+      in
       match content, lit#content with
         Lit_rule (s, s'), Lit_rule (t, t') -> double_eq s t s' t'
       | Lit_equal (s, s'), Lit_equal (t, t') ->
-          begin (* Discards PM on exceptions *)
-            try
-              double_eq s t s' t'
-            with (Failure "bijective_renaming") ->
-              double_eq s t' s' t
-          end
+         begin (* Discards PM on exceptions *)
+           try
+             double_eq s t s' t'
+           with (Failure _) ->
+             double_eq s t' s' t
+         end
       | Lit_diff (s, s'), Lit_diff (t, t') ->
-          begin (* Discards PM on exceptions *)
-            try
-              double_eq s t s' t'
-            with (Failure "bijective_renaming") ->
-              double_eq s t' s' t
-          end
+         begin (* Discards PM on exceptions *)
+           try
+             double_eq s t s' t'
+           with (Failure _) ->
+             double_eq s t' s' t
+         end
       | Lit_rule _, Lit_equal _ | Lit_equal _, Lit_rule _| Lit_rule _, Lit_diff _| Lit_diff _, Lit_rule _ | Lit_equal _, Lit_diff _| Lit_diff _, Lit_equal _ -> failwith "bijective_renaming"
 
     (* Equality modulo renaming and AC properties *)
@@ -231,18 +235,16 @@ class literal c_l =
 	    {< content = Lit_diff (t#copy, t'#copy) >}
 	    
     method equal lit =
-      try
-        let _ = self#bijective_renaming [] lit in
-        true
-      with (Failure "bijective_renaming") ->
-        false
+      match self#bijective_renaming [] lit with
+        | exception (Failure _) -> false
+        | _ -> true
 
     method syntactic_equal (l: literal) =
       let lhs, rhs = self#both_sides
       and lhs', rhs' = l#both_sides in
-      if (self#is_diff && l#is_diff) or ((not self#is_diff) && (not l#is_diff)) then
-	    (lhs#syntactic_equal lhs' && rhs#syntactic_equal rhs') or
-	(lhs#syntactic_equal rhs' && rhs#syntactic_equal lhs')
+      if (self#is_diff && l#is_diff) || ((not self#is_diff) && (not l#is_diff)) then
+	(lhs#syntactic_equal lhs' && rhs#syntactic_equal rhs') ||
+	  (lhs#syntactic_equal rhs' && rhs#syntactic_equal lhs')
       else false 
     (* Is this literal oriented ? *)
     method is_oriented =
@@ -271,10 +273,14 @@ class literal c_l =
     (* Subterm at position *)
     method subterm_at_position p =
       match p with
-        0::t -> (try (self#lefthand_side)#subterm_at_position t with (Failure "subterm_at_position") -> failwith ("subterm_at_position in literals.ml for literal " ^
-	  self#string ^ " in subterm_at_position for p = " ^ (sprint_position p)))
-      | 1::t -> (try (self#righthand_side)#subterm_at_position t with (Failure "subterm_at_position") -> failwith ("subterm_at_position in literals.ml for literal " ^
-	  self#string ^ " for subterm_at_position for p = " ^ (sprint_position p)))
+        0::t -> let s = self#lefthand_side in
+                (match s#subterm_at_position t with 
+                 | exception (Failure _) -> failwith ("subterm_at_position in literals.ml for literal " ^ self#string ^ " in subterm_at_position for p = " ^ (sprint_position p))
+                 | res -> res)
+      | 1::t -> let s = self#righthand_side in
+                (match s#subterm_at_position t with 
+                 | exception (Failure _) -> failwith ("subterm_at_position in literals.ml for literal " ^ self#string ^ " in subterm_at_position for p = " ^ (sprint_position p))
+                 | res -> res)
       | _ -> failwith "subterm"
 
     (* Replace subterm at position p by st
@@ -311,68 +317,69 @@ class literal c_l =
     method subterm_matching proceed_fun (lit: literal) =
       let lhs, rhs = self#both_sides in
       let fn t t' = 
-        begin
-          try
-            let p, s = lhs#subterm_matching (fun p s -> proceed_fun (0::p) s true) t in
-            0::p, s, true
-          with (Failure "matching") ->
-            try
-              let p, s = rhs#subterm_matching (fun p s -> proceed_fun (1::p) s true) t in
-              1::p, s, true
-            with (Failure "matching") ->
-              try
-                let p, s = lhs#subterm_matching (fun p s -> proceed_fun (0::p) s false) t' in
-                0::p, s, false
-              with (Failure "matching") ->
-                let p, s = rhs#subterm_matching (fun p s -> proceed_fun (1::p) s false) t' in
-                1::p, s, false
-        end
+        match lhs#subterm_matching (fun p s -> proceed_fun (0::p) s true) t with
+          | p, s -> 0::p, s, true
+          | exception (Failure _) -> 
+             (match  rhs#subterm_matching (fun p s -> proceed_fun (1::p) s true) t with
+                | p, s  -> 1::p, s, true
+                | exception (Failure _) -> 
+             (match lhs#subterm_matching (fun p s -> proceed_fun (0::p) s false) t' with
+                 | p, s  -> 0::p, s, false
+              | exception (Failure _) -> 
+                (match rhs#subterm_matching (fun p s -> proceed_fun (1::p) s false) t' with
+                   | p, s -> 1::p, s, false
+                   | exception (Failure _) -> failwith "subterm_matching"
+                                                )
+                )
+             )
       in
       match lit#content with
-          Lit_equal (t, t') -> fn t t'
-	| Lit_diff (t, t') -> fn t t'
-      	| Lit_rule (t, _) ->
-            try
-              let p, s = lhs#subterm_matching (fun p s -> proceed_fun (0::p) s true) t in
-              0::p, s, true
-            with (Failure "matching") ->
-              let p, s = rhs#subterm_matching (fun p s -> proceed_fun (1::p) s true) t in
-              1::p, s, true
-		
+        Lit_equal (t, t') -> fn t t'
+      | Lit_diff (t, t') -> fn t t'
+      | Lit_rule (t, _) ->
+         match lhs#subterm_matching (fun p s -> proceed_fun (0::p) s true) t with
+         | p, s -> 0::p, s, true
+         | exception (Failure _) -> 
+            (match rhs#subterm_matching (fun p s -> proceed_fun (1::p) s true) t with
+              | p, s -> 1::p, s, true
+              |  exception (Failure _) -> failwith "subterm_matching"
+            )
+
+              
     (* Checks if the subterm of self at position p matches t (i.e. exists sigma, t.sigma = s[p]).
        Once more, we provide information on whether we have swaped arguments *)
     method subterm_matching_at_pos proceed_fun p (lit: literal) =
       let s = self#subterm_at_position p in
       let fn t t' = 
-        begin
-          try
-            let sigma = s#matching (fun s -> proceed_fun s true) t in
-            sigma, true
-          with (Failure "matching") ->
-            let sigma = s#matching (fun s -> proceed_fun s false(*true*)) t' in
-            sigma, false
-        end
+        match s#matching (fun s -> proceed_fun s true) t with
+        | exception (Failure _) -> 
+           (match s#matching (fun s -> proceed_fun s false(*true*)) t' with
+                  | exception (Failure _) -> failwith "subterm_matching_at_pos"
+                | sigma -> sigma, false
+           )
+        | sigma -> sigma, true          
       in
       match lit#content with
-          Lit_equal (t, t') -> fn t t'
-        | Lit_diff (t, t') -> fn t t'
-	| Lit_rule (t, _) ->
-            let sigma = s#matching (fun s -> proceed_fun s true) t in
-            sigma, true
+        Lit_equal (t, t') -> fn t t'
+      | Lit_diff (t, t') -> fn t t'
+      | Lit_rule (t, _) ->
+         let sigma = s#matching (fun s -> proceed_fun s true) t in
+         sigma, true
 	      
     (* Matching
        proceed_fun: substitution -> bool *)
     method matching_core proceed_fun sigma (lit: literal) =
       match content, lit#content with
-        Lit_rule (t0, t0'), Lit_rule (t1, t1') ->
-          t0#matching_core proceed_fun sigma [ (t0, t1) ; (t0', t1') ]
-	| Lit_diff _, Lit_diff _| Lit_equal _, Lit_equal _  | Lit_rule _, Lit_equal _ | Lit_equal _, Lit_rule _| Lit_rule _, Lit_diff _| Lit_diff _, Lit_rule _ | Lit_equal _, Lit_diff _| Lit_diff _, Lit_equal _ ->
-          let t0, t0' = self#both_sides
-          and t1, t1' = lit#both_sides in
-          try
-            t0#matching_core proceed_fun sigma [ (t0, t1) ; (t0', t1') ]
-          with (Failure "matching") ->
-            t0#matching_core proceed_fun sigma [ (t0, t1') ; (t0', t1) ]
+      | Lit_rule (t0, t0'), Lit_rule (t1, t1') ->
+         (try t0#matching_core proceed_fun sigma [ (t0, t1) ; (t0', t1') ] with (Failure _) -> failwith "matching_core")            
+      | Lit_diff _, Lit_diff _| Lit_equal _, Lit_equal _  | Lit_rule _, Lit_equal _ | Lit_equal _, Lit_rule _| Lit_rule _, Lit_diff _| Lit_diff _, Lit_rule _ | Lit_equal _, Lit_diff _| Lit_diff _, Lit_equal _ ->
+         let t0, t0' = self#both_sides
+         and t1, t1' = lit#both_sides in
+         try
+           t0#matching_core proceed_fun sigma [ (t0, t1) ; (t0', t1') ]
+         with (Failure _) ->
+           try t0#matching_core proceed_fun sigma [ (t0, t1') ; (t0', t1) ]
+           with (Failure _) -> failwith "matching_core"
 
     method treesize =
       let lhs, rhs = self#both_sides in
@@ -400,7 +407,7 @@ class literal c_l =
       let lhs, rhs = self#both_sides
       and f = term_true#syntactic_equal
       and g = term_false#syntactic_equal in
-      f rhs or g rhs or f lhs or g lhs
+      f rhs || g rhs || f lhs || g lhs
 
   (* if the literal is of the form t1=true it returns t1 = false and
      viceversa. Any Lit_diff is transformed in Lit_equal  *)
@@ -457,7 +464,7 @@ class literal c_l =
       let fn t t' = 
           (!rpos_greater false t t' && !rpos_greater false t lhs &&
 	  !rpos_greater false t rhs)
-            or
+            ||
           (!rpos_greater false t' t && !rpos_greater false t' lhs &&
 	  !rpos_greater false t' rhs) 
       in
@@ -477,13 +484,12 @@ class literal c_l =
 
     method is_subterm (t : term) =
       let lhs, rhs = self#both_sides in
-      try
-	let p = t#subterm lhs
-	in 0::p
-      with (Failure "subterm") ->
-	let p = t#subterm rhs
-	in 1::p
-      
+      match  t#subterm lhs with
+      | exception (Failure _) ->
+         let p = t#subterm rhs
+	 in 1::p
+      | p -> 0::p
+
   end
       
 let compute_string_literal_caml l =

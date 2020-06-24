@@ -49,7 +49,7 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
 		  0::_ ->
                     begin
                       try let _ = c#subterm_at_position (b, n, p) in Pos_defined (b, n, p)
-                      with (Failure "subterm_at_position") ->
+                      with (Failure _) ->
                     	print_string "Invalid position" ;
                     	buffered_output "" ;
                     	!spike_parse_clausal_lhs_position c ()
@@ -62,7 +62,7 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
       	| Pos_litdefined p ->
             begin
               try let _ = c#lit_at_position p in c_pos
-              with (Failure "lit_at_position") ->
+              with (Failure _) ->
               	print_string "Invalid position" ;
               	buffered_output "" ;
               	!spike_parse_clausal_lhs_position c ()
@@ -88,7 +88,7 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
           try
             let p', sigma = t#subterm_matching (fun x s -> proceed_fun (b, n, p@x) s true) lhs  in
             (b, n, p@p'), sigma, true
-          with Failure ("matching") ->
+          with Failure _ ->
             if l_2_r#is_oriented
             then failwith ("matching")
             else
@@ -125,7 +125,7 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
       let lhs, rhs = l_2_r#both_sides_w_or kept_or
       and rw_r_is_oriented = l_2_r#is_oriented in
       let new_cl = c#replace_subterm_at_pos (b, n, p) rhs in
-      if (rw_r_is_oriented or condition_2 lhs rhs)
+      if (rw_r_is_oriented || condition_2 lhs rhs)
         &&
         (match type_system with C -> (if nr_cxt = 2 then clause_greater false false c rw_r'  else clause_geq false false c rw_r' )
 	  | L|R -> true)
@@ -184,7 +184,7 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
     try
       let (_, _, _), _, _ = condition_1 other_conditions l_2_r in
       true
-    with (Failure "matching") -> false 
+    with (Failure _) -> false 
   in
         
   (* 8: same conditions + test that we have a Horn clause
@@ -202,12 +202,12 @@ let contextual_rewriting verbose st sl c_pos (cxt1,cxt2) c is_strict level =
         let () = c#set_bit contextual_rewriting_bit in
         false (* échec *)
     | C::t -> 
-      let res1 = (List.exists (absolutely_all_conditions C 2) cxt2) or (List.exists (absolutely_all_conditions C 1) cxt1) in let res2 = fn t  in res1 or res2
+      let res1 = (List.exists (absolutely_all_conditions C 2) cxt2) || (List.exists (absolutely_all_conditions C 1) cxt1) in let res2 = fn t  in res1 || res2
     | R::t ->
         if c#has_bit contextual_rewriting_bit
         then fn t
-        else let res1 = rewrite_system#exists (all_conditions R 0) in let res2 =  fn t in res1 or res2
-    | L::t -> let res1 = lemmas_system#exists (lemmas_all_conditions L) in let res2 = fn t  in res1 or res2
+        else let res1 = rewrite_system#exists (all_conditions R 0) in let res2 =  fn t in res1 || res2
+    | L::t -> let res1 = lemmas_system#exists (lemmas_all_conditions L) in let res2 = fn t  in res1 || res2
   in
 
   (* 10: let's do it ! *)
@@ -234,7 +234,7 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
       Pos_defined p ->
         begin (* Discards second level PM *)
           try let _ = c#subterm_at_position p in c_pos
-          with (Failure "subterm_at_position") ->
+          with (Failure _) ->
             print_string "Invalid position" ;
             buffered_output "" ;
             !spike_parse_literal_position_in_clause c ()
@@ -242,7 +242,7 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
     | Pos_litdefined n ->
         begin (* Discards second level PM *)
           try let _ = c#lit_at_position n in c_pos
-          with (Failure "lit_at_position") ->
+          with (Failure _) ->
             print_string "Invalid position" ;
             buffered_output "" ;
             !spike_parse_literal_position_in_clause c ()
@@ -261,7 +261,7 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
     let new_cl = c#replace_subterm_at_pos p rhs' in
 (*     let () = buffered_output ("the clause " ^ c#string ^ " is replaced by " ^ new_cl#string) in *)
 (*     let () = buffered_output ("is_less is " ^ (string_of_bool is_less) ^ " and the comparison is " ^  (string_of_bool (clause_geq false c c_ref_sigma)) ) in *)
-    if ((is_less && clause_greater false false c c_ref_sigma ) or ((not is_less) && clause_geq false false c c_ref_sigma))
+    if ((is_less && clause_greater false false c c_ref_sigma ) || ((not is_less) && clause_geq false false c c_ref_sigma))
       && ((is_strict && clause_greater false false c new_cl ) || ((not is_strict) && clause_geq false false c new_cl) )
     then
       let _ = res := preprocess_conjecture new_cl in
@@ -290,7 +290,7 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
           try
             let p', sigma = t#subterm_matching (fun x s -> condition_2 is_less l_2_r  (b, n, p@x) s true) lhs in
             (b, n, p@p'), sigma, true
-          with (Failure "matching") ->
+          with (Failure _) ->
             let p', sigma = t#subterm_matching (fun x s -> condition_2 is_less l_2_r (b, n, p@x) s false) rhs in
             (b, n, p@p'), sigma, false
         end
@@ -301,7 +301,7 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
     | Pos_all ->
 	(try
           c#subterm_matching (condition_2 is_less l_2_r ) l_2_r
-	with (Failure "matching") ->
+	with (Failure _) ->
 	  let inverted_l = l_2_r#swap in
 	  c#subterm_matching (condition_2 is_less inverted_l) inverted_l)
     | Pos_query -> invalid_arg "equational rewriting" 
@@ -316,14 +316,14 @@ let equational_rewriting verbose c_pos (cxt1,cxt2) c is_strict level =
       try
         let _ = all_conditions cl is_less in
         true (* réussite *)
-      with (Failure "matching") -> false
+      with (Failure _) -> false
     else false in
 
   (* 5: let's do it ! *)
   let () = incr equational_rewriting_counter in
   let _ = if !maximal_output then  buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule EQUATIONAL REWRITING " ^ " on " ^ (string_of_int c#number)) in
 (*   let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
-  if (List.exists (fun x -> absolutely_all_conditions x true) cxt2) or  
+  if (List.exists (fun x -> absolutely_all_conditions x true) cxt2) ||  
     (List.exists (fun x -> absolutely_all_conditions x false) cxt1) then (* succes *)
     !res
   else 
@@ -391,7 +391,7 @@ let reduce_clause is_rewrite fn_rewrite arg_sl _ c cxt =
 	      broken_infos' @ broken_infos, ("\n- rewriting at the position " ^ (sprint_clausal_position (b, n, p)) ^ ":\n" ^ str ^
 					       (* 	      " \n to get " ^ cfinal#string ^ *)
 					       str' ), cl', iHs' 
-	  with (Failure "rewrite") -> 
+	  with (Failure _ (* "rewrite" *)) -> 
 	    let phead = (b, n, [List.hd p]) in
 	    let term = cl#subterm_at_position phead in
 
@@ -448,14 +448,13 @@ let rewriting verbose rw_kind sl pos cxt c is_strict level =
 		  let br_symbs, str, t', iHs =
 		    if rw_kind
 		    then
-		      normalize_plus arg_sl t c "" cxt 0
+		      try normalize_plus arg_sl t c "" cxt 0 with  Failure _ -> failwith "rewriting"
 		    else
-		      rewrite arg_sl t c "" cxt 0
+		      try rewrite arg_sl t c "" cxt 0 with Failure _ -> failwith "rewriting"
 		  in
-		  let res = c#replace_subterm_at_pos p t' in
+		  let res = try c#replace_subterm_at_pos p t'  with  Failure _ -> failwith "rewriting" in
 		    br_symbs, str, res, iHs
-		with (Failure "matching")
-		  | (Failure "rewrite") | (Failure "replace_subterm_at_pos") -> failwith "rewriting"
+		with Failure _ -> failwith "rewriting"
 	      end
 	  | Pos_litdefined _ | Pos_all | Pos_query | Pos_dumb ->
 	      
@@ -467,7 +466,7 @@ let rewriting verbose rw_kind sl pos cxt c is_strict level =
 	  then
 	    let test = if !dracula_mode then (* let () = buffered_output ("str_proof = " ^str_proof) in *) true   else (*  true *) if is_strict then  clause_greater false false c c' else clause_geq false false c c' in
 	    let () = if !broken_order && (not test) then
-	      let broken_info = try List.hd broken_infos with (Failure "hd") -> failwith "We are expecting a non empty list of broken infos" in 
+	      let broken_info = try List.hd broken_infos with (Failure _) -> failwith "We are expecting a non empty list of broken infos" in 
 	      let () = c'#set_broken_info broken_info in
 	      let () = buffered_output ("\nWARNING: broken order !!!") in 
 		(*       let () = print_history normalize c in *)
@@ -555,7 +554,7 @@ let rewriting verbose rw_kind sl pos cxt c is_strict level =
 					    else fn_conj tl
 					else (* let () = buffered_output "\n... but no 2-cycle has been found !" in  *)fn_conj tl
 			    in
-			      try fn_conj sbconjs_historying_cH with Failure "fn_conj" -> 
+			      try fn_conj sbconjs_historying_cH with Failure _ -> 
 				let () = buffered_output ("\nFailed to find a cycle to check the iH (" ^ cH#string ^ " " ^ (sprint_subst epsilon) ^ "), so the conjecture [ " ^ (string_of_int c#number) ^ " ] is put on standby !\n\n") in
 				let () = c#set_standby true in
 				let () = c#set_sb_string (success_str ^ str_proof ^ (List.fold_left (fun s x-> !indent_string ^ "\n\187 " ^ x#string ^ "\n" ^ s) "" res)) in
@@ -570,7 +569,7 @@ let rewriting verbose rw_kind sl pos cxt c is_strict level =
 			let () = buffered_output str_proof in
 			  List.iter (fun x -> let () = buffered_output (!indent_string ^ "\n\187 " ^ x#string ^ "\n") in ()) res 
 		    in
-		    let hyp_rewriting = List.map (fun (c,_,_,s) -> (c, s)) (List.filter (fun (_, los, _, _) -> compare los "C1" == 0 or compare los "C2" == 0)  !rewriting_clauses) in
+		    let hyp_rewriting = List.map (fun (c,_,_,s) -> (c, s)) (List.filter (fun (_, los, _, _) -> compare los "C1" == 0 || compare los "C2" == 0)  !rewriting_clauses) in
 		      (*       let () = buffered_output ("\nsize of rewriting_clauses is " ^ (string_of_int (List.length !rewriting_clauses))) in *)
 		    let () = 
 		      if hyp_rewriting == [] then

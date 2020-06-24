@@ -270,7 +270,7 @@ object (self: 'a)
 
     method maximal_monomial =
       try List.hd content
-      with (Failure "hd") -> failwith "maximal_monomial"
+      with (Failure _) -> failwith "maximal_monomial"
 
     method maximal_multiplicand = snd self#maximal_monomial
 
@@ -307,7 +307,7 @@ object (self: 'a)
       	  if t#syntactic_equal t' && k * k' < 0 then (k, k')
 	  else failwith "combination"
       with 
-	  Failure "maximal_monomial" -> failwith "combination"
+	  Failure _ -> failwith "combination"
 	  
     method independent = true
 

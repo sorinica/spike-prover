@@ -213,7 +213,7 @@ let print_coq_proof f =
   
   (* processing lemmas *)
 
-  let j = ref 0 in
+  (* let j = ref 0 in *)
   let () = coq_all_lemmas := List.map (fun lem -> 
     let lvars = List.map (fun (i, s, _) ->  (i, s)) lem#variables in
     (* let () = buffered_output ("\nlemma coq string: " ^ (lem#compute_string_coq_with_quantifiers false)) in *)
@@ -221,7 +221,7 @@ let print_coq_proof f =
   
   let lemmas = List.fold_right (fun lem s -> 
     let lvars = List.map (fun (i, s, _) ->  (i, s)) lem#variables in
-    let args_str = let () = j:= 0 in List.fold_right (fun (i, s) str -> "(" ^ (if i == 0 then let () = j:= !j + 1 in "_u" ^ (string_of_int !j) else ("u" ^ (string_of_int i))) ^ ": " ^ (dico_sort_string#find s) ^ ")" ^ (if compare str "" == 0 then "" else " ") ^  str) lvars "" in
+    (* let args_str = let () = j:= 0 in List.fold_right (fun (i, s) str -> "(" ^ (if i == 0 then let () = j:= !j + 1 in "_u" ^ (string_of_int !j) else ("u" ^ (string_of_int i))) ^ ": " ^ (dico_sort_string#find s) ^ ")" ^ (if compare str "" == 0 then "" else " ") ^  str) lvars "" in *)
     let title = "\n\nHypothesis true_" ^ (string_of_int lem#number) ^ ": " ^ (* (if compare args_str "" == 0 then "" else "forall ") ^ args_str ^ (if compare args_str "" == 0 then "" else ", ") ^ *) lem#compute_string_coq_with_quantifiers true ^ ".\n" in
     let () =  coq_all_lemmas := (lem#number, (title, lvars)):: !coq_all_lemmas in
     title ^ s) (* lemmas_system#content *) !coq_spec_lemmas "" in
@@ -319,12 +319,12 @@ Proof.
 intros F HF " ^ (fn_var total_number_vars 1 true) ^ "; case_In HF; intro Hind.\n\n"
     
   in
-  let rec rename_t t l = 
-    match t#content with
-	Var_univ (i, s) -> let new_i = List.assoc i l in new term (Var_univ (new_i, s))
-      | Var_exist _ -> failwith "existential variables not yet treated"
-      | Term (f, l', s) -> new term (Term (f,  List.map (fun t' -> rename_t t' l) l', s))
-  in 
+  (* let rec rename_t t l = 
+   *   match t#content with
+   *       Var_univ (i, s) -> let new_i = List.assoc i l in new term (Var_univ (new_i, s))
+   *     | Var_exist _ -> failwith "existential variables not yet treated"
+   *     | Term (f, l', s) -> new term (Term (f,  List.map (fun t' -> rename_t t' l) l', s))
+   * in  *)
   let rec npos n str l =
     match l with
       |	[] -> failwith "npos: not found"
@@ -384,12 +384,12 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
       let () = eq_counter := 0 in
       if compare case_eq_str "" == 0 then 
 	if write_case_eq then init ^ intros1 ^ intros2 else init ^ "\n" 
-      else if not write_case_eq then intros1 ^ intros2 ^ case_eq_str ^ init ^ "\n"  else   "(\* this case is not possible *\)\n"  in
+      else if not write_case_eq then intros1 ^ intros2 ^ case_eq_str ^ init ^ "\n"  else   "(* this case is not possible *)\n"  in
     preambule (*^ exists_f*) ^ stuff1 ^ exists ^ stuff2 
   in
 
   let fn_case_rew orig n_case (subst: (Symbols.var * Terms.term) list) hyp_subst_list info_rewriting = 
-    let _, los, ax_inst, pat_subst = try List.hd info_rewriting with Failure "hd" -> failwith "fn_case_rew: there should be something" in
+    let _, los, ax_inst, pat_subst = try List.hd info_rewriting with Failure _ -> failwith "fn_case_rew: there should be something" in
     let trm = ax_inst#lefthand_side in
     let has_hyp  = hyp_subst_list <> [] (* compare los "C1" == 0 or compare los "C2" == 0 *) in
     let has_lemma = compare los "L" == 0 in
@@ -431,11 +431,11 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 	      | Term (f, l, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else ("(" ^ s ^ (n_underscore l) ^ ")")) with Not_found -> failwith "fn_case_rew: symbol not found" )
 	      | Var_exist _ | Var_univ _ -> failwith "fn_case_rew : lhs is a variable" 
 	  in
-	  let fun_str = 
-	    match trm#content with 
-	      | Term (f, l, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) with Not_found -> failwith "fn_case_rew: symbol not found" )
-	      | Var_exist _ | Var_univ _ -> failwith "fn_case_rew : lhs is a variable" 
-	  in
+	  (* let fun_str = 
+	   *   match trm#content with 
+	   *     | Term (f, l, _) -> (try (let s = dico_const_string#find f in if String.compare s "+" == 0 then "plus" else s) with Not_found -> failwith "fn_case_rew: symbol not found" )
+	   *     | Var_exist _ | Var_univ _ -> failwith "fn_case_rew : lhs is a variable"  *)
+	  (* in *)
 	      (* (if has_hyp then "try rewrite HFabs0.\n" else  *)"\npattern " ^ pat_args ^ ". simpl " ^ fun_arg_str ^ ". cbv beta.\n"
     in
 
@@ -644,7 +644,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 	      let i_subst = 
 		try
 		  let trm = List.assoc i [] in 
-		  trm#compute_string_coq_with_quantifiers [] 
+		  trm#compute_string_coq_with_quantifiers 
 		with Not_found -> (
 		  (  "u" ^ (string_of_int i)))  
 	      in 
@@ -659,7 +659,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 	  let rename_vars1 = j:= 0; List.fold_right (fun (i, _) s -> let () = j := !j + 1 in s ^ (if i == 0 then ("rename u" ^ (string_of_int !j) ^ " into d_u" ^ (string_of_int !j) ^ ". ") else let () = conv_vars := i :: !conv_vars in "rename u" ^ (string_of_int !j) ^ " into _u" ^ (string_of_int i) ^ ". ")) (List.rev vars_case) "" in  
 	  let rename_vars2 = List.fold_right (fun i s -> s ^ "rename _u" ^ (string_of_int i) ^ " into u" ^ (string_of_int i) ^ ". ") !conv_vars "" in
 
-	  let lres_c = List.map fst (List.filter (fun (_, c) -> c#number == n) !coq_less_clauses) in 
+	  (* let lres_c = List.map fst (List.filter (fun (_, c) -> c#number == n) !coq_less_clauses) in  *)
 	  let llits = ref [] in
 	  let lcond = List.fold_right (fun (c,_,ax_inst,_) s -> (List.fold_right (fun l s' -> 
 	    (match l#content with
@@ -738,7 +738,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 	    if not is_hyp then 
 	      sprint_list "\n\n" (fun (n', _) -> fn_case_rew n n' [] [] info_rewriting) linst 
 	    else
-	      let h, _, _, subst = try List.hd info_rewriting with Failure "hd" -> failwith "fn_case_rew: there should be something" in						   
+	      let h, _, _, subst = try List.hd info_rewriting with Failure _ -> failwith "fn_case_rew: there should be something" in						   
  	      let (n', _) = List.hd linst in 
 	      fn_case_rew n n' [] [(h,subst)] (List.tl info_rewriting)
 	  in
@@ -765,7 +765,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 	  in
 	  let ind_scheme = "apply f_" ^ (string_of_int n) ^ "_ind.\n\n" in
 	  let lcond = List.assoc n !coq_generate_cond in
-	  let linst_cond = try List.combine linst lcond with Invalid_argument("List.combine") -> failwith ( "generate: mismatch between conditions and cases : " ^ (string_of_int (List.length lcond)) ^ " and " ^  (string_of_int (List.length linst)))in
+	  let linst_cond = try List.combine linst lcond with Invalid_argument _ -> failwith ( "generate: mismatch between conditions and cases : " ^ (string_of_int (List.length lcond)) ^ " and " ^  (string_of_int (List.length linst)))in
 	  let write_case_eq = ref true in 
 	  let lcase = List.fold_left (fun s ((n', subst), cond) -> 
 	    let init = "(* case [ " ^ (string_of_int n') ^ " ] *)\n" in
@@ -776,10 +776,10 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 		  let lit_subst = lit#substitute subst in
 		  let l, r = lit_subst#both_sides in 
 		  let () = if !maximal_output && !coqc_mode then buffered_output ("r_string is " ^ r#string) in 
-		  if compare l#string "true" == 0 or compare l#string "false" == 0 then 
+		  if compare l#string "true" == 0 || compare l#string "false" == 0 then 
 		    if !write_case_eq then (write_case_eq := false; "case_eq " ^ r#compute_string_coq_with_quantifiers vars_pattern ^ "; [intro H | intro H].\n") else ""
 		  else	 
-		    if compare r#string "true" == 0 or compare r#string "false" == 0 then 
+		    if compare r#string "true" == 0 || compare r#string "false" == 0 then 
 		      if !write_case_eq  then (write_case_eq := false; "case_eq " ^ l#compute_string_coq_with_quantifiers vars_pattern ^ "; [intro H | intro H].\n\n") else ""
 		    else "\n(* several conditions for the unifying axiom are not supported - the case should to be manually checked *)"
 	    in
@@ -853,7 +853,7 @@ assert (HFabs0 : fst (F_" ^ str_case ^ " "
 	      else 
 		let (c1, _, _, _) = List.hd info_rewriting in
 		let (c2, _, _, _) = List.hd (List.tl info_rewriting) in 
-		if c1#negative_lits <> [] or c2#negative_lits <> [] then "\n\n(* This case is not yet supported. Please fill in the proof manually *)\n\n"
+		if c1#negative_lits <> [] || c2#negative_lits <> [] then "\n\n(* This case is not yet supported. Please fill in the proof manually *)\n\n"
 		else 
 		  let c1_str = c1#compute_string_coq_with_quantifiers false in
 		  let c2_str = c2#compute_string_coq_with_quantifiers false in
@@ -955,7 +955,7 @@ Qed.
 					    (*let assert_str = "assert (H: " ^  (if compare args_str "" == 0 then "" else "forall ") ^ args_str ^ (if compare args_str "" == 0 then "" else ", ") ^ c#compute_string_coq_with_quantifiers false ^ ").\n" in	*)    
 					    let (c_case_string, vcase, _) = List.assoc c#number !coq_formulas_with_numbers in
 					    let () = coq_all_lemmas := (c#number, (c_case_string, vcase)) :: !coq_all_lemmas in
-					    let intro_str =  List.fold_right (fun (i, _) str -> (if i == 0 then "" else "intro. ") ^  str) vars_case "" in
+					    (* let intro_str =  List.fold_right (fun (i, _) str -> (if i == 0 then "" else "intro. ") ^  str) vars_case "" in *)
 
 						let n = (string_of_int (List.length (List.filter (fun (i,_) -> i <> 0) vars_case))) in title ^ 
 "Proof.

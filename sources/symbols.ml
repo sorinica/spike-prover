@@ -132,7 +132,7 @@ let subsumes proceed_fun matchfun sigma l l' fn_arith =
 	    let r =  matchfun proceed_fun' s (b', lit')  (b, lit) in 
 (* 	    let () = buffered_output ("\n" ^ (n_spaces i) ^ " lit = " ^ lit#string ^ " \n\tr = " ^ (sprint_subst r) ^  "\n\ts = " ^ (sprint_subst s)) in *)
 	    r
-	  with Failure "matching" -> 
+	  with Failure _ -> 
 	    if(*  !specif_LA_defined *) false  then 
 	      if (b = b') && (b = false) && fn_arith lit then s else failwith "matching"
 	    else failwith "matching") (Failure "matching") l' 
@@ -178,7 +178,7 @@ let newvar () = let i = !greatest_var in incr greatest_var; i;;
 
 let update_greatest_var c =
   try greatest_var := 1 + c#greatest_varcode with
-    Failure "greatest_varcode" -> ()
+    Failure _ -> ()
 ;;
 
 let sort_counter = ref 0;;
@@ -213,7 +213,7 @@ let rec occurs_str str s =
   match s with 
     | Abstr_sort0 str' -> str = str' 
     | Abstr_sort1 (_, s') -> occurs_str str s'
-    | Abstr_sort2 (_, s', s'') -> (occurs_str str s') or (occurs_str str s'')
+    | Abstr_sort2 (_, s', s'') -> (occurs_str str s') || (occurs_str str s'')
     | Def_sort _ -> false
 
 
@@ -272,20 +272,20 @@ let unify_sorts ps s0 =
 		| Abstr_sort0 x -> fn1 x s1 (spaces + 3)
 		| Abstr_sort1 _ | Abstr_sort2 _ -> failwith "fn"
 	    )
-	  | Abstr_sort0 x -> if x = (sprint_sort s2) or (not (occurs_str x s2)) then fn1 x s2 (spaces + 3) else failwith "fn"
+	  | Abstr_sort0 x -> if x = (sprint_sort s2) || (not (occurs_str x s2)) then fn1 x s2 (spaces + 3) else failwith "fn"
 	  | Abstr_sort1 (i, s) -> (
 	      match s2 with 
-		  Abstr_sort0 x -> if x = (sprint_sort s1) or not (occurs_str x s1) then fn1 x s1 (spaces + 3) else failwith "fn"
+		  Abstr_sort0 x -> if x = (sprint_sort s1) || not (occurs_str x s1) then fn1 x s1 (spaces + 3) else failwith "fn"
 		| Abstr_sort1 (i', s') -> if i = i' then Abstr_sort1(i', fn s s' (spaces + 3)) else failwith "fn"
 		| Def_sort _ | Abstr_sort2 _ -> failwith "fn"
 	    )
 	  | Abstr_sort2 (i, s', s'') -> (
 	      match s2 with 
-		  Abstr_sort0 x -> if x = (sprint_sort s1) or not (occurs_str x s1) then fn1 x s1 (spaces + 3) else failwith "fn" 
+		  Abstr_sort0 x -> if x = (sprint_sort s1) || not (occurs_str x s1) then fn1 x s1 (spaces + 3) else failwith "fn" 
 		| Abstr_sort2 (i', s1', s1'') -> if i = i' then Abstr_sort2(i', (fn s' s1' (spaces + 3)), (fn s'' s1'' (spaces + 3))) else failwith "fn"
 		| Def_sort _ | Abstr_sort1 _ -> failwith "fn"
 	    )
-	with Failure "fn" -> failwith "unify_sorts"
+	with Failure _ -> failwith "unify_sorts"
     in 
 (*     let () = if !debug_mode then print_string ("\n" ^ (n_spaces spaces) ^ "The result of unification of s1: " ^ (sprint_sort s1) ^ "  with s2: " ^ (sprint_sort s2) ^ " is " ^ (sprint_sort res)) else () in *)
     res
@@ -297,7 +297,7 @@ let unify_sorts ps s0 =
 
 let equal_sorts s1 s2 = 
   if !specif_parameterized then 
-    try let _ = unify_sorts (Actual_sort s1) s2 in true with Failure "unify_sorts" -> false  
+    try let _ = unify_sorts (Actual_sort s1) s2 in true with Failure _ -> false  
   else
     s1 == s2
 
@@ -648,7 +648,7 @@ let complete_status_dico () =
   dico_const_string#iter fn
 ;;
 
-let get_status id = try dico_id_status#find id with Not_found -> failwith  ("raising Not_found in get_status_id for " ^ (string_of_int id)) ;;
+let get_status id = try dico_id_status#find id with Not_found -> failwith  "get_status" ;;
 
 let greater is_total x y =
   try
@@ -661,7 +661,7 @@ let greater is_total x y =
 
 
 let equivalent x y =
-  x = y or
+  x = y ||
   (try
      List.mem y (dico_equivalence#find x) &&
      (let () =
@@ -703,7 +703,7 @@ let check_status_equivalent_symbols () =
   let fn k v =
     let s = try get_status k with _ -> !default_status in
     let _ =
-      List.for_all (fun x -> (try get_status x with _ -> !default_status) = s) v or
+      List.for_all (fun x -> (try get_status x with _ -> !default_status) = s) v ||
       failwith "check_status_equivalent_symbols"
     in
     ()
@@ -885,7 +885,7 @@ let id_symbol_s = new_constructor ();;
   (* defined but not used *)
 let add_lists_specif () =
   let list_sort = new_sort () 
-  and nat_sort = try dico_sort_string#find_key "nat" with Failure "find_key" -> failwith "raising find_key in add_lists_specif" in
+  and nat_sort = try dico_sort_string#find_key "nat" with Failure _ -> failwith "raising find_key in add_lists_specif" in
   let l_sorts = [list_sort, "list"]
   and l_symbols =
     [new_constructor (), "nil", [list_sort], 0, 0, [];

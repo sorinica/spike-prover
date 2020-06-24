@@ -140,7 +140,7 @@ begin
   let () = buffered_output "Computing critical contexts" in
 (* initializing cc0 *)
   let fn _ n = 
-    let s1 = try dico_sort_string#find_key n with Failure "find_key" -> failwith "compute_critical context0" in
+    let s1 = try dico_sort_string#find_key n with Failure _ -> failwith "compute_critical context0" in
     let all_CC0 = generate_all_contexts_CC0 (Clauses.rewrite_system#depth - 1)  s1   in
     let all_CC0_wo_obs_subcont = List.filter (fun c -> c#has_no_obs_strict_subcontext) all_CC0 in
     cc0 := (!cc0) @  (List.filter (fun c -> is_not_ground_reducible c)  all_CC0_wo_obs_subcont) 
@@ -153,7 +153,7 @@ begin
     let fn1 s n =
       try let _ = dico_obs_sort#find  s in () 
       with Not_found ->
-	let s1 = try dico_sort_string#find_key n with Failure "find_key" -> failwith "compute_critical context1" in
+	let s1 = try dico_sort_string#find_key n with Failure _ -> failwith "compute_critical context1" in
 	let all_T0 = generate_all_contexts_T0 (Clauses.rewrite_system#depth - 1) s1  in 
 	let all_T0_wo_obs_subcont = List.filter (fun c -> c#has_no_obs_strict_subcontext ) all_T0 in 
 	t0 := !t0 @ (List.filter (fun c -> is_not_ground_reducible c ) (all_T0_wo_obs_subcont)) 

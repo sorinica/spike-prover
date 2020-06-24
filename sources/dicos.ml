@@ -231,7 +231,7 @@ class ['a] order_dictionary ini_size =
       	  Not_found -> [] in
       let l' = try Hashtbl.find content x' with 
       	  Not_found -> [] in
-      if List.exists (fun c -> let l_c = try Hashtbl. find content c with Not_found -> [] in List.mem x l_c) (x' :: l') or 
+      if List.exists (fun c -> let l_c = try Hashtbl. find content c with Not_found -> [] in List.mem x l_c) (x' :: l') || 
       List.mem x l then 
 	 failwith ("the symbol " ^ (string_of_int x) ^ " cannot be added to the existing ordering")
       else
@@ -302,10 +302,10 @@ class ['a] order_dictionary ini_size =
             Not_found -> []
         in
         (* let () = *)
-        (*   if List.mem x l' or List.mem x' l then failwith "add_equiv" *)
+        (*   if List.mem x l' || List.mem x' l then failwith "add_equiv" *)
         (* in *)
-	let new_l = try remove_el (=) x' l with Failure "remove_el" -> l in
-	let new_l' = try remove_el (=) x l'  with Failure "remove_el" -> l' in
+	let new_l = try remove_el (=) x' l with Failure _ -> l in
+	let new_l' = try remove_el (=) x l'  with Failure _ -> l' in
 
         (* let fn k v = *)
         (*   if List.mem x v then *)

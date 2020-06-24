@@ -61,7 +61,7 @@ let default_fill_order_dico () =
     in
     let r_cond_symb = try 
       remove_el ( = ) lhs_head_symbol ldef_symb 
-    with Failure "remove_el" -> failwith "default_fill_order_dico"
+    with Failure _ -> failwith "default_fill_order_dico"
     in
     let () = if !debug_mode then 
       let () = buffered_output c#string in
@@ -85,7 +85,7 @@ let default_fill_order_dico () =
 	  with Not_Horn -> failwith "default_fill_order_dico"
 	in
 	  not (List.mem lhs_head_symbol (try dico_order#find rhs_head_symbol with Not_found -> [])) 
-      with Failure "variable" -> true 
+      with Failure _ -> true 
     in
       if is_orientable then
 	List.iter (dico_order#add_couple lhs_head_symbol) r_cond_symb
@@ -103,7 +103,7 @@ let default_fill_order_dico () =
   let () = 
     try
       dico_order#merge_equivalence_relation dico_equivalence ;
-    with (Failure "rehash") ->
+    with (Failure _) ->
       parse_failwith "there are incompatibilities between the order and equivalence relations"
   in
   if !debug_mode then 
@@ -132,7 +132,7 @@ let share_variables s s' =
 let parse_positive_int s =
   let i =
     try int_of_string s
-    with (Failure "int_of_string") -> parse_failwith "not a positive integer"
+    with (Failure _) -> parse_failwith "not a positive integer"
   in if i < 0
   then parse_failwith "not a positive integer"
   else i
@@ -140,7 +140,7 @@ let parse_positive_int s =
 (* Get sort id from string *)
 let find_sort_id s =
   try dico_sort_string#find_key s
-  with Failure "find_key" -> 
+  with Failure _ -> 
     if not (* !specif_paramete
 rized  *) true
     then parse_failwith ("unknown sort \"" ^ s ^ "\"") 
@@ -152,19 +152,19 @@ rized  *) true
 (* Get symbol id from string *)
 let find_symbol_id s =
   try dico_const_string#find_key s
-  with Failure "find_key" -> parse_failwith ("undefined symbol \"" ^ s ^ "\"")
+  with Failure _ -> parse_failwith ("undefined symbol \"" ^ s ^ "\"")
 
   (* Provided an integer reference i, a value, and a (int, _) dictionary, we add the couple
      (i, v) if v is not already t here and increment i (decrement if negative), do nothing otherwise.
      Returns key *)
 let selective_add d i v =
   try d#find_key v with
-    Failure "find_key" -> let n = !i in d#add n v; if n >= 0 then incr i else decr i; n
+    Failure _ -> let n = !i in d#add n v; if n >= 0 then incr i else decr i; n
 ;;
 
 let selective_add_sort d i v =
   try d#find_key v with
-    Failure "find_key" -> let n = !i in d#add (Def_sort n) v; if n >= 0 then incr i else decr i; Def_sort n
+    Failure _ -> let n = !i in d#add (Def_sort n) v; if n >= 0 then incr i else decr i; Def_sort n
 ;;
 
 
@@ -203,7 +203,7 @@ let process_specif_symbol counter s (l, rs) =
     try
       let _ = dico_const_string#find_key sym
       in parse_failwith ("symbol \"" ^ sym ^ "\" already defined")
-    with Failure "find_key" -> ()
+    with Failure _ -> ()
   end ;
   if (l_ar + r_ar) <> List.length l
   then parse_failwith ("mismatch between declared arities and profile")
@@ -218,16 +218,16 @@ let process_specif_symbol counter s (l, rs) =
 let process_function_props list_symb prop =
   let fn id =  
       try
-	let sym = dico_const_string#find_key id in
+	let sym = try dico_const_string#find_key id with Failure _ -> failwith "fn" in
     	let l_ar, r_ar = dico_arities#find sym in
     	if ((l_ar = 0 && r_ar = 2) || (l_ar = 1 && r_ar = 1))
     	then dico_properties#add sym prop
     	else parse_failwith ("symbol \"" ^ id ^ "\" has a profile incompatible with its " ^ 
     	(match prop with Prop_ac -> "AC" | Prop_assoc -> "ASSOC" | Prop_peano -> "") ^ " properties")
-      with Failure "find_key" -> parse_failwith ("symbol \"" ^ id ^ "\" is not defined")
+      with Failure _ -> parse_failwith ("symbol \"" ^ id ^ "\" is not defined")
 	| Not_found -> failwith "raising Not_found in process_function_props"
   in
-  let () =  assert (  prop =  Prop_ac or prop = Prop_assoc) in
+  let () =  assert (  prop =  Prop_ac || prop = Prop_assoc) in
   let _ = List.map fn list_symb in
   ()
           
@@ -254,7 +254,7 @@ let check_explicit_type v s =
     try
       let _ = dico_const_string#find_key v
       in parse_failwith ("attempting to redefine sort of functional symbol " ^ v)
-    with Failure "find_key" -> ()
+    with Failure _ -> ()
   and id = code_of_var v
   and sort_id = find_sort_id s in
   try
@@ -272,7 +272,7 @@ let check_explicit_type v s =
 
 (*
    * The core function: add a new incomplete tree at the first undefined node in "yy_incomplete_tree".
-   * This new tree can be either a Variable node, or a new node with at the root the id of the given symbol,
+   * This new tree can be either a Variable node, || a new node with at the root the id of the given symbol,
    * and as arguments, as many trees as the left arity picked from the stack yy_terms_stack, and as many
    * Undefined nodes as the right arity
    * If no place can be found (the tree is complete), the whole tree is pushed into the stack, and yy_incomplete_tree
@@ -286,14 +286,14 @@ let add_to_incomplete_tree tk =
 	TT_ident s ->
           begin
             try
-	      let id = dico_const_string#find_key s in
+	      let id = try dico_const_string#find_key s with Failure _ -> failwith "fn1" in
 	      let l_ar, r_ar = dico_arities#find id in
 	(* let () = buffered_output ("Popping " ^ (string_of_int l_ar) ^ " elements from stack") ; flush stdout in *)
 	      let l_args = pop_n_times l_ar yy_terms_stack in
 	      let r_args = list_init r_ar (Undefined: incomplete_tree pointer)
 	      in 
 	      Defined (Iterm (id, l_args @ r_args))
-            with Failure "find_key"
+            with Failure _
 	      | Not_found -> let id = code_of_var s in Defined (Ivar id)
           end
       | TT_tree t -> Defined t
@@ -306,7 +306,7 @@ let add_to_incomplete_tree tk =
         try
           let l' = fn2 tk l in
           (Defined (Iterm (s', l'))) :: t
-        with Failure "fn2" ->
+        with Failure _ ->
           h :: (fn2 tk t)
   and fn2 tk = function
       [] -> failwith "fn2"
@@ -333,7 +333,7 @@ let process_term_tokens =
       [] ->
 	let empty_stack = Stack.length yy_terms_stack = 0 in
 	let complete_tree = incomplete_tree_is_complete !yy_incomplete_tree in
-        if  (not empty_stack) or not complete_tree
+        if  (not empty_stack) || not complete_tree
         then parse_failwith "badly formed term"
         else
           let t = !yy_incomplete_tree in
@@ -388,7 +388,7 @@ let rec typecheck_incomplete_tree ps t =
 		Actual_sort s'' -> 
 		  (try
 		    unify_sorts ps s'
-		  with Failure "unify_sorts" ->  parse_failwith ("\nConflicting types: " ^ (sprint_sort s') ^ " and " ^ (sprint_sort s''))
+		  with Failure _ ->  parse_failwith ("\nConflicting types: " ^ (sprint_sort s') ^ " and " ^ (sprint_sort s''))
 		  )
             | Variable_sort x' -> (* We have a sort for y in x = y ; we update the sort of x_{E} *)
 		let l = yy_tmp_equiv_dico#find x' in
@@ -423,7 +423,7 @@ let rec typecheck_incomplete_tree ps t =
         and a' = List.tl p' in
         let () = match ps with
             Actual_sort s'' ->
-              (try let _ = unify_sorts ps s' in () with Failure "unify_sorts" -> 
+              (try let _ = unify_sorts ps s' in () with Failure _ -> 
 (* 		let () = if !debug_mode then print_string ("\ncall of unify_sorts in parser.mly:  the list yy_tmp_param_sorts before application is : " ^ *)
 (* 		(List.fold_right (fun (x, s) y -> (x ^ " has associated the sort " ^ (sprint_sort s) ^ ", " ^ y)) !yy_tmp_param_sorts "")) else () in  *)
 		parse_failwith ("\n Error: sort " ^ (sprint_sort s'') ^ " is not unifiable with " ^ (sprint_sort s')) )
@@ -450,7 +450,7 @@ let literal_of_incomplete_terms lit =
   let x, x', tlit = lit in
   let new_tx = x#expand_sorts in
   let new_tx' = x'#expand_sorts in 
-  let s = try unify_sorts (Actual_sort new_tx#sort) new_tx'#sort with Failure "unify_sorts" -> failwith "literal_of_incomplete_terms" in
+  let s = try unify_sorts (Actual_sort new_tx#sort) new_tx'#sort with Failure _ -> failwith "literal_of_incomplete_terms" in
   let t = term_with_new_sort new_tx s in
   let t' = term_with_new_sort new_tx' s in
   let () = if !debug_mode then ((print_detailed_term t); (print_detailed_term t')) in
@@ -539,7 +539,7 @@ let del_minmax c =
       try 
 	let l1 = List.hd l' in
 	split_f (l1::l) (List.tl l') (len - 1)
-      with Failure "hd" ->
+      with Failure _ ->
 	failwith "split_f"
   in
   let lnegs = c#negative_lits in
@@ -763,7 +763,7 @@ spec_ordering:
             let c' = c#orient in
             let () = buffered_output ("\t" ^ c'#string) in
             (f, l, c')::fn t
-          with (Failure "orient") ->
+          with (Failure _) ->
             parsed_gfile := f ;
             linenumber := l ;
 	    let concl = List.hd ((fun (_, p) -> p) c#content) in
@@ -888,7 +888,7 @@ opt_specif_use:
     | h::_ ->
         try
           add_predefined_specif h
-        with (Failure "add_predefined_specif") ->
+        with (Failure _) ->
           parse_failwith ("\"" ^ h ^ "\" is not a valid predefined specification") in
     fn $3 }
 | TOK_USE TOK_COLUMN
@@ -939,7 +939,7 @@ get_list_of_obs_sorts:
   TOK_IDENT
   { try
      let () = observational_proof := true in
-     let k = (try (dico_sort_string#find_key $1) with Failure "find_key" -> failwith "get_list_of_obs_sorts") in
+     let k = (try (dico_sort_string#find_key $1) with Failure _ -> failwith "get_list_of_obs_sorts") in
      match k with
 	 Def_sort i -> 
 	   let ref_i = ref i in 
@@ -951,7 +951,7 @@ get_list_of_obs_sorts:
 | get_list_of_obs_sorts TOK_IDENT
   { 
     try
-     let k = (try (dico_sort_string#find_key $2) with Failure "find_key" -> failwith "get_list_of_obs_sorts") in
+     let k = (try (dico_sort_string#find_key $2) with Failure _ -> failwith "get_list_of_obs_sorts") in
      match k with
 	 Def_sort i ->
 	   let ref_i = ref i in
@@ -1046,7 +1046,7 @@ opt_specif_axioms:
 |
   { }
 
-/* Properties specification for defined symbols, e.g., AC or C */
+/* Properties specification for defined symbols, e.g., AC || C */
 
 opt_specif_function_props:
   TOK_FUNCTION_PROPS TOK_COLUMN  list_of_raw_symbols TOK_COLUMN TOK_AC TOK_SEMICOLUMN
@@ -1111,7 +1111,7 @@ opt_specif_equivs:
 (* 	print_dico_equivalence (); *)
         dico_order#merge_equivalence_relation dico_equivalence ;
         buffered_output "\nSuccessfully parsed equivalence relation" ; flush stdout
-      with (Failure "rehash") ->
+      with (Failure _) ->
         parse_failwith "t here are incompatibilities between the order and equivalence relations"
   }
 | TOK_EQUIV TOK_COLUMN
@@ -1156,7 +1156,7 @@ opt_specif_status:
     (try complete_status_dico ()
     with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status") );
     try check_status_equivalent_symbols ()
-    with (Failure "check_status_equivalent_symbols") -> parse_failwith "equivalent symbols must have the same status"
+    with (Failure _) -> parse_failwith "equivalent symbols must have the same status"
   }
 | TOK_STATUS TOK_COLUMN
   { buffered_output "\nSuccessfully parsed statuses" ; flush stdout ;
@@ -1164,7 +1164,7 @@ opt_specif_status:
     (try complete_status_dico ()
     with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status") );
     try check_status_equivalent_symbols ()
-    with (Failure "check_status_equivalent_symbols") -> parse_failwith "equivalent symbols must have the same status"
+    with (Failure _) -> parse_failwith "equivalent symbols must have the same status"
   }
 |
   { buffered_output "\nSuccessfully parsed statuses" ; flush stdout ;
@@ -1172,7 +1172,7 @@ opt_specif_status:
     (try complete_status_dico ()
     with (Failure s) -> parse_failwith ("Symbol \"" ^ s ^ "\" is ac and must have multiset status") );
     try check_status_equivalent_symbols ()
-    with (Failure "check_status_equivalent_symbols") -> parse_failwith "equivalent symbols must have the same status"
+    with (Failure _) -> parse_failwith "equivalent symbols must have the same status"
   }
 
 list_of_statuses:
@@ -1259,12 +1259,11 @@ specif_fun_with_positions:
   TOK_IDENT
   {   
     let n =
-      try
-	let n = dico_const_string#find_key $1
+	let n = try dico_const_string#find_key $1 with Failure _ -> parse_failwith ("symbol " ^ $1 ^ " is not a defined function")
 	in if is_defined n
 	then n
 	else parse_failwith ("symbol " ^ $1 ^ " is not a defined function")
-      with Failure "find_key" -> parse_failwith ("symbol " ^ $1 ^ " is not a defined function")
+      
     in 
     try
       let l = (dico_ind_positions_v0#find n) in
@@ -1274,20 +1273,19 @@ specif_fun_with_positions:
 | TOK_IDENT TOK_LPAR list_of_positions TOK_RPAR
   { 
     let n =
-      try
-        let n = dico_const_string#find_key $1
+        let n = try dico_const_string#find_key $1 with Failure _ -> parse_failwith ("symbol " ^ $1 ^ " is not a defined function")
         in if is_defined n
         then n
         else parse_failwith ("symbol " ^ $1 ^ " is not a defined function")
-      with Failure "find_key" -> parse_failwith ("symbol " ^ $1 ^ " is not a defined function")
+      
     in try
       let l = dico_ind_positions_v0#find n in
       let all_ind_pos = list_remove_doubles (=) (List.flatten l) in
-      let _ = generic_setminus all_ind_pos $3
+      let _ = try generic_setminus all_ind_pos $3 with (Failure _) -> parse_failwith ("provided induction positions of symbol \"" ^ $1 ^
+        "\" are not a subset of actual positions") 
       in Ind_pos_position (List.sort (fun x y -> if x < y then -1 else if x == y then 0 else 1) (List.map (fun p -> n, p) $3))
     with Not_found -> parse_failwith ("symbol \"" ^ $1 ^ "\" has no induction positions")
-      | (Failure "setminus") -> parse_failwith ("provided induction positions of symbol \"" ^ $1 ^
-        "\" are not a subset of actual positions") }
+      }
 | specif_path
   {
     Ind_pos_void
@@ -1621,7 +1619,7 @@ specif_literal:
     let t = process_term_tokens lhs
     and t' = process_term_tokens rhs in
     let content = try (defined_content t) with
-	(Failure "defined_content") -> failwith "defined_content"
+	(Failure _) -> failwith "defined_content"
     in 
     let term_t, term_t' =  
       match content with
@@ -1682,11 +1680,11 @@ one_token:
 list_of_term_tokens:
   list_of_tokens
   { let content = (try defined_content (process_term_tokens $1) with
-      (Failure "defined_content") -> failwith "defined_content")
+      (Failure _) -> failwith "defined_content")
   in [ TT_tree content ] }
 | list_of_term_tokens TOK_COMA list_of_tokens
   { let content = (try (defined_content (process_term_tokens $3)) with
-      (Failure "defined_content") -> failwith "defined_content")
+      (Failure _) -> failwith "defined_content")
   in $1 @ [ TT_tree content ] }
       
 specif_strategies:
@@ -1739,13 +1737,13 @@ strategy_term:
 | TOK_PRINT_GOALS_HISTORY
   { new strategy (Print_goals (false, true)) }
 | TOK_PRINT_GOALS TOK_LPAR TOK_IDENT TOK_RPAR
-  { match String.lowercase $3 with
+  { match String.lowercase_ascii $3 with
       "t" | "true" -> new strategy (Print_goals (true, false))
     | "f" | "false" -> new strategy (Print_goals (false, false))
     | _ -> parse_failwith "Bad argument for strategy \"print_goals\"" }
 
 | TOK_PRINT_GOALS_HISTORY TOK_LPAR TOK_IDENT TOK_RPAR
-  { match String.lowercase $3 with
+  { match String.lowercase_ascii $3 with
       "t" | "true" -> new strategy (Print_goals (true, true))
     | "f" | "false" -> new strategy (Print_goals (false, true))
     | _ -> parse_failwith "Bad argument for strategy \"print_goals_history\"" }
@@ -1765,7 +1763,7 @@ reasoning_module:
   { match $3 with
       "rewrite" -> (Rewriting (false, $5, $7))
     | "normalize" -> (Rewriting (true, $5, $7))
-    | _ -> parse_failwith "argument of rewriting must be either \"rewrite\" or \"normalize\"" }
+    | _ -> parse_failwith "argument of rewriting must be either \"rewrite\" || \"normalize\"" }
 | TOK_PARTIAL_CASE_REWRITING TOK_LPAR specif_list_of_systems TOK_COMA specif_literal_position_in_clause TOK_RPAR
   { Partial_case_rewriting ($3, $5) }
 | TOK_TOTAL_CASE_REWRITING TOK_LPAR strategy_term TOK_COMA specif_list_of_systems TOK_COMA specif_literal_position_in_clause TOK_RPAR
@@ -1964,12 +1962,12 @@ specif_clausal_position:
       match i with
         0 -> false
       | 1 -> true
-      | _ -> parse_failwith "clausal position must start with 0 or 1"
+      | _ -> parse_failwith "clausal position must start with 0 || 1"
     in Pos_defined (b, parse_positive_int $2, $3) }
 | TOK_IDENT
   { match $1 with
       "*" -> Pos_all
-    | _ -> parse_failwith "clausal position is either \"*\" or a real position" }
+    | _ -> parse_failwith "clausal position is either \"*\" || a real position" }
 | TOK_QUESTION_MARK
   { Pos_query }
 

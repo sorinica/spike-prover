@@ -30,7 +30,7 @@ let rec max_propagate_s t =
 	      let arg2'_s = max_propagate_s arg2' in
 	      new term (Term (id_symbol_max, [arg1'_s;arg2'_s], id_sort_nat))
 	    else
-	      let () = if !maximal_output then buffered_output ("max_propagate_s: symbol " ^ (dico_const_string#find f') ^ " not managed by Rmaxs0") in failwith "outside Rmax"
+	      let () = if !maximal_output then buffered_output ("max_propagate_s: symbol " ^ (dico_const_string#find f') ^ " not managed by Rmaxs0") in failwith "max_propagate_s"
 	)
       else if f == id_symbol_max then
 	let arg1 = List.hd l in
@@ -41,7 +41,7 @@ let rec max_propagate_s t =
 	else if arg2'#syntactic_equal zero_t then arg1'
 	else new term (Term (id_symbol_max, [arg1';arg2'], id_sort_nat))
       else
-	let () = if !maximal_output then buffered_output ("max_propagate_s: symbol " ^ (dico_const_string#find f) ^ " not managed by Rmaxs0") in failwith "outside Rmax"
+	let () = if !maximal_output then buffered_output ("max_propagate_s: symbol " ^ (dico_const_string#find f) ^ " not managed by Rmaxs0") in failwith "max_propagate_s"
 
 let rec max_smaller x l = 
   let rec fn_smaller t t' =
@@ -116,7 +116,7 @@ let rec max_ordered l l' =
   
 let max_norm t i = 
   let ts = try max_propagate_s t 
-    with Failure "outside Rmax" -> failwith "max_norm" 
+    with Failure _ -> failwith "max_norm" 
   in
   (* let () = buffered_output ("\nAfter max_propagate, t = " ^ t#string) in *)
   let list_ts = max_list ts in

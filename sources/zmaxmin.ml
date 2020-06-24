@@ -190,7 +190,7 @@ let zmm_norm t i =
   let ts = 
     try 
       zmm_propagate_min t 0 
-    with Failure "outside Rzmm" -> failwith "zmm_norm" 
+    with Failure _ -> failwith "zmm_norm" 
   in
   (* let () = buffered_output ("\nAfter zmm_propagate_min, t = " ^ ts#string) in *)
   let list_ts = zmm_list ts in

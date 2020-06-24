@@ -2,7 +2,7 @@
 echo "***************   Starting computation  **********************"
 
 j=0
-for i in  even2odd sorted even_odd tree_list 
+for i in  even2odd sorted  tree_list 
 
 do
 j=`expr $j + 1`

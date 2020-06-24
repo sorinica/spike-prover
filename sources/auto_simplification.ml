@@ -57,8 +57,8 @@ y *)
 		let trm = trm'#copy in
 		try 
 (* 		  let () = buffered_output ("\ntrm' = " ^ trm#string ^ " with s = " ^ s#string) in *)
-		  let p = s#subterm trm in
-(* 		  let _ = unify_sorts (Actual_sort s#sort) t#sort in *)
+		  let p = try s#subterm trm with Failure _ -> failwith "fn3" in
+(* 		  let _ = try unify_sorts (Actual_sort s#sort) t#sort with Failure _ -> failwith "fn3" in *)
 (* 		  if p = [] then trm' else *)
 (* 		  let () = buffered_output ("\nPosition p " ^ (sprint_position p) ) in *)
 		    let res = trm#replace_subterm_at_pos p (t#copy) in
@@ -70,7 +70,7 @@ y *)
 		  
 		    res#update_pos 
 		    (* 			else trm *)
-		with Failure "subterm" | Failure "unify_sorts" -> trm'
+		with Failure _-> trm'
 	      in
 	      let lhs, rhs = lit#both_sides in
 	      let lhs' = fn lhs in

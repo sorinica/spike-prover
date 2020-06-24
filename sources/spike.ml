@@ -69,7 +69,7 @@ let () =  main_interact  := fun () ->
     try 
       read_int ()
     with 
-	Failure "int_of_string" |End_of_file -> 
+	Failure _ |End_of_file -> 
 	  let () = buffered_output error in
 	  my_read_int ()
 	    
@@ -122,25 +122,25 @@ let () =  main_interact  := fun () ->
 		  try
 		    let _ =  normal_strat#apply false ([],[]) false in
 		    (
-		      try 
 			if List.length conjectures_system#content <> 1 then let _ = Unix.system ("/usr/X11R6/bin/xmessage " ^ (sprint_goals())) in ()
 			else
 			  let cl = List.hd conjectures_system#content in
-			  let t_norm = cl#subterm_at_position (true, 0, [1]) in
-			  let _ = Unix.system  ("xmessage Resulted normal form: " ^ t_norm#string)  in
+                          try
+			    let t_norm =  cl#subterm_at_position (true, 0, [1]) in
+			    let _ = Unix.system  ("xmessage Resulted normal form: " ^ t_norm#string)  in
 			  ()
-		      with Failure "subterm_at_position" -> let () = buffered_output (sprint_goals()) in ()
+                          with Failure _ -> let () = buffered_output (sprint_goals()) in ()
 		    )
 		  with 
 		    | Refutation -> 
-			try 
 			  if List.length conjectures_system#content <> 1 then let _ = Unix.system ("/usr/X11R6/bin/xmessage " ^ (sprint_goals())) in ()
 			  else
 			    let cl = List.hd conjectures_system#content in
-			    let t_norm = cl#subterm_at_position (true, 0, [1]) in
-			    let _ = Unix.system  ("xmessage Resulted normal form: " ^ t_norm#string) in
-			    ()
-			with Failure "subterm_at_position" -> let _ = Unix.system ("/usr/X11R6/bin/xmessage " ^ (sprint_goals())) in ()
+                            try
+			      let t_norm = cl#subterm_at_position (true, 0, [1]) in
+			      let _ = Unix.system  ("xmessage Resulted normal form: " ^ t_norm#string) in
+			      ()
+                            with Failure _ -> let _ = Unix.system ("/usr/X11R6/bin/xmessage " ^ (sprint_goals())) in ()			
 			  | _ -> let _ = Unix.system ("/usr/X11R6/bin/xmessage " ^ (sprint_goals())) in ()
 		in  
 		let () = interaction_mode := true in
@@ -300,117 +300,117 @@ let out = ref stdout;;
 let out_proof = ref stdout;;
 
 let process_problem_token = function
-Strat_token l ->
-  let () = List.iter (fun (x, y) -> dico_st#replace x y) l in
-  let () = print_dico_st () in
-  true
+    Strat_token l ->
+     let () = List.iter (fun (x, y) -> dico_st#replace x y) l in
+     let () = print_dico_st () in
+     true
   | Lemmas_token l ->
-    let () = all_lemmas := generic_list_object_remove_doubles (!all_lemmas @ l) in
-    let () = coq_spec_lemmas := l @ !coq_spec_lemmas in
-    true
+     let () = all_lemmas := generic_list_object_remove_doubles (!all_lemmas @ l) in
+     let () = coq_spec_lemmas := l @ !coq_spec_lemmas in
+     true
   | Startpoint_token s ->
-    let () = global_strat := s in
-    let () = buffered_output ("Start point is now " ^ s#string) in
-    true
+     let () = global_strat := s in
+     let () = buffered_output ("Start point is now " ^ s#string) in
+     true
   | Augmentation_token s ->
-    let () = augmentation_strat := s in
-    let () = buffered_output ("The strategy for augmentation is " ^ s#string) in
-    true
+     let () = augmentation_strat := s in
+     let () = buffered_output ("The strategy for augmentation is " ^ s#string) in
+     true
   | Hypotheses_token l ->
-    let () = hypotheses_system#init l (fun c -> ()) in
-    true
+     let () = hypotheses_system#init l (fun c -> ()) in
+     true
   | Conjectures_token ll ->
-    let fn c = 
-      let n, p = c#content in 
-      let _ = List.map (fun x -> x#update_pos) n in
-      let _ = List.map (fun x -> x#update_pos) p in
-      let res = c#build n p in
-	(* 	let () = print_dico_ind_positions_v0 () in *)
-	(* 	let () = print_dico_rules () in *)
-      let () = if !maximal_output then print_detailed_clause res in
-      res
-    in
-      (* let () = all_conjectures_system#append l in *)
-    let () = lemmas_system#init !all_lemmas (fun c -> ()) in
-      (* all_lemmas is updated with the proved conjectures from l *)
-    let l' = List.map fn ll in
-    let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture l')) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
-    let () = initial_conjectures := conjectures_system#content in
-    let () = buffered_output   "\n************************  Proving  *************************" in
-    let () = List.iter (fun x -> buffered_output x#string) !initial_conjectures   in
-    let () = buffered_output "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" in
-    let () = 
-      if !all_lemmas <> [] then 
-	let () = buffered_output "\n\nusing lemmas\n" in
-	List.iter (fun x -> buffered_output x#string) lemmas_system#content
-      else () 
-    in
-    let () = 
-      if complete_lemmas_system#content <> [] then 
-	let () = buffered_output "\n\nusing complete lemmas\n" in
-	List.iter (fun x -> buffered_output x#string) complete_lemmas_system#content
-      else () 
-    in
-    let () = 
-      if hypotheses_system#content <> [] then
-	let () = buffered_output "\n\nusing hypotheses\n " in
-	List.iter (fun x -> buffered_output x#string) hypotheses_system#content 
-      else ()
-    in
-      (*       let () = if !global_strat#string = "normalize" then normalize_flag := true else normalize_flag := false in  (* to change this line  *) *)
-    let () = buffered_output "\n\nusing strategy \n"in
-    let () = buffered_output (!global_strat#string  ^ (if !dracula_mode then " mixed with DRaCuLa" else ""))in
-    let () = buffered_output "************************************************************" in
-    let b =
-      try
-        if !global_strat#apply true ([],[]) false && proof_found ()
-        then
+     let fn c = 
+       let n, p = c#content in 
+       let _ = List.map (fun x -> x#update_pos) n in
+       let _ = List.map (fun x -> x#update_pos) p in
+       let res = c#build n p in
+       (* 	let () = print_dico_ind_positions_v0 () in *)
+       (* 	let () = print_dico_rules () in *)
+       let () = if !maximal_output then print_detailed_clause res in
+       res
+     in
+     (* let () = all_conjectures_system#append l in *)
+     let () = lemmas_system#init !all_lemmas (fun c -> ()) in
+     (* all_lemmas is updated with the proved conjectures from l *)
+     let l' = List.map fn ll in
+     let () = conjectures_system#init (List.flatten (List.map preprocess_conjecture l')) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
+     let () = initial_conjectures := conjectures_system#content in
+     let () = buffered_output   "\n************************  Proving  *************************" in
+     let () = List.iter (fun x -> buffered_output x#string) !initial_conjectures   in
+     let () = buffered_output "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" in
+     let () = 
+       if !all_lemmas <> [] then 
+	 let () = buffered_output "\n\nusing lemmas\n" in
+	 List.iter (fun x -> buffered_output x#string) lemmas_system#content
+       else () 
+     in
+     let () = 
+       if complete_lemmas_system#content <> [] then 
+	 let () = buffered_output "\n\nusing complete lemmas\n" in
+	 List.iter (fun x -> buffered_output x#string) complete_lemmas_system#content
+       else () 
+     in
+     let () = 
+       if hypotheses_system#content <> [] then
+	 let () = buffered_output "\n\nusing hypotheses\n " in
+	 List.iter (fun x -> buffered_output x#string) hypotheses_system#content 
+       else ()
+     in
+     (*       let () = if !global_strat#string = "normalize" then normalize_flag := true else normalize_flag := false in  (* to change this line  *) *)
+     let () = buffered_output "\n\nusing strategy \n"in
+     let () = buffered_output (!global_strat#string  ^ (if !dracula_mode then " mixed with DRaCuLa" else ""))in
+     let () = buffered_output "************************************************************" in
+     let b =
+       try
+         if !global_strat#apply true ([],[]) false && proof_found ()
+         then
+           let () = buffered_output "\n\nThe following initial conjectures are inductive consequences of R"
+	   and () = List.iter (fun x -> buffered_output ("\n" ^ x#string))  !initial_conjectures in
+           let () = exit_code := 0 in
+
+	   (* 	    let () = if !coqc_mode then *)
+	   (* 	      let () = if !maximal_output then buffered_output  ("\n\n(\* Generating the COQ proof for the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*\)\n" ) in *)
+	   (* 	      let () =  output_string !out  ("\n\n(\* Generating the COQ proof for the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*\)\n" ) in *)
+	   (* 	      let () = print_coq_proof !out in *)
+	   (* 	      (\* Initialize coq proof *\) *)
+	   (* 	      let () = coq_formulas_with_infos := [] in *)
+	   (* 	      let () = coq_less_clauses := [] in *)
+	   (* 	      let () = coq_main_lemma := "" in *)
+	   (* 	      let () = main_lemma_proof := "" in *)
+	   (* 	      let () = coq_induction_schemas := "" in *)
+	   (* 		()  *)
+	   (* 	    in *)
+           true
+         else
+           let () = buffered_output "\n\nWe failed on the initial conjectures" 
+	   and () = List.iter (fun x -> buffered_output x#string; if !maximal_output then write_pos_clause x) !initial_conjectures
+	   in
+           let () = exit_code := 3 in
+           false
+       with 
+	 Proof ->
           let () = buffered_output "\n\nThe following initial conjectures are inductive consequences of R"
 	  and () = List.iter (fun x -> buffered_output ("\n" ^ x#string))  !initial_conjectures in
+	  let () = all_lemmas := (* list_remove_doubles (fun x y -> x#syntactic_equal y) *) (!all_lemmas @ !initial_conjectures) in
           let () = exit_code := 0 in
-
-	    (* 	    let () = if !coqc_mode then *)
-	    (* 	      let () = if !maximal_output then buffered_output  ("\n\n(\* Generating the COQ proof for the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*\)\n" ) in *)
-	    (* 	      let () =  output_string !out  ("\n\n(\* Generating the COQ proof for the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*\)\n" ) in *)
-	    (* 	      let () = print_coq_proof !out in *)
-	    (* 	      (\* Initialize coq proof *\) *)
-	    (* 	      let () = coq_formulas_with_infos := [] in *)
-	    (* 	      let () = coq_less_clauses := [] in *)
-	    (* 	      let () = coq_main_lemma := "" in *)
-	    (* 	      let () = main_lemma_proof := "" in *)
-	    (* 	      let () = coq_induction_schemas := "" in *)
-	    (* 		()  *)
-	    (* 	    in *)
-          true
-        else
-          let () = buffered_output "\n\nWe failed on the initial conjectures" 
-	  and () = List.iter (fun x -> buffered_output x#string; if !maximal_output then write_pos_clause x) !initial_conjectures
+	  (* Initialize coq proof *)
+	  let () = if !coqc_mode then
+		     let () = if !maximal_output then buffered_output  ("\n\n(* Generating the COQ proof of the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*)\n" ) in
+		     let () = output_string !out  ("\n\n(* Generating the COQ proof of the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*)\n" ) in
+		     let () = print_coq_proof !out_proof in
+	             (* Initialize coq proof *)
+		     let () = coq_formulas := [] in
+		     let () = coq_formulas_with_infos := [] in
+		     let () = coq_less_clauses := [] in
+		     let () = coq_main_lemma := "" in
+		     let () = main_lemma_proof := "" in
+		     let () = coq_replacing_clauses := [] in
+		     let () = coq_induction_schemas := "" in
+		     () 
 	  in
-          let () = exit_code := 3 in
-          false
-      with 
-	  Proof ->
-            let () = buffered_output "\n\nThe following initial conjectures are inductive consequences of R"
-	    and () = List.iter (fun x -> buffered_output ("\n" ^ x#string))  !initial_conjectures in
-	    let () = all_lemmas := (* list_remove_doubles (fun x y -> x#syntactic_equal y) *) (!all_lemmas @ !initial_conjectures) in
-            let () = exit_code := 0 in
-	    (* Initialize coq proof *)
-	    let () = if !coqc_mode then
-		let () = if !maximal_output then buffered_output  ("\n\n(* Generating the COQ proof of the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*)\n" ) in
-		let () = output_string !out  ("\n\n(* Generating the COQ proof of the conjectures:\n\n  " ^ (sprint_list "\n  " (fun x -> x#compute_string_coq_with_quantifiers true) !initial_conjectures) ^ "\n\n*)\n" ) in
-		let () = print_coq_proof !out_proof in
-	      (* Initialize coq proof *)
-		let () = coq_formulas := [] in
-		let () = coq_formulas_with_infos := [] in
-		let () = coq_less_clauses := [] in
-		let () = coq_main_lemma := "" in
-		let () = main_lemma_proof := "" in
-		let () = coq_replacing_clauses := [] in
-		let () = coq_induction_schemas := "" in
-		() 
-	    in
-            true
-        | Refutation ->
+          true
+       | Refutation ->
           if !system_is_strongly_sufficiently_complete && !system_is_ground_convergent && !free_constructors
           then
             let () = buffered_output "\n\nWe have a refutation of the initial conjectures" in
@@ -422,131 +422,131 @@ Strat_token l ->
 	    and () = List.iter (fun x -> buffered_output x#string) !initial_conjectures in
             let () = exit_code := 2 in
             false
-        | Sys.Break -> 
+       | Sys.Break -> 
           let () = buffered_output "\n\nUser interruption by Sys.Break" in
           let () = buffered_output "\n\n while proving the following initial conjectures"
 	  and () = List.iter (fun x -> buffered_output x#string) !initial_conjectures in
 	  let () = exit_code := 4 in
 	  false
-	| MyExit s ->
+       | MyExit s ->
 	  let () = flush stdout in
 	  let () = buffered_output ("\n\nUser interruption by MyExit with " ^ s)in
           let () = buffered_output "\n\n while proving the following initial conjectures"
 	  and () = List.iter (fun x -> buffered_output x#string) !initial_conjectures in
           let () = exit_code := 4 in
           false
-        | ex  ->
+       | ex  ->
           let () = buffered_output ("\n\nUncaught exception: " ^ (Printexc.to_string ex)) in
           let () = buffered_output "\n\n while proving the following initial conjectures"
 	  and () = List.iter (fun x -> buffered_output x#string) !initial_conjectures in
           let () = exit_code := (-1) in
           false 
-    in
-    let () = hypotheses_system#init [] (fun c -> ()) in
-    let () = buffered_output ("Elapsed time: " ^ (string_of_float (Sys.time ())) ^ " s") in
-    let () = buffered_output (sprint_useful_values ()) in
-    b
+     in
+     let () = hypotheses_system#init [] (fun c -> ()) in
+     let () = buffered_output ("Elapsed time: " ^ (string_of_float (Sys.time ())) ^ " s") in
+     let () = buffered_output (sprint_useful_values ()) in
+     b
   | Cterm_token l ->
-    let rec fn  = function 
-    [] -> []
-      | trm :: tl -> 
-	    (* 	    let () = buffered_output ("\ntreating trm = " ^ trm#string) in *)
-	let res_tl = fn tl in
-	let res_trm = List.fold_left (fun lst c -> 
-	      (* 	      let () = buffered_output ("\ntreating c = " ^ c#string) in *)
-	  let res = 
-	    try 
-	      let lhs = c#lefthand_side in
-	      let _ =  lhs#matching (fun s -> s) trm in
-	      (try
-		 let c' = c#orient in
-		 [c']
-	       with (Failure "orient") ->
-		 match (List.hd c#positive_lits)#content with
-		     Lit_equal _ 
-		   | Lit_rule _ -> 
-      		     let c' = c#force_orientation in
-		     let () = buffered_output ("\t" ^ c'#string) in
-			  (* let () = broken_order := true in  *)
-		     let () = buffered_output ("\nWARNING: the lemma [" ^ (string_of_int c#number) ^ "] is not orientable in a rewrite rule using the current order") in
-		     [c']
-		   | Lit_diff _ -> parse_failwith ("The lemma [" ^ (string_of_int c#number) ^ "] is not orientable") 
-	      )
-	    with Not_Horn | (Failure "matching") -> []
-	  in
-	  res @ lst
-	) [] !all_lemmas
-	in 
-	res_trm @ res_tl
-    in
-    let old_content = complete_lemmas_system#content in
-    let () = complete_lemmas_system#init (old_content @ (fn l)) (fun c -> ()) in 
-    true
+     let rec fn  = function 
+         [] -> []
+       | trm :: tl -> 
+	  (* 	    let () = buffered_output ("\ntreating trm = " ^ trm#string) in *)
+	  let res_tl = fn tl in
+	  let res_trm = List.fold_left (fun lst c -> 
+	                    (* 	      let () = buffered_output ("\ntreating c = " ^ c#string) in *)
+	                    let res = 
+	                      match c#lefthand_side with 
+                              | exception Not_Horn -> []
+                              | lhs ->
+ 	                         match lhs#matching (fun s -> s) trm with 
+                                 | exception (Failure _) -> []
+                                 | _ -> 
+	                            (try
+		                       let c' = c#orient in
+		                       [c']
+	                             with (Failure _) ->
+		                           match (List.hd c#positive_lits)#content with
+		                             Lit_equal _ 
+		                           | Lit_rule _ -> 
+      		                              let c' = c#force_orientation in
+		                              let () = buffered_output ("\t" ^ c'#string) in
+			                      (* let () = broken_order := true in  *)
+		                              let () = buffered_output ("\nWARNING: the lemma [" ^ (string_of_int c#number) ^ "] is not orientable in a rewrite rule using the current order") in
+		                              [c']
+		                           | Lit_diff _ -> parse_failwith ("The lemma [" ^ (string_of_int c#number) ^ "] is not orientable") 
+	                            )
+	                    in
+	                    res @ lst
+	                  ) [] !all_lemmas
+	  in 
+	  res_trm @ res_tl
+     in
+     let old_content = complete_lemmas_system#content in
+     let () = complete_lemmas_system#init (old_content @ (fn l)) (fun c -> ()) in 
+     true
   | Norm_token l ->
-    let f t =
-      let () = buffered_output ("\nNormalizing ONLY with unconditional rules: " ^ t#string) in
-      let c_dummy = List.hd rewrite_system#content in
-      let _, str, t', _ = normalize_plus [R;L] t c_dummy "" ([],[]) 0 in
-      buffered_output ("\n" ^  t'#string ^ " is the normal form of " ^ t#string ^ (if str = "" then "" else " obtained by the following operations :" ^ str)) in
-    let () = List.iter f l in 
-    true
+     let f t =
+       let () = buffered_output ("\nNormalizing ONLY with unconditional rules: " ^ t#string) in
+       let c_dummy = List.hd rewrite_system#content in
+       let _, str, t', _ = normalize_plus [R;L] t c_dummy "" ([],[]) 0 in
+       buffered_output ("\n" ^  t'#string ^ " is the normal form of " ^ t#string ^ (if str = "" then "" else " obtained by the following operations :" ^ str)) in
+     let () = List.iter f l in 
+     true
   | Rpo_token (t, t') ->
-    let () = buffered_output "Comparing \n" in
-    let () = buffered_output ("t  = " ^ t#string)
-    and () = buffered_output ("t' = " ^ t'#string) in
-    let s =
-      if rpo_equivalent t t' then "t ~ t'"
-      else 
-	if rpo_greater false t t' then "t > t'"
-	else if rpo_greater false t' t then "t < t'"
-	else "t and t' are not comparable" in
-    let () = buffered_output s in
-    true
+     let () = buffered_output "Comparing \n" in
+     let () = buffered_output ("t  = " ^ t#string)
+     and () = buffered_output ("t' = " ^ t'#string) in
+     let s =
+       if rpo_equivalent t t' then "t ~ t'"
+       else 
+	 if rpo_greater false t t' then "t > t'"
+	 else if rpo_greater false t' t then "t < t'"
+	 else "t and t' are not comparable" in
+     let () = buffered_output s in
+     true
   | Compare_token (c, c') ->
-    let () = buffered_output ("c  = " ^ c#string)
-    and () = buffered_output ("c' = " ^ c'#string) in
-    let s =
-      if clause_equiv false false c c' then "c ~ c'"
-      else if clause_greater false false c c' then "c > c'"
-      else if clause_greater false false c' c then "c < c'"
-      else "c and c' are not comparable" in
-    let () = buffered_output s in
-    true 
+     let () = buffered_output ("c  = " ^ c#string)
+     and () = buffered_output ("c' = " ^ c'#string) in
+     let s =
+       if clause_equiv false false c c' then "c ~ c'"
+       else if clause_greater false false c c' then "c > c'"
+       else if clause_greater false false c' c then "c < c'"
+       else "c and c' are not comparable" in
+     let () = buffered_output s in
+     true 
   | Compare_max_token (c, c') ->
-    let () = buffered_output ("c  = " ^ c#string)
-    and () = buffered_output ("c' = " ^ c'#string) in
-    let s =
-      if clause_equiv true false c c' then "c ~ c'"
-      else if clause_greater true false c c' then "c > c'"
-      else if clause_greater true false c' c then "c < c'"
-      else "c and c' are not comparable" in
-    let () = buffered_output s in
-    true 
+     let () = buffered_output ("c  = " ^ c#string)
+     and () = buffered_output ("c' = " ^ c'#string) in
+     let s =
+       if clause_equiv true false c c' then "c ~ c'"
+       else if clause_greater true false c c' then "c > c'"
+       else if clause_greater true false c' c then "c < c'"
+       else "c and c' are not comparable" in
+     let () = buffered_output s in
+     true 
   | Match_token (t, t') ->
-    let () = buffered_output ("t  = " ^ t#string)
-    and () = buffered_output ("t' = " ^ t'#string) in
-    let () = 
-      try 
-	let pos, subst = 
-	  t#subterm_matching (fun _ s -> s) t' in
-	buffered_output 
-	  ("the substitution " ^  sprint_subst subst ^ " applied to (" ^ t#string ^ ") " ^ " gives (" ^
-	      t'#string ^ ") at the position " ^ (sprint_position pos) ) 
-      with Failure "matching" -> 
-	buffered_output ("no matching")
-    in
-    let () = buffered_output ("################################################################################") in
-    true
+     let () = buffered_output ("t  = " ^ t#string)
+     and () = buffered_output ("t' = " ^ t'#string) in
+     let () = 
+       match t#subterm_matching (fun _ s -> s) t' with
+       | exception (Failure _) ->  buffered_output ("no matching")
+       | pos, subst ->
+	  buffered_output 
+	    ("the substitution " ^  sprint_subst subst ^ " applied to (" ^ t#string ^ ") " ^ " gives (" ^
+	       t'#string ^ ") at the position " ^ (sprint_position pos) ) 
+     in
+     let () = buffered_output ("################################################################################") in
+     true
   | Message_token s ->
-    let () = buffered_output s
-    in true
+     let () = buffered_output s
+     in true
   | Ac_token (_, _) ->
-      (*       let () = buffered_output ("l  = " ^ (sprint_list " ; " (fun x -> x#string) l)) *)
-      (*       and () = buffered_output ("l' = " ^ (sprint_list " ; " (fun x -> x#string) l')) in *)
-      (*       let sigma = subsumes (fun s -> s) (fun proceed_fun s y z -> y#matching_core proceed_fun s [ (z, y) ]) [] l l' *)
-      (*       in let _ = print_endline ("subsumption sigma = " ^ (sprint_subst sigma)) *)
-      (*       in *) 
-    true
+     (*       let () = buffered_output ("l  = " ^ (sprint_list " ; " (fun x -> x#string) l)) *)
+     (*       and () = buffered_output ("l' = " ^ (sprint_list " ; " (fun x -> x#string) l')) in *)
+     (*       let sigma = subsumes (fun s -> s) (fun proceed_fun s y z -> y#matching_core proceed_fun s [ (z, y) ]) [] l l' *)
+     (*       in let _ = print_endline ("subsumption sigma = " ^ (sprint_subst sigma)) *)
+     (*       in *) 
+     true
 	   
 let specif_counter = ref 0
   

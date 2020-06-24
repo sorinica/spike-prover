@@ -77,7 +77,7 @@ let rec rpo is_total ((s:term),(t:term)) =
 		  GR else NGE
 	      else if equivalent f g then
 		((* if List.for_all (fun ti -> (rpo is_total (s,ti) == GR)) ts then *)
-		   let st = try get_status f with Failure "raising Not_found in get_status_id" -> Multiset in
+		   let st = try get_status f with Failure _ -> Multiset in
 		     match st with
 		       | Left -> lex (rpo is_total) (ss,ts)
 		       | Right -> 
@@ -223,7 +223,7 @@ let constant_symbols () =
 (* 	      (multiset_geq is_total rpo_equivalent rpo_greater l [t']) *)
 (* 	    end *)
 (* 	| Term (_, _, _), Var_exist (x, _)   *)
-(* 	| Term (_, _, _), Var_univ (x, _) -> (t#occur x) or  *)
+(* 	| Term (_, _, _), Var_univ (x, _) -> (t#occur x) ||  *)
 (* 	    (is_total && (List.for_all (fun (v,_, _) -> v > x) t#variables)) *)
 (* 	| Var_exist(x,_), Var_univ(y,_) *)
 (* 	| Var_exist(x,_), Var_exist(y,_) *)
@@ -237,7 +237,7 @@ let constant_symbols () =
 (* let rpo_geq is_total t t' =  rpo_equivalent t t' || rpo_greater is_total t t' *)
 	
 (* let rpo_incomparable is_total (t:term) (t': term) =  *)
-(*   not ((rpo_greater is_total t t') or (rpo_greater is_total t' t)) *)
+(*   not ((rpo_greater is_total t t') || (rpo_greater is_total t' t)) *)
 
   (* a total order on ground terms  *)
   (* as in ACL2 (see term-order in
@@ -252,7 +252,7 @@ let ground_greater t1 t2 =
   let nr_func1 = nr_symb1 - nr_var1 
   and nr_func2 = nr_symb2 - nr_var2
   in
-  (nr_var1 > nr_var2) or (nr_var1 = nr_var2 && nr_func1 > nr_func2) or
+  (nr_var1 > nr_var2) || (nr_var1 = nr_var2 && nr_func1 > nr_func2) ||
   (nr_var1 = nr_var2 && nr_func1 = nr_func2 && (t1#string > t2#string))
   
 let rpos_greater = ref rpo_greater
@@ -267,7 +267,7 @@ let heavier t t' = ground_greater t t'
 (*   in *)
 (*   let d = t#treesize - n *)
 (*   and d' = t'#treesize - n'  *)
-(*   in n > n' or  (n = n' && d > d')  or  *)
+(*   in n > n' ||  (n = n' && d > d')  ||  *)
 (* (try  t#var_content > t'#var_content with Failure "var_content" -> false) ||  *)
 (* (n = n' && d = d' && rpo_greater is_total t t') *)
     
@@ -310,10 +310,10 @@ let ac_distribute_ac_ac f g t =
         if const_equal f f'
         then
           try
-            let l' = megamix (fn2 l) in
-            let l'' = List.map (List.map (fun x -> try fn x with (Failure "fn2") -> x)) l' in
+            let l' = try megamix (fn2 l) with (Failure _) -> failwith "fn" in
+            let l'' = List.map (List.map (fun x -> try fn x with (Failure _) -> x)) l' in
             new term (Term (g, List.map (fun x -> new term (Term (f, x, s))) l'', s))
-          with (Failure "fn2") ->
+          with (Failure _) ->
             new term (Term (f, List.map fn l, s))
         else new term (Term (f, List.map fn l, s))
 
@@ -325,7 +325,7 @@ let ac_distribute_ac_ac f g t =
         | Term (g', l, _) ->
             if const_equal g g'
             then
-              let t' = try fn2 t with (Failure "fn2") -> List.map (fun x -> [x]) t in
+              let t' = try fn2 t with (Failure _) -> List.map (fun x -> [x]) t in
               l::t'
             else [h]::fn2 t in
   fn t
@@ -429,7 +429,7 @@ let determine_ac_category () =
   and l_const = constant_symbols ()
   and l_un = unary_symbols () in
   let fn l = 
-    try dico_const_string#find l with Not_found -> failwith "raising Not_found in determine_ac_category"
+    try dico_const_string#find l with Not_found -> failwith "fn"
   in
   let () = buffered_output ("AC symbols: " ^ (sprint_list ", " fn l_ac)) in
   let test1 l =
@@ -438,7 +438,7 @@ let determine_ac_category () =
     | [_] -> false
     | _ ->
         try
-          let l' = consecutive_elements l in
+          let l' = try consecutive_elements l with (Failure _) -> failwith "test1" in
           match l' with
             [] -> false
           | h::t ->
@@ -449,7 +449,7 @@ let determine_ac_category () =
               else
                 let () = ac_symbols_ordered := [] in
                 false
-        with (Failure "consecutive_elements") ->
+        with (Failure _) ->
           let () = ac_symbols_ordered := [] in
           false in
   let rec test2 = function
@@ -470,16 +470,16 @@ let determine_ac_category () =
             minimal l_const h2 &&
             minimal (generic_insert_sorted h2 (generic_merge_sorted_lists l_const l_un)) h1
           then
-            let l_un_2 = generic_intersection_sorted_lists l_un (try dico_order#find h1 with Not_found -> failwith "raising Not_found in determine_ac_category" ) in
+            let l_un_2 = generic_intersection_sorted_lists l_un (try dico_order#find h1 with Not_found -> failwith "test3" ) in
             try
-              let l' = consecutive_elements l_un_2 in
+              let l' = try consecutive_elements l_un_2  with (Failure _) -> failwith "test3" in
               let () = ac_symbol_1 := h1
               and () = ac_symbol_2 := h2
               and () = unary_symbols_ordered := l' in
               true
-            with (Failure "consecutive_elements") -> false
+            with (Failure _) -> false
           else false in
-        fn h1 h2 or fn h2 h1
+        fn h1 h2 || fn h2 h1
     | _ -> false in
   let test4 l =
     match l with
@@ -487,7 +487,7 @@ let determine_ac_category () =
         let fn h1 h2 =
           if greater false h1 h2
           then
-            let l' = generic_remove_sorted h2 (generic_remove_sorted_lists (try dico_order#find h1  with Not_found -> failwith "raising Not_found in determine_ac_category") l_const) in
+            let l' = generic_remove_sorted h2 (generic_remove_sorted_lists (try dico_order#find h1  with Not_found -> failwith "test4") l_const) in
             match l' with
               [h] ->
                 if dico_arities#total_ar h = 1 && greater false h2 h
@@ -499,45 +499,46 @@ let determine_ac_category () =
                 else false
             | _ -> false
           else false in
-        fn h1 h2 or fn h2 h1
+        fn h1 h2 || fn h2 h1
     | _ -> false in
   let rec test5 l =
     try
-      let l' = consecutive_elements l in
+      let l' = try consecutive_elements l  with (Failure _) -> failwith "test5" in
       match l' with
         [] -> false
       | [_] -> false
       | h1::(h2::_ as tl) ->
           let h_n = 
 	    try last_el l' 
-	    with (Failure "last_el") -> failwith "determine_ac_category"
+	    with (Failure _) -> failwith "test5"
 	  in
-          let l_min = generic_remove_sorted_lists (try dico_order#find h_n  with Not_found -> failwith "raising Not_found in determine_ac_category") l_const in
+          let l_min = generic_remove_sorted_lists (try dico_order#find h_n  with Not_found -> failwith "test5") l_const in
           match l_min with
             [h] ->
               if dico_arities#total_ar h = 1
               then
-                let l_mixed = generic_remove_sorted_lists (generic_remove_sorted_lists (try dico_order#find h1  with Not_found -> failwith "raising Not_found in determine_ac_category") l_const) l in
+                let l_mixed = generic_remove_sorted_lists (generic_remove_sorted_lists (try dico_order#find h1  with Not_found -> failwith "test5") l_const) l in
                 let l_mixed' = generic_remove_sorted h l_mixed in
                 if List.for_all (fun x -> dico_arities#total_ar x = 1
 		  && greater false x h2) l_mixed'
                 then
                   try
-                    let l_unaries = consecutive_elements l_mixed' in
+                    let l_unaries = try consecutive_elements l_mixed'  with (Failure _) -> failwith "test5" in
                     let () = ac_symbol_1 := h1
                     and () = unary_symbol_1 := h
                     and () = ac_symbols_ordered := tl
                     and () = unary_symbols_ordered := l_unaries in
                     true
-                  with (Failure "consecutive_elements") -> false
+                  with (Failure _) -> false
                 else
                   false
               else
                 false
           | _ -> false
-    with (Failure "consecutive_elements") -> false in
+    with (Failure _) -> false 
+  in
   let fn l = 
-    try dico_const_string#find l with Not_found -> failwith "raising Not_found in determine_ac_category"
+    try dico_const_string#find l with Not_found -> failwith "fn"
   in
   if test1 l_ac
   then
@@ -551,7 +552,7 @@ let determine_ac_category () =
                               (match !ac_symbols_ordered with
                                 [] -> failwith "determine_ac_category"
                               | h::t ->
-                                  (try dico_const_string#find h with Not_found -> failwith "raising Not_found in determine_ac_category") ^ " > " ^
+                                  (try dico_const_string#find h with Not_found -> failwith "determine_ac_category") ^ " > " ^
                                   (sprint_list ", " fn t))) in
     let () = rpos_greater := fun b t t' -> rpo_greater b (ac_normalize_2 t) (ac_normalize_2 t') in
     ac_symbols_category := 2
@@ -563,7 +564,7 @@ let determine_ac_category () =
         (dico_const_string#find !ac_symbol_1) ^ " (ac) > " ^
         (sprint_list " > " dico_const_string#find !unary_symbols_ordered) ^
         " > " ^ (dico_const_string#find !ac_symbol_2) ^ " (ac)") 
-	with Not_found -> failwith "raising Not_found in determine_ac_category" 
+	with Not_found -> failwith "determine_ac_category" 
 	in
     let () = rpos_greater := fun b t t' -> rpo_greater b (ac_normalize_3 t) (ac_normalize_3 t') in
     ac_symbols_category := 3
@@ -575,7 +576,7 @@ let determine_ac_category () =
         (dico_const_string#find !ac_symbol_1) ^ " (ac) > " ^
         (dico_const_string#find !ac_symbol_2) ^ " (ac) > " ^
         (dico_const_string#find !unary_symbol_1))
-      with Not_found -> failwith "raising Not_found in determine_ac_category" 
+      with Not_found -> failwith "determine_ac_category" 
     in
     let () = rpos_greater := !rpos_greater (* TODO *) in
     ac_symbols_category := 4
@@ -588,7 +589,7 @@ let determine_ac_category () =
                               (sprint_list " > " dico_const_string#find !unary_symbols_ordered) ^
                               " > " ^ (sprint_list " > " dico_const_string#find !ac_symbols_ordered) ^
                               " > " ^ (dico_const_string#find !unary_symbol_1)) 
-      with Not_found -> failwith "raising Not_found in determine_ac_category" 
+      with Not_found -> failwith "determine_ac_category" 
     in
     let () = rpos_greater := !rpos_greater (* TODO *) in
     ac_symbols_category := 5

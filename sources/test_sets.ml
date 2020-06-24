@@ -63,8 +63,8 @@ let generate_constructor_terms d s expand_nullary =
     let profile = try dico_const_profile#find f with Not_found -> failwith "raising Not_found in generate_constructor_terms" in 
     if profile = [] then failwith "generate_constructor_terms" 
     else
-      try 
-	let dummy = unify_sorts (Actual_sort (List.hd profile)) s in
+
+	let dummy = try unify_sorts (Actual_sort (List.hd profile)) s with  Failure _ ->  failwith "generate_constructor_terms"  in
 	let p = List.map (fun x -> expand_sorts x) (List.tl profile) in
 	match p with
 	    [] -> [ new term (Term (f, [], dummy)) ]
@@ -72,7 +72,7 @@ let generate_constructor_terms d s expand_nullary =
 	      let args = List.map (fn (i + 1)) p in
 	      let sets_of_args = megamix args in
 	      List.map (fun l -> new term (Term (f, l, dummy))) sets_of_args
-	with Failure "unify_sorts" ->  failwith "generate_constructor_terms" 
+	
   in
   if d = 0
   then []
@@ -84,14 +84,14 @@ let cs_terms () =
     let d = read_int () in
     let () = print_string "enter sort: " in
     let st = read_line () in
-    let s = dico_sort_string#find_key st in
+    let s = try dico_sort_string#find_key st with Failure _ -> failwith "raising find_key in cs_terms" in
     let l = generate_constructor_terms d s true in
     let () = buffered_output ("Constructor terms: depth " ^ (string_of_int d)
     ^ ", sort " ^ (dico_sort_string#find s) ^ "\n\t"
     ^ (sprint_list "\n\t" (fun x -> x#string) l)) in
     ()
   with Not_found -> failwith "raising Not_found in cs_terms"
-    | Failure "find_key" -> failwith "raising find_key in cs_terms"
+    
 (* Symbols on which induction will be tried. *)
 type induction_position_specification =
     Ind_pos_void
@@ -150,7 +150,7 @@ let compute_induction_posvar (t:term) =
       let trm =  t#subterm_at_position pos in
       if not trm#is_term then [trm, pos]
       else []
-    with Failure "subterm_at_position" -> []
+    with Failure _ -> []
   in
   List.fold_right (fun p l -> let res = fn p in if res = [] then l else insert_sorted ( = ) ( < ) (List.hd res) l) all_pos []
 
@@ -308,7 +308,7 @@ let induction_variables_v1 los (t:term) =
           try
             let ds =  generic_list_max (try List.map dico_ind_positions_v1#find l with Not_found -> failwith "induction_variables_v1") in
             max_assoc x ds (fn t)
-          with (Failure "list_max") -> fn t in
+          with (Failure _) -> fn t in
   fn t#variable_paths
 
 (* Induction variables of a term, version 2.
@@ -380,7 +380,7 @@ let compute_test_set_v2 rw_s =
     try
       let _ = list_special_exists (fun x -> x#var_content) (Failure "var_content") l in
       dico_test_set_v2#remove p
-    with (Failure "var_content") -> () 
+    with (Failure _) -> () 
       | Not_found -> failwith "raising Not_found in compute_test_set_v2" in
   dico_test_set_v2#iter fn3
 

@@ -48,7 +48,7 @@ let print_constructors out =
     let f_print c = 
       let id = dico_const_string#find_key c in
       let l_ar, r_ar = dico_arities#find id in
-     let l_sym = dico_const_string#find id in
+     (* let l_sym = dico_const_string#find id in *)
     (* let () = Printf.printf "#Test: l_sym: %s \n%!" l_sym in *)
  
 
@@ -107,7 +107,7 @@ let sprint_sort_smt srt =
 
 let sprint_lit lit =
   let fun_print t1 t2 is_eq =
-    let s1 = t1#sort in
+    (* let s1 = t1#sort in *)
     let eq_symb = "=" in
     let string_t1 = (sprint_term t1) in
     let string_t2 = (sprint_term t2) in
@@ -154,11 +154,11 @@ let print_axiom out c is_axiom =
   let lp = c#positive_lits in
   let lnat = ref [] in
   let body () = 
-    let list_var lv = 
-      if List.length lv <> 0 then
-	sprint_list " " (fun id -> (string_of_int id)) lv
-      else ""
-    in
+    (* let list_var lv = 
+     *   if List.length lv <> 0 then
+     *     sprint_list " " (fun id -> (string_of_int id)) lv
+     *   else ""
+     * in *)
     
     
     let lvars = sprint_list " " (fun (id, s, _) -> 
@@ -203,7 +203,7 @@ let sprint_profile_smt l =
 
 let print_function out k v =
   let id = dico_const_string#find_key v in
-  let l_ar, r_ar = dico_arities#find id in
+  (* let l_ar, r_ar = dico_arities#find id in *)
   let l_sym =dico_const_string#find id in
   let sort_sym = dico_const_sort#find id in
   let profile = dico_const_profile#find id  in 
@@ -303,7 +303,7 @@ let print_smt c l1 l2 =
 
     let () =flush out in
     let () = close_out out in
-    let n_print_string s = buffered_output s in 
+    (* let n_print_string s = buffered_output s in  *)
     let oc_in, oc_out = Unix.open_process  ( !z3_path ^ " -T:1" ^ " " ^ name ^ ".smt2") in
     let () = try 
 	       while true do

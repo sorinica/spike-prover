@@ -30,7 +30,7 @@ let case_rw_condition_1 lhs rhs =
 (* compute all ([(rw_r_i, sigma_i)]) couples from the rewrite system,
    given p. (b,n,prefix) is a path *)
 let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n p sl _ _ =
-  let t = try c#subterm_at_position (b, n, p) with (Failure "subterm_at_position") -> failwith "case_rw_condition_2_with_p_given" in
+  let t = try c#subterm_at_position (b, n, p) with (Failure _) -> failwith "case_rw_condition_2_with_p_given" in
 (*   let () = buffered_output ("\nTreating t = " ^ t#string) in  *)
   let max_var = c#greatest_varcode + 1 in
 
@@ -53,7 +53,7 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
 		fn_test (n + 2) t' tl
 	      else true
 	    else false 
-	  with Failure "head" -> false
+	  with Failure _ -> false
     in 
 (*     let () = buffered_output ("\n" ^ (n_spaces n) ^ "Final res = " ^ (string_of_bool res)) in *)
     res
@@ -84,13 +84,13 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
 	      in
 	      (h, sub, los) :: fn tail
             with 
-		(Failure "matching") -> 
+		(Failure _) -> 
 		  (   
 		    if los <> "R" then (fn tail) else
 		      try
-	      	      let h' = h#swap_rule in
+	      	      let h' = try h#swap_rule with Failure _ -> failwith "fn" in
 	      	      let lhs' = h'#lefthand_side in
-              	      let sub' = t#matching
+              	      let sub' = try t#matching
 			(fun s ->
 			  let hs', _ = (h'#substitute_and_rename s max_var) in
 			  
@@ -104,17 +104,16 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
 			  then 		    
 			    s
 			  else failwith "matching")
-			lhs'#update_pos
+			lhs'#update_pos with Failure _ -> failwith "fn"
 		      in
 		      (h, sub', los) :: fn tail 
-		    with (Failure "matching") 
-		      | (Failure "swap_rule") -> (fn tail)
+		    with Failure _ -> (fn tail)
 		  )
 	    with Not_Horn -> fn tail
   in
   let lpat_L = if List.mem L sl then complete_lemmas_system#content else [] in
   let lpat_L' = List.map (fun x -> ("L", x)) lpat_L in
-  let k = try t#head with Failure "head" -> failwith ("case: fail on term " ^ t#string) in
+  let k = try t#head with Failure _ -> failwith ("case: fail on term " ^ t#string) in
   let rules_k = try dico_rules#find k with Not_found -> [] in
   let lpat_R = if List.mem R sl then rules_k else [] in
   let lpat_R' = List.map (fun x -> ("R", x)) lpat_R in  
@@ -128,7 +127,7 @@ let case_rw_condition_2_with_p_given final_update (c: peano_context clause) b n 
   let () = if !maximal_output && l <> [] then buffered_output ("\nThe result is\n" ^ (List.fold_left  (fun y (x, _, _) -> ((y ^ x#string ) ^ "\n ")) "" l)) in 
   try 
     final_update t b n p l
-  with (Failure "final_update") -> false
+  with (Failure _) -> false
     
 let generate_cond_and_eq t c b n p l _ =
   let max_var = c#greatest_varcode + 1 in
@@ -186,7 +185,7 @@ let partial_case_rewriting verbose sl c_pos cxt c is_strict level =
         Pos_defined (b, n, p) ->
           begin (* Discards second level PM *)
             try let _ = c#subterm_at_position (b, n, p) in c_pos
-            with (Failure "subterm_at_position") ->
+            with (Failure _) ->
               print_string "Invalid position" ;
               buffered_output "" ;
               !spike_parse_literal_position_in_clause c ()
@@ -194,7 +193,7 @@ let partial_case_rewriting verbose sl c_pos cxt c is_strict level =
       | Pos_litdefined n ->
           begin (* Discards second level PM *)
             try let _ = c#lit_at_position n in c_pos
-            with (Failure "lit_at_position") ->
+            with (Failure _) ->
               print_string "Invalid position" ;
               buffered_output "" ;
               !spike_parse_literal_position_in_clause c ()
@@ -350,7 +349,7 @@ else
         Pos_defined (b, n, p) ->
           begin (* Discards second level PM *)
             try let _ = c#subterm_at_position (b, n, p) in c_pos
-            with (Failure "subterm_at_position") ->
+            with (Failure _) ->
               print_string "Invalid position" ;
               buffered_output "" ;
               !spike_parse_literal_position_in_clause c ()
@@ -358,7 +357,7 @@ else
       | Pos_litdefined (b, n) ->
           begin (* Discards second level PM *)
             try let _ = c#lit_at_position (b, n) in c_pos
-            with (Failure "lit_at_position") ->
+            with (Failure _) ->
               print_string "Invalid position" ;
               buffered_output "" ;
               !spike_parse_literal_position_in_clause c ()
@@ -493,7 +492,7 @@ else
 	    else 
 	      let _ = c#subterm_at_position (b, n, [(List.hd p)]) in 
 		all_conditions t
-	  with Failure "case_rw_condition_2_with_p_given" -> 
+	  with Failure _ -> 
 	    all_conditions t 
   in
     

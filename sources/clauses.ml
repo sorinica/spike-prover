@@ -107,7 +107,7 @@ object (self)
   method print ind_s =
     List.iter (fun x -> buffered_output (ind_s ^ x#string)) content
 
-  method ith i = try List.nth content i with (Failure "nth") -> failwith "ith"
+  method ith i = try List.nth content i with (Failure _) -> failwith "ith"
 
   (* Replace nth element. Put all previous elements at the tail of the list *)
   method replace n el f_smt =
@@ -115,9 +115,9 @@ object (self)
       
   method replace_w_list n (els: 'a list) f_smt =
     let els', els_equal = List.partition (fun x -> not
-      (generic_list_object_member x content)) els in
+                                                     (generic_list_object_member x content)) els in
     let () = if els_equal <> [] then 
-	print_string (List.fold_left (fun str c -> str ^ (" \n The clause " ^ c#string ^ "\n is eliminated from the current set of conjectures since redundant\n\n" ) ) "\n " els_equal) in
+	       print_string (List.fold_left (fun str c -> str ^ (" \n The clause " ^ c#string ^ "\n is eliminated from the current set of conjectures since redundant\n\n" ) ) "\n " els_equal) in
     let els'', content' = if !resolution_mode then resolution els' content else els', content in
     (* dealing with the decision procedures *)
     let els_res = 
@@ -128,38 +128,40 @@ object (self)
 	  then 
 	    let rec update_lenvar t =
 	      match t#content with
-		| Var_univ (i,s) ->
-		  if (s == id_sort_nat) && list_member (=) i !lenvar_l then 
-		    let v = new term (Var_univ (i, id_sort_list)) in
-		    new term (Term (id_symbol_len, [v], id_sort_nat))
-		  else t
-		| Var_exist (i,s)  ->
-		  if (s == id_sort_nat) && list_member (=) i !lenvar_l then 
-		    let v = new term (Var_univ (i, id_sort_list)) in
-		    new term (Term (id_symbol_len, [v], id_sort_nat))
-		  else t
-		| Term (f, l, s) -> let l' = List.map (fun t' -> update_lenvar t') l in
-				    new term (Term (f, l', s))
+	      | Var_univ (i,s) ->
+		 if (s == id_sort_nat) && list_member (=) i !lenvar_l then 
+		   let v = new term (Var_univ (i, id_sort_list)) in
+		   new term (Term (id_symbol_len, [v], id_sort_nat))
+		 else t
+	      | Var_exist (i,s)  ->
+		 if (s == id_sort_nat) && list_member (=) i !lenvar_l then 
+		   let v = new term (Var_univ (i, id_sort_list)) in
+		   new term (Term (id_symbol_len, [v], id_sort_nat))
+		 else t
+	      | Term (f, l, s) -> let l' = List.map (fun t' -> update_lenvar t') l in
+				  new term (Term (f, l', s))
 	    in
 	    list_special_map (fun c -> 
-	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
-		try 
+	        if c#negative_lits == [] && List.length c#positive_lits == 1 then
 		  let () = if !maximal_output then buffered_output ("\nTrying the Rnatlist module on " ^ c#string) in 
 		  let (lhs, rhs) = c#both_sides in 
 		  let () = lenvar_l := [] in
-		  let lhs_norm = natlist_norm lhs 0 in 
-		  let lhs' = update_lenvar lhs_norm in
-		  let () = lenvar_l := [] in
-		  let rhs_norm = natlist_norm rhs 0 in 
-		  let rhs' = update_lenvar rhs_norm in
-		  let () = buffered_output ("\nNormalized lhs = " ^ lhs'#string ^ "\nNormalized rhs = " ^ rhs'#string) in
-		  if  lhs'#syntactic_equal rhs'
-		  then let _ = buffered_output ("\nThe Rnatlist module validated the conjecture " ^ c#string) in 
-		       raise Inconsistent 
-		  else let _ = buffered_output ("\nThe Rnatlist module refuted the conjecture " ^ c#string) in  
-		       raise Refutation 
-		with Failure "natlist_norm" -> c
-	      else c) Inconsistent "\nThe Rnatlist module validated the conjecture " els'' 
+		  match natlist_norm lhs 0 with
+                  | exception (Failure _) -> c
+                  |lhs_norm ->
+		    let lhs' = update_lenvar lhs_norm in
+		    let () = lenvar_l := [] in
+                    match natlist_norm rhs 0 with 
+                    | exception (Failure _) -> c
+		    | rhs_norm ->
+		       let rhs' = update_lenvar rhs_norm in
+		       let () = buffered_output ("\nNormalized lhs = " ^ lhs'#string ^ "\nNormalized rhs = " ^ rhs'#string) in
+		       if  lhs'#syntactic_equal rhs'
+		       then let _ = buffered_output ("\nThe Rnatlist module validated the conjecture " ^ c#string) in 
+		            raise Inconsistent 
+		       else let _ = buffered_output ("\nThe Rnatlist module refuted the conjecture " ^ c#string) in  
+		            raise Refutation 
+	        else c) Inconsistent "\nThe Rnatlist module validated the conjecture " els'' 
 	  else els''
 	in
 	let els_Rzmm = 
@@ -167,20 +169,23 @@ object (self)
 	  else if !specif_Rzmm_defined 
 	  then 
 	    list_special_map (fun c -> 
-	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
-		try 
+	        if c#negative_lits == [] && List.length c#positive_lits == 1 then		  
 		  let () = if !maximal_output then buffered_output ("\nTrying the Rzmm module on " ^ c#string) in 
 		  let (lhs, rhs) = c#both_sides in 
-		  let lhs_norm = zmm_norm lhs 0 in 
-		  let rhs_norm = zmm_norm rhs 0 in 
-		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
-		  if  lhs_norm#syntactic_equal rhs_norm 
-		  then let _ = buffered_output ("\nThe Rzmm module validated the conjecture " ^ c#string) in 
-		       raise Inconsistent 
-		  else let _ = buffered_output ("\nThe Rzmm module refuted the conjecture " ^ c#string) in  
-		       raise Refutation 
-		with Failure "zmm_norm" -> c
-	      else c) Inconsistent "\nThe Rzmm module validated the conjecture " els_Rnatlist 
+		  match zmm_norm lhs 0 with
+                  | exception (Failure _) -> c
+                  | lhs_norm ->
+		     match zmm_norm rhs 0 with
+                     | exception (Failure _) -> c
+                     | rhs_norm ->
+		        let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
+		        if  lhs_norm#syntactic_equal rhs_norm 
+		        then let _ = buffered_output ("\nThe Rzmm module validated the conjecture " ^ c#string) in 
+		             raise Inconsistent 
+		        else let _ = buffered_output ("\nThe Rzmm module refuted the conjecture " ^ c#string) in  
+		             raise Refutation 
+
+	        else c) Inconsistent "\nThe Rzmm module validated the conjecture " els_Rnatlist 
 	  else els_Rnatlist
 	in
 	let els_Rmins0 = 
@@ -188,21 +193,23 @@ object (self)
 	  else if !specif_Rmins0_defined 
 	  then 
 	    list_special_map (fun c -> 
-	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
-		try 
+	        if c#negative_lits == [] && List.length c#positive_lits == 1 then
 		  let () = if !maximal_output then buffered_output ("\nTrying the Rmins0 module on " ^ c#string) in 
 		  let (lhs, rhs) = c#both_sides in 
-		  let lhs_norm = min_norm lhs 0 in 
-		  (* let () = buffered_output "\nDealing with rhs_norm !\n\n\n" in *)
-		  let rhs_norm = min_norm rhs 0 in 
-		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
-		  if  lhs_norm#syntactic_equal rhs_norm 
-		  then let _ = buffered_output ("\nThe Rmins0 module validated the conjecture " ^ c#string) in 
-		       raise Inconsistent 
-		  else let _ = buffered_output ("\nThe Rmins0 module refuted the conjecture " ^ c#string) in  
-		       raise Refutation 
-		with Failure "min_norm" -> c
-	      else c) Inconsistent "\nThe Rmins0 module validated the conjecture " els_Rzmm
+		  match min_norm lhs 0 with
+                  | exception (Failure _) -> c
+                  | lhs_norm ->
+		     (* let () = buffered_output "\nDealing with rhs_norm !\n\n\n" in *)
+		     match min_norm rhs 0 with
+                     | exception (Failure _) -> c
+                     | rhs_norm ->
+		        let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
+		        if  lhs_norm#syntactic_equal rhs_norm 
+		        then let _ = buffered_output ("\nThe Rmins0 module validated the conjecture " ^ c#string) in 
+		             raise Inconsistent 
+		        else let _ = buffered_output ("\nThe Rmins0 module refuted the conjecture " ^ c#string) in  
+		             raise Refutation 
+	        else c) Inconsistent "\nThe Rmins0 module validated the conjecture " els_Rzmm
 	  else els_Rzmm
 	in
 	let els_Rmaxs0 = 
@@ -210,20 +217,22 @@ object (self)
 	  else if !specif_Rmaxs0_defined 
 	  then 
 	    list_special_map (fun c -> 
-	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
-		try 
+	        if c#negative_lits == [] && List.length c#positive_lits == 1 then
 		  let () = if !maximal_output then buffered_output ("\nTrying the Rmaxs0 module on " ^ c#string) in 
 		  let (lhs, rhs) = c#both_sides in 
-		  let lhs_norm = max_norm lhs 0 in 
-		  let rhs_norm = max_norm rhs 0 in 
-		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
-		  if  lhs_norm#syntactic_equal rhs_norm 
-		  then let _ = buffered_output ("\nThe Rmaxs0 module validated the conjecture " ^ c#string) in 
-		       raise Inconsistent 
-		  else let _ = buffered_output ("\nThe Rmaxs0 module refuted the conjecture " ^ c#string) in  
-		       raise Refutation 
-		with Failure "max_norm" -> c
-	      else c) Inconsistent "\nThe Rmaxs0 module validated the conjecture " els_Rmins0
+		  match max_norm lhs 0 with
+                  | exception (Failure _) -> c
+                  | lhs_norm ->
+                     match max_norm rhs 0 with
+                     | exception (Failure _) -> c
+                     | rhs_norm ->		    
+		        let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
+		        if  lhs_norm#syntactic_equal rhs_norm 
+		        then let _ = buffered_output ("\nThe Rmaxs0 module validated the conjecture " ^ c#string) in 
+		             raise Inconsistent 
+		        else let _ = buffered_output ("\nThe Rmaxs0 module refuted the conjecture " ^ c#string) in  
+		             raise Refutation 		  
+	        else c) Inconsistent "\nThe Rmaxs0 module validated the conjecture " els_Rmins0
 	  else els_Rmins0
 	in
 	let els_Rmps0 = 
@@ -231,20 +240,22 @@ object (self)
 	  else if !specif_Rmps0_defined 
 	  then 
 	    list_special_map (fun c -> 
-	      if c#negative_lits == [] && List.length c#positive_lits == 1 then
-		try 
-		  let () = if !maximal_output then buffered_output ("\nTrying the Rmps0 module on " ^ c#string) in 
-		  let (lhs, rhs) = c#both_sides in 
-		  let lhs_norm = np_norm lhs 0 in 
-		  let rhs_norm = np_norm rhs 0 in 
-		  let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
-		  if  lhs_norm#syntactic_equal rhs_norm 
-		  then let _ = buffered_output ("\nThe Rmps0 module validated the conjecture " ^ c#string) in 
-		       raise Inconsistent 
-		  else let _ = buffered_output ("\nThe Rmps0 module refuted the conjecture " ^ c#string) in  
-		       raise Refutation 
-		with Failure "np_norm" -> c
-	      else c) Inconsistent "\nThe Rmps0 module validated the conjecture " els_Rmaxs0 
+	        if c#negative_lits == [] && List.length c#positive_lits == 1 then
+		    let () = if !maximal_output then buffered_output ("\nTrying the Rmps0 module on " ^ c#string) in 
+		    let (lhs, rhs) = c#both_sides in 
+		    match np_norm rhs 0 with
+                    | exception (Failure _) -> c
+                    | rhs_norm -> 
+                       match np_norm lhs 0 with
+                       | exception (Failure _) -> c
+                       | lhs_norm -> 
+		          let () = buffered_output ("\nNormalized lhs = " ^ lhs_norm#string ^ "\nNormalized rhs = " ^ rhs_norm#string) in
+		          if  lhs_norm#syntactic_equal rhs_norm 
+		          then let _ = buffered_output ("\nThe Rmps0 module validated the conjecture " ^ c#string) in 
+		               raise Inconsistent 
+		          else let _ = buffered_output ("\nThe Rmps0 module refuted the conjecture " ^ c#string) in  
+		               raise Refutation 
+	            else c) Inconsistent "\nThe Rmps0 module validated the conjecture " els_Rmaxs0 
 	  else els_Rmaxs0
 	in
 	let els_LA =
@@ -267,7 +278,7 @@ object (self)
     let new_n = if (difference (fun z y -> z#syntactic_equal y) content content') = [] then n else (n-1) in
     let new_n' = if List.length content' < new_n then List.length content' else new_n in
     let new_n'' = if new_n' < 0 then 0 else new_n' in
-    let v, tv = try list_split_at_n new_n'' content' with Failure "list_split_at_n" -> failwith "replace_w_list" in
+    let v, tv = try list_split_at_n new_n'' content' with Failure _ -> failwith "replace_w_list" in
     let tv' = if tv = [] then [] else List.tl tv in
     content <- tv'@v@els_res
 
@@ -319,7 +330,7 @@ class ['a] rw_system (ini_l: 'a list) =
       let l = list_all_but i content in
       new rw_system l
 
-    method ith i = try List.nth content i with (Failure "nth") -> failwith "ith"
+    method ith i = try List.nth content i with (Failure _) -> failwith "ith"
 
     (* Lefthand sides of the rules (i.e. the Horn clauses only) *)
     method lefthand_sides =
@@ -524,102 +535,103 @@ class peano_literal c_p_l' =
       let lhs, rhs = self#both_sides in
       try
 	let _ = t#subterm lhs in true
-      with (Failure "subterm") ->
+      with (Failure _) ->
 	try
 	  let _ = t#subterm rhs in true
-      	with (Failure "subterm") ->
+      	with (Failure _) ->
 	  false
   end
 
 (* negativize a literal. Normal form contains no greater symbols *)
 let rec invert_literal (lit: literal) =
   match lit#content with
-      Lit_diff (x,y) -> convert_literal (new literal (Lit_equal (x,y)))
-    | Lit_equal _ | Lit_rule _ ->
-  	let lhs, rhs = lit#both_sides
-  	and bool_content b t =
-	  try
-	    match t#head_n_sons with
-        	f, [ t1 ; t2 ] ->
-		  if f = id_symbol_less then
-		    if b then
-		      Peano_leq (t2, t1)
-		    else
-		      Peano_less (t1, t2)
-		  else if f = id_symbol_leq then
-		    if b then
-		      Peano_less (t2, t1)
-		    else
-		      Peano_leq (t1, t2)
-		  else if f = id_symbol_greater then
-		    if b then
-		      Peano_leq (t1, t2)
-		    else
-		      Peano_less (t2, t1)
-		  else if f = id_symbol_geq then
-		    if b then
-		      Peano_less (t1, t2)
-		    else
-		      Peano_leq (t2, t1)
-		  else failwith "bool_content"
-	      | _ -> failwith "bool_content"
-	  with (Failure "head_n_sons") -> failwith "bool_content" in
-  	new peano_literal
-	  (
-	    if term_is_true lhs
-	    then try bool_content true rhs with (Failure "bool_content") -> Peano_equal (rhs, term_false)
-	    else if term_is_false lhs
-	    then try bool_content false rhs with (Failure "bool_content") -> Peano_equal (rhs, term_true)
-	    else if term_is_true rhs
-	    then try bool_content true lhs with (Failure "bool_content") -> Peano_equal (lhs, term_false)
-	    else if term_is_false rhs
-	    then try bool_content false lhs with (Failure "bool_content") -> Peano_equal (lhs, term_true)
-	    else Peano_diff (lhs, rhs)
-	  )
-	  
+    Lit_diff (x,y) -> convert_literal (new literal (Lit_equal (x,y)))
+  | Lit_equal _ | Lit_rule _ ->
+     let lhs, rhs = lit#both_sides
+     and bool_content b t =
+       match t#head_n_sons with
+         f, [ t1 ; t2 ] ->
+	  if f = id_symbol_less then
+	    if b then
+	      Peano_leq (t2, t1)
+	    else
+	      Peano_less (t1, t2)
+	  else if f = id_symbol_leq then
+	    if b then
+	      Peano_less (t2, t1)
+	    else
+	      Peano_leq (t1, t2)
+	  else if f = id_symbol_greater then
+	    if b then
+	      Peano_leq (t1, t2)
+	    else
+	      Peano_less (t2, t1)
+	  else if f = id_symbol_geq then
+	    if b then
+	      Peano_less (t1, t2)
+	    else
+	      Peano_leq (t2, t1)
+	  else failwith "bool_content"
+       | exception (Failure _) 
+                   | _ -> failwith "bool_content"
+
+     in
+     new peano_literal
+       (
+	 if term_is_true lhs
+	 then try bool_content true rhs with (Failure _) -> Peano_equal (rhs, term_false)
+	 else if term_is_false lhs
+	 then try bool_content false rhs with (Failure _) -> Peano_equal (rhs, term_true)
+	 else if term_is_true rhs
+	 then try bool_content true lhs with (Failure _) -> Peano_equal (lhs, term_false)
+	 else if term_is_false rhs
+	 then try bool_content false lhs with (Failure _) -> Peano_equal (lhs, term_true)
+	 else Peano_diff (lhs, rhs)
+       )
+     
 (* convert a literal into a Peano literal. Normal form contains no greater symbols *)
 and convert_literal (lit: literal) =
   match lit#content with
-      Lit_diff (x,y) -> invert_literal (new literal (Lit_equal (x,y)))
-    | Lit_equal _ | Lit_rule _ ->
-  	let lhs, rhs = lit#both_sides
-  	and bool_content b t =
-	  try
-	    match t#head_n_sons with
-        	f, [ t1 ; t2 ] ->
-		  if f = id_symbol_less then
-		    if b then
-		      Peano_less (t1, t2)
-		    else
-		      Peano_leq (t2, t1)
-		  else if f = id_symbol_leq then
-		    if b then
-		      Peano_leq (t1, t2)
-		    else
-		      Peano_less (t2, t1)
-		  else if f = id_symbol_greater then
-		    if b then
-		      Peano_less (t2, t1)
-		    else
-		      Peano_leq (t1, t2)
-		  else if f = id_symbol_geq then
-		    if b then
-		      Peano_leq (t2, t1)
-		    else
-		      Peano_less (t1, t2)
-		  else failwith "bool_content"
-	      | _ -> failwith "bool_content"
-	  with (Failure "head_n_sons") -> failwith "bool_content" in
-  	new peano_literal
-	  (if term_is_true lhs
-	  then try bool_content true rhs with (Failure "bool_content") -> Peano_equal (rhs, term_true)
-	  else if term_is_false lhs
-	  then try bool_content false rhs with (Failure "bool_content") -> Peano_equal (rhs, term_false)
-	  else if term_is_true rhs
-	  then try bool_content true lhs with (Failure "bool_content") -> Peano_equal (lhs, term_true)
-	  else if term_is_false rhs
-	  then try bool_content false lhs with (Failure "bool_content") -> Peano_equal (lhs, term_false)
-	  else Peano_equal (lhs, rhs))
+    Lit_diff (x,y) -> invert_literal (new literal (Lit_equal (x,y)))
+  | Lit_equal _ | Lit_rule _ ->
+     let lhs, rhs = lit#both_sides
+     and bool_content b t =
+       match t#head_n_sons with
+         f, [ t1 ; t2 ] ->
+	  if f = id_symbol_less then
+	    if b then
+	      Peano_less (t1, t2)
+	    else
+	      Peano_leq (t2, t1)
+	  else if f = id_symbol_leq then
+	    if b then
+	      Peano_leq (t1, t2)
+	    else
+	      Peano_less (t2, t1)
+	  else if f = id_symbol_greater then
+	    if b then
+	      Peano_less (t2, t1)
+	    else
+	      Peano_leq (t1, t2)
+	  else if f = id_symbol_geq then
+	    if b then
+	      Peano_leq (t2, t1)
+	    else
+	      Peano_less (t1, t2)
+	  else failwith "bool_content"
+       | exception (Failure _) 
+	 | _ -> failwith "bool_content"
+     in
+     new peano_literal
+       (if term_is_true lhs
+	then try bool_content true rhs with (Failure _) -> Peano_equal (rhs, term_true)
+	else if term_is_false lhs
+	then try bool_content false rhs with (Failure _) -> Peano_equal (rhs, term_false)
+	else if term_is_true rhs
+	then try bool_content true lhs with (Failure _) -> Peano_equal (lhs, term_true)
+	else if term_is_false rhs
+	then try bool_content false lhs with (Failure _) -> Peano_equal (lhs, term_false)
+	else Peano_equal (lhs, rhs))
 
 
     (* produces a list of polynoms from a peano_literal *)
@@ -689,16 +701,16 @@ let oracle_a = ref (fun (_: int)
 let normal_form (r : peano_literal list) (trm:ground_term) =
   let rec parcours_positions tr lhs rhs = function
       [] -> tr
-    | p :: t -> try 
-	let tr_at_p = tr#subterm_at_position p in 
+    | p :: t -> 
+	match tr#subterm_at_position p with
+          | exception (Failure _) -> parcours_positions tr lhs rhs t
+          | tr_at_p ->
 	if tr_at_p#syntactic_equal lhs then
 	  let repl = tr#replace_subterm_at_pos p rhs in
 	  rewrite repl r 
 	else
 	  parcours_positions tr lhs rhs t
-      with Failure "subterm_at_position" ->
-	parcours_positions tr lhs rhs t
-	  
+
   and  rewrite tr = function
       [] -> tr
     | h::t ->
@@ -718,15 +730,13 @@ let critical_pairs (a : peano_literal list) (l: ground_term) (r: ground_term) =
   let rec fn = function
       [] -> []
     | h::t ->
-        let lhs, rhs = h#both_sides in
-        try
-          let p = lhs#subterm l in
-          (r, l#replace_subterm_at_pos p rhs)::fn t
-        with (Failure "subterm") ->
-          try
-            let p = l#subterm lhs in
-            (rhs, lhs#replace_subterm_at_pos p r)::fn t
-          with (Failure "subterm") -> fn t
+       let lhs, rhs = h#both_sides in
+       match lhs#subterm l with
+       | p -> (r, l#replace_subterm_at_pos p rhs)::fn t
+       | exception (Failure _) ->
+          match  l#subterm lhs with
+            p ->  (rhs, lhs#replace_subterm_at_pos p r)::fn t
+          | exception (Failure _) -> fn t
   in 
   let crit_pair = fn a in
   if crit_pair = [] then [l, r]
@@ -745,10 +755,9 @@ let inconsistent (d : peano_literal list) (r : peano_literal list) =
 
   (* tests if t' is a subterm of t  *)
 let reduces (t: ground_term) (t':ground_term) =
-  try
-    let _ = t'#subterm t in
-    true
-  with (Failure "subterm") -> false
+    match t'#subterm t with
+      | exception (Failure _) -> false
+      | _ ->   true
 
 let apply_cc cr l =
   let e, d = List.partition (function x -> match x#content with Peano_equal _ -> true | Peano_diff _ -> false | Peano_leq _ | Peano_less _ -> failwith "apply_cc") l in
@@ -756,77 +765,77 @@ let apply_cc cr l =
       [] -> r @ d
     | hd :: tl -> begin
         match hd#content with
-            Peano_equal (s, t) ->
-              let s' = normal_form (r @ cr) s
-              and t' = normal_form (r @ cr) t in
-              if s'#syntactic_equal t'
-              then fn r tl
-              else
-              	let lhs, rhs = 
-		  try orient  s' t' with 
-		      Failure "orient" -> 
-			print_string (" Fail to orient  " ^ 
-			s'#string ^ " = " ^ t'#string); failwith "apply_cc" 
-		in
-		let oriented_lit = new peano_literal (Peano_equal
-		  (lhs, rhs)) in
-              	if inconsistent d (oriented_lit :: (r @ cr))
-              	then raise Inconsistent
-              	else
-                  let r', e' = fn2 lhs rhs r
-                  in fn (oriented_lit :: r') (e' @ tl)
-          |  Peano_diff (s, t) ->
-	       let () = if !maximal_output then print_indent_string ("Peano_diff: s" ^ s#string) in
-	       let () = if !maximal_output then print_indent_string ("Peano_diff: t" ^ t#string) in
-              let s' = normal_form (r @ cr) s
-              and t' = normal_form (r @ cr) t in
-	      if s'#syntactic_equal t' then raise Inconsistent
-	      else failwith "apply_cc"
-	  | Peano_less _ | Peano_leq _ -> failwith "apply_cc"
+          Peano_equal (s, t) ->
+           let s' = normal_form (r @ cr) s
+           and t' = normal_form (r @ cr) t in
+           if s'#syntactic_equal t'
+           then fn r tl
+           else
+             let lhs, rhs = 
+	       try orient  s' t' with Failure _ -> 
+		 print_string (" Fail to orient  " ^ 
+			         s'#string ^ " = " ^ t'#string); failwith "apply_cc" 
+	     in
+	     let oriented_lit = new peano_literal (Peano_equal
+		                                     (lhs, rhs)) in
+             if inconsistent d (oriented_lit :: (r @ cr))
+             then raise Inconsistent
+             else
+               let r', e' = fn2 lhs rhs r
+               in fn (oriented_lit :: r') (e' @ tl)
+        |  Peano_diff (s, t) ->
+	    let () = if !maximal_output then print_indent_string ("Peano_diff: s" ^ s#string) in
+	    let () = if !maximal_output then print_indent_string ("Peano_diff: t" ^ t#string) in
+            let s' = normal_form (r @ cr) s
+            and t' = normal_form (r @ cr) t in
+	    if s'#syntactic_equal t' then raise Inconsistent
+	    else failwith "apply_cc"
+	| Peano_less _ | Peano_leq _ -> failwith "apply_cc"
       end
   and fn2 lhs rhs = function
       [] -> [], []
     | hd::tl -> begin
         match hd#content with
           Peano_equal (s, t) ->
-	    assert (ground_greater s t );
-            let r, e = fn2 lhs rhs tl in
-            if reduces s lhs
-            then
-              r, hd::e
-            else if reduces t lhs
-            then
-              let t' = normal_form r t in
-              ((new peano_literal (Peano_equal (s, t')))::r, e)
-            else
-              let cp = List.map (fun (x, y) -> new peano_literal (Peano_equal (x, y))) (critical_pairs (hd::r) lhs rhs) in
-              hd::r, cp @ e
-          | Peano_diff _| Peano_less _| Peano_leq _ -> failwith "apply_cc" 
+	   assert (ground_greater s t );
+           let r, e = fn2 lhs rhs tl in
+           if reduces s lhs
+           then
+             r, hd::e
+           else if reduces t lhs
+           then
+             let t' = normal_form r t in
+             ((new peano_literal (Peano_equal (s, t')))::r, e)
+           else
+             let cp = List.map (fun (x, y) -> new peano_literal (Peano_equal (x, y))) (critical_pairs (hd::r) lhs rhs) in
+             hd::r, cp @ e
+        | Peano_diff _| Peano_less _| Peano_leq _ -> failwith "apply_cc" 
       end 
   in
   fn [] e
 
 let implicit_equations l = 
   let peano_sort = if !nat_specif_defined then id_sort_nat else
-    id_sort_int in
+                     id_sort_int in
   let equationable p = 
     match p#content with
-	[(1, t)] -> if p#constant <= 0 then (* t = - p#constant *)
-	  new peano_literal (Peano_equal (t, term_nat (- p#constant)))
-	else (* t = (0 - p#constant) *)
-	  new peano_literal (Peano_equal (t, 
-	  new term (Term (id_symbol_minus, [new term (Term (id_symbol_zero, [], peano_sort)); term_nat p#constant], peano_sort))))
-      | [(1, t1);(-1,t2)] -> if p#constant = 0 then new peano_literal (Peano_equal (t1,t2))
-	else failwith "equationable"
-      | [(-1, t1);(1,t2)] -> if p#constant = 0 then new peano_literal (Peano_equal (t1,t2))
-	else failwith "equationable"
-      | _ -> failwith "equationable"
+      [(1, t)] -> if p#constant <= 0 then (* t = - p#constant *)
+	            new peano_literal (Peano_equal (t, term_nat (- p#constant)))
+	          else (* t = (0 - p#constant) *)
+	            new peano_literal (Peano_equal (t, 
+	                                            new term (Term (id_symbol_minus, [new term (Term (id_symbol_zero, [], peano_sort)); term_nat p#constant], peano_sort))))
+    | [(1, t1);(-1,t2)] -> if p#constant = 0 then new peano_literal (Peano_equal (t1,t2))
+	                   else failwith "equationable"
+    | [(-1, t1);(1,t2)] -> if p#constant = 0 then new peano_literal (Peano_equal (t1,t2))
+	                   else failwith "equationable"
+    | _ -> failwith "equationable"
   in
   let rec fn1  = function (* transforms a list of polynoms into equations *)
       [] -> []
     | p :: tl -> 
-	try let eq = (equationable p) in eq :: (fn1 tl)
-	with   Failure "equationable" -> fn1 tl
+       match  (equationable p) with
+       | exception Failure _ -> fn1 tl
+       | eq ->  eq :: (fn1 tl) 
   in
   let fn p = 
     if p#syntactic_equal poly_0_leq_0 then (* p#history contains only elements equal to 0  *)
@@ -841,43 +850,42 @@ let apply_la l =
   let is_inconsistent lp =    (* tests if the set of polynoms lp is inconsistent *)
     if List.exists (fun x ->  x#impossible) lp then 
       let () = if !maximal_output then buffered_output  ("\nThe inconsistent polynom is one of: \n" ^ (sprint_list
-      	"\n" (fun x -> ("   " ^ x#string)) (list_remove_doubles (fun x
-	  -> x#syntactic_equal) lp )))  in 
+      	                                                                                                 "\n" (fun x -> ("   " ^ x#string)) (list_remove_doubles (fun x
+	                                                                                                                                                          -> x#syntactic_equal) lp )))  in 
       true
     else false
   in
   let nl = list_remove_doubles (fun x -> x#syntactic_equal) l' in
   let max_length = List.fold_right (fun x y -> max x y) (List.map (fun x
-    -> List.length x#content) nl) 0 in
+                                                                   -> List.length x#content) nl) 0 in
   let max_iterations = max max_length (List.length nl) in
   let rec apply_la_core l nr_iter =
     let rec calcul_coef = function 
 	[] -> []
       | (p1,p2) :: tl ->
-	  let lpc' = calcul_coef tl in
-	  try
-	    let (k1, k2) = p1#combination p2 in 
-	    ((p1,p2), (k1, k2)) :: lpc'
-	  with Failure "combination" -> 
-	    lpc'
+	 let lpc' = calcul_coef tl in
+         match p1#combination p2 with
+         |  (k1, k2) ->
+	     ((p1,p2), (k1, k2)) :: lpc'
+	 | exception (Failure _) -> lpc'
     in
     let c_l =  all_combinations_from_list l in
     let () = if !maximal_output then print_indent_string ("\n    apply_la: the size of c_l and l are:" 
-                ^ (string_of_int (List.length c_l)) ^ " and " ^ (string_of_int (List.length l)) ^ "\n" ) in
+                                                          ^ (string_of_int (List.length c_l)) ^ " and " ^ (string_of_int (List.length l)) ^ "\n" ) in
     let lpc = calcul_coef c_l  (* lpc contains the combinable polys + the appropriate coefficients *)
     in
     let added_poly =  List.map (fun ((p1,p2),(k1,k2)) -> (p1#cross_multiply_add p2 (k1,k2))) lpc in 
     let new_l = l @ added_poly in 
     let np = list_remove_doubles (fun y -> y#syntactic_equal) new_l in
     let () = if !maximal_output then print_indent_string ("\n\tthe polynoms list l is \n"
-    ^ (List.fold_right (fun x y -> "\n" ^ x#string ^ y) l "")) in 
+                                                          ^ (List.fold_right (fun x y -> "\n" ^ x#string ^ y) l "")) in 
     let () = if !maximal_output then print_indent_string  ("\n\tthe polynoms list nc is \n"
-    ^ (List.fold_right (fun x y -> "\n" ^ x#string ^ y) np ""))  in 
+                                                           ^ (List.fold_right (fun x y -> "\n" ^ x#string ^ y) np ""))  in 
     if is_inconsistent np then raise Inconsistent 
     else 
       if nr_iter > max_iterations  (* the fixpoint has been reached *)
-           then np
-           else apply_la_core np (nr_iter + 1)
+      then np
+      else apply_la_core np (nr_iter + 1)
   in   
   if not (is_inconsistent l) then 
     let new_l = (apply_la_core nl 0) in 
@@ -1086,36 +1094,34 @@ class peano_context  (negs: literal list) (poss: literal list) cr g l =
       let rec cycle = function 
 	  [] -> ()
 	| A2L :: t -> 
-	    (try
-	      let () = fn A2L in
-	      let op = self#a_2_l in 
-	      let () = fn1 A2L in
-	      cycle (list_remove_doubles (=) (op @ t))
-	    with (Failure "a_2_l") -> cycle t   
-	      )
+	   (
+	     let () = fn A2L in
+             match self#a_2_l with 
+             | exception (Failure _) -> cycle t
+             | op ->
+	        let () = fn1 A2L in
+	        cycle (list_remove_doubles (=) (op @ t))	    
+	   )
 	| A2G :: t ->  
-	    let () = fn A2G in 
-	    let op = self#a_2_g in 
-	    let () = fn1 A2G in 
-	    cycle (list_remove_doubles (=) (op @ t))
+	   let () = fn A2G in 
+	   let op = self#a_2_g in 
+	   let () = fn1 A2G in 
+	   cycle (list_remove_doubles (=) (op @ t))
 	| G2CR :: t ->  
-	    let () = fn G2CR in 
-	    let op = self#g_2_cr in 
-	    let () = fn1 G2CR in 
-	    cycle (list_remove_doubles (=) (op @ t))
+	   let () = fn G2CR in 
+	   let op = self#g_2_cr in 
+	   let () = fn1 G2CR in 
+	   cycle (list_remove_doubles (=) (op @ t))
 	| L2G :: t ->  
-	    let () = fn L2G in 
-	    let op = self#l_2_g in 
-	    let () = fn1 L2G in 
-	    cycle (list_remove_doubles (=) (op @ t))
-	| Augment_L :: t -> 
-	    (try
+	   let () = fn L2G in 
+	   let op = self#l_2_g in 
+	   let () = fn1 L2G in 
+	   cycle (list_remove_doubles (=) (op @ t))
+	| Augment_L :: t ->
 	      let () = fn Augment_L in 
 	      let op = if !augmentation_mode then self#augment_l augment_counter c else [] in  
 	      let () = fn1 Augment_L in 
 	      cycle (list_remove_doubles (=) (op @ t))
-	    with (Failure "a_2_l") -> cycle t
-	    )
 	| Augment_G :: t -> let () = fn Augment_G in 
 			    let op = if !augmentation_mode then self#augment_g else [] in (* nothing for the moment *)
 			    let () = fn1 Augment_G in 
@@ -1338,7 +1344,7 @@ class ['peano] clause c_v hist br_info =
       {< content = (negs',pos') ; >}
 
     method try_to_orient =
-      try self#orient with Not_Horn | (Failure "orient") -> {< oriented = Defined false >}
+      try self#orient with Not_Horn | (Failure _) -> {< oriented = Defined false >}
 
   (* again, the clause should be Horn  *)
     method orientable =
@@ -1351,7 +1357,7 @@ class ['peano] clause c_v hist br_info =
             try
               let _ = self#orient in
               true
-            with (Failure "orient") -> false
+            with (Failure _) -> false
       else raise Not_Horn
 
     (* Left linearity *)
@@ -1382,13 +1388,12 @@ class ['peano] clause c_v hist br_info =
       | _ -> false
 
     method greatest_varcode = 
-      let fn variables = 
-      try 
-	let i = (fun (x,_,_) -> x) (last_el variables) in
-	let j = (fun (x,_,_) -> x) (List.hd variables) in
-	max (abs i) (abs j)
-      with 
-	  (Failure "last_el") -> 0
+      let fn variables =  
+	match (fun (x,_,_) -> x) (last_el variables) with
+          | exception (Failure _) -> 0
+          | i ->
+	     let j = (fun (x,_,_) -> x) (List.hd variables) in
+	     max (abs i) (abs j)
       in
       let lc_history = List.map (fun (s, c) -> let lv = c#variables in let vs = List.flatten (List.map (fun (_, t) -> t#variables)
       s) in lv @ vs) history in
@@ -1445,7 +1450,7 @@ class ['peano] clause c_v hist br_info =
       try
         let _ = self#bijective_renaming [] c in
         true
-      with (Failure "bijective_renaming") | (Failure "ac_eq") ->
+      with (Failure _) ->
         false
 
     method negative_lits = fst content
@@ -1459,14 +1464,14 @@ class ['peano] clause c_v hist br_info =
         if b
         then List.nth self#positive_lits n
         else List.nth self#negative_lits n
-      with Failure("nth") -> failwith ("lit_at_position : cl = " ^ self#string ^ " n = " ^ (string_of_int n) ^ " b = " ^ (string_of_bool b))
+      with Failure _ -> failwith ("lit_at_position : cl = " ^ self#string ^ " n = " ^ (string_of_int n) ^ " b = " ^ (string_of_bool b))
 
     method subterm_at_position (b, n, p) =
       try
         if b
         then (List.nth self#positive_lits n)#subterm_at_position p
         else (List.nth self#negative_lits n)#subterm_at_position p
-      with Failure("nth") -> failwith "subterm_at_position"
+      with Failure _ -> failwith "subterm_at_position"
 
     (* Returns all terms featured in the clause *)
     method all_neg_terms =
@@ -1553,17 +1558,14 @@ class ['peano] clause c_v hist br_info =
       and replace x = x#replace_subterm_at_pos p st in
       if b
       then
-        try
-	  let poss' = apply_f_to_element_n replace n poss in
-	  self#build negs poss' 
-	with (Failure "apply_f_to_element_n") -> failwith "replace_subterm_at_pos"
+	  match apply_f_to_element_n replace n poss with
+            | exception (Failure _) -> failwith "replace_subterm_at_pos"
+               | poss' -> self#build negs poss' 
       else
-	try
-          let negs' = apply_f_to_element_n replace n negs in
-	  self#build negs' poss 
-	with (Failure "apply_f_to_element_n") -> failwith "replace_subterm_at_pos"
-
-	  
+	match apply_f_to_element_n replace n negs with
+          | exception (Failure _) -> failwith "replace_subterm_at_pos"
+             | negs' -> self#build negs' poss 
+    	  
   (* useless  *)
     method flatten =
       let n, p = content in
@@ -1577,16 +1579,18 @@ class ['peano] clause c_v hist br_info =
     (* proceed_fun: position -> substitution -> bool -> bool *)
     method subterm_matching proceed_fun (lit: literal) =
       let rec fn b i = function
-          [] -> failwith "matching"
-        | hd::tl ->
-            try
-              let new_proceed_fun p s kept_or = proceed_fun (b, i, p) s kept_or in
-              let p, s, kept_or = hd#subterm_matching new_proceed_fun lit in
+          [] -> failwith "fn"
+        | hd::tl ->           
+           let new_proceed_fun p s kept_or = proceed_fun (b, i, p) s kept_or in
+           match hd#subterm_matching new_proceed_fun lit with
+           | exception (Failure _) -> fn b (i + 1) tl 
+           | p, s, kept_or ->
               (b, i, p), s, kept_or
-            with (Failure "matching") -> fn b (i + 1) tl in
+      in
+
       let n, p = content in
       try fn false 0 n
-      with (Failure "matching") -> fn true 0 p
+      with (Failure _) -> fn true 0 p
 
     method expand_sorts = 
       let ln, lp = content in
@@ -1598,14 +1602,14 @@ class ['peano] clause c_v hist br_info =
       let s = self#subterm_at_position (b, n, p) in
       let fn t t' =
         begin
-          try
             let new_proceed_fun s = proceed_fun s true in
-            let sigma = s#matching new_proceed_fun t in
-            sigma, true
-          with (Failure "matching") ->
-            let new_proceed_fun s = proceed_fun s false in
-            let sigma = s#matching new_proceed_fun t' in
-            sigma, false
+            match s#matching new_proceed_fun t with
+              | exception (Failure _) -> 
+                 let new_proceed_fun s = proceed_fun s false in
+                 let sigma = s#matching new_proceed_fun t' in
+                 sigma, false
+              | sigma -> sigma, true          
+            
         end
       in
       match lit#content with
@@ -1623,7 +1627,7 @@ class ['peano] clause c_v hist br_info =
         List.for_all2 (fun x y -> x#syntactic_equal y) n n'
           &&
         List.for_all2 (fun x y -> x#syntactic_equal y) p p'
-      with (Invalid_argument "List.for_all2") -> false
+      with (Invalid_argument _) -> false
 
     method add_failed_subsumption i =
       subsumption_failure <- generic_insert_sorted i subsumption_failure
@@ -1712,15 +1716,15 @@ class ['peano] clause c_v hist br_info =
 
     method is_subterm t =
       let rec fn b i = function
-	  [] -> failwith "subterm"
+	  [] -> failwith "fn"
 	| hd::tl ->
 	    try
 	      let p = hd#is_subterm t
 	      in (b, i, p)
-	    with (Failure "subterm") -> fn b (i + 1) tl in
+	    with (Failure _) -> fn b (i + 1) tl in
       let n, p = content in
       try fn false 0 n
-      with (Failure "subterm") -> fn true 0 p
+      with (Failure _) -> fn true 0 p
 
     method build (n:Literals.literal list) (p:Literals.literal list) :'a = 
       let v = List.fold_left (fun l l' ->  merge_sorted_lists ( < ) l l') [] (List.map (fun x -> x#variables) n) in
@@ -1772,13 +1776,13 @@ let all_nonvariable_symbols c =
 (* Takes a clause. Checks whether it is a Horn clause, and tries to orient it *)
 let orient_clause c =
   try c#orient with
-      Failure "orient" -> failwith "orient"
+      Failure _ -> failwith "orient_clause"
 (*   let negs, poss = c#content in *)
 (*   match poss with *)
 (*     [h] -> (new clause (negs, poss))#orient *)
 (*   | _ -> failwith "orient" *)
 
-let try_to_orient_clause c = try orient_clause c with (Failure "orient") -> c
+let try_to_orient_clause c = try orient_clause c with (Failure _) -> c
 
 let print_clause_list l = buffered_output (sprint_list "\n" (fun x -> "\t" ^ x#string) l)
 
@@ -1867,14 +1871,15 @@ let update_dico_free_constructors () =
       ()
   and fn2 c =
     let lhs = c#lefthand_side in
-    try
-      let f = lhs#head in
-      if is_constructor f
-      then
-        let () = dico_free_constructors#add f false in
-        free_constructors := false
-      else ()
-    with (Failure "head") -> () in
+    match lhs#head with
+    | exception (Failure _) -> ()
+    | f ->
+       if is_constructor f
+       then
+         let () = dico_free_constructors#add f false in
+         free_constructors := false
+       else ()
+  in
   let () = dico_const_string#iter fn in
   List.iter fn2 rewrite_system#content
 
@@ -2126,7 +2131,7 @@ let rec expand_nullary lt  =
 		  (List.map (fun x -> let trm = new term (Term (x, [], s)) in (trm, [i, trm])) l) @ (expand_nullary tl )
 		else 
 		let exp_tl = expand_nullary tl  in
-		(try (fn i s) :: exp_tl  with Failure "fn" -> (t, []) :: exp_tl)
+		(try (fn i s) :: exp_tl  with Failure _ -> (t, []) :: exp_tl)
 	    |  Term (i, l, s) -> 
 
 		 let expanded_args =  megamix ((List.map (fun x -> expand_nullary [x] ) l)) in 
@@ -2253,7 +2258,7 @@ let clause_ground_instance c =
 	      let () = yy_tmp_param_sorts := [] in
 	      if equal_sorts s s' then
 		let () = res := [new term (Term(x, [], s))] in
-		failwith "found"
+		failwith "fn"
 	      else ()
 	    else ()
 	  )
@@ -2261,8 +2266,8 @@ let clause_ground_instance c =
       let () = buffered_output ("\nPlease provide a ground instance of the variable u" ^ (if is_abstract s then "a" else "") ^
       (string_of_int i) ^ " of sort " ^ (sprint_sort s) ^ " !!!" ) in
       let () = res := [new term (Var_univ(i, s))] in
-      failwith "found"
-    with Failure "found" ->  List.hd !res
+      failwith "fn"
+    with Failure _ ->  List.hd !res
   in
   let ground_s = List.map (fun (i,s,_) -> let constr = fn (i, s) in (i, constr)) lvar_c' in 
 
@@ -2274,34 +2279,35 @@ let print_history fn_norm c show_ctx=
   let rec fn l c_rez= match l with
       [] -> c_rez
     | (subst, cl) :: tl -> 
-	let () = print_string ("\n\n" ^ (sprint_subst subst) ^ " \n \t on " ^ cl#string) in
-	let c' = c_rez#substitute subst in
-	fn tl c'
+       let () = print_string ("\n\n" ^ (sprint_subst subst) ^ " \n \t on " ^ cl#string) in
+       let c' = c_rez#substitute subst in
+       fn tl c'
   in 
   let br_symb, cl_number, _ = c#get_broken_info in 
   let () = if br_symb <> "" then buffered_output ("\nThe broken functional symbol for [" ^ (string_of_int c#number) ^ "] is " ^ br_symb ^ " and the number of the clause where the break happened is [ " ^ (string_of_int cl_number) ^ " ] \n") in
   let () = print_string ("\n The history of " ^ c#string) in
-  try 
-    let (_, c_orig) = List.hd c#history in
+    match List.hd c#history with
+    |  (_, c_orig) ->
     (* computing an instance  *)
     let c_inst = fn c#history c_orig in
     let () = buffered_output ("\n\n The corresponding instance is \n\t" ^ c_inst#string) in
     (* computing a ground instance  *)
-      if show_ctx then 
-	let c_ginst = 
-	  (try 
-	     let cxp = counterexample fn_norm c_inst in 
-	     let () = buffered_output ("\n\n One of its counterexamples is  \n\t" ^ cxp#string) in
-	       cxp
-	   with Failure "counterexample" -> 
-	     let () = buffered_output "\n\n Preparing a ground instance ...\n" in
-	     let cinst = clause_ground_instance c_inst in
-	     let () = buffered_output ("\n\n One of such instance is \n\t" ^ cinst#string) in
-	       cinst) 
-	in
-	let () = print_detailed_clause c_ginst in
-	  () 
-  with Failure "hd" -> ()
+    if show_ctx then 
+      let c_ginst =         
+	match counterexample fn_norm c_inst with
+        | exception (Failure _ ) -> 
+	   let () = buffered_output "\n\n Preparing a ground instance ...\n" in
+	   let cinst = clause_ground_instance c_inst in
+	   let () = buffered_output ("\n\n One of such instance is \n\t" ^ cinst#string) in
+	   cinst
+        | cxp ->
+	   let () = buffered_output ("\n\n One of its counterexamples is  \n\t" ^ cxp#string) in
+	   cxp
+
+      in
+      let () = print_detailed_clause c_ginst in
+      () 
+  | exception (Failure _) -> ()
 
 let print_history_instance c = 
   let rec fn l c_rez= match l with
@@ -2312,13 +2318,14 @@ let print_history_instance c =
 	fn tl c'
   in 
   let () = print_string ("\n The history of " ^ c#string) in
-  try 
-    let (_, c_orig) = List.hd c#history in
+ 
+    match List.hd c#history with
+      | (_, c_orig) ->
   (* computing an instance  *)
     let c_inst = fn c#history c_orig in
     let () = buffered_output ("\n\n The corresponding instance is \n\t" ^ c_inst#string) in
     () 
-  with Failure "hd" -> ()
+  | exception (Failure _ ) -> ()
 
 
 let compute_string_clause_caml c = 

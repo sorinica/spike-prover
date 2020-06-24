@@ -68,7 +68,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
       let () =
         try
           greatest_var := ((fun (x,_,_) -> x) (last_el c#variables)) + 1
-        with (Failure "last_el") -> () in
+        with (Failure _) -> () in
       let sigma_set = !generate_test_substitutions los lhs in
       let () = buffered_output (!indent_string ^ "Found " ^ (string_of_int (List.length sigma_set)) ^ " test-substitutions") in
       let () = print_tab_list (List.map sprint_subst sigma_set) in let () = buffered_output "\n" in 
@@ -92,7 +92,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
       let () =
         try
           greatest_var := ((fun (x,_,_) -> x) (last_el c#variables)) + 1
-        with (Failure "last_el") -> () in
+        with (Failure _) -> () in
       let sigma_set = !generate_test_substitutions_for_clause los c in
       let () = buffered_output (!indent_string ^ "Found " ^ (string_of_int (List.length sigma_set)) ^ " test-substitutions") in
       let () = print_tab_list (List.map sprint_subst sigma_set) in let () = buffered_output "-" in
@@ -150,7 +150,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
                 let () =
 		  try
 		    greatest_var := greatest_var_of_contren + 1
-		  with (Failure "last_el") -> () in
+		  with (Failure _) -> () in
                 new literal (Lit_equal 
                   (contren#substitute [(cont#contextual_var + greatest_var_of_contren  - greatest_var_of_cont, l#lefthand_side)],
                   contren#substitute [(cont#contextual_var + greatest_var_of_contren - greatest_var_of_cont, l#righthand_side)])
@@ -187,7 +187,7 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
 	let _ = rule'#number in
 	let lhs = rule'#lefthand_side in
 	
-	let (s1, s2) = try unify_terms t lhs false with Failure "unify_terms" -> failwith "fn" in
+	let (s1, s2) = try unify_terms t lhs false with Failure _ -> failwith "fn" in
 (* 	let () = buffered_output ("s1 = " ^ (sprint_subst s1) ^ " s2 = " ^ (sprint_subst s2)) in *)
 	let _ = List.map (fun (i, t') -> (i, t'#expand_sorts)) s1 in
 	let new_rule' = rule'#expand_sorts in
@@ -204,12 +204,12 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
 	      try 
 		let tmp = fn subterm r in 
 		tmp :: (fn1 subterm tl) 
-	      with Failure "fn" -> fn1 subterm tl 
+	      with Failure _ -> fn1 subterm tl 
       in
       (* all the instances for a given subterm t *)
       let all_inst t =
  	let () = buffered_output ("\n treating " ^ t#string) in 
- 	let k = try t#head with Failure "head" -> failwith ("generate: fail on term " ^ t#string) in 
+ 	let k = try t#head with Failure _ -> failwith ("generate: fail on term " ^ t#string) in 
 	let rules_k = try dico_rules#find k with Not_found -> let () =  buffered_output ("\n no rules for " ^ t#string) in [] in
 	if rules_k <> [] then
 	  List.flatten (fn1 t rules_k) 
@@ -226,17 +226,17 @@ let generate_obs verbose is_automatic arg_indpos _ (c: peano_context clause) =
 	      (* 	    p) ^ " (i.e. the term " ^ (c#subterm_at_position p)#string) in *)
 	      
 	      try 
-		let ls = all_inst t in
+		let ls = try all_inst t with  Failure _ -> failwith "fn2" in 
 		let _ = List.map (fun (s1, _, _) -> List.map (fun (_, s) -> s) s1) ls in (* the terms for substitution in t *)
 		
 (* 		let test = (List.exists (fun t -> not t#is_term) (List.flatten all_ts))  false in *)
-		if (ls = []) (* or test  *)then fn2 tl 
+		if (ls = []) (* || test  *)then fn2 tl 
 		else 
 		  (p, ls)
-	      with Failure "all_inst" -> fn2 tl 
+	      with Failure _ -> fn2 tl 
       in
       (* compute the substitutions  *)
-      let p, ls = try fn2 lp_t with Failure "fn2" -> let () = print_history normalize cl false in let () =  buffered_output ("\nWarning: fail generate on " ^ cl#string) in
+      let p, ls = try fn2 lp_t with Failure _ -> let () = print_history normalize cl false in let () =  buffered_output ("\nWarning: fail generate on " ^ cl#string) in
       failwith "generate_obs" in
       (* start to write the instances  *)
 

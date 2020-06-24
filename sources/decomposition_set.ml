@@ -33,20 +33,20 @@ let decompose counter lit =
   in
   let rec fn lhs rhs =
     try
-      let f, l = lhs#head_n_sons
-      and f', l' = rhs#head_n_sons in
+      let f, l = try lhs#head_n_sons with  Failure _ -> failwith "fn"
+      and f', l' = try rhs#head_n_sons with  Failure _ -> failwith "fn" in
       if f = f' && is_free_constructor f
       then
         let () = incr counter in
         List.fold_left (@) [] (List.map2 fn l l')
       else
         [fn1 lhs rhs]
-    with (Failure "head_n_sons") ->
+    with (Failure _) ->
         [fn1 lhs rhs]
   in
   let lhs = lit#lefthand_side in
   let rhs = lit#righthand_side in
-  try fn lhs rhs with Failure "fn1" -> let () = counter := counter_tmp in [lit]
+  try fn lhs rhs with Failure _ -> let () = counter := counter_tmp in [lit]
 
 
 let main_function verbose c level is_pos = 
@@ -87,7 +87,7 @@ let main_function verbose c level is_pos =
 	(is_positive, b, n, new_lits)
     in
     
-    let is_positive, b, pos, new_lits = try fn1 (nl @ pl) with Failure "fn1" -> failwith "main" in
+    let is_positive, b, pos, new_lits = try fn1 (nl @ pl) with Failure _ -> failwith "main" in
 
     let full_res = 
       if is_positive then List.map (fun x -> if not b then c#build (list_replace_element pos x n)  p else  c#build n (list_replace_element pos x p)) new_lits
@@ -96,14 +96,14 @@ let main_function verbose c level is_pos =
     is_positive, full_res
 
   in
-  if (is_pos && c#has_bit positive_decomposition_bit) or ((not is_pos) & c#has_bit negative_decomposition_bit) then 
+  if (is_pos && c#has_bit positive_decomposition_bit) || ((not is_pos) && c#has_bit negative_decomposition_bit) then 
     if is_pos then failwith "positive_decomposition" else failwith "negative_decomposition"
   else 
  (* print the result *)   
     let is_positive, lres = 
       try 
 	main c
-      with (Failure "main") -> 
+      with (Failure _) -> 
 	let () = c#set_bit positive_decomposition_bit in 
 	let () = c#set_bit negative_decomposition_bit in 
 	if is_pos then failwith "positive_decomposition" else failwith "negative_decomposition"
@@ -118,7 +118,7 @@ let main_function verbose c level is_pos =
         buffered_output "" 
     in
     let lres' = List.map (fun x -> x#expand_sorts) lres in
-    let dummy_term = List.hd (c#all_terms) in
+    (* let dummy_term = List.hd (c#all_terms) in *)
     let dummy_clause = c in 
     let () = List.iter (fun c1 -> rewriting_clauses := !rewriting_clauses @ [(c1, "", dummy_clause, [] )]) lres' in 
     let () = List.iter (fun c1 -> coq_less_clauses:= !coq_less_clauses @ [(c1, c)] ) lres' in
@@ -161,23 +161,23 @@ let positive_clash verbose c level  =
 	      in
 	    let test_occur_check = ((not lhs#is_term) && rhs#is_term && is_constructor rhs#head && (fn_occur lhs#var_content rhs)) || 
 		                     ((not rhs#is_term) && rhs#is_term && is_constructor lhs#head && (fn_occur rhs#var_content lhs)) in
-	    if test_occur_check && ((is_positive && not h#is_diff) or (not is_positive && h#is_diff))
+	    if test_occur_check && ((is_positive && not h#is_diff) || (not is_positive && h#is_diff))
 	    then
 	      fn2 is_positive t
 	    else
 	      try
-		let f = lhs#head
-		and f' = rhs#head in
+		let f = try lhs#head with  Failure _ -> failwith "fn2" 
+		and f' = try rhs#head with  Failure _ -> failwith "fn2" in 
 		if (f <> f' && is_free_constructor f &&
 		is_free_constructor f' && 
-		(((not h#is_diff) && is_positive) or 
+		(((not h#is_diff) && is_positive) || 
 		(h#is_diff && (not is_positive))))
 		then
 		  let () = incr pos_clash_counter in
 		  fn2 is_positive t 
 		else
 		  h :: fn2 is_positive t 
-              with (Failure "head") ->
+              with (Failure _) ->
 		h :: fn2 is_positive t 
     in
     let n, p = c#content in
@@ -210,7 +210,7 @@ let positive_clash verbose c level  =
   else
     let _ = if !maximal_output then  buffered_output ("\n" ^ (indent_blank level) ^ "We will try the rule POSITIVE CLASH " ^ " on " ^ (string_of_int c#number)) in
     (*     let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
-    let res = try fn c with (Failure "fn") -> failwith "positive_clash" in
+    let res = try fn c with (Failure _) -> failwith "positive_clash" in
     [res]
 
 
@@ -299,7 +299,7 @@ let congruence_closure _ c level =
     (*     let _ = if !maximal_output then buffered_output ((indent_blank level) ^ "on " ^ c#string); flush stdout  in *)
 (*     let new_r = fn lneg  in  *)
 
-    let fn_equal (x, y) (x', y') = (x#syntactic_equal x' && y#syntactic_equal y') or (x#syntactic_equal y' && y#syntactic_equal x') in
+    let fn_equal (x, y) (x', y') = (x#syntactic_equal x' && y#syntactic_equal y') || (x#syntactic_equal y' && y#syntactic_equal x') in
 (*     let new_r' = List.filter (fun lit -> not (list_member fn_equal lit (List.map (fun l -> l#both_sides) ne))) new_r in *)
 (*     let () = print_string ("\nRules =") in *)
 (*     let () = print_list "\t" (fun (s, t) -> let () = print_string ("\n\t" ^ s#string) in let () = print_string (" = " ^ t#string) in () ) new_r'  in *)
