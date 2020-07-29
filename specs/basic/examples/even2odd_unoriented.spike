@@ -1,0 +1,103 @@
+specification : even2odd
+
+sorts : nat  bool;
+
+constructors :
+
+0    :          -> nat;
+S_ : nat -> nat;
+True : bool;
+False : bool;
+ 
+
+defined functions:
+
+even1_ : nat -> bool;
+odd1_ : nat -> bool;
+even_ : nat -> bool;
+odd_ : nat -> bool;
+ 
+plus__ : nat nat -> nat;
+
+axioms:
+
+plus(0,  x) = x;
+plus(S(x),  y) = S(plus(x,y));
+ 
+even (0) = True;
+even (S(0))  = False;
+even (S(S(x))) = even1(plus(S(S(x)),0));
+%even (S(S(x))) = even1(S(S(x)));
+%even (S(S(x))) = even1(x);
+
+even1 (0) = True;
+even1 (S(0))  = False;
+odd(x) = False => even1(S(S(x))) = even(x);
+odd(x) = True => even1(S(S(x))) = False;
+
+odd(0) = False;
+odd(S(0)) = True;
+odd(S(S(x))) = odd1(plus(S(S(x)),0));
+%odd(S(S(x))) = odd1(S(S(x)));
+%odd(S(S(x))) = odd1(x);
+
+
+odd1(0) = False;
+odd1(S(0)) = True;
+even(x) = True => odd1(S(S(x))) = odd(x);
+even(x) = False => odd1(S(S(x))) = True;
+
+greater: 
+
+plus : S 0; 
+even : True False S 0 plus;
+
+equiv:
+even even1 odd odd1;
+
+properties:
+
+system_is_sufficiently_complete ;
+system_is_strongly_sufficiently_complete ;
+system_is_ground_convergent ;
+
+
+Strategy:
+
+% instances of Delete
+tautology_rule                   = delete(id, [tautology]);
+subsumption_rule                 = delete(id, [subsumption (L|C)]);
+negative_clash_rule              = Delete(id, [negative_clash]);
+
+% instances of Simplify
+decomposition_rule = simplify(id, [negative_decomposition]);
+rewriting_rule = simplify(id,[rewriting(rewrite, L|R|C, *)]);
+total_case_rewriting_rule = simplify(id, [total_case_rewriting (simplify_strat, r, *)]);
+
+
+% instances of AddPremise
+case_rewriting_rule = add_premise(total_case_rewriting(simplify_strat, r, *),[id]);
+split_rule = add_premise(generate,[id]);
+
+
+stra = repeat (try (
+                    tautology_rule,
+                    negative_clash_rule,
+                    subsumption_rule,
+                    decomposition_rule,
+                    rewriting_rule,      
+                    print_goals,
+                    case_rewriting_rule
+));
+
+fullind = (repeat(stra, split_rule), print_goals_with_history);
+
+start_with: fullind
+
+conjectures:
+plus(x,0) = x;
+plus(x, S(y)) = S(plus(x,y));
+
+conjectures: 
+even(plus(x,x)) = True;
+%odd(plus(x,x)) = False;
