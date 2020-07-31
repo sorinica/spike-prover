@@ -1,4 +1,4 @@
-specification : even2odd
+specification : even2odd_unoriented
 
 sorts : nat  bool;
 
