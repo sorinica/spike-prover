@@ -11,8 +11,8 @@
 
 (** * Term algebra defined as functor from a Module Signature and a Module Variable.*)
 
-Add LoadPath "basis". 
-Add LoadPath "list_extensions". 
+Add LoadPath "basis" as b. 
+Add LoadPath "list_extensions" as le. 
 
 Require Import Recdef.
 Require Import List.

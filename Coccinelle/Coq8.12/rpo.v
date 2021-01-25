@@ -624,21 +624,21 @@ match t1, t2 with
     match status Prec f1 with
     | Lex => 
          let equiv_lex_bool :=
-              (fix equiv_lex_bool (kk1 kk2 : list term) {struct kk1} :  bool :=  
-               (match kk1 with
-               | [] => match kk2 with [] => true | _ :: _=> false end
+              fix equiv_lex_bool (kk1 kk2 : list term) {struct kk1} :  bool :=  
+               match kk1 with
+               | nil => match kk2 with | nil => true | _ :: _=> false end
                | t1 :: k1 => 
                      match kk2 with 
-                         [] => false 
+                       |  nil => false 
                        | t2 :: k2=> (equiv_bool t1 t2) && (equiv_lex_bool k1 k2)
                        end
-                 end)) in
+                 end in
               (equiv_lex_bool l1 l2)
     | Mul => 
        let equiv_mult_bool :=
               (fix equiv_mult_bool (kk1 kk2 : list term) {struct kk1} :  bool :=  
                (match kk1 with
-               | [] => match kk2 with [] => true | _ :: _=> false end
+               | nil => match kk2 with nil => true | _ :: _=> false end
                | t1 :: k1 => 
                      match remove equiv_bool t1 kk2 with 
                            None => false 
@@ -782,10 +782,10 @@ match t1, t2 with
          let equiv_lex_bool :=
               (fix equiv_lex_bool (kk1 kk2 : list term) {struct kk1} :  bool :=  
                (match kk1 with
-               | [] => match kk2 with [] => true | _ :: _=> false end
+               | nil => match kk2 with nil => true | _ :: _=> false end
                | t1 :: k1 => 
                      match kk2 with 
-                         [] => false 
+                         nil => false 
                        | t2 :: k2=> (equiv_bool t1 t2) && (equiv_lex_bool k1 k2)
                        end
                  end)) in
@@ -794,7 +794,7 @@ match t1, t2 with
        let equiv_mult_bool :=
               (fix equiv_mult_bool (kk1 kk2 : list term) {struct kk1} :  bool :=  
                (match kk1 with
-               | [] => match kk2 with [] => true | _ :: _=> false end
+               | nil => match kk2 with nil => true | _ :: _=> false end
                | t1 :: k1 => 
                      match remove equiv_bool t1 kk2 with 
                            None => false 
@@ -818,25 +818,25 @@ case (status Prec f1); clear f1.
 assert (H' : forall l1 f1 f2, (forall t1, In t1 l1 -> forall t2, f1 t1 t2 = f2 t1 t2) -> forall l2,
                  (fix equiv_lex_bool (kk1 kk2 : list term) : bool :=
                  match kk1 with
-                 | [] => match kk2 with
-                 | [] => true
+                 | nil => match kk2 with
+                 | nil => true
                  | _ :: _ => false
                  end
                  | t1 :: k1 =>
                  match kk2 with
-                 | [] => false
+                 | nil => false
                  | t2 :: k2 => f1 t1 t2 && equiv_lex_bool k1 k2
        end
    end) l1 l2 =
 (fix equiv_lex_bool (kk1 kk2 : list term) : bool :=
                  match kk1 with
-                 | [] => match kk2 with
-                 | [] => true
+                 | nil => match kk2 with
+                 | nil => true
                  | _ :: _ => false
                  end
                  | t1 :: k1 =>
                  match kk2 with
-                 | [] => false
+                 | nil => false
                  | t2 :: k2 => f2 t1 t2 && equiv_lex_bool k1 k2
        end
    end) l1 l2).
@@ -855,8 +855,8 @@ simpl; intro L; apply (le_S_n _ _ L).
 assert (H' : forall l1 f1 f2, (forall t1, In t1 l1 -> forall t2, f1 t1 t2 = f2 t1 t2) -> forall l2,
                  (fix equiv_mult_bool (kk1 kk2 : list term) : bool :=
    match kk1 with
-   | [] => match kk2 with
-           | [] => true
+   | nil => match kk2 with
+           | nil => true
            | _ :: _ => false
            end
    | t1 :: k1 =>
@@ -869,8 +869,8 @@ assert (H' : forall l1 f1 f2, (forall t1, In t1 l1 -> forall t2, f1 t1 t2 = f2 t
    end) l1 l2 =
 (fix equiv_mult_bool (kk1 kk2 : list term) : bool :=
    match kk1 with
-   | [] => match kk2 with
-           | [] => true
+   | nil => match kk2 with
+           | nil => true
            | _ :: _ => false
            end
    | t1 :: k1 =>
@@ -912,13 +912,13 @@ intro f1_eq_f2; case_eq (status Prec f1).
 intro Lex_f1; simpl.
 assert (H : if (fix equiv_lex_bool (kk1 kk2 : list term) : bool :=
       match kk1 with
-      | [] => match kk2 with
-              | [] => true
+      | nil => match kk2 with
+              | nil => true
               | _ :: _ => false
               end
       | t1 :: k1 =>
           match kk2 with
-          | [] => false
+          | nil => false
           | t2 :: k2 => equiv_bool t1 t2 && equiv_lex_bool k1 k2
           end
       end) l1 l2
@@ -933,13 +933,13 @@ intro a1_eq_a2; generalize (IHl1 (tail_prop _ IH) l2).
 simpl.
 case ((fix equiv_lex_bool (kk1 kk2 : list term) : bool :=
        match kk1 with
-       | [] => match kk2 with
-               | [] => true
+       | nil => match kk2 with
+               | nil => true
                | _ :: _ => false
                end
        | t1 :: k1 =>
            match kk2 with
-           | [] => false
+           | nil => false
            | t3 :: k2 => equiv_bool t1 t3 && equiv_lex_bool k1 k2
            end
        end) l1 l2).
@@ -949,13 +949,13 @@ intros a1_diff_a2 l1_eq_l2; apply a1_diff_a2; inversion l1_eq_l2; assumption.
 revert H; simpl.
 case ((fix equiv_lex_bool (kk1 kk2 : list term) : bool :=
        match kk1 with
-       | [] => match kk2 with
-               | [] => true
+       | nil => match kk2 with
+               | nil => true
                | _ :: _ => false
                end
        | t1 :: k1 =>
            match kk2 with
-           | [] => false
+           | nil => false
            | t3 :: k2 => equiv_bool t1 t3 && equiv_lex_bool k1 k2
            end
        end) l1 l2).
@@ -970,8 +970,8 @@ subst f2; rewrite Lex_f1 in H3. discriminate.
 intro Mul_f1; simpl.
 assert (H : if (fix equiv_mult_bool (kk1 kk2 : list term) : bool :=
       match kk1 with
-      | [] => match kk2 with
-              | [] => true
+      | nil => match kk2 with
+              | nil => true
               | _ :: _ => false
               end
       | t1 :: k1 =>
@@ -1013,8 +1013,8 @@ generalize (IHl1 (tail_prop _ IH) k2); simpl.
 injection H3; clear H3; intro H3; 
 case ((fix equiv_mult_bool (kk1 kk2 : list term) : bool :=
        match kk1 with
-       | [] => match kk2 with
-               | [] => true
+       | nil => match kk2 with
+               | nil => true
                | _ :: _ => false
                end
        | t1 :: k1 =>
@@ -1037,8 +1037,8 @@ intros H P; inversion P as [ | a1' a2 l1' l2' l2'' a1_eq_a2 P'].
 apply (H a2 a1_eq_a2); subst l2; apply in_or_app; right; left; reflexivity.
 revert H; case ((fix equiv_mult_bool (kk1 kk2 : list term) : bool :=
       match kk1 with
-      | [] => match kk2 with
-              | [] => true
+      | nil => match kk2 with
+              | nil => true
               | _ :: _ => false
               end
       | t1 :: k1 =>
@@ -6350,7 +6350,7 @@ left; reflexivity.
 apply (Ko v); trivial.
 destruct l' as [ | v' l'].
 right; intro fk_lt_fl.
-assert (rpo_mul bb0 k' []).
+assert (rpo_mul bb0 k' nil).
 apply Rem. trivial.
 inversion H.
 inversion H1.

@@ -10,7 +10,7 @@
 (**************************************************************************)
 
 (** * Sets built with lists *)
-Add LoadPath "basis".
+Add LoadPath "basis" as b.
 
 Set Implicit Arguments. 
 
@@ -1152,3 +1152,4 @@ End Make.
 *** coq-prog-args: ("-emacs-U" "-I" "../basis/" "-I" "../list_extensions/") ***
 *** End: ***
  *)
+
