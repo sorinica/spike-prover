@@ -178,6 +178,8 @@ End bool_ok.
 (***********************************************************************)
 (** checking a property (P i) for all i<n *)
 
+Set Firstorder Solver debug auto with *. 
+
 Section bforall_lt.
 
   Variables (P : nat->Prop) (bP : nat->bool)

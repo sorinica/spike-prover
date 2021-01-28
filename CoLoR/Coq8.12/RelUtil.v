@@ -13,6 +13,7 @@ Set Implicit Arguments.
 
 From Coq Require Import Setoid Basics Morphisms List Omega.
 From Coq Require Export Relations.
+From Coq Require Import Lia.
 
 From CoLoR Require Import LogicUtil.
 From CoLoR Require Export RelMidex.
@@ -609,7 +610,7 @@ Proof. intros R S [RS SR]. split; apply tc_incl; hyp. Qed.
 
 Lemma incl_tc A (R S : rel A) : R << S -> R << S!.
 
-Proof. fo. Qed.
+Proof. intros. unfold incl. unfold incl in H. intros. apply H in H0. apply t_step. trivial.  Qed.
 
 Lemma trans_tc_incl A (R : rel A) : Transitive R -> R! << R.
 
@@ -785,7 +786,7 @@ Qed.
 
 Instance rtc_refl A (R : rel A) : Reflexive (R#).
 
-Proof. fo. Qed.
+Proof. unfold Reflexive. apply rt_refl. Qed.
 
 Instance rtc_trans A (R : rel A) : Transitive (R#).
 
@@ -804,7 +805,7 @@ Proof. intros R S [RS SR]. split; apply rtc_incl; hyp. Qed.
 
 Lemma incl_rtc A (R : rel A) : R << R#.
 
-Proof. fo. Qed.
+Proof. unfold inclusion. intros. Print clos_refl_trans. apply rt_step. trivial. Qed.
 
 Lemma tc_incl_rtc A (R : rel A) : R! << R#.
 

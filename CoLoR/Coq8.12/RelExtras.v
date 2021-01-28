@@ -167,12 +167,14 @@ Module Type Poset.
 
   Parameter gtA_so : strict_order gtA.
 
-  Hint Resolve (sord_trans gtA_so) : sets.
+  Hint Resolve (sord_trans gtA_so): sets.
   Hint Resolve (sord_irrefl gtA_so) : sets.
   Hint Resolve (so_not_symmetric gtA_so) : sets.
   Hint Resolve (so_strict gtA_so gtA_eqA_compat eqA_Equivalence) : sets.
 
 End Poset.
+
+Set Firstorder Solver debug auto with *. 
 
 Module nat_ord <: Ord.
 
