@@ -1,0 +1,6 @@
+-R "." CoLoR AccUtil.v		LogicUtil.v		MultisetTheory.v
+BoolUtil.v		MultisetCore.v		NatUtil.v
+EqUtil.v		MultisetList.v		RelExtras.v
+ListExtras.v			RelMidex.v
+ListPermutation.v	MultisetNat.v		RelUtil.v
+ListUtil.v		MultisetOrder.v
