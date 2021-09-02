@@ -572,8 +572,8 @@ let rec invert_literal (lit: literal) =
 	    else
 	      Peano_leq (t2, t1)
 	  else failwith "bool_content"
-       | exception (Failure _) 
-                   | _ -> failwith "bool_content"
+       | exception (Failure _) -> failwith "bool_content"
+       | _ -> failwith "bool_content"
 
      in
      new peano_literal
@@ -619,8 +619,8 @@ and convert_literal (lit: literal) =
 	    else
 	      Peano_less (t1, t2)
 	  else failwith "bool_content"
-       | exception (Failure _) 
-	 | _ -> failwith "bool_content"
+       | exception (Failure _) -> failwith "bool_content"
+       | _ -> failwith "bool_content"
      in
      new peano_literal
        (if term_is_true lhs
