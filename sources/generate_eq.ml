@@ -223,7 +223,7 @@ let generate_eq verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict
 	let () = print_detailed_clause c in 
 	let () = print_history normalize c false in 
 (* 	let () = print_history_ic normalize c in  *)
-	failwith ("fail induction on " ^ c#string) in
+	raise Refutation in
   
   let target_term = c#subterm_at_position p in
   let target_vars = List.map (fun (x,_,_) -> x) target_term#variables in

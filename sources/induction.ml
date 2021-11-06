@@ -233,7 +233,7 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 		let () = print_detailed_clause c in 
 		let () = print_history normalize c false in 
 		  (* 	let () = print_history_ic normalize c in  *)
-		  failwith ("fail generate on " ^ c#string) 
+		  raise Refutation
 	    | tested_pos :: tl_pos ->	  
 		(* compute the substitutions *)
 		try 

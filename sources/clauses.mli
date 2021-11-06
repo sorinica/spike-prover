@@ -266,6 +266,7 @@ val preprocess_conjecture : 'a clause -> 'a clause list
              method replace : int -> 'a -> ('a -> unit) -> unit
              method replace_w_list : int -> 'a list -> ('a -> unit) -> unit
              method sprint_numbers : string
+             method sort_by_numbers : unit
            end
            class ['a] l_system :
            'a list ->
@@ -305,6 +306,8 @@ val preprocess_conjecture : 'a clause -> 'a clause list
              method replace : int -> 'a -> ('a -> unit) -> unit
              method replace_w_list : int -> 'a list -> ('a -> unit) -> unit
              method sprint_numbers : string
+             method sort_by_numbers : unit
+
            end
 class ['a] rw_system :
   'a list ->

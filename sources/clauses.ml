@@ -285,6 +285,9 @@ object (self)
   method clear =
     content <- []
 
+  method sort_by_numbers = 
+    content <- List.sort (fun x x' -> if x#number < x'#number then -1 else if x#number == x'#number then 0 else 1) content
+
 end
 
   (* used for lemmas system *)

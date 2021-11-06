@@ -272,7 +272,7 @@ let apply_rm rm cxt1 cxt2 c st is_strict pp level verbose =
 	if cxt2 <> empty_cxt then 
 	  (try
 	    generate verbose cxt1 cxt2 c is_strict 
-	  with (Failure _) -> failwith "apply_rm")
+	  with (Failure _) -> failwith "stop")
 	else 
 	  failwith "apply_at_pos: the Generate rule cannot exist in a list of reasoning modules"
     | Generate_eq (_, _) ->
@@ -420,6 +420,7 @@ class strategy (cs: concrete_strategy) =
 		    let h_crt = hypotheses_system in
                     match r with
 			AddPremise (rm, st) -> 
+                          
 			  let cxt1 = (h_crt#content, e_crt#content) in
 			  let cxt2 = (h_crt#content, e_crt#content @ [phi]) in
 			  (
@@ -433,6 +434,7 @@ class strategy (cs: concrete_strategy) =
 			      (* 				let () = List.iter (fun c -> write_pos_clause c) l_new_conj in  *)
 			      (* 				let () = List.iter (fun c -> print_detailed_clause c) l_new_conj in  *)
 			      let () = conjectures_system#replace_w_list phi_number (List.flatten (List.map preprocess_conjecture l_new_conj)) (fun c -> print_smt c all_conjectures_system#content rewrite_system#content) in
+                              let () = conjectures_system#sort_by_numbers in
 			      (* 				let () = if !broken_order then () else hypotheses_system#append [phi] in *)
 			      true
 			    with (Failure _) -> 
