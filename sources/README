@@ -3,3 +3,5 @@ do `make'
 you need to previously install
 
 - ocaml (http://ocaml.org/)
+- ocamlbuild
+- ocamlfind
