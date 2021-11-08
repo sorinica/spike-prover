@@ -153,7 +153,8 @@ let generate_cond_and_eq t c b n p l _ =
     
     
     let negs, poss = cfinal#content in
-    let negs' = List.map (fun x ->x#copy) (negs @ p_i') in
+    let p_i'' = difference (fun x y -> x#syntactic_equal y) p_i' negs in
+    let negs' = List.map (fun x ->x#copy) (negs @ p_i'') in
     let poss' = List.map (fun x ->x#copy) poss in
     let res = c#build negs' poss' in
     let () = axiom_numbers := !axiom_numbers @ [cl#number, []] in
