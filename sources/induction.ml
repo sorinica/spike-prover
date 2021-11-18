@@ -429,7 +429,8 @@ let generate verbose   _ _ (c:Clauses.peano_context Clauses.clause) is_strict =
 		    let cfinal = c'#replace_subterm_at_pos phead term' in
 		      
 		    let lneg, lpos = cfinal#content in
-		    let cond' = List.map (fun x -> x#update_pos) cond in
+                    let cond'' = difference (fun x y -> x#syntactic_equal y) cond lneg in
+		    let cond' = List.map (fun x -> x#update_pos) cond'' in
 		    let () = list_cond :=  !list_cond @ [cond']  in
 		    let lpos' = List.map (fun x ->x#copy) lpos in
 		    let lneg' = List.map (fun x ->x#copy) (lneg @ cond') in
