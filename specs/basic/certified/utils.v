@@ -1,4 +1,4 @@
-Require Import Lt.
+Require Import Lt Le.
 Require Import Relations.
 Require Import Wf_nat.
 Require Import List.
@@ -18,15 +18,15 @@ end.
 
 Lemma beq_nat_true: forall m n, beq_nat m n = true -> m = n.
 Proof.
-double induction m n; intros. trivial. unfold beq_nat in H0. discriminate H0.
-unfold beq_nat in H0. discriminate H0. assert (H2: n1 = n). 
-apply H0. unfold beq_nat in H1. apply H1.  rewrite H2. trivial. 
+induction m; destruct n; intros. trivial. unfold beq_nat in H. discriminate H.
+unfold beq_nat in H. discriminate H. assert (H2: m = n). 
+apply IHm. unfold beq_nat in H. apply H.  rewrite H2. trivial. 
 Defined.
 
 Lemma beq_nat_false: forall m n, beq_nat m n = false -> m <> n.
 Proof.
-double induction m n; intros. unfold beq_nat in H. discriminate H. trivial. discriminate. 
-injection. intros. contradict H3. apply H0. unfold beq_nat in H1. apply H1. Defined.
+ induction m; destruct n; intros. unfold beq_nat in H. discriminate H. trivial. discriminate. 
+injection. intros. apply IHm in H. rewrite H1 in H. contradict H. trivial. Defined.
 
 Theorem beq_nat_ok: forall m n, if beq_nat m n then m = n else m <> n.
 Proof.
@@ -54,12 +54,12 @@ end.
 
 Theorem blt_lt: forall x y, blt_nat x y = true <-> x < y.
 Proof.
-double induction x y; intros.
+induction x; destruct y; intros.
 unfold blt_nat. 
-intuition. inversion H. inversion H. intuition. intuition. unfold blt_nat in H0. discriminate H0. 
-inversion H0. intuition.  apply Lt.lt_n_S. apply H0. unfold blt_nat in H1. apply H1. apply Lt.lt_S_n in H1.
-apply H0 in H1. 
-unfold blt_nat. apply H1.
+intuition. inversion H. inversion H. intuition. intuition. unfold blt_nat in H. discriminate H. 
+inversion H. intuition.  apply Lt.lt_n_S. apply IHx. unfold blt_nat in H. apply H. apply Lt.lt_S_n in H.
+apply IHx in H. 
+unfold blt_nat. apply H.
 Qed.
 
 
