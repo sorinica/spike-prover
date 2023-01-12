@@ -1690,7 +1690,7 @@ Section ith.
       | cons x m => fun i =>
         match i return i < S (length m) -> A with
 	  | O => fun _ => x
-	  | S j => fun H => ith (lt_S_n j (length m) H)
+	  | S j => fun H => ith (Arith_prebase.lt_S_n_stt j (length m) H)
         end
     end.
 
@@ -1747,7 +1747,7 @@ Section pvalues.
     match n as n return (forall i, i < n -> A) -> list A with
       | 0 => fun _ => nil
       | S k => fun f =>
-        f 0 (Nat.lt_0_succ k) :: pvalues (fun i h => f (S i) (lt_n_S i _ h))
+        f 0 (Nat.lt_0_succ k) :: pvalues (fun i h => f (S i) (Arith_prebase.lt_n_S_stt i _ h))
     end.
 
   Lemma pvalues_eq : forall n (f g : forall i, i < n -> A),
