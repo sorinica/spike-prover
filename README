@@ -1,3 +1,7 @@
+(* Sorin Stratulat - January 2023 *)
+
+Updated for Coq 8.16.
+
 (* Sorin Stratulat - February 2022 *)
 
 Updated for Coq 8.14 and 8.15.
