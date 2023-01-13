@@ -19,8 +19,6 @@ From Coq Require Import Setoid SetoidList FunInd.
 From Coq Require Export List.
 From Coq Require Program.
 
-Set Firstorder Solver debug eauto with core.
-
 
 Arguments nil {A}.
 Arguments incl {A} l m.
@@ -267,7 +265,9 @@ Infix "[=]" := lequiv (at level 70).
 
 #[export] Instance lequiv_rel A : Equivalence (@lequiv A).
 
-Proof. constructor. fo. fo. constructor. fo.  fo.  Qed.
+Proof. constructor. fo. fo. constructor. inversion H0. inversion H. unfold incl. unfold incl in H3. unfold incl in H1. clear H H0 H2 H4. intros. apply H3 in H. apply H1 in H. trivial. fo. Qed.
+
+
 
 #[export] Instance app_lequiv A : Proper (lequiv ==> lequiv ==> lequiv) (@app A).
 
@@ -310,7 +310,7 @@ End nil.
 
 #[export] Instance cons_incl A : Proper (eq ==> incl ==> incl) (@cons A). 
 
-Proof. intros x x' xx'. subst x'. fo. Qed.
+Proof. intros x x' xx'. subst x'.  fo. Qed.
 
 #[export] Instance cons_lequiv A : Proper (eq ==> lequiv ==> lequiv) (@cons A).
 

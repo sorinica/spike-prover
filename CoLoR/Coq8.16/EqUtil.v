@@ -21,7 +21,6 @@ equality on some type. *)
 
 Module LeibnizFacts (Import T : Typ).
 
-Set Firstorder Solver debug auto with *.
 
   Definition eq : relation t := @Logic.eq t.
 
@@ -31,7 +30,7 @@ Set Firstorder Solver debug auto with *.
 
   #[export] Instance eq_sym : Symmetric eq.
 
-  Proof. fo. Qed.
+  Proof. unfold Symmetric. intros. fo. unfold eq. unfold eq in H. rewrite H. trivial. Qed.
 
   #[export] Instance eq_trans : Transitive eq.
 

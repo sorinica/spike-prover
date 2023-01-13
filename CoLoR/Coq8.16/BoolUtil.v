@@ -182,7 +182,7 @@ End bool_ok.
 
 Section bforall_lt.
 
-Set Firstorder Solver debug trivial.
+
 
   Variables (P : nat->Prop) (bP : nat->bool)
     (bP_ok : forall x, bP x = true <-> P x).
