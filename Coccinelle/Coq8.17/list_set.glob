@@ -1,0 +1,3048 @@
+DIGEST 4000ce3589cceca7acc923c99c2eaed3
+FCoccinelle.list_set
+R871:879 Coq.Relations.Relations <> <> lib
+R897:900 Coq.Lists.List <> <> lib
+R918:923 Coq.Setoids.Setoid <> <> lib
+R941:953 Coccinelle.decidable_set <> <> lib
+R971:979 Coccinelle.more_list <> <> lib
+R997:1007 Coccinelle.list_permut <> <> lib
+R1025:1029 Coq.Arith.Arith <> <> lib
+R1047:1052 Coq.funind.FunInd <> <> lib
+modtype 1068:1068 <> S
+R1100:1115 Coccinelle.decidable_set ES <> mod
+mod 1094:1096 <> S.EDS
+R1145:1157 Coccinelle.list_permut S <> mod
+R1178:1180 Coccinelle.list_set S.EDS <> modtype
+mod 1140:1141 <> S.LP
+def 1193:1208 S without_red_bool
+R1215:1218 Coq.Init.Datatypes <> list ind
+R1220:1220 Coccinelle.list_set S A defax
+binder 1211:1211 <> l:1
+R1236:1239 Coq.Init.Datatypes <> bool ind
+R1252:1252 Coccinelle.list_set <> l:1 var
+R1263:1265 Coq.Init.Datatypes <> nil constr
+R1270:1273 Coq.Init.Datatypes <> true constr
+R1280:1283 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1284:1285 Coq.Init.Peano <> le ind
+R1294:1301 Coccinelle.more_list <> mem_bool def
+R1303:1309 Coccinelle.list_set S eq_bool defax
+R1333:1348 Coccinelle.list_set <> without_red_bool:2 def
+R1322:1326 Coq.Init.Datatypes <> false constr
+def 1372:1382 S without_red
+binder 1384:1384 <> l:4
+R1407:1409 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1389:1404 Coccinelle.list_set S without_red_bool def
+R1406:1406 Coccinelle.list_set <> l:4 var
+R1410:1413 Coq.Init.Datatypes <> true constr
+rec 1424:1424 S t
+proj 1454:1460 S support
+proj 1477:1484 S is_a_set
+R1464:1467 Coq.Init.Datatypes <> list ind
+R1469:1469 Coccinelle.list_set S A defax
+R1488:1498 Coccinelle.list_set S without_red def
+R1500:1506 Coccinelle.list_set <> support:6 meth
+def 1525:1527 S mem
+binder 1529:1529 <> e:8
+binder 1531:1531 <> s:9
+R1536:1538 Coccinelle.more_list <> mem def
+R1550:1556 Coccinelle.list_set S support proj
+R1547:1547 Coccinelle.list_set <> s:9 var
+R1545:1545 Coccinelle.list_set <> e:8 var
+R1540:1543 Coccinelle.list_set S eq_A defax
+def 1572:1579 S cardinal
+binder 1581:1581 <> s:10
+R1586:1596 Coq.Lists.List <> length abbrev
+R1601:1607 Coccinelle.list_set S support proj
+R1598:1598 Coccinelle.list_set <> s:10 var
+def 1649:1654 S eq_set
+binder 1656:1657 <> s1:11
+binder 1659:1660 <> s2:12
+binder 1672:1672 <> e:13
+R1683:1687 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1675:1677 Coccinelle.list_set S mem def
+R1681:1682 Coccinelle.list_set <> s1:11 var
+R1679:1679 Coccinelle.list_set <> e:13 var
+R1688:1690 Coccinelle.list_set S mem def
+R1694:1695 Coccinelle.list_set <> s2:12 var
+R1692:1692 Coccinelle.list_set <> e:13 var
+ax 1709:1719 S eq_set_refl
+binder 1730:1730 <> s:14
+R1733:1738 Coccinelle.list_set S eq_set def
+R1742:1742 Coccinelle.list_set <> s:14 var
+R1740:1740 Coccinelle.list_set <> s:14 var
+ax 1756:1781 S eq_set_list_permut_support
+binder 1794:1795 <> s1:16
+binder 1797:1798 <> s2:17
+R1814:1817 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1802:1807 Coccinelle.list_set S eq_set def
+R1812:1813 Coccinelle.list_set <> s2:17 var
+R1809:1810 Coccinelle.list_set <> s1:16 var
+R1818:1823 Coccinelle.list_set S permut abbrev
+R1842:1848 Coccinelle.list_set S support proj
+R1838:1839 Coccinelle.list_set <> s2:17 var
+R1829:1835 Coccinelle.list_set S support proj
+R1825:1826 Coccinelle.list_set <> s1:16 var
+def 1864:1869 S subset
+binder 1871:1872 <> s1:19
+binder 1874:1875 <> s2:20
+binder 1896:1896 <> e:21
+R1907:1910 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1899:1901 Coccinelle.list_set S mem def
+R1905:1906 Coccinelle.list_set <> s1:19 var
+R1903:1903 Coccinelle.list_set <> e:21 var
+R1911:1913 Coccinelle.list_set S mem def
+R1917:1918 Coccinelle.list_set <> s2:20 var
+R1915:1915 Coccinelle.list_set <> e:21 var
+ax 1932:1946 S cardinal_subset
+binder 1959:1960 <> s1:22
+binder 1962:1963 <> s2:23
+R1978:1981 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1966:1971 Coccinelle.list_set S subset def
+R1976:1977 Coccinelle.list_set <> s2:23 var
+R1973:1974 Coccinelle.list_set <> s1:22 var
+R1993:1996 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R1982:1989 Coccinelle.list_set S cardinal def
+R1991:1992 Coccinelle.list_set <> s1:22 var
+R1997:2004 Coccinelle.list_set S cardinal def
+R2006:2007 Coccinelle.list_set <> s2:23 var
+R2015:2015 Coccinelle.list_set S <> modtype
+R2081:2096 Coccinelle.decidable_set ES <> mod
+R2102:2102 Coccinelle.list_set S <> mod
+R2122:2125 Coccinelle.list_set EDS1 <> modtype
+mod 2068:2071 <> Make
+R2150:2153 Coccinelle.list_set EDS1 <> modtype
+mod 2143:2145 <> Make.EDS
+R2177:2192 Coccinelle.list_permut Make <> modtype
+R2195:2197 Coccinelle.list_set Make.EDS <> modtype
+mod 2171:2172 <> Make.LP
+R2319:2322 Coq.Init.Datatypes <> list ind
+R2324:2324 Coccinelle.list_set Make A defax
+binder 2315:2315 <> l:25
+R2340:2343 Coq.Init.Datatypes <> bool ind
+R2356:2356 Coccinelle.list_set <> l:25 var
+R2367:2369 Coq.Init.Datatypes <> nil constr
+R2374:2377 Coq.Init.Datatypes <> true constr
+R2384:2387 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2388:2389 Coq.Init.Peano <> le ind
+R2398:2405 Coccinelle.more_list <> mem_bool def
+R2407:2413 Coccinelle.list_set Make eq_bool defax
+R2437:2452 Coccinelle.list_set <> without_red_bool:26 def
+R2426:2430 Coq.Init.Datatypes <> false constr
+binder 2315:2315 <> l:28
+binder 2315:2315 <> l:29
+binder 2315:2315 <> l:31
+R2356:2356 Coccinelle.list_set <> l:31 var
+R2367:2369 Coq.Init.Datatypes <> nil constr
+R2374:2377 Coq.Init.Datatypes <> true constr
+R2384:2387 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2388:2389 Coq.Init.Peano <> le ind
+R2398:2405 Coccinelle.more_list <> mem_bool def
+R2407:2413 Coccinelle.list_set Make eq_bool defax
+R2437:2452 Coccinelle.list_set <> without_red_bool:30 def
+R2426:2430 Coq.Init.Datatypes <> false constr
+binder 2315:2315 <> l:33
+R2356:2356 Coccinelle.list_set <> l:33 var
+R2367:2369 Coq.Init.Datatypes <> nil constr
+R2374:2377 Coq.Init.Datatypes <> true constr
+R2384:2387 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2388:2389 Coq.Init.Peano <> le ind
+R2398:2405 Coccinelle.more_list <> mem_bool def
+R2407:2413 Coccinelle.list_set Make eq_bool defax
+R2437:2452 Coccinelle.list_set <> without_red_bool:34 def
+R2426:2430 Coq.Init.Datatypes <> false constr
+def 2476:2486 Make without_red
+binder 2488:2488 <> l:48
+R2511:2513 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2493:2508 Coccinelle.list_set Make without_red_bool def
+R2510:2510 Coccinelle.list_set <> l:48 var
+R2514:2517 Coq.Init.Datatypes <> true constr
+prf 2527:2544 Make without_red_remove
+binder 2557:2557 <> e:49
+binder 2559:2560 <> l1:50
+binder 2562:2563 <> l2:51
+R2593:2596 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2566:2576 Coccinelle.list_set Make without_red def
+R2581:2584 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2579:2580 Coccinelle.list_set <> l1:50 var
+R2586:2589 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2585:2585 Coccinelle.list_set <> e:49 var
+R2590:2591 Coccinelle.list_set <> l2:51 var
+R2597:2607 Coccinelle.list_set Make without_red def
+R2612:2615 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2610:2611 Coccinelle.list_set <> l1:50 var
+R2616:2617 Coccinelle.list_set <> l2:51 var
+R2635:2645 Coccinelle.list_set Make without_red def
+R2722:2729 Coccinelle.more_list <> mem_bool def
+R2731:2737 Coccinelle.list_set Make eq_bool defax
+R2722:2729 Coccinelle.more_list <> mem_bool def
+R2731:2737 Coccinelle.list_set Make eq_bool defax
+R2807:2817 Coccinelle.more_list <> mem_bool_ok thm
+R2840:2843 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2845:2848 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2823:2832 Coccinelle.list_set Make eq_bool_ok defax
+R2807:2817 Coccinelle.more_list <> mem_bool_ok thm
+R2840:2843 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2845:2848 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2823:2832 Coccinelle.list_set Make eq_bool_ok defax
+R2861:2868 Coccinelle.more_list <> mem_bool def
+R2884:2887 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2889:2892 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2870:2876 Coccinelle.list_set Make eq_bool defax
+R2861:2868 Coccinelle.more_list <> mem_bool def
+R2884:2887 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2889:2892 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2870:2876 Coccinelle.list_set Make eq_bool defax
+R2957:2967 Coccinelle.more_list <> mem_bool_ok thm
+R2990:2993 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2973:2982 Coccinelle.list_set Make eq_bool_ok defax
+R2957:2967 Coccinelle.more_list <> mem_bool_ok thm
+R2990:2993 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2973:2982 Coccinelle.list_set Make eq_bool_ok defax
+R3006:3013 Coccinelle.more_list <> mem_bool def
+R3029:3032 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3015:3021 Coccinelle.list_set Make eq_bool defax
+R3006:3013 Coccinelle.more_list <> mem_bool def
+R3029:3032 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3015:3021 Coccinelle.list_set Make eq_bool defax
+R3062:3070 Coq.Init.Logic <> False_rec scheme
+R3099:3108 Coccinelle.more_list <> mem_insert thm
+R3062:3070 Coq.Init.Logic <> False_rec scheme
+R3099:3108 Coccinelle.more_list <> mem_insert thm
+prf 3184:3201 Make without_red_not_in
+binder 3214:3214 <> e:52
+binder 3216:3217 <> l1:53
+binder 3219:3220 <> l2:54
+R3250:3253 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3223:3233 Coccinelle.list_set Make without_red def
+R3238:3241 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3236:3237 Coccinelle.list_set <> l1:53 var
+R3243:3246 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3242:3242 Coccinelle.list_set <> e:52 var
+R3247:3248 Coccinelle.list_set <> l2:54 var
+R3254:3254 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3255:3257 Coccinelle.more_list <> mem def
+R3269:3272 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3267:3268 Coccinelle.list_set <> l1:53 var
+R3273:3274 Coccinelle.list_set <> l2:54 var
+R3264:3264 Coccinelle.list_set <> e:52 var
+R3259:3262 Coccinelle.list_set Make eq_A defax
+R3292:3302 Coccinelle.list_set Make without_red def
+R3385:3395 Coccinelle.more_list <> mem_bool_ok thm
+R3401:3410 Coccinelle.list_set Make eq_bool_ok defax
+R3425:3432 Coccinelle.more_list <> mem_bool def
+R3434:3440 Coccinelle.list_set Make eq_bool defax
+R3385:3395 Coccinelle.more_list <> mem_bool_ok thm
+R3401:3410 Coccinelle.list_set Make eq_bool_ok defax
+R3425:3432 Coccinelle.more_list <> mem_bool def
+R3434:3440 Coccinelle.list_set Make eq_bool defax
+R3524:3534 Coccinelle.more_list <> mem_bool_ok thm
+R3557:3560 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3562:3565 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3540:3549 Coccinelle.list_set Make eq_bool_ok defax
+R3579:3586 Coccinelle.more_list <> mem_bool def
+R3602:3605 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3607:3610 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3588:3594 Coccinelle.list_set Make eq_bool defax
+R3524:3534 Coccinelle.more_list <> mem_bool_ok thm
+R3557:3560 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3562:3565 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3540:3549 Coccinelle.list_set Make eq_bool_ok defax
+R3579:3586 Coccinelle.more_list <> mem_bool def
+R3602:3605 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3607:3610 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3588:3594 Coccinelle.list_set Make eq_bool defax
+R3733:3742 Coccinelle.more_list <> mem_or_app thm
+R3733:3742 Coccinelle.more_list <> mem_or_app thm
+R3733:3742 Coccinelle.more_list <> mem_or_app thm
+R3786:3794 Coq.Init.Logic <> False_rec scheme
+R3786:3794 Coq.Init.Logic <> False_rec scheme
+prf 3859:3865 Make add_prf
+binder 3878:3878 <> e:55
+binder 3880:3881 <> l1:56
+binder 3883:3884 <> l2:57
+R3909:3912 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3887:3897 Coccinelle.list_set Make without_red def
+R3902:3905 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3900:3901 Coccinelle.list_set <> l1:56 var
+R3906:3907 Coccinelle.list_set <> l2:57 var
+R3935:3940 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3913:3913 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3914:3916 Coccinelle.more_list <> mem def
+R3928:3931 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3926:3927 Coccinelle.list_set <> l1:56 var
+R3932:3933 Coccinelle.list_set <> l2:57 var
+R3923:3923 Coccinelle.list_set <> e:55 var
+R3918:3921 Coccinelle.list_set Make eq_A defax
+R3941:3951 Coccinelle.list_set Make without_red def
+R3956:3959 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3954:3955 Coccinelle.list_set <> l1:56 var
+R3961:3964 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3960:3960 Coccinelle.list_set <> e:55 var
+R3965:3966 Coccinelle.list_set <> l2:57 var
+R3984:3994 Coccinelle.list_set Make without_red def
+R4095:4105 Coccinelle.more_list <> mem_bool_ok thm
+R4111:4120 Coccinelle.list_set Make eq_bool_ok defax
+R4135:4142 Coccinelle.more_list <> mem_bool def
+R4144:4150 Coccinelle.list_set Make eq_bool defax
+R4095:4105 Coccinelle.more_list <> mem_bool_ok thm
+R4111:4120 Coccinelle.list_set Make eq_bool_ok defax
+R4135:4142 Coccinelle.more_list <> mem_bool def
+R4144:4150 Coccinelle.list_set Make eq_bool defax
+R4182:4184 Coccinelle.more_list <> mem def
+R4186:4189 Coccinelle.list_set Make eq_A defax
+R4182:4184 Coccinelle.more_list <> mem def
+R4186:4189 Coccinelle.list_set Make eq_A defax
+R4278:4288 Coccinelle.more_list <> mem_bool_ok thm
+R4311:4314 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4316:4319 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4294:4303 Coccinelle.list_set Make eq_bool_ok defax
+R4278:4288 Coccinelle.more_list <> mem_bool_ok thm
+R4311:4314 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4316:4319 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4294:4303 Coccinelle.list_set Make eq_bool_ok defax
+R4332:4339 Coccinelle.more_list <> mem_bool def
+R4355:4358 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4360:4363 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4341:4347 Coccinelle.list_set Make eq_bool defax
+R4332:4339 Coccinelle.more_list <> mem_bool def
+R4355:4358 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4360:4363 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4341:4347 Coccinelle.list_set Make eq_bool defax
+R4398:4400 Coccinelle.more_list <> mem def
+R4413:4416 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4402:4405 Coccinelle.list_set Make eq_A defax
+R4398:4400 Coccinelle.more_list <> mem def
+R4413:4416 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4402:4405 Coccinelle.list_set Make eq_A defax
+R4430:4447 Coccinelle.list_set Make without_red_not_in thm
+R4459:4462 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4452:4454 Coq.Init.Datatypes <> nil constr
+R4430:4447 Coccinelle.list_set Make without_red_not_in thm
+R4459:4462 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4452:4454 Coq.Init.Datatypes <> nil constr
+R4484:4498 Coccinelle.more_list <> diff_mem_remove thm
+R4484:4498 Coccinelle.more_list <> diff_mem_remove thm
+R4610:4627 Coccinelle.list_set Make without_red_remove thm
+R4639:4642 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4632:4634 Coq.Init.Datatypes <> nil constr
+R4610:4627 Coccinelle.list_set Make without_red_remove thm
+R4639:4642 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4632:4634 Coq.Init.Datatypes <> nil constr
+prf 4715:4732 Make without_red_permut
+binder 4744:4745 <> l1:58
+binder 4747:4748 <> l2:59
+R4765:4768 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4751:4761 Coccinelle.list_set Make without_red def
+R4763:4764 Coccinelle.list_set <> l1:58 var
+R4784:4787 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4769:4777 Coccinelle.list_set Make permut abbrev
+R4782:4783 Coccinelle.list_set <> l2:59 var
+R4779:4780 Coccinelle.list_set <> l1:58 var
+R4788:4798 Coccinelle.list_set Make without_red def
+R4800:4801 Coccinelle.list_set <> l2:59 var
+R4818:4828 Coccinelle.list_set Make without_red def
+R4911:4920 Coccinelle.list_permut <> permut_nil thm
+R4923:4932 Coccinelle.list_set Make permut_sym defax
+R4911:4920 Coccinelle.list_permut <> permut_nil thm
+R4923:4932 Coccinelle.list_set Make permut_sym defax
+R4911:4920 Coccinelle.list_permut <> permut_nil thm
+R4923:4932 Coccinelle.list_set Make permut_sym defax
+R4988:4998 Coccinelle.more_list <> mem_bool_ok thm
+R5004:5013 Coccinelle.list_set Make eq_bool_ok defax
+R5029:5036 Coccinelle.more_list <> mem_bool def
+R5038:5044 Coccinelle.list_set Make eq_bool defax
+R4988:4998 Coccinelle.more_list <> mem_bool_ok thm
+R5004:5013 Coccinelle.list_set Make eq_bool_ok defax
+R5029:5036 Coccinelle.more_list <> mem_bool def
+R5038:5044 Coccinelle.list_set Make eq_bool defax
+R5122:5136 Coccinelle.list_set Make cons_permut_mem defax
+R5139:5169 Coq.Relations.Relation_Definitions <> equiv_refl proj
+R5175:5182 Coccinelle.list_set Make eq_proof defax
+R5122:5136 Coccinelle.list_set Make cons_permut_mem defax
+R5139:5169 Coq.Relations.Relation_Definitions <> equiv_refl proj
+R5175:5182 Coccinelle.list_set Make eq_proof defax
+R5198:5210 Coccinelle.more_list <> mem_split_set thm
+R5216:5225 Coccinelle.list_set Make eq_bool_ok defax
+R5198:5210 Coccinelle.more_list <> mem_split_set thm
+R5216:5225 Coccinelle.list_set Make eq_bool_ok defax
+R5406:5423 Coccinelle.list_set Make permut_cons_inside defax
+R5406:5423 Coccinelle.list_set Make permut_cons_inside defax
+R5406:5423 Coccinelle.list_set Make permut_cons_inside defax
+R5406:5423 Coccinelle.list_set Make permut_cons_inside defax
+R5464:5470 Coccinelle.list_set Make add_prf thm
+R5464:5470 Coccinelle.list_set Make add_prf thm
+R5525:5538 Coccinelle.list_set Make mem_permut_mem defax
+R5525:5538 Coccinelle.list_set Make mem_permut_mem defax
+R5525:5538 Coccinelle.list_set Make mem_permut_mem defax
+R5591:5600 Coccinelle.more_list <> mem_eq_mem thm
+R5622:5630 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R5636:5643 Coccinelle.list_set Make eq_proof defax
+R5602:5609 Coccinelle.list_set Make eq_proof defax
+R5591:5600 Coccinelle.more_list <> mem_eq_mem thm
+R5622:5630 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R5636:5643 Coccinelle.list_set Make eq_proof defax
+R5602:5609 Coccinelle.list_set Make eq_proof defax
+R5766:5769 Coq.Init.Datatypes <> list ind
+R5771:5771 Coccinelle.list_set Make A defax
+binder 5762:5762 <> l:60
+R5776:5779 Coq.Init.Datatypes <> list ind
+R5781:5781 Coccinelle.list_set Make A defax
+R5794:5794 Coccinelle.list_set <> l:60 var
+R5805:5807 Coq.Init.Datatypes <> nil constr
+R5812:5814 Coq.Init.Datatypes <> nil constr
+R5821:5824 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5825:5826 Coq.Init.Peano <> le ind
+R5847:5854 Coccinelle.more_list <> mem_bool def
+R5856:5862 Coccinelle.list_set Make eq_bool defax
+R5919:5923 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5937:5937 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5924:5933 Coccinelle.list_set <> remove_red:61 def
+R5887:5896 Coccinelle.list_set <> remove_red:61 def
+binder 5762:5762 <> l:63
+binder 5762:5762 <> l:64
+binder 5762:5762 <> l:66
+R5794:5794 Coccinelle.list_set <> l:66 var
+R5805:5807 Coq.Init.Datatypes <> nil constr
+R5812:5814 Coq.Init.Datatypes <> nil constr
+R5821:5824 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5825:5826 Coq.Init.Peano <> le ind
+R5847:5854 Coccinelle.more_list <> mem_bool def
+R5856:5862 Coccinelle.list_set Make eq_bool defax
+R5919:5923 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5937:5937 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5924:5933 Coccinelle.list_set <> remove_red:65 def
+R5887:5896 Coccinelle.list_set <> remove_red:65 def
+binder 5762:5762 <> l:68
+R5794:5794 Coccinelle.list_set <> l:68 var
+R5805:5807 Coq.Init.Datatypes <> nil constr
+R5812:5814 Coq.Init.Datatypes <> nil constr
+R5821:5824 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5825:5826 Coq.Init.Peano <> le ind
+R5847:5854 Coccinelle.more_list <> mem_bool def
+R5856:5862 Coccinelle.list_set Make eq_bool defax
+R5919:5923 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5937:5937 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5924:5933 Coccinelle.list_set <> remove_red:69 def
+R5887:5896 Coccinelle.list_set <> remove_red:69 def
+prf 5954:5972 Make included_remove_red
+binder 5984:5984 <> e:84
+binder 5986:5986 <> l:85
+R6014:6017 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5989:5991 Coccinelle.more_list <> mem def
+R6001:6010 Coccinelle.list_set Make remove_red def
+R6012:6012 Coccinelle.list_set <> l:85 var
+R5998:5998 Coccinelle.list_set <> e:84 var
+R5993:5996 Coccinelle.list_set Make eq_A defax
+R6018:6020 Coccinelle.more_list <> mem def
+R6029:6029 Coccinelle.list_set <> l:85 var
+R6027:6027 Coccinelle.list_set <> e:84 var
+R6022:6025 Coccinelle.list_set Make eq_A defax
+R6138:6145 Coccinelle.more_list <> mem_bool def
+R6147:6153 Coccinelle.list_set Make eq_bool defax
+R6138:6145 Coccinelle.more_list <> mem_bool def
+R6147:6153 Coccinelle.list_set Make eq_bool defax
+prf 6400:6418 Make remove_red_included
+binder 6429:6429 <> e:86
+binder 6431:6431 <> l:87
+R6446:6449 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6434:6436 Coccinelle.more_list <> mem def
+R6445:6445 Coccinelle.list_set <> l:87 var
+R6443:6443 Coccinelle.list_set <> e:86 var
+R6438:6441 Coccinelle.list_set Make eq_A defax
+R6450:6452 Coccinelle.more_list <> mem def
+R6462:6471 Coccinelle.list_set Make remove_red def
+R6473:6473 Coccinelle.list_set <> l:87 var
+R6459:6459 Coccinelle.list_set <> e:86 var
+R6454:6457 Coccinelle.list_set Make eq_A defax
+R6589:6599 Coccinelle.more_list <> mem_bool_ok thm
+R6605:6614 Coccinelle.list_set Make eq_bool_ok defax
+R6628:6635 Coccinelle.more_list <> mem_bool def
+R6637:6643 Coccinelle.list_set Make eq_bool defax
+R6589:6599 Coccinelle.more_list <> mem_bool_ok thm
+R6605:6614 Coccinelle.list_set Make eq_bool_ok defax
+R6628:6635 Coccinelle.more_list <> mem_bool def
+R6637:6643 Coccinelle.list_set Make eq_bool defax
+R6751:6760 Coccinelle.more_list <> mem_eq_mem thm
+R6778:6786 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R6792:6799 Coccinelle.list_set Make eq_proof defax
+R6762:6769 Coccinelle.list_set Make eq_proof defax
+R6751:6760 Coccinelle.more_list <> mem_eq_mem thm
+R6778:6786 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R6792:6799 Coccinelle.list_set Make eq_proof defax
+R6762:6769 Coccinelle.list_set Make eq_proof defax
+prf 7030:7051 Make without_red_remove_red
+binder 7063:7063 <> l:88
+R7066:7076 Coccinelle.list_set Make without_red def
+R7079:7088 Coccinelle.list_set Make remove_red def
+R7090:7090 Coccinelle.list_set <> l:88 var
+R7108:7118 Coccinelle.list_set Make without_red def
+R7221:7231 Coccinelle.more_list <> mem_bool_ok thm
+R7237:7246 Coccinelle.list_set Make eq_bool_ok defax
+R7260:7267 Coccinelle.more_list <> mem_bool def
+R7269:7275 Coccinelle.list_set Make eq_bool defax
+R7221:7231 Coccinelle.more_list <> mem_bool_ok thm
+R7237:7246 Coccinelle.list_set Make eq_bool_ok defax
+R7260:7267 Coccinelle.more_list <> mem_bool def
+R7269:7275 Coccinelle.list_set Make eq_bool defax
+R7364:7374 Coccinelle.more_list <> mem_bool_ok thm
+R7394:7403 Coccinelle.list_set Make remove_red def
+R7380:7389 Coccinelle.list_set Make eq_bool_ok defax
+R7364:7374 Coccinelle.more_list <> mem_bool_ok thm
+R7394:7403 Coccinelle.list_set Make remove_red def
+R7380:7389 Coccinelle.list_set Make eq_bool_ok defax
+R7416:7423 Coccinelle.more_list <> mem_bool def
+R7436:7445 Coccinelle.list_set Make remove_red def
+R7425:7431 Coccinelle.list_set Make eq_bool defax
+R7416:7423 Coccinelle.more_list <> mem_bool def
+R7436:7445 Coccinelle.list_set Make remove_red def
+R7425:7431 Coccinelle.list_set Make eq_bool defax
+R7475:7477 Coccinelle.more_list <> mem def
+R7479:7482 Coccinelle.list_set Make eq_A defax
+R7475:7477 Coccinelle.more_list <> mem def
+R7479:7482 Coccinelle.list_set Make eq_A defax
+R7508:7526 Coccinelle.list_set Make included_remove_red thm
+R7508:7526 Coccinelle.list_set Make included_remove_red thm
+rec 7681:7681 Make t
+proj 7711:7717 Make support
+proj 7734:7741 Make is_a_set
+R7721:7724 Coq.Init.Datatypes <> list ind
+R7726:7726 Coccinelle.list_set Make A defax
+R7745:7755 Coccinelle.list_set Make without_red def
+R7757:7763 Coccinelle.list_set <> support:90 meth
+def 7782:7784 Make mem
+binder 7786:7786 <> e:92
+binder 7788:7788 <> s:93
+R7793:7795 Coccinelle.more_list <> mem def
+R7807:7813 Coccinelle.list_set Make support proj
+R7804:7804 Coccinelle.list_set <> s:93 var
+R7802:7802 Coccinelle.list_set <> e:92 var
+R7797:7800 Coccinelle.list_set Make eq_A defax
+prf 7824:7833 Make eq_mem_mem
+binder 7846:7846 <> s:94
+binder 7848:7848 <> e:95
+binder 7850:7851 <> e':96
+R7863:7866 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7854:7857 Coccinelle.list_set Make eq_A defax
+R7859:7859 Coccinelle.list_set <> e:95 var
+R7861:7862 Coccinelle.list_set <> e':96 var
+R7874:7877 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7867:7869 Coccinelle.list_set Make mem def
+R7873:7873 Coccinelle.list_set <> s:94 var
+R7871:7871 Coccinelle.list_set <> e:95 var
+R7878:7880 Coccinelle.list_set Make mem def
+R7885:7885 Coccinelle.list_set <> s:94 var
+R7882:7883 Coccinelle.list_set <> e':96 var
+R7936:7948 Coccinelle.more_list <> mem_split_set thm
+R7954:7963 Coccinelle.list_set Make eq_bool_ok defax
+R7936:7948 Coccinelle.more_list <> mem_split_set thm
+R7954:7963 Coccinelle.list_set Make eq_bool_ok defax
+R8019:8021 Coccinelle.list_set Make mem def
+R8046:8055 Coccinelle.more_list <> mem_or_app thm
+R8046:8055 Coccinelle.more_list <> mem_or_app thm
+R8046:8055 Coccinelle.more_list <> mem_or_app thm
+def 8132:8134 Make add
+R8141:8141 Coccinelle.list_set Make A defax
+binder 8137:8137 <> e:97
+R8149:8149 Coccinelle.list_set Make t rec
+binder 8145:8145 <> s:98
+R8154:8154 Coccinelle.list_set Make t rec
+R8169:8179 Coccinelle.more_list <> mem_bool_ok thm
+R8201:8207 Coccinelle.list_set Make support proj
+R8185:8194 Coccinelle.list_set Make eq_bool_ok defax
+R8169:8179 Coccinelle.more_list <> mem_bool_ok thm
+R8201:8207 Coccinelle.list_set Make support proj
+R8185:8194 Coccinelle.list_set Make eq_bool_ok defax
+R8218:8225 Coccinelle.more_list <> mem_bool def
+R8240:8246 Coccinelle.list_set Make support proj
+R8227:8233 Coccinelle.list_set Make eq_bool defax
+R8218:8225 Coccinelle.more_list <> mem_bool def
+R8240:8246 Coccinelle.list_set Make support proj
+R8227:8233 Coccinelle.list_set Make eq_bool defax
+R8296:8301 Coccinelle.list_set Make mk_set constr
+R8304:8310 Coccinelle.list_set Make add_prf thm
+R8333:8340 Coccinelle.list_set Make is_a_set proj
+R8321:8327 Coccinelle.list_set Make support proj
+R8314:8316 Coq.Init.Datatypes <> nil constr
+R8296:8301 Coccinelle.list_set Make mk_set constr
+R8304:8310 Coccinelle.list_set Make add_prf thm
+R8333:8340 Coccinelle.list_set Make is_a_set proj
+R8321:8327 Coccinelle.list_set Make support proj
+R8314:8316 Coq.Init.Datatypes <> nil constr
+prf 8373:8387 Make already_mem_add
+binder 8398:8398 <> e:99
+binder 8400:8400 <> s:100
+R8410:8413 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8403:8405 Coccinelle.list_set Make mem def
+R8409:8409 Coccinelle.list_set <> s:100 var
+R8407:8407 Coccinelle.list_set <> e:99 var
+R8421:8423 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8414:8416 Coccinelle.list_set Make add def
+R8420:8420 Coccinelle.list_set <> s:100 var
+R8418:8418 Coccinelle.list_set <> e:99 var
+R8424:8424 Coccinelle.list_set <> s:100 var
+R8452:8454 Coccinelle.list_set Make mem def
+R8457:8459 Coccinelle.list_set Make add def
+R8481:8491 Coccinelle.more_list <> mem_bool_ok thm
+R8497:8511 Coccinelle.list_set EDS1 eq_bool_ok defax
+R8481:8491 Coccinelle.more_list <> mem_bool_ok thm
+R8497:8511 Coccinelle.list_set EDS1 eq_bool_ok defax
+R8525:8532 Coccinelle.more_list <> mem_bool def
+R8534:8545 Coccinelle.list_set EDS1 eq_bool defax
+R8525:8532 Coccinelle.more_list <> mem_bool def
+R8534:8545 Coccinelle.list_set EDS1 eq_bool defax
+R8606:8614 Coq.Init.Logic <> False_rec scheme
+R8606:8614 Coq.Init.Logic <> False_rec scheme
+prf 8659:8677 Make not_already_mem_add
+binder 8690:8690 <> e:101
+binder 8692:8692 <> s:102
+R8704:8707 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8695:8696 Coq.Init.Logic <> ::type_scope:'~'_x not
+R8697:8699 Coccinelle.list_set Make mem def
+R8703:8703 Coccinelle.list_set <> s:102 var
+R8701:8701 Coccinelle.list_set <> e:101 var
+R8722:8724 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8709:8712 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R8708:8708 Coccinelle.list_set <> e:101 var
+R8713:8719 Coccinelle.list_set Make support proj
+R8721:8721 Coccinelle.list_set <> s:102 var
+R8725:8731 Coccinelle.list_set Make support proj
+R8734:8736 Coccinelle.list_set Make add def
+R8740:8740 Coccinelle.list_set <> s:102 var
+R8738:8738 Coccinelle.list_set <> e:101 var
+R8769:8771 Coccinelle.list_set Make mem def
+R8774:8776 Coccinelle.list_set Make add def
+R8798:8808 Coccinelle.more_list <> mem_bool_ok thm
+R8814:8828 Coccinelle.list_set EDS1 eq_bool_ok defax
+R8798:8808 Coccinelle.more_list <> mem_bool_ok thm
+R8814:8828 Coccinelle.list_set EDS1 eq_bool_ok defax
+R8842:8849 Coccinelle.more_list <> mem_bool def
+R8851:8862 Coccinelle.list_set EDS1 eq_bool defax
+R8842:8849 Coccinelle.more_list <> mem_bool def
+R8851:8862 Coccinelle.list_set EDS1 eq_bool defax
+R8902:8910 Coq.Init.Logic <> False_rec scheme
+R8902:8910 Coq.Init.Logic <> False_rec scheme
+prf 8976:8980 Make add_1
+binder 8991:8991 <> e:103
+binder 8993:8993 <> s:104
+R8996:8998 Coccinelle.list_set Make mem def
+R9003:9005 Coccinelle.list_set Make add def
+R9009:9009 Coccinelle.list_set <> s:104 var
+R9007:9007 Coccinelle.list_set <> e:103 var
+R9000:9000 Coccinelle.list_set <> e:103 var
+R9039:9041 Coccinelle.list_set Make mem def
+R9044:9046 Coccinelle.list_set Make add def
+R9068:9078 Coccinelle.more_list <> mem_bool_ok thm
+R9100:9106 Coccinelle.list_set Make support proj
+R9084:9093 Coccinelle.list_set Make eq_bool_ok defax
+R9068:9078 Coccinelle.more_list <> mem_bool_ok thm
+R9100:9106 Coccinelle.list_set Make support proj
+R9084:9093 Coccinelle.list_set Make eq_bool_ok defax
+R9117:9124 Coccinelle.more_list <> mem_bool def
+R9139:9145 Coccinelle.list_set Make support proj
+R9126:9132 Coccinelle.list_set Make eq_bool defax
+R9117:9124 Coccinelle.more_list <> mem_bool def
+R9139:9145 Coccinelle.list_set Make support proj
+R9126:9132 Coccinelle.list_set Make eq_bool defax
+prf 9216:9220 Make add_2
+binder 9231:9231 <> e:105
+binder 9233:9234 <> e':106
+binder 9236:9236 <> s:107
+R9246:9249 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9239:9241 Coccinelle.list_set Make mem def
+R9245:9245 Coccinelle.list_set <> s:107 var
+R9243:9243 Coccinelle.list_set <> e:105 var
+R9250:9252 Coccinelle.list_set Make mem def
+R9257:9259 Coccinelle.list_set Make add def
+R9264:9264 Coccinelle.list_set <> s:107 var
+R9261:9262 Coccinelle.list_set <> e':106 var
+R9254:9254 Coccinelle.list_set <> e:105 var
+R9297:9299 Coccinelle.list_set Make mem def
+R9302:9304 Coccinelle.list_set Make add def
+R9327:9337 Coccinelle.more_list <> mem_bool_ok thm
+R9360:9366 Coccinelle.list_set Make support proj
+R9343:9352 Coccinelle.list_set Make eq_bool_ok defax
+R9327:9337 Coccinelle.more_list <> mem_bool_ok thm
+R9360:9366 Coccinelle.list_set Make support proj
+R9343:9352 Coccinelle.list_set Make eq_bool_ok defax
+R9377:9384 Coccinelle.more_list <> mem_bool def
+R9400:9406 Coccinelle.list_set Make support proj
+R9386:9392 Coccinelle.list_set Make eq_bool defax
+R9377:9384 Coccinelle.more_list <> mem_bool def
+R9400:9406 Coccinelle.list_set Make support proj
+R9386:9392 Coccinelle.list_set Make eq_bool defax
+prf 9480:9485 Make add_12
+binder 9496:9496 <> e:108
+binder 9498:9499 <> e':109
+binder 9501:9501 <> s:110
+R9520:9523 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9504:9506 Coccinelle.list_set Make mem def
+R9511:9513 Coccinelle.list_set Make add def
+R9518:9518 Coccinelle.list_set <> s:110 var
+R9515:9516 Coccinelle.list_set <> e':109 var
+R9508:9508 Coccinelle.list_set <> e:108 var
+R9533:9536 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R9524:9527 Coccinelle.list_set Make eq_A defax
+R9529:9529 Coccinelle.list_set <> e:108 var
+R9531:9532 Coccinelle.list_set <> e':109 var
+R9537:9539 Coccinelle.list_set Make mem def
+R9543:9543 Coccinelle.list_set <> s:110 var
+R9541:9541 Coccinelle.list_set <> e:108 var
+R9575:9577 Coccinelle.list_set Make mem def
+R9580:9582 Coccinelle.list_set Make add def
+R9604:9614 Coccinelle.more_list <> mem_bool_ok thm
+R9637:9643 Coccinelle.list_set Make support proj
+R9620:9629 Coccinelle.list_set Make eq_bool_ok defax
+R9604:9614 Coccinelle.more_list <> mem_bool_ok thm
+R9637:9643 Coccinelle.list_set Make support proj
+R9620:9629 Coccinelle.list_set Make eq_bool_ok defax
+R9654:9661 Coccinelle.more_list <> mem_bool def
+R9677:9683 Coccinelle.list_set Make support proj
+R9663:9669 Coccinelle.list_set Make eq_bool defax
+R9654:9661 Coccinelle.more_list <> mem_bool def
+R9677:9683 Coccinelle.list_set Make support proj
+R9663:9669 Coccinelle.list_set Make eq_bool defax
+R9787:9790 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9786:9786 Coccinelle.list_set Make A defax
+R9791:9794 Coq.Init.Datatypes <> bool ind
+binder 9777:9782 <> P_bool:111
+R9803:9806 Coq.Init.Datatypes <> list ind
+R9808:9808 Coccinelle.list_set Make A defax
+binder 9799:9799 <> l:112
+R9824:9827 Coq.Init.Datatypes <> list ind
+R9829:9829 Coccinelle.list_set Make A defax
+R9842:9842 Coccinelle.list_set <> l:112 var
+R9853:9855 Coq.Init.Datatypes <> nil constr
+R9860:9862 Coq.Init.Datatypes <> nil constr
+R9869:9872 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9873:9874 Coq.Init.Peano <> le ind
+R9895:9900 Coccinelle.list_set <> P_bool:111 var
+R9966:9975 Coccinelle.list_set <> filter_aux:113 def
+R9977:9982 Coccinelle.list_set <> P_bool:111 var
+R9922:9926 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9947:9947 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9927:9936 Coccinelle.list_set <> filter_aux:113 def
+R9938:9943 Coccinelle.list_set <> P_bool:111 var
+binder 9777:9782 <> P_bool:115
+binder 9799:9799 <> l:116
+binder 9777:9782 <> P_bool:117
+binder 9799:9799 <> l:118
+binder 9777:9782 <> P_bool:120
+binder 9799:9799 <> l:121
+R9842:9842 Coccinelle.list_set <> l:121 var
+R9853:9855 Coq.Init.Datatypes <> nil constr
+R9860:9862 Coq.Init.Datatypes <> nil constr
+R9869:9872 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9873:9874 Coq.Init.Peano <> le ind
+R9895:9900 Coccinelle.list_set <> P_bool:120 var
+R9966:9975 Coccinelle.list_set <> filter_aux:119 def
+R9977:9982 Coccinelle.list_set <> P_bool:120 var
+R9922:9926 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9947:9947 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9927:9936 Coccinelle.list_set <> filter_aux:119 def
+R9938:9943 Coccinelle.list_set <> P_bool:120 var
+binder 9777:9782 <> P_bool:123
+binder 9799:9799 <> l:124
+R9842:9842 Coccinelle.list_set <> l:124 var
+R9853:9855 Coq.Init.Datatypes <> nil constr
+R9860:9862 Coq.Init.Datatypes <> nil constr
+R9869:9872 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9873:9874 Coq.Init.Peano <> le ind
+R9895:9900 Coccinelle.list_set <> P_bool:123 var
+R9966:9975 Coccinelle.list_set <> filter_aux:125 def
+R9977:9982 Coccinelle.list_set <> P_bool:123 var
+R9922:9926 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9947:9947 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9927:9936 Coccinelle.list_set <> filter_aux:125 def
+R9938:9943 Coccinelle.list_set <> P_bool:123 var
+prf 10032:10050 Make included_filter_aux
+binder 10064:10069 <> P_bool:142
+binder 10071:10071 <> e:143
+binder 10073:10073 <> l:144
+R10121:10124 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10079:10091 Coccinelle.more_list <> mem def
+R10101:10110 Coccinelle.list_set Make filter_aux def
+R10119:10119 Coccinelle.list_set <> l:144 var
+R10112:10117 Coccinelle.list_set <> P_bool:142 var
+R10098:10098 Coccinelle.list_set <> e:143 var
+R10093:10096 Coccinelle.list_set Make eq_A defax
+R10125:10137 Coccinelle.more_list <> mem def
+R10146:10146 Coccinelle.list_set <> l:144 var
+R10144:10144 Coccinelle.list_set <> e:143 var
+R10139:10142 Coccinelle.list_set Make eq_A defax
+R10198:10207 Coccinelle.list_set Make filter_aux def
+R10198:10207 Coccinelle.list_set Make filter_aux def
+prf 10400:10421 Make without_red_filter_aux
+binder 10436:10441 <> P_bool:145
+binder 10443:10443 <> l:146
+R10459:10462 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10446:10456 Coccinelle.list_set Make without_red def
+R10458:10458 Coccinelle.list_set <> l:146 var
+R10463:10473 Coccinelle.list_set Make without_red def
+R10476:10485 Coccinelle.list_set Make filter_aux def
+R10494:10494 Coccinelle.list_set <> l:146 var
+R10487:10492 Coccinelle.list_set <> P_bool:145 var
+R10512:10522 Coccinelle.list_set Make without_red def
+R10643:10653 Coccinelle.more_list <> mem_bool_ok thm
+R10659:10668 Coccinelle.list_set Make eq_bool_ok defax
+R10682:10689 Coccinelle.more_list <> mem_bool def
+R10691:10697 Coccinelle.list_set Make eq_bool defax
+R10643:10653 Coccinelle.more_list <> mem_bool_ok thm
+R10659:10668 Coccinelle.list_set Make eq_bool_ok defax
+R10682:10689 Coccinelle.more_list <> mem_bool def
+R10691:10697 Coccinelle.list_set Make eq_bool defax
+R10831:10841 Coccinelle.more_list <> mem_bool_ok thm
+R10861:10870 Coccinelle.list_set Make filter_aux def
+R10847:10856 Coccinelle.list_set Make eq_bool_ok defax
+R10890:10897 Coccinelle.more_list <> mem_bool def
+R10910:10919 Coccinelle.list_set Make filter_aux def
+R10899:10905 Coccinelle.list_set Make eq_bool defax
+R10831:10841 Coccinelle.more_list <> mem_bool_ok thm
+R10861:10870 Coccinelle.list_set Make filter_aux def
+R10847:10856 Coccinelle.list_set Make eq_bool_ok defax
+R10890:10897 Coccinelle.more_list <> mem_bool def
+R10910:10919 Coccinelle.list_set Make filter_aux def
+R10899:10905 Coccinelle.list_set Make eq_bool defax
+R10955:10967 Coccinelle.more_list <> mem def
+R10969:10972 Coccinelle.list_set Make eq_A defax
+R10955:10967 Coccinelle.more_list <> mem def
+R10969:10972 Coccinelle.list_set Make eq_A defax
+R10998:11016 Coccinelle.list_set Make included_filter_aux thm
+R10998:11016 Coccinelle.list_set Make included_filter_aux thm
+def 11100:11105 Make filter
+R11118:11121 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11117:11117 Coccinelle.list_set Make A defax
+R11122:11125 Coq.Init.Datatypes <> bool ind
+binder 11108:11113 <> P_bool:147
+binder 11128:11128 <> s:148
+binder 11152:11152 <> e:149
+binder 11154:11155 <> e':150
+R11167:11171 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11192:11192 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11158:11161 Coccinelle.list_set Make eq_A defax
+R11163:11163 Coccinelle.list_set <> e:149 var
+R11165:11166 Coccinelle.list_set <> e':150 var
+R11180:11182 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11172:11177 Coccinelle.list_set <> P_bool:147 var
+R11179:11179 Coccinelle.list_set <> e:149 var
+R11183:11188 Coccinelle.list_set <> P_bool:147 var
+R11190:11191 Coccinelle.list_set <> e':150 var
+binder 11134:11141 <> P_compat:151
+R11202:11207 Coccinelle.list_set Make mk_set constr
+R11210:11231 Coccinelle.list_set Make without_red_filter_aux thm
+R11243:11250 Coccinelle.list_set Make is_a_set proj
+R11240:11240 Coccinelle.list_set <> s:148 var
+R11233:11238 Coccinelle.list_set <> P_bool:147 var
+prf 11262:11274 Make filter_1_list
+R11298:11301 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11297:11297 Coccinelle.list_set Make A defax
+R11302:11305 Coq.Init.Datatypes <> bool ind
+binder 11288:11293 <> P_bool:152
+binder 11308:11308 <> l:153
+binder 11310:11310 <> e:154
+binder 11334:11334 <> e:155
+binder 11336:11337 <> e':156
+R11349:11353 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11374:11374 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11340:11343 Coccinelle.list_set Make eq_A defax
+R11345:11345 Coccinelle.list_set <> e:155 var
+R11347:11348 Coccinelle.list_set <> e':156 var
+R11362:11364 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11354:11359 Coccinelle.list_set <> P_bool:152 var
+R11361:11361 Coccinelle.list_set <> e:155 var
+R11365:11370 Coccinelle.list_set <> P_bool:152 var
+R11372:11373 Coccinelle.list_set <> e':156 var
+binder 11316:11323 <> P_compat:157
+R11402:11405 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11380:11392 Coccinelle.more_list <> mem def
+R11401:11401 Coccinelle.list_set <> l:153 var
+R11399:11399 Coccinelle.list_set <> e:154 var
+R11394:11397 Coccinelle.list_set Make eq_A defax
+R11421:11424 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11414:11416 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11406:11411 Coccinelle.list_set <> P_bool:152 var
+R11413:11413 Coccinelle.list_set <> e:154 var
+R11417:11420 Coq.Init.Datatypes <> true constr
+R11425:11437 Coccinelle.more_list <> mem def
+R11447:11456 Coccinelle.list_set Make filter_aux def
+R11465:11465 Coccinelle.list_set <> l:153 var
+R11458:11463 Coccinelle.list_set <> P_bool:152 var
+R11444:11444 Coccinelle.list_set <> e:154 var
+R11439:11442 Coccinelle.list_set Make eq_A defax
+R11537:11546 Coccinelle.list_set Make filter_aux def
+R11537:11546 Coccinelle.list_set Make filter_aux def
+prf 11871:11878 Make filter_1
+R11902:11905 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11901:11901 Coccinelle.list_set Make A defax
+R11906:11909 Coq.Init.Datatypes <> bool ind
+binder 11892:11897 <> P_bool:158
+binder 11912:11912 <> s:159
+binder 11914:11921 <> P_compat:160
+binder 11923:11923 <> e:161
+R11936:11939 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11929:11931 Coccinelle.list_set Make mem def
+R11935:11935 Coccinelle.list_set <> s:159 var
+R11933:11933 Coccinelle.list_set <> e:161 var
+R11955:11958 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11948:11950 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11940:11945 Coccinelle.list_set <> P_bool:158 var
+R11947:11947 Coccinelle.list_set <> e:161 var
+R11951:11954 Coq.Init.Datatypes <> true constr
+R11959:11961 Coccinelle.list_set Make mem def
+R11966:11971 Coccinelle.list_set Make filter def
+R11982:11989 Coccinelle.list_set <> P_compat:160 var
+R11980:11980 Coccinelle.list_set <> s:159 var
+R11973:11978 Coccinelle.list_set <> P_bool:158 var
+R11963:11963 Coccinelle.list_set <> e:161 var
+R12007:12009 Coccinelle.list_set Make mem def
+R12012:12018 Coccinelle.list_set Make support proj
+R12080:12092 Coccinelle.list_set Make filter_1_list thm
+R12080:12092 Coccinelle.list_set Make filter_1_list thm
+prf 12116:12128 Make filter_2_list
+R12151:12154 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12150:12150 Coccinelle.list_set Make A defax
+R12155:12158 Coq.Init.Datatypes <> bool ind
+binder 12141:12146 <> P_bool:162
+binder 12161:12161 <> l:163
+binder 12163:12163 <> e:164
+binder 12188:12188 <> e:165
+binder 12190:12191 <> e':166
+R12203:12207 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12228:12228 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12194:12197 Coccinelle.list_set Make eq_A defax
+R12199:12199 Coccinelle.list_set <> e:165 var
+R12201:12202 Coccinelle.list_set <> e':166 var
+R12216:12218 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R12208:12213 Coccinelle.list_set <> P_bool:162 var
+R12215:12215 Coccinelle.list_set <> e:165 var
+R12219:12224 Coccinelle.list_set <> P_bool:162 var
+R12226:12227 Coccinelle.list_set <> e':166 var
+binder 12170:12177 <> P_compat:167
+R12276:12279 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12234:12246 Coccinelle.more_list <> mem def
+R12256:12265 Coccinelle.list_set Make filter_aux def
+R12274:12274 Coccinelle.list_set <> l:163 var
+R12267:12272 Coccinelle.list_set <> P_bool:162 var
+R12253:12253 Coccinelle.list_set <> e:164 var
+R12248:12251 Coccinelle.list_set Make eq_A defax
+R12302:12305 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12280:12292 Coccinelle.more_list <> mem def
+R12301:12301 Coccinelle.list_set <> l:163 var
+R12299:12299 Coccinelle.list_set <> e:164 var
+R12294:12297 Coccinelle.list_set Make eq_A defax
+R12314:12316 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R12306:12311 Coccinelle.list_set <> P_bool:162 var
+R12313:12313 Coccinelle.list_set <> e:164 var
+R12317:12320 Coq.Init.Datatypes <> true constr
+R12383:12392 Coccinelle.list_set Make filter_aux def
+R12383:12392 Coccinelle.list_set Make filter_aux def
+R12582:12586 Coq.Init.Logic <> proj1 thm
+R12582:12586 Coq.Init.Logic <> proj1 thm
+R12610:12614 Coq.Init.Logic <> proj2 thm
+R12610:12614 Coq.Init.Logic <> proj2 thm
+prf 12693:12700 Make filter_2
+R12723:12726 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12722:12722 Coccinelle.list_set Make A defax
+R12727:12730 Coq.Init.Datatypes <> bool ind
+binder 12713:12718 <> P_bool:168
+binder 12733:12733 <> s:169
+binder 12735:12742 <> P_compat:170
+binder 12744:12744 <> e:171
+R12782:12785 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12750:12752 Coccinelle.list_set Make mem def
+R12757:12762 Coccinelle.list_set Make filter def
+R12773:12780 Coccinelle.list_set <> P_compat:170 var
+R12771:12771 Coccinelle.list_set <> s:169 var
+R12764:12769 Coccinelle.list_set <> P_bool:168 var
+R12754:12754 Coccinelle.list_set <> e:171 var
+R12793:12796 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12786:12788 Coccinelle.list_set Make mem def
+R12792:12792 Coccinelle.list_set <> s:169 var
+R12790:12790 Coccinelle.list_set <> e:171 var
+R12805:12807 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R12797:12802 Coccinelle.list_set <> P_bool:168 var
+R12804:12804 Coccinelle.list_set <> e:171 var
+R12808:12811 Coq.Init.Datatypes <> true constr
+R12828:12830 Coccinelle.list_set Make mem def
+R12833:12839 Coccinelle.list_set Make support proj
+R12890:12902 Coccinelle.list_set Make filter_2_list thm
+R12890:12902 Coccinelle.list_set Make filter_2_list thm
+prf 12945:12959 Make without_red_nil
+R12963:12973 Coccinelle.list_set Make without_red def
+R12975:12977 Coq.Init.Datatypes <> nil constr
+R12994:13004 Coccinelle.list_set Make without_red def
+def 13040:13044 Make empty
+R13048:13048 Coccinelle.list_set Make t rec
+R13053:13058 Coccinelle.list_set Make mk_set constr
+R13060:13074 Coccinelle.list_set Make without_red_nil thm
+prf 13102:13122 Make without_red_singleton
+R13137:13137 Coccinelle.list_set Make A defax
+binder 13133:13133 <> e:172
+R13140:13150 Coccinelle.list_set Make without_red def
+R13154:13157 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13153:13153 Coccinelle.list_set <> e:172 var
+R13158:13160 Coq.Init.Datatypes <> nil constr
+R13178:13188 Coccinelle.list_set Make without_red def
+def 13237:13245 Make singleton
+R13252:13252 Coccinelle.list_set Make A defax
+binder 13248:13248 <> e:173
+R13257:13257 Coccinelle.list_set Make t rec
+R13262:13267 Coccinelle.list_set Make mk_set constr
+R13270:13290 Coccinelle.list_set Make without_red_singleton thm
+R13292:13292 Coccinelle.list_set <> e:173 var
+def 13360:13367 Make make_set
+R13374:13377 Coq.Init.Datatypes <> list ind
+R13379:13379 Coccinelle.list_set Make A defax
+binder 13370:13370 <> l:174
+R13384:13384 Coccinelle.list_set Make t rec
+R13389:13394 Coccinelle.list_set Make mk_set constr
+R13397:13418 Coccinelle.list_set Make without_red_remove_red thm
+R13420:13420 Coccinelle.list_set <> l:174 var
+R13482:13485 Coq.Init.Datatypes <> list ind
+R13487:13487 Coccinelle.list_set Make A defax
+binder 13474:13476 <> acc:175
+R13482:13485 Coq.Init.Datatypes <> list ind
+R13487:13487 Coccinelle.list_set Make A defax
+binder 13478:13478 <> l:176
+R13503:13506 Coq.Init.Datatypes <> list ind
+R13508:13508 Coccinelle.list_set Make A defax
+R13521:13521 Coccinelle.list_set <> l:176 var
+R13532:13534 Coq.Init.Datatypes <> nil constr
+R13539:13541 Coccinelle.list_set <> acc:175 var
+R13548:13551 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13552:13553 Coq.Init.Peano <> le ind
+R13567:13574 Coccinelle.more_list <> mem_bool def
+R13586:13588 Coccinelle.list_set <> acc:175 var
+R13576:13582 Coccinelle.list_set Make eq_bool defax
+R13634:13648 Coccinelle.list_set <> add_without_red:177 def
+R13652:13655 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13656:13658 Coccinelle.list_set <> acc:175 var
+R13601:13615 Coccinelle.list_set <> add_without_red:177 def
+R13617:13619 Coccinelle.list_set <> acc:175 var
+binder 13474:13476 <> acc:179
+binder 13478:13478 <> l:180
+binder 13474:13476 <> acc:181
+binder 13478:13478 <> l:182
+binder 13474:13476 <> acc:184
+binder 13478:13478 <> l:185
+R13521:13521 Coccinelle.list_set <> l:185 var
+R13532:13534 Coq.Init.Datatypes <> nil constr
+R13539:13541 Coccinelle.list_set <> acc:184 var
+R13548:13551 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13552:13553 Coq.Init.Peano <> le ind
+R13567:13574 Coccinelle.more_list <> mem_bool def
+R13586:13588 Coccinelle.list_set <> acc:184 var
+R13576:13582 Coccinelle.list_set Make eq_bool defax
+R13634:13648 Coccinelle.list_set <> add_without_red:183 def
+R13652:13655 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13656:13658 Coccinelle.list_set <> acc:184 var
+R13601:13615 Coccinelle.list_set <> add_without_red:183 def
+R13617:13619 Coccinelle.list_set <> acc:184 var
+binder 13474:13476 <> acc:187
+binder 13478:13478 <> l:188
+R13521:13521 Coccinelle.list_set <> l:188 var
+R13532:13534 Coq.Init.Datatypes <> nil constr
+R13539:13541 Coccinelle.list_set <> acc:187 var
+R13548:13551 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13552:13553 Coq.Init.Peano <> le ind
+R13567:13574 Coccinelle.more_list <> mem_bool def
+R13586:13588 Coccinelle.list_set <> acc:187 var
+R13576:13582 Coccinelle.list_set Make eq_bool defax
+R13634:13648 Coccinelle.list_set <> add_without_red:189 def
+R13652:13655 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13656:13658 Coccinelle.list_set <> acc:187 var
+R13601:13615 Coccinelle.list_set <> add_without_red:189 def
+R13617:13619 Coccinelle.list_set <> acc:187 var
+prf 13678:13704 Make without_red_add_without_red
+binder 13717:13718 <> l1:209
+binder 13720:13721 <> l2:210
+R13738:13741 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13724:13734 Coccinelle.list_set Make without_red def
+R13736:13737 Coccinelle.list_set <> l1:209 var
+R13742:13752 Coccinelle.list_set Make without_red def
+R13755:13769 Coccinelle.list_set Make add_without_red def
+R13774:13775 Coccinelle.list_set <> l2:210 var
+R13771:13772 Coccinelle.list_set <> l1:209 var
+R13793:13803 Coccinelle.list_set Make without_red def
+R13848:13862 Coccinelle.list_set Make add_without_red def
+R13848:13862 Coccinelle.list_set Make add_without_red def
+def 14043:14047 Make union
+binder 14049:14050 <> s1:211
+binder 14052:14053 <> s2:212
+R14058:14063 Coccinelle.list_set Make mk_set constr
+R14066:14092 Coccinelle.list_set Make without_red_add_without_red thm
+R14111:14118 Coccinelle.list_set Make is_a_set proj
+R14107:14108 Coccinelle.list_set <> s1:211 var
+R14098:14104 Coccinelle.list_set Make support proj
+R14094:14095 Coccinelle.list_set <> s2:212 var
+prf 14130:14140 Make union_1_aux
+R14160:14163 Coq.Init.Datatypes <> list ind
+R14165:14165 Coccinelle.list_set Make A defax
+binder 14152:14153 <> l1:213
+binder 14155:14156 <> l2:214
+R14173:14173 Coccinelle.list_set Make A defax
+binder 14169:14169 <> e:215
+R14200:14203 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14177:14189 Coccinelle.more_list <> mem def
+R14198:14199 Coccinelle.list_set <> l1:213 var
+R14196:14196 Coccinelle.list_set <> e:215 var
+R14191:14194 Coccinelle.list_set Make eq_A defax
+R14204:14216 Coccinelle.more_list <> mem def
+R14226:14240 Coccinelle.list_set Make add_without_red def
+R14245:14246 Coccinelle.list_set <> l2:214 var
+R14242:14243 Coccinelle.list_set <> l1:213 var
+R14223:14223 Coccinelle.list_set <> e:215 var
+R14218:14221 Coccinelle.list_set Make eq_A defax
+R14366:14373 Coccinelle.more_list <> mem_bool def
+R14375:14381 Coccinelle.list_set Make eq_bool defax
+R14366:14373 Coccinelle.more_list <> mem_bool def
+R14375:14381 Coccinelle.list_set Make eq_bool defax
+R14450:14453 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R14464:14472 Coq.Init.Logic <> or_intror constr
+R14450:14453 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R14464:14472 Coq.Init.Logic <> or_intror constr
+prf 14499:14505 Make union_1
+binder 14516:14517 <> s1:216
+binder 14519:14520 <> s2:217
+binder 14522:14522 <> e:218
+R14533:14536 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14525:14527 Coccinelle.list_set Make mem def
+R14531:14532 Coccinelle.list_set <> s1:216 var
+R14529:14529 Coccinelle.list_set <> e:218 var
+R14537:14539 Coccinelle.list_set Make mem def
+R14544:14548 Coccinelle.list_set Make union def
+R14553:14554 Coccinelle.list_set <> s2:217 var
+R14550:14551 Coccinelle.list_set <> s1:216 var
+R14541:14541 Coccinelle.list_set <> e:218 var
+R14572:14574 Coccinelle.list_set Make mem def
+R14618:14628 Coccinelle.list_set Make union_1_aux thm
+R14618:14628 Coccinelle.list_set Make union_1_aux thm
+prf 14644:14654 Make union_2_aux
+R14674:14677 Coq.Init.Datatypes <> list ind
+R14679:14679 Coccinelle.list_set Make A defax
+binder 14666:14667 <> l1:219
+binder 14669:14670 <> l2:220
+R14687:14687 Coccinelle.list_set Make A defax
+binder 14683:14683 <> e:221
+R14714:14717 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14691:14703 Coccinelle.more_list <> mem def
+R14712:14713 Coccinelle.list_set <> l2:220 var
+R14710:14710 Coccinelle.list_set <> e:221 var
+R14705:14708 Coccinelle.list_set Make eq_A defax
+R14718:14730 Coccinelle.more_list <> mem def
+R14740:14754 Coccinelle.list_set Make add_without_red def
+R14759:14760 Coccinelle.list_set <> l2:220 var
+R14756:14757 Coccinelle.list_set <> l1:219 var
+R14737:14737 Coccinelle.list_set <> e:221 var
+R14732:14735 Coccinelle.list_set Make eq_A defax
+R14955:14964 Coccinelle.more_list <> mem_eq_mem thm
+R14983:14991 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R14997:15004 Coccinelle.list_set Make eq_proof defax
+R14966:14973 Coccinelle.list_set Make eq_proof defax
+R14955:14964 Coccinelle.more_list <> mem_eq_mem thm
+R14983:14991 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R14997:15004 Coccinelle.list_set Make eq_proof defax
+R14966:14973 Coccinelle.list_set Make eq_proof defax
+R15042:15052 Coccinelle.more_list <> mem_bool_ok thm
+R15058:15067 Coccinelle.list_set Make eq_bool_ok defax
+R15083:15090 Coccinelle.more_list <> mem_bool def
+R15092:15098 Coccinelle.list_set Make eq_bool defax
+R15042:15052 Coccinelle.more_list <> mem_bool_ok thm
+R15058:15067 Coccinelle.list_set Make eq_bool_ok defax
+R15083:15090 Coccinelle.more_list <> mem_bool def
+R15092:15098 Coccinelle.list_set Make eq_bool defax
+R15130:15140 Coccinelle.list_set Make union_1_aux thm
+R15130:15140 Coccinelle.list_set Make union_1_aux thm
+R15172:15182 Coccinelle.list_set Make union_1_aux thm
+R15187:15190 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15172:15182 Coccinelle.list_set Make union_1_aux thm
+R15187:15190 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15240:15247 Coccinelle.more_list <> mem_bool def
+R15249:15255 Coccinelle.list_set Make eq_bool defax
+R15240:15247 Coccinelle.more_list <> mem_bool def
+R15249:15255 Coccinelle.list_set Make eq_bool defax
+prf 15308:15314 Make union_2
+binder 15325:15326 <> s1:222
+binder 15328:15329 <> s2:223
+binder 15331:15331 <> e:224
+R15342:15345 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15334:15336 Coccinelle.list_set Make mem def
+R15340:15341 Coccinelle.list_set <> s2:223 var
+R15338:15338 Coccinelle.list_set <> e:224 var
+R15346:15348 Coccinelle.list_set Make mem def
+R15353:15357 Coccinelle.list_set Make union def
+R15362:15363 Coccinelle.list_set <> s2:223 var
+R15359:15360 Coccinelle.list_set <> s1:222 var
+R15350:15350 Coccinelle.list_set <> e:224 var
+R15381:15383 Coccinelle.list_set Make mem def
+R15427:15437 Coccinelle.list_set Make union_2_aux thm
+R15427:15437 Coccinelle.list_set Make union_2_aux thm
+prf 15452:15463 Make union_12_aux
+R15483:15486 Coq.Init.Datatypes <> list ind
+R15488:15488 Coccinelle.list_set Make A defax
+binder 15475:15476 <> l1:225
+binder 15478:15479 <> l2:226
+R15496:15496 Coccinelle.list_set Make A defax
+binder 15492:15492 <> e:227
+R15544:15555 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15500:15512 Coccinelle.more_list <> mem def
+R15522:15536 Coccinelle.list_set Make add_without_red def
+R15541:15542 Coccinelle.list_set <> l2:226 var
+R15538:15539 Coccinelle.list_set <> l1:225 var
+R15519:15519 Coccinelle.list_set <> e:227 var
+R15514:15517 Coccinelle.list_set Make eq_A defax
+R15579:15582 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R15556:15568 Coccinelle.more_list <> mem def
+R15577:15578 Coccinelle.list_set <> l1:225 var
+R15575:15575 Coccinelle.list_set <> e:227 var
+R15570:15573 Coccinelle.list_set Make eq_A defax
+R15583:15595 Coccinelle.more_list <> mem def
+R15604:15605 Coccinelle.list_set <> l2:226 var
+R15602:15602 Coccinelle.list_set <> e:227 var
+R15597:15600 Coccinelle.list_set Make eq_A defax
+R15665:15679 Coccinelle.list_set Make add_without_red def
+R15665:15679 Coccinelle.list_set Make add_without_red def
+prf 15975:15982 Make union_12
+binder 15996:15997 <> s1:228
+binder 15999:16000 <> s2:229
+binder 16002:16002 <> e:230
+R16024:16027 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16005:16007 Coccinelle.list_set Make mem def
+R16012:16016 Coccinelle.list_set Make union def
+R16021:16022 Coccinelle.list_set <> s2:229 var
+R16018:16019 Coccinelle.list_set <> s1:228 var
+R16009:16009 Coccinelle.list_set <> e:230 var
+R16036:16039 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R16028:16030 Coccinelle.list_set Make mem def
+R16034:16035 Coccinelle.list_set <> s1:228 var
+R16032:16032 Coccinelle.list_set <> e:230 var
+R16040:16042 Coccinelle.list_set Make mem def
+R16046:16047 Coccinelle.list_set <> s2:229 var
+R16044:16044 Coccinelle.list_set <> e:230 var
+R16064:16066 Coccinelle.list_set Make mem def
+R16110:16121 Coccinelle.list_set Make union_12_aux thm
+R16110:16121 Coccinelle.list_set Make union_12_aux thm
+R16170:16173 Coq.Init.Datatypes <> list ind
+R16175:16175 Coccinelle.list_set Make A defax
+binder 16158:16160 <> acc:231
+binder 16162:16163 <> l1:232
+R16170:16173 Coq.Init.Datatypes <> list ind
+R16175:16175 Coccinelle.list_set Make A defax
+binder 16165:16166 <> l2:233
+R16192:16195 Coq.Init.Datatypes <> list ind
+R16197:16197 Coccinelle.list_set Make A defax
+R16210:16211 Coccinelle.list_set <> l2:233 var
+R16222:16224 Coq.Init.Datatypes <> nil constr
+R16229:16231 Coccinelle.list_set <> acc:231 var
+R16238:16241 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16258:16265 Coccinelle.more_list <> mem_bool def
+R16277:16278 Coccinelle.list_set <> l1:232 var
+R16267:16273 Coccinelle.list_set Make eq_bool defax
+R16337:16353 Coccinelle.list_set <> remove_not_common:234 def
+R16359:16360 Coccinelle.list_set <> l1:232 var
+R16355:16357 Coccinelle.list_set <> acc:231 var
+R16292:16308 Coccinelle.list_set <> remove_not_common:234 def
+R16321:16322 Coccinelle.list_set <> l1:232 var
+R16312:16315 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16316:16318 Coccinelle.list_set <> acc:231 var
+binder 16158:16160 <> acc:236
+binder 16162:16163 <> l1:237
+binder 16165:16166 <> l2:238
+binder 16158:16160 <> acc:239
+binder 16162:16163 <> l1:240
+binder 16165:16166 <> l2:241
+binder 16158:16160 <> acc:243
+binder 16162:16163 <> l1:244
+binder 16165:16166 <> l2:245
+R16210:16211 Coccinelle.list_set <> l2:245 var
+R16222:16224 Coq.Init.Datatypes <> nil constr
+R16229:16231 Coccinelle.list_set <> acc:243 var
+R16238:16241 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16258:16265 Coccinelle.more_list <> mem_bool def
+R16277:16278 Coccinelle.list_set <> l1:244 var
+R16267:16273 Coccinelle.list_set Make eq_bool defax
+R16337:16353 Coccinelle.list_set <> remove_not_common:242 def
+R16359:16360 Coccinelle.list_set <> l1:244 var
+R16355:16357 Coccinelle.list_set <> acc:243 var
+R16292:16308 Coccinelle.list_set <> remove_not_common:242 def
+R16321:16322 Coccinelle.list_set <> l1:244 var
+R16312:16315 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16316:16318 Coccinelle.list_set <> acc:243 var
+binder 16158:16160 <> acc:247
+binder 16162:16163 <> l1:248
+binder 16165:16166 <> l2:249
+R16210:16211 Coccinelle.list_set <> l2:249 var
+R16222:16224 Coq.Init.Datatypes <> nil constr
+R16229:16231 Coccinelle.list_set <> acc:247 var
+R16238:16241 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16258:16265 Coccinelle.more_list <> mem_bool def
+R16277:16278 Coccinelle.list_set <> l1:248 var
+R16267:16273 Coccinelle.list_set Make eq_bool defax
+R16337:16353 Coccinelle.list_set <> remove_not_common:250 def
+R16359:16360 Coccinelle.list_set <> l1:248 var
+R16355:16357 Coccinelle.list_set <> acc:247 var
+R16292:16308 Coccinelle.list_set <> remove_not_common:250 def
+R16321:16322 Coccinelle.list_set <> l1:248 var
+R16312:16315 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16316:16318 Coccinelle.list_set <> acc:247 var
+prf 16378:16401 Make length_remove_not_common
+binder 16416:16417 <> l1:275
+binder 16419:16420 <> l2:276
+binder 16422:16424 <> acc:277
+R16463:16465 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R16427:16432 Coq.Init.Datatypes <> length def
+R16435:16451 Coccinelle.list_set Make remove_not_common def
+R16460:16461 Coccinelle.list_set <> l2:276 var
+R16457:16458 Coccinelle.list_set <> l1:275 var
+R16453:16455 Coccinelle.list_set <> acc:277 var
+R16476:16478 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R16466:16471 Coq.Init.Datatypes <> length def
+R16473:16475 Coccinelle.list_set <> acc:277 var
+R16479:16484 Coq.Init.Datatypes <> length def
+R16487:16503 Coccinelle.list_set Make remove_not_common def
+R16512:16513 Coccinelle.list_set <> l2:276 var
+R16509:16510 Coccinelle.list_set <> l1:275 var
+R16505:16507 Coq.Init.Datatypes <> nil constr
+R16604:16611 Coq.Init.Peano <> plus_n_O thm
+R16604:16611 Coq.Init.Peano <> plus_n_O thm
+R16604:16611 Coq.Init.Peano <> plus_n_O thm
+R16647:16654 Coccinelle.more_list <> mem_bool def
+R16656:16662 Coccinelle.list_set Make eq_bool defax
+R16647:16654 Coccinelle.more_list <> mem_bool def
+R16656:16662 Coccinelle.list_set Make eq_bool defax
+R16715:16718 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16770:16773 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16774:16776 Coq.Init.Datatypes <> nil constr
+R16794:16802 Coq.Init.Peano <> plus_n_Sm thm
+R16715:16718 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16715:16718 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16770:16773 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16774:16776 Coq.Init.Datatypes <> nil constr
+R16770:16773 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16774:16776 Coq.Init.Datatypes <> nil constr
+R16794:16802 Coq.Init.Peano <> plus_n_Sm thm
+prf 16849:16881 Make without_red_remove_not_common_aux
+binder 16894:16896 <> acc:278
+binder 16898:16899 <> l1:279
+binder 16901:16902 <> l2:280
+R16905:16905 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16976:17007 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 16913:16913 <> e:281
+R16967:16970 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16940:16943 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R16916:16928 Coccinelle.more_list <> mem def
+R16937:16939 Coccinelle.list_set <> acc:278 var
+R16935:16935 Coccinelle.list_set <> e:281 var
+R16930:16933 Coccinelle.list_set Make eq_A defax
+R16944:16956 Coccinelle.more_list <> mem def
+R16965:16966 Coccinelle.list_set <> l2:280 var
+R16963:16963 Coccinelle.list_set <> e:281 var
+R16958:16961 Coccinelle.list_set Make eq_A defax
+R16971:16975 Coq.Init.Logic <> False ind
+R17023:17026 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17008:17018 Coccinelle.list_set Make without_red def
+R17020:17022 Coccinelle.list_set <> acc:278 var
+R17041:17044 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17027:17037 Coccinelle.list_set Make without_red def
+R17039:17040 Coccinelle.list_set <> l1:279 var
+R17059:17090 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17045:17055 Coccinelle.list_set Make without_red def
+R17057:17058 Coccinelle.list_set <> l2:280 var
+R17091:17101 Coccinelle.list_set Make without_red def
+R17104:17120 Coccinelle.list_set Make remove_not_common def
+R17129:17130 Coccinelle.list_set <> l2:280 var
+R17126:17127 Coccinelle.list_set <> l1:279 var
+R17122:17124 Coccinelle.list_set <> acc:278 var
+R17194:17210 Coccinelle.list_set Make remove_not_common def
+R17194:17210 Coccinelle.list_set Make remove_not_common def
+R17441:17451 Coccinelle.list_set Make without_red def
+R17473:17483 Coccinelle.more_list <> mem_bool_ok thm
+R17489:17498 Coccinelle.list_set Make eq_bool_ok defax
+R17513:17520 Coccinelle.more_list <> mem_bool def
+R17522:17528 Coccinelle.list_set Make eq_bool defax
+R17473:17483 Coccinelle.more_list <> mem_bool_ok thm
+R17489:17498 Coccinelle.list_set Make eq_bool_ok defax
+R17513:17520 Coccinelle.more_list <> mem_bool def
+R17522:17528 Coccinelle.list_set Make eq_bool defax
+R17623:17632 Coccinelle.more_list <> mem_eq_mem thm
+R17634:17641 Coccinelle.list_set Make eq_proof defax
+R17623:17632 Coccinelle.more_list <> mem_eq_mem thm
+R17634:17641 Coccinelle.list_set Make eq_proof defax
+R17740:17750 Coccinelle.list_set Make without_red def
+R17772:17782 Coccinelle.more_list <> mem_bool_ok thm
+R17788:17797 Coccinelle.list_set Make eq_bool_ok defax
+R17813:17820 Coccinelle.more_list <> mem_bool def
+R17822:17828 Coccinelle.list_set Make eq_bool defax
+R17772:17782 Coccinelle.more_list <> mem_bool_ok thm
+R17788:17797 Coccinelle.list_set Make eq_bool_ok defax
+R17813:17820 Coccinelle.more_list <> mem_bool def
+R17822:17828 Coccinelle.list_set Make eq_bool defax
+R17860:17868 Coq.Init.Logic <> False_rec scheme
+R17860:17868 Coq.Init.Logic <> False_rec scheme
+R17942:17952 Coccinelle.list_set Make without_red def
+R18004:18014 Coccinelle.list_set Make without_red def
+R18030:18037 Coccinelle.more_list <> mem_bool def
+R18039:18045 Coccinelle.list_set Make eq_bool defax
+R18030:18037 Coccinelle.more_list <> mem_bool def
+R18039:18045 Coccinelle.list_set Make eq_bool defax
+R18260:18270 Coccinelle.list_set Make without_red def
+R18286:18293 Coccinelle.more_list <> mem_bool def
+R18295:18301 Coccinelle.list_set Make eq_bool defax
+R18286:18293 Coccinelle.more_list <> mem_bool def
+R18295:18301 Coccinelle.list_set Make eq_bool defax
+prf 18362:18390 Make without_red_remove_not_common
+binder 18403:18404 <> l1:282
+binder 18406:18407 <> l2:283
+R18424:18427 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18410:18420 Coccinelle.list_set Make without_red def
+R18422:18423 Coccinelle.list_set <> l1:282 var
+R18442:18465 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18428:18438 Coccinelle.list_set Make without_red def
+R18440:18441 Coccinelle.list_set <> l2:283 var
+R18466:18476 Coccinelle.list_set Make without_red def
+R18479:18495 Coccinelle.list_set Make remove_not_common def
+R18504:18505 Coccinelle.list_set <> l2:283 var
+R18501:18502 Coccinelle.list_set <> l1:282 var
+R18497:18499 Coq.Init.Datatypes <> nil constr
+R18545:18577 Coccinelle.list_set Make without_red_remove_not_common_aux thm
+R18545:18577 Coccinelle.list_set Make without_red_remove_not_common_aux thm
+R18629:18639 Coccinelle.list_set Make without_red def
+def 18675:18679 Make inter
+binder 18681:18682 <> s1:284
+binder 18684:18685 <> s2:285
+R18692:18697 Coccinelle.list_set Make mk_set constr
+R18700:18728 Coccinelle.list_set Make without_red_remove_not_common thm
+R18748:18755 Coccinelle.list_set Make is_a_set proj
+R18744:18745 Coccinelle.list_set <> s2:285 var
+R18734:18741 Coccinelle.list_set Make is_a_set proj
+R18730:18731 Coccinelle.list_set <> s1:284 var
+prf 18767:18777 Make inter_1_aux
+binder 18791:18793 <> acc:286
+binder 18795:18796 <> l1:287
+binder 18798:18799 <> l2:288
+binder 18801:18801 <> e:289
+R18854:18860 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18804:18816 Coccinelle.more_list <> mem def
+R18826:18842 Coccinelle.list_set Make remove_not_common def
+R18851:18852 Coccinelle.list_set <> l2:288 var
+R18848:18849 Coccinelle.list_set <> l1:287 var
+R18844:18846 Coccinelle.list_set <> acc:286 var
+R18823:18823 Coccinelle.list_set <> e:289 var
+R18818:18821 Coccinelle.list_set Make eq_A defax
+R18885:18888 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R18861:18873 Coccinelle.more_list <> mem def
+R18882:18884 Coccinelle.list_set <> acc:286 var
+R18880:18880 Coccinelle.list_set <> e:289 var
+R18875:18878 Coccinelle.list_set Make eq_A defax
+R18889:18901 Coccinelle.more_list <> mem def
+R18910:18911 Coccinelle.list_set <> l1:287 var
+R18908:18908 Coccinelle.list_set <> e:289 var
+R18903:18906 Coccinelle.list_set Make eq_A defax
+R18975:18991 Coccinelle.list_set Make remove_not_common def
+R18975:18991 Coccinelle.list_set Make remove_not_common def
+R19232:19241 Coccinelle.more_list <> mem_eq_mem thm
+R19243:19250 Coccinelle.list_set Make eq_proof defax
+R19232:19241 Coccinelle.more_list <> mem_eq_mem thm
+R19243:19250 Coccinelle.list_set Make eq_proof defax
+R19264:19272 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R19278:19285 Coccinelle.list_set Make eq_proof defax
+R19264:19272 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R19278:19285 Coccinelle.list_set Make eq_proof defax
+R19313:19323 Coccinelle.more_list <> mem_bool_ok thm
+R19329:19338 Coccinelle.list_set Make eq_bool_ok defax
+R19313:19323 Coccinelle.more_list <> mem_bool_ok thm
+R19329:19338 Coccinelle.list_set Make eq_bool_ok defax
+prf 19415:19421 Make inter_1
+binder 19432:19433 <> s1:290
+binder 19435:19436 <> s2:291
+binder 19438:19438 <> e:292
+R19460:19463 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19441:19443 Coccinelle.list_set Make mem def
+R19448:19452 Coccinelle.list_set Make inter def
+R19457:19458 Coccinelle.list_set <> s2:291 var
+R19454:19455 Coccinelle.list_set <> s1:290 var
+R19445:19445 Coccinelle.list_set <> e:292 var
+R19464:19466 Coccinelle.list_set Make mem def
+R19470:19471 Coccinelle.list_set <> s1:290 var
+R19468:19468 Coccinelle.list_set <> e:292 var
+R19531:19541 Coccinelle.list_set Make inter_1_aux thm
+R19543:19545 Coq.Init.Datatypes <> nil constr
+R19531:19541 Coccinelle.list_set Make inter_1_aux thm
+R19543:19545 Coq.Init.Datatypes <> nil constr
+prf 19614:19624 Make inter_2_aux
+binder 19638:19640 <> acc:293
+binder 19642:19643 <> l1:294
+binder 19645:19646 <> l2:295
+binder 19648:19648 <> e:296
+R19701:19707 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19651:19663 Coccinelle.more_list <> mem def
+R19673:19689 Coccinelle.list_set Make remove_not_common def
+R19698:19699 Coccinelle.list_set <> l2:295 var
+R19695:19696 Coccinelle.list_set <> l1:294 var
+R19691:19693 Coccinelle.list_set <> acc:293 var
+R19670:19670 Coccinelle.list_set <> e:296 var
+R19665:19668 Coccinelle.list_set Make eq_A defax
+R19732:19735 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R19708:19720 Coccinelle.more_list <> mem def
+R19729:19731 Coccinelle.list_set <> acc:293 var
+R19727:19727 Coccinelle.list_set <> e:296 var
+R19722:19725 Coccinelle.list_set Make eq_A defax
+R19736:19748 Coccinelle.more_list <> mem def
+R19757:19758 Coccinelle.list_set <> l2:295 var
+R19755:19755 Coccinelle.list_set <> e:296 var
+R19750:19753 Coccinelle.list_set Make eq_A defax
+R19822:19838 Coccinelle.list_set Make remove_not_common def
+R19822:19838 Coccinelle.list_set Make remove_not_common def
+prf 20180:20186 Make inter_2
+binder 20197:20198 <> s1:297
+binder 20200:20201 <> s2:298
+binder 20203:20203 <> e:299
+R20225:20228 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20206:20208 Coccinelle.list_set Make mem def
+R20213:20217 Coccinelle.list_set Make inter def
+R20222:20223 Coccinelle.list_set <> s2:298 var
+R20219:20220 Coccinelle.list_set <> s1:297 var
+R20210:20210 Coccinelle.list_set <> e:299 var
+R20229:20231 Coccinelle.list_set Make mem def
+R20235:20236 Coccinelle.list_set <> s2:298 var
+R20233:20233 Coccinelle.list_set <> e:299 var
+R20295:20305 Coccinelle.list_set Make inter_2_aux thm
+R20307:20309 Coq.Init.Datatypes <> nil constr
+R20295:20305 Coccinelle.list_set Make inter_2_aux thm
+R20307:20309 Coq.Init.Datatypes <> nil constr
+prf 20378:20389 Make inter_12_aux
+binder 20402:20404 <> acc:300
+binder 20406:20407 <> l1:301
+binder 20409:20410 <> l2:302
+binder 20412:20412 <> e:303
+R20439:20442 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20416:20428 Coccinelle.more_list <> mem def
+R20437:20438 Coccinelle.list_set <> l1:301 var
+R20435:20435 Coccinelle.list_set <> e:303 var
+R20430:20433 Coccinelle.list_set Make eq_A defax
+R20466:20472 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20443:20455 Coccinelle.more_list <> mem def
+R20464:20465 Coccinelle.list_set <> l2:302 var
+R20462:20462 Coccinelle.list_set <> e:303 var
+R20457:20460 Coccinelle.list_set Make eq_A defax
+R20473:20485 Coccinelle.more_list <> mem def
+R20495:20511 Coccinelle.list_set Make remove_not_common def
+R20520:20521 Coccinelle.list_set <> l2:302 var
+R20517:20518 Coccinelle.list_set <> l1:301 var
+R20513:20515 Coccinelle.list_set <> acc:300 var
+R20492:20492 Coccinelle.list_set <> e:303 var
+R20487:20490 Coccinelle.list_set Make eq_A defax
+binder 20551:20553 <> acc:304
+binder 20555:20556 <> l1:305
+binder 20558:20559 <> l2:306
+binder 20561:20561 <> e:307
+R20588:20612 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20564:20576 Coccinelle.more_list <> mem def
+R20585:20587 Coccinelle.list_set <> acc:304 var
+R20583:20583 Coccinelle.list_set <> e:307 var
+R20578:20581 Coccinelle.list_set Make eq_A defax
+R20613:20625 Coccinelle.more_list <> mem def
+R20635:20651 Coccinelle.list_set Make remove_not_common def
+R20660:20661 Coccinelle.list_set <> l2:306 var
+R20657:20658 Coccinelle.list_set <> l1:305 var
+R20653:20655 Coccinelle.list_set <> acc:304 var
+R20632:20632 Coccinelle.list_set <> e:307 var
+R20627:20630 Coccinelle.list_set Make eq_A defax
+binder 20551:20553 <> acc:308
+binder 20555:20556 <> l1:309
+binder 20558:20559 <> l2:310
+binder 20561:20561 <> e:311
+R20588:20612 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20564:20576 Coccinelle.more_list <> mem def
+R20585:20587 Coccinelle.list_set <> acc:308 var
+R20583:20583 Coccinelle.list_set <> e:311 var
+R20578:20581 Coccinelle.list_set Make eq_A defax
+R20613:20625 Coccinelle.more_list <> mem def
+R20635:20651 Coccinelle.list_set Make remove_not_common def
+R20660:20661 Coccinelle.list_set <> l2:310 var
+R20657:20658 Coccinelle.list_set <> l1:309 var
+R20653:20655 Coccinelle.list_set <> acc:308 var
+R20632:20632 Coccinelle.list_set <> e:311 var
+R20627:20630 Coccinelle.list_set Make eq_A defax
+R20717:20733 Coccinelle.list_set Make remove_not_common def
+R20717:20733 Coccinelle.list_set Make remove_not_common def
+R20960:20976 Coccinelle.list_set Make remove_not_common def
+R20960:20976 Coccinelle.list_set Make remove_not_common def
+R21239:21251 Coccinelle.more_list <> mem def
+R21253:21256 Coccinelle.list_set Make eq_A defax
+R21239:21251 Coccinelle.more_list <> mem def
+R21253:21256 Coccinelle.list_set Make eq_A defax
+R21278:21288 Coccinelle.more_list <> mem_bool_ok thm
+R21294:21303 Coccinelle.list_set Make eq_bool_ok defax
+R21278:21288 Coccinelle.more_list <> mem_bool_ok thm
+R21294:21303 Coccinelle.list_set Make eq_bool_ok defax
+R21362:21371 Coccinelle.more_list <> mem_eq_mem thm
+R21373:21380 Coccinelle.list_set Make eq_proof defax
+R21362:21371 Coccinelle.more_list <> mem_eq_mem thm
+R21373:21380 Coccinelle.list_set Make eq_proof defax
+prf 21429:21436 Make inter_12
+binder 21450:21451 <> s1:312
+binder 21453:21454 <> s2:313
+binder 21456:21456 <> e:314
+R21467:21470 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21459:21461 Coccinelle.list_set Make mem def
+R21465:21466 Coccinelle.list_set <> s1:312 var
+R21463:21463 Coccinelle.list_set <> e:314 var
+R21479:21482 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21471:21473 Coccinelle.list_set Make mem def
+R21477:21478 Coccinelle.list_set <> s2:313 var
+R21475:21475 Coccinelle.list_set <> e:314 var
+R21483:21485 Coccinelle.list_set Make mem def
+R21490:21494 Coccinelle.list_set Make inter def
+R21499:21500 Coccinelle.list_set <> s2:313 var
+R21496:21497 Coccinelle.list_set <> s1:312 var
+R21487:21487 Coccinelle.list_set <> e:314 var
+R21564:21575 Coccinelle.list_set Make inter_12_aux thm
+R21577:21579 Coq.Init.Datatypes <> nil constr
+R21564:21575 Coccinelle.list_set Make inter_12_aux thm
+R21577:21579 Coq.Init.Datatypes <> nil constr
+def 21637:21642 Make subset
+binder 21644:21645 <> s1:315
+binder 21647:21648 <> s2:316
+binder 21669:21669 <> e:317
+R21680:21683 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21672:21674 Coccinelle.list_set Make mem def
+R21678:21679 Coccinelle.list_set <> s1:315 var
+R21676:21676 Coccinelle.list_set <> e:317 var
+R21684:21686 Coccinelle.list_set Make mem def
+R21690:21691 Coccinelle.list_set <> s2:316 var
+R21688:21688 Coccinelle.list_set <> e:317 var
+prf 21701:21710 Make subset_dec
+binder 21721:21722 <> s1:318
+binder 21724:21725 <> s2:319
+R21728:21728 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R21741:21745 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R21760:21760 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R21729:21734 Coccinelle.list_set Make subset def
+R21739:21740 Coccinelle.list_set <> s2:319 var
+R21736:21737 Coccinelle.list_set <> s1:318 var
+R21746:21747 Coq.Init.Logic <> ::type_scope:'~'_x not
+R21748:21753 Coccinelle.list_set Make subset def
+R21758:21759 Coccinelle.list_set <> s2:319 var
+R21755:21756 Coccinelle.list_set <> s1:318 var
+R21777:21782 Coccinelle.list_set Make subset def
+R21785:21787 Coccinelle.list_set Make mem def
+R22061:22071 Coccinelle.more_list <> mem_bool_ok thm
+R22077:22086 Coccinelle.list_set Make eq_bool_ok defax
+R22102:22109 Coccinelle.more_list <> mem_bool def
+R22111:22117 Coccinelle.list_set Make eq_bool defax
+R22061:22071 Coccinelle.more_list <> mem_bool_ok thm
+R22077:22086 Coccinelle.list_set Make eq_bool_ok defax
+R22102:22109 Coccinelle.more_list <> mem_bool def
+R22111:22117 Coccinelle.list_set Make eq_bool defax
+R22304:22313 Coccinelle.more_list <> mem_eq_mem thm
+R22315:22322 Coccinelle.list_set Make eq_proof defax
+R22304:22313 Coccinelle.more_list <> mem_eq_mem thm
+R22315:22322 Coccinelle.list_set Make eq_proof defax
+R22336:22344 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R22350:22357 Coccinelle.list_set Make eq_proof defax
+R22336:22344 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R22350:22357 Coccinelle.list_set Make eq_proof defax
+R22552:22560 Coq.Init.Logic <> or_intror constr
+R22552:22560 Coq.Init.Logic <> or_intror constr
+prf 22717:22730 Make subset_union_1
+binder 22743:22744 <> s1:320
+binder 22746:22747 <> s2:321
+R22750:22755 Coccinelle.list_set Make subset def
+R22761:22765 Coccinelle.list_set Make union def
+R22770:22771 Coccinelle.list_set <> s2:321 var
+R22767:22768 Coccinelle.list_set <> s1:320 var
+R22757:22758 Coccinelle.list_set <> s1:320 var
+R22804:22810 Coccinelle.list_set Make union_1 thm
+R22804:22810 Coccinelle.list_set Make union_1 thm
+prf 22825:22838 Make subset_union_2
+binder 22851:22852 <> s1:322
+binder 22854:22855 <> s2:323
+R22858:22863 Coccinelle.list_set Make subset def
+R22869:22873 Coccinelle.list_set Make union def
+R22878:22879 Coccinelle.list_set <> s2:323 var
+R22875:22876 Coccinelle.list_set <> s1:322 var
+R22865:22866 Coccinelle.list_set <> s2:323 var
+R22912:22918 Coccinelle.list_set Make union_2 thm
+R22912:22918 Coccinelle.list_set Make union_2 thm
+prf 22933:22946 Make subset_inter_1
+binder 22959:22960 <> s1:324
+binder 22962:22963 <> s2:325
+R22966:22971 Coccinelle.list_set Make subset def
+R22987:22988 Coccinelle.list_set <> s1:324 var
+R22974:22978 Coccinelle.list_set Make inter def
+R22983:22984 Coccinelle.list_set <> s2:325 var
+R22980:22981 Coccinelle.list_set <> s1:324 var
+R23020:23026 Coccinelle.list_set Make inter_1 thm
+R23020:23026 Coccinelle.list_set Make inter_1 thm
+prf 23041:23054 Make subset_inter_2
+binder 23067:23068 <> s1:326
+binder 23070:23071 <> s2:327
+R23074:23079 Coccinelle.list_set Make subset def
+R23095:23096 Coccinelle.list_set <> s2:327 var
+R23082:23086 Coccinelle.list_set Make inter def
+R23091:23092 Coccinelle.list_set <> s2:327 var
+R23088:23089 Coccinelle.list_set <> s1:326 var
+R23128:23134 Coccinelle.list_set Make inter_2 thm
+R23128:23134 Coccinelle.list_set Make inter_2 thm
+def 23180:23185 Make eq_set
+binder 23187:23188 <> s1:328
+binder 23190:23191 <> s2:329
+binder 23205:23205 <> e:330
+R23216:23220 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R23208:23210 Coccinelle.list_set Make mem def
+R23214:23215 Coccinelle.list_set <> s1:328 var
+R23212:23212 Coccinelle.list_set <> e:330 var
+R23221:23223 Coccinelle.list_set Make mem def
+R23227:23228 Coccinelle.list_set <> s2:329 var
+R23225:23225 Coccinelle.list_set <> e:330 var
+prf 23238:23247 Make eq_set_dec
+binder 23258:23259 <> s1:331
+binder 23261:23262 <> s2:332
+R23265:23265 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R23278:23282 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R23296:23296 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R23266:23271 Coccinelle.list_set Make eq_set def
+R23276:23277 Coccinelle.list_set <> s2:332 var
+R23273:23274 Coccinelle.list_set <> s1:331 var
+R23283:23283 Coq.Init.Logic <> ::type_scope:'~'_x not
+R23284:23289 Coccinelle.list_set Make eq_set def
+R23294:23295 Coccinelle.list_set <> s2:332 var
+R23291:23292 Coccinelle.list_set <> s1:331 var
+R23330:23339 Coccinelle.list_set Make subset_dec thm
+R23330:23339 Coccinelle.list_set Make subset_dec thm
+R23394:23403 Coccinelle.list_set Make subset_dec thm
+R23394:23403 Coccinelle.list_set Make subset_dec thm
+prf 23685:23695 Make eq_set_refl
+binder 23706:23706 <> s:333
+R23709:23714 Coccinelle.list_set Make eq_set def
+R23718:23718 Coccinelle.list_set <> s:333 var
+R23716:23716 Coccinelle.list_set <> s:333 var
+prf 23768:23777 Make eq_set_sym
+binder 23790:23791 <> s1:334
+binder 23793:23794 <> s2:335
+R23809:23812 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23797:23802 Coccinelle.list_set Make eq_set def
+R23807:23808 Coccinelle.list_set <> s2:335 var
+R23804:23805 Coccinelle.list_set <> s1:334 var
+R23813:23818 Coccinelle.list_set Make eq_set def
+R23823:23824 Coccinelle.list_set <> s1:334 var
+R23820:23821 Coccinelle.list_set <> s2:335 var
+prf 23893:23904 Make eq_set_trans
+binder 23917:23918 <> s1:336
+binder 23920:23921 <> s2:337
+binder 23923:23924 <> s3:338
+R23939:23942 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23927:23932 Coccinelle.list_set Make eq_set def
+R23937:23938 Coccinelle.list_set <> s2:337 var
+R23934:23935 Coccinelle.list_set <> s1:336 var
+R23955:23958 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23943:23948 Coccinelle.list_set Make eq_set def
+R23953:23954 Coccinelle.list_set <> s3:338 var
+R23950:23951 Coccinelle.list_set <> s2:337 var
+R23959:23964 Coccinelle.list_set Make eq_set def
+R23969:23970 Coccinelle.list_set <> s3:338 var
+R23966:23967 Coccinelle.list_set <> s1:336 var
+prf 24079:24095 Make add_compat_eq_set
+binder 24108:24108 <> e:339
+binder 24110:24111 <> s1:340
+binder 24113:24114 <> s2:341
+R24129:24132 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24117:24122 Coccinelle.list_set Make eq_set def
+R24127:24128 Coccinelle.list_set <> s2:341 var
+R24124:24125 Coccinelle.list_set <> s1:340 var
+R24133:24138 Coccinelle.list_set Make eq_set def
+R24152:24154 Coccinelle.list_set Make add def
+R24158:24159 Coccinelle.list_set <> s2:341 var
+R24156:24156 Coccinelle.list_set <> e:339 var
+R24141:24143 Coccinelle.list_set Make add def
+R24147:24148 Coccinelle.list_set <> s1:340 var
+R24145:24145 Coccinelle.list_set <> e:339 var
+binder 24185:24185 <> a:342
+binder 24187:24187 <> e:343
+binder 24189:24190 <> s1:344
+binder 24192:24193 <> s2:345
+R24208:24211 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24196:24201 Coccinelle.list_set Make eq_set def
+R24206:24207 Coccinelle.list_set <> s2:345 var
+R24203:24204 Coccinelle.list_set <> s1:344 var
+R24228:24231 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24212:24214 Coccinelle.list_set Make mem def
+R24219:24221 Coccinelle.list_set Make add def
+R24225:24226 Coccinelle.list_set <> s1:344 var
+R24223:24223 Coccinelle.list_set <> e:343 var
+R24216:24216 Coccinelle.list_set <> a:342 var
+R24232:24234 Coccinelle.list_set Make mem def
+R24239:24241 Coccinelle.list_set Make add def
+R24245:24246 Coccinelle.list_set <> s2:345 var
+R24243:24243 Coccinelle.list_set <> e:343 var
+R24236:24236 Coccinelle.list_set <> a:342 var
+binder 24185:24185 <> a:346
+binder 24187:24187 <> e:347
+binder 24189:24190 <> s1:348
+binder 24192:24193 <> s2:349
+R24208:24211 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24196:24201 Coccinelle.list_set Make eq_set def
+R24206:24207 Coccinelle.list_set <> s2:349 var
+R24203:24204 Coccinelle.list_set <> s1:348 var
+R24228:24231 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24212:24214 Coccinelle.list_set Make mem def
+R24219:24221 Coccinelle.list_set Make add def
+R24225:24226 Coccinelle.list_set <> s1:348 var
+R24223:24223 Coccinelle.list_set <> e:347 var
+R24216:24216 Coccinelle.list_set <> a:346 var
+R24232:24234 Coccinelle.list_set Make mem def
+R24239:24241 Coccinelle.list_set Make add def
+R24245:24246 Coccinelle.list_set <> s2:349 var
+R24243:24243 Coccinelle.list_set <> e:347 var
+R24236:24236 Coccinelle.list_set <> a:346 var
+R24299:24304 Coccinelle.list_set Make add_12 thm
+R24299:24304 Coccinelle.list_set Make add_12 thm
+R24365:24373 Coccinelle.list_set EDS1 eq_A defax
+R24365:24373 Coccinelle.list_set EDS1 eq_A defax
+R24407:24416 Coccinelle.list_set Make eq_mem_mem thm
+R24419:24421 Coccinelle.list_set Make add def
+R24407:24416 Coccinelle.list_set Make eq_mem_mem thm
+R24419:24421 Coccinelle.list_set Make add def
+R24444:24448 Coccinelle.list_set Make add_1 thm
+R24444:24448 Coccinelle.list_set Make add_1 thm
+R24457:24461 Coccinelle.list_set Make add_2 thm
+R24457:24461 Coccinelle.list_set Make add_2 thm
+R24556:24565 Coccinelle.list_set Make eq_set_sym thm
+R24556:24565 Coccinelle.list_set Make eq_set_sym thm
+prf 24589:24596 Make add_comm
+binder 24609:24610 <> e1:350
+binder 24612:24613 <> e2:351
+binder 24615:24615 <> s:352
+R24618:24623 Coccinelle.list_set Make eq_set def
+R24646:24648 Coccinelle.list_set Make add def
+R24654:24656 Coccinelle.list_set Make add def
+R24661:24661 Coccinelle.list_set <> s:352 var
+R24658:24659 Coccinelle.list_set <> e1:350 var
+R24650:24651 Coccinelle.list_set <> e2:351 var
+R24626:24628 Coccinelle.list_set Make add def
+R24634:24636 Coccinelle.list_set Make add def
+R24641:24641 Coccinelle.list_set <> s:352 var
+R24638:24639 Coccinelle.list_set <> e2:351 var
+R24630:24631 Coccinelle.list_set <> e1:350 var
+binder 24692:24693 <> e1:353
+binder 24695:24696 <> e2:354
+binder 24698:24698 <> s:355
+R24701:24706 Coccinelle.list_set Make subset def
+R24729:24731 Coccinelle.list_set Make add def
+R24737:24739 Coccinelle.list_set Make add def
+R24744:24744 Coccinelle.list_set <> s:355 var
+R24741:24742 Coccinelle.list_set <> e1:353 var
+R24733:24734 Coccinelle.list_set <> e2:354 var
+R24709:24711 Coccinelle.list_set Make add def
+R24717:24719 Coccinelle.list_set Make add def
+R24724:24724 Coccinelle.list_set <> s:355 var
+R24721:24722 Coccinelle.list_set <> e2:354 var
+R24713:24714 Coccinelle.list_set <> e1:353 var
+binder 24692:24693 <> e1:356
+binder 24695:24696 <> e2:357
+binder 24698:24698 <> s:358
+R24701:24706 Coccinelle.list_set Make subset def
+R24729:24731 Coccinelle.list_set Make add def
+R24737:24739 Coccinelle.list_set Make add def
+R24744:24744 Coccinelle.list_set <> s:358 var
+R24741:24742 Coccinelle.list_set <> e1:356 var
+R24733:24734 Coccinelle.list_set <> e2:357 var
+R24709:24711 Coccinelle.list_set Make add def
+R24717:24719 Coccinelle.list_set Make add def
+R24724:24724 Coccinelle.list_set <> s:358 var
+R24721:24722 Coccinelle.list_set <> e2:357 var
+R24713:24714 Coccinelle.list_set <> e1:356 var
+R24787:24792 Coccinelle.list_set Make add_12 thm
+R24787:24792 Coccinelle.list_set Make add_12 thm
+R24836:24838 Coccinelle.list_set Make mem def
+R24848:24857 Coccinelle.more_list <> mem_eq_mem thm
+R24859:24866 Coccinelle.list_set Make eq_proof defax
+R24848:24857 Coccinelle.more_list <> mem_eq_mem thm
+R24859:24866 Coccinelle.list_set Make eq_proof defax
+R24880:24888 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R24894:24901 Coccinelle.list_set Make eq_proof defax
+R24880:24888 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R24894:24901 Coccinelle.list_set Make eq_proof defax
+R24923:24927 Coccinelle.list_set Make add_2 thm
+R24943:24947 Coccinelle.list_set Make add_1 thm
+R24923:24927 Coccinelle.list_set Make add_2 thm
+R24943:24947 Coccinelle.list_set Make add_1 thm
+R24960:24965 Coccinelle.list_set Make add_12 thm
+R24960:24965 Coccinelle.list_set Make add_12 thm
+R25014:25016 Coccinelle.list_set Make mem def
+R25026:25035 Coccinelle.more_list <> mem_eq_mem thm
+R25037:25044 Coccinelle.list_set Make eq_proof defax
+R25026:25035 Coccinelle.more_list <> mem_eq_mem thm
+R25037:25044 Coccinelle.list_set Make eq_proof defax
+R25058:25066 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R25072:25079 Coccinelle.list_set Make eq_proof defax
+R25058:25066 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R25072:25079 Coccinelle.list_set Make eq_proof defax
+R25101:25105 Coccinelle.list_set Make add_1 thm
+R25101:25105 Coccinelle.list_set Make add_1 thm
+R25119:25123 Coccinelle.list_set Make add_2 thm
+R25119:25123 Coccinelle.list_set Make add_2 thm
+R25119:25123 Coccinelle.list_set Make add_2 thm
+prf 25179:25191 Make union_empty_1
+binder 25204:25204 <> s:359
+R25207:25212 Coccinelle.list_set Make eq_set def
+R25217:25221 Coccinelle.list_set Make union def
+R25229:25229 Coccinelle.list_set <> s:359 var
+R25223:25227 Coccinelle.list_set Make empty def
+R25214:25214 Coccinelle.list_set <> s:359 var
+R25264:25275 Coccinelle.list_set Make union_12_aux thm
+R25282:25288 Coccinelle.list_set Make support proj
+R25277:25279 Coq.Init.Datatypes <> nil constr
+R25264:25275 Coccinelle.list_set Make union_12_aux thm
+R25282:25288 Coccinelle.list_set Make support proj
+R25277:25279 Coq.Init.Datatypes <> nil constr
+R25321:25327 Coccinelle.list_set Make union_2 thm
+R25321:25327 Coccinelle.list_set Make union_2 thm
+prf 25351:25363 Make union_empty_2
+binder 25376:25376 <> s:360
+R25379:25384 Coccinelle.list_set Make eq_set def
+R25389:25393 Coccinelle.list_set Make union def
+R25397:25401 Coccinelle.list_set Make empty def
+R25395:25395 Coccinelle.list_set <> s:360 var
+R25386:25386 Coccinelle.list_set <> s:360 var
+prf 25454:25463 Make union_comm
+binder 25476:25477 <> s1:361
+binder 25479:25480 <> s2:362
+R25483:25488 Coccinelle.list_set Make eq_set def
+R25505:25509 Coccinelle.list_set Make union def
+R25514:25515 Coccinelle.list_set <> s1:361 var
+R25511:25512 Coccinelle.list_set <> s2:362 var
+R25491:25495 Coccinelle.list_set Make union def
+R25500:25501 Coccinelle.list_set <> s2:362 var
+R25497:25498 Coccinelle.list_set <> s1:361 var
+R25555:25562 Coccinelle.list_set Make union_12 thm
+R25574:25580 Coccinelle.list_set Make union_1 thm
+R25592:25598 Coccinelle.list_set Make union_2 thm
+R25610:25617 Coccinelle.list_set Make union_12 thm
+R25630:25636 Coccinelle.list_set Make union_1 thm
+R25648:25654 Coccinelle.list_set Make union_2 thm
+R25555:25562 Coccinelle.list_set Make union_12 thm
+R25574:25580 Coccinelle.list_set Make union_1 thm
+R25592:25598 Coccinelle.list_set Make union_2 thm
+R25610:25617 Coccinelle.list_set Make union_12 thm
+R25630:25636 Coccinelle.list_set Make union_1 thm
+R25648:25654 Coccinelle.list_set Make union_2 thm
+prf 25689:25699 Make union_assoc
+binder 25712:25713 <> s1:363
+binder 25715:25716 <> s2:364
+binder 25718:25719 <> s3:365
+R25722:25727 Coccinelle.list_set Make eq_set def
+R25755:25759 Coccinelle.list_set Make union def
+R25775:25776 Coccinelle.list_set <> s3:365 var
+R25762:25766 Coccinelle.list_set Make union def
+R25771:25772 Coccinelle.list_set <> s2:364 var
+R25768:25769 Coccinelle.list_set <> s1:363 var
+R25730:25734 Coccinelle.list_set Make union def
+R25740:25744 Coccinelle.list_set Make union def
+R25749:25750 Coccinelle.list_set <> s3:365 var
+R25746:25747 Coccinelle.list_set <> s2:364 var
+R25736:25737 Coccinelle.list_set <> s1:363 var
+R25819:25826 Coccinelle.list_set Make union_12 thm
+R25832:25836 Coccinelle.list_set Make union def
+R25849:25855 Coccinelle.list_set Make union_1 thm
+R25861:25865 Coccinelle.list_set Make union def
+R25880:25886 Coccinelle.list_set Make union_2 thm
+R25892:25896 Coccinelle.list_set Make union def
+R25909:25916 Coccinelle.list_set Make union_12 thm
+R25928:25934 Coccinelle.list_set Make union_1 thm
+R25946:25952 Coccinelle.list_set Make union_2 thm
+R25964:25971 Coccinelle.list_set Make union_12 thm
+R25974:25978 Coccinelle.list_set Make union def
+R25994:26000 Coccinelle.list_set Make union_1 thm
+R26003:26007 Coccinelle.list_set Make union def
+R26026:26032 Coccinelle.list_set Make union_2 thm
+R26035:26039 Coccinelle.list_set Make union def
+R26055:26062 Coccinelle.list_set Make union_12 thm
+R26075:26081 Coccinelle.list_set Make union_1 thm
+R26093:26099 Coccinelle.list_set Make union_2 thm
+R25819:25826 Coccinelle.list_set Make union_12 thm
+R25832:25836 Coccinelle.list_set Make union def
+R25849:25855 Coccinelle.list_set Make union_1 thm
+R25861:25865 Coccinelle.list_set Make union def
+R25880:25886 Coccinelle.list_set Make union_2 thm
+R25892:25896 Coccinelle.list_set Make union def
+R25909:25916 Coccinelle.list_set Make union_12 thm
+R25928:25934 Coccinelle.list_set Make union_1 thm
+R25946:25952 Coccinelle.list_set Make union_2 thm
+R25964:25971 Coccinelle.list_set Make union_12 thm
+R25974:25978 Coccinelle.list_set Make union def
+R25994:26000 Coccinelle.list_set Make union_1 thm
+R26003:26007 Coccinelle.list_set Make union def
+R26026:26032 Coccinelle.list_set Make union_2 thm
+R26035:26039 Coccinelle.list_set Make union def
+R26055:26062 Coccinelle.list_set Make union_12 thm
+R26075:26081 Coccinelle.list_set Make union_1 thm
+R26093:26099 Coccinelle.list_set Make union_2 thm
+prf 26134:26146 Make subset_filter
+R26169:26172 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R26168:26168 Coccinelle.list_set Make A defax
+R26173:26176 Coq.Init.Datatypes <> bool ind
+binder 26160:26161 <> P1:366
+binder 26163:26164 <> P2:367
+binder 26179:26180 <> s1:368
+binder 26182:26183 <> s2:369
+binder 26185:26193 <> P1_compat:370
+binder 26195:26203 <> P2_compat:371
+R26221:26224 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R26209:26214 Coccinelle.list_set Make subset def
+R26219:26220 Coccinelle.list_set <> s2:369 var
+R26216:26217 Coccinelle.list_set <> s1:368 var
+R26225:26225 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R26262:26269 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 26233:26233 <> e:372
+R26247:26250 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R26240:26242 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R26236:26237 Coccinelle.list_set <> P1:366 var
+R26239:26239 Coccinelle.list_set <> e:372 var
+R26243:26246 Coq.Init.Datatypes <> true constr
+R26255:26257 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R26251:26252 Coccinelle.list_set <> P2:367 var
+R26254:26254 Coccinelle.list_set <> e:372 var
+R26258:26261 Coq.Init.Datatypes <> true constr
+R26270:26275 Coccinelle.list_set Make subset def
+R26303:26308 Coccinelle.list_set Make filter def
+R26316:26324 Coccinelle.list_set <> P2_compat:371 var
+R26313:26314 Coccinelle.list_set <> s2:369 var
+R26310:26311 Coccinelle.list_set <> P2:367 var
+R26278:26283 Coccinelle.list_set Make filter def
+R26291:26299 Coccinelle.list_set <> P1_compat:370 var
+R26288:26289 Coccinelle.list_set <> s1:368 var
+R26285:26286 Coccinelle.list_set <> P1:366 var
+R26391:26398 Coccinelle.list_set Make filter_1 thm
+R26391:26398 Coccinelle.list_set Make filter_1 thm
+R26422:26426 Coq.Init.Logic <> proj1 thm
+R26429:26436 Coccinelle.list_set Make filter_2 thm
+R26422:26426 Coq.Init.Logic <> proj1 thm
+R26429:26436 Coccinelle.list_set Make filter_2 thm
+R26476:26480 Coq.Init.Logic <> proj2 thm
+R26483:26490 Coccinelle.list_set Make filter_2 thm
+R26476:26480 Coq.Init.Logic <> proj2 thm
+R26483:26490 Coccinelle.list_set Make filter_2 thm
+prf 26525:26536 Make filter_union
+binder 26549:26549 <> P:373
+binder 26551:26552 <> s1:374
+binder 26554:26555 <> s2:375
+binder 26557:26564 <> P_compat:376
+R26570:26575 Coccinelle.list_set Make eq_set def
+R26627:26631 Coccinelle.list_set Make union def
+R26657:26662 Coccinelle.list_set Make filter def
+R26669:26676 Coccinelle.list_set <> P_compat:376 var
+R26666:26667 Coccinelle.list_set <> s2:375 var
+R26664:26664 Coccinelle.list_set <> P:373 var
+R26634:26639 Coccinelle.list_set Make filter def
+R26646:26653 Coccinelle.list_set <> P_compat:376 var
+R26643:26644 Coccinelle.list_set <> s1:374 var
+R26641:26641 Coccinelle.list_set <> P:373 var
+R26578:26583 Coccinelle.list_set Make filter def
+R26601:26608 Coccinelle.list_set <> P_compat:376 var
+R26588:26592 Coccinelle.list_set Make union def
+R26597:26598 Coccinelle.list_set <> s2:375 var
+R26594:26595 Coccinelle.list_set <> s1:374 var
+R26585:26585 Coccinelle.list_set <> P:373 var
+R26741:26743 Coccinelle.list_set Make mem def
+R26772:26784 Coccinelle.list_set Make filter_2_list thm
+R26827:26838 Coccinelle.list_set Make union_12_aux thm
+R26859:26869 Coccinelle.list_set Make union_1_aux thm
+R26879:26889 Coccinelle.list_set Make union_2_aux thm
+R26900:26912 Coccinelle.list_set Make filter_1_list thm
+R26772:26784 Coccinelle.list_set Make filter_2_list thm
+R26827:26838 Coccinelle.list_set Make union_12_aux thm
+R26859:26869 Coccinelle.list_set Make union_1_aux thm
+R26879:26889 Coccinelle.list_set Make union_2_aux thm
+R26900:26912 Coccinelle.list_set Make filter_1_list thm
+R26900:26912 Coccinelle.list_set Make filter_1_list thm
+R26943:26954 Coccinelle.list_set Make union_12_aux thm
+R26990:27002 Coccinelle.list_set Make filter_2_list thm
+R27042:27054 Coccinelle.list_set Make filter_1_list thm
+R27074:27084 Coccinelle.list_set Make union_1_aux thm
+R27094:27104 Coccinelle.list_set Make union_2_aux thm
+R26943:26954 Coccinelle.list_set Make union_12_aux thm
+R26990:27002 Coccinelle.list_set Make filter_2_list thm
+R26990:27002 Coccinelle.list_set Make filter_2_list thm
+R27042:27054 Coccinelle.list_set Make filter_1_list thm
+R27042:27054 Coccinelle.list_set Make filter_1_list thm
+R27074:27084 Coccinelle.list_set Make union_1_aux thm
+R27094:27104 Coccinelle.list_set Make union_2_aux thm
+prf 27130:27144 Make subset_compat_1
+binder 27157:27158 <> s1:377
+binder 27160:27162 <> s1':378
+binder 27164:27165 <> s2:379
+R27181:27184 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27168:27173 Coccinelle.list_set Make eq_set def
+R27178:27180 Coccinelle.list_set <> s1':378 var
+R27175:27176 Coccinelle.list_set <> s1:377 var
+R27197:27200 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27185:27190 Coccinelle.list_set Make subset def
+R27195:27196 Coccinelle.list_set <> s2:379 var
+R27192:27193 Coccinelle.list_set <> s1:377 var
+R27201:27206 Coccinelle.list_set Make subset def
+R27212:27213 Coccinelle.list_set <> s2:379 var
+R27208:27210 Coccinelle.list_set <> s1':378 var
+prf 27322:27336 Make subset_compat_2
+binder 27349:27350 <> s1:380
+binder 27352:27353 <> s2:381
+binder 27355:27357 <> s2':382
+R27373:27376 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27360:27365 Coccinelle.list_set Make eq_set def
+R27370:27372 Coccinelle.list_set <> s2':382 var
+R27367:27368 Coccinelle.list_set <> s2:381 var
+R27389:27392 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27377:27382 Coccinelle.list_set Make subset def
+R27387:27388 Coccinelle.list_set <> s2:381 var
+R27384:27385 Coccinelle.list_set <> s1:380 var
+R27393:27398 Coccinelle.list_set Make subset def
+R27403:27405 Coccinelle.list_set <> s2':382 var
+R27400:27401 Coccinelle.list_set <> s1:380 var
+prf 27518:27530 Make subset_compat
+binder 27544:27545 <> s1:383
+binder 27547:27549 <> s1':384
+binder 27551:27552 <> s2:385
+binder 27554:27556 <> s2':386
+R27572:27575 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27559:27564 Coccinelle.list_set Make eq_set def
+R27569:27571 Coccinelle.list_set <> s1':384 var
+R27566:27567 Coccinelle.list_set <> s1:383 var
+R27589:27629 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27576:27581 Coccinelle.list_set Make eq_set def
+R27586:27588 Coccinelle.list_set <> s2':386 var
+R27583:27584 Coccinelle.list_set <> s2:385 var
+R27642:27645 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27630:27635 Coccinelle.list_set Make subset def
+R27640:27641 Coccinelle.list_set <> s2:385 var
+R27637:27638 Coccinelle.list_set <> s1:383 var
+R27646:27651 Coccinelle.list_set Make subset def
+R27657:27659 Coccinelle.list_set <> s2':386 var
+R27653:27655 Coccinelle.list_set <> s1':384 var
+prf 27793:27813 Make union_compat_subset_1
+binder 27826:27827 <> s1:387
+binder 27829:27830 <> s2:388
+binder 27832:27832 <> s:389
+R27847:27850 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27835:27840 Coccinelle.list_set Make subset def
+R27845:27846 Coccinelle.list_set <> s2:388 var
+R27842:27843 Coccinelle.list_set <> s1:387 var
+R27851:27856 Coccinelle.list_set Make subset def
+R27873:27877 Coccinelle.list_set Make union def
+R27882:27882 Coccinelle.list_set <> s:389 var
+R27879:27880 Coccinelle.list_set <> s2:388 var
+R27859:27863 Coccinelle.list_set Make union def
+R27868:27868 Coccinelle.list_set <> s:389 var
+R27865:27866 Coccinelle.list_set <> s1:387 var
+R27933:27938 Coccinelle.list_set Make subset def
+R27981:27992 Coccinelle.list_set Make union_12_aux thm
+R27981:27992 Coccinelle.list_set Make union_12_aux thm
+R28054:28060 Coccinelle.list_set Make union_1 thm
+R28054:28060 Coccinelle.list_set Make union_1 thm
+R28087:28093 Coccinelle.list_set Make union_2 thm
+R28087:28093 Coccinelle.list_set Make union_2 thm
+prf 28117:28137 Make union_compat_subset_2
+binder 28150:28151 <> s1:390
+binder 28153:28154 <> s2:391
+binder 28156:28156 <> s:392
+R28171:28174 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R28159:28164 Coccinelle.list_set Make subset def
+R28169:28170 Coccinelle.list_set <> s2:391 var
+R28166:28167 Coccinelle.list_set <> s1:390 var
+R28175:28180 Coccinelle.list_set Make subset def
+R28197:28201 Coccinelle.list_set Make union def
+R28205:28206 Coccinelle.list_set <> s2:391 var
+R28203:28203 Coccinelle.list_set <> s:392 var
+R28183:28187 Coccinelle.list_set Make union def
+R28191:28192 Coccinelle.list_set <> s1:390 var
+R28189:28189 Coccinelle.list_set <> s:392 var
+R28257:28262 Coccinelle.list_set Make subset def
+R28305:28316 Coccinelle.list_set Make union_12_aux thm
+R28305:28316 Coccinelle.list_set Make union_12_aux thm
+R28378:28384 Coccinelle.list_set Make union_1 thm
+R28378:28384 Coccinelle.list_set Make union_1 thm
+R28402:28408 Coccinelle.list_set Make union_2 thm
+R28402:28408 Coccinelle.list_set Make union_2 thm
+prf 28441:28459 Make union_compat_subset
+binder 28472:28473 <> s1:393
+binder 28475:28476 <> s2:394
+binder 28478:28480 <> s1':395
+binder 28482:28484 <> s2':396
+R28499:28502 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R28487:28492 Coccinelle.list_set Make subset def
+R28497:28498 Coccinelle.list_set <> s2:394 var
+R28494:28495 Coccinelle.list_set <> s1:393 var
+R28517:28520 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R28503:28508 Coccinelle.list_set Make subset def
+R28514:28516 Coccinelle.list_set <> s2':396 var
+R28510:28512 Coccinelle.list_set <> s1':395 var
+R28521:28526 Coccinelle.list_set Make subset def
+R28545:28549 Coccinelle.list_set Make union def
+R28554:28556 Coccinelle.list_set <> s2':396 var
+R28551:28552 Coccinelle.list_set <> s2:394 var
+R28529:28533 Coccinelle.list_set Make union def
+R28538:28540 Coccinelle.list_set <> s1':395 var
+R28535:28536 Coccinelle.list_set <> s1:393 var
+R28622:28627 Coccinelle.list_set Make subset def
+R28673:28684 Coccinelle.list_set Make union_12_aux thm
+R28673:28684 Coccinelle.list_set Make union_12_aux thm
+R28739:28745 Coccinelle.list_set Make union_1 thm
+R28739:28745 Coccinelle.list_set Make union_1 thm
+R28772:28778 Coccinelle.list_set Make union_2 thm
+R28772:28778 Coccinelle.list_set Make union_2 thm
+prf 28813:28831 Make union_compat_eq_set
+binder 28844:28845 <> s1:397
+binder 28847:28849 <> s1':398
+binder 28851:28852 <> s2:399
+binder 28854:28856 <> s2':400
+R28872:28875 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R28859:28864 Coccinelle.list_set Make eq_set def
+R28869:28871 Coccinelle.list_set <> s1':398 var
+R28866:28867 Coccinelle.list_set <> s1:397 var
+R28889:28897 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R28876:28881 Coccinelle.list_set Make eq_set def
+R28886:28888 Coccinelle.list_set <> s2':400 var
+R28883:28884 Coccinelle.list_set <> s2:399 var
+R28898:28903 Coccinelle.list_set Make eq_set def
+R28920:28924 Coccinelle.list_set Make union def
+R28930:28932 Coccinelle.list_set <> s2':400 var
+R28926:28928 Coccinelle.list_set <> s1':398 var
+R28906:28910 Coccinelle.list_set Make union def
+R28915:28916 Coccinelle.list_set <> s2:399 var
+R28912:28913 Coccinelle.list_set <> s1:397 var
+R29015:29022 Coccinelle.list_set Make union_12 thm
+R29015:29022 Coccinelle.list_set Make union_12 thm
+R29070:29076 Coccinelle.list_set Make union_1 thm
+R29070:29076 Coccinelle.list_set Make union_1 thm
+R29122:29128 Coccinelle.list_set Make union_2 thm
+R29122:29128 Coccinelle.list_set Make union_2 thm
+R29180:29187 Coccinelle.list_set Make union_12 thm
+R29180:29187 Coccinelle.list_set Make union_12 thm
+R29239:29245 Coccinelle.list_set Make union_1 thm
+R29239:29245 Coccinelle.list_set Make union_1 thm
+R29291:29297 Coccinelle.list_set Make union_2 thm
+R29291:29297 Coccinelle.list_set Make union_2 thm
+prf 29350:29368 Make subset_subset_union
+binder 29381:29382 <> s1:401
+binder 29384:29385 <> s2:402
+binder 29387:29387 <> s:403
+R29401:29404 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29390:29395 Coccinelle.list_set Make subset def
+R29400:29400 Coccinelle.list_set <> s:403 var
+R29397:29398 Coccinelle.list_set <> s1:401 var
+R29416:29419 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29405:29410 Coccinelle.list_set Make subset def
+R29415:29415 Coccinelle.list_set <> s:403 var
+R29412:29413 Coccinelle.list_set <> s2:402 var
+R29420:29425 Coccinelle.list_set Make subset def
+R29441:29441 Coccinelle.list_set <> s:403 var
+R29428:29432 Coccinelle.list_set Make union def
+R29437:29438 Coccinelle.list_set <> s2:402 var
+R29434:29435 Coccinelle.list_set <> s1:401 var
+R29487:29494 Coccinelle.list_set Make union_12 thm
+R29487:29494 Coccinelle.list_set Make union_12 thm
+def 29574:29581 Make cardinal
+binder 29583:29583 <> s:404
+R29588:29598 Coq.Lists.List <> length abbrev
+R29603:29609 Coccinelle.list_set Make support proj
+R29600:29600 Coccinelle.list_set <> s:404 var
+prf 29620:29634 Make cardinal_subset
+binder 29647:29648 <> s1:405
+binder 29650:29651 <> s2:406
+R29666:29669 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R29654:29659 Coccinelle.list_set Make subset def
+R29664:29665 Coccinelle.list_set <> s2:406 var
+R29661:29662 Coccinelle.list_set <> s1:405 var
+R29681:29684 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R29670:29677 Coccinelle.list_set Make cardinal def
+R29679:29680 Coccinelle.list_set <> s1:405 var
+R29685:29692 Coccinelle.list_set Make cardinal def
+R29694:29695 Coccinelle.list_set <> s2:406 var
+R29822:29827 Coccinelle.list_set Make subset def
+R29830:29837 Coccinelle.list_set Make cardinal def
+R29840:29842 Coccinelle.list_set Make mem def
+R29845:29855 Coccinelle.list_set Make without_red def
+R29940:29945 Coq.Arith.Le <> le_O_n abbrev
+R29940:29945 Coq.Arith.Le <> le_O_n abbrev
+R29981:29991 Coccinelle.more_list <> mem_bool_ok thm
+R29997:30006 Coccinelle.list_set Make eq_bool_ok defax
+R30022:30029 Coccinelle.more_list <> mem_bool def
+R30031:30037 Coccinelle.list_set Make eq_bool defax
+R29981:29991 Coccinelle.more_list <> mem_bool_ok thm
+R29997:30006 Coccinelle.list_set Make eq_bool_ok defax
+R30022:30029 Coccinelle.more_list <> mem_bool def
+R30031:30037 Coccinelle.list_set Make eq_bool defax
+R30135:30147 Coccinelle.more_list <> mem def
+R30149:30152 Coccinelle.list_set Make eq_A defax
+R30135:30147 Coccinelle.more_list <> mem def
+R30149:30152 Coccinelle.list_set Make eq_A defax
+R30203:30215 Coccinelle.more_list <> mem_split_set thm
+R30221:30230 Coccinelle.list_set Make eq_bool_ok defax
+R30203:30215 Coccinelle.more_list <> mem_split_set thm
+R30221:30230 Coccinelle.list_set Make eq_bool_ok defax
+R30409:30418 Coccinelle.more_list <> length_add thm
+R30434:30439 Coq.Init.Peano <> le_n_S thm
+R30409:30418 Coccinelle.more_list <> length_add thm
+R30409:30418 Coccinelle.more_list <> length_add thm
+R30434:30439 Coq.Init.Peano <> le_n_S thm
+R30484:30501 Coccinelle.list_set Make without_red_remove thm
+R30484:30501 Coccinelle.list_set Make without_red_remove thm
+R30554:30568 Coccinelle.more_list <> diff_mem_remove thm
+R30554:30568 Coccinelle.more_list <> diff_mem_remove thm
+R30623:30632 Coccinelle.more_list <> mem_eq_mem thm
+R30634:30641 Coccinelle.list_set Make eq_proof defax
+R30623:30632 Coccinelle.more_list <> mem_eq_mem thm
+R30634:30641 Coccinelle.list_set Make eq_proof defax
+R30656:30664 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R30670:30677 Coccinelle.list_set Make eq_proof defax
+R30656:30664 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R30670:30677 Coccinelle.list_set Make eq_proof defax
+R30700:30709 Coccinelle.more_list <> mem_eq_mem thm
+R30711:30718 Coccinelle.list_set Make eq_proof defax
+R30700:30709 Coccinelle.more_list <> mem_eq_mem thm
+R30711:30718 Coccinelle.list_set Make eq_proof defax
+prf 30787:30802 Make cardinal_union_1
+binder 30815:30816 <> s1:407
+binder 30818:30819 <> s2:408
+R30833:30836 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R30822:30829 Coccinelle.list_set Make cardinal def
+R30831:30832 Coccinelle.list_set <> s1:407 var
+R30837:30844 Coccinelle.list_set Make cardinal def
+R30847:30851 Coccinelle.list_set Make union def
+R30856:30857 Coccinelle.list_set <> s2:408 var
+R30853:30854 Coccinelle.list_set <> s1:407 var
+R30888:30902 Coccinelle.list_set Make cardinal_subset thm
+R30911:30924 Coccinelle.list_set Make subset_union_1 thm
+R30888:30902 Coccinelle.list_set Make cardinal_subset thm
+R30911:30924 Coccinelle.list_set Make subset_union_1 thm
+prf 30939:30954 Make cardinal_union_2
+binder 30967:30968 <> s1:409
+binder 30970:30971 <> s2:410
+R30985:30988 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R30974:30981 Coccinelle.list_set Make cardinal def
+R30983:30984 Coccinelle.list_set <> s2:410 var
+R30989:30996 Coccinelle.list_set Make cardinal def
+R30999:31003 Coccinelle.list_set Make union def
+R31008:31009 Coccinelle.list_set <> s2:410 var
+R31005:31006 Coccinelle.list_set <> s1:409 var
+R31040:31054 Coccinelle.list_set Make cardinal_subset thm
+R31063:31076 Coccinelle.list_set Make subset_union_2 thm
+R31040:31054 Coccinelle.list_set Make cardinal_subset thm
+R31063:31076 Coccinelle.list_set Make subset_union_2 thm
+prf 31091:31113 Make cardinal_union_inter_12
+binder 31126:31127 <> s1:411
+binder 31129:31130 <> s2:412
+R31180:31182 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R31155:31157 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R31133:31140 Coccinelle.list_set Make cardinal def
+R31143:31147 Coccinelle.list_set Make union def
+R31152:31153 Coccinelle.list_set <> s2:412 var
+R31149:31150 Coccinelle.list_set <> s1:411 var
+R31158:31165 Coccinelle.list_set Make cardinal def
+R31168:31172 Coccinelle.list_set Make inter def
+R31177:31178 Coccinelle.list_set <> s2:412 var
+R31174:31175 Coccinelle.list_set <> s1:411 var
+R31194:31196 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R31183:31190 Coccinelle.list_set Make cardinal def
+R31192:31193 Coccinelle.list_set <> s1:411 var
+R31197:31204 Coccinelle.list_set Make cardinal def
+R31206:31207 Coccinelle.list_set <> s2:412 var
+R31334:31344 Coccinelle.list_set Make without_red def
+R31347:31354 Coccinelle.list_set Make cardinal def
+R31488:31498 Coccinelle.more_list <> mem_bool_ok thm
+R31504:31513 Coccinelle.list_set Make eq_bool_ok defax
+R31532:31539 Coccinelle.more_list <> mem_bool def
+R31541:31547 Coccinelle.list_set Make eq_bool defax
+R31488:31498 Coccinelle.more_list <> mem_bool_ok thm
+R31504:31513 Coccinelle.list_set Make eq_bool_ok defax
+R31532:31539 Coccinelle.more_list <> mem_bool def
+R31541:31547 Coccinelle.list_set Make eq_bool defax
+R31642:31652 Coccinelle.more_list <> mem_bool_ok thm
+R31658:31667 Coccinelle.list_set Make eq_bool_ok defax
+R31683:31690 Coccinelle.more_list <> mem_bool def
+R31692:31698 Coccinelle.list_set Make eq_bool defax
+R31642:31652 Coccinelle.more_list <> mem_bool_ok thm
+R31658:31667 Coccinelle.list_set Make eq_bool_ok defax
+R31683:31690 Coccinelle.more_list <> mem_bool def
+R31692:31698 Coccinelle.list_set Make eq_bool defax
+R31732:31755 Coccinelle.list_set Make length_remove_not_common thm
+R31732:31755 Coccinelle.list_set Make length_remove_not_common thm
+R31732:31755 Coccinelle.list_set Make length_remove_not_common thm
+R31781:31789 Coq.Init.Peano <> plus_n_Sm thm
+R31781:31789 Coq.Init.Peano <> plus_n_Sm thm
+R31781:31789 Coq.Init.Peano <> plus_n_Sm thm
+R31781:31789 Coq.Init.Peano <> plus_n_Sm thm
+R31781:31789 Coq.Init.Peano <> plus_n_Sm thm
+R31885:31893 Coq.Init.Peano <> plus_n_Sm thm
+R31885:31893 Coq.Init.Peano <> plus_n_Sm thm
+R31885:31893 Coq.Init.Peano <> plus_n_Sm thm
+binder 31967:31969 <> l1':413
+binder 31971:31974 <> l1'':414
+R32024:32026 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R31977:31982 Coq.Init.Datatypes <> length def
+R31985:31999 Coccinelle.list_set Make add_without_red def
+R32005:32008 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R32002:32004 Coccinelle.list_set <> l1':413 var
+R32011:32014 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R32015:32018 Coccinelle.list_set <> l1'':414 var
+R32027:32027 Coq.Init.Datatypes <> S constr
+R32030:32035 Coq.Init.Datatypes <> length def
+R32038:32052 Coccinelle.list_set Make add_without_red def
+R32058:32061 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R32055:32057 Coccinelle.list_set <> l1':413 var
+R32062:32065 Coccinelle.list_set <> l1'':414 var
+binder 31967:31969 <> l1':415
+binder 31971:31974 <> l1'':416
+R32024:32026 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R31977:31982 Coq.Init.Datatypes <> length def
+R31985:31999 Coccinelle.list_set Make add_without_red def
+R32005:32008 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R32002:32004 Coccinelle.list_set <> l1':415 var
+R32011:32014 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R32015:32018 Coccinelle.list_set <> l1'':416 var
+R32027:32027 Coq.Init.Datatypes <> S constr
+R32030:32035 Coq.Init.Datatypes <> length def
+R32038:32052 Coccinelle.list_set Make add_without_red def
+R32058:32061 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R32055:32057 Coccinelle.list_set <> l1':415 var
+R32062:32065 Coccinelle.list_set <> l1'':416 var
+R32231:32240 Coccinelle.more_list <> length_app def
+R32258:32266 Coq.Init.Peano <> plus_n_Sm thm
+R32231:32240 Coccinelle.more_list <> length_app def
+R32231:32240 Coccinelle.more_list <> length_app def
+R32231:32240 Coccinelle.more_list <> length_app def
+R32231:32240 Coccinelle.more_list <> length_app def
+R32258:32266 Coq.Init.Peano <> plus_n_Sm thm
+R32258:32266 Coq.Init.Peano <> plus_n_Sm thm
+R32332:32334 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R32320:32326 Coccinelle.list_set Make eq_bool defax
+R32335:32341 Coccinelle.list_set Make eq_bool defax
+R32332:32334 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R32320:32326 Coccinelle.list_set Make eq_bool defax
+R32335:32341 Coccinelle.list_set Make eq_bool defax
+R32362:32371 Coccinelle.list_set Make eq_bool_ok defax
+R32380:32389 Coccinelle.list_set Make eq_bool_ok defax
+R32404:32410 Coccinelle.list_set Make eq_bool defax
+R32425:32431 Coccinelle.list_set Make eq_bool defax
+R32362:32371 Coccinelle.list_set Make eq_bool_ok defax
+R32380:32389 Coccinelle.list_set Make eq_bool_ok defax
+R32404:32410 Coccinelle.list_set Make eq_bool defax
+R32425:32431 Coccinelle.list_set Make eq_bool defax
+R32425:32431 Coccinelle.list_set Make eq_bool defax
+R32497:32505 Coq.Init.Logic <> False_rec scheme
+R32497:32505 Coq.Init.Logic <> False_rec scheme
+R32579:32587 Coq.Init.Logic <> False_rec scheme
+R32579:32587 Coq.Init.Logic <> False_rec scheme
+R32722:32733 Coccinelle.more_list <> mem_bool_app thm
+R32752:32755 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R32735:32741 Coccinelle.list_set Make eq_bool defax
+R32722:32733 Coccinelle.more_list <> mem_bool_app thm
+R32752:32755 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R32735:32741 Coccinelle.list_set Make eq_bool defax
+R32722:32733 Coccinelle.more_list <> mem_bool_app thm
+R32752:32755 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R32735:32741 Coccinelle.list_set Make eq_bool defax
+R32798:32804 Coccinelle.list_set Make eq_bool defax
+R32798:32804 Coccinelle.list_set Make eq_bool defax
+R32877:32888 Coccinelle.more_list <> mem_bool_app thm
+R32890:32896 Coccinelle.list_set Make eq_bool defax
+R32918:32925 Coccinelle.more_list <> mem_bool def
+R32942:32945 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R32927:32933 Coccinelle.list_set Make eq_bool defax
+R32877:32888 Coccinelle.more_list <> mem_bool_app thm
+R32890:32896 Coccinelle.list_set Make eq_bool defax
+R32877:32888 Coccinelle.more_list <> mem_bool_app thm
+R32890:32896 Coccinelle.list_set Make eq_bool defax
+R32918:32925 Coccinelle.more_list <> mem_bool def
+R32942:32945 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R32927:32933 Coccinelle.list_set Make eq_bool defax
+R33030:33033 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R33030:33033 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R33062:33064 Coq.Init.Datatypes <> nil constr
+R33062:33064 Coq.Init.Datatypes <> nil constr
+prf 33128:33141 Make cardinal_union
+binder 33153:33154 <> s1:417
+binder 33156:33157 <> s2:418
+R33182:33184 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R33160:33167 Coccinelle.list_set Make cardinal def
+R33170:33174 Coccinelle.list_set Make union def
+R33179:33180 Coccinelle.list_set <> s2:418 var
+R33176:33177 Coccinelle.list_set <> s1:417 var
+R33210:33212 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R33196:33198 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R33185:33192 Coccinelle.list_set Make cardinal def
+R33194:33195 Coccinelle.list_set <> s1:417 var
+R33199:33206 Coccinelle.list_set Make cardinal def
+R33208:33209 Coccinelle.list_set <> s2:418 var
+R33213:33220 Coccinelle.list_set Make cardinal def
+R33223:33227 Coccinelle.list_set Make inter def
+R33232:33233 Coccinelle.list_set <> s2:418 var
+R33229:33230 Coccinelle.list_set <> s1:417 var
+R33271:33293 Coccinelle.list_set Make cardinal_union_inter_12 thm
+R33271:33293 Coccinelle.list_set Make cardinal_union_inter_12 thm
+R33309:33318 Coq.Arith.Minus <> plus_minus abbrev
+R33327:33332 Coq.Init.Logic <> sym_eq abbrev
+R33343:33351 Coq.Arith.Plus <> plus_comm abbrev
+R33309:33318 Coq.Arith.Minus <> plus_minus abbrev
+R33327:33332 Coq.Init.Logic <> sym_eq abbrev
+R33343:33351 Coq.Arith.Plus <> plus_comm abbrev
+R33343:33351 Coq.Arith.Plus <> plus_comm abbrev
+prf 33375:33389 Make cardinal_eq_set
+binder 33400:33401 <> s1:419
+binder 33403:33404 <> s2:420
+R33419:33422 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R33407:33412 Coccinelle.list_set Make eq_set def
+R33417:33418 Coccinelle.list_set <> s2:420 var
+R33414:33415 Coccinelle.list_set <> s1:419 var
+R33434:33436 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R33423:33430 Coccinelle.list_set Make cardinal def
+R33432:33433 Coccinelle.list_set <> s1:419 var
+R33437:33444 Coccinelle.list_set Make cardinal def
+R33446:33447 Coccinelle.list_set <> s2:420 var
+R33486:33495 Coq.Arith.Le <> le_antisym abbrev
+R33504:33518 Coccinelle.list_set Make cardinal_subset thm
+R33486:33495 Coq.Arith.Le <> le_antisym abbrev
+R33504:33518 Coccinelle.list_set Make cardinal_subset thm
+R33504:33518 Coccinelle.list_set Make cardinal_subset thm
+prf 33587:33619 Make subset_cardinal_not_eq_not_eq_set
+binder 33632:33633 <> s1:421
+binder 33635:33636 <> s2:422
+binder 33638:33638 <> e:423
+R33653:33656 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R33641:33646 Coccinelle.list_set Make subset def
+R33651:33652 Coccinelle.list_set <> s2:422 var
+R33648:33649 Coccinelle.list_set <> s1:421 var
+R33666:33669 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R33657:33657 Coq.Init.Logic <> ::type_scope:'~'_x not
+R33658:33660 Coccinelle.list_set Make mem def
+R33664:33665 Coccinelle.list_set <> s1:421 var
+R33662:33662 Coccinelle.list_set <> e:423 var
+R33678:33685 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R33670:33672 Coccinelle.list_set Make mem def
+R33676:33677 Coccinelle.list_set <> s2:422 var
+R33674:33674 Coccinelle.list_set <> e:423 var
+R33697:33699 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R33686:33693 Coccinelle.list_set Make cardinal def
+R33695:33696 Coccinelle.list_set <> s1:421 var
+R33700:33707 Coccinelle.list_set Make cardinal def
+R33709:33710 Coccinelle.list_set <> s2:422 var
+R33837:33847 Coccinelle.list_set Make without_red def
+R33850:33857 Coccinelle.list_set Make cardinal def
+R33860:33865 Coccinelle.list_set Make subset def
+R33868:33870 Coccinelle.list_set Make mem def
+R33980:33992 Coccinelle.more_list <> mem_split_set thm
+R33998:34007 Coccinelle.list_set Make eq_bool_ok defax
+R33980:33992 Coccinelle.more_list <> mem_split_set thm
+R33998:34007 Coccinelle.list_set Make eq_bool_ok defax
+R34182:34191 Coccinelle.more_list <> length_app def
+R34201:34206 Coq.Init.Datatypes <> length def
+R34211:34214 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R34234:34242 Coq.Init.Peano <> plus_n_Sm thm
+R34256:34265 Coccinelle.more_list <> length_app def
+R34182:34191 Coccinelle.more_list <> length_app def
+R34182:34191 Coccinelle.more_list <> length_app def
+R34201:34206 Coq.Init.Datatypes <> length def
+R34211:34214 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R34234:34242 Coq.Init.Peano <> plus_n_Sm thm
+R34234:34242 Coq.Init.Peano <> plus_n_Sm thm
+R34256:34265 Coccinelle.more_list <> length_app def
+R34256:34265 Coccinelle.more_list <> length_app def
+R34283:34293 Coccinelle.list_set Make without_red def
+R34299:34302 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R34283:34293 Coccinelle.list_set Make without_red def
+R34299:34302 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R34317:34334 Coccinelle.list_set Make without_red_remove thm
+R34317:34334 Coccinelle.list_set Make without_red_remove thm
+R34363:34368 Coq.Init.Peano <> le_n_S thm
+R34379:34393 Coccinelle.list_set Make cardinal_subset thm
+R34396:34401 Coccinelle.list_set Make mk_set constr
+R34409:34414 Coccinelle.list_set Make mk_set constr
+R34363:34368 Coq.Init.Peano <> le_n_S thm
+R34379:34393 Coccinelle.list_set Make cardinal_subset thm
+R34396:34401 Coccinelle.list_set Make mk_set constr
+R34409:34414 Coccinelle.list_set Make mk_set constr
+R34441:34443 Coccinelle.list_set Make mem def
+R34519:34528 Coccinelle.more_list <> mem_or_app thm
+R34519:34528 Coccinelle.more_list <> mem_or_app thm
+R34519:34528 Coccinelle.more_list <> mem_or_app thm
+R34598:34607 Coccinelle.more_list <> mem_or_app thm
+R34598:34607 Coccinelle.more_list <> mem_or_app thm
+R34598:34607 Coccinelle.more_list <> mem_or_app thm
+R34702:34714 Coccinelle.more_list <> mem def
+R34716:34719 Coccinelle.list_set Make eq_A defax
+R34702:34714 Coccinelle.more_list <> mem def
+R34716:34719 Coccinelle.list_set Make eq_A defax
+R34747:34756 Coccinelle.more_list <> mem_eq_mem thm
+R34758:34765 Coccinelle.list_set Make eq_proof defax
+R34747:34756 Coccinelle.more_list <> mem_eq_mem thm
+R34758:34765 Coccinelle.list_set Make eq_proof defax
+R34779:34787 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R34793:34800 Coccinelle.list_set Make eq_proof defax
+R34779:34787 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R34793:34800 Coccinelle.list_set Make eq_proof defax
+R34823:34832 Coccinelle.more_list <> mem_eq_mem thm
+R34834:34841 Coccinelle.list_set Make eq_proof defax
+R34823:34832 Coccinelle.more_list <> mem_eq_mem thm
+R34834:34841 Coccinelle.list_set Make eq_proof defax
+R34887:34896 Coccinelle.more_list <> mem_or_app thm
+R34887:34896 Coccinelle.more_list <> mem_or_app thm
+R34887:34896 Coccinelle.more_list <> mem_or_app thm
+prf 34930:34955 Make eq_set_list_permut_support
+binder 34968:34969 <> s1:424
+binder 34971:34972 <> s2:425
+R34988:34991 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R34976:34981 Coccinelle.list_set Make eq_set def
+R34986:34987 Coccinelle.list_set <> s2:425 var
+R34983:34984 Coccinelle.list_set <> s1:424 var
+R34992:34997 Coccinelle.list_set Make permut abbrev
+R35016:35022 Coccinelle.list_set Make support proj
+R35012:35013 Coccinelle.list_set <> s2:425 var
+R35003:35009 Coccinelle.list_set Make support proj
+R34999:35000 Coccinelle.list_set <> s1:424 var
+R35066:35071 Coccinelle.list_set Make eq_set def
+R35074:35076 Coccinelle.list_set Make mem def
+R35158:35161 Coccinelle.list_permut <> Pnil constr
+R35158:35161 Coccinelle.list_permut <> Pnil constr
+R35170:35178 Coq.Init.Logic <> False_rec scheme
+R35170:35178 Coq.Init.Logic <> False_rec scheme
+R35289:35301 Coccinelle.more_list <> mem def
+R35303:35306 Coccinelle.list_set Make eq_A defax
+R35289:35301 Coccinelle.more_list <> mem def
+R35303:35306 Coccinelle.list_set Make eq_A defax
+R35368:35380 Coccinelle.more_list <> mem_split_set thm
+R35386:35395 Coccinelle.list_set Make eq_bool_ok defax
+R35368:35380 Coccinelle.more_list <> mem_split_set thm
+R35386:35395 Coccinelle.list_set Make eq_bool_ok defax
+R35507:35524 Coccinelle.list_set Make permut_cons_inside defax
+R35507:35524 Coccinelle.list_set Make permut_cons_inside defax
+R35507:35524 Coccinelle.list_set Make permut_cons_inside defax
+R35507:35524 Coccinelle.list_set Make permut_cons_inside defax
+R35564:35581 Coccinelle.list_set Make without_red_remove thm
+R35586:35588 Coq.Init.Datatypes <> nil constr
+R35564:35581 Coccinelle.list_set Make without_red_remove thm
+R35586:35588 Coq.Init.Datatypes <> nil constr
+R35608:35625 Coccinelle.list_set Make without_red_remove thm
+R35608:35625 Coccinelle.list_set Make without_red_remove thm
+R35675:35689 Coccinelle.more_list <> diff_mem_remove thm
+R35675:35689 Coccinelle.more_list <> diff_mem_remove thm
+R35724:35741 Coccinelle.list_set Make without_red_not_in thm
+R35746:35748 Coq.Init.Datatypes <> nil constr
+R35724:35741 Coccinelle.list_set Make without_red_not_in thm
+R35746:35748 Coq.Init.Datatypes <> nil constr
+R35857:35871 Coccinelle.more_list <> diff_mem_remove thm
+R35875:35878 Coccinelle.list_set Make eq_A defax
+R35880:35882 Coq.Init.Datatypes <> nil constr
+R35857:35871 Coccinelle.more_list <> diff_mem_remove thm
+R35875:35878 Coccinelle.list_set Make eq_A defax
+R35880:35882 Coq.Init.Datatypes <> nil constr
+R35914:35931 Coccinelle.list_set Make without_red_not_in thm
+R35914:35931 Coccinelle.list_set Make without_red_not_in thm
+R36024:36033 Coccinelle.more_list <> mem_insert thm
+R36024:36033 Coccinelle.more_list <> mem_insert thm
+prf 36057:36070 Make not_mem_compat
+binder 36083:36084 <> s2:426
+binder 36086:36086 <> e:427
+binder 36088:36089 <> e':428
+R36101:36112 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R36092:36095 Coccinelle.list_set Make eq_A defax
+R36097:36097 Coccinelle.list_set <> e:427 var
+R36099:36100 Coccinelle.list_set <> e':428 var
+R36175:36185 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R36123:36128 Coccinelle.list_set EDS1 A defax
+binder 36118:36119 <> e0:429
+R36133:36136 Coq.Init.Datatypes <> negb def
+R36139:36146 Coccinelle.more_list <> mem_bool def
+R36160:36166 Coccinelle.list_set Make support proj
+R36168:36169 Coccinelle.list_set <> s2:426 var
+R36156:36157 Coccinelle.list_set <> e0:429 var
+R36148:36154 Coccinelle.list_set Make eq_bool defax
+R36174:36174 Coccinelle.list_set <> e:427 var
+R36196:36201 Coccinelle.list_set EDS1 A defax
+binder 36191:36192 <> e0:430
+R36206:36209 Coq.Init.Datatypes <> negb def
+R36212:36219 Coccinelle.more_list <> mem_bool def
+R36233:36239 Coccinelle.list_set Make support proj
+R36241:36242 Coccinelle.list_set <> s2:426 var
+R36229:36230 Coccinelle.list_set <> e0:430 var
+R36221:36227 Coccinelle.list_set Make eq_bool defax
+R36247:36248 Coccinelle.list_set <> e':428 var
+R36295:36305 Coccinelle.more_list <> mem_bool_ok thm
+R36325:36331 Coccinelle.list_set Make support proj
+R36311:36320 Coccinelle.list_set Make eq_bool_ok defax
+R36339:36349 Coccinelle.more_list <> mem_bool_ok thm
+R36370:36376 Coccinelle.list_set Make support proj
+R36355:36364 Coccinelle.list_set Make eq_bool_ok defax
+R36295:36305 Coccinelle.more_list <> mem_bool_ok thm
+R36325:36331 Coccinelle.list_set Make support proj
+R36311:36320 Coccinelle.list_set Make eq_bool_ok defax
+R36339:36349 Coccinelle.more_list <> mem_bool_ok thm
+R36370:36376 Coccinelle.list_set Make support proj
+R36355:36364 Coccinelle.list_set Make eq_bool_ok defax
+R36391:36398 Coccinelle.more_list <> mem_bool def
+R36411:36417 Coccinelle.list_set Make support proj
+R36400:36406 Coccinelle.list_set Make eq_bool defax
+R36431:36438 Coccinelle.more_list <> mem_bool def
+R36452:36458 Coccinelle.list_set Make support proj
+R36440:36446 Coccinelle.list_set Make eq_bool defax
+R36391:36398 Coccinelle.more_list <> mem_bool def
+R36411:36417 Coccinelle.list_set Make support proj
+R36400:36406 Coccinelle.list_set Make eq_bool defax
+R36431:36438 Coccinelle.more_list <> mem_bool def
+R36452:36458 Coccinelle.list_set Make support proj
+R36440:36446 Coccinelle.list_set Make eq_bool defax
+R36431:36438 Coccinelle.more_list <> mem_bool def
+R36452:36458 Coccinelle.list_set Make support proj
+R36440:36446 Coccinelle.list_set Make eq_bool defax
+R36528:36540 Coccinelle.more_list <> mem def
+R36551:36557 Coccinelle.list_set Make support proj
+R36542:36545 Coccinelle.list_set Make eq_A defax
+R36528:36540 Coccinelle.more_list <> mem def
+R36551:36557 Coccinelle.list_set Make support proj
+R36542:36545 Coccinelle.list_set Make eq_A defax
+R36584:36593 Coccinelle.more_list <> mem_eq_mem thm
+R36595:36602 Coccinelle.list_set Make eq_proof defax
+R36584:36593 Coccinelle.more_list <> mem_eq_mem thm
+R36595:36602 Coccinelle.list_set Make eq_proof defax
+R36657:36669 Coccinelle.more_list <> mem def
+R36679:36685 Coccinelle.list_set Make support proj
+R36671:36674 Coccinelle.list_set Make eq_A defax
+R36657:36669 Coccinelle.more_list <> mem def
+R36679:36685 Coccinelle.list_set Make support proj
+R36671:36674 Coccinelle.list_set Make eq_A defax
+R36712:36721 Coccinelle.more_list <> mem_eq_mem thm
+R36723:36730 Coccinelle.list_set Make eq_proof defax
+R36712:36721 Coccinelle.more_list <> mem_eq_mem thm
+R36723:36730 Coccinelle.list_set Make eq_proof defax
+R36744:36752 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R36758:36765 Coccinelle.list_set Make eq_proof defax
+R36744:36752 Coq.Relations.Relation_Definitions <> equiv_sym proj
+R36758:36765 Coccinelle.list_set Make eq_proof defax
+def 36835:36842 Make set_diff
+binder 36844:36845 <> s1:431
+binder 36847:36848 <> s2:432
+R36853:36858 Coccinelle.list_set Make filter def
+R36914:36927 Coccinelle.list_set Make not_mem_compat thm
+R36929:36930 Coccinelle.list_set <> s2:432 var
+R36910:36911 Coccinelle.list_set <> s1:431 var
+binder 36865:36865 <> e:433
+R36870:36873 Coq.Init.Datatypes <> negb def
+R36876:36883 Coccinelle.more_list <> mem_bool def
+R36899:36905 Coccinelle.list_set Make support proj
+R36895:36896 Coccinelle.list_set <> s2:432 var
+R36893:36893 Coccinelle.list_set <> e:433 var
+R36885:36891 Coccinelle.list_set Make eq_bool defax
+prf 36941:36955 Make subset_set_diff
+binder 36970:36971 <> s1:434
+binder 36973:36974 <> s2:435
+binder 36976:36978 <> s2':436
+R36994:36997 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R36981:36986 Coccinelle.list_set Make subset def
+R36991:36993 Coccinelle.list_set <> s2':436 var
+R36988:36989 Coccinelle.list_set <> s2:435 var
+R37024:37027 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R36998:37005 Coccinelle.list_set Make cardinal def
+R37008:37015 Coccinelle.list_set Make set_diff def
+R37020:37022 Coccinelle.list_set <> s2':436 var
+R37017:37018 Coccinelle.list_set <> s1:434 var
+R37028:37035 Coccinelle.list_set Make cardinal def
+R37038:37045 Coccinelle.list_set Make set_diff def
+R37050:37051 Coccinelle.list_set <> s2:435 var
+R37047:37048 Coccinelle.list_set <> s1:434 var
+R37069:37076 Coccinelle.list_set Make set_diff def
+R37079:37084 Coccinelle.list_set Make filter def
+R37087:37094 Coccinelle.list_set Make cardinal def
+R37194:37197 Coq.Init.Peano <> le_n constr
+R37194:37197 Coq.Init.Peano <> le_n constr
+R37216:37233 Coccinelle.list_set Make without_red_remove thm
+R37238:37240 Coq.Init.Datatypes <> nil constr
+R37216:37233 Coccinelle.list_set Make without_red_remove thm
+R37238:37240 Coq.Init.Datatypes <> nil constr
+R37315:37324 Coccinelle.list_set Make filter_aux def
+R37335:37340 Coccinelle.list_set EDS1 A defax
+binder 37331:37331 <> e:437
+R37345:37348 Coq.Init.Datatypes <> negb def
+R37351:37358 Coccinelle.more_list <> mem_bool def
+R37376:37382 Coccinelle.list_set Make support proj
+R37373:37373 Coccinelle.list_set <> e:437 var
+R37360:37371 Coccinelle.list_set EDS1 eq_bool defax
+R37315:37324 Coccinelle.list_set Make filter_aux def
+R37335:37340 Coccinelle.list_set EDS1 A defax
+binder 37331:37331 <> e:438
+R37345:37348 Coq.Init.Datatypes <> negb def
+R37351:37358 Coccinelle.more_list <> mem_bool def
+R37376:37382 Coccinelle.list_set Make support proj
+R37373:37373 Coccinelle.list_set <> e:438 var
+R37360:37371 Coccinelle.list_set EDS1 eq_bool defax
+R37411:37420 Coccinelle.list_set Make filter_aux def
+R37431:37436 Coccinelle.list_set EDS1 A defax
+binder 37427:37427 <> e:439
+R37441:37444 Coq.Init.Datatypes <> negb def
+R37447:37454 Coccinelle.more_list <> mem_bool def
+R37472:37478 Coccinelle.list_set Make support proj
+R37469:37469 Coccinelle.list_set <> e:439 var
+R37456:37467 Coccinelle.list_set EDS1 eq_bool defax
+R37411:37420 Coccinelle.list_set Make filter_aux def
+R37431:37436 Coccinelle.list_set EDS1 A defax
+binder 37427:37427 <> e:440
+R37441:37444 Coq.Init.Datatypes <> negb def
+R37447:37454 Coccinelle.more_list <> mem_bool def
+R37472:37478 Coccinelle.list_set Make support proj
+R37469:37469 Coccinelle.list_set <> e:440 var
+R37456:37467 Coccinelle.list_set EDS1 eq_bool defax
+R37531:37533 Coccinelle.list_set Make mem def
+R37548:37558 Coccinelle.more_list <> mem_bool_ok thm
+R37579:37585 Coccinelle.list_set Make support proj
+R37564:37573 Coccinelle.list_set Make eq_bool_ok defax
+R37548:37558 Coccinelle.more_list <> mem_bool_ok thm
+R37579:37585 Coccinelle.list_set Make support proj
+R37564:37573 Coccinelle.list_set Make eq_bool_ok defax
+R37605:37615 Coccinelle.more_list <> mem_bool_ok thm
+R37636:37642 Coccinelle.list_set Make support proj
+R37621:37630 Coccinelle.list_set Make eq_bool_ok defax
+R37605:37615 Coccinelle.more_list <> mem_bool_ok thm
+R37636:37642 Coccinelle.list_set Make support proj
+R37621:37630 Coccinelle.list_set Make eq_bool_ok defax
+R37657:37664 Coccinelle.more_list <> mem_bool def
+R37683:37689 Coccinelle.list_set Make support proj
+R37666:37677 Coccinelle.list_set EDS1 eq_bool defax
+R37657:37664 Coccinelle.more_list <> mem_bool def
+R37683:37689 Coccinelle.list_set Make support proj
+R37666:37677 Coccinelle.list_set EDS1 eq_bool defax
+R37704:37711 Coccinelle.more_list <> mem_bool def
+R37730:37736 Coccinelle.list_set Make support proj
+R37713:37724 Coccinelle.list_set EDS1 eq_bool defax
+R37704:37711 Coccinelle.more_list <> mem_bool def
+R37730:37736 Coccinelle.list_set Make support proj
+R37713:37724 Coccinelle.list_set EDS1 eq_bool defax
+R37797:37800 Coq.Init.Peano <> le_S constr
+R37797:37800 Coq.Init.Peano <> le_S constr
+R37821:37828 Coccinelle.more_list <> mem_bool def
+R37847:37853 Coccinelle.list_set Make support proj
+R37830:37841 Coccinelle.list_set EDS1 eq_bool defax
+R37821:37828 Coccinelle.more_list <> mem_bool def
+R37847:37853 Coccinelle.list_set Make support proj
+R37830:37841 Coccinelle.list_set EDS1 eq_bool defax
+R37909:37917 Coq.Init.Logic <> False_rec scheme
+R37909:37917 Coq.Init.Logic <> False_rec scheme
+R37988:37993 Coq.Init.Peano <> le_n_S thm
+R37988:37993 Coq.Init.Peano <> le_n_S thm
+prf 38020:38041 Make strict_subset_set_diff
+binder 38056:38057 <> s1:441
+binder 38059:38060 <> s2:442
+binder 38062:38064 <> s2':443
+R38080:38086 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R38067:38072 Coccinelle.list_set Make subset def
+R38077:38079 Coccinelle.list_set <> s2':443 var
+R38074:38075 Coccinelle.list_set <> s2:442 var
+R38087:38087 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R38132:38138 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R38088:38094 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R38096:38097 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 38095:38095 <> e:444
+R38106:38109 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R38098:38100 Coccinelle.list_set Make mem def
+R38104:38105 Coccinelle.list_set <> s1:441 var
+R38102:38102 Coccinelle.list_set <> e:444 var
+R38119:38122 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R38110:38112 Coccinelle.list_set Make mem def
+R38116:38118 Coccinelle.list_set <> s2':443 var
+R38114:38114 Coccinelle.list_set <> e:444 var
+R38123:38123 Coq.Init.Logic <> ::type_scope:'~'_x not
+R38124:38126 Coccinelle.list_set Make mem def
+R38130:38131 Coccinelle.list_set <> s2:442 var
+R38128:38128 Coccinelle.list_set <> e:444 var
+R38165:38167 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R38139:38146 Coccinelle.list_set Make cardinal def
+R38149:38156 Coccinelle.list_set Make set_diff def
+R38161:38163 Coccinelle.list_set <> s2':443 var
+R38158:38159 Coccinelle.list_set <> s1:441 var
+R38168:38175 Coccinelle.list_set Make cardinal def
+R38178:38185 Coccinelle.list_set Make set_diff def
+R38190:38191 Coccinelle.list_set <> s2:442 var
+R38187:38188 Coccinelle.list_set <> s1:441 var
+R38210:38217 Coccinelle.list_set Make set_diff def
+R38220:38225 Coccinelle.list_set Make filter def
+R38228:38235 Coccinelle.list_set Make cardinal def
+R38394:38411 Coccinelle.list_set Make without_red_remove thm
+R38416:38418 Coq.Init.Datatypes <> nil constr
+R38394:38411 Coccinelle.list_set Make without_red_remove thm
+R38416:38418 Coq.Init.Datatypes <> nil constr
+R38456:38465 Coccinelle.list_set Make eq_bool_ok defax
+R38483:38489 Coccinelle.list_set Make eq_bool defax
+R38456:38465 Coccinelle.list_set Make eq_bool_ok defax
+R38483:38489 Coccinelle.list_set Make eq_bool defax
+R38609:38611 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R38571:38578 Coccinelle.more_list <> mem_bool def
+R38597:38603 Coccinelle.list_set Make support proj
+R38580:38591 Coccinelle.list_set EDS1 eq_bool defax
+R38612:38615 Coq.Init.Datatypes <> true constr
+R38609:38611 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R38571:38578 Coccinelle.more_list <> mem_bool def
+R38597:38603 Coccinelle.list_set Make support proj
+R38580:38591 Coccinelle.list_set EDS1 eq_bool defax
+R38612:38615 Coq.Init.Datatypes <> true constr
+R38631:38641 Coccinelle.more_list <> mem_bool_ok thm
+R38662:38668 Coccinelle.list_set Make support proj
+R38647:38656 Coccinelle.list_set Make eq_bool_ok defax
+R38631:38641 Coccinelle.more_list <> mem_bool_ok thm
+R38662:38668 Coccinelle.list_set Make support proj
+R38647:38656 Coccinelle.list_set Make eq_bool_ok defax
+R38683:38690 Coccinelle.more_list <> mem_bool def
+R38709:38715 Coccinelle.list_set Make support proj
+R38692:38703 Coccinelle.list_set EDS1 eq_bool defax
+R38683:38690 Coccinelle.more_list <> mem_bool def
+R38709:38715 Coccinelle.list_set Make support proj
+R38692:38703 Coccinelle.list_set EDS1 eq_bool defax
+R38740:38749 Coq.Init.Logic <> refl_equal abbrev
+R38740:38749 Coq.Init.Logic <> refl_equal abbrev
+R38780:38788 Coq.Init.Logic <> False_rec scheme
+R38780:38788 Coq.Init.Logic <> False_rec scheme
+R38820:38829 Coccinelle.more_list <> mem_eq_mem thm
+R38850:38856 Coccinelle.list_set Make support proj
+R38831:38843 Coccinelle.list_set EDS1 eq_proof defax
+R38820:38829 Coccinelle.more_list <> mem_eq_mem thm
+R38850:38856 Coccinelle.list_set Make support proj
+R38831:38843 Coccinelle.list_set EDS1 eq_proof defax
+R38979:38981 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R38935:38938 Coq.Init.Datatypes <> negb def
+R38941:38948 Coccinelle.more_list <> mem_bool def
+R38967:38973 Coccinelle.list_set Make support proj
+R38950:38961 Coccinelle.list_set EDS1 eq_bool defax
+R38982:38985 Coq.Init.Datatypes <> true constr
+R38979:38981 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R38935:38938 Coq.Init.Datatypes <> negb def
+R38941:38948 Coccinelle.more_list <> mem_bool def
+R38967:38973 Coccinelle.list_set Make support proj
+R38950:38961 Coccinelle.list_set EDS1 eq_bool defax
+R38982:38985 Coq.Init.Datatypes <> true constr
+R39001:39014 Coccinelle.list_set Make not_mem_compat thm
+R39001:39014 Coccinelle.list_set Make not_mem_compat thm
+R39001:39014 Coccinelle.list_set Make not_mem_compat thm
+R39042:39052 Coccinelle.more_list <> mem_bool_ok thm
+R39072:39078 Coccinelle.list_set Make support proj
+R39058:39067 Coccinelle.list_set Make eq_bool_ok defax
+R39042:39052 Coccinelle.more_list <> mem_bool_ok thm
+R39072:39078 Coccinelle.list_set Make support proj
+R39058:39067 Coccinelle.list_set Make eq_bool_ok defax
+R39092:39099 Coccinelle.more_list <> mem_bool def
+R39117:39123 Coccinelle.list_set Make support proj
+R39101:39112 Coccinelle.list_set EDS1 eq_bool defax
+R39092:39099 Coccinelle.more_list <> mem_bool def
+R39117:39123 Coccinelle.list_set Make support proj
+R39101:39112 Coccinelle.list_set EDS1 eq_bool defax
+R39153:39161 Coq.Init.Logic <> False_rec scheme
+R39153:39161 Coq.Init.Logic <> False_rec scheme
+R39212:39221 Coq.Init.Logic <> refl_equal abbrev
+R39212:39221 Coq.Init.Logic <> refl_equal abbrev
+R39260:39265 Coq.Init.Peano <> le_n_S thm
+R39260:39265 Coq.Init.Peano <> le_n_S thm
+R39275:39289 Coccinelle.list_set Make subset_set_diff thm
+R39292:39297 Coccinelle.list_set Make mk_set constr
+R39275:39289 Coccinelle.list_set Make subset_set_diff thm
+R39292:39297 Coccinelle.list_set Make mk_set constr
+R39392:39398 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R39409:39410 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R39403:39408 Coccinelle.list_set EDS1 A defax
+binder 39399:39399 <> e:445
+R39430:39433 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R39411:39413 Coccinelle.list_set Make mem def
+R39418:39423 Coccinelle.list_set Make mk_set constr
+R39415:39415 Coccinelle.list_set <> e:445 var
+R39443:39446 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R39434:39436 Coccinelle.list_set Make mem def
+R39438:39438 Coccinelle.list_set <> e:445 var
+R39447:39448 Coq.Init.Logic <> ::type_scope:'~'_x not
+R39449:39451 Coccinelle.list_set Make mem def
+R39453:39453 Coccinelle.list_set <> e:445 var
+R39392:39398 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R39409:39410 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R39403:39408 Coccinelle.list_set EDS1 A defax
+binder 39399:39399 <> e:446
+R39430:39433 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R39411:39413 Coccinelle.list_set Make mem def
+R39418:39423 Coccinelle.list_set Make mk_set constr
+R39415:39415 Coccinelle.list_set <> e:446 var
+R39443:39446 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R39434:39436 Coccinelle.list_set Make mem def
+R39438:39438 Coccinelle.list_set <> e:446 var
+R39447:39448 Coq.Init.Logic <> ::type_scope:'~'_x not
+R39449:39451 Coccinelle.list_set Make mem def
+R39453:39453 Coccinelle.list_set <> e:446 var
+R39543:39545 Coccinelle.list_set Make mem def
+R39591:39599 Coq.Init.Logic <> False_rec scheme
+R39591:39599 Coq.Init.Logic <> False_rec scheme
+R39705:39714 Coccinelle.list_set Make filter_aux def
+R39725:39730 Coccinelle.list_set EDS1 A defax
+binder 39721:39721 <> e:447
+R39735:39738 Coq.Init.Datatypes <> negb def
+R39741:39748 Coccinelle.more_list <> mem_bool def
+R39766:39772 Coccinelle.list_set Make support proj
+R39763:39763 Coccinelle.list_set <> e:447 var
+R39750:39761 Coccinelle.list_set EDS1 eq_bool defax
+R39705:39714 Coccinelle.list_set Make filter_aux def
+R39725:39730 Coccinelle.list_set EDS1 A defax
+binder 39721:39721 <> e:448
+R39735:39738 Coq.Init.Datatypes <> negb def
+R39741:39748 Coccinelle.more_list <> mem_bool def
+R39766:39772 Coccinelle.list_set Make support proj
+R39763:39763 Coccinelle.list_set <> e:448 var
+R39750:39761 Coccinelle.list_set EDS1 eq_bool defax
+R39801:39810 Coccinelle.list_set Make filter_aux def
+R39821:39826 Coccinelle.list_set EDS1 A defax
+binder 39817:39817 <> e:449
+R39831:39834 Coq.Init.Datatypes <> negb def
+R39837:39844 Coccinelle.more_list <> mem_bool def
+R39862:39868 Coccinelle.list_set Make support proj
+R39859:39859 Coccinelle.list_set <> e:449 var
+R39846:39857 Coccinelle.list_set EDS1 eq_bool defax
+R39801:39810 Coccinelle.list_set Make filter_aux def
+R39821:39826 Coccinelle.list_set EDS1 A defax
+binder 39817:39817 <> e:450
+R39831:39834 Coq.Init.Datatypes <> negb def
+R39837:39844 Coccinelle.more_list <> mem_bool def
+R39862:39868 Coccinelle.list_set Make support proj
+R39859:39859 Coccinelle.list_set <> e:450 var
+R39846:39857 Coccinelle.list_set EDS1 eq_bool defax
+R39921:39923 Coccinelle.list_set Make mem def
+R39938:39948 Coccinelle.more_list <> mem_bool_ok thm
+R39969:39975 Coccinelle.list_set Make support proj
+R39954:39963 Coccinelle.list_set Make eq_bool_ok defax
+R39990:39997 Coccinelle.more_list <> mem_bool def
+R40016:40022 Coccinelle.list_set Make support proj
+R39999:40010 Coccinelle.list_set EDS1 eq_bool defax
+R39938:39948 Coccinelle.more_list <> mem_bool_ok thm
+R39969:39975 Coccinelle.list_set Make support proj
+R39954:39963 Coccinelle.list_set Make eq_bool_ok defax
+R39990:39997 Coccinelle.more_list <> mem_bool def
+R40016:40022 Coccinelle.list_set Make support proj
+R39999:40010 Coccinelle.list_set EDS1 eq_bool defax
+R40043:40053 Coccinelle.more_list <> mem_bool_ok thm
+R40074:40080 Coccinelle.list_set Make support proj
+R40059:40068 Coccinelle.list_set Make eq_bool_ok defax
+R40094:40101 Coccinelle.more_list <> mem_bool def
+R40120:40126 Coccinelle.list_set Make support proj
+R40103:40114 Coccinelle.list_set EDS1 eq_bool defax
+R40043:40053 Coccinelle.more_list <> mem_bool_ok thm
+R40074:40080 Coccinelle.list_set Make support proj
+R40059:40068 Coccinelle.list_set Make eq_bool_ok defax
+R40094:40101 Coccinelle.more_list <> mem_bool def
+R40120:40126 Coccinelle.list_set Make support proj
+R40103:40114 Coccinelle.list_set EDS1 eq_bool defax
+R40187:40190 Coq.Init.Peano <> le_S constr
+R40187:40190 Coq.Init.Peano <> le_S constr
+R40217:40227 Coccinelle.more_list <> mem_bool_ok thm
+R40248:40254 Coccinelle.list_set Make support proj
+R40233:40242 Coccinelle.list_set Make eq_bool_ok defax
+R40268:40275 Coccinelle.more_list <> mem_bool def
+R40294:40300 Coccinelle.list_set Make support proj
+R40277:40288 Coccinelle.list_set EDS1 eq_bool defax
+R40217:40227 Coccinelle.more_list <> mem_bool_ok thm
+R40248:40254 Coccinelle.list_set Make support proj
+R40233:40242 Coccinelle.list_set Make eq_bool_ok defax
+R40268:40275 Coccinelle.more_list <> mem_bool def
+R40294:40300 Coccinelle.list_set Make support proj
+R40277:40288 Coccinelle.list_set EDS1 eq_bool defax
+R40349:40357 Coq.Init.Logic <> False_rec scheme
+R40349:40357 Coq.Init.Logic <> False_rec scheme
+R40435:40440 Coq.Init.Peano <> le_n_S thm
+R40435:40440 Coq.Init.Peano <> le_n_S thm
+R40465:40468 Coccinelle.list_set Make <> mod

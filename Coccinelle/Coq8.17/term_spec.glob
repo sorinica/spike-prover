@@ -1,0 +1,2362 @@
+DIGEST 73b2c050999188e9a6b4e595c6f6bd5b
+FCoccinelle.term_spec
+R942:947 Coq.funind.Recdef <> <> lib
+R965:968 Coq.Lists.List <> <> lib
+R986:992 Coccinelle.closure <> <> lib
+R1010:1018 Coccinelle.more_list <> <> lib
+R1036:1046 Coccinelle.list_permut <> <> lib
+R1064:1071 Coccinelle.list_set <> <> lib
+R1089:1093 Coq.Arith.Arith <> <> lib
+R1111:1123 Coccinelle.decidable_set <> <> lib
+R1141:1146 Coq.Setoids.Setoid <> <> lib
+ind 1274:1283 <> arity_type
+constr 1298:1299 <> AC
+constr 1318:1318 <> C
+constr 1337:1340 <> Free
+R1303:1312 Coccinelle.term_spec <> arity_type:1 ind
+R1322:1331 Coccinelle.term_spec <> arity_type:1 ind
+R1347:1350 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1344:1346 Coq.Init.Datatypes <> nat ind
+R1351:1360 Coccinelle.term_spec <> arity_type:1 ind
+modtype 1496:1504 <> Signature
+R1536:1550 Coccinelle.decidable_set S <> mod
+mod 1529:1532 <> Signature.Symb
+ax 1563:1567 Signature arity
+R1577:1580 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1571:1576 Coccinelle.term_spec Signature A defax
+R1581:1590 Coccinelle.term_spec <> arity_type ind
+R1597:1605 Coccinelle.term_spec Signature <> modtype
+modtype 1694:1697 <> Term
+R1727:1735 Coccinelle.term_spec Signature <> mod
+mod 1723:1723 <> Term.F
+R1764:1778 Coccinelle.decidable_set S <> mod
+mod 1760:1760 <> Term.X
+abbrev 1791:1796 Term symbol
+R1801:1806 Coccinelle.term_spec Term A defax
+abbrev 1818:1829 Term eq_symb_bool
+R1834:1845 Coccinelle.term_spec Term eq_bool defax
+abbrev 1857:1871 Term eq_symb_bool_ok
+R1876:1890 Coccinelle.term_spec Term eq_bool_ok defax
+ax 1903:1919 Term eq_symb_bool_refl
+binder 1930:1930 <> x:4
+R1949:1951 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1933:1944 Coccinelle.term_spec Term eq_symb_bool abbrev
+R1946:1946 Coccinelle.term_spec <> x:4 var
+R1948:1948 Coccinelle.term_spec <> x:4 var
+R1952:1955 Coq.Init.Datatypes <> true constr
+abbrev 1968:1975 Term variable
+R1980:1982 Coccinelle.term_spec Term A defax
+abbrev 1994:2004 Term eq_var_bool
+R2009:2017 Coccinelle.term_spec Term eq_bool defax
+abbrev 2029:2042 Term eq_var_bool_ok
+R2047:2058 Coccinelle.term_spec Term eq_bool_ok defax
+ax 2071:2086 Term eq_var_bool_refl
+binder 2097:2097 <> x:6
+R2115:2117 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2100:2110 Coccinelle.term_spec Term eq_var_bool abbrev
+R2112:2112 Coccinelle.term_spec <> x:6 var
+R2114:2114 Coccinelle.term_spec <> x:6 var
+R2118:2121 Coq.Init.Datatypes <> true constr
+R2151:2160 Coccinelle.list_set S <> mod
+R2187:2189 Coccinelle.term_spec Term A defax
+R2237:2238 Coq.Init.Logic <> eq ind
+R2240:2242 Coccinelle.term_spec Term A defax
+mod 2140:2143 <> Term.VSet
+R2362:2371 Coq.Init.Logic <> refl_equal abbrev
+R2374:2378 Coccinelle.term_spec Term arity defax
+R2411:2415 Coccinelle.term_spec Term arity defax
+ind 2547:2550 Term term
+constr 2565:2567 Term Var
+constr 2592:2595 Term Term
+R2579:2582 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2571:2578 Coccinelle.term_spec Term variable abbrev
+R2583:2586 Coccinelle.term_spec <> term:8 ind
+R2605:2608 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2599:2604 Coccinelle.term_spec Term symbol abbrev
+R2618:2621 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2609:2612 Coq.Init.Datatypes <> list ind
+R2614:2617 Coccinelle.term_spec <> term:8 ind
+R2622:2625 Coccinelle.term_spec <> term:8 ind
+def 2699:2702 Term size
+R2707:2710 Coccinelle.term_spec Term term ind
+binder 2705:2705 <> t:10
+R2715:2717 Coq.Init.Datatypes <> nat ind
+R2730:2730 Coccinelle.term_spec <> t:10 var
+R2741:2743 Coccinelle.term_spec Term Var constr
+R2756:2759 Coccinelle.term_spec Term Term constr
+R2822:2825 Coq.Init.Datatypes <> list ind
+R2827:2830 Coccinelle.term_spec Term term ind
+binder 2818:2818 <> l:13
+R2846:2848 Coq.Init.Datatypes <> nat ind
+R2871:2871 Coccinelle.term_spec <> l:13 var
+R2892:2894 Coq.Init.Datatypes <> nil constr
+R2916:2919 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2920:2921 Coq.Init.Peano <> lt def
+R2932:2934 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2926:2929 Coccinelle.term_spec <> size:11 def
+R2931:2931 Coccinelle.term_spec <> t:10 var
+R2935:2943 Coccinelle.term_spec <> size_list:14 var
+binder 2780:2788 <> size_list:16
+R2977:2979 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2980:2988 Coccinelle.term_spec <> size_list:16 var
+ax 3011:3021 Term size_unfold
+binder 3033:3033 <> t:17
+R3042:3044 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3036:3039 Coccinelle.term_spec Term size def
+R3041:3041 Coccinelle.term_spec <> t:17 var
+R3051:3051 Coccinelle.term_spec <> t:17 var
+R3089:3091 Coccinelle.term_spec Term Var constr
+R3131:3134 Coccinelle.term_spec Term Term constr
+R3144:3146 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3147:3155 Coccinelle.more_list <> list_size def
+R3157:3160 Coccinelle.term_spec Term size def
+ax 3207:3217 Term size_ge_one
+binder 3228:3228 <> t:20
+R3232:3235 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R3236:3239 Coccinelle.term_spec Term size def
+R3241:3241 Coccinelle.term_spec <> t:20 var
+R3276:3283 Coccinelle.term_spec Term variable abbrev
+binder 3272:3272 <> x:22
+R3291:3294 Coq.Init.Datatypes <> list ind
+R3296:3299 Coccinelle.term_spec Term term ind
+binder 3287:3287 <> l:23
+R3336:3339 Coq.Init.Datatypes <> bool ind
+R3352:3352 Coccinelle.term_spec <> l:23 var
+R3365:3367 Coq.Init.Datatypes <> nil constr
+R3372:3376 Coq.Init.Datatypes <> false constr
+R3384:3384 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3390:3394 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3385:3387 Coccinelle.term_spec Term Var constr
+R3400:3402 Coq.Init.Datatypes <> orb def
+R3423:3438 Coccinelle.term_spec <> var_in_term_list:24 def
+R3442:3442 Coccinelle.term_spec <> l:23 var
+R3440:3440 Coccinelle.term_spec <> x:22 var
+R3405:3415 Coccinelle.term_spec Term eq_var_bool abbrev
+R3417:3417 Coccinelle.term_spec <> x:22 var
+R3452:3452 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3462:3466 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3453:3456 Coccinelle.term_spec Term Term constr
+R3472:3474 Coq.Init.Datatypes <> orb def
+R3501:3516 Coccinelle.term_spec <> var_in_term_list:24 def
+R3520:3520 Coccinelle.term_spec <> l:23 var
+R3518:3518 Coccinelle.term_spec <> x:22 var
+R3477:3492 Coccinelle.term_spec <> var_in_term_list:24 def
+R3494:3494 Coccinelle.term_spec <> x:22 var
+binder 3272:3272 <> x:26
+binder 3287:3287 <> l:27
+binder 3272:3272 <> x:28
+binder 3287:3287 <> l:29
+binder 3272:3272 <> x:31
+binder 3287:3287 <> l:32
+R3352:3352 Coccinelle.term_spec <> l:32 var
+R3365:3367 Coq.Init.Datatypes <> nil constr
+R3372:3376 Coq.Init.Datatypes <> false constr
+R3384:3384 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3390:3394 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3385:3387 Coccinelle.term_spec Term Var constr
+R3400:3402 Coq.Init.Datatypes <> orb def
+R3423:3438 Coccinelle.term_spec <> var_in_term_list:30 def
+R3442:3442 Coccinelle.term_spec <> l:32 var
+R3440:3440 Coccinelle.term_spec <> x:31 var
+R3405:3415 Coccinelle.term_spec Term eq_var_bool abbrev
+R3417:3417 Coccinelle.term_spec <> x:31 var
+R3452:3452 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3462:3466 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3453:3456 Coccinelle.term_spec Term Term constr
+R3472:3474 Coq.Init.Datatypes <> orb def
+R3501:3516 Coccinelle.term_spec <> var_in_term_list:30 def
+R3520:3520 Coccinelle.term_spec <> l:32 var
+R3518:3518 Coccinelle.term_spec <> x:31 var
+R3477:3492 Coccinelle.term_spec <> var_in_term_list:30 def
+R3494:3494 Coccinelle.term_spec <> x:31 var
+binder 3272:3272 <> x:34
+binder 3287:3287 <> l:35
+binder 3272:3272 <> x:36
+binder 3287:3287 <> l:37
+R3352:3352 Coccinelle.term_spec <> l:37 var
+R3365:3367 Coq.Init.Datatypes <> nil constr
+R3372:3376 Coq.Init.Datatypes <> false constr
+R3384:3384 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3390:3394 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3385:3387 Coccinelle.term_spec Term Var constr
+R3400:3402 Coq.Init.Datatypes <> orb def
+R3423:3438 Coccinelle.term_spec <> var_in_term_list:30 def
+R3442:3442 Coccinelle.term_spec <> l:37 var
+R3440:3440 Coccinelle.term_spec <> x:36 var
+R3405:3415 Coccinelle.term_spec Term eq_var_bool abbrev
+R3417:3417 Coccinelle.term_spec <> x:36 var
+R3452:3452 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3462:3466 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3453:3456 Coccinelle.term_spec Term Term constr
+R3472:3474 Coq.Init.Datatypes <> orb def
+R3501:3516 Coccinelle.term_spec <> var_in_term_list:30 def
+R3520:3520 Coccinelle.term_spec <> l:37 var
+R3518:3518 Coccinelle.term_spec <> x:36 var
+R3477:3492 Coccinelle.term_spec <> var_in_term_list:30 def
+R3494:3494 Coccinelle.term_spec <> x:36 var
+R3314:3322 Coccinelle.more_list <> list_size def
+R3324:3327 Coccinelle.term_spec Term size def
+R3696:3699 Coccinelle.term_spec Term size def
+R3702:3705 Coccinelle.term_spec Term Term constr
+R3678:3688 Coq.Arith.Lt <> lt_le_trans abbrev
+R3696:3699 Coccinelle.term_spec Term size def
+R3702:3705 Coccinelle.term_spec Term Term constr
+R3678:3688 Coq.Arith.Lt <> lt_le_trans abbrev
+R3723:3733 Coccinelle.term_spec Term size_unfold defax
+R3723:3733 Coccinelle.term_spec Term size_unfold defax
+R3723:3733 Coccinelle.term_spec Term size_unfold defax
+def 3805:3815 Term var_in_term
+R3822:3829 Coccinelle.term_spec Term variable abbrev
+binder 3818:3818 <> v:57
+R3837:3840 Coccinelle.term_spec Term term ind
+binder 3833:3833 <> t:58
+R3845:3848 Coq.Init.Datatypes <> bool ind
+R3860:3860 Coccinelle.term_spec <> t:58 var
+R3870:3872 Coccinelle.term_spec Term Var constr
+R3880:3890 Coccinelle.term_spec Term eq_var_bool abbrev
+R3894:3894 Coccinelle.term_spec <> v:57 var
+R3906:3909 Coccinelle.term_spec Term Term constr
+R3918:3933 Coccinelle.term_spec Term var_in_term_list thm
+R3935:3935 Coccinelle.term_spec <> v:57 var
+def 3962:3969 Term var_list
+R3976:3979 Coccinelle.term_spec Term term ind
+binder 3972:3972 <> t:60
+R3984:3987 Coq.Init.Datatypes <> list ind
+R3989:3996 Coccinelle.term_spec Term variable abbrev
+R4009:4009 Coccinelle.term_spec <> t:60 var
+R4020:4022 Coccinelle.term_spec Term Var constr
+R4031:4034 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4035:4037 Coq.Init.Datatypes <> nil constr
+R4044:4047 Coccinelle.term_spec Term Term constr
+R4117:4120 Coq.Init.Datatypes <> list ind
+R4122:4125 Coccinelle.term_spec Term term ind
+binder 4113:4113 <> l:63
+R4141:4144 Coq.Init.Datatypes <> list ind
+R4146:4153 Coccinelle.term_spec Term variable abbrev
+R4176:4176 Coccinelle.term_spec <> l:63 var
+R4197:4199 Coq.Init.Datatypes <> nil constr
+R4205:4207 Coq.Init.Datatypes <> nil constr
+R4226:4229 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4230:4231 Coq.Init.Peano <> lt def
+R4246:4249 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4236:4243 Coccinelle.term_spec <> var_list:61 def
+R4245:4245 Coccinelle.term_spec <> t:60 var
+R4250:4262 Coccinelle.term_spec <> var_list_list:64 var
+binder 4067:4079 <> var_list_list:66
+R4295:4307 Coccinelle.term_spec <> var_list_list:66 var
+def 4329:4341 Term var_list_list
+R4348:4351 Coq.Init.Datatypes <> list ind
+R4353:4356 Coccinelle.term_spec Term term ind
+binder 4344:4344 <> l:67
+R4372:4375 Coq.Init.Datatypes <> list ind
+R4377:4384 Coccinelle.term_spec Term variable abbrev
+R4407:4407 Coccinelle.term_spec <> l:67 var
+R4428:4430 Coq.Init.Datatypes <> nil constr
+R4435:4437 Coq.Init.Datatypes <> nil constr
+R4454:4457 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4458:4459 Coq.Init.Peano <> lt def
+R4474:4477 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4464:4471 Coccinelle.term_spec Term var_list def
+R4478:4490 Coccinelle.term_spec <> var_list_list:68 def
+ax 4523:4539 Term var_list_list_app
+binder 4550:4551 <> l1:70
+binder 4553:4554 <> l2:71
+R4581:4583 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4557:4569 Coccinelle.term_spec Term var_list_list def
+R4574:4577 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4572:4573 Coccinelle.term_spec <> l1:70 var
+R4578:4579 Coccinelle.term_spec <> l2:71 var
+R4584:4584 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4601:4605 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4585:4597 Coccinelle.term_spec Term var_list_list def
+R4599:4600 Coccinelle.term_spec <> l1:70 var
+R4606:4618 Coccinelle.term_spec Term var_list_list def
+R4620:4621 Coccinelle.term_spec <> l2:71 var
+ax 4635:4650 Term in_var_list_list
+binder 4661:4661 <> l:73
+binder 4663:4663 <> v:74
+R4688:4691 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4666:4667 Coq.Lists.List <> In def
+R4672:4684 Coccinelle.term_spec Term var_list_list def
+R4686:4686 Coccinelle.term_spec <> l:73 var
+R4669:4669 Coccinelle.term_spec <> v:74 var
+R4692:4698 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R4700:4701 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 4699:4699 <> t:75
+R4708:4711 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4702:4703 Coq.Lists.List <> In def
+R4707:4707 Coccinelle.term_spec <> l:73 var
+R4705:4705 Coccinelle.term_spec <> t:75 var
+R4712:4713 Coq.Lists.List <> In def
+R4718:4725 Coccinelle.term_spec Term var_list def
+R4727:4727 Coccinelle.term_spec <> t:75 var
+R4715:4715 Coccinelle.term_spec <> v:74 var
+ax 4742:4758 Term mem_var_list_list
+binder 4769:4769 <> l:77
+binder 4771:4771 <> v:78
+R4805:4808 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4774:4776 Coccinelle.more_list <> mem def
+R4789:4801 Coccinelle.term_spec Term var_list_list def
+R4803:4803 Coccinelle.term_spec <> l:77 var
+R4786:4786 Coccinelle.term_spec <> v:78 var
+R4780:4781 Coq.Init.Logic <> eq ind
+R4809:4815 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R4817:4818 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 4816:4816 <> t:79
+R4825:4828 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4819:4820 Coq.Lists.List <> In def
+R4824:4824 Coccinelle.term_spec <> l:77 var
+R4822:4822 Coccinelle.term_spec <> t:79 var
+R4829:4831 Coccinelle.more_list <> mem def
+R4844:4851 Coccinelle.term_spec Term var_list def
+R4853:4853 Coccinelle.term_spec <> t:79 var
+R4841:4841 Coccinelle.term_spec <> v:78 var
+R4835:4836 Coq.Init.Logic <> eq ind
+ax 4868:4882 Term var_list_unfold
+binder 4894:4894 <> t:81
+R4908:4910 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4898:4905 Coccinelle.term_spec Term var_list def
+R4907:4907 Coccinelle.term_spec <> t:81 var
+R4917:4917 Coccinelle.term_spec <> t:81 var
+R4936:4938 Coccinelle.term_spec Term Var constr
+R4947:4950 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4951:4953 Coq.Init.Datatypes <> nil constr
+R4968:4971 Coccinelle.term_spec Term Term constr
+R4980:4992 Coccinelle.term_spec Term var_list_list def
+ax 5022:5041 Term var_in_term_is_sound
+binder 5052:5052 <> x:84
+binder 5054:5054 <> t:85
+R5079:5083 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R5072:5074 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5057:5067 Coccinelle.term_spec Term var_in_term def
+R5071:5071 Coccinelle.term_spec <> t:85 var
+R5069:5069 Coccinelle.term_spec <> x:84 var
+R5075:5078 Coq.Init.Datatypes <> true constr
+R5084:5085 Coq.Lists.List <> In def
+R5090:5097 Coccinelle.term_spec Term var_list def
+R5099:5099 Coccinelle.term_spec <> t:85 var
+R5087:5087 Coccinelle.term_spec <> x:84 var
+def 5115:5128 Term direct_subterm
+binder 5130:5131 <> t1:87
+binder 5133:5134 <> t2:88
+R5154:5155 Coccinelle.term_spec <> t2:88 var
+R5166:5168 Coccinelle.term_spec Term Var constr
+R5175:5179 Coq.Init.Logic <> False ind
+R5185:5188 Coccinelle.term_spec Term Term constr
+R5197:5198 Coq.Lists.List <> In def
+R5200:5201 Coccinelle.term_spec <> t1:87 var
+ax 5223:5241 Term size_direct_subterm
+binder 5253:5254 <> t1:90
+binder 5256:5257 <> t2:91
+R5280:5283 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5260:5273 Coccinelle.term_spec Term direct_subterm def
+R5278:5279 Coccinelle.term_spec <> t2:91 var
+R5275:5276 Coccinelle.term_spec <> t1:90 var
+R5291:5293 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R5284:5287 Coccinelle.term_spec Term size def
+R5289:5290 Coccinelle.term_spec <> t1:90 var
+R5294:5297 Coccinelle.term_spec Term size def
+R5299:5300 Coccinelle.term_spec <> t2:91 var
+def 5313:5324 Term symb_in_term
+R5331:5336 Coccinelle.term_spec Term symbol abbrev
+binder 5327:5327 <> f:93
+R5342:5345 Coccinelle.term_spec Term term ind
+binder 5340:5340 <> t:94
+R5350:5353 Coq.Init.Datatypes <> bool ind
+R5366:5366 Coccinelle.term_spec <> t:94 var
+R5377:5379 Coccinelle.term_spec Term Var constr
+R5386:5390 Coq.Init.Datatypes <> false constr
+R5396:5399 Coccinelle.term_spec Term Term constr
+binder 5473:5473 <> f:97
+R5480:5483 Coq.Init.Datatypes <> list ind
+R5485:5488 Coccinelle.term_spec Term term ind
+binder 5476:5476 <> l:98
+R5504:5507 Coq.Init.Datatypes <> bool ind
+R5530:5530 Coccinelle.term_spec <> l:98 var
+R5551:5553 Coq.Init.Datatypes <> nil constr
+R5558:5562 Coq.Init.Datatypes <> false constr
+R5579:5582 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5583:5584 Coq.Init.Peano <> lt def
+R5589:5591 Coq.Init.Datatypes <> orb def
+R5613:5629 Coccinelle.term_spec <> symb_in_term_list:99 var
+R5631:5631 Coccinelle.term_spec <> f:97 var
+R5594:5605 Coccinelle.term_spec <> symb_in_term:95 def
+R5609:5609 Coccinelle.term_spec <> t:94 var
+R5607:5607 Coccinelle.term_spec <> f:97 var
+binder 5420:5436 <> symb_in_term_list:101
+R5674:5676 Coq.Init.Datatypes <> orb def
+R5698:5714 Coccinelle.term_spec <> symb_in_term_list:101 var
+R5716:5716 Coccinelle.term_spec <> f:93 var
+R5679:5690 Coccinelle.term_spec Term eq_symb_bool abbrev
+R5692:5692 Coccinelle.term_spec <> f:93 var
+def 5739:5755 Term symb_in_term_list
+binder 5757:5757 <> f:102
+R5764:5767 Coq.Init.Datatypes <> list ind
+R5769:5772 Coccinelle.term_spec Term term ind
+binder 5760:5760 <> l:103
+R5788:5791 Coq.Init.Datatypes <> bool ind
+R5814:5814 Coccinelle.term_spec <> l:103 var
+R5835:5837 Coq.Init.Datatypes <> nil constr
+R5842:5846 Coq.Init.Datatypes <> false constr
+R5863:5866 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5867:5868 Coq.Init.Peano <> lt def
+R5873:5875 Coq.Init.Datatypes <> orb def
+R5897:5913 Coccinelle.term_spec <> symb_in_term_list:104 def
+R5915:5915 Coccinelle.term_spec <> f:102 var
+R5878:5889 Coccinelle.term_spec Term symb_in_term def
+R5891:5891 Coccinelle.term_spec <> f:102 var
+def 5948:5956 Term symb_list
+R5963:5966 Coccinelle.term_spec Term term ind
+binder 5959:5959 <> t:106
+R5971:5974 Coq.Init.Datatypes <> list ind
+R5976:5981 Coccinelle.term_spec Term symbol abbrev
+R5994:5994 Coccinelle.term_spec <> t:106 var
+R6005:6007 Coccinelle.term_spec Term Var constr
+R6014:6016 Coq.Init.Datatypes <> nil constr
+R6022:6025 Coccinelle.term_spec Term Term constr
+R6097:6100 Coq.Init.Datatypes <> list ind
+R6102:6105 Coccinelle.term_spec Term term ind
+binder 6093:6093 <> l:109
+R6121:6124 Coq.Init.Datatypes <> list ind
+R6126:6131 Coccinelle.term_spec Term symbol abbrev
+R6154:6154 Coccinelle.term_spec <> l:109 var
+R6175:6177 Coq.Init.Datatypes <> nil constr
+R6182:6184 Coq.Init.Datatypes <> nil constr
+R6201:6204 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6205:6206 Coq.Init.Peano <> lt def
+R6222:6225 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6211:6219 Coccinelle.term_spec <> symb_list:107 def
+R6221:6221 Coccinelle.term_spec <> t:106 var
+R6226:6239 Coccinelle.term_spec <> symb_list_list:110 var
+binder 6045:6058 <> symb_list_list:112
+R6273:6277 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6294:6294 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6278:6291 Coccinelle.term_spec <> symb_list_list:112 var
+R6334:6337 Coq.Init.Datatypes <> list ind
+R6339:6342 Coccinelle.term_spec Term term ind
+binder 6330:6330 <> l:113
+R6358:6361 Coq.Init.Datatypes <> list ind
+R6363:6368 Coccinelle.term_spec Term symbol abbrev
+R6391:6391 Coccinelle.term_spec <> l:113 var
+R6412:6414 Coq.Init.Datatypes <> nil constr
+R6419:6421 Coq.Init.Datatypes <> nil constr
+R6438:6441 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6442:6443 Coq.Init.Peano <> lt def
+R6459:6462 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6448:6456 Coccinelle.term_spec Term symb_list def
+R6463:6476 Coccinelle.term_spec <> symb_list_list:114 def
+binder 6330:6330 <> l:116
+binder 6330:6330 <> l:117
+binder 6330:6330 <> l:119
+R6391:6391 Coccinelle.term_spec <> l:119 var
+R6412:6414 Coq.Init.Datatypes <> nil constr
+R6419:6421 Coq.Init.Datatypes <> nil constr
+R6438:6441 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6442:6443 Coq.Init.Peano <> lt def
+R6459:6462 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6448:6456 Coccinelle.term_spec Term symb_list def
+R6463:6476 Coccinelle.term_spec <> symb_list_list:118 def
+binder 6330:6330 <> l:121
+R6391:6391 Coccinelle.term_spec <> l:121 var
+R6412:6414 Coq.Init.Datatypes <> nil constr
+R6419:6421 Coq.Init.Datatypes <> nil constr
+R6438:6441 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6442:6443 Coq.Init.Peano <> lt def
+R6459:6462 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6448:6456 Coccinelle.term_spec Term symb_list def
+R6463:6476 Coccinelle.term_spec <> symb_list_list:122 def
+ax 6509:6526 Term symb_list_list_app
+binder 6537:6538 <> l1:133
+binder 6540:6541 <> l2:134
+R6569:6571 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6544:6557 Coccinelle.term_spec Term symb_list_list def
+R6562:6565 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6560:6561 Coccinelle.term_spec <> l1:133 var
+R6566:6567 Coccinelle.term_spec <> l2:134 var
+R6572:6572 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6590:6594 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6573:6586 Coccinelle.term_spec Term symb_list_list def
+R6588:6589 Coccinelle.term_spec <> l1:133 var
+R6595:6608 Coccinelle.term_spec Term symb_list_list def
+R6610:6611 Coccinelle.term_spec <> l2:134 var
+ax 6625:6641 Term in_symb_list_list
+binder 6652:6652 <> l:136
+binder 6654:6654 <> f:137
+R6680:6683 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6657:6658 Coq.Lists.List <> In def
+R6663:6676 Coccinelle.term_spec Term symb_list_list def
+R6678:6678 Coccinelle.term_spec <> l:136 var
+R6660:6660 Coccinelle.term_spec <> f:137 var
+R6684:6690 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R6692:6693 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 6691:6691 <> t:138
+R6700:6703 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R6694:6695 Coq.Lists.List <> In def
+R6699:6699 Coccinelle.term_spec <> l:136 var
+R6697:6697 Coccinelle.term_spec <> t:138 var
+R6704:6705 Coq.Lists.List <> In def
+R6710:6718 Coccinelle.term_spec Term symb_list def
+R6720:6720 Coccinelle.term_spec <> t:138 var
+R6707:6707 Coccinelle.term_spec <> f:137 var
+ax 6735:6753 Term symb_in_term_unfold
+binder 6765:6765 <> f:140
+binder 6767:6767 <> t:141
+R6787:6789 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6771:6782 Coccinelle.term_spec Term symb_in_term def
+R6786:6786 Coccinelle.term_spec <> t:141 var
+R6784:6784 Coccinelle.term_spec <> f:140 var
+R6796:6796 Coccinelle.term_spec <> t:141 var
+R6834:6836 Coccinelle.term_spec Term Var constr
+R6843:6847 Coq.Init.Datatypes <> false constr
+R6880:6883 Coccinelle.term_spec Term Term constr
+R6893:6895 Coq.Init.Datatypes <> orb def
+R6917:6933 Coccinelle.term_spec Term symb_in_term_list def
+R6935:6935 Coccinelle.term_spec <> f:140 var
+R6898:6909 Coccinelle.term_spec Term eq_symb_bool abbrev
+R6911:6911 Coccinelle.term_spec <> f:140 var
+ax 6983:7003 Term symb_in_term_list_app
+binder 7016:7016 <> f:144
+binder 7018:7019 <> l1:145
+binder 7021:7022 <> l2:146
+R7055:7079 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7025:7041 Coccinelle.term_spec Term symb_in_term_list def
+R7048:7051 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R7046:7047 Coccinelle.term_spec <> l1:145 var
+R7052:7053 Coccinelle.term_spec <> l2:146 var
+R7043:7043 Coccinelle.term_spec <> f:144 var
+R7080:7082 Coq.Init.Datatypes <> orb def
+R7110:7126 Coccinelle.term_spec Term symb_in_term_list def
+R7130:7131 Coccinelle.term_spec <> l2:146 var
+R7128:7128 Coccinelle.term_spec <> f:144 var
+R7085:7101 Coccinelle.term_spec Term symb_in_term_list def
+R7105:7106 Coccinelle.term_spec <> l1:145 var
+R7103:7103 Coccinelle.term_spec <> f:144 var
+ax 7146:7167 Term symb_in_direct_subterm
+binder 7180:7180 <> f:148
+binder 7182:7182 <> l:149
+binder 7184:7184 <> t:150
+binder 7186:7186 <> g:151
+R7195:7198 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7189:7190 Coq.Lists.List <> In def
+R7194:7194 Coccinelle.term_spec <> l:149 var
+R7192:7192 Coccinelle.term_spec <> t:150 var
+R7222:7234 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7215:7217 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7199:7210 Coccinelle.term_spec Term symb_in_term def
+R7214:7214 Coccinelle.term_spec <> t:150 var
+R7212:7212 Coccinelle.term_spec <> g:151 var
+R7218:7221 Coq.Init.Datatypes <> true constr
+R7260:7262 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7235:7246 Coccinelle.term_spec Term symb_in_term def
+R7251:7254 Coccinelle.term_spec Term Term constr
+R7258:7258 Coccinelle.term_spec <> l:149 var
+R7256:7256 Coccinelle.term_spec <> f:148 var
+R7248:7248 Coccinelle.term_spec <> g:151 var
+R7263:7266 Coq.Init.Datatypes <> true constr
+sec 7308:7316 Term Recursion
+var 7328:7328 Term.Recursion P
+R7336:7339 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7332:7335 Coccinelle.term_spec Term term ind
+var 7355:7356 Term.Recursion Pl
+R7369:7372 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7360:7363 Coq.Init.Datatypes <> list ind
+R7365:7368 Coccinelle.term_spec Term term ind
+ax 7390:7398 Term term_rec2
+R7402:7402 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7433:7437 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7410:7410 <> n:155
+binder 7412:7412 <> t:156
+R7426:7429 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7421:7424 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R7415:7418 Coccinelle.term_spec Term size def
+R7420:7420 Coccinelle.term_spec <> t:156 var
+R7425:7425 Coccinelle.term_spec <> n:155 var
+R7430:7430 Coccinelle.term_spec <> Term.Recursion.P var
+R7432:7432 Coccinelle.term_spec <> t:156 var
+binder 7445:7445 <> t:157
+R7448:7448 Coccinelle.term_spec <> Term.Recursion.P var
+R7450:7450 Coccinelle.term_spec <> t:157 var
+ax 7463:7471 Term term_rec3
+R7477:7477 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7497:7501 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7485:7485 <> v:159
+R7488:7488 Coccinelle.term_spec <> Term.Recursion.P var
+R7491:7493 Coccinelle.term_spec Term Var constr
+R7495:7495 Coccinelle.term_spec <> v:159 var
+R7502:7502 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7556:7560 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7510:7510 <> f:160
+binder 7512:7512 <> l:161
+R7515:7515 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7539:7543 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7523:7523 <> t:162
+R7532:7535 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7526:7527 Coq.Lists.List <> In def
+R7531:7531 Coccinelle.term_spec <> l:161 var
+R7529:7529 Coccinelle.term_spec <> t:162 var
+R7536:7536 Coccinelle.term_spec <> Term.Recursion.P var
+R7538:7538 Coccinelle.term_spec <> t:162 var
+R7544:7544 Coccinelle.term_spec <> Term.Recursion.P var
+R7547:7550 Coccinelle.term_spec Term Term constr
+R7554:7554 Coccinelle.term_spec <> l:161 var
+R7552:7552 Coccinelle.term_spec <> f:160 var
+binder 7568:7568 <> t:163
+R7571:7571 Coccinelle.term_spec <> Term.Recursion.P var
+R7573:7573 Coccinelle.term_spec <> t:163 var
+ax 7586:7594 Term term_rec4
+R7600:7600 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7620:7624 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7608:7608 <> v:165
+R7611:7611 Coccinelle.term_spec <> Term.Recursion.P var
+R7614:7616 Coccinelle.term_spec Term Var constr
+R7618:7618 Coccinelle.term_spec <> v:165 var
+R7625:7625 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7658:7664 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7633:7633 <> f:166
+binder 7635:7635 <> l:167
+R7642:7645 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7638:7639 Coccinelle.term_spec <> Term.Recursion.Pl var
+R7641:7641 Coccinelle.term_spec <> l:167 var
+R7646:7646 Coccinelle.term_spec <> Term.Recursion.P var
+R7649:7652 Coccinelle.term_spec Term Term constr
+R7656:7656 Coccinelle.term_spec <> l:167 var
+R7654:7654 Coccinelle.term_spec <> f:166 var
+R7665:7665 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7709:7713 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7673:7673 <> l:168
+R7676:7676 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7700:7704 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7684:7684 <> t:169
+R7693:7696 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7687:7688 Coq.Lists.List <> In def
+R7692:7692 Coccinelle.term_spec <> l:168 var
+R7690:7690 Coccinelle.term_spec <> t:169 var
+R7697:7697 Coccinelle.term_spec <> Term.Recursion.P var
+R7699:7699 Coccinelle.term_spec <> t:169 var
+R7705:7706 Coccinelle.term_spec <> Term.Recursion.Pl var
+R7708:7708 Coccinelle.term_spec <> l:168 var
+binder 7721:7721 <> t:170
+R7724:7724 Coccinelle.term_spec <> Term.Recursion.P var
+R7726:7726 Coccinelle.term_spec <> t:170 var
+R7733:7741 Coccinelle.term_spec Term.Recursion <> sec
+sec 7790:7804 Term DoubleRecursion
+var 7816:7817 Term.DoubleRecursion P2
+R7825:7828 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7821:7824 Coccinelle.term_spec Term term ind
+R7833:7836 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7829:7832 Coccinelle.term_spec Term term ind
+var 7852:7854 Term.DoubleRecursion Pl2
+R7867:7870 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7858:7861 Coq.Init.Datatypes <> list ind
+R7863:7866 Coccinelle.term_spec Term term ind
+R7880:7883 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7871:7874 Coq.Init.Datatypes <> list ind
+R7876:7879 Coccinelle.term_spec Term term ind
+ax 7901:7909 Term term_rec7
+R7915:7915 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7944:7963 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7923:7924 <> v1:174
+binder 7926:7927 <> t2:175
+R7930:7931 Coccinelle.term_spec <> Term.DoubleRecursion.P2 var
+R7942:7943 Coccinelle.term_spec <> t2:175 var
+R7934:7936 Coccinelle.term_spec Term Var constr
+R7938:7939 Coccinelle.term_spec <> v1:174 var
+R7964:7964 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7993:8012 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7972:7973 <> t1:176
+binder 7975:7976 <> v2:177
+R7979:7980 Coccinelle.term_spec <> Term.DoubleRecursion.P2 var
+R7986:7988 Coccinelle.term_spec Term Var constr
+R7990:7991 Coccinelle.term_spec <> v2:177 var
+R7982:7983 Coccinelle.term_spec <> t1:176 var
+R8013:8013 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8075:8094 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 8021:8022 <> f1:178
+binder 8024:8025 <> f2:179
+binder 8027:8028 <> l1:180
+binder 8030:8031 <> l2:181
+R8043:8046 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8034:8036 Coccinelle.term_spec <> Term.DoubleRecursion.Pl2 var
+R8041:8042 Coccinelle.term_spec <> l2:181 var
+R8038:8039 Coccinelle.term_spec <> l1:180 var
+R8047:8048 Coccinelle.term_spec <> Term.DoubleRecursion.P2 var
+R8064:8067 Coccinelle.term_spec Term Term constr
+R8072:8073 Coccinelle.term_spec <> l2:181 var
+R8069:8070 Coccinelle.term_spec <> f2:179 var
+R8051:8054 Coccinelle.term_spec Term Term constr
+R8059:8060 Coccinelle.term_spec <> l1:180 var
+R8056:8057 Coccinelle.term_spec <> f1:178 var
+R8095:8095 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8171:8190 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 8103:8104 <> l1:182
+binder 8106:8107 <> l2:183
+R8110:8110 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8157:8161 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 8118:8119 <> t1:184
+binder 8121:8122 <> t2:185
+R8133:8136 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8125:8126 Coq.Lists.List <> In def
+R8131:8132 Coccinelle.term_spec <> l1:182 var
+R8128:8129 Coccinelle.term_spec <> t1:184 var
+R8145:8148 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8137:8138 Coq.Lists.List <> In def
+R8143:8144 Coccinelle.term_spec <> l2:183 var
+R8140:8141 Coccinelle.term_spec <> t2:185 var
+R8149:8150 Coccinelle.term_spec <> Term.DoubleRecursion.P2 var
+R8155:8156 Coccinelle.term_spec <> t2:185 var
+R8152:8153 Coccinelle.term_spec <> t1:184 var
+R8162:8164 Coccinelle.term_spec <> Term.DoubleRecursion.Pl2 var
+R8169:8170 Coccinelle.term_spec <> l2:183 var
+R8166:8167 Coccinelle.term_spec <> l1:182 var
+binder 8198:8199 <> t1:186
+binder 8201:8202 <> t2:187
+R8205:8206 Coccinelle.term_spec <> Term.DoubleRecursion.P2 var
+R8211:8212 Coccinelle.term_spec <> t2:187 var
+R8208:8209 Coccinelle.term_spec <> t1:186 var
+ax 8226:8234 Term term_rec8
+R8240:8240 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8269:8288 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 8248:8249 <> v1:189
+binder 8251:8252 <> t2:190
+R8255:8256 Coccinelle.term_spec <> Term.DoubleRecursion.P2 var
+R8267:8268 Coccinelle.term_spec <> t2:190 var
+R8259:8261 Coccinelle.term_spec Term Var constr
+R8263:8264 Coccinelle.term_spec <> v1:189 var
+R8289:8289 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8318:8337 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 8297:8298 <> t1:191
+binder 8300:8301 <> v2:192
+R8304:8305 Coccinelle.term_spec <> Term.DoubleRecursion.P2 var
+R8311:8313 Coccinelle.term_spec Term Var constr
+R8315:8316 Coccinelle.term_spec <> v2:192 var
+R8307:8308 Coccinelle.term_spec <> t1:191 var
+R8338:8338 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8400:8419 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 8346:8347 <> f1:193
+binder 8349:8350 <> f2:194
+binder 8352:8353 <> l1:195
+binder 8355:8356 <> l2:196
+R8368:8371 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8359:8361 Coccinelle.term_spec <> Term.DoubleRecursion.Pl2 var
+R8366:8367 Coccinelle.term_spec <> l2:196 var
+R8363:8364 Coccinelle.term_spec <> l1:195 var
+R8372:8373 Coccinelle.term_spec <> Term.DoubleRecursion.P2 var
+R8389:8392 Coccinelle.term_spec Term Term constr
+R8397:8398 Coccinelle.term_spec <> l2:196 var
+R8394:8395 Coccinelle.term_spec <> f2:194 var
+R8376:8379 Coccinelle.term_spec Term Term constr
+R8384:8385 Coccinelle.term_spec <> l1:195 var
+R8381:8382 Coccinelle.term_spec <> f1:193 var
+R8420:8420 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8496:8515 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 8428:8429 <> l1:197
+binder 8431:8432 <> l2:198
+R8435:8435 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8482:8486 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 8443:8444 <> t1:199
+binder 8446:8447 <> t2:200
+R8458:8461 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8450:8451 Coq.Lists.List <> In def
+R8456:8457 Coccinelle.term_spec <> l1:197 var
+R8453:8454 Coccinelle.term_spec <> t1:199 var
+R8470:8473 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8462:8463 Coq.Lists.List <> In def
+R8468:8469 Coccinelle.term_spec <> l2:198 var
+R8465:8466 Coccinelle.term_spec <> t2:200 var
+R8474:8475 Coccinelle.term_spec <> Term.DoubleRecursion.P2 var
+R8480:8481 Coccinelle.term_spec <> t2:200 var
+R8477:8478 Coccinelle.term_spec <> t1:199 var
+R8487:8489 Coccinelle.term_spec <> Term.DoubleRecursion.Pl2 var
+R8494:8495 Coccinelle.term_spec <> l2:198 var
+R8491:8492 Coccinelle.term_spec <> l1:197 var
+binder 8523:8524 <> l1:201
+binder 8526:8527 <> l2:202
+R8530:8532 Coccinelle.term_spec <> Term.DoubleRecursion.Pl2 var
+R8537:8538 Coccinelle.term_spec <> l2:202 var
+R8534:8535 Coccinelle.term_spec <> l1:201 var
+R8545:8559 Coccinelle.term_spec Term.DoubleRecursion <> sec
+def 8614:8620 Term eq_bool
+R8630:8633 Coccinelle.term_spec Term term ind
+binder 8623:8624 <> t1:204
+binder 8626:8627 <> t2:205
+R8638:8641 Coq.Init.Datatypes <> bool ind
+R8658:8659 Coccinelle.term_spec <> t2:205 var
+R8654:8655 Coccinelle.term_spec <> t1:204 var
+R8670:8672 Coccinelle.term_spec Term Var constr
+R8678:8680 Coccinelle.term_spec Term Var constr
+R8688:8698 Coccinelle.term_spec Term eq_var_bool abbrev
+R8710:8712 Coccinelle.term_spec Term Var constr
+R8717:8720 Coccinelle.term_spec Term Term constr
+R8729:8733 Coq.Init.Datatypes <> false constr
+R8739:8742 Coccinelle.term_spec Term Term constr
+R8749:8751 Coccinelle.term_spec Term Var constr
+R8758:8762 Coq.Init.Datatypes <> false constr
+R8770:8773 Coccinelle.term_spec Term Term constr
+R8782:8785 Coccinelle.term_spec Term Term constr
+R8806:8817 Coccinelle.term_spec Term eq_symb_bool abbrev
+R9204:9208 Coq.Init.Datatypes <> false constr
+R8900:8903 Coq.Init.Datatypes <> list ind
+R8905:8908 Coccinelle.term_spec Term term ind
+binder 8893:8894 <> l1:209
+binder 8896:8897 <> l2:210
+R8925:8928 Coq.Init.Datatypes <> bool ind
+R8955:8956 Coccinelle.term_spec <> l2:210 var
+R8951:8952 Coccinelle.term_spec <> l1:209 var
+R8977:8979 Coq.Init.Datatypes <> nil constr
+R8982:8984 Coq.Init.Datatypes <> nil constr
+R8989:8992 Coq.Init.Datatypes <> true constr
+R9008:9010 Coq.Init.Datatypes <> nil constr
+R9015:9018 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9025:9029 Coq.Init.Datatypes <> false constr
+R9047:9048 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9053:9055 Coq.Init.Datatypes <> nil constr
+R9060:9064 Coq.Init.Datatypes <> false constr
+R9082:9085 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9092:9095 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9102:9105 Coq.Init.Datatypes <> andb def
+R9124:9135 Coccinelle.term_spec <> eq_bool_list:211 var
+R9108:9114 Coccinelle.term_spec <> eq_bool:206 def
+R9119:9120 Coccinelle.term_spec <> t2:205 var
+R9116:9117 Coccinelle.term_spec <> t1:204 var
+binder 8849:8860 <> eq_bool_list:214
+R9172:9183 Coccinelle.term_spec <> eq_bool_list:214 var
+ax 9229:9238 Term eq_bool_ok
+binder 9249:9250 <> t1:215
+binder 9252:9253 <> t2:216
+R9262:9268 Coccinelle.term_spec Term eq_bool def
+R9273:9274 Coccinelle.term_spec <> t2:216 var
+R9270:9271 Coccinelle.term_spec <> t1:215 var
+R9281:9284 Coq.Init.Datatypes <> true constr
+R9291:9293 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9289:9290 Coccinelle.term_spec <> t1:215 var
+R9294:9295 Coccinelle.term_spec <> t2:216 var
+R9299:9303 Coq.Init.Datatypes <> false constr
+R9310:9312 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R9308:9309 Coccinelle.term_spec <> t1:215 var
+R9313:9314 Coccinelle.term_spec <> t2:216 var
+ax 9332:9344 Term term_term_dec
+R9363:9363 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9359:9362 Coccinelle.term_spec Term term ind
+R9364:9367 Coccinelle.term_spec Term term ind
+binder 9355:9355 <> x:218
+binder 9357:9357 <> y:219
+R9370:9370 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9374:9376 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9381:9381 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9372:9372 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9371:9371 Coccinelle.term_spec <> x:218 var
+R9373:9373 Coccinelle.term_spec <> y:219 var
+R9377:9377 Coq.Init.Logic <> ::type_scope:'~'_x not
+R9379:9379 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9378:9378 Coccinelle.term_spec <> x:218 var
+R9380:9380 Coccinelle.term_spec <> y:219 var
+ax 9395:9401 Term rel_dec
+R9420:9427 Coq.Relations.Relation_Definitions <> relation def
+R9429:9432 Coccinelle.term_spec Term term ind
+binder 9416:9416 <> P:221
+binder 9435:9439 <> Plist:222
+R9442:9442 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9479:9485 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 9450:9450 <> u:223
+binder 9452:9452 <> v:224
+R9460:9464 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R9455:9455 Coccinelle.term_spec <> P:221 var
+R9457:9457 Coccinelle.term_spec <> v:224 var
+R9459:9459 Coccinelle.term_spec <> u:223 var
+R9465:9466 Coq.Lists.List <> In def
+R9474:9478 Coccinelle.term_spec <> Plist:222 var
+R9468:9468 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9470:9470 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9472:9472 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9469:9469 Coccinelle.term_spec <> u:223 var
+R9471:9471 Coccinelle.term_spec <> v:224 var
+binder 9493:9493 <> r:225
+binder 9495:9495 <> l:226
+R9498:9498 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9504:9506 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9513:9513 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9499:9499 Coccinelle.term_spec <> P:221 var
+R9501:9501 Coccinelle.term_spec <> r:225 var
+R9503:9503 Coccinelle.term_spec <> l:226 var
+R9507:9507 Coq.Init.Logic <> ::type_scope:'~'_x not
+R9508:9508 Coccinelle.term_spec <> P:221 var
+R9510:9510 Coccinelle.term_spec <> r:225 var
+R9512:9512 Coccinelle.term_spec <> l:226 var
+R9546:9560 Coccinelle.decidable_set S <> mod
+R9582:9585 Coccinelle.term_spec Term term ind
+R9676:9682 Coccinelle.term_spec Term eq_bool def
+R9775:9784 Coccinelle.term_spec Term eq_bool_ok defax
+mod 9532:9542 <> Term.Term_eq_dec
+def 9858:9873 Term well_formed_bool
+R9878:9881 Coccinelle.term_spec Term term ind
+binder 9876:9876 <> t:228
+R9886:9889 Coq.Init.Datatypes <> bool ind
+R9902:9902 Coccinelle.term_spec <> t:228 var
+R9913:9915 Coccinelle.term_spec Term Var constr
+R9922:9925 Coq.Init.Datatypes <> true constr
+R9931:9934 Coccinelle.term_spec Term Term constr
+R10004:10007 Coq.Init.Datatypes <> list ind
+R10009:10012 Coccinelle.term_spec Term term ind
+binder 10002:10002 <> l:231
+R10017:10020 Coq.Init.Datatypes <> bool ind
+R10038:10038 Coccinelle.term_spec <> l:231 var
+R10054:10056 Coq.Init.Datatypes <> nil constr
+R10061:10064 Coq.Init.Datatypes <> true constr
+R10076:10079 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10080:10081 Coq.Lists.List <> tl def
+R10086:10089 Coq.Init.Datatypes <> andb def
+R10114:10129 Coccinelle.term_spec <> well_formed_list:232 var
+R10092:10107 Coccinelle.term_spec <> well_formed_bool:229 def
+binder 9952:9967 <> well_formed_list:234
+R10157:10160 Coq.Init.Datatypes <> andb def
+R10195:10199 Coccinelle.term_spec Term arity defax
+R10215:10218 Coccinelle.term_spec <> Free constr
+R10225:10231 Coq.Arith.EqNat <> beq_nat abbrev
+R10234:10239 Coq.Init.Datatypes <> length def
+R10259:10265 Coq.Arith.EqNat <> beq_nat abbrev
+R10268:10273 Coq.Init.Datatypes <> length def
+R10163:10178 Coccinelle.term_spec <> well_formed_list:234 var
+def 10309:10319 Term well_formed
+binder 10321:10321 <> t:235
+R10344:10346 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R10326:10341 Coccinelle.term_spec Term well_formed_bool def
+R10343:10343 Coccinelle.term_spec <> t:235 var
+R10347:10350 Coq.Init.Datatypes <> true constr
+ax 10364:10381 Term well_formed_unfold
+binder 10393:10393 <> t:236
+R10409:10413 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10396:10406 Coccinelle.term_spec Term well_formed def
+R10408:10408 Coccinelle.term_spec <> t:236 var
+R10420:10420 Coccinelle.term_spec <> t:236 var
+R10431:10433 Coccinelle.term_spec Term Var constr
+R10440:10443 Coq.Init.Logic <> True ind
+R10448:10451 Coccinelle.term_spec Term Term constr
+R10464:10464 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R10498:10507 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R10587:10587 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 10472:10472 <> u:238
+R10481:10484 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10475:10476 Coq.Lists.List <> In def
+R10478:10478 Coccinelle.term_spec <> u:238 var
+R10485:10495 Coccinelle.term_spec Term well_formed def
+R10497:10497 Coccinelle.term_spec <> u:238 var
+R10514:10518 Coccinelle.term_spec Term arity defax
+R10533:10536 Coccinelle.term_spec <> Free constr
+R10551:10553 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R10543:10548 Coq.Init.Datatypes <> length def
+R10575:10577 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R10567:10572 Coq.Init.Datatypes <> length def
+ax 10606:10621 Term well_formed_fold
+binder 10633:10633 <> t:240
+R10816:10819 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10643:10643 Coccinelle.term_spec <> t:240 var
+R10654:10656 Coccinelle.term_spec Term Var constr
+R10663:10666 Coq.Init.Logic <> True ind
+R10671:10674 Coccinelle.term_spec Term Term constr
+R10687:10687 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R10721:10730 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R10810:10810 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 10695:10695 <> u:242
+R10704:10707 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10698:10699 Coq.Lists.List <> In def
+R10701:10701 Coccinelle.term_spec <> u:242 var
+R10708:10718 Coccinelle.term_spec Term well_formed def
+R10720:10720 Coccinelle.term_spec <> u:242 var
+R10737:10741 Coccinelle.term_spec Term arity defax
+R10756:10759 Coccinelle.term_spec <> Free constr
+R10774:10776 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R10766:10771 Coq.Init.Datatypes <> length def
+R10798:10800 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R10790:10795 Coq.Init.Datatypes <> length def
+R10820:10830 Coccinelle.term_spec Term well_formed def
+R10832:10832 Coccinelle.term_spec <> t:240 var
+def 10872:10883 Term substitution
+R10888:10891 Coq.Init.Datatypes <> list ind
+R10902:10904 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10894:10901 Coccinelle.term_spec Term variable abbrev
+R10905:10908 Coccinelle.term_spec Term term ind
+def 10922:10932 Term apply_subst
+R10943:10954 Coccinelle.term_spec Term substitution def
+binder 10935:10939 <> sigma:244
+R10962:10965 Coccinelle.term_spec Term term ind
+binder 10958:10958 <> t:245
+R10981:10984 Coccinelle.term_spec Term term ind
+R10997:10997 Coccinelle.term_spec <> t:245 var
+R11008:11010 Coccinelle.term_spec Term Var constr
+R11028:11031 Coccinelle.more_list <> find def
+R11047:11051 Coccinelle.term_spec <> sigma:244 var
+R11033:11043 Coccinelle.term_spec Term eq_var_bool abbrev
+R11064:11067 Coq.Init.Datatypes <> None constr
+R11072:11072 Coccinelle.term_spec <> t:245 var
+R11080:11083 Coq.Init.Datatypes <> Some constr
+R11116:11119 Coccinelle.term_spec Term Term constr
+R11128:11131 Coccinelle.term_spec Term Term constr
+R11136:11138 Coq.Lists.List <> map def
+R11141:11151 Coccinelle.term_spec <> apply_subst:246 def
+R11153:11157 Coccinelle.term_spec <> sigma:244 var
+ax 11183:11199 Term empty_subst_is_id
+binder 11210:11210 <> t:248
+R11230:11232 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11213:11223 Coccinelle.term_spec Term apply_subst def
+R11229:11229 Coccinelle.term_spec <> t:248 var
+R11225:11227 Coq.Init.Datatypes <> nil constr
+R11233:11233 Coccinelle.term_spec <> t:248 var
+ax 11246:11267 Term empty_subst_is_id_list
+binder 11278:11278 <> l:250
+R11304:11306 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11281:11283 Coq.Lists.List <> map def
+R11303:11303 Coccinelle.term_spec <> l:250 var
+R11286:11296 Coccinelle.term_spec Term apply_subst def
+R11298:11300 Coq.Init.Datatypes <> nil constr
+R11307:11307 Coccinelle.term_spec <> l:250 var
+def 11359:11367 Term map_subst
+R11382:11385 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11374:11381 Coccinelle.term_spec Term variable abbrev
+R11390:11393 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11386:11389 Coccinelle.term_spec Term term ind
+R11394:11397 Coccinelle.term_spec Term term ind
+binder 11370:11370 <> f:252
+binder 11400:11404 <> sigma:253
+R11411:11413 Coq.Lists.List <> map def
+R11546:11550 Coccinelle.term_spec <> sigma:253 var
+binder 11420:11420 <> x:254
+R11456:11458 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R11448:11455 Coccinelle.term_spec Term variable abbrev
+R11459:11462 Coccinelle.term_spec Term term ind
+R11444:11444 Coccinelle.term_spec <> x:254 var
+R11484:11484 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11486:11487 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11495:11495 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11500:11500 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11502:11503 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11515:11515 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R11504:11504 Coccinelle.term_spec <> f:252 var
+def 11565:11574 Term subst_comp
+binder 11576:11581 <> sigma1:255
+binder 11583:11588 <> sigma2:256
+R11595:11595 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R11646:11656 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R11904:11904 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R11596:11604 Coccinelle.term_spec Term map_subst def
+R11640:11645 Coccinelle.term_spec <> sigma2:256 var
+binder 11613:11613 <> t:257
+R11618:11628 Coccinelle.term_spec Term apply_subst def
+R11637:11637 Coccinelle.term_spec <> t:257 var
+R11630:11635 Coccinelle.term_spec <> sigma1:255 var
+R11657:11665 Coccinelle.term_spec Term map_subst def
+R11898:11903 Coccinelle.term_spec <> sigma1:255 var
+binder 11672:11672 <> v:258
+binder 11674:11674 <> t:259
+R11709:11712 Coccinelle.more_list <> find def
+R11728:11733 Coccinelle.term_spec <> sigma2:256 var
+R11726:11726 Coccinelle.term_spec <> v:258 var
+R11714:11724 Coccinelle.term_spec Term eq_var_bool abbrev
+R11766:11769 Coq.Init.Datatypes <> None constr
+R11774:11774 Coccinelle.term_spec <> t:259 var
+R11802:11805 Coq.Init.Datatypes <> Some constr
+R11819:11829 Coccinelle.term_spec Term apply_subst def
+R11831:11836 Coccinelle.term_spec <> sigma1:255 var
+ax 11918:11946 Term subst_comp_is_subst_comp_aux1
+binder 11959:11959 <> v:260
+binder 11961:11965 <> sigma:261
+binder 11967:11967 <> f:262
+R12010:12015 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11972:11975 Coccinelle.more_list <> find def
+R11992:12000 Coccinelle.term_spec Term map_subst def
+R12004:12008 Coccinelle.term_spec <> sigma:261 var
+R12002:12002 Coccinelle.term_spec <> f:262 var
+R11989:11989 Coccinelle.term_spec <> v:260 var
+R11977:11987 Coccinelle.term_spec Term eq_var_bool abbrev
+R12022:12025 Coccinelle.more_list <> find def
+R12041:12045 Coccinelle.term_spec <> sigma:261 var
+R12039:12039 Coccinelle.term_spec <> v:260 var
+R12027:12037 Coccinelle.term_spec Term eq_var_bool abbrev
+R12057:12060 Coq.Init.Datatypes <> None constr
+R12065:12068 Coq.Init.Datatypes <> None constr
+R12075:12078 Coq.Init.Datatypes <> Some constr
+R12085:12088 Coq.Init.Datatypes <> Some constr
+R12091:12091 Coccinelle.term_spec <> f:262 var
+R12093:12093 Coccinelle.term_spec <> v:260 var
+ax 12116:12139 Term subst_comp_is_subst_comp
+binder 12152:12157 <> sigma1:264
+binder 12159:12164 <> sigma2:265
+binder 12166:12166 <> t:266
+R12212:12217 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R12172:12182 Coccinelle.term_spec Term apply_subst def
+R12211:12211 Coccinelle.term_spec <> t:266 var
+R12185:12194 Coccinelle.term_spec Term subst_comp def
+R12203:12208 Coccinelle.term_spec <> sigma2:265 var
+R12196:12201 Coccinelle.term_spec <> sigma1:264 var
+R12218:12228 Coccinelle.term_spec Term apply_subst def
+R12238:12248 Coccinelle.term_spec Term apply_subst def
+R12257:12257 Coccinelle.term_spec <> t:266 var
+R12250:12255 Coccinelle.term_spec <> sigma2:265 var
+R12230:12235 Coccinelle.term_spec <> sigma1:264 var
+ax 12272:12291 Term instantiated_subterm
+binder 12304:12304 <> u:268
+binder 12306:12307 <> u':269
+binder 12309:12313 <> sigma:270
+R12346:12379 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12316:12325 Coccinelle.TransClosure <> trans_clos ind
+R12344:12345 Coccinelle.term_spec <> u':269 var
+R12342:12342 Coccinelle.term_spec <> u:268 var
+R12327:12340 Coccinelle.term_spec Term direct_subterm def
+R12380:12389 Coccinelle.TransClosure <> trans_clos ind
+R12429:12439 Coccinelle.term_spec Term apply_subst def
+R12447:12448 Coccinelle.term_spec <> u':269 var
+R12441:12445 Coccinelle.term_spec <> sigma:270 var
+R12407:12417 Coccinelle.term_spec Term apply_subst def
+R12425:12425 Coccinelle.term_spec <> u:268 var
+R12419:12423 Coccinelle.term_spec <> sigma:270 var
+R12391:12404 Coccinelle.term_spec Term direct_subterm def
+def 12498:12514 Term well_formed_subst
+binder 12516:12520 <> sigma:272
+binder 12534:12534 <> v:273
+R12543:12546 Coccinelle.more_list <> find def
+R12562:12566 Coccinelle.term_spec <> sigma:272 var
+R12560:12560 Coccinelle.term_spec <> v:273 var
+R12548:12558 Coccinelle.term_spec Term eq_var_bool abbrev
+R12587:12590 Coq.Init.Datatypes <> None constr
+R12595:12598 Coq.Init.Logic <> True ind
+R12614:12617 Coq.Init.Datatypes <> Some constr
+R12624:12634 Coccinelle.term_spec Term well_formed def
+ax 12667:12689 Term well_formed_apply_subst
+binder 12702:12706 <> sigma:274
+R12732:12738 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12709:12725 Coccinelle.term_spec Term well_formed_subst def
+R12727:12731 Coccinelle.term_spec <> sigma:274 var
+binder 12746:12746 <> t:275
+R12762:12765 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12749:12759 Coccinelle.term_spec Term well_formed def
+R12761:12761 Coccinelle.term_spec <> t:275 var
+R12766:12776 Coccinelle.term_spec Term well_formed def
+R12779:12789 Coccinelle.term_spec Term apply_subst def
+R12797:12797 Coccinelle.term_spec <> t:275 var
+R12791:12795 Coccinelle.term_spec <> sigma:274 var
+ax 12812:12841 Term well_formed_apply_subst_strong
+binder 12854:12858 <> sigma:277
+binder 12860:12860 <> t:278
+R12863:12863 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12939:12946 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 12871:12871 <> x:279
+R12896:12899 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12889:12891 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R12874:12884 Coccinelle.term_spec Term var_in_term def
+R12888:12888 Coccinelle.term_spec <> t:278 var
+R12886:12886 Coccinelle.term_spec <> x:279 var
+R12892:12895 Coq.Init.Datatypes <> true constr
+R12900:12910 Coccinelle.term_spec Term well_formed def
+R12913:12923 Coccinelle.term_spec Term apply_subst def
+R12932:12934 Coccinelle.term_spec Term Var constr
+R12936:12936 Coccinelle.term_spec <> x:279 var
+R12925:12929 Coccinelle.term_spec <> sigma:277 var
+R12960:12963 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12947:12957 Coccinelle.term_spec Term well_formed def
+R12959:12959 Coccinelle.term_spec <> t:278 var
+R12964:12974 Coccinelle.term_spec Term well_formed def
+R12977:12987 Coccinelle.term_spec Term apply_subst def
+R12995:12995 Coccinelle.term_spec <> t:278 var
+R12989:12993 Coccinelle.term_spec <> sigma:277 var
+ax 13010:13033 Term well_formed_remove_subst
+binder 13046:13050 <> sigma:281
+binder 13052:13052 <> t:282
+R13088:13091 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13055:13065 Coccinelle.term_spec Term well_formed def
+R13068:13078 Coccinelle.term_spec Term apply_subst def
+R13086:13086 Coccinelle.term_spec <> t:282 var
+R13080:13084 Coccinelle.term_spec <> sigma:281 var
+R13092:13102 Coccinelle.term_spec Term well_formed def
+R13104:13104 Coccinelle.term_spec <> t:282 var
+ax 13118:13140 Term well_formed_remove_term
+binder 13153:13157 <> sigma:284
+binder 13159:13159 <> t:285
+R13195:13200 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13162:13172 Coccinelle.term_spec Term well_formed def
+R13175:13185 Coccinelle.term_spec Term apply_subst def
+R13193:13193 Coccinelle.term_spec <> t:285 var
+R13187:13191 Coccinelle.term_spec <> sigma:284 var
+binder 13208:13208 <> x:286
+R13233:13236 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13226:13228 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R13211:13221 Coccinelle.term_spec Term var_in_term def
+R13225:13225 Coccinelle.term_spec <> t:285 var
+R13223:13223 Coccinelle.term_spec <> x:286 var
+R13229:13232 Coq.Init.Datatypes <> true constr
+R13237:13247 Coccinelle.term_spec Term well_formed def
+R13250:13260 Coccinelle.term_spec Term apply_subst def
+R13269:13271 Coccinelle.term_spec Term Var constr
+R13273:13273 Coccinelle.term_spec <> x:286 var
+R13262:13266 Coccinelle.term_spec <> sigma:284 var
+def 13318:13325 Term is_a_pos
+R13332:13335 Coccinelle.term_spec Term term ind
+binder 13328:13328 <> t:288
+R13343:13346 Coq.Init.Datatypes <> list ind
+R13348:13350 Coq.Init.Datatypes <> nat ind
+binder 13339:13339 <> p:289
+R13365:13368 Coq.Init.Datatypes <> bool ind
+R13381:13381 Coccinelle.term_spec <> p:289 var
+R13392:13394 Coq.Init.Datatypes <> nil constr
+R13399:13402 Coq.Init.Datatypes <> true constr
+R13409:13412 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13428:13428 Coccinelle.term_spec <> t:288 var
+R13441:13443 Coccinelle.term_spec Term Var constr
+R13450:13454 Coq.Init.Datatypes <> false constr
+R13462:13465 Coccinelle.term_spec Term Term constr
+R13490:13498 Coq.Lists.List <> nth_error def
+R13521:13524 Coq.Init.Datatypes <> Some constr
+R13532:13539 Coccinelle.term_spec <> is_a_pos:290 def
+R13558:13561 Coq.Init.Datatypes <> None constr
+R13566:13570 Coq.Init.Datatypes <> false constr
+def 13612:13625 Term subterm_at_pos
+R13632:13635 Coccinelle.term_spec Term term ind
+binder 13628:13628 <> t:293
+R13643:13646 Coq.Init.Datatypes <> list ind
+R13648:13650 Coq.Init.Datatypes <> nat ind
+binder 13639:13639 <> p:294
+R13665:13670 Coq.Init.Datatypes <> option ind
+R13672:13675 Coccinelle.term_spec Term term ind
+R13688:13688 Coccinelle.term_spec <> p:294 var
+R13699:13701 Coq.Init.Datatypes <> nil constr
+R13706:13709 Coq.Init.Datatypes <> Some constr
+R13711:13711 Coccinelle.term_spec <> t:293 var
+R13718:13721 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R13737:13737 Coccinelle.term_spec <> t:293 var
+R13750:13752 Coccinelle.term_spec Term Var constr
+R13759:13762 Coq.Init.Datatypes <> None constr
+R13770:13773 Coccinelle.term_spec Term Term constr
+R13798:13806 Coq.Lists.List <> nth_error def
+R13829:13832 Coq.Init.Datatypes <> Some constr
+R13840:13853 Coccinelle.term_spec <> subterm_at_pos:295 def
+R13872:13875 Coq.Init.Datatypes <> None constr
+R13880:13883 Coq.Init.Datatypes <> None constr
+def 13924:13933 Term is_subterm
+R13942:13945 Coccinelle.term_spec Term term ind
+binder 13936:13936 <> s:298
+binder 13938:13938 <> t:299
+R13950:13953 Coq.Init.Datatypes <> bool ind
+R13966:13966 Coccinelle.term_spec <> t:299 var
+R13977:13979 Coccinelle.term_spec Term Var constr
+R13992:13992 Coccinelle.term_spec <> s:298 var
+R13999:14001 Coccinelle.term_spec Term Var constr
+R14008:14018 Coccinelle.term_spec Term eq_var_bool abbrev
+R14031:14035 Coq.Init.Datatypes <> false constr
+R14044:14047 Coccinelle.term_spec Term Term constr
+R14092:14095 Coq.Init.Datatypes <> list ind
+R14097:14100 Coccinelle.term_spec Term term ind
+binder 14088:14088 <> l:303
+R14105:14108 Coq.Init.Datatypes <> bool ind
+R14128:14128 Coccinelle.term_spec <> l:303 var
+R14146:14148 Coq.Init.Datatypes <> nil constr
+R14153:14157 Coq.Init.Datatypes <> false constr
+R14171:14174 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R14180:14182 Coq.Init.Datatypes <> orb def
+R14202:14216 Coccinelle.term_spec <> is_subterm_list:304 var
+R14218:14218 Coccinelle.term_spec <> l:303 var
+R14185:14194 Coccinelle.term_spec <> is_subterm:300 def
+R14198:14198 Coccinelle.term_spec <> t:299 var
+R14196:14196 Coccinelle.term_spec <> s:298 var
+binder 14071:14085 <> is_subterm_list:306
+R14246:14248 Coq.Init.Datatypes <> orb def
+R14265:14279 Coccinelle.term_spec <> is_subterm_list:306 var
+R14251:14257 Coccinelle.term_spec Term eq_bool def
+R14261:14261 Coccinelle.term_spec <> s:298 var
+R14259:14259 Coccinelle.term_spec <> t:299 var
+ax 14301:14318 Term is_subterm_ok_true
+binder 14332:14332 <> s:307
+binder 14334:14334 <> t:308
+R14358:14361 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14351:14353 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14337:14346 Coccinelle.term_spec Term is_subterm def
+R14350:14350 Coccinelle.term_spec <> t:308 var
+R14348:14348 Coccinelle.term_spec <> s:307 var
+R14354:14357 Coq.Init.Datatypes <> true constr
+R14362:14362 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14364:14366 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14375:14377 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14405:14405 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14367:14370 Coq.Init.Datatypes <> list ind
+R14372:14374 Coq.Init.Datatypes <> nat ind
+binder 14363:14363 <> p:309
+R14396:14398 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14378:14391 Coccinelle.term_spec Term subterm_at_pos def
+R14395:14395 Coccinelle.term_spec <> p:309 var
+R14393:14393 Coccinelle.term_spec <> t:308 var
+R14399:14402 Coq.Init.Datatypes <> Some constr
+R14404:14404 Coccinelle.term_spec <> s:307 var
+ax 14419:14437 Term is_subterm_ok_false
+binder 14451:14451 <> s:311
+binder 14453:14453 <> t:312
+R14478:14481 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14470:14472 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14456:14465 Coccinelle.term_spec Term is_subterm def
+R14469:14469 Coccinelle.term_spec <> t:312 var
+R14467:14467 Coccinelle.term_spec <> s:311 var
+R14473:14477 Coq.Init.Datatypes <> false constr
+binder 14489:14489 <> p:313
+R14510:14513 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R14492:14505 Coccinelle.term_spec Term subterm_at_pos def
+R14509:14509 Coccinelle.term_spec <> p:313 var
+R14507:14507 Coccinelle.term_spec <> t:312 var
+R14514:14517 Coq.Init.Datatypes <> Some constr
+R14519:14519 Coccinelle.term_spec <> s:311 var
+ax 14533:14550 Term subterm_at_pos_dec
+binder 14563:14563 <> t:315
+binder 14565:14565 <> s:316
+R14612:14613 Coq.Init.Specif <> ::type_scope:x_'+'_'{'_x_'}' not
+R14652:14652 Coq.Init.Specif <> ::type_scope:x_'+'_'{'_x_'}' not
+R14568:14568 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14570:14572 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14581:14583 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14611:14611 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14573:14576 Coq.Init.Datatypes <> list ind
+R14578:14580 Coq.Init.Datatypes <> nat ind
+binder 14569:14569 <> p:317
+R14602:14604 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14584:14597 Coccinelle.term_spec Term subterm_at_pos def
+R14601:14601 Coccinelle.term_spec <> p:317 var
+R14599:14599 Coccinelle.term_spec <> t:315 var
+R14605:14608 Coq.Init.Datatypes <> Some constr
+R14610:14610 Coccinelle.term_spec <> s:316 var
+binder 14621:14621 <> p:318
+R14642:14645 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R14624:14637 Coccinelle.term_spec Term subterm_at_pos def
+R14641:14641 Coccinelle.term_spec <> p:318 var
+R14639:14639 Coccinelle.term_spec <> t:315 var
+R14646:14649 Coq.Init.Datatypes <> Some constr
+R14651:14651 Coccinelle.term_spec <> s:316 var
+ax 14666:14687 Term subterm_at_pos_dec_alt
+binder 14700:14700 <> t:320
+binder 14702:14702 <> s:321
+R14749:14751 Coq.Init.Specif <> ::type_scope:x_'+'_'{'_x_'}' not
+R14790:14790 Coq.Init.Specif <> ::type_scope:x_'+'_'{'_x_'}' not
+R14705:14705 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14707:14709 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14718:14720 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14748:14748 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R14710:14713 Coq.Init.Datatypes <> list ind
+R14715:14717 Coq.Init.Datatypes <> nat ind
+binder 14706:14706 <> p:322
+R14739:14741 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14721:14734 Coccinelle.term_spec Term subterm_at_pos def
+R14738:14738 Coccinelle.term_spec <> p:322 var
+R14736:14736 Coccinelle.term_spec <> t:320 var
+R14742:14745 Coq.Init.Datatypes <> Some constr
+R14747:14747 Coccinelle.term_spec <> s:321 var
+R14752:14752 Coq.Init.Logic <> ::type_scope:'~'_x not
+R14753:14759 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R14761:14762 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 14760:14760 <> p:323
+R14781:14783 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14763:14776 Coccinelle.term_spec Term subterm_at_pos def
+R14780:14780 Coccinelle.term_spec <> p:323 var
+R14778:14778 Coccinelle.term_spec <> t:320 var
+R14784:14787 Coq.Init.Datatypes <> Some constr
+R14789:14789 Coccinelle.term_spec <> s:321 var
+ax 14804:14818 Term subterm_subterm
+binder 14831:14831 <> t:325
+binder 14833:14833 <> p:326
+binder 14835:14835 <> s:327
+R14865:14868 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14856:14858 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14838:14851 Coccinelle.term_spec Term subterm_at_pos def
+R14855:14855 Coccinelle.term_spec <> p:326 var
+R14853:14853 Coccinelle.term_spec <> t:325 var
+R14859:14862 Coq.Init.Datatypes <> Some constr
+R14864:14864 Coccinelle.term_spec <> s:327 var
+R14869:14869 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R14873:14878 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R14908:14908 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R14871:14871 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14870:14870 Coccinelle.term_spec <> t:325 var
+R14872:14872 Coccinelle.term_spec <> s:327 var
+R14879:14888 Coccinelle.TransClosure <> trans_clos ind
+R14907:14907 Coccinelle.term_spec <> t:325 var
+R14905:14905 Coccinelle.term_spec <> s:327 var
+R14890:14903 Coccinelle.term_spec Term direct_subterm def
+ax 14922:14940 Term size_subterm_at_pos
+binder 14953:14953 <> t:329
+binder 14955:14955 <> i:330
+binder 14957:14957 <> p:331
+R14966:14979 Coccinelle.term_spec Term subterm_at_pos def
+R14985:14988 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R14984:14984 Coccinelle.term_spec <> i:330 var
+R14989:14989 Coccinelle.term_spec <> p:331 var
+R14981:14981 Coccinelle.term_spec <> t:329 var
+R15011:15014 Coq.Init.Datatypes <> Some constr
+R15027:15029 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R15021:15024 Coccinelle.term_spec Term size def
+R15030:15033 Coccinelle.term_spec Term size def
+R15035:15035 Coccinelle.term_spec <> t:329 var
+R15051:15054 Coq.Init.Datatypes <> None constr
+R15059:15062 Coq.Init.Logic <> True ind
+ax 15092:15110 Term size_strict_subterm
+binder 15121:15121 <> s:333
+binder 15123:15123 <> t:334
+R15155:15158 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15126:15135 Coccinelle.TransClosure <> trans_clos ind
+R15154:15154 Coccinelle.term_spec <> t:334 var
+R15152:15152 Coccinelle.term_spec <> s:333 var
+R15137:15150 Coccinelle.term_spec Term direct_subterm def
+R15165:15167 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R15159:15162 Coccinelle.term_spec Term size def
+R15164:15164 Coccinelle.term_spec <> s:333 var
+R15168:15171 Coccinelle.term_spec Term size def
+R15173:15173 Coccinelle.term_spec <> t:334 var
+ax 15187:15200 Term var_in_subterm
+binder 15213:15213 <> v:336
+binder 15215:15215 <> s:337
+binder 15217:15217 <> t:338
+binder 15219:15219 <> p:339
+R15249:15252 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15240:15242 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15222:15235 Coccinelle.term_spec Term subterm_at_pos def
+R15239:15239 Coccinelle.term_spec <> p:339 var
+R15237:15237 Coccinelle.term_spec <> t:338 var
+R15243:15246 Coq.Init.Datatypes <> Some constr
+R15248:15248 Coccinelle.term_spec <> s:337 var
+R15270:15274 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15253:15254 Coq.Lists.List <> In def
+R15259:15266 Coccinelle.term_spec Term var_list def
+R15268:15268 Coccinelle.term_spec <> s:337 var
+R15256:15256 Coccinelle.term_spec <> v:336 var
+R15275:15276 Coq.Lists.List <> In def
+R15281:15288 Coccinelle.term_spec Term var_list def
+R15290:15290 Coccinelle.term_spec <> t:338 var
+R15278:15278 Coccinelle.term_spec <> v:336 var
+ax 15305:15319 Term var_in_subterm2
+binder 15332:15332 <> v:341
+binder 15334:15334 <> t:342
+R15363:15366 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15337:15339 Coccinelle.more_list <> mem def
+R15352:15359 Coccinelle.term_spec Term var_list def
+R15361:15361 Coccinelle.term_spec <> t:342 var
+R15349:15349 Coccinelle.term_spec <> v:341 var
+R15343:15344 Coq.Init.Logic <> eq ind
+R15367:15367 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R15369:15371 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R15380:15382 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R15416:15416 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R15372:15375 Coq.Init.Datatypes <> list ind
+R15377:15379 Coq.Init.Datatypes <> nat ind
+binder 15368:15368 <> p:343
+R15401:15403 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15383:15396 Coccinelle.term_spec Term subterm_at_pos def
+R15400:15400 Coccinelle.term_spec <> p:343 var
+R15398:15398 Coccinelle.term_spec <> t:342 var
+R15404:15407 Coq.Init.Datatypes <> Some constr
+R15410:15412 Coccinelle.term_spec Term Var constr
+R15414:15414 Coccinelle.term_spec <> v:341 var
+ax 15430:15444 Term symb_in_subterm
+binder 15457:15457 <> f:345
+binder 15459:15459 <> s:346
+binder 15461:15461 <> t:347
+binder 15463:15463 <> p:348
+R15493:15496 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15484:15486 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15466:15479 Coccinelle.term_spec Term subterm_at_pos def
+R15483:15483 Coccinelle.term_spec <> p:348 var
+R15481:15481 Coccinelle.term_spec <> t:347 var
+R15487:15490 Coq.Init.Datatypes <> Some constr
+R15492:15492 Coccinelle.term_spec <> s:346 var
+R15520:15523 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15513:15515 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15497:15508 Coccinelle.term_spec Term symb_in_term def
+R15512:15512 Coccinelle.term_spec <> s:346 var
+R15510:15510 Coccinelle.term_spec <> f:345 var
+R15516:15519 Coq.Init.Datatypes <> true constr
+R15540:15542 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15524:15535 Coccinelle.term_spec Term symb_in_term def
+R15539:15539 Coccinelle.term_spec <> t:347 var
+R15537:15537 Coccinelle.term_spec <> f:345 var
+R15543:15546 Coq.Init.Datatypes <> true constr
+ax 15560:15571 Term symb_list_ok
+binder 15582:15582 <> f:350
+binder 15584:15584 <> t:351
+R15605:15609 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R15587:15588 Coq.Lists.List <> In def
+R15593:15601 Coccinelle.term_spec Term symb_list def
+R15603:15603 Coccinelle.term_spec <> t:351 var
+R15590:15590 Coccinelle.term_spec <> f:350 var
+R15626:15628 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15610:15621 Coccinelle.term_spec Term symb_in_term def
+R15625:15625 Coccinelle.term_spec <> t:351 var
+R15623:15623 Coccinelle.term_spec <> f:350 var
+R15629:15632 Coq.Init.Datatypes <> true constr
+ax 15646:15662 Term symb_list_list_ok
+binder 15673:15673 <> f:353
+binder 15675:15675 <> l:354
+R15701:15705 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R15678:15679 Coq.Lists.List <> In def
+R15684:15697 Coccinelle.term_spec Term symb_list_list def
+R15699:15699 Coccinelle.term_spec <> l:354 var
+R15681:15681 Coccinelle.term_spec <> f:353 var
+R15727:15729 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15706:15722 Coccinelle.term_spec Term symb_in_term_list def
+R15726:15726 Coccinelle.term_spec <> l:354 var
+R15724:15724 Coccinelle.term_spec <> f:353 var
+R15730:15733 Coq.Init.Datatypes <> true constr
+ax 15747:15769 Term is_a_pos_exists_subterm
+binder 15782:15782 <> t:356
+binder 15784:15784 <> p:357
+R15806:15810 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R15799:15801 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15787:15794 Coccinelle.term_spec Term is_a_pos def
+R15798:15798 Coccinelle.term_spec <> p:357 var
+R15796:15796 Coccinelle.term_spec <> t:356 var
+R15802:15805 Coq.Init.Datatypes <> true constr
+R15811:15817 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R15819:15820 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 15818:15818 <> u:358
+R15839:15841 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15821:15834 Coccinelle.term_spec Term subterm_at_pos def
+R15838:15838 Coccinelle.term_spec <> p:357 var
+R15836:15836 Coccinelle.term_spec <> t:356 var
+R15842:15845 Coq.Init.Datatypes <> Some constr
+R15847:15847 Coccinelle.term_spec <> u:358 var
+ax 15861:15879 Term well_formed_subterm
+binder 15892:15892 <> t:360
+binder 15894:15894 <> p:361
+binder 15896:15896 <> s:362
+R15912:15915 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15899:15909 Coccinelle.term_spec Term well_formed def
+R15911:15911 Coccinelle.term_spec <> t:360 var
+R15943:15946 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15934:15936 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15916:15929 Coccinelle.term_spec Term subterm_at_pos def
+R15933:15933 Coccinelle.term_spec <> p:361 var
+R15931:15931 Coccinelle.term_spec <> t:360 var
+R15937:15940 Coq.Init.Datatypes <> Some constr
+R15942:15942 Coccinelle.term_spec <> s:362 var
+R15947:15957 Coccinelle.term_spec Term well_formed def
+R15959:15959 Coccinelle.term_spec <> s:362 var
+def 15972:15985 Term replace_at_pos
+R15994:15997 Coccinelle.term_spec Term term ind
+binder 15988:15988 <> t:364
+binder 15990:15990 <> u:365
+R16005:16008 Coq.Init.Datatypes <> list ind
+R16010:16012 Coq.Init.Datatypes <> nat ind
+binder 16001:16001 <> p:366
+R16028:16031 Coccinelle.term_spec Term term ind
+R16044:16044 Coccinelle.term_spec <> p:366 var
+R16055:16057 Coq.Init.Datatypes <> nil constr
+R16062:16062 Coccinelle.term_spec <> u:365 var
+R16069:16072 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16089:16089 Coccinelle.term_spec <> t:364 var
+R16103:16105 Coccinelle.term_spec Term Var constr
+R16112:16112 Coccinelle.term_spec <> t:364 var
+R16121:16124 Coccinelle.term_spec Term Term constr
+binder 16202:16202 <> j:370
+R16209:16212 Coq.Init.Datatypes <> list ind
+R16214:16217 Coccinelle.term_spec Term term ind
+binder 16205:16205 <> l:371
+R16232:16235 Coq.Init.Datatypes <> list ind
+R16237:16240 Coccinelle.term_spec Term term ind
+R16263:16263 Coccinelle.term_spec <> l:371 var
+R16284:16286 Coq.Init.Datatypes <> nil constr
+R16291:16293 Coq.Init.Datatypes <> nil constr
+R16310:16313 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16314:16315 Coq.Lists.List <> tl def
+R16343:16343 Coccinelle.term_spec <> j:370 var
+R16369:16369 Coq.Init.Datatypes <> O constr
+R16374:16374 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16395:16399 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16375:16388 Coccinelle.term_spec <> replace_at_pos:367 def
+R16392:16392 Coccinelle.term_spec <> u:365 var
+R16422:16422 Coq.Init.Datatypes <> S constr
+R16430:16434 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16459:16459 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16435:16453 Coccinelle.term_spec <> replace_at_pos_list:372 var
+binder 16145:16163 <> replace_at_pos_list:375
+R16506:16509 Coccinelle.term_spec Term Term constr
+R16514:16532 Coccinelle.term_spec <> replace_at_pos_list:375 var
+def 16564:16582 Term replace_at_pos_list
+R16589:16592 Coq.Init.Datatypes <> list ind
+R16594:16597 Coccinelle.term_spec Term term ind
+binder 16585:16585 <> l:376
+R16605:16608 Coccinelle.term_spec Term term ind
+binder 16601:16601 <> u:377
+R16616:16618 Coq.Init.Datatypes <> nat ind
+binder 16612:16612 <> i:378
+R16626:16629 Coq.Init.Datatypes <> list ind
+R16631:16633 Coq.Init.Datatypes <> nat ind
+binder 16622:16622 <> p:379
+R16650:16653 Coq.Init.Datatypes <> list ind
+R16655:16658 Coccinelle.term_spec Term term ind
+R16671:16671 Coccinelle.term_spec <> l:376 var
+R16682:16684 Coq.Init.Datatypes <> nil constr
+R16689:16691 Coq.Init.Datatypes <> nil constr
+R16698:16701 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16702:16703 Coq.Lists.List <> tl def
+R16719:16719 Coccinelle.term_spec <> i:378 var
+R16733:16733 Coq.Init.Datatypes <> O constr
+R16738:16738 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16759:16763 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16739:16752 Coccinelle.term_spec Term replace_at_pos def
+R16758:16758 Coccinelle.term_spec <> p:379 var
+R16756:16756 Coccinelle.term_spec <> u:377 var
+R16774:16774 Coq.Init.Datatypes <> S constr
+R16782:16786 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16816:16816 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16787:16805 Coccinelle.term_spec <> replace_at_pos_list:380 def
+R16815:16815 Coccinelle.term_spec <> p:379 var
+R16811:16811 Coccinelle.term_spec <> u:377 var
+ax 16845:16865 Term replace_at_pos_unfold
+binder 16878:16878 <> f:383
+binder 16880:16880 <> l:384
+binder 16882:16882 <> u:385
+binder 16884:16884 <> i:386
+binder 16886:16886 <> q:387
+R16928:16930 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R16892:16905 Coccinelle.term_spec Term replace_at_pos def
+R16922:16925 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16921:16921 Coccinelle.term_spec <> i:386 var
+R16926:16926 Coccinelle.term_spec <> q:387 var
+R16918:16918 Coccinelle.term_spec <> u:385 var
+R16908:16911 Coccinelle.term_spec Term Term constr
+R16915:16915 Coccinelle.term_spec <> l:384 var
+R16913:16913 Coccinelle.term_spec <> f:383 var
+R16931:16934 Coccinelle.term_spec Term Term constr
+R16939:16957 Coccinelle.term_spec Term replace_at_pos_list def
+R16965:16965 Coccinelle.term_spec <> q:387 var
+R16963:16963 Coccinelle.term_spec <> i:386 var
+R16961:16961 Coccinelle.term_spec <> u:385 var
+R16959:16959 Coccinelle.term_spec <> l:384 var
+R16936:16936 Coccinelle.term_spec <> f:383 var
+ax 16980:17012 Term replace_at_pos_is_replace_at_pos1
+binder 17025:17025 <> t:389
+binder 17027:17027 <> u:390
+binder 17029:17029 <> p:391
+R17051:17056 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17044:17046 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17032:17039 Coccinelle.term_spec Term is_a_pos def
+R17043:17043 Coccinelle.term_spec <> p:391 var
+R17041:17041 Coccinelle.term_spec <> t:389 var
+R17047:17050 Coq.Init.Datatypes <> true constr
+R17096:17098 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17057:17070 Coccinelle.term_spec Term subterm_at_pos def
+R17095:17095 Coccinelle.term_spec <> p:391 var
+R17073:17086 Coccinelle.term_spec Term replace_at_pos def
+R17092:17092 Coccinelle.term_spec <> p:391 var
+R17090:17090 Coccinelle.term_spec <> u:390 var
+R17088:17088 Coccinelle.term_spec <> t:389 var
+R17099:17102 Coq.Init.Datatypes <> Some constr
+R17104:17104 Coccinelle.term_spec <> u:390 var
+ax 17118:17150 Term replace_at_pos_is_replace_at_pos2
+binder 17163:17163 <> t:393
+binder 17165:17165 <> p:394
+binder 17167:17167 <> u:395
+R17197:17200 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17188:17190 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17170:17183 Coccinelle.term_spec Term subterm_at_pos def
+R17187:17187 Coccinelle.term_spec <> p:394 var
+R17185:17185 Coccinelle.term_spec <> t:393 var
+R17191:17194 Coq.Init.Datatypes <> Some constr
+R17196:17196 Coccinelle.term_spec <> u:395 var
+R17221:17223 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17201:17214 Coccinelle.term_spec Term replace_at_pos def
+R17220:17220 Coccinelle.term_spec <> p:394 var
+R17218:17218 Coccinelle.term_spec <> u:395 var
+R17216:17216 Coccinelle.term_spec <> t:393 var
+R17224:17224 Coccinelle.term_spec <> t:393 var
+ax 17239:17291 Term subterm_at_pos_apply_subst_apply_subst_subterm_at_pos
+binder 17304:17304 <> t:397
+binder 17306:17306 <> p:398
+binder 17308:17312 <> sigma:399
+R17324:17337 Coccinelle.term_spec Term subterm_at_pos def
+R17341:17341 Coccinelle.term_spec <> p:398 var
+R17339:17339 Coccinelle.term_spec <> t:397 var
+R17352:17355 Coq.Init.Datatypes <> Some constr
+R17408:17410 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17370:17383 Coccinelle.term_spec Term subterm_at_pos def
+R17407:17407 Coccinelle.term_spec <> p:398 var
+R17386:17396 Coccinelle.term_spec Term apply_subst def
+R17404:17404 Coccinelle.term_spec <> t:397 var
+R17398:17402 Coccinelle.term_spec <> sigma:399 var
+R17411:17414 Coq.Init.Datatypes <> Some constr
+R17417:17427 Coccinelle.term_spec Term apply_subst def
+R17429:17433 Coccinelle.term_spec <> sigma:399 var
+R17442:17445 Coq.Init.Datatypes <> None constr
+R17450:17453 Coq.Init.Logic <> True ind
+ax 17471:17515 Term replace_at_pos_list_replace_at_pos_in_subterm
+binder 17526:17527 <> l1:401
+binder 17529:17530 <> ui:402
+binder 17532:17533 <> l2:403
+binder 17535:17535 <> u:404
+binder 17537:17537 <> i:405
+binder 17539:17539 <> p:406
+R17555:17559 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17551:17553 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17542:17547 Coq.Init.Datatypes <> length def
+R17549:17550 Coccinelle.term_spec <> l1:401 var
+R17554:17554 Coccinelle.term_spec <> i:405 var
+R17602:17606 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17560:17578 Coccinelle.term_spec Term replace_at_pos_list def
+R17601:17601 Coccinelle.term_spec <> p:406 var
+R17599:17599 Coccinelle.term_spec <> i:405 var
+R17597:17597 Coccinelle.term_spec <> u:404 var
+R17583:17586 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R17581:17582 Coccinelle.term_spec <> l1:401 var
+R17589:17592 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R17587:17588 Coccinelle.term_spec <> ui:402 var
+R17593:17594 Coccinelle.term_spec <> l2:403 var
+R17609:17612 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R17607:17608 Coccinelle.term_spec <> l1:401 var
+R17613:17613 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R17635:17639 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R17614:17627 Coccinelle.term_spec Term replace_at_pos def
+R17634:17634 Coccinelle.term_spec <> p:406 var
+R17632:17632 Coccinelle.term_spec <> u:404 var
+R17629:17630 Coccinelle.term_spec <> ui:402 var
+R17640:17641 Coccinelle.term_spec <> l2:403 var
+ax 17655:17680 Term well_formed_replace_at_pos
+binder 17694:17694 <> p:408
+binder 17696:17696 <> t:409
+binder 17698:17698 <> u:410
+R17714:17717 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17701:17711 Coccinelle.term_spec Term well_formed def
+R17713:17713 Coccinelle.term_spec <> t:409 var
+R17731:17734 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17718:17728 Coccinelle.term_spec Term well_formed def
+R17730:17730 Coccinelle.term_spec <> u:410 var
+R17735:17745 Coccinelle.term_spec Term well_formed def
+R17748:17761 Coccinelle.term_spec Term replace_at_pos def
+R17767:17767 Coccinelle.term_spec <> p:408 var
+R17765:17765 Coccinelle.term_spec <> u:410 var
+R17763:17763 Coccinelle.term_spec <> t:409 var
+ax 17782:17801 Term subst_replace_at_pos
+binder 17814:17814 <> t:412
+binder 17816:17816 <> u:413
+binder 17818:17818 <> p:414
+binder 17820:17824 <> sigma:415
+R17846:17849 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17839:17841 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17827:17834 Coccinelle.term_spec Term is_a_pos def
+R17838:17838 Coccinelle.term_spec <> p:414 var
+R17836:17836 Coccinelle.term_spec <> t:412 var
+R17842:17845 Coq.Init.Datatypes <> true constr
+R17890:17893 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17850:17860 Coccinelle.term_spec Term apply_subst def
+R17869:17882 Coccinelle.term_spec Term replace_at_pos def
+R17888:17888 Coccinelle.term_spec <> p:414 var
+R17886:17886 Coccinelle.term_spec <> u:413 var
+R17884:17884 Coccinelle.term_spec <> t:412 var
+R17862:17866 Coccinelle.term_spec <> sigma:415 var
+R17894:17907 Coccinelle.term_spec Term replace_at_pos def
+R17953:17953 Coccinelle.term_spec <> p:414 var
+R17932:17942 Coccinelle.term_spec Term apply_subst def
+R17950:17950 Coccinelle.term_spec <> u:413 var
+R17944:17948 Coccinelle.term_spec <> sigma:415 var
+R17910:17920 Coccinelle.term_spec Term apply_subst def
+R17928:17928 Coccinelle.term_spec <> t:412 var
+R17922:17926 Coccinelle.term_spec <> sigma:415 var
+ax 17967:17994 Term subterm_in_instantiated_term
+binder 18007:18007 <> p:417
+binder 18009:18009 <> s:418
+binder 18011:18011 <> t:419
+binder 18013:18017 <> sigma:420
+R18067:18090 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18058:18060 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18020:18033 Coccinelle.term_spec Term subterm_at_pos def
+R18057:18057 Coccinelle.term_spec <> p:417 var
+R18036:18046 Coccinelle.term_spec Term apply_subst def
+R18054:18054 Coccinelle.term_spec <> t:419 var
+R18048:18052 Coccinelle.term_spec <> sigma:420 var
+R18061:18064 Coq.Init.Datatypes <> Some constr
+R18066:18066 Coccinelle.term_spec <> s:418 var
+R18097:18110 Coccinelle.term_spec Term subterm_at_pos def
+R18114:18114 Coccinelle.term_spec <> p:417 var
+R18112:18112 Coccinelle.term_spec <> t:419 var
+R18129:18132 Coq.Init.Datatypes <> Some constr
+R18141:18143 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18140:18140 Coccinelle.term_spec <> s:418 var
+R18144:18154 Coccinelle.term_spec Term apply_subst def
+R18156:18160 Coccinelle.term_spec <> sigma:420 var
+R18180:18183 Coq.Init.Datatypes <> None constr
+R18188:18194 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R18196:18197 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 18195:18195 <> v:421
+R18198:18204 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R18206:18207 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 18205:18205 <> q:422
+R18208:18214 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R18217:18218 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 18215:18216 <> q':423
+R18230:18275 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R18220:18222 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18219:18219 Coccinelle.term_spec <> p:417 var
+R18224:18227 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R18223:18223 Coccinelle.term_spec <> q:422 var
+R18228:18229 Coccinelle.term_spec <> q':423 var
+R18293:18338 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R18276:18277 Coq.Lists.List <> In def
+R18282:18289 Coccinelle.term_spec Term var_list def
+R18291:18291 Coccinelle.term_spec <> t:419 var
+R18279:18279 Coccinelle.term_spec <> v:421 var
+R18372:18409 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R18357:18359 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18339:18352 Coccinelle.term_spec Term subterm_at_pos def
+R18356:18356 Coccinelle.term_spec <> q:422 var
+R18354:18354 Coccinelle.term_spec <> t:419 var
+R18360:18363 Coq.Init.Datatypes <> Some constr
+R18366:18368 Coccinelle.term_spec Term Var constr
+R18370:18370 Coccinelle.term_spec <> v:421 var
+R18455:18457 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18410:18423 Coccinelle.term_spec Term subterm_at_pos def
+R18453:18454 Coccinelle.term_spec <> q':423 var
+R18426:18436 Coccinelle.term_spec Term apply_subst def
+R18445:18447 Coccinelle.term_spec Term Var constr
+R18449:18449 Coccinelle.term_spec <> v:421 var
+R18438:18442 Coccinelle.term_spec <> sigma:420 var
+R18458:18461 Coq.Init.Datatypes <> Some constr
+R18463:18463 Coccinelle.term_spec <> s:418 var
+ax 18495:18512 Term subterm_in_subterm
+binder 18525:18525 <> p:425
+binder 18527:18527 <> q:426
+binder 18529:18529 <> s:427
+binder 18531:18531 <> t:428
+binder 18533:18533 <> u:429
+R18563:18566 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18554:18556 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18536:18549 Coccinelle.term_spec Term subterm_at_pos def
+R18553:18553 Coccinelle.term_spec <> p:425 var
+R18551:18551 Coccinelle.term_spec <> t:428 var
+R18557:18560 Coq.Init.Datatypes <> Some constr
+R18562:18562 Coccinelle.term_spec <> s:427 var
+R18594:18623 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18585:18587 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18567:18580 Coccinelle.term_spec Term subterm_at_pos def
+R18584:18584 Coccinelle.term_spec <> q:426 var
+R18582:18582 Coccinelle.term_spec <> s:427 var
+R18588:18591 Coq.Init.Datatypes <> Some constr
+R18593:18593 Coccinelle.term_spec <> u:429 var
+R18649:18651 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18624:18637 Coccinelle.term_spec Term subterm_at_pos def
+R18643:18646 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R18642:18642 Coccinelle.term_spec <> p:425 var
+R18647:18647 Coccinelle.term_spec <> q:426 var
+R18639:18639 Coccinelle.term_spec <> t:428 var
+R18652:18655 Coq.Init.Datatypes <> Some constr
+R18657:18657 Coccinelle.term_spec <> u:429 var
+ax 18671:18689 Term subterm_in_subterm2
+binder 18702:18702 <> p:431
+binder 18704:18704 <> q:432
+binder 18706:18706 <> s:433
+binder 18708:18708 <> t:434
+R18745:18770 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18736:18738 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18711:18724 Coccinelle.term_spec Term subterm_at_pos def
+R18730:18733 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R18729:18729 Coccinelle.term_spec <> p:431 var
+R18734:18734 Coccinelle.term_spec <> q:432 var
+R18726:18726 Coccinelle.term_spec <> t:434 var
+R18739:18742 Coq.Init.Datatypes <> Some constr
+R18744:18744 Coccinelle.term_spec <> s:433 var
+R18771:18777 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R18779:18780 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 18778:18778 <> u:435
+R18808:18811 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R18799:18801 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18781:18794 Coccinelle.term_spec Term subterm_at_pos def
+R18798:18798 Coccinelle.term_spec <> p:431 var
+R18796:18796 Coccinelle.term_spec <> t:434 var
+R18802:18805 Coq.Init.Datatypes <> Some constr
+R18807:18807 Coccinelle.term_spec <> u:435 var
+R18830:18832 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18812:18825 Coccinelle.term_spec Term subterm_at_pos def
+R18829:18829 Coccinelle.term_spec <> q:432 var
+R18827:18827 Coccinelle.term_spec <> u:435 var
+R18833:18836 Coq.Init.Datatypes <> Some constr
+R18838:18838 Coccinelle.term_spec <> s:433 var
+ax 18852:18870 Term subterm_subterm_alt
+binder 18883:18883 <> t:437
+binder 18885:18885 <> s:438
+R18888:18888 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18923:18927 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18889:18903 Coccinelle.TransClosure <> refl_trans_clos ind
+R18922:18922 Coccinelle.term_spec <> t:437 var
+R18920:18920 Coccinelle.term_spec <> s:438 var
+R18905:18918 Coccinelle.term_spec Term direct_subterm def
+R18928:18928 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R18930:18932 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R18941:18943 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R18971:18971 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R18933:18936 Coq.Init.Datatypes <> list ind
+R18938:18940 Coq.Init.Datatypes <> nat ind
+binder 18929:18929 <> p:439
+R18962:18964 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18944:18957 Coccinelle.term_spec Term subterm_at_pos def
+R18961:18961 Coccinelle.term_spec <> p:439 var
+R18959:18959 Coccinelle.term_spec <> t:437 var
+R18965:18968 Coq.Init.Datatypes <> Some constr
+R18970:18970 Coccinelle.term_spec <> s:438 var
+ax 18987:19007 Term var_in_replace_at_pos
+binder 19020:19020 <> s:441
+binder 19022:19022 <> p:442
+binder 19024:19024 <> u:443
+binder 19026:19026 <> x:444
+R19067:19070 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19029:19030 Coq.Lists.List <> In def
+R19035:19042 Coccinelle.term_spec Term var_list def
+R19045:19058 Coccinelle.term_spec Term replace_at_pos def
+R19064:19064 Coccinelle.term_spec <> p:442 var
+R19062:19062 Coccinelle.term_spec <> u:443 var
+R19060:19060 Coccinelle.term_spec <> s:441 var
+R19032:19032 Coccinelle.term_spec <> x:444 var
+R19088:19091 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R19071:19072 Coq.Lists.List <> In def
+R19077:19084 Coccinelle.term_spec Term var_list def
+R19086:19086 Coccinelle.term_spec <> s:441 var
+R19074:19074 Coccinelle.term_spec <> x:444 var
+R19092:19093 Coq.Lists.List <> In def
+R19098:19105 Coccinelle.term_spec Term var_list def
+R19107:19107 Coccinelle.term_spec <> u:443 var
+R19095:19095 Coccinelle.term_spec <> x:444 var
+ax 19122:19141 Term remove_garbage_subst
+R19162:19173 Coccinelle.term_spec Term substitution def
+binder 19154:19158 <> sigma:446
+R19183:19183 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R19190:19192 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R19205:19207 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R19644:19644 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R19193:19204 Coccinelle.term_spec Term substitution def
+binder 19184:19189 <> sigma':447
+R19208:19208 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R19271:19309 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 19216:19216 <> x:448
+R19243:19245 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19219:19222 Coccinelle.more_list <> find def
+R19238:19242 Coccinelle.term_spec <> sigma:446 var
+R19236:19236 Coccinelle.term_spec <> x:448 var
+R19224:19234 Coccinelle.term_spec Term eq_var_bool abbrev
+R19246:19249 Coccinelle.more_list <> find def
+R19265:19270 Coccinelle.term_spec <> sigma':447 var
+R19263:19263 Coccinelle.term_spec <> x:448 var
+R19251:19261 Coccinelle.term_spec Term eq_var_bool abbrev
+R19310:19310 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R19382:19428 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R19643:19643 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 19318:19318 <> x:449
+binder 19320:19322 <> val:450
+R19342:19345 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19325:19326 Coq.Lists.List <> In def
+R19336:19341 Coccinelle.term_spec <> sigma':447 var
+R19328:19328 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19330:19330 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19334:19334 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19329:19329 Coccinelle.term_spec <> x:449 var
+R19331:19333 Coccinelle.term_spec <> val:450 var
+R19371:19373 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19346:19349 Coccinelle.more_list <> find def
+R19365:19370 Coccinelle.term_spec <> sigma':447 var
+R19363:19363 Coccinelle.term_spec <> x:449 var
+R19351:19361 Coccinelle.term_spec Term eq_var_bool abbrev
+R19374:19377 Coq.Init.Datatypes <> Some constr
+R19379:19381 Coccinelle.term_spec <> val:450 var
+binder 19436:19436 <> x:451
+binder 19438:19438 <> y:452
+binder 19440:19442 <> val:453
+binder 19444:19447 <> val':454
+R19467:19478 Coccinelle.term_spec Term substitution def
+binder 19450:19452 <> tau:455
+binder 19454:19457 <> tau':456
+binder 19459:19463 <> tau'':457
+R19584:19636 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19538:19540 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19532:19537 Coccinelle.term_spec <> sigma':447 var
+R19544:19547 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R19541:19543 Coccinelle.term_spec <> tau:455 var
+R19555:19558 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19548:19548 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19550:19550 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19554:19554 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19549:19549 Coccinelle.term_spec <> x:451 var
+R19551:19553 Coccinelle.term_spec <> val:453 var
+R19563:19566 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R19559:19562 Coccinelle.term_spec <> tau':456 var
+R19575:19578 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19567:19567 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19569:19569 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19574:19574 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19568:19568 Coccinelle.term_spec <> y:452 var
+R19570:19573 Coccinelle.term_spec <> val':454 var
+R19579:19583 Coccinelle.term_spec <> tau'':457 var
+R19638:19641 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R19637:19637 Coccinelle.term_spec <> x:451 var
+R19642:19642 Coccinelle.term_spec <> y:452 var
+ax 19658:19670 Term subst_eq_vars
+binder 19683:19683 <> t:459
+binder 19685:19689 <> sigma:460
+binder 19691:19696 <> sigma':461
+R19699:19699 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R19785:19827 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+binder 19707:19707 <> v:462
+R19727:19730 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19710:19711 Coq.Lists.List <> In def
+R19716:19723 Coccinelle.term_spec Term var_list def
+R19725:19725 Coccinelle.term_spec <> t:459 var
+R19713:19713 Coccinelle.term_spec <> v:462 var
+R19756:19758 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19731:19741 Coccinelle.term_spec Term apply_subst def
+R19750:19752 Coccinelle.term_spec Term Var constr
+R19754:19754 Coccinelle.term_spec <> v:462 var
+R19743:19747 Coccinelle.term_spec <> sigma:460 var
+R19759:19769 Coccinelle.term_spec Term apply_subst def
+R19779:19781 Coccinelle.term_spec Term Var constr
+R19783:19783 Coccinelle.term_spec <> v:462 var
+R19771:19776 Coccinelle.term_spec <> sigma':461 var
+R19847:19849 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19828:19838 Coccinelle.term_spec Term apply_subst def
+R19846:19846 Coccinelle.term_spec <> t:459 var
+R19840:19844 Coccinelle.term_spec <> sigma:460 var
+R19850:19860 Coccinelle.term_spec Term apply_subst def
+R19869:19869 Coccinelle.term_spec <> t:459 var
+R19862:19867 Coccinelle.term_spec <> sigma':461 var
+def 19882:19891 Term subst_rest
+binder 19893:19896 <> vars:464
+binder 19898:19902 <> sigma:465
+R19906:19917 Coccinelle.term_spec Term substitution def
+R19928:19932 Coccinelle.term_spec <> sigma:465 var
+R19941:19943 Coq.Init.Datatypes <> nil constr
+R19948:19950 Coq.Init.Datatypes <> nil constr
+R19959:19962 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R19954:19954 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19956:19956 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19958:19958 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R19986:19993 Coccinelle.more_list <> mem_bool def
+R20009:20012 Coccinelle.term_spec <> vars:464 var
+R19995:20005 Coccinelle.term_spec Term eq_var_bool abbrev
+R20078:20087 Coccinelle.term_spec <> subst_rest:466 def
+R20094:20098 Coccinelle.term_spec <> sigma:465 var
+R20089:20092 Coccinelle.term_spec <> vars:464 var
+R20035:20039 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R20061:20061 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R20030:20030 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20032:20032 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20034:20034 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20040:20049 Coccinelle.term_spec <> subst_rest:466 def
+R20056:20060 Coccinelle.term_spec <> sigma:465 var
+R20051:20054 Coccinelle.term_spec <> vars:464 var
+ax 20116:20128 Term subst_rest_ok
+binder 20141:20144 <> vars:468
+binder 20146:20150 <> sigma:469
+binder 20152:20152 <> v:470
+R20164:20167 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20155:20156 Coq.Lists.List <> In def
+R20160:20163 Coccinelle.term_spec <> vars:468 var
+R20158:20158 Coccinelle.term_spec <> v:470 var
+R20211:20213 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R20168:20178 Coccinelle.term_spec Term apply_subst def
+R20205:20207 Coccinelle.term_spec Term Var constr
+R20209:20209 Coccinelle.term_spec <> v:470 var
+R20181:20190 Coccinelle.term_spec Term subst_rest def
+R20197:20201 Coccinelle.term_spec <> sigma:469 var
+R20192:20195 Coccinelle.term_spec <> vars:468 var
+R20214:20224 Coccinelle.term_spec Term apply_subst def
+R20233:20235 Coccinelle.term_spec Term Var constr
+R20237:20237 Coccinelle.term_spec <> v:470 var
+R20226:20230 Coccinelle.term_spec <> sigma:469 var
+ax 20252:20266 Term subst_rest_rest
+binder 20279:20282 <> vars:472
+binder 20284:20288 <> sigma:473
+binder 20290:20290 <> v:474
+binder 20292:20292 <> t:475
+R20327:20330 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20295:20296 Coq.Lists.List <> In def
+R20305:20314 Coccinelle.term_spec Term subst_rest def
+R20321:20325 Coccinelle.term_spec <> sigma:473 var
+R20316:20319 Coccinelle.term_spec <> vars:472 var
+R20298:20298 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20300:20300 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20302:20302 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20299:20299 Coccinelle.term_spec <> v:474 var
+R20301:20301 Coccinelle.term_spec <> t:475 var
+R20331:20332 Coq.Lists.List <> In def
+R20336:20339 Coccinelle.term_spec <> vars:472 var
+R20334:20334 Coccinelle.term_spec <> v:474 var
+ax 20353:20368 Term subst_rest_subst
+binder 20381:20384 <> vars:477
+binder 20386:20390 <> sigma:478
+binder 20392:20392 <> v:479
+binder 20394:20394 <> t:480
+R20429:20432 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20397:20398 Coq.Lists.List <> In def
+R20407:20416 Coccinelle.term_spec Term subst_rest def
+R20423:20427 Coccinelle.term_spec <> sigma:478 var
+R20418:20421 Coccinelle.term_spec <> vars:477 var
+R20400:20400 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20402:20402 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20404:20404 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20401:20401 Coccinelle.term_spec <> v:479 var
+R20403:20403 Coccinelle.term_spec <> t:480 var
+R20433:20434 Coq.Lists.List <> In def
+R20442:20446 Coccinelle.term_spec <> sigma:478 var
+R20436:20436 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20438:20438 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20440:20440 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20437:20437 Coccinelle.term_spec <> v:479 var
+R20439:20439 Coccinelle.term_spec <> t:480 var
+ax 20460:20480 Term subst_rest_subst_rest
+binder 20493:20496 <> vars:482
+binder 20498:20502 <> sigma:483
+binder 20504:20504 <> v:484
+binder 20506:20506 <> t:485
+R20518:20521 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20509:20510 Coq.Lists.List <> In def
+R20514:20517 Coccinelle.term_spec <> vars:482 var
+R20512:20512 Coccinelle.term_spec <> v:484 var
+R20536:20539 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20522:20523 Coq.Lists.List <> In def
+R20531:20535 Coccinelle.term_spec <> sigma:483 var
+R20525:20525 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20527:20527 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20529:20529 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20526:20526 Coccinelle.term_spec <> v:484 var
+R20528:20528 Coccinelle.term_spec <> t:485 var
+R20540:20541 Coq.Lists.List <> In def
+R20550:20559 Coccinelle.term_spec Term subst_rest def
+R20566:20570 Coccinelle.term_spec <> sigma:483 var
+R20561:20564 Coccinelle.term_spec <> vars:482 var
+R20543:20543 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20545:20545 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20547:20547 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20544:20544 Coccinelle.term_spec <> v:484 var
+R20546:20546 Coccinelle.term_spec <> t:485 var
+def 20586:20599 Term extend_with_id
+binder 20601:20604 <> vars:487
+binder 20606:20610 <> sigma:488
+R20617:20617 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R20786:20792 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R20618:20620 Coq.Lists.List <> map def
+R20678:20683 Coq.Lists.List <> filter def
+R20781:20784 Coccinelle.term_spec <> vars:487 var
+binder 20690:20690 <> x:489
+R20729:20732 Coq.Init.Datatypes <> negb def
+R20735:20742 Coccinelle.more_list <> mem_bool def
+R20757:20759 Coq.Lists.List <> map def
+R20772:20776 Coccinelle.term_spec <> sigma:488 var
+R20763:20765 Coq.Init.Datatypes <> fst def
+R20754:20754 Coccinelle.term_spec <> x:489 var
+R20744:20752 Coccinelle.term_spec Term eq_bool defax
+binder 20627:20627 <> x:490
+R20632:20632 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20634:20634 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20640:20640 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R20633:20633 Coccinelle.term_spec <> x:490 var
+R20635:20637 Coccinelle.term_spec Term Var constr
+R20639:20639 Coccinelle.term_spec <> x:490 var
+R20793:20797 Coccinelle.term_spec <> sigma:488 var
+ax 20811:20827 Term subst_trivial_ext
+binder 20838:20841 <> vars:491
+binder 20843:20847 <> sigma:492
+binder 20849:20849 <> t:493
+R20893:20895 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R20852:20862 Coccinelle.term_spec Term apply_subst def
+R20892:20892 Coccinelle.term_spec <> t:493 var
+R20865:20878 Coccinelle.term_spec Term extend_with_id def
+R20885:20889 Coccinelle.term_spec <> sigma:492 var
+R20880:20883 Coccinelle.term_spec <> vars:491 var
+R20896:20906 Coccinelle.term_spec Term apply_subst def
+R20914:20914 Coccinelle.term_spec <> t:493 var
+R20908:20912 Coccinelle.term_spec <> sigma:492 var
+ax 20963:20970 Term matching
+R20992:20995 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20974:20977 Coq.Init.Datatypes <> list ind
+R20984:20986 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R20980:20983 Coccinelle.term_spec Term term ind
+R20987:20990 Coccinelle.term_spec Term term ind
+R20996:21001 Coq.Init.Datatypes <> option ind
+R21003:21014 Coccinelle.term_spec Term substitution def
+ax 21028:21043 Term matching_unfold2
+binder 21054:21055 <> pb:496
+R21071:21075 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R21060:21067 Coccinelle.term_spec Term matching defax
+R21069:21070 Coccinelle.term_spec <> pb:496 var
+R21082:21083 Coccinelle.term_spec <> pb:496 var
+R21095:21097 Coq.Init.Datatypes <> nil constr
+R21102:21105 Coq.Init.Datatypes <> Some constr
+R21107:21109 Coq.Init.Datatypes <> nil constr
+R21128:21131 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R21116:21116 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21121:21122 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21127:21127 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21172:21174 Coccinelle.term_spec Term Var constr
+R21203:21210 Coccinelle.term_spec Term matching defax
+R21212:21213 Coccinelle.term_spec <> pb:496 var
+R21237:21240 Coq.Init.Datatypes <> Some constr
+R21251:21255 Coccinelle.more_list <> merge def
+R21286:21289 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R21278:21278 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21280:21280 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21285:21285 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21290:21292 Coq.Init.Datatypes <> nil constr
+R21269:21275 Coccinelle.term_spec Term eq_bool def
+R21257:21267 Coccinelle.term_spec Term eq_var_bool abbrev
+R21318:21321 Coq.Init.Datatypes <> None constr
+R21326:21329 Coq.Init.Datatypes <> None constr
+R21361:21364 Coccinelle.term_spec Term Term constr
+R21420:21422 Coccinelle.term_spec Term Var constr
+R21429:21432 Coq.Init.Datatypes <> None constr
+R21451:21454 Coccinelle.term_spec Term Term constr
+R21486:21497 Coccinelle.term_spec Term eq_symb_bool abbrev
+R22474:22477 Coq.Init.Datatypes <> None constr
+R21585:21587 Coq.Init.Datatypes <> nil constr
+R21659:21661 Coq.Init.Datatypes <> nil constr
+R21666:21673 Coccinelle.term_spec Term matching defax
+R21675:21676 Coccinelle.term_spec <> pb:496 var
+R21710:21713 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R21722:21725 Coq.Init.Datatypes <> None constr
+R21785:21788 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R21867:21869 Coq.Init.Datatypes <> nil constr
+R21874:21877 Coq.Init.Datatypes <> None constr
+R21912:21915 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R21961:21968 Coccinelle.term_spec Term matching defax
+R21983:21986 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R21971:21971 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21976:21977 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21982:21982 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R21987:21989 Coq.Init.Datatypes <> nil constr
+R22030:22033 Coq.Init.Datatypes <> Some constr
+R22088:22095 Coccinelle.term_spec Term matching defax
+R22124:22127 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R22098:22098 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22110:22111 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22123:22123 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22099:22102 Coccinelle.term_spec Term Term constr
+R22112:22115 Coccinelle.term_spec Term Term constr
+R22128:22129 Coccinelle.term_spec <> pb:496 var
+R22174:22177 Coq.Init.Datatypes <> Some constr
+R22188:22192 Coccinelle.more_list <> merge def
+R22206:22212 Coccinelle.term_spec Term eq_bool def
+R22194:22204 Coccinelle.term_spec Term eq_var_bool abbrev
+R22263:22266 Coq.Init.Datatypes <> None constr
+R22271:22274 Coq.Init.Datatypes <> None constr
+R22347:22350 Coq.Init.Datatypes <> None constr
+R22355:22358 Coq.Init.Datatypes <> None constr
+ax 22531:22546 Term matching_correct
+binder 22559:22560 <> pb:504
+binder 22562:22566 <> sigma:505
+R22593:22609 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22911:22911 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22580:22582 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R22569:22576 Coccinelle.term_spec Term matching defax
+R22578:22579 Coccinelle.term_spec <> pb:504 var
+R22583:22586 Coq.Init.Datatypes <> Some constr
+R22588:22592 Coccinelle.term_spec <> sigma:505 var
+R22610:22610 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R22693:22708 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 22618:22618 <> v:506
+binder 22620:22620 <> p:507
+binder 22622:22622 <> s:508
+R22642:22645 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22625:22626 Coq.Lists.List <> In def
+R22631:22638 Coccinelle.term_spec Term var_list def
+R22640:22640 Coccinelle.term_spec <> p:507 var
+R22628:22628 Coccinelle.term_spec <> v:506 var
+R22657:22660 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22646:22647 Coq.Lists.List <> In def
+R22655:22656 Coccinelle.term_spec <> pb:504 var
+R22649:22649 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22651:22651 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22653:22653 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22650:22650 Coccinelle.term_spec <> p:507 var
+R22652:22652 Coccinelle.term_spec <> s:508 var
+R22685:22688 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R22661:22664 Coccinelle.more_list <> find def
+R22680:22684 Coccinelle.term_spec <> sigma:505 var
+R22678:22678 Coccinelle.term_spec <> v:506 var
+R22666:22676 Coccinelle.term_spec Term eq_var_bool abbrev
+R22689:22692 Coq.Init.Datatypes <> None constr
+R22709:22709 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R22842:22859 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R22910:22910 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+binder 22717:22717 <> v:509
+R22752:22789 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22744:22747 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R22720:22723 Coccinelle.more_list <> find def
+R22739:22743 Coccinelle.term_spec <> sigma:505 var
+R22737:22737 Coccinelle.term_spec <> v:509 var
+R22725:22735 Coccinelle.term_spec Term eq_var_bool abbrev
+R22748:22751 Coq.Init.Datatypes <> None constr
+R22790:22796 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R22798:22799 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 22797:22797 <> p:510
+R22800:22806 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R22808:22809 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 22807:22807 <> s:511
+R22821:22824 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R22810:22811 Coq.Lists.List <> In def
+R22819:22820 Coccinelle.term_spec <> pb:504 var
+R22813:22813 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22815:22815 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22817:22817 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22814:22814 Coccinelle.term_spec <> p:510 var
+R22816:22816 Coccinelle.term_spec <> s:511 var
+R22825:22826 Coq.Lists.List <> In def
+R22831:22838 Coccinelle.term_spec Term var_list def
+R22840:22840 Coccinelle.term_spec <> p:510 var
+R22828:22828 Coccinelle.term_spec <> v:509 var
+binder 22867:22867 <> p:512
+binder 22869:22869 <> s:513
+R22883:22886 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22872:22873 Coq.Lists.List <> In def
+R22881:22882 Coccinelle.term_spec <> pb:504 var
+R22875:22875 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22877:22877 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22879:22879 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22876:22876 Coccinelle.term_spec <> p:512 var
+R22878:22878 Coccinelle.term_spec <> s:513 var
+R22906:22908 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R22887:22897 Coccinelle.term_spec Term apply_subst def
+R22905:22905 Coccinelle.term_spec <> p:512 var
+R22899:22903 Coccinelle.term_spec <> sigma:505 var
+R22909:22909 Coccinelle.term_spec <> s:513 var
+ax 22925:22941 Term matching_complete
+binder 22954:22955 <> pb:515
+binder 22957:22961 <> sigma:516
+R22964:22964 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23015:23021 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 22972:22972 <> p:517
+binder 22974:22974 <> s:518
+R22988:22991 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22977:22978 Coq.Lists.List <> In def
+R22986:22987 Coccinelle.term_spec <> pb:515 var
+R22980:22980 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22982:22982 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22984:22984 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R22981:22981 Coccinelle.term_spec <> p:517 var
+R22983:22983 Coccinelle.term_spec <> s:518 var
+R23011:23013 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R22992:23002 Coccinelle.term_spec Term apply_subst def
+R23010:23010 Coccinelle.term_spec <> p:517 var
+R23004:23008 Coccinelle.term_spec <> sigma:516 var
+R23014:23014 Coccinelle.term_spec <> s:518 var
+R23028:23035 Coccinelle.term_spec Term matching defax
+R23037:23038 Coccinelle.term_spec <> pb:515 var
+R23049:23052 Coq.Init.Datatypes <> Some constr
+binder 23068:23068 <> v:519
+binder 23070:23070 <> p:520
+binder 23072:23072 <> s:521
+R23092:23095 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23075:23076 Coq.Lists.List <> In def
+R23081:23088 Coccinelle.term_spec Term var_list def
+R23090:23090 Coccinelle.term_spec <> p:520 var
+R23078:23078 Coccinelle.term_spec <> v:519 var
+R23107:23147 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23096:23097 Coq.Lists.List <> In def
+R23105:23106 Coccinelle.term_spec <> pb:515 var
+R23099:23099 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23101:23101 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23103:23103 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R23100:23100 Coccinelle.term_spec <> p:520 var
+R23102:23102 Coccinelle.term_spec <> s:521 var
+R23171:23173 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R23148:23158 Coccinelle.term_spec Term apply_subst def
+R23165:23167 Coccinelle.term_spec Term Var constr
+R23169:23169 Coccinelle.term_spec <> v:519 var
+R23174:23184 Coccinelle.term_spec Term apply_subst def
+R23193:23195 Coccinelle.term_spec Term Var constr
+R23197:23197 Coccinelle.term_spec <> v:519 var
+R23186:23190 Coccinelle.term_spec <> sigma:516 var
+R23204:23207 Coq.Init.Datatypes <> None constr
+R23212:23216 Coq.Init.Logic <> False ind
+R23230:23233 Coccinelle.term_spec Term <> modtype

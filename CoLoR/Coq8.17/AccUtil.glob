@@ -1,0 +1,605 @@
+DIGEST 8224c371392fba54ad8fb7bf65466a3a
+FCoLoR.AccUtil
+R267:275 Coq.Classes.Morphisms <> <> lib
+R277:282 Coq.Program.Basics <> <> lib
+R309:319 Coq.Wellfounded.Wellfounded <> <> lib
+R348:356 CoLoR.LogicUtil <> <> lib
+R358:364 CoLoR.RelUtil <> <> lib
+R378:384 Coq.Wellfounded.Inclusion <> wf_incl thm
+R378:384 Coq.Wellfounded.Inclusion <> wf_incl thm
+inst 572:579 <> Acc_incl
+binder 581:581 <> A:1
+R585:590 Coq.Classes.Morphisms <> Proper class
+R617:619 Coq.Init.Wf <> Acc ind
+R621:621 CoLoR.AccUtil <> A:1 var
+R597:601 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'-->'_x not
+R593:596 CoLoR.RelUtil <> incl abbrev
+R604:608 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R602:603 Coq.Init.Logic <> eq ind
+R609:612 Coq.Program.Basics <> impl def
+R690:698 Coq.Init.Wf <> Acc_intro constr
+R690:698 Coq.Init.Wf <> Acc_intro constr
+inst 730:737 <> Acc_same
+binder 739:739 <> A:2
+R743:748 Coq.Classes.Morphisms <> Proper class
+R774:776 Coq.Init.Wf <> Acc ind
+R778:778 CoLoR.AccUtil <> A:2 var
+R755:759 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R751:754 CoLoR.RelUtil <> same abbrev
+R762:766 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R760:761 Coq.Init.Logic <> eq ind
+R767:769 Coq.Init.Logic <> iff def
+prf 924:933 <> Acc_eq_rel
+binder 944:944 <> A:3
+R953:960 Coq.Relations.Relation_Definitions <> relation def
+R962:962 CoLoR.AccUtil <> A:3 var
+binder 947:947 <> R:4
+binder 949:949 <> S:5
+binder 965:965 <> x:6
+R970:970 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R998:1002 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 978:978 <> a:7
+binder 980:980 <> b:8
+R988:992 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R983:983 CoLoR.AccUtil <> R:4 var
+R985:985 CoLoR.AccUtil <> a:7 var
+R987:987 CoLoR.AccUtil <> b:8 var
+R993:993 CoLoR.AccUtil <> S:5 var
+R995:995 CoLoR.AccUtil <> a:7 var
+R997:997 CoLoR.AccUtil <> b:8 var
+R1010:1013 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1003:1005 Coq.Init.Wf <> Acc ind
+R1009:1009 CoLoR.AccUtil <> x:6 var
+R1007:1007 CoLoR.AccUtil <> R:4 var
+R1014:1016 Coq.Init.Wf <> Acc ind
+R1020:1020 CoLoR.AccUtil <> x:6 var
+R1018:1018 CoLoR.AccUtil <> S:5 var
+R1090:1094 Coq.Init.Logic <> proj2 thm
+R1090:1094 Coq.Init.Logic <> proj2 thm
+inst 1135:1151 <> well_founded_incl
+binder 1153:1153 <> A:9
+R1159:1164 Coq.Classes.Morphisms <> Proper class
+R1184:1195 Coq.Init.Wf <> well_founded def
+R1197:1197 CoLoR.AccUtil <> A:9 var
+R1171:1175 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'-->'_x not
+R1167:1170 CoLoR.RelUtil <> incl abbrev
+R1176:1179 Coq.Program.Basics <> impl def
+inst 1282:1298 <> well_founded_same
+binder 1300:1300 <> A:10
+R1304:1309 Coq.Classes.Morphisms <> Proper class
+R1328:1339 Coq.Init.Wf <> well_founded def
+R1341:1341 CoLoR.AccUtil <> A:10 var
+R1316:1320 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R1312:1315 CoLoR.RelUtil <> same abbrev
+R1321:1323 Coq.Init.Logic <> iff def
+sec 1546:1548 <> rtc
+var 1565:1565 rtc A
+var 1576:1576 rtc R
+R1580:1587 Coq.Relations.Relation_Definitions <> relation def
+R1589:1589 CoLoR.AccUtil <> A:11 var
+prf 1602:1608 <> Acc_rtc
+binder 1619:1619 <> x:13
+binder 1621:1621 <> y:14
+R1645:1648 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1624:1638 Coq.Relations.Relation_Operators <> clos_refl_trans ind
+R1644:1644 CoLoR.AccUtil <> y:14 var
+R1642:1642 CoLoR.AccUtil <> x:13 var
+R1640:1640 CoLoR.AccUtil <> rtc.R var
+R1656:1659 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1649:1651 Coq.Init.Wf <> Acc ind
+R1655:1655 CoLoR.AccUtil <> y:14 var
+R1653:1653 CoLoR.AccUtil <> rtc.R var
+R1660:1662 Coq.Init.Wf <> Acc ind
+R1666:1666 CoLoR.AccUtil <> x:13 var
+R1664:1664 CoLoR.AccUtil <> rtc.R var
+R1714:1720 Coq.Init.Wf <> Acc_inv thm
+R1714:1720 Coq.Init.Wf <> Acc_inv thm
+prf 1832:1841 <> Acc_tc_ind
+R1857:1858 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1856:1856 CoLoR.AccUtil <> rtc.A var
+binder 1852:1852 <> P:15
+R1869:1869 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1922:1930 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1877:1877 <> x:16
+R1880:1880 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1914:1918 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1888:1888 <> y:17
+R1907:1910 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1891:1900 Coq.Relations.Relation_Operators <> clos_trans ind
+R1906:1906 CoLoR.AccUtil <> x:16 var
+R1904:1904 CoLoR.AccUtil <> y:17 var
+R1902:1902 CoLoR.AccUtil <> rtc.R var
+R1911:1911 CoLoR.AccUtil <> P:15 var
+R1913:1913 CoLoR.AccUtil <> y:17 var
+R1919:1919 CoLoR.AccUtil <> P:15 var
+R1921:1921 CoLoR.AccUtil <> x:16 var
+binder 1938:1938 <> x:18
+R1948:1951 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1941:1943 Coq.Init.Wf <> Acc ind
+R1947:1947 CoLoR.AccUtil <> x:18 var
+R1945:1945 CoLoR.AccUtil <> rtc.R var
+R1952:1952 CoLoR.AccUtil <> P:15 var
+R1954:1954 CoLoR.AccUtil <> x:18 var
+R2005:2014 Coq.Relations.Relation_Operators <> clos_trans ind
+R2016:2016 CoLoR.AccUtil <> rtc.R var
+R1986:1992 Coq.Init.Wf <> Acc_ind scheme
+R2005:2014 Coq.Relations.Relation_Operators <> clos_trans ind
+R2016:2016 CoLoR.AccUtil <> rtc.R var
+R1986:1992 Coq.Init.Wf <> Acc_ind scheme
+R2086:2099 Coq.Wellfounded.Transitive_Closure <> Acc_clos_trans thm
+R2086:2099 Coq.Wellfounded.Transitive_Closure <> Acc_clos_trans thm
+R2119:2121 CoLoR.AccUtil rtc <> sec
+sec 2234:2240 <> symprod
+var 2257:2257 symprod A
+var 2259:2259 symprod B
+var 2270:2272 symprod leA
+var 2289:2291 symprod leB
+R2276:2283 Coq.Relations.Relation_Definitions <> relation def
+R2285:2285 CoLoR.AccUtil <> A:20 var
+R2295:2302 Coq.Relations.Relation_Definitions <> relation def
+R2304:2304 CoLoR.AccUtil <> B:19 var
+abbrev 2320:2326 <> Symprod
+R2332:2338 Coq.Relations.Relation_Operators <> symprod ind
+R2344:2346 CoLoR.AccUtil <> symprod.leB var
+R2340:2342 CoLoR.AccUtil <> symprod.leA var
+prf 2359:2373 <> Acc_symprod_fst
+binder 2375:2375 <> x:23
+R2392:2395 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2379:2381 Coq.Init.Wf <> Acc ind
+R2391:2391 CoLoR.AccUtil <> x:23 var
+R2383:2389 CoLoR.AccUtil <> Symprod abbrev
+R2396:2398 Coq.Init.Wf <> Acc ind
+R2405:2407 Coq.Init.Datatypes <> fst def
+R2409:2409 CoLoR.AccUtil <> x:23 var
+R2400:2402 CoLoR.AccUtil <> symprod.leA var
+R2465:2473 Coq.Init.Wf <> Acc_intro constr
+R2465:2473 Coq.Init.Wf <> Acc_intro constr
+R2492:2492 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2494:2494 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2496:2496 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2492:2492 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2494:2494 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2496:2496 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2520:2527 Coq.Relations.Relation_Operators <> left_sym constr
+R2520:2527 Coq.Relations.Relation_Operators <> left_sym constr
+prf 2551:2565 <> Acc_symprod_snd
+binder 2567:2567 <> x:24
+R2584:2587 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2571:2573 Coq.Init.Wf <> Acc ind
+R2583:2583 CoLoR.AccUtil <> x:24 var
+R2575:2581 CoLoR.AccUtil <> Symprod abbrev
+R2588:2590 Coq.Init.Wf <> Acc ind
+R2597:2599 Coq.Init.Datatypes <> snd def
+R2601:2601 CoLoR.AccUtil <> x:24 var
+R2592:2594 CoLoR.AccUtil <> symprod.leB var
+R2657:2665 Coq.Init.Wf <> Acc_intro constr
+R2657:2665 Coq.Init.Wf <> Acc_intro constr
+R2684:2684 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2686:2686 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2688:2688 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2684:2684 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2686:2686 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2688:2688 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2712:2720 Coq.Relations.Relation_Operators <> right_sym constr
+R2712:2720 Coq.Relations.Relation_Operators <> right_sym constr
+prf 2744:2759 <> Acc_symprod_invl
+binder 2761:2761 <> x:25
+binder 2763:2763 <> y:26
+R2784:2787 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2767:2769 Coq.Init.Wf <> Acc ind
+R2779:2779 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2781:2781 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2783:2783 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2780:2780 CoLoR.AccUtil <> x:25 var
+R2782:2782 CoLoR.AccUtil <> y:26 var
+R2771:2777 CoLoR.AccUtil <> Symprod abbrev
+R2788:2790 Coq.Init.Wf <> Acc ind
+R2796:2796 CoLoR.AccUtil <> x:25 var
+R2792:2794 CoLoR.AccUtil <> symprod.leA var
+R2822:2836 CoLoR.AccUtil <> Acc_symprod_fst thm
+R2822:2836 CoLoR.AccUtil <> Acc_symprod_fst thm
+prf 2861:2876 <> Acc_symprod_invr
+binder 2878:2878 <> x:27
+binder 2880:2880 <> y:28
+R2901:2904 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2884:2886 Coq.Init.Wf <> Acc ind
+R2896:2896 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2898:2898 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2900:2900 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2897:2897 CoLoR.AccUtil <> x:27 var
+R2899:2899 CoLoR.AccUtil <> y:28 var
+R2888:2894 CoLoR.AccUtil <> Symprod abbrev
+R2905:2907 Coq.Init.Wf <> Acc ind
+R2913:2913 CoLoR.AccUtil <> y:28 var
+R2909:2911 CoLoR.AccUtil <> symprod.leB var
+R2939:2953 CoLoR.AccUtil <> Acc_symprod_snd thm
+R2939:2953 CoLoR.AccUtil <> Acc_symprod_snd thm
+prf 2978:2992 <> Acc_symprod_inv
+binder 2994:2994 <> x:29
+binder 2996:2996 <> y:30
+R3017:3020 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3000:3002 Coq.Init.Wf <> Acc ind
+R3012:3012 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3014:3014 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3016:3016 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3013:3013 CoLoR.AccUtil <> x:29 var
+R3015:3015 CoLoR.AccUtil <> y:30 var
+R3004:3010 CoLoR.AccUtil <> Symprod abbrev
+R3030:3033 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3021:3023 Coq.Init.Wf <> Acc ind
+R3029:3029 CoLoR.AccUtil <> x:29 var
+R3025:3027 CoLoR.AccUtil <> symprod.leA var
+R3034:3036 Coq.Init.Wf <> Acc ind
+R3042:3042 CoLoR.AccUtil <> y:30 var
+R3038:3040 CoLoR.AccUtil <> symprod.leB var
+R3081:3096 CoLoR.AccUtil <> Acc_symprod_invl thm
+R3081:3096 CoLoR.AccUtil <> Acc_symprod_invl thm
+R3115:3130 CoLoR.AccUtil <> Acc_symprod_invr thm
+R3115:3130 CoLoR.AccUtil <> Acc_symprod_invr thm
+R3158:3164 CoLoR.AccUtil symprod <> sec
+sec 3284:3296 <> RestrictedAcc
+var 3313:3313 RestrictedAcc A
+var 3324:3324 RestrictedAcc P
+R3329:3332 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3328:3328 CoLoR.AccUtil <> A:31 var
+ind 3353:3366 <> Restricted_acc
+constr 3404:3422 <> Restricted_acc_cons
+R3373:3380 Coq.Relations.Relation_Definitions <> relation def
+R3382:3382 CoLoR.AccUtil <> RestrictedAcc.A var
+binder 3369:3369 <> R:33
+R3388:3391 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3387:3387 CoLoR.AccUtil <> RestrictedAcc.A var
+binder 3433:3433 <> a:36
+R3440:3440 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3489:3493 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 3448:3449 <> a':37
+R3456:3459 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3452:3452 CoLoR.AccUtil <> RestrictedAcc.P var
+R3454:3455 CoLoR.AccUtil <> a':37 var
+R3466:3469 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3460:3460 CoLoR.AccUtil <> R:33 var
+R3462:3463 CoLoR.AccUtil <> a':37 var
+R3465:3465 CoLoR.AccUtil <> a:36 var
+R3470:3483 CoLoR.AccUtil <> Restricted_acc:34 ind
+R3487:3488 CoLoR.AccUtil <> a':37 var
+R3485:3485 CoLoR.AccUtil <> R:33 var
+R3494:3507 CoLoR.AccUtil <> Restricted_acc:34 ind
+R3511:3511 CoLoR.AccUtil <> a:36 var
+R3509:3509 CoLoR.AccUtil <> R:33 var
+prf 3523:3543 <> Restricted_acc_eq_acc
+binder 3554:3554 <> R:38
+binder 3556:3556 <> a:39
+R3596:3600 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R3563:3565 Coq.Init.Wf <> Acc ind
+R3595:3595 CoLoR.AccUtil <> a:39 var
+binder 3572:3572 <> a:40
+binder 3574:3575 <> a':41
+R3583:3586 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3580:3580 CoLoR.AccUtil <> RestrictedAcc.P var
+R3582:3582 CoLoR.AccUtil <> a:40 var
+R3587:3587 CoLoR.AccUtil <> R:38 var
+R3589:3589 CoLoR.AccUtil <> a:40 var
+R3591:3592 CoLoR.AccUtil <> a':41 var
+R3601:3614 CoLoR.AccUtil <> Restricted_acc ind
+R3618:3618 CoLoR.AccUtil <> a:39 var
+R3616:3616 CoLoR.AccUtil <> R:38 var
+R3975:3987 CoLoR.AccUtil RestrictedAcc <> sec
+R4127:4130 Coq.Lists.List <> <> lib
+def 4145:4148 <> Accs
+binder 4151:4151 <> A:42
+binder 4161:4161 <> R:43
+binder 4163:4163 <> l:44
+R4179:4179 CoLoR.AccUtil <> A:42 var
+binder 4175:4175 <> a:45
+R4188:4191 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4182:4183 Coq.Lists.List <> In def
+R4187:4187 CoLoR.AccUtil <> l:44 var
+R4185:4185 CoLoR.AccUtil <> a:45 var
+R4192:4194 Coq.Init.Wf <> Acc ind
+R4198:4198 CoLoR.AccUtil <> a:45 var
+R4196:4196 CoLoR.AccUtil <> R:43 var
+sec 4318:4330 <> Accessibility
+var 4347:4347 Accessibility A
+var 4349:4349 Accessibility B
+var 4360:4360 Accessibility R
+R4364:4371 Coq.Relations.Relation_Definitions <> relation def
+R4373:4373 CoLoR.AccUtil <> A:47 var
+def 4391:4395 <> mimic
+R4402:4409 Coq.Relations.Relation_Definitions <> relation def
+R4411:4411 CoLoR.AccUtil <> Accessibility.A var
+binder 4398:4398 <> P:49
+binder 4424:4424 <> x:50
+binder 4426:4427 <> x':51
+R4436:4443 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4430:4430 CoLoR.AccUtil <> P:49 var
+R4432:4432 CoLoR.AccUtil <> x:50 var
+R4434:4435 CoLoR.AccUtil <> x':51 var
+binder 4451:4452 <> y':52
+R4462:4465 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4455:4455 CoLoR.AccUtil <> Accessibility.R var
+R4460:4461 CoLoR.AccUtil <> x':51 var
+R4457:4458 CoLoR.AccUtil <> y':52 var
+R4466:4473 Coq.Init.Logic <> ::type_scope:'exists2'_x_','_x_'&'_x not
+R4475:4476 Coq.Init.Logic <> ::type_scope:'exists2'_x_','_x_'&'_x not
+R4482:4484 Coq.Init.Logic <> ::type_scope:'exists2'_x_','_x_'&'_x not
+binder 4474:4474 <> y:53
+R4477:4477 CoLoR.AccUtil <> Accessibility.R var
+R4481:4481 CoLoR.AccUtil <> x:50 var
+R4479:4479 CoLoR.AccUtil <> y:53 var
+binder 4474:4474 <> y:54
+R4485:4485 CoLoR.AccUtil <> P:49 var
+R4487:4487 CoLoR.AccUtil <> y:54 var
+R4489:4490 CoLoR.AccUtil <> y':52 var
+prf 4502:4510 <> Acc_mimic
+binder 4521:4521 <> x:55
+R4527:4534 Coq.Relations.Relation_Definitions <> relation def
+R4536:4536 CoLoR.AccUtil <> Accessibility.A var
+binder 4524:4524 <> P:56
+R4551:4554 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4544:4546 Coq.Init.Wf <> Acc ind
+R4550:4550 CoLoR.AccUtil <> x:55 var
+R4548:4548 CoLoR.AccUtil <> Accessibility.R var
+R4562:4565 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4555:4559 CoLoR.AccUtil <> mimic def
+R4561:4561 CoLoR.AccUtil <> P:56 var
+binder 4573:4574 <> x':57
+R4583:4586 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4577:4577 CoLoR.AccUtil <> P:56 var
+R4579:4579 CoLoR.AccUtil <> x:55 var
+R4581:4582 CoLoR.AccUtil <> x':57 var
+R4587:4589 Coq.Init.Wf <> Acc ind
+R4593:4594 CoLoR.AccUtil <> x':57 var
+R4591:4591 CoLoR.AccUtil <> Accessibility.R var
+R4703:4707 CoLoR.AccUtil <> mimic def
+var 4822:4822 Accessibility x
+var 4824:4824 Accessibility y
+R4828:4828 CoLoR.AccUtil <> Accessibility.A var
+sec 4842:4848 Accessibility AccHomo
+var 4865:4865 Accessibility.AccHomo T
+R4869:4876 Coq.Relations.Relation_Definitions <> relation def
+R4878:4878 CoLoR.AccUtil <> Accessibility.B var
+var 4894:4894 Accessibility.AccHomo z
+R4898:4898 CoLoR.AccUtil <> Accessibility.B var
+var 4914:4921 Accessibility.AccHomo morphism
+R4926:4929 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4925:4925 CoLoR.AccUtil <> Accessibility.A var
+R4931:4934 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4930:4930 CoLoR.AccUtil <> Accessibility.B var
+var 4954:4957 Accessibility.AccHomo comp
+binder 4968:4968 <> x:63
+binder 4970:4970 <> y:64
+binder 4972:4973 <> x':65
+R4995:4998 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4982:4989 CoLoR.AccUtil <> Accessibility.AccHomo.morphism var
+R4994:4994 CoLoR.AccUtil <> x:63 var
+R4991:4992 CoLoR.AccUtil <> x':65 var
+R5004:5007 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4999:4999 CoLoR.AccUtil <> Accessibility.AccHomo.T var
+R5003:5003 CoLoR.AccUtil <> x:63 var
+R5001:5001 CoLoR.AccUtil <> y:64 var
+R5008:5015 Coq.Init.Logic <> ::type_scope:'exists2'_x_':'_x_','_x_'&'_x not
+R5018:5019 Coq.Init.Logic <> ::type_scope:'exists2'_x_':'_x_','_x_'&'_x not
+R5021:5022 Coq.Init.Logic <> ::type_scope:'exists2'_x_':'_x_','_x_'&'_x not
+R5030:5032 Coq.Init.Logic <> ::type_scope:'exists2'_x_':'_x_','_x_'&'_x not
+R5020:5020 CoLoR.AccUtil <> Accessibility.A var
+binder 5016:5017 <> y':66
+R5023:5023 CoLoR.AccUtil <> Accessibility.R var
+R5028:5029 CoLoR.AccUtil <> x':65 var
+R5025:5026 CoLoR.AccUtil <> y':66 var
+binder 5016:5017 <> y':67
+R5033:5040 CoLoR.AccUtil <> Accessibility.AccHomo.morphism var
+R5045:5045 CoLoR.AccUtil <> y:64 var
+R5042:5043 CoLoR.AccUtil <> y':67 var
+prf 5059:5066 <> Acc_homo
+binder 5083:5083 <> x:69
+R5093:5096 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5086:5088 Coq.Init.Wf <> Acc ind
+R5092:5092 CoLoR.AccUtil <> x:69 var
+R5090:5090 CoLoR.AccUtil <> Accessibility.R var
+binder 5104:5105 <> x':70
+R5121:5124 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5108:5115 CoLoR.AccUtil <> Accessibility.AccHomo.morphism var
+R5119:5120 CoLoR.AccUtil <> x':70 var
+R5117:5117 CoLoR.AccUtil <> x:69 var
+R5125:5127 Coq.Init.Wf <> Acc ind
+R5131:5132 CoLoR.AccUtil <> x':70 var
+R5129:5129 CoLoR.AccUtil <> Accessibility.AccHomo.T var
+R5250:5253 CoLoR.AccUtil <> Accessibility.AccHomo.comp var
+R5250:5253 CoLoR.AccUtil <> Accessibility.AccHomo.comp var
+R5322:5328 CoLoR.AccUtil Accessibility.AccHomo <> sec
+sec 5344:5349 Accessibility AccIso
+var 5366:5366 Accessibility.AccIso T
+R5370:5377 Coq.Relations.Relation_Definitions <> relation def
+R5379:5379 CoLoR.AccUtil <> Accessibility.B var
+var 5395:5395 Accessibility.AccIso z
+R5399:5399 CoLoR.AccUtil <> Accessibility.B var
+var 5415:5417 Accessibility.AccIso iso
+R5422:5425 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5421:5421 CoLoR.AccUtil <> Accessibility.A var
+R5427:5430 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5426:5426 CoLoR.AccUtil <> Accessibility.B var
+var 5450:5457 Accessibility.AccIso iso_comp
+binder 5468:5468 <> x:74
+binder 5470:5471 <> y':75
+binder 5473:5474 <> x':76
+R5491:5494 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5483:5485 CoLoR.AccUtil <> Accessibility.AccIso.iso var
+R5489:5490 CoLoR.AccUtil <> x':76 var
+R5487:5487 CoLoR.AccUtil <> x:74 var
+R5502:5505 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5495:5495 CoLoR.AccUtil <> Accessibility.AccIso.T var
+R5500:5501 CoLoR.AccUtil <> x':76 var
+R5497:5498 CoLoR.AccUtil <> y':75 var
+R5506:5506 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}' not
+R5508:5509 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}' not
+R5511:5513 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}' not
+R5519:5521 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}' not
+R5530:5530 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}' not
+R5510:5510 CoLoR.AccUtil <> Accessibility.A var
+binder 5507:5507 <> y:77
+R5514:5514 CoLoR.AccUtil <> Accessibility.R var
+R5518:5518 CoLoR.AccUtil <> x:74 var
+R5516:5516 CoLoR.AccUtil <> y:77 var
+binder 5507:5507 <> y:78
+R5522:5524 CoLoR.AccUtil <> Accessibility.AccIso.iso var
+R5528:5529 CoLoR.AccUtil <> y':75 var
+R5526:5526 CoLoR.AccUtil <> y:78 var
+prf 5544:5550 <> Acc_iso
+R5561:5564 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5554:5556 CoLoR.AccUtil <> Accessibility.AccIso.iso var
+R5560:5560 CoLoR.AccUtil <> Accessibility.AccIso.z var
+R5558:5558 CoLoR.AccUtil <> Accessibility.x var
+R5572:5575 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5565:5567 Coq.Init.Wf <> Acc ind
+R5571:5571 CoLoR.AccUtil <> Accessibility.x var
+R5569:5569 CoLoR.AccUtil <> Accessibility.R var
+R5576:5578 Coq.Init.Wf <> Acc ind
+R5582:5582 CoLoR.AccUtil <> Accessibility.AccIso.z var
+R5580:5580 CoLoR.AccUtil <> Accessibility.AccIso.T var
+R5636:5636 CoLoR.AccUtil <> Accessibility.AccIso.z var
+R5636:5636 CoLoR.AccUtil <> Accessibility.AccIso.z var
+R5784:5791 CoLoR.AccUtil <> Accessibility.AccIso.iso_comp var
+R5784:5791 CoLoR.AccUtil <> Accessibility.AccIso.iso_comp var
+R5888:5893 CoLoR.AccUtil Accessibility.AccIso <> sec
+R5901:5913 CoLoR.AccUtil Accessibility <> sec
+R6076:6078 Coq.Init.Wf <> Fix def
+R6076:6078 Coq.Init.Wf <> Fix def
+R6107:6112 Coq.Init.Wf <> Fix_eq thm
+R6107:6112 Coq.Init.Wf <> Fix_eq thm
+R6143:6147 Coq.Init.Wf <> Fix_F def
+R6143:6147 Coq.Init.Wf <> Fix_F def
+R6176:6183 Coq.Init.Wf <> Fix_F_eq thm
+R6176:6183 Coq.Init.Wf <> Fix_F_eq thm
+R6212:6220 Coq.Init.Wf <> Fix_F_inv thm
+R6212:6220 Coq.Init.Wf <> Fix_F_inv thm
+sec 6256:6258 <> Fix
+var 6275:6275 Fix A
+var 6286:6286 Fix R
+var 6303:6305 Fix Rwf
+var 6330:6330 Fix P
+var 6346:6346 Fix F
+var 6406:6407 Fix eq
+var 6442:6446 Fix F_ext
+R6290:6297 Coq.Relations.Relation_Definitions <> relation def
+R6299:6299 CoLoR.AccUtil <> A:80 var
+R6309:6320 Coq.Init.Wf <> well_founded def
+R6322:6322 CoLoR.AccUtil <> R:81 var
+R6335:6338 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6334:6334 CoLoR.AccUtil <> A:80 var
+R6361:6361 CoLoR.AccUtil <> A:80 var
+binder 6357:6357 <> x:84
+R6364:6364 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6391:6395 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6376:6376 CoLoR.AccUtil <> A:80 var
+binder 6372:6372 <> y:85
+R6384:6387 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6379:6379 CoLoR.AccUtil <> R:81 var
+R6383:6383 CoLoR.AccUtil <> x:84 var
+R6381:6381 CoLoR.AccUtil <> y:85 var
+R6388:6388 CoLoR.AccUtil <> P:83 var
+R6390:6390 CoLoR.AccUtil <> y:85 var
+R6396:6396 CoLoR.AccUtil <> P:83 var
+R6398:6398 CoLoR.AccUtil <> x:84 var
+binder 6418:6418 <> x:87
+R6421:6428 Coq.Relations.Relation_Definitions <> relation def
+R6431:6431 CoLoR.AccUtil <> P:83 var
+R6433:6433 CoLoR.AccUtil <> x:87 var
+binder 6457:6457 <> x:89
+binder 6473:6473 <> y:90
+R6481:6484 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6476:6476 CoLoR.AccUtil <> R:81 var
+R6480:6480 CoLoR.AccUtil <> x:89 var
+R6478:6478 CoLoR.AccUtil <> y:90 var
+R6485:6485 CoLoR.AccUtil <> P:83 var
+R6487:6487 CoLoR.AccUtil <> y:90 var
+binder 6460:6460 <> f:91
+binder 6462:6462 <> g:92
+R6497:6497 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6538:6542 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 6505:6505 <> y:93
+R6512:6512 CoLoR.AccUtil <> R:81 var
+R6516:6516 CoLoR.AccUtil <> x:89 var
+R6514:6514 CoLoR.AccUtil <> y:93 var
+binder 6508:6508 <> p:94
+R6520:6521 CoLoR.AccUtil <> eq:88 var
+R6532:6532 CoLoR.AccUtil <> g:92 var
+R6536:6536 CoLoR.AccUtil <> p:94 var
+R6534:6534 CoLoR.AccUtil <> y:93 var
+R6524:6524 CoLoR.AccUtil <> f:91 var
+R6528:6528 CoLoR.AccUtil <> p:94 var
+R6526:6526 CoLoR.AccUtil <> y:93 var
+R6543:6544 CoLoR.AccUtil <> eq:88 var
+R6553:6553 CoLoR.AccUtil <> F:86 var
+R6555:6555 CoLoR.AccUtil <> g:92 var
+R6547:6547 CoLoR.AccUtil <> F:86 var
+R6549:6549 CoLoR.AccUtil <> f:91 var
+abbrev 6572:6576 <> Fix_F
+R6582:6586 Coq.Init.Wf <> Fix_F def
+R6588:6588 CoLoR.AccUtil <> Fix.F var
+abbrev 6603:6610 <> Fix_F_eq
+R6616:6623 Coq.Init.Wf <> Fix_F_eq thm
+R6625:6625 CoLoR.AccUtil <> Fix.F var
+abbrev 6640:6642 <> Fix
+R6648:6650 Coq.Init.Wf <> Fix def
+R6656:6656 CoLoR.AccUtil <> Fix.F var
+R6652:6654 CoLoR.AccUtil <> Fix.Rwf var
+R6676:6677 CoLoR.AccUtil <> Fix.eq var
+not 6668:6668 Fix :::x_'=='_x
+prf 6703:6711 <> Fix_F_inv
+binder 6722:6722 <> x:96
+R6731:6733 Coq.Init.Wf <> Acc ind
+R6737:6737 CoLoR.AccUtil <> x:96 var
+R6735:6735 CoLoR.AccUtil <> Fix.R var
+binder 6725:6725 <> r:97
+binder 6727:6727 <> s:98
+R6748:6751 CoLoR.AccUtil Fix :::x_'=='_x not
+R6741:6745 CoLoR.AccUtil <> Fix_F abbrev
+R6747:6747 CoLoR.AccUtil <> r:97 var
+R6752:6756 CoLoR.AccUtil <> Fix_F abbrev
+R6758:6758 CoLoR.AccUtil <> s:98 var
+R6795:6797 CoLoR.AccUtil <> Fix.Rwf var
+R6795:6797 CoLoR.AccUtil <> Fix.Rwf var
+R6827:6834 CoLoR.AccUtil <> Fix_F_eq abbrev
+R6844:6851 CoLoR.AccUtil <> Fix_F_eq abbrev
+R6827:6834 CoLoR.AccUtil <> Fix_F_eq abbrev
+R6827:6834 CoLoR.AccUtil <> Fix_F_eq abbrev
+R6844:6851 CoLoR.AccUtil <> Fix_F_eq abbrev
+R6844:6851 CoLoR.AccUtil <> Fix_F_eq abbrev
+R6875:6879 CoLoR.AccUtil <> Fix.F_ext var
+R6875:6879 CoLoR.AccUtil <> Fix.F_ext var
+prf 6904:6909 <> Fix_eq
+binder 6920:6920 <> x:99
+R6928:6931 CoLoR.AccUtil Fix :::x_'=='_x not
+R6923:6925 CoLoR.AccUtil <> Fix abbrev
+R6927:6927 CoLoR.AccUtil <> x:99 var
+R6932:6932 CoLoR.AccUtil <> Fix.F var
+binder 6939:6939 <> y:100
+R6946:6946 CoLoR.AccUtil <> Fix.R var
+R6950:6950 CoLoR.AccUtil <> x:99 var
+R6948:6948 CoLoR.AccUtil <> y:100 var
+binder 6942:6942 <> p:101
+R6956:6958 CoLoR.AccUtil <> Fix abbrev
+R6960:6960 CoLoR.AccUtil <> y:100 var
+R6994:6999 Coq.Init.Wf <> Fix def
+R7017:7024 CoLoR.AccUtil <> Fix_F_eq abbrev
+R7017:7024 CoLoR.AccUtil <> Fix_F_eq abbrev
+R7017:7024 CoLoR.AccUtil <> Fix_F_eq abbrev
+R7037:7041 CoLoR.AccUtil <> Fix.F_ext var
+R7037:7041 CoLoR.AccUtil <> Fix.F_ext var
+R7062:7070 CoLoR.AccUtil <> Fix_F_inv thm
+R7062:7070 CoLoR.AccUtil <> Fix_F_inv thm
+R7085:7087 CoLoR.AccUtil Fix <> sec
+R7101:7109 CoLoR.AccUtil <> Fix_F_inv thm
+R7101:7109 CoLoR.AccUtil <> Fix_F_inv thm
+R7148:7153 CoLoR.AccUtil <> Fix_eq thm
+R7148:7153 CoLoR.AccUtil <> Fix_eq thm
+prf 7306:7314 <> wf_irrefl
+binder 7325:7325 <> A:102
+R7332:7339 Coq.Relations.Relation_Definitions <> relation def
+R7341:7341 CoLoR.AccUtil <> A:102 var
+binder 7328:7328 <> R:103
+R7359:7362 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7345:7356 Coq.Init.Wf <> well_founded def
+R7358:7358 CoLoR.AccUtil <> R:103 var
+R7363:7373 Coq.Classes.RelationClasses <> Irreflexive class
+R7375:7375 CoLoR.AccUtil <> R:103 var

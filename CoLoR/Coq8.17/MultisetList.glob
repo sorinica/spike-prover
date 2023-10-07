@@ -1,0 +1,719 @@
+DIGEST f695f26eb72e63471c8b776aeb35409a
+FCoLoR.MultisetList
+R261:271 Coq.Sorting.Permutation <> <> lib
+R273:284 Coq.Sorting.PermutSetoid <> <> lib
+R286:288 Coq.micromega.Lia <> <> lib
+R290:297 Coq.Sets.Multiset <> <> lib
+R326:334 CoLoR.LogicUtil <> <> lib
+R336:344 CoLoR.RelExtras <> <> lib
+R346:357 CoLoR.MultisetCore <> <> lib
+R359:368 CoLoR.ListExtras <> <> lib
+R398:406 CoLoR.RelExtras Eqset_dec <> mod
+R412:423 CoLoR.MultisetCore MultisetCore <> mod
+R444:445 CoLoR.MultisetList ES <> modtype
+mod 379:390 <> MultisetList
+R472:473 CoLoR.MultisetList ES <> modtype
+mod 465:467 <> MultisetList.Sid
+sec 485:494 MultisetList Operations
+def 511:518 MultisetList Multiset
+R523:526 Coq.Init.Datatypes <> list ind
+R528:528 CoLoR.MultisetList MultisetList A defax
+def 545:549 MultisetList empty
+R553:560 CoLoR.MultisetList MultisetList Multiset def
+R565:567 Coq.Init.Datatypes <> nil constr
+def 583:591 MultisetList singleton
+binder 593:593 <> a:1
+R597:604 CoLoR.MultisetList MultisetList Multiset def
+R610:613 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R609:609 CoLoR.MultisetList <> a:1 var
+R614:616 Coq.Init.Datatypes <> nil constr
+def 632:636 MultisetList union
+R641:643 Coq.Init.Datatypes <> app def
+R649:649 CoLoR.MultisetList MultisetList A defax
+def 666:668 MultisetList meq
+R673:683 Coq.Sorting.PermutSetoid <> permutation def
+R689:695 CoLoR.MultisetList MultisetList eqA_dec defax
+R685:687 CoLoR.MultisetList MultisetList eqA defax
+def 712:715 MultisetList mult
+R720:726 CoLoR.ListExtras <> countIn def
+R732:738 CoLoR.MultisetList MultisetList eqA_dec defax
+R728:730 CoLoR.MultisetList MultisetList eqA defax
+def 754:756 MultisetList rem
+R761:770 CoLoR.ListExtras <> removeElem def
+R776:782 CoLoR.MultisetList MultisetList eqA_dec defax
+R772:774 CoLoR.MultisetList MultisetList eqA defax
+def 798:801 MultisetList diff
+R806:814 CoLoR.ListExtras <> removeAll def
+R820:826 CoLoR.MultisetList MultisetList eqA_dec defax
+R816:818 CoLoR.MultisetList MultisetList eqA defax
+def 843:854 MultisetList intersection
+R859:871 CoLoR.MultisetCore <> inter_as_diff def
+R873:876 CoLoR.MultisetList MultisetList diff def
+def 893:901 MultisetList fold_left
+binder 910:910 <> T:2
+R922:935 Coq.Lists.List <> fold_left def
+R952:952 CoLoR.MultisetList MultisetList A defax
+R943:943 CoLoR.MultisetList <> T:2 var
+R961:970 CoLoR.MultisetList MultisetList.Operations <> sec
+R993:995 CoLoR.MultisetList MultisetList meq def
+not 982:982 MultisetList ::msets_scope:x_'=mul='_x
+R1053:1053 Coq.Init.Logic <> ::type_scope:'~'_x not
+R1054:1056 CoLoR.MultisetList MultisetList meq def
+not 1037:1037 MultisetList ::msets_scope:x_'<>mul'_x
+R1117:1125 CoLoR.MultisetList MultisetList singleton def
+not 1103:1103 MultisetList ::msets_scope:'{{'_x_'}}'
+R1173:1177 CoLoR.MultisetList MultisetList union def
+not 1166:1166 MultisetList ::msets_scope:x_'+'_x
+R1209:1212 CoLoR.MultisetList MultisetList diff def
+not 1202:1202 MultisetList ::msets_scope:x_'-'_x
+R1244:1255 CoLoR.MultisetList MultisetList intersection def
+not 1237:1237 MultisetList ::msets_scope:x_'#'_x
+R1321:1324 CoLoR.MultisetList MultisetList mult def
+not 1314:1314 MultisetList ::msets_scope:x_'/'_x
+sec 1457:1466 MultisetList ImplLemmas
+prf 1478:1488 MultisetList empty_empty
+binder 1499:1499 <> M:3
+R1502:1502 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1522:1526 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 1510:1510 <> x:4
+R1518:1520 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1514:1516 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R1513:1513 CoLoR.MultisetList <> x:4 var
+R1517:1517 CoLoR.MultisetList <> M:3 var
+R1528:1530 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1527:1527 CoLoR.MultisetList <> M:3 var
+R1531:1535 CoLoR.MultisetList MultisetList empty def
+R1614:1616 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1605:1608 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R1613:1613 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R1610:1611 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1614:1616 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1605:1608 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R1613:1613 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R1610:1611 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1642:1648 CoLoR.MultisetList MultisetList eqA_dec defax
+R1642:1648 CoLoR.MultisetList MultisetList eqA_dec defax
+R1694:1703 CoLoR.MultisetList MultisetList.ImplLemmas <> sec
+sec 1715:1730 MultisetList SpecConformation
+prf 1742:1756 MultisetList mult_eqA_compat
+binder 1767:1767 <> M:5
+binder 1769:1769 <> x:6
+binder 1771:1771 <> y:7
+R1781:1784 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1775:1779 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R1774:1774 CoLoR.MultisetList <> x:6 var
+R1780:1780 CoLoR.MultisetList <> y:7 var
+R1790:1792 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1786:1788 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R1785:1785 CoLoR.MultisetList <> x:6 var
+R1789:1789 CoLoR.MultisetList <> M:5 var
+R1794:1796 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R1793:1793 CoLoR.MultisetList <> y:7 var
+R1797:1797 CoLoR.MultisetList <> M:5 var
+R1874:1880 CoLoR.MultisetList MultisetList eqA_dec defax
+R1898:1904 CoLoR.MultisetList MultisetList eqA_dec defax
+R1944:1948 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R1997:1999 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1993:1995 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2001:2003 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R1874:1880 CoLoR.MultisetList MultisetList eqA_dec defax
+R1898:1904 CoLoR.MultisetList MultisetList eqA_dec defax
+R1898:1904 CoLoR.MultisetList MultisetList eqA_dec defax
+R1944:1948 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R1997:1999 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1993:1995 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2001:2003 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R1944:1948 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R1944:1948 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R1944:1948 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R1997:1999 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1993:1995 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2001:2003 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+prf 2032:2040 MultisetList mult_comp
+binder 2051:2051 <> l:8
+binder 2053:2053 <> a:9
+R2065:2067 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2061:2063 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2060:2060 CoLoR.MultisetList <> a:9 var
+R2064:2064 CoLoR.MultisetList <> l:8 var
+R2068:2079 Coq.Sets.Multiset <> multiplicity def
+R2111:2111 CoLoR.MultisetList <> a:9 var
+R2082:2094 Coq.Sorting.PermutSetoid <> list_contents def
+R2108:2108 CoLoR.MultisetList <> l:8 var
+R2100:2106 CoLoR.MultisetList MultisetList eqA_dec defax
+R2096:2098 CoLoR.MultisetList MultisetList eqA defax
+R2186:2192 CoLoR.MultisetList MultisetList eqA_dec defax
+R2211:2217 CoLoR.MultisetList MultisetList eqA_dec defax
+R2284:2288 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R2186:2192 CoLoR.MultisetList MultisetList eqA_dec defax
+R2211:2217 CoLoR.MultisetList MultisetList eqA_dec defax
+R2211:2217 CoLoR.MultisetList MultisetList eqA_dec defax
+R2284:2288 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R2284:2288 CoLoR.RelExtras Eqset :::x_'=A='_x not
+prf 2326:2335 MultisetList multeq_meq
+binder 2346:2346 <> M:10
+binder 2348:2348 <> N:11
+R2351:2351 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2375:2379 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 2359:2359 <> x:12
+R2367:2369 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2363:2365 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2362:2362 CoLoR.MultisetList <> x:12 var
+R2366:2366 CoLoR.MultisetList <> M:10 var
+R2371:2373 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2370:2370 CoLoR.MultisetList <> x:12 var
+R2374:2374 CoLoR.MultisetList <> N:11 var
+R2381:2387 CoLoR.MultisetList MultisetList ::msets_scope:x_'=mul='_x not
+R2380:2380 CoLoR.MultisetList <> M:10 var
+R2388:2388 CoLoR.MultisetList <> N:11 var
+R2412:2414 CoLoR.MultisetList MultisetList meq def
+R2451:2459 CoLoR.MultisetList MultisetList mult_comp thm
+R2451:2459 CoLoR.MultisetList MultisetList mult_comp thm
+R2451:2459 CoLoR.MultisetList MultisetList mult_comp thm
+R2451:2459 CoLoR.MultisetList MultisetList mult_comp thm
+R2451:2459 CoLoR.MultisetList MultisetList mult_comp thm
+prf 2497:2506 MultisetList meq_multeq
+binder 2517:2517 <> M:13
+binder 2519:2519 <> N:14
+R2531:2534 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2523:2529 CoLoR.MultisetList MultisetList ::msets_scope:x_'=mul='_x not
+R2522:2522 CoLoR.MultisetList <> M:13 var
+R2530:2530 CoLoR.MultisetList <> N:14 var
+binder 2542:2542 <> x:15
+R2550:2552 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2546:2548 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2545:2545 CoLoR.MultisetList <> x:15 var
+R2549:2549 CoLoR.MultisetList <> M:13 var
+R2554:2556 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2553:2553 CoLoR.MultisetList <> x:15 var
+R2557:2557 CoLoR.MultisetList <> N:14 var
+R2581:2583 CoLoR.MultisetList MultisetList meq def
+R2586:2596 Coq.Sorting.PermutSetoid <> permutation def
+R2599:2610 Coq.Sets.Multiset <> meq def
+R2645:2653 CoLoR.MultisetList MultisetList mult_comp thm
+R2645:2653 CoLoR.MultisetList MultisetList mult_comp thm
+R2645:2653 CoLoR.MultisetList MultisetList mult_comp thm
+R2645:2653 CoLoR.MultisetList MultisetList mult_comp thm
+R2645:2653 CoLoR.MultisetList MultisetList mult_comp thm
+prf 2688:2697 MultisetList empty_mult
+binder 2708:2708 <> x:16
+R2723:2725 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2711:2714 CoLoR.MultisetList MultisetList mult def
+R2718:2722 CoLoR.MultisetList MultisetList empty def
+R2716:2716 CoLoR.MultisetList <> x:16 var
+prf 2759:2768 MultisetList union_mult
+binder 2779:2779 <> M:17
+binder 2781:2781 <> N:18
+binder 2783:2783 <> x:19
+R2826:2828 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2811:2812 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2818:2818 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2810:2810 CoLoR.MultisetList <> x:19 var
+R2814:2816 CoLoR.MultisetList MultisetList ::msets_scope:x_'+'_x not
+R2813:2813 CoLoR.MultisetList <> M:17 var
+R2817:2817 CoLoR.MultisetList <> N:18 var
+R2841:2843 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2832:2832 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2831:2831 CoLoR.MultisetList <> x:19 var
+R2833:2833 CoLoR.MultisetList <> M:17 var
+R2846:2846 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R2845:2845 CoLoR.MultisetList <> x:19 var
+R2847:2847 CoLoR.MultisetList <> N:18 var
+R2928:2934 CoLoR.MultisetList MultisetList eqA_dec defax
+R2928:2934 CoLoR.MultisetList MultisetList eqA_dec defax
+prf 2983:2994 MultisetList diff_empty_l
+binder 3005:3005 <> M:20
+R3017:3019 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3013:3015 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R3008:3012 CoLoR.MultisetList MultisetList empty def
+R3016:3016 CoLoR.MultisetList <> M:20 var
+R3020:3024 CoLoR.MultisetList MultisetList empty def
+prf 3076:3087 MultisetList diff_empty_r
+binder 3098:3098 <> M:21
+R3110:3112 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3102:3104 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R3101:3101 CoLoR.MultisetList <> M:21 var
+R3105:3109 CoLoR.MultisetList MultisetList empty def
+R3113:3113 CoLoR.MultisetList <> M:21 var
+prf 3165:3178 MultisetList mult_remove_in
+binder 3189:3189 <> x:22
+binder 3191:3191 <> a:23
+binder 3193:3193 <> M:24
+R3207:3210 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3201:3205 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3200:3200 CoLoR.MultisetList <> x:22 var
+R3206:3206 CoLoR.MultisetList <> a:23 var
+R3232:3234 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3213:3216 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3224:3224 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3212:3212 CoLoR.MultisetList <> x:22 var
+R3217:3219 CoLoR.MultisetList MultisetList rem def
+R3223:3223 CoLoR.MultisetList <> M:24 var
+R3221:3221 CoLoR.MultisetList <> a:23 var
+R3249:3251 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R3238:3240 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3237:3237 CoLoR.MultisetList <> x:22 var
+R3241:3241 CoLoR.MultisetList <> M:24 var
+R3333:3339 CoLoR.MultisetList MultisetList eqA_dec defax
+R3358:3364 CoLoR.MultisetList MultisetList eqA_dec defax
+R3407:3411 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3333:3339 CoLoR.MultisetList MultisetList eqA_dec defax
+R3358:3364 CoLoR.MultisetList MultisetList eqA_dec defax
+R3358:3364 CoLoR.MultisetList MultisetList eqA_dec defax
+R3407:3411 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3407:3411 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3407:3411 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3407:3411 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3469:3475 CoLoR.MultisetList MultisetList eqA_dec defax
+R3469:3475 CoLoR.MultisetList MultisetList eqA_dec defax
+prf 3521:3538 MultisetList mult_remove_not_in
+binder 3549:3549 <> M:25
+binder 3551:3551 <> a:26
+binder 3553:3553 <> x:27
+R3569:3572 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3560:3561 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3563:3567 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3562:3562 CoLoR.MultisetList <> x:27 var
+R3568:3568 CoLoR.MultisetList <> a:26 var
+R3586:3588 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3574:3577 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3585:3585 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3573:3573 CoLoR.MultisetList <> x:27 var
+R3578:3580 CoLoR.MultisetList MultisetList rem def
+R3584:3584 CoLoR.MultisetList <> M:25 var
+R3582:3582 CoLoR.MultisetList <> a:26 var
+R3590:3592 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3589:3589 CoLoR.MultisetList <> x:27 var
+R3593:3593 CoLoR.MultisetList <> M:25 var
+R3662:3668 CoLoR.MultisetList MultisetList eqA_dec defax
+R3662:3668 CoLoR.MultisetList MultisetList eqA_dec defax
+R3691:3697 CoLoR.MultisetList MultisetList eqA_dec defax
+R3727:3731 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3691:3697 CoLoR.MultisetList MultisetList eqA_dec defax
+R3727:3731 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3727:3731 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R3785:3791 CoLoR.MultisetList MultisetList eqA_dec defax
+R3785:3791 CoLoR.MultisetList MultisetList eqA_dec defax
+prf 3872:3889 MultisetList remove_perm_single
+binder 3900:3900 <> x:28
+binder 3902:3902 <> a:29
+binder 3904:3904 <> b:30
+binder 3906:3906 <> M:31
+R3933:3935 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3913:3916 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3932:3932 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3912:3912 CoLoR.MultisetList <> x:28 var
+R3917:3919 CoLoR.MultisetList MultisetList rem def
+R3924:3926 CoLoR.MultisetList MultisetList rem def
+R3930:3930 CoLoR.MultisetList <> M:31 var
+R3928:3928 CoLoR.MultisetList <> b:30 var
+R3921:3921 CoLoR.MultisetList <> a:29 var
+R3937:3940 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3956:3956 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R3936:3936 CoLoR.MultisetList <> x:28 var
+R3941:3943 CoLoR.MultisetList MultisetList rem def
+R3948:3950 CoLoR.MultisetList MultisetList rem def
+R3954:3954 CoLoR.MultisetList <> M:31 var
+R3952:3952 CoLoR.MultisetList <> a:29 var
+R3945:3945 CoLoR.MultisetList <> b:30 var
+R3999:4005 CoLoR.MultisetList MultisetList eqA_dec defax
+R4019:4025 CoLoR.MultisetList MultisetList eqA_dec defax
+R3999:4005 CoLoR.MultisetList MultisetList eqA_dec defax
+R4019:4025 CoLoR.MultisetList MultisetList eqA_dec defax
+R4019:4025 CoLoR.MultisetList MultisetList eqA_dec defax
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4083:4096 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4141:4154 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4141:4154 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4141:4154 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4141:4154 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4184:4201 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4184:4201 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4184:4201 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4184:4201 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4184:4201 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4184:4201 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4184:4201 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4226:4239 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4226:4239 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4226:4239 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4226:4239 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4285:4302 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4285:4302 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4285:4302 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4285:4302 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4332:4345 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4332:4345 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4332:4345 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4332:4345 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4332:4345 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4332:4345 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4332:4345 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4370:4387 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4370:4387 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4370:4387 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4370:4387 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4434:4451 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+prf 4479:4492 MultisetList diff_mult_comp
+binder 4503:4503 <> x:32
+binder 4505:4505 <> N:33
+binder 4507:4507 <> M:34
+binder 4509:4510 <> M':35
+R4527:4530 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4518:4524 CoLoR.MultisetList MultisetList ::msets_scope:x_'=mul='_x not
+R4517:4517 CoLoR.MultisetList <> M:34 var
+R4525:4526 CoLoR.MultisetList <> M':35 var
+R4542:4544 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4532:4535 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R4541:4541 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R4531:4531 CoLoR.MultisetList <> x:32 var
+R4537:4539 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R4536:4536 CoLoR.MultisetList <> M:34 var
+R4540:4540 CoLoR.MultisetList <> N:33 var
+R4546:4549 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R4556:4556 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R4545:4545 CoLoR.MultisetList <> x:32 var
+R4552:4554 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R4550:4551 CoLoR.MultisetList <> M':35 var
+R4555:4555 CoLoR.MultisetList <> N:33 var
+R4604:4613 CoLoR.MultisetList MultisetList meq_multeq thm
+R4604:4613 CoLoR.MultisetList MultisetList meq_multeq thm
+R4682:4691 CoLoR.MultisetList MultisetList multeq_meq thm
+R4682:4691 CoLoR.MultisetList MultisetList multeq_meq thm
+R4718:4724 CoLoR.MultisetList MultisetList eqA_dec defax
+R4718:4724 CoLoR.MultisetList MultisetList eqA_dec defax
+R4756:4769 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4756:4769 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4756:4769 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4756:4769 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4756:4769 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4756:4769 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4756:4769 CoLoR.MultisetList MultisetList mult_remove_in thm
+R4794:4803 CoLoR.MultisetList MultisetList meq_multeq thm
+R4794:4803 CoLoR.MultisetList MultisetList meq_multeq thm
+R4794:4803 CoLoR.MultisetList MultisetList meq_multeq thm
+R4844:4861 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4844:4861 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4844:4861 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4844:4861 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4844:4861 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4844:4861 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4844:4861 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R4883:4892 CoLoR.MultisetList MultisetList meq_multeq thm
+R4883:4892 CoLoR.MultisetList MultisetList meq_multeq thm
+prf 4920:4935 MultisetList diff_perm_single
+binder 4946:4946 <> x:36
+binder 4948:4948 <> a:37
+binder 4950:4950 <> b:38
+binder 4952:4952 <> M:39
+binder 4954:4954 <> N:40
+R4981:4983 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4963:4966 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R4980:4980 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R4962:4962 CoLoR.MultisetList <> x:36 var
+R4968:4971 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R4979:4979 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R4967:4967 CoLoR.MultisetList <> M:39 var
+R4973:4974 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4972:4972 CoLoR.MultisetList <> a:37 var
+R4976:4977 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4975:4975 CoLoR.MultisetList <> b:38 var
+R4978:4978 CoLoR.MultisetList <> N:40 var
+R4985:4988 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5002:5002 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R4984:4984 CoLoR.MultisetList <> x:36 var
+R4990:4993 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5001:5001 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R4989:4989 CoLoR.MultisetList <> M:39 var
+R4995:4996 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4994:4994 CoLoR.MultisetList <> b:38 var
+R4998:4999 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4997:4997 CoLoR.MultisetList <> a:37 var
+R5000:5000 CoLoR.MultisetList <> N:40 var
+R5054:5067 CoLoR.MultisetList MultisetList diff_mult_comp thm
+R5054:5067 CoLoR.MultisetList MultisetList diff_mult_comp thm
+R5080:5089 CoLoR.MultisetList MultisetList multeq_meq thm
+R5080:5089 CoLoR.MultisetList MultisetList multeq_meq thm
+R5112:5129 CoLoR.MultisetList MultisetList remove_perm_single thm
+R5112:5129 CoLoR.MultisetList MultisetList remove_perm_single thm
+prf 5148:5156 MultisetList diff_perm
+binder 5167:5167 <> M:41
+binder 5169:5169 <> N:42
+binder 5171:5171 <> a:43
+binder 5173:5173 <> x:44
+R5199:5201 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5181:5184 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5198:5198 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5180:5180 CoLoR.MultisetList <> x:44 var
+R5185:5185 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5193:5196 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5186:5188 CoLoR.MultisetList MultisetList rem def
+R5192:5192 CoLoR.MultisetList <> M:41 var
+R5190:5190 CoLoR.MultisetList <> a:43 var
+R5197:5197 CoLoR.MultisetList <> N:42 var
+R5203:5206 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5220:5220 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5202:5202 CoLoR.MultisetList <> x:44 var
+R5207:5209 CoLoR.MultisetList MultisetList rem def
+R5215:5217 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5214:5214 CoLoR.MultisetList <> M:41 var
+R5218:5218 CoLoR.MultisetList <> N:42 var
+R5211:5211 CoLoR.MultisetList <> a:43 var
+R5329:5332 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5337:5337 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5322:5324 CoLoR.MultisetList MultisetList rem def
+R5334:5335 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5347:5350 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5358:5358 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5352:5353 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5355:5356 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5329:5332 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5337:5337 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5322:5324 CoLoR.MultisetList MultisetList rem def
+R5334:5335 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5347:5350 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5358:5358 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5352:5353 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5355:5356 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5374:5389 CoLoR.MultisetList MultisetList diff_perm_single thm
+R5374:5389 CoLoR.MultisetList MultisetList diff_perm_single thm
+R5374:5389 CoLoR.MultisetList MultisetList diff_perm_single thm
+prf 5430:5446 MultisetList diff_mult_step_eq
+binder 5457:5457 <> M:45
+binder 5459:5459 <> N:46
+binder 5461:5461 <> a:47
+binder 5463:5463 <> x:48
+R5477:5480 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5471:5475 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R5470:5470 CoLoR.MultisetList <> x:48 var
+R5476:5476 CoLoR.MultisetList <> a:47 var
+R5498:5500 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5482:5485 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5497:5497 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5481:5481 CoLoR.MultisetList <> x:48 var
+R5493:5495 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5486:5488 CoLoR.MultisetList MultisetList rem def
+R5492:5492 CoLoR.MultisetList <> M:45 var
+R5490:5490 CoLoR.MultisetList <> a:47 var
+R5496:5496 CoLoR.MultisetList <> N:46 var
+R5521:5523 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R5504:5507 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5513:5513 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5503:5503 CoLoR.MultisetList <> x:48 var
+R5509:5511 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5508:5508 CoLoR.MultisetList <> M:45 var
+R5512:5512 CoLoR.MultisetList <> N:46 var
+R5578:5586 CoLoR.MultisetList MultisetList diff_perm thm
+R5578:5586 CoLoR.MultisetList MultisetList diff_perm thm
+R5578:5586 CoLoR.MultisetList MultisetList diff_perm thm
+R5601:5614 CoLoR.MultisetList MultisetList mult_remove_in thm
+R5601:5614 CoLoR.MultisetList MultisetList mult_remove_in thm
+R5601:5614 CoLoR.MultisetList MultisetList mult_remove_in thm
+R5601:5614 CoLoR.MultisetList MultisetList mult_remove_in thm
+prf 5642:5659 MultisetList diff_mult_step_neq
+binder 5670:5670 <> M:49
+binder 5672:5672 <> N:50
+binder 5674:5674 <> a:51
+binder 5676:5676 <> x:52
+R5692:5695 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5683:5684 Coq.Init.Logic <> ::type_scope:'~'_x not
+R5686:5690 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R5685:5685 CoLoR.MultisetList <> x:52 var
+R5691:5691 CoLoR.MultisetList <> a:51 var
+R5713:5715 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5697:5700 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5712:5712 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5696:5696 CoLoR.MultisetList <> x:52 var
+R5708:5710 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5701:5703 CoLoR.MultisetList MultisetList rem def
+R5707:5707 CoLoR.MultisetList <> M:49 var
+R5705:5705 CoLoR.MultisetList <> a:51 var
+R5711:5711 CoLoR.MultisetList <> N:50 var
+R5717:5720 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5726:5726 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5716:5716 CoLoR.MultisetList <> x:52 var
+R5722:5724 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5721:5721 CoLoR.MultisetList <> M:49 var
+R5725:5725 CoLoR.MultisetList <> N:50 var
+R5775:5783 CoLoR.MultisetList MultisetList diff_perm thm
+R5775:5783 CoLoR.MultisetList MultisetList diff_perm thm
+R5775:5783 CoLoR.MultisetList MultisetList diff_perm thm
+R5798:5815 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R5798:5815 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R5798:5815 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+R5798:5815 CoLoR.MultisetList MultisetList mult_remove_not_in thm
+prf 5844:5852 MultisetList diff_mult
+binder 5863:5863 <> M:53
+binder 5865:5865 <> N:54
+binder 5867:5867 <> x:55
+R5903:5905 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5893:5896 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5902:5902 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5892:5892 CoLoR.MultisetList <> x:55 var
+R5898:5900 CoLoR.MultisetList MultisetList ::msets_scope:x_'-'_x not
+R5897:5897 CoLoR.MultisetList <> M:53 var
+R5901:5901 CoLoR.MultisetList <> N:54 var
+R5920:5922 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R5909:5911 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5908:5908 CoLoR.MultisetList <> x:55 var
+R5912:5912 CoLoR.MultisetList <> M:53 var
+R5925:5927 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R5924:5924 CoLoR.MultisetList <> x:55 var
+R5928:5928 CoLoR.MultisetList <> N:54 var
+R6080:6086 CoLoR.MultisetList MultisetList eqA_dec defax
+R6080:6086 CoLoR.MultisetList MultisetList eqA_dec defax
+R6127:6129 CoLoR.MultisetList MultisetList rem def
+R6127:6129 CoLoR.MultisetList MultisetList rem def
+R6145:6161 CoLoR.MultisetList MultisetList diff_mult_step_eq thm
+R6145:6161 CoLoR.MultisetList MultisetList diff_mult_step_eq thm
+R6145:6161 CoLoR.MultisetList MultisetList diff_mult_step_eq thm
+R6228:6230 CoLoR.MultisetList MultisetList rem def
+R6228:6230 CoLoR.MultisetList MultisetList rem def
+R6246:6263 CoLoR.MultisetList MultisetList diff_mult_step_neq thm
+R6246:6263 CoLoR.MultisetList MultisetList diff_mult_step_neq thm
+R6246:6263 CoLoR.MultisetList MultisetList diff_mult_step_neq thm
+def 6313:6329 MultisetList intersection_mult
+R6334:6349 CoLoR.MultisetCore <> inter_as_diff_ok thm
+R6361:6369 CoLoR.MultisetList MultisetList diff_mult thm
+R6356:6359 CoLoR.MultisetList MultisetList diff def
+R6351:6354 CoLoR.MultisetList MultisetList mult def
+prf 6381:6397 MultisetList singleton_mult_in
+binder 6408:6408 <> x:56
+binder 6410:6410 <> y:57
+R6420:6423 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6414:6418 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R6413:6413 CoLoR.MultisetList <> x:56 var
+R6419:6419 CoLoR.MultisetList <> y:57 var
+R6433:6435 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6425:6427 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R6424:6424 CoLoR.MultisetList <> x:56 var
+R6428:6429 CoLoR.MultisetList MultisetList ::msets_scope:'{{'_x_'}}' not
+R6431:6432 CoLoR.MultisetList MultisetList ::msets_scope:'{{'_x_'}}' not
+R6430:6430 CoLoR.MultisetList <> y:57 var
+R6480:6486 CoLoR.MultisetList MultisetList eqA_dec defax
+R6480:6486 CoLoR.MultisetList MultisetList eqA_dec defax
+prf 6531:6550 MultisetList singleton_mult_notin
+binder 6561:6561 <> x:58
+binder 6563:6563 <> y:59
+R6574:6577 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6566:6566 Coq.Init.Logic <> ::type_scope:'~'_x not
+R6568:6572 CoLoR.RelExtras Eqset :::x_'=A='_x not
+R6567:6567 CoLoR.MultisetList <> x:58 var
+R6573:6573 CoLoR.MultisetList <> y:59 var
+R6587:6589 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6579:6581 CoLoR.MultisetList MultisetList ::msets_scope:x_'/'_x not
+R6578:6578 CoLoR.MultisetList <> x:58 var
+R6582:6583 CoLoR.MultisetList MultisetList ::msets_scope:'{{'_x_'}}' not
+R6585:6586 CoLoR.MultisetList MultisetList ::msets_scope:'{{'_x_'}}' not
+R6584:6584 CoLoR.MultisetList <> y:59 var
+R6634:6640 CoLoR.MultisetList MultisetList eqA_dec defax
+R6634:6640 CoLoR.MultisetList MultisetList eqA_dec defax
+prf 6683:6699 MultisetList rev_list_ind_type
+R6722:6725 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6714:6721 CoLoR.MultisetList MultisetList Multiset def
+binder 6710:6710 <> P:60
+R6741:6744 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6736:6736 CoLoR.MultisetList <> P:60 var
+R6738:6740 Coq.Init.Datatypes <> nil constr
+R6745:6745 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6787:6791 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 6753:6753 <> a:61
+binder 6755:6755 <> l:62
+R6767:6770 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6758:6758 CoLoR.MultisetList <> P:60 var
+R6761:6763 Coq.Lists.List <> rev def
+R6765:6765 CoLoR.MultisetList <> l:62 var
+R6771:6771 CoLoR.MultisetList <> P:60 var
+R6774:6776 Coq.Lists.List <> rev def
+R6780:6783 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6779:6779 CoLoR.MultisetList <> a:61 var
+R6784:6784 CoLoR.MultisetList <> l:62 var
+binder 6799:6799 <> l:63
+R6802:6802 CoLoR.MultisetList <> P:60 var
+R6805:6807 Coq.Lists.List <> rev def
+R6809:6809 CoLoR.MultisetList <> l:63 var
+prf 6866:6877 MultisetList rev_ind_type
+R6900:6903 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6892:6899 CoLoR.MultisetList MultisetList Multiset def
+binder 6888:6888 <> P:64
+R6919:6922 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6914:6914 CoLoR.MultisetList <> P:64 var
+R6916:6918 Coq.Init.Datatypes <> nil constr
+R6923:6923 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6960:6964 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 6931:6931 <> x:65
+binder 6933:6933 <> l:66
+R6939:6942 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6936:6936 CoLoR.MultisetList <> P:64 var
+R6938:6938 CoLoR.MultisetList <> l:66 var
+R6943:6943 CoLoR.MultisetList <> P:64 var
+R6947:6950 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6946:6946 CoLoR.MultisetList <> l:66 var
+R6952:6955 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6951:6951 CoLoR.MultisetList <> x:65 var
+R6956:6958 Coq.Init.Datatypes <> nil constr
+binder 6972:6972 <> l:67
+R6975:6975 CoLoR.MultisetList <> P:64 var
+R6977:6977 CoLoR.MultisetList <> l:67 var
+R7011:7024 Coq.Lists.List <> rev_involutive thm
+R7011:7024 Coq.Lists.List <> rev_involutive thm
+R7069:7085 CoLoR.MultisetList MultisetList rev_list_ind_type thm
+R7069:7085 CoLoR.MultisetList MultisetList rev_list_ind_type thm
+R7149:7151 Coq.Lists.List <> rev def
+R7149:7151 Coq.Lists.List <> rev def
+prf 7189:7201 MultisetList mset_ind_type
+R7224:7227 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7216:7223 CoLoR.MultisetList MultisetList Multiset def
+binder 7212:7212 <> P:68
+R7245:7248 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7238:7238 CoLoR.MultisetList <> P:68 var
+R7240:7244 CoLoR.MultisetList MultisetList empty def
+R7249:7249 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7286:7290 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7257:7257 <> M:69
+binder 7259:7259 <> a:70
+R7265:7268 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7262:7262 CoLoR.MultisetList <> P:68 var
+R7264:7264 CoLoR.MultisetList <> M:69 var
+R7269:7269 CoLoR.MultisetList <> P:68 var
+R7272:7276 CoLoR.MultisetList MultisetList union def
+R7280:7281 CoLoR.MultisetList MultisetList ::msets_scope:'{{'_x_'}}' not
+R7283:7284 CoLoR.MultisetList MultisetList ::msets_scope:'{{'_x_'}}' not
+R7282:7282 CoLoR.MultisetList <> a:70 var
+R7278:7278 CoLoR.MultisetList <> M:69 var
+binder 7298:7298 <> M:71
+R7301:7301 CoLoR.MultisetList <> P:68 var
+R7303:7303 CoLoR.MultisetList <> M:71 var
+R7349:7360 CoLoR.MultisetList MultisetList rev_ind_type thm
+R7349:7360 CoLoR.MultisetList MultisetList rev_ind_type thm
+R7417:7432 CoLoR.MultisetList MultisetList.SpecConformation <> sec
+R7460:7462 CoLoR.MultisetList MultisetList meq def
+R7472:7476 CoLoR.MultisetList MultisetList empty def
+R7492:7500 CoLoR.MultisetList MultisetList singleton def
+R7516:7519 CoLoR.MultisetList MultisetList mult def
+R7535:7539 CoLoR.MultisetList MultisetList union def
+R7555:7558 CoLoR.MultisetList MultisetList diff def
+R7886:7895 CoLoR.MultisetList MultisetList empty_mult thm
+R7912:7921 CoLoR.MultisetList MultisetList union_mult thm
+R7931:7939 CoLoR.MultisetList MultisetList diff_mult thm
+R7949:7965 CoLoR.MultisetList MultisetList intersection_mult def
+R7999:8010 CoLoR.MultisetList MultisetList <> mod
