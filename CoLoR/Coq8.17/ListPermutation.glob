@@ -1,4 +1,4 @@
-DIGEST 1c733d4877c4636c82dc3207b5174b7a
+DIGEST 0923fcb981123447d8bb438d363b91f7
 FCoLoR.ListPermutation
 R224:229 Coq.Setoids.Setoid <> <> lib
 R231:239 Coq.Classes.Morphisms <> <> lib
@@ -507,400 +507,400 @@ R5749:5765 Coq.Sorting.PermutSetoid <> list_contents_app thm
 R5749:5765 Coq.Sorting.PermutSetoid <> list_contents_app thm
 R5749:5765 Coq.Sorting.PermutSetoid <> list_contents_app thm
 R5749:5765 Coq.Sorting.PermutSetoid <> list_contents_app thm
-R5791:5798 Coq.Arith.Plus <> plus_0_r abbrev
-R5791:5798 Coq.Arith.Plus <> plus_0_r abbrev
-R5791:5798 Coq.Arith.Plus <> plus_0_r abbrev
-R5844:5846 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R5832:5835 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5843:5843 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5838:5840 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5844:5846 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R5832:5835 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5843:5843 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5838:5840 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5863:5866 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5872:5872 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5868:5870 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5886:5888 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5882:5884 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5863:5866 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5872:5872 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5868:5870 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5886:5888 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5882:5884 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5969:5978 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5914:5925 Coq.Sets.Multiset <> multiplicity def
-R5928:5940 Coq.Sorting.PermutSetoid <> list_contents def
-R5951:5960 CoLoR.ListExtras <> initialSeg def
-R5942:5948 CoLoR.ListPermutation <> Permutation.eqA_dec var
-R5979:5990 Coq.Sets.Multiset <> multiplicity def
-R5993:6005 Coq.Sorting.PermutSetoid <> list_contents def
-R6016:6023 CoLoR.ListExtras <> finalSeg def
-R6007:6013 CoLoR.ListPermutation <> Permutation.eqA_dec var
-R6045:6056 Coq.Sets.Multiset <> multiplicity def
-R6065:6077 Coq.Sorting.PermutSetoid <> list_contents def
-R6102:6105 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R6088:6097 CoLoR.ListExtras <> initialSeg def
-R6106:6113 CoLoR.ListExtras <> finalSeg def
-R6079:6085 CoLoR.ListPermutation <> Permutation.eqA_dec var
-R5969:5978 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5914:5925 Coq.Sets.Multiset <> multiplicity def
-R5928:5940 Coq.Sorting.PermutSetoid <> list_contents def
-R5951:5960 CoLoR.ListExtras <> initialSeg def
-R5942:5948 CoLoR.ListPermutation <> Permutation.eqA_dec var
-R5979:5990 Coq.Sets.Multiset <> multiplicity def
-R5993:6005 Coq.Sorting.PermutSetoid <> list_contents def
-R6016:6023 CoLoR.ListExtras <> finalSeg def
-R6007:6013 CoLoR.ListPermutation <> Permutation.eqA_dec var
-R6045:6056 Coq.Sets.Multiset <> multiplicity def
-R6065:6077 Coq.Sorting.PermutSetoid <> list_contents def
-R6102:6105 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R6088:6097 CoLoR.ListExtras <> initialSeg def
-R6106:6113 CoLoR.ListExtras <> finalSeg def
-R6079:6085 CoLoR.ListPermutation <> Permutation.eqA_dec var
-R6137:6160 CoLoR.ListExtras <> initialSeg_finalSeg_full thm
-R6137:6160 CoLoR.ListExtras <> initialSeg_finalSeg_full thm
-R6137:6160 CoLoR.ListExtras <> initialSeg_finalSeg_full thm
-R6220:6236 Coq.Sorting.PermutSetoid <> list_contents_app thm
-R6220:6236 Coq.Sorting.PermutSetoid <> list_contents_app thm
-R6220:6236 Coq.Sorting.PermutSetoid <> list_contents_app thm
-R6269:6279 CoLoR.ListPermutation Permutation <> sec
-sec 6291:6297 <> ListSim
-var 6312:6312 ListSim A
-var 6333:6333 ListSim B
-var 6354:6354 ListSim R
-R6359:6362 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R6358:6358 CoLoR.ListPermutation <> ListSim.A var
-R6364:6367 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R6363:6363 CoLoR.ListPermutation <> ListSim.B var
-ind 6387:6394 <> list_sim
-constr 6429:6438 <> conv_empty
-constr 6469:6477 <> conv_cons
-R6403:6406 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R6397:6400 Coq.Init.Datatypes <> list ind
-R6402:6402 CoLoR.ListPermutation <> ListSim.A var
-R6413:6416 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R6407:6410 Coq.Init.Datatypes <> list ind
-R6412:6412 CoLoR.ListPermutation <> ListSim.B var
-R6448:6455 CoLoR.ListPermutation <> list_sim:56 ind
-R6461:6463 Coq.Init.Datatypes <> nil constr
-R6457:6459 Coq.Init.Datatypes <> nil constr
-binder 6487:6487 <> x:58
-binder 6489:6489 <> y:59
-binder 6491:6492 <> xs:60
-binder 6494:6495 <> ys:61
-R6509:6518 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R6504:6504 CoLoR.ListPermutation <> ListSim.R var
-R6508:6508 CoLoR.ListPermutation <> y:59 var
-R6506:6506 CoLoR.ListPermutation <> x:58 var
-R6533:6542 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R6519:6526 CoLoR.ListPermutation <> list_sim:56 ind
-R6531:6532 CoLoR.ListPermutation <> ys:61 var
-R6528:6529 CoLoR.ListPermutation <> xs:60 var
-R6543:6550 CoLoR.ListPermutation <> list_sim:56 ind
-R6562:6563 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R6561:6561 CoLoR.ListPermutation <> y:59 var
-R6564:6565 CoLoR.ListPermutation <> ys:61 var
-R6554:6555 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R6553:6553 CoLoR.ListPermutation <> x:58 var
-R6556:6557 CoLoR.ListPermutation <> xs:60 var
-prf 6578:6589 <> list_sim_nth
-binder 6600:6600 <> p:62
-binder 6602:6602 <> l:63
-binder 6604:6605 <> l':64
-binder 6607:6607 <> a:65
-R6623:6630 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R6610:6617 CoLoR.ListPermutation <> list_sim ind
-R6621:6622 CoLoR.ListPermutation <> l':64 var
-R6619:6619 CoLoR.ListPermutation <> l:63 var
-R6653:6660 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R6644:6646 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R6631:6639 Coq.Lists.List <> nth_error def
-R6643:6643 CoLoR.ListPermutation <> p:62 var
-R6641:6641 CoLoR.ListPermutation <> l:63 var
-R6647:6650 Coq.Init.Datatypes <> Some constr
-R6652:6652 CoLoR.ListPermutation <> a:65 var
-R6661:6667 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R6669:6670 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 6668:6668 <> b:66
-R6694:6697 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R6685:6687 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R6671:6679 Coq.Lists.List <> nth_error def
-R6684:6684 CoLoR.ListPermutation <> p:62 var
-R6681:6682 CoLoR.ListPermutation <> l':64 var
-R6688:6691 Coq.Init.Datatypes <> Some constr
-R6693:6693 CoLoR.ListPermutation <> b:66 var
-R6698:6698 CoLoR.ListPermutation <> ListSim.R var
-R6702:6702 CoLoR.ListPermutation <> b:66 var
-R6700:6700 CoLoR.ListPermutation <> a:65 var
-prf 7085:7100 <> list_sim_nth_rev
-binder 7111:7111 <> p:67
-binder 7113:7113 <> l:68
-binder 7115:7116 <> l':69
-binder 7118:7118 <> b:70
-R7134:7141 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7121:7128 CoLoR.ListPermutation <> list_sim ind
-R7132:7133 CoLoR.ListPermutation <> l':69 var
-R7130:7130 CoLoR.ListPermutation <> l:68 var
-R7165:7172 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7156:7158 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7142:7150 Coq.Lists.List <> nth_error def
-R7155:7155 CoLoR.ListPermutation <> p:67 var
-R7152:7153 CoLoR.ListPermutation <> l':69 var
-R7159:7162 Coq.Init.Datatypes <> Some constr
-R7164:7164 CoLoR.ListPermutation <> b:70 var
-R7173:7179 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R7181:7182 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 7180:7180 <> a:71
-R7205:7208 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R7196:7198 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7183:7191 Coq.Lists.List <> nth_error def
-R7195:7195 CoLoR.ListPermutation <> p:67 var
-R7193:7193 CoLoR.ListPermutation <> l:68 var
-R7199:7202 Coq.Init.Datatypes <> Some constr
-R7204:7204 CoLoR.ListPermutation <> a:71 var
-R7209:7209 CoLoR.ListPermutation <> ListSim.R var
-R7213:7213 CoLoR.ListPermutation <> b:70 var
-R7211:7211 CoLoR.ListPermutation <> a:71 var
-prf 7596:7607 <> list_sim_app
-binder 7618:7619 <> l1:72
-binder 7621:7623 <> l1':73
-binder 7625:7626 <> l2:74
-binder 7628:7630 <> l2':75
-R7652:7655 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7637:7644 CoLoR.ListPermutation <> list_sim ind
-R7649:7651 CoLoR.ListPermutation <> l1':73 var
-R7646:7647 CoLoR.ListPermutation <> l1:72 var
-R7671:7674 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7656:7663 CoLoR.ListPermutation <> list_sim ind
-R7668:7670 CoLoR.ListPermutation <> l2':75 var
-R7665:7666 CoLoR.ListPermutation <> l2:74 var
-R7675:7682 CoLoR.ListPermutation <> list_sim ind
-R7699:7702 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R7696:7698 CoLoR.ListPermutation <> l1':73 var
-R7703:7705 CoLoR.ListPermutation <> l2':75 var
-R7687:7690 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R7685:7686 CoLoR.ListPermutation <> l1:72 var
-R7691:7692 CoLoR.ListPermutation <> l2:74 var
-prf 7862:7876 <> list_sim_unique
-binder 7887:7887 <> l:76
-binder 7889:7889 <> m:77
-binder 7891:7892 <> m':78
-R7899:7899 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7978:7986 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 7907:7907 <> x:79
-binder 7909:7909 <> y:80
-binder 7911:7912 <> y':81
-R7921:7924 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7915:7916 Coq.Lists.List <> In def
-R7920:7920 CoLoR.ListPermutation <> l:76 var
-R7918:7918 CoLoR.ListPermutation <> x:79 var
-R7931:7934 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7925:7926 Coq.Lists.List <> In def
-R7930:7930 CoLoR.ListPermutation <> m:77 var
-R7928:7928 CoLoR.ListPermutation <> y:80 var
-R7943:7952 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7935:7936 Coq.Lists.List <> In def
-R7941:7942 CoLoR.ListPermutation <> m':78 var
-R7938:7939 CoLoR.ListPermutation <> y':81 var
-R7958:7961 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7953:7953 CoLoR.ListPermutation <> ListSim.R var
-R7957:7957 CoLoR.ListPermutation <> y:80 var
-R7955:7955 CoLoR.ListPermutation <> x:79 var
-R7968:7971 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7962:7962 CoLoR.ListPermutation <> ListSim.R var
-R7966:7967 CoLoR.ListPermutation <> y':81 var
-R7964:7964 CoLoR.ListPermutation <> x:79 var
-R7973:7975 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7972:7972 CoLoR.ListPermutation <> y:80 var
-R7976:7977 CoLoR.ListPermutation <> y':81 var
-R7999:8002 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7987:7994 CoLoR.ListPermutation <> list_sim ind
-R7998:7998 CoLoR.ListPermutation <> m:77 var
-R7996:7996 CoLoR.ListPermutation <> l:76 var
-R8016:8019 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R8003:8010 CoLoR.ListPermutation <> list_sim ind
-R8014:8015 CoLoR.ListPermutation <> m':78 var
-R8012:8012 CoLoR.ListPermutation <> l:76 var
-R8021:8023 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R8020:8020 CoLoR.ListPermutation <> m:77 var
-R8024:8025 CoLoR.ListPermutation <> m':78 var
-R8185:8195 CoLoR.ListUtil <> list_In_nth thm
-R8185:8195 CoLoR.ListUtil <> list_In_nth thm
-prf 8515:8533 <> list_sim_insert_nth
-binder 8544:8544 <> p:82
-binder 8546:8546 <> l:83
-binder 8548:8549 <> l':84
-binder 8551:8551 <> a:85
-binder 8553:8554 <> a':86
-R8579:8586 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R8570:8572 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R8557:8565 Coq.Lists.List <> nth_error def
-R8569:8569 CoLoR.ListPermutation <> p:82 var
-R8567:8567 CoLoR.ListPermutation <> l:83 var
-R8573:8576 Coq.Init.Datatypes <> Some constr
-R8578:8578 CoLoR.ListPermutation <> a:85 var
-R8611:8614 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R8601:8603 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R8587:8595 Coq.Lists.List <> nth_error def
-R8600:8600 CoLoR.ListPermutation <> p:82 var
-R8597:8598 CoLoR.ListPermutation <> l':84 var
-R8604:8607 Coq.Init.Datatypes <> Some constr
-R8609:8610 CoLoR.ListPermutation <> a':86 var
-R8621:8628 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R8615:8615 CoLoR.ListPermutation <> ListSim.R var
-R8619:8620 CoLoR.ListPermutation <> a':86 var
-R8617:8617 CoLoR.ListPermutation <> a:85 var
-R8668:8671 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R8629:8636 CoLoR.ListPermutation <> list_sim ind
-R8654:8661 CoLoR.ListExtras <> drop_nth def
-R8666:8666 CoLoR.ListPermutation <> p:82 var
-R8663:8664 CoLoR.ListPermutation <> l':84 var
-R8639:8646 CoLoR.ListExtras <> drop_nth def
-R8650:8650 CoLoR.ListPermutation <> p:82 var
-R8648:8648 CoLoR.ListPermutation <> l:83 var
-R8672:8679 CoLoR.ListPermutation <> list_sim ind
-R8683:8684 CoLoR.ListPermutation <> l':84 var
-R8681:8681 CoLoR.ListPermutation <> l:83 var
-R8914:8926 CoLoR.ListExtras <> drop_nth_cons thm
-R8914:8926 CoLoR.ListExtras <> drop_nth_cons thm
-R8914:8926 CoLoR.ListExtras <> drop_nth_cons thm
-R8914:8926 CoLoR.ListExtras <> drop_nth_cons thm
-R8914:8926 CoLoR.ListExtras <> drop_nth_cons thm
-R9079:9091 CoLoR.ListExtras <> drop_nth_succ thm
-R9079:9091 CoLoR.ListExtras <> drop_nth_succ thm
-R9079:9091 CoLoR.ListExtras <> drop_nth_succ thm
-R9079:9091 CoLoR.ListExtras <> drop_nth_succ thm
-R9079:9091 CoLoR.ListExtras <> drop_nth_succ thm
-prf 9194:9208 <> list_sim_length
-binder 9219:9219 <> l:87
-binder 9221:9222 <> l':88
-R9238:9241 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R9225:9232 CoLoR.ListPermutation <> list_sim ind
-R9236:9237 CoLoR.ListPermutation <> l':88 var
-R9234:9234 CoLoR.ListPermutation <> l:87 var
-R9250:9252 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R9242:9247 Coq.Init.Datatypes <> length def
-R9249:9249 CoLoR.ListPermutation <> l:87 var
-R9253:9258 Coq.Init.Datatypes <> length def
-R9260:9261 CoLoR.ListPermutation <> l':88 var
-prf 9443:9455 <> list_sim_tail
-binder 9466:9466 <> l:89
-binder 9468:9469 <> l':90
-R9489:9492 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R9476:9483 CoLoR.ListPermutation <> list_sim ind
-R9487:9488 CoLoR.ListPermutation <> l':90 var
-R9485:9485 CoLoR.ListPermutation <> l:89 var
-R9493:9500 CoLoR.ListPermutation <> list_sim ind
-R9512:9515 Coq.Lists.List <> tail abbrev
-R9517:9518 CoLoR.ListPermutation <> l':90 var
-R9503:9506 Coq.Lists.List <> tail abbrev
-R9508:9508 CoLoR.ListPermutation <> l:89 var
-R9605:9611 CoLoR.ListPermutation ListSim <> sec
-sec 9623:9633 <> ListSim_iso
-var 9654:9654 ListSim_iso A
-var 9665:9665 ListSim_iso P
-var 9667:9669 ListSim_iso eqA
-var 9690:9696 ListSim_iso eqA_dec
-var 9741:9755 ListSim_iso eqA_Equivalence
-var 9781:9790 ListSim_iso P_eqA_comp
-R9673:9680 Coq.Relations.Relation_Definitions <> relation def
-R9682:9682 CoLoR.ListPermutation <> A:91 var
-binder 9707:9707 <> x:94
-binder 9709:9709 <> y:95
-R9712:9712 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R9720:9724 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R9733:9733 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R9713:9715 CoLoR.ListPermutation <> eqA:92 var
-R9719:9719 CoLoR.ListPermutation <> y:95 var
-R9717:9717 CoLoR.ListPermutation <> x:94 var
-R9725:9725 Coq.Init.Logic <> ::type_scope:'~'_x not
-R9726:9728 CoLoR.ListPermutation <> eqA:92 var
-R9732:9732 CoLoR.ListPermutation <> y:95 var
-R9730:9730 CoLoR.ListPermutation <> x:94 var
-R9759:9769 Coq.Classes.RelationClasses <> Equivalence class
-R9771:9773 CoLoR.ListPermutation <> eqA:92 var
-R9794:9799 Coq.Classes.Morphisms <> Proper class
-R9824:9824 CoLoR.ListPermutation <> P:93 var
-R9805:9809 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
-R9802:9804 CoLoR.ListPermutation <> eqA:92 var
-R9813:9817 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
-R9810:9812 CoLoR.ListPermutation <> eqA:92 var
-R9818:9821 Coq.Program.Basics <> impl def
-def 9842:9850 <> list_simA
-R9856:9863 CoLoR.ListPermutation <> list_sim ind
-R9865:9865 CoLoR.ListPermutation <> ListSim_iso.A var
-R9867:9867 CoLoR.ListPermutation <> ListSim_iso.A var
-R9869:9869 CoLoR.ListPermutation <> ListSim_iso.P var
-prf 9881:9900 <> list_sim_permutation
-binder 9911:9911 <> l:99
-binder 9913:9914 <> l':100
-binder 9916:9916 <> m:101
-R9937:9940 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R9923:9931 CoLoR.ListPermutation <> list_simA def
-R9935:9936 CoLoR.ListPermutation <> l':100 var
-R9933:9933 CoLoR.ListPermutation <> l:99 var
-R9964:9971 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R9941:9951 Coq.Sorting.PermutSetoid <> permutation def
-R9963:9963 CoLoR.ListPermutation <> m:101 var
-R9961:9961 CoLoR.ListPermutation <> l:99 var
-R9953:9959 CoLoR.ListPermutation <> ListSim_iso.eqA_dec var
-R9972:9978 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R9981:9982 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 9979:9980 <> m':102
-R9997:10000 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R9983:9991 CoLoR.ListPermutation <> list_simA def
-R9995:9996 CoLoR.ListPermutation <> m':102 var
-R9993:9993 CoLoR.ListPermutation <> m:101 var
-R10001:10011 Coq.Sorting.PermutSetoid <> permutation def
-R10024:10025 CoLoR.ListPermutation <> m':102 var
-R10021:10022 CoLoR.ListPermutation <> l':100 var
-R10013:10019 CoLoR.ListPermutation <> ListSim_iso.eqA_dec var
-R10049:10061 Coq.Setoids.Setoid <> Setoid_Theory def
-R10146:10148 Coq.Init.Datatypes <> nil constr
-R10154:10154 CoLoR.ListPermutation <> ListSim_iso.A var
-R10146:10148 Coq.Init.Datatypes <> nil constr
-R10154:10154 CoLoR.ListPermutation <> ListSim_iso.A var
-R10247:10253 CoLoR.ListPermutation <> ListSim_iso.eqA_dec var
-R10247:10253 CoLoR.ListPermutation <> ListSim_iso.eqA_dec var
-R10282:10284 CoLoR.ListPermutation <> ListSim_iso.eqA var
-R10282:10284 CoLoR.ListPermutation <> ListSim_iso.eqA var
-R10330:10340 Coq.Sorting.PermutSetoid <> permut_refl thm
-R10330:10340 Coq.Sorting.PermutSetoid <> permut_refl thm
-R10417:10432 CoLoR.ListPermutation <> permutation_cons thm
-R10434:10448 CoLoR.ListPermutation <> ListSim_iso.eqA_Equivalence var
-R10417:10432 CoLoR.ListPermutation <> permutation_cons thm
-R10434:10448 CoLoR.ListPermutation <> ListSim_iso.eqA_Equivalence var
-R10503:10510 CoLoR.ListExtras <> drop_nth def
-R10503:10510 CoLoR.ListExtras <> drop_nth def
-R10594:10597 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R10585:10590 Coq.Init.Datatypes <> length def
-R10594:10597 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R10585:10590 Coq.Init.Datatypes <> length def
-R10618:10632 CoLoR.ListPermutation <> list_sim_length thm
-R10618:10632 CoLoR.ListPermutation <> list_sim_length thm
-R10618:10632 CoLoR.ListPermutation <> list_sim_length thm
-R10654:10661 CoLoR.ListUtil <> nth_some thm
-R10654:10661 CoLoR.ListUtil <> nth_some thm
-R10686:10700 CoLoR.ListExtras <> drop_nth_length thm
-R10686:10700 CoLoR.ListExtras <> drop_nth_length thm
-R10729:10738 CoLoR.ListExtras <> insert_nth def
-R10729:10738 CoLoR.ListExtras <> insert_nth def
-R10768:10776 CoLoR.ListPermutation <> list_simA def
-R10785:10803 CoLoR.ListPermutation <> list_sim_insert_nth thm
-R10785:10803 CoLoR.ListPermutation <> list_sim_insert_nth thm
-R10838:10851 CoLoR.ListExtras <> nth_insert_nth thm
-R10838:10851 CoLoR.ListExtras <> nth_insert_nth thm
-R10873:10882 CoLoR.ListPermutation <> ListSim_iso.P_eqA_comp var
-R10873:10882 CoLoR.ListPermutation <> ListSim_iso.P_eqA_comp var
-R10946:10964 CoLoR.ListExtras <> drop_nth_insert_nth thm
-R10946:10964 CoLoR.ListExtras <> drop_nth_insert_nth thm
-R10946:10964 CoLoR.ListExtras <> drop_nth_insert_nth thm
-R10946:10964 CoLoR.ListExtras <> drop_nth_insert_nth thm
-R10986:11000 CoLoR.ListPermutation <> permutation_sym thm
-R10986:11000 CoLoR.ListPermutation <> permutation_sym thm
-R11013:11030 CoLoR.ListPermutation <> insert_nth_permut' thm
-R11013:11030 CoLoR.ListPermutation <> insert_nth_permut' thm
-R11043:11057 CoLoR.ListPermutation <> permutation_sym thm
-R11043:11057 CoLoR.ListPermutation <> permutation_sym thm
-R11081:11091 CoLoR.ListPermutation ListSim_iso <> sec
+R5791:5801 Coq.Arith.PeanoNat Nat add_0_r thm
+R5791:5801 Coq.Arith.PeanoNat Nat add_0_r thm
+R5791:5801 Coq.Arith.PeanoNat Nat add_0_r thm
+R5847:5849 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5835:5838 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5846:5846 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5841:5843 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5847:5849 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5835:5838 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5846:5846 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5841:5843 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5866:5869 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5875:5875 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5871:5873 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5889:5891 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5885:5887 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5866:5869 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5875:5875 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5871:5873 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5889:5891 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5885:5887 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5972:5981 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5917:5928 Coq.Sets.Multiset <> multiplicity def
+R5931:5943 Coq.Sorting.PermutSetoid <> list_contents def
+R5954:5963 CoLoR.ListExtras <> initialSeg def
+R5945:5951 CoLoR.ListPermutation <> Permutation.eqA_dec var
+R5982:5993 Coq.Sets.Multiset <> multiplicity def
+R5996:6008 Coq.Sorting.PermutSetoid <> list_contents def
+R6019:6026 CoLoR.ListExtras <> finalSeg def
+R6010:6016 CoLoR.ListPermutation <> Permutation.eqA_dec var
+R6048:6059 Coq.Sets.Multiset <> multiplicity def
+R6068:6080 Coq.Sorting.PermutSetoid <> list_contents def
+R6105:6108 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6091:6100 CoLoR.ListExtras <> initialSeg def
+R6109:6116 CoLoR.ListExtras <> finalSeg def
+R6082:6088 CoLoR.ListPermutation <> Permutation.eqA_dec var
+R5972:5981 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5917:5928 Coq.Sets.Multiset <> multiplicity def
+R5931:5943 Coq.Sorting.PermutSetoid <> list_contents def
+R5954:5963 CoLoR.ListExtras <> initialSeg def
+R5945:5951 CoLoR.ListPermutation <> Permutation.eqA_dec var
+R5982:5993 Coq.Sets.Multiset <> multiplicity def
+R5996:6008 Coq.Sorting.PermutSetoid <> list_contents def
+R6019:6026 CoLoR.ListExtras <> finalSeg def
+R6010:6016 CoLoR.ListPermutation <> Permutation.eqA_dec var
+R6048:6059 Coq.Sets.Multiset <> multiplicity def
+R6068:6080 Coq.Sorting.PermutSetoid <> list_contents def
+R6105:6108 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6091:6100 CoLoR.ListExtras <> initialSeg def
+R6109:6116 CoLoR.ListExtras <> finalSeg def
+R6082:6088 CoLoR.ListPermutation <> Permutation.eqA_dec var
+R6140:6163 CoLoR.ListExtras <> initialSeg_finalSeg_full thm
+R6140:6163 CoLoR.ListExtras <> initialSeg_finalSeg_full thm
+R6140:6163 CoLoR.ListExtras <> initialSeg_finalSeg_full thm
+R6223:6239 Coq.Sorting.PermutSetoid <> list_contents_app thm
+R6223:6239 Coq.Sorting.PermutSetoid <> list_contents_app thm
+R6223:6239 Coq.Sorting.PermutSetoid <> list_contents_app thm
+R6272:6282 CoLoR.ListPermutation Permutation <> sec
+sec 6294:6300 <> ListSim
+var 6315:6315 ListSim A
+var 6336:6336 ListSim B
+var 6357:6357 ListSim R
+R6362:6365 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6361:6361 CoLoR.ListPermutation <> ListSim.A var
+R6367:6370 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6366:6366 CoLoR.ListPermutation <> ListSim.B var
+ind 6390:6397 <> list_sim
+constr 6432:6441 <> conv_empty
+constr 6472:6480 <> conv_cons
+R6406:6409 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6400:6403 Coq.Init.Datatypes <> list ind
+R6405:6405 CoLoR.ListPermutation <> ListSim.A var
+R6416:6419 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6410:6413 Coq.Init.Datatypes <> list ind
+R6415:6415 CoLoR.ListPermutation <> ListSim.B var
+R6451:6458 CoLoR.ListPermutation <> list_sim:56 ind
+R6464:6466 Coq.Init.Datatypes <> nil constr
+R6460:6462 Coq.Init.Datatypes <> nil constr
+binder 6490:6490 <> x:58
+binder 6492:6492 <> y:59
+binder 6494:6495 <> xs:60
+binder 6497:6498 <> ys:61
+R6512:6521 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6507:6507 CoLoR.ListPermutation <> ListSim.R var
+R6511:6511 CoLoR.ListPermutation <> y:59 var
+R6509:6509 CoLoR.ListPermutation <> x:58 var
+R6536:6545 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6522:6529 CoLoR.ListPermutation <> list_sim:56 ind
+R6534:6535 CoLoR.ListPermutation <> ys:61 var
+R6531:6532 CoLoR.ListPermutation <> xs:60 var
+R6546:6553 CoLoR.ListPermutation <> list_sim:56 ind
+R6565:6566 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6564:6564 CoLoR.ListPermutation <> y:59 var
+R6567:6568 CoLoR.ListPermutation <> ys:61 var
+R6557:6558 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6556:6556 CoLoR.ListPermutation <> x:58 var
+R6559:6560 CoLoR.ListPermutation <> xs:60 var
+prf 6581:6592 <> list_sim_nth
+binder 6603:6603 <> p:62
+binder 6605:6605 <> l:63
+binder 6607:6608 <> l':64
+binder 6610:6610 <> a:65
+R6626:6633 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6613:6620 CoLoR.ListPermutation <> list_sim ind
+R6624:6625 CoLoR.ListPermutation <> l':64 var
+R6622:6622 CoLoR.ListPermutation <> l:63 var
+R6656:6663 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6647:6649 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6634:6642 Coq.Lists.List <> nth_error def
+R6646:6646 CoLoR.ListPermutation <> p:62 var
+R6644:6644 CoLoR.ListPermutation <> l:63 var
+R6650:6653 Coq.Init.Datatypes <> Some constr
+R6655:6655 CoLoR.ListPermutation <> a:65 var
+R6664:6670 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R6672:6673 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 6671:6671 <> b:66
+R6697:6700 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R6688:6690 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6674:6682 Coq.Lists.List <> nth_error def
+R6687:6687 CoLoR.ListPermutation <> p:62 var
+R6684:6685 CoLoR.ListPermutation <> l':64 var
+R6691:6694 Coq.Init.Datatypes <> Some constr
+R6696:6696 CoLoR.ListPermutation <> b:66 var
+R6701:6701 CoLoR.ListPermutation <> ListSim.R var
+R6705:6705 CoLoR.ListPermutation <> b:66 var
+R6703:6703 CoLoR.ListPermutation <> a:65 var
+prf 7088:7103 <> list_sim_nth_rev
+binder 7114:7114 <> p:67
+binder 7116:7116 <> l:68
+binder 7118:7119 <> l':69
+binder 7121:7121 <> b:70
+R7137:7144 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7124:7131 CoLoR.ListPermutation <> list_sim ind
+R7135:7136 CoLoR.ListPermutation <> l':69 var
+R7133:7133 CoLoR.ListPermutation <> l:68 var
+R7168:7175 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7159:7161 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7145:7153 Coq.Lists.List <> nth_error def
+R7158:7158 CoLoR.ListPermutation <> p:67 var
+R7155:7156 CoLoR.ListPermutation <> l':69 var
+R7162:7165 Coq.Init.Datatypes <> Some constr
+R7167:7167 CoLoR.ListPermutation <> b:70 var
+R7176:7182 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R7184:7185 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 7183:7183 <> a:71
+R7208:7211 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R7199:7201 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7186:7194 Coq.Lists.List <> nth_error def
+R7198:7198 CoLoR.ListPermutation <> p:67 var
+R7196:7196 CoLoR.ListPermutation <> l:68 var
+R7202:7205 Coq.Init.Datatypes <> Some constr
+R7207:7207 CoLoR.ListPermutation <> a:71 var
+R7212:7212 CoLoR.ListPermutation <> ListSim.R var
+R7216:7216 CoLoR.ListPermutation <> b:70 var
+R7214:7214 CoLoR.ListPermutation <> a:71 var
+prf 7599:7610 <> list_sim_app
+binder 7621:7622 <> l1:72
+binder 7624:7626 <> l1':73
+binder 7628:7629 <> l2:74
+binder 7631:7633 <> l2':75
+R7655:7658 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7640:7647 CoLoR.ListPermutation <> list_sim ind
+R7652:7654 CoLoR.ListPermutation <> l1':73 var
+R7649:7650 CoLoR.ListPermutation <> l1:72 var
+R7674:7677 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7659:7666 CoLoR.ListPermutation <> list_sim ind
+R7671:7673 CoLoR.ListPermutation <> l2':75 var
+R7668:7669 CoLoR.ListPermutation <> l2:74 var
+R7678:7685 CoLoR.ListPermutation <> list_sim ind
+R7702:7705 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R7699:7701 CoLoR.ListPermutation <> l1':73 var
+R7706:7708 CoLoR.ListPermutation <> l2':75 var
+R7690:7693 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R7688:7689 CoLoR.ListPermutation <> l1:72 var
+R7694:7695 CoLoR.ListPermutation <> l2:74 var
+prf 7865:7879 <> list_sim_unique
+binder 7890:7890 <> l:76
+binder 7892:7892 <> m:77
+binder 7894:7895 <> m':78
+R7902:7902 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7981:7989 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7910:7910 <> x:79
+binder 7912:7912 <> y:80
+binder 7914:7915 <> y':81
+R7924:7927 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7918:7919 Coq.Lists.List <> In def
+R7923:7923 CoLoR.ListPermutation <> l:76 var
+R7921:7921 CoLoR.ListPermutation <> x:79 var
+R7934:7937 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7928:7929 Coq.Lists.List <> In def
+R7933:7933 CoLoR.ListPermutation <> m:77 var
+R7931:7931 CoLoR.ListPermutation <> y:80 var
+R7946:7955 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7938:7939 Coq.Lists.List <> In def
+R7944:7945 CoLoR.ListPermutation <> m':78 var
+R7941:7942 CoLoR.ListPermutation <> y':81 var
+R7961:7964 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7956:7956 CoLoR.ListPermutation <> ListSim.R var
+R7960:7960 CoLoR.ListPermutation <> y:80 var
+R7958:7958 CoLoR.ListPermutation <> x:79 var
+R7971:7974 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7965:7965 CoLoR.ListPermutation <> ListSim.R var
+R7969:7970 CoLoR.ListPermutation <> y':81 var
+R7967:7967 CoLoR.ListPermutation <> x:79 var
+R7976:7978 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7975:7975 CoLoR.ListPermutation <> y:80 var
+R7979:7980 CoLoR.ListPermutation <> y':81 var
+R8002:8005 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7990:7997 CoLoR.ListPermutation <> list_sim ind
+R8001:8001 CoLoR.ListPermutation <> m:77 var
+R7999:7999 CoLoR.ListPermutation <> l:76 var
+R8019:8022 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8006:8013 CoLoR.ListPermutation <> list_sim ind
+R8017:8018 CoLoR.ListPermutation <> m':78 var
+R8015:8015 CoLoR.ListPermutation <> l:76 var
+R8024:8026 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8023:8023 CoLoR.ListPermutation <> m:77 var
+R8027:8028 CoLoR.ListPermutation <> m':78 var
+R8188:8198 CoLoR.ListUtil <> list_In_nth thm
+R8188:8198 CoLoR.ListUtil <> list_In_nth thm
+prf 8518:8536 <> list_sim_insert_nth
+binder 8547:8547 <> p:82
+binder 8549:8549 <> l:83
+binder 8551:8552 <> l':84
+binder 8554:8554 <> a:85
+binder 8556:8557 <> a':86
+R8582:8589 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8573:8575 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8560:8568 Coq.Lists.List <> nth_error def
+R8572:8572 CoLoR.ListPermutation <> p:82 var
+R8570:8570 CoLoR.ListPermutation <> l:83 var
+R8576:8579 Coq.Init.Datatypes <> Some constr
+R8581:8581 CoLoR.ListPermutation <> a:85 var
+R8614:8617 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8604:8606 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8590:8598 Coq.Lists.List <> nth_error def
+R8603:8603 CoLoR.ListPermutation <> p:82 var
+R8600:8601 CoLoR.ListPermutation <> l':84 var
+R8607:8610 Coq.Init.Datatypes <> Some constr
+R8612:8613 CoLoR.ListPermutation <> a':86 var
+R8624:8631 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8618:8618 CoLoR.ListPermutation <> ListSim.R var
+R8622:8623 CoLoR.ListPermutation <> a':86 var
+R8620:8620 CoLoR.ListPermutation <> a:85 var
+R8671:8674 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8632:8639 CoLoR.ListPermutation <> list_sim ind
+R8657:8664 CoLoR.ListExtras <> drop_nth def
+R8669:8669 CoLoR.ListPermutation <> p:82 var
+R8666:8667 CoLoR.ListPermutation <> l':84 var
+R8642:8649 CoLoR.ListExtras <> drop_nth def
+R8653:8653 CoLoR.ListPermutation <> p:82 var
+R8651:8651 CoLoR.ListPermutation <> l:83 var
+R8675:8682 CoLoR.ListPermutation <> list_sim ind
+R8686:8687 CoLoR.ListPermutation <> l':84 var
+R8684:8684 CoLoR.ListPermutation <> l:83 var
+R8917:8929 CoLoR.ListExtras <> drop_nth_cons thm
+R8917:8929 CoLoR.ListExtras <> drop_nth_cons thm
+R8917:8929 CoLoR.ListExtras <> drop_nth_cons thm
+R8917:8929 CoLoR.ListExtras <> drop_nth_cons thm
+R8917:8929 CoLoR.ListExtras <> drop_nth_cons thm
+R9082:9094 CoLoR.ListExtras <> drop_nth_succ thm
+R9082:9094 CoLoR.ListExtras <> drop_nth_succ thm
+R9082:9094 CoLoR.ListExtras <> drop_nth_succ thm
+R9082:9094 CoLoR.ListExtras <> drop_nth_succ thm
+R9082:9094 CoLoR.ListExtras <> drop_nth_succ thm
+prf 9197:9211 <> list_sim_length
+binder 9222:9222 <> l:87
+binder 9224:9225 <> l':88
+R9241:9244 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9228:9235 CoLoR.ListPermutation <> list_sim ind
+R9239:9240 CoLoR.ListPermutation <> l':88 var
+R9237:9237 CoLoR.ListPermutation <> l:87 var
+R9253:9255 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9245:9250 Coq.Init.Datatypes <> length def
+R9252:9252 CoLoR.ListPermutation <> l:87 var
+R9256:9261 Coq.Init.Datatypes <> length def
+R9263:9264 CoLoR.ListPermutation <> l':88 var
+prf 9446:9458 <> list_sim_tail
+binder 9469:9469 <> l:89
+binder 9471:9472 <> l':90
+R9492:9495 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9479:9486 CoLoR.ListPermutation <> list_sim ind
+R9490:9491 CoLoR.ListPermutation <> l':90 var
+R9488:9488 CoLoR.ListPermutation <> l:89 var
+R9496:9503 CoLoR.ListPermutation <> list_sim ind
+R9515:9518 Coq.Lists.List <> tail abbrev
+R9520:9521 CoLoR.ListPermutation <> l':90 var
+R9506:9509 Coq.Lists.List <> tail abbrev
+R9511:9511 CoLoR.ListPermutation <> l:89 var
+R9608:9614 CoLoR.ListPermutation ListSim <> sec
+sec 9626:9636 <> ListSim_iso
+var 9657:9657 ListSim_iso A
+var 9668:9668 ListSim_iso P
+var 9670:9672 ListSim_iso eqA
+var 9693:9699 ListSim_iso eqA_dec
+var 9744:9758 ListSim_iso eqA_Equivalence
+var 9784:9793 ListSim_iso P_eqA_comp
+R9676:9683 Coq.Relations.Relation_Definitions <> relation def
+R9685:9685 CoLoR.ListPermutation <> A:91 var
+binder 9710:9710 <> x:94
+binder 9712:9712 <> y:95
+R9715:9715 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9723:9727 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9736:9736 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9716:9718 CoLoR.ListPermutation <> eqA:92 var
+R9722:9722 CoLoR.ListPermutation <> y:95 var
+R9720:9720 CoLoR.ListPermutation <> x:94 var
+R9728:9728 Coq.Init.Logic <> ::type_scope:'~'_x not
+R9729:9731 CoLoR.ListPermutation <> eqA:92 var
+R9735:9735 CoLoR.ListPermutation <> y:95 var
+R9733:9733 CoLoR.ListPermutation <> x:94 var
+R9762:9772 Coq.Classes.RelationClasses <> Equivalence class
+R9774:9776 CoLoR.ListPermutation <> eqA:92 var
+R9797:9802 Coq.Classes.Morphisms <> Proper class
+R9827:9827 CoLoR.ListPermutation <> P:93 var
+R9808:9812 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R9805:9807 CoLoR.ListPermutation <> eqA:92 var
+R9816:9820 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R9813:9815 CoLoR.ListPermutation <> eqA:92 var
+R9821:9824 Coq.Program.Basics <> impl def
+def 9845:9853 <> list_simA
+R9859:9866 CoLoR.ListPermutation <> list_sim ind
+R9868:9868 CoLoR.ListPermutation <> ListSim_iso.A var
+R9870:9870 CoLoR.ListPermutation <> ListSim_iso.A var
+R9872:9872 CoLoR.ListPermutation <> ListSim_iso.P var
+prf 9884:9903 <> list_sim_permutation
+binder 9914:9914 <> l:99
+binder 9916:9917 <> l':100
+binder 9919:9919 <> m:101
+R9940:9943 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9926:9934 CoLoR.ListPermutation <> list_simA def
+R9938:9939 CoLoR.ListPermutation <> l':100 var
+R9936:9936 CoLoR.ListPermutation <> l:99 var
+R9967:9974 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9944:9954 Coq.Sorting.PermutSetoid <> permutation def
+R9966:9966 CoLoR.ListPermutation <> m:101 var
+R9964:9964 CoLoR.ListPermutation <> l:99 var
+R9956:9962 CoLoR.ListPermutation <> ListSim_iso.eqA_dec var
+R9975:9981 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R9984:9985 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 9982:9983 <> m':102
+R10000:10003 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R9986:9994 CoLoR.ListPermutation <> list_simA def
+R9998:9999 CoLoR.ListPermutation <> m':102 var
+R9996:9996 CoLoR.ListPermutation <> m:101 var
+R10004:10014 Coq.Sorting.PermutSetoid <> permutation def
+R10027:10028 CoLoR.ListPermutation <> m':102 var
+R10024:10025 CoLoR.ListPermutation <> l':100 var
+R10016:10022 CoLoR.ListPermutation <> ListSim_iso.eqA_dec var
+R10052:10064 Coq.Setoids.Setoid <> Setoid_Theory def
+R10149:10151 Coq.Init.Datatypes <> nil constr
+R10157:10157 CoLoR.ListPermutation <> ListSim_iso.A var
+R10149:10151 Coq.Init.Datatypes <> nil constr
+R10157:10157 CoLoR.ListPermutation <> ListSim_iso.A var
+R10250:10256 CoLoR.ListPermutation <> ListSim_iso.eqA_dec var
+R10250:10256 CoLoR.ListPermutation <> ListSim_iso.eqA_dec var
+R10285:10287 CoLoR.ListPermutation <> ListSim_iso.eqA var
+R10285:10287 CoLoR.ListPermutation <> ListSim_iso.eqA var
+R10333:10343 Coq.Sorting.PermutSetoid <> permut_refl thm
+R10333:10343 Coq.Sorting.PermutSetoid <> permut_refl thm
+R10420:10435 CoLoR.ListPermutation <> permutation_cons thm
+R10437:10451 CoLoR.ListPermutation <> ListSim_iso.eqA_Equivalence var
+R10420:10435 CoLoR.ListPermutation <> permutation_cons thm
+R10437:10451 CoLoR.ListPermutation <> ListSim_iso.eqA_Equivalence var
+R10506:10513 CoLoR.ListExtras <> drop_nth def
+R10506:10513 CoLoR.ListExtras <> drop_nth def
+R10597:10600 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R10588:10593 Coq.Init.Datatypes <> length def
+R10597:10600 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R10588:10593 Coq.Init.Datatypes <> length def
+R10621:10635 CoLoR.ListPermutation <> list_sim_length thm
+R10621:10635 CoLoR.ListPermutation <> list_sim_length thm
+R10621:10635 CoLoR.ListPermutation <> list_sim_length thm
+R10657:10664 CoLoR.ListUtil <> nth_some thm
+R10657:10664 CoLoR.ListUtil <> nth_some thm
+R10689:10703 CoLoR.ListExtras <> drop_nth_length thm
+R10689:10703 CoLoR.ListExtras <> drop_nth_length thm
+R10732:10741 CoLoR.ListExtras <> insert_nth def
+R10732:10741 CoLoR.ListExtras <> insert_nth def
+R10771:10779 CoLoR.ListPermutation <> list_simA def
+R10788:10806 CoLoR.ListPermutation <> list_sim_insert_nth thm
+R10788:10806 CoLoR.ListPermutation <> list_sim_insert_nth thm
+R10841:10854 CoLoR.ListExtras <> nth_insert_nth thm
+R10841:10854 CoLoR.ListExtras <> nth_insert_nth thm
+R10876:10885 CoLoR.ListPermutation <> ListSim_iso.P_eqA_comp var
+R10876:10885 CoLoR.ListPermutation <> ListSim_iso.P_eqA_comp var
+R10949:10967 CoLoR.ListExtras <> drop_nth_insert_nth thm
+R10949:10967 CoLoR.ListExtras <> drop_nth_insert_nth thm
+R10949:10967 CoLoR.ListExtras <> drop_nth_insert_nth thm
+R10949:10967 CoLoR.ListExtras <> drop_nth_insert_nth thm
+R10989:11003 CoLoR.ListPermutation <> permutation_sym thm
+R10989:11003 CoLoR.ListPermutation <> permutation_sym thm
+R11016:11033 CoLoR.ListPermutation <> insert_nth_permut' thm
+R11016:11033 CoLoR.ListPermutation <> insert_nth_permut' thm
+R11046:11060 CoLoR.ListPermutation <> permutation_sym thm
+R11046:11060 CoLoR.ListPermutation <> permutation_sym thm
+R11084:11094 CoLoR.ListPermutation ListSim_iso <> sec

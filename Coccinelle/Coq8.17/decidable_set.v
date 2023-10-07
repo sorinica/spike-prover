@@ -63,8 +63,8 @@ Add Relation A eq_A
 
 End Convert.
 
-Lemma beq_nat_ok : forall n1 n2, if beq_nat n1 n2 then n1 = n2 else n1 <> n2.
+Lemma beq_nat_ok : forall n1 n2, if Nat.eqb n1 n2 then n1 = n2 else n1 <> n2.
 Proof.
 fix beq_nat_ok 1; intros [ | n1] [ | n2]; simpl; try reflexivity; try discriminate.
-generalize (beq_nat_ok n1 n2); case (beq_nat n1 n2); [intro; subst; reflexivity | intros n1_diff_n2 H; apply n1_diff_n2; injection H; intro; assumption].
+generalize (beq_nat_ok n1 n2); case (Nat.eqb n1 n2); [intro; subst; reflexivity | intros n1_diff_n2 H; apply n1_diff_n2; injection H; intro; assumption].
 Defined.

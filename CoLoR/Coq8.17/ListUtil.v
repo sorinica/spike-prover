@@ -19,6 +19,7 @@ From Coq Require Import Setoid SetoidList FunInd.
 From Coq Require Export List.
 From Coq Require Program.
 
+
 Arguments nil {A}.
 Arguments incl {A} l m.
 Arguments in_app_or [A l m a] _.
@@ -264,7 +265,9 @@ Infix "[=]" := lequiv (at level 70).
 
 #[export] Instance lequiv_rel A : Equivalence (@lequiv A).
 
-Proof. fo. Qed.
+Proof. constructor. fo. fo. constructor. inversion H0. inversion H. unfold incl. unfold incl in H3. unfold incl in H1. clear H H0 H2 H4. intros. apply H3 in H. apply H1 in H. trivial. fo. Qed.
+
+
 
 #[export] Instance app_lequiv A : Proper (lequiv ==> lequiv ==> lequiv) (@app A).
 
@@ -307,7 +310,7 @@ End nil.
 
 #[export] Instance cons_incl A : Proper (eq ==> incl ==> incl) (@cons A). 
 
-Proof. intros x x' xx'. subst x'. fo. Qed.
+Proof. intros x x' xx'. subst x'.  fo. Qed.
 
 #[export] Instance cons_lequiv A : Proper (eq ==> lequiv ==> lequiv) (@cons A).
 
@@ -544,14 +547,29 @@ Section select.
 
   Proof.
     induction l; intro x; simpl. fo.
-    destruct (f_dec a); fo. subst. hyp.
+    destruct (f_dec a). intro. split. unfold In in H. destruct H. fo. replace ((fix In (a : A) (l : list A) {struct l} : Prop := match l with
+                                                        | nil => False
+                                                        | b :: m => b = a \/ In a m
+                                                        end) x (select l)) with  (In x (select l)) in H.
+    apply IHl in H. right. destruct H. auto. auto.
+    destruct (f_dec a).
+    unfold In in H. destruct H. rewrite <- H. trivial. replace ((fix In (a : A) (l : list A) {struct l} : Prop := match l with
+                                                        | nil => False
+                                                        | b :: m => b = a \/ In a m
+                                                        end) x (select l)) with  (In x (select l)) in H. 
+    apply IHl in H. destruct H. trivial. auto. contradict n. trivial.
+    intro. apply IHl in H. split. destruct H. right. trivial.
+    destruct H. trivial.
   Qed.
 
   Lemma select_complete : forall l x, In x l -> f x -> In x (select l).
 
   Proof.
-    induction l; intro x; simpl. fo.
-    intros [h|h]; destruct (f_dec a); subst; fo.
+    induction l; intro x; simpl. intros. trivial.
+    intros [h|h]; destruct (f_dec a); subst. intros. unfold In. left. trivial. 
+    intros. contradict n. trivial. 
+    intros. unfold In. right. apply IHl. trivial. trivial. 
+    apply IHl. trivial.
   Qed.
 
 End select.
@@ -713,8 +731,8 @@ Section remove.
   Lemma length_remove : forall (x : A) l, length (remove x l) <= length l.
 
   Proof.
-    induction l; simpl; intros. apply le_O_n. destruct (eq_dec a x).
-    apply le_trans with (length l). apply IHl. apply le_n_Sn. simpl.
+    induction l; simpl; intros. apply Nat.le_0_l. destruct (eq_dec a x).
+    apply Nat.le_trans with (length l). apply IHl. apply Nat.le_succ_diag_r. simpl.
     apply le_n_S. apply IHl.
   Qed.
 
@@ -723,8 +741,8 @@ Section remove.
 
   Proof.
     induction l; simpl; intros. contr. destruct (eq_dec a x).
-    apply le_lt_n_Sm.
-    apply length_remove. destruct H. rewrite H in n. tauto. simpl. apply lt_n_S.
+    apply Nat.lt_succ_r.
+    apply length_remove. destruct H. rewrite H in n. tauto. simpl. apply Nat.lt_succ_r.
     apply IHl. hyp.
   Qed.
 
@@ -823,8 +841,28 @@ Section removes.
 
   Proof.
     induction m; simpl; intros. tauto. case (In_dec a l); intro. rewrite IHm.
-    fo. subst. contr. simpl. rewrite IHm. fo. subst.
-    hyp.
+    split; intros. split; destruct H. right. trivial. trivial. destruct H. split. destruct H.
+    contradict H0. rewrite <- H. trivial. trivial. trivial.
+    
+    split; intros. split. unfold In in H. destruct H. left. trivial.
+    replace ((fix In (a : A) (l : list A) {struct l} : Prop := match l with
+                                                        | nil => False
+                                                        | b :: m => b = a \/ In a m
+                                                        end) x (removes l m)) with (In x (removes l m)) in H. rewrite IHm in H.
+    right. destruct H. trivial. auto.
+    unfold In in H. destruct H. 
+    rewrite <- H. trivial. replace ((fix In (a : A) (l : list A) {struct l} : Prop := match l with
+                                                        | nil => False
+                                                        | b :: m => b = a \/ In a m
+                                                        end) x (removes l m)) with (In x (removes l m)) in H. rewrite IHm in H.
+    destruct H. trivial. auto.
+
+    unfold In. destruct H. destruct H. left. trivial.
+    right. replace ((fix In (a : A) (l : list A) {struct l} : Prop := match l with
+                                                        | nil => False
+                                                        | b :: m => b = a \/ In a m
+                                                        end) x (removes l m)) with (In x (removes l m)).
+    rewrite IHm. split; trivial. auto.
   Qed.
 
 End removes.
@@ -955,7 +993,7 @@ Section pos.
 
     Proof.
       induction l; intro h; simpl. fo. destruct (eq_dec a x). lia.
-      apply lt_n_S. fo.
+      apply ->  Nat.succ_lt_mono. fo.
     Qed.
 
   End def.
@@ -1103,7 +1141,7 @@ Section Element_At_List.
 
   Proof.
     induction l; intros.
-    simpl. rewrite <- minus_n_O. refl.
+    simpl. rewrite Nat.sub_0_r. refl.
     destruct p. inversion H.
     simpl. rewrite IHl. refl. intuition.
   Qed.
@@ -1648,15 +1686,15 @@ Section ith.
 
   Fixpoint ith (l : list A) : forall i, i < length l -> A :=
     match l as l return forall i, i < length l -> A with
-      | nil => fun i H => False_rect A (lt_n_O H)
+      | nil => fun i H => False_rect A (Nat.nlt_0_r H)
       | cons x m => fun i =>
         match i return i < S (length m) -> A with
 	  | O => fun _ => x
-	  | S j => fun H => ith (lt_S_n H)
+	  | S j => fun H => ith (Arith_prebase.lt_S_n_stt j (length m) H)
         end
     end.
 
-  Lemma ith_In : forall l i (h : i < length l), In (ith h) l.
+Lemma ith_In : forall l i (h : i < length l), In (ith h) l.
 
   Proof.
     induction l; simpl; intros. lia. destruct i. auto. right. apply IHl.
@@ -1709,7 +1747,7 @@ Section pvalues.
     match n as n return (forall i, i < n -> A) -> list A with
       | 0 => fun _ => nil
       | S k => fun f =>
-        f 0 (lt_O_Sn k) :: pvalues (fun i h => f (S i) (lt_n_S h))
+        f 0 (Nat.lt_0_succ k) :: pvalues (fun i h => f (S i) (Arith_prebase.lt_n_S_stt i _ h))
     end.
 
   Lemma pvalues_eq : forall n (f g : forall i, i < n -> A),
@@ -1775,7 +1813,7 @@ Section fold_left.
   Definition feq f f' :=
     forall a a', eqA a a' -> forall b b', eqB b b' -> eqA (f a b) (f' a' b').
 
-  Global Instance fold_left_m_ext :
+  #[global] Instance fold_left_m_ext :
     Proper (feq ==> eqlistA eqB ==> eqA ==> eqA) (@fold_left A B).
 
   Proof.

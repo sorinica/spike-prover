@@ -21,6 +21,7 @@ equality on some type. *)
 
 Module LeibnizFacts (Import T : Typ).
 
+
   Definition eq : relation t := @Logic.eq t.
 
   #[export] Instance eq_refl : Reflexive eq.
@@ -29,7 +30,7 @@ Module LeibnizFacts (Import T : Typ).
 
   #[export] Instance eq_sym : Symmetric eq.
 
-  Proof. fo. Qed.
+  Proof. unfold Symmetric. intros. fo. unfold eq. unfold eq in H. rewrite H. trivial. Qed.
 
   #[export] Instance eq_trans : Transitive eq.
 

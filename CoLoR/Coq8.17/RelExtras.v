@@ -11,10 +11,10 @@ missing in the standard library.
 
 Set Implicit Arguments.
 
-From Coq Require Export Relations.
-From Coq Require Import Max Arith Setoid Morphisms Basics.
+Require Export Relations.
+Require Import Max Arith Setoid Morphisms Basics.
 
-From CoLoR Require Import LogicUtil RelUtil.
+Require Import LogicUtil RelUtil.
 (***********************************************************************)
 (** strict order *)
 
@@ -62,11 +62,11 @@ Module Type Eqset.
   Parameter eqA : relation A.
   Notation "X =A= Y" := (eqA X Y) (at level 70).
 
-  #[export] Declare Instance eqA_Equivalence : Equivalence eqA.
+   #[export] Declare Instance eqA_Equivalence : Equivalence eqA.
 
-  #[export] Hint Resolve (Seq_refl  A eqA eqA_Equivalence) : sets.
-  #[export] Hint Resolve (Seq_trans A eqA eqA_Equivalence) : sets.
-  #[export] Hint Resolve (Seq_sym   A eqA eqA_Equivalence) : sets.
+   #[export] Hint Resolve (Seq_refl  A eqA eqA_Equivalence) : sets.
+   #[export] Hint Resolve (Seq_trans A eqA eqA_Equivalence) : sets.
+   #[export] Hint Resolve (Seq_sym   A eqA eqA_Equivalence) : sets.
 
 End Eqset.
 
@@ -84,7 +84,7 @@ Module Eqset_def (A : SetA) <: Eqset.
 
   Definition eqA := eq (A:=A).
 
-  #[export] Instance eqA_Equivalence : Equivalence eqA.
+   #[export] Instance eqA_Equivalence : Equivalence eqA.
 
   Proof. unfold eqA. class. Qed.
 
@@ -101,7 +101,7 @@ Section Eqset_def_gtA_eqA_compat.
 
   Variables (A : Type) (gtA : relation A).
 
-  Instance Eqset_def_gtA_eqA_compat : Proper (eq ==> eq ==> impl) gtA.
+  #[export] Instance Eqset_def_gtA_eqA_compat : Proper (eq ==> eq ==> impl) gtA.
 
   Proof.
     intros x x' x_x' y y' y_y' x_y. rewrite <- x_x', <- y_y'; trivial.
@@ -135,19 +135,19 @@ Module OrdLemmas (Export P : Ord).
   Notation "X >=A Y" := (geA X Y) (at level 70).
   Notation "X <=A Y" := (leA X Y) (at level 70).
 
-  #[export] Hint Unfold ltA geA leA AccA : sets.
+   #[export] Hint Unfold ltA geA leA AccA : sets.
 
 (*REMOVE?*)
-  #[export] Instance gtA_morph : Proper (eqA ==> eqA ==> iff) gtA.
+   #[export] Instance gtA_morph : Proper (eqA ==> eqA ==> iff) gtA.
 
   Proof. intros a b ab c d cd. split; apply gtA_eqA_compat; (hyp||sym;hyp). Qed.
 
 (*REMOVE?*)
-  #[export] Instance ltA_morph : Proper (eqA ==> eqA ==> iff) ltA.
+   #[export] Instance ltA_morph : Proper (eqA ==> eqA ==> iff) ltA.
 
   Proof. intros a b ab c d cd. split; apply gtA_eqA_compat; (hyp||sym;hyp). Qed.
 
-  #[export] Instance AccA_morph : Proper (eqA ==> iff) AccA.
+   #[export] Instance AccA_morph : Proper (eqA ==> iff) AccA.
 
   Proof.
     intros a b eq_ab. split.
@@ -167,10 +167,10 @@ Module Type Poset.
 
   Parameter gtA_so : strict_order gtA.
 
-  #[export] Hint Resolve (sord_trans gtA_so): sets.
-  #[export] Hint Resolve (sord_irrefl gtA_so) : sets.
-  #[export] Hint Resolve (so_not_symmetric gtA_so) : sets.
-  #[export] Hint Resolve (so_strict gtA_so gtA_eqA_compat eqA_Equivalence) : sets.
+   #[export] Hint Resolve (sord_trans gtA_so): sets.
+   #[export] Hint Resolve (sord_irrefl gtA_so) : sets.
+   #[export] Hint Resolve (so_not_symmetric gtA_so) : sets.
+   #[export] Hint Resolve (so_strict gtA_so gtA_eqA_compat eqA_Equivalence) : sets.
 
 End Poset.
 
@@ -188,7 +188,7 @@ Module nat_ord <: Ord.
   Definition A := nat.
   Definition gtA := gt.
 
-  #[export] Instance gtA_eqA_compat : Proper (eq ==> eq ==> impl) gt.
+   #[export] Instance gtA_eqA_compat : Proper (eq ==> eq ==> impl) gt.
 
   Proof. firstorder congruence. Qed.
 

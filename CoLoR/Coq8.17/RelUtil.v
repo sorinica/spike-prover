@@ -18,6 +18,8 @@ From Coq Require Import Lia.
 From CoLoR Require Import LogicUtil.
 From CoLoR Require Export RelMidex.
 
+Ltac Tauto.intuition_solver ::= auto with *.
+
 Arguments inclusion {A} R1 R2.
 Arguments same_relation {A} R1 R2.
 Arguments transp {A} R x y.

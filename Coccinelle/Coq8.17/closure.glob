@@ -1,4 +1,4 @@
-DIGEST 173484f9c2e60be1326c22d31e87d2ff
+DIGEST d32c5c3f3eef282af19edc1429391e3c
 FCoccinelle.closure
 R812:817 Coq.Setoids.Setoid <> <> lib
 R835:843 Coq.Relations.Relations <> <> lib
@@ -145,1755 +145,1755 @@ R2634:2639 Coccinelle.TransClosure <> t_clos constr
 R2648:2653 Coccinelle.TransClosure <> t_step constr
 R2634:2639 Coccinelle.TransClosure <> t_clos constr
 R2648:2653 Coccinelle.TransClosure <> t_step constr
-R2759:2764 Coccinelle.TransClosure <> t_clos constr
-R2773:2778 Coccinelle.TransClosure <> t_step constr
-R2759:2764 Coccinelle.TransClosure <> t_clos constr
-R2773:2778 Coccinelle.TransClosure <> t_step constr
-R2799:2804 Coccinelle.TransClosure <> t_clos constr
-R2813:2819 Coccinelle.TransClosure <> t_trans constr
-R2799:2804 Coccinelle.TransClosure <> t_clos constr
-R2813:2819 Coccinelle.TransClosure <> t_trans constr
-R2890:2895 Coccinelle.TransClosure <> t_step constr
-R2910:2919 Coq.Init.Logic <> refl_equal abbrev
-R2890:2895 Coccinelle.TransClosure <> t_step constr
-R2910:2919 Coq.Init.Logic <> refl_equal abbrev
-R2930:2939 Coccinelle.closure <> trans_incl thm
-R2930:2939 Coccinelle.closure <> trans_incl thm
-prf 2987:2994 <> acc_star
-binder 3009:3009 <> A:25
-R3016:3023 Coq.Relations.Relation_Definitions <> relation def
-R3025:3025 Coccinelle.closure <> A:25 var
-binder 3012:3012 <> R:26
-binder 3028:3028 <> a:27
-R3038:3041 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R3031:3033 Coq.Init.Wf <> Acc ind
-R3037:3037 Coccinelle.closure <> a:27 var
-R3035:3035 Coccinelle.closure <> R:26 var
-binder 3049:3049 <> b:28
-R3075:3078 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R3053:3067 Coccinelle.TransClosure <> refl_trans_clos ind
-R3074:3074 Coccinelle.closure <> a:27 var
-R3072:3072 Coccinelle.closure <> b:28 var
-R3070:3070 Coccinelle.closure <> R:26 var
-R3079:3081 Coq.Init.Wf <> Acc ind
-R3085:3085 Coccinelle.closure <> b:28 var
-R3083:3083 Coccinelle.closure <> R:26 var
-R3184:3193 Coccinelle.TransClosure <> trans_clos ind
-R3169:3176 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R3184:3193 Coccinelle.TransClosure <> trans_clos ind
-R3169:3176 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R3222:3227 Coccinelle.TransClosure <> t_step constr
-R3222:3227 Coccinelle.TransClosure <> t_step constr
-R3248:3254 Coq.Init.Wf <> Acc_inv thm
-R3248:3254 Coq.Init.Wf <> Acc_inv thm
-R3280:3288 Coccinelle.closure <> acc_trans thm
-R3280:3288 Coccinelle.closure <> acc_trans thm
-ind 3316:3326 <> compose_rel
-constr 3369:3372 <> Comp
-binder 3328:3328 <> A:29
-R3339:3346 Coq.Relations.Relation_Definitions <> relation def
-R3348:3348 Coccinelle.closure <> A:29 var
-binder 3331:3332 <> R1:30
-binder 3334:3335 <> R2:31
-R3353:3360 Coq.Relations.Relation_Definitions <> relation def
-binder 3383:3384 <> a1:34
-binder 3386:3387 <> a2:35
-binder 3389:3390 <> a3:36
-R3401:3404 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R3393:3394 Coccinelle.closure <> R1:30 var
-R3396:3397 Coccinelle.closure <> a1:34 var
-R3399:3400 Coccinelle.closure <> a2:35 var
-R3413:3416 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R3405:3406 Coccinelle.closure <> R2:31 var
-R3408:3409 Coccinelle.closure <> a2:35 var
-R3411:3412 Coccinelle.closure <> a3:36 var
-R3417:3427 Coccinelle.closure <> compose_rel:32 ind
-R3438:3439 Coccinelle.closure <> a3:36 var
-R3435:3436 Coccinelle.closure <> a1:34 var
-R3432:3433 Coccinelle.closure <> R2:31 var
-R3429:3430 Coccinelle.closure <> R1:30 var
-sec 3451:3457 <> Compose
-var 3469:3469 Compose A
-var 3488:3489 Compose R1
-R3493:3500 Coq.Relations.Relation_Definitions <> relation def
-R3502:3502 Coccinelle.closure <> Compose.A var
-var 3514:3515 Compose R2
-R3519:3526 Coq.Relations.Relation_Definitions <> relation def
-R3528:3528 Coccinelle.closure <> Compose.A var
-prf 3538:3548 <> trans_union
-binder 3561:3561 <> a:40
-binder 3563:3563 <> b:41
-R3598:3605 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R3568:3577 Coccinelle.TransClosure <> trans_clos ind
-R3597:3597 Coccinelle.closure <> b:41 var
-R3595:3595 Coccinelle.closure <> a:40 var
-R3580:3584 Coq.Relations.Relation_Operators <> union def
-R3591:3592 Coccinelle.closure <> Compose.R2 var
-R3588:3589 Coccinelle.closure <> Compose.R1 var
-R3606:3610 Coq.Relations.Relation_Operators <> union def
-R3729:3729 Coccinelle.closure <> a:40 var
-R3731:3731 Coccinelle.closure <> b:41 var
-R3644:3654 Coccinelle.closure <> compose_rel ind
-R3678:3687 Coccinelle.TransClosure <> trans_clos ind
-R3690:3700 Coccinelle.closure <> compose_rel ind
-R3706:3720 Coccinelle.TransClosure <> refl_trans_clos ind
-R3722:3723 Coccinelle.closure <> Compose.R1 var
-R3702:3703 Coccinelle.closure <> Compose.R2 var
-R3657:3671 Coccinelle.TransClosure <> refl_trans_clos ind
-R3673:3674 Coccinelle.closure <> Compose.R1 var
-R3615:3624 Coccinelle.TransClosure <> trans_clos ind
-R3626:3627 Coccinelle.closure <> Compose.R1 var
-R3859:3864 Coccinelle.TransClosure <> t_step constr
-R3859:3864 Coccinelle.TransClosure <> t_step constr
-R3892:3895 Coccinelle.closure <> Comp constr
-R3892:3895 Coccinelle.closure <> Comp constr
-R3911:3916 Coccinelle.TransClosure <> r_step constr
-R3911:3916 Coccinelle.TransClosure <> r_step constr
-R3925:3930 Coccinelle.TransClosure <> t_step constr
-R3925:3930 Coccinelle.TransClosure <> t_step constr
-R3939:3942 Coccinelle.closure <> Comp constr
-R3939:3942 Coccinelle.closure <> Comp constr
-R3967:3972 Coccinelle.TransClosure <> r_step constr
-R3967:3972 Coccinelle.TransClosure <> r_step constr
-R4045:4051 Coccinelle.TransClosure <> t_trans constr
-R4045:4051 Coccinelle.TransClosure <> t_trans constr
-R4144:4147 Coccinelle.closure <> Comp constr
-R4144:4147 Coccinelle.closure <> Comp constr
-R4221:4226 Coccinelle.TransClosure <> t_clos constr
-R4235:4240 Coccinelle.TransClosure <> t_step constr
-R4221:4226 Coccinelle.TransClosure <> t_clos constr
-R4235:4240 Coccinelle.TransClosure <> t_step constr
-R4271:4276 Coccinelle.TransClosure <> t_clos constr
-R4285:4291 Coccinelle.TransClosure <> t_trans constr
-R4271:4276 Coccinelle.TransClosure <> t_clos constr
-R4285:4291 Coccinelle.TransClosure <> t_trans constr
-R4332:4335 Coccinelle.closure <> Comp constr
-R4332:4335 Coccinelle.closure <> Comp constr
-R4351:4356 Coccinelle.TransClosure <> r_step constr
-R4351:4356 Coccinelle.TransClosure <> r_step constr
-R4365:4370 Coccinelle.TransClosure <> t_step constr
-R4379:4382 Coccinelle.closure <> Comp constr
-R4365:4370 Coccinelle.TransClosure <> t_step constr
-R4379:4382 Coccinelle.closure <> Comp constr
-R4407:4412 Coccinelle.TransClosure <> t_clos constr
-R4407:4412 Coccinelle.TransClosure <> t_clos constr
-R4498:4501 Coccinelle.closure <> Comp constr
-R4498:4501 Coccinelle.closure <> Comp constr
-R4517:4522 Coccinelle.TransClosure <> r_step constr
-R4517:4522 Coccinelle.TransClosure <> r_step constr
-R4531:4537 Coccinelle.TransClosure <> t_trans constr
-R4531:4537 Coccinelle.TransClosure <> t_trans constr
-R4563:4566 Coccinelle.closure <> Comp constr
-R4563:4566 Coccinelle.closure <> Comp constr
-R4636:4637 Coccinelle.closure <> Compose.R1 var
-R4620:4629 Coccinelle.closure <> trans_incl thm
-R4636:4637 Coccinelle.closure <> Compose.R1 var
-R4620:4629 Coccinelle.closure <> trans_incl thm
-R4790:4807 Coccinelle.TransClosure <> trans_clos_is_clos thm
-R4790:4807 Coccinelle.TransClosure <> trans_clos_is_clos thm
-R4833:4843 Coccinelle.closure <> compose_rel ind
-R4849:4863 Coccinelle.TransClosure <> refl_trans_clos ind
-R4865:4866 Coccinelle.closure <> Compose.R1 var
-R4845:4846 Coccinelle.closure <> Compose.R2 var
-R4816:4825 Coccinelle.closure <> trans_incl thm
-R4833:4843 Coccinelle.closure <> compose_rel ind
-R4849:4863 Coccinelle.TransClosure <> refl_trans_clos ind
-R4865:4866 Coccinelle.closure <> Compose.R1 var
-R4845:4846 Coccinelle.closure <> Compose.R2 var
-R4816:4825 Coccinelle.closure <> trans_incl thm
-R5033:5038 Coccinelle.TransClosure <> t_step constr
-R5033:5038 Coccinelle.TransClosure <> t_step constr
-R5076:5082 Coccinelle.TransClosure <> t_trans constr
-R5076:5082 Coccinelle.TransClosure <> t_trans constr
-R5131:5132 Coccinelle.closure <> Compose.R1 var
-R5115:5124 Coccinelle.closure <> trans_incl thm
-R5131:5132 Coccinelle.closure <> Compose.R1 var
-R5115:5124 Coccinelle.closure <> trans_incl thm
-R5186:5204 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R5186:5204 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R5237:5238 Coccinelle.closure <> Compose.R1 var
-R5221:5230 Coccinelle.closure <> trans_incl thm
-R5237:5238 Coccinelle.closure <> Compose.R1 var
-R5221:5230 Coccinelle.closure <> trans_incl thm
-R5279:5296 Coccinelle.TransClosure <> trans_clos_is_clos thm
-R5279:5296 Coccinelle.TransClosure <> trans_clos_is_clos thm
-R5322:5332 Coccinelle.closure <> compose_rel ind
-R5338:5352 Coccinelle.TransClosure <> refl_trans_clos ind
-R5354:5355 Coccinelle.closure <> Compose.R1 var
-R5334:5335 Coccinelle.closure <> Compose.R2 var
-R5305:5314 Coccinelle.closure <> trans_incl thm
-R5322:5332 Coccinelle.closure <> compose_rel ind
-R5338:5352 Coccinelle.TransClosure <> refl_trans_clos ind
-R5354:5355 Coccinelle.closure <> Compose.R1 var
-R5334:5335 Coccinelle.closure <> Compose.R2 var
-R5305:5314 Coccinelle.closure <> trans_incl thm
-R5611:5612 Coccinelle.closure <> Compose.R1 var
-R5595:5604 Coccinelle.closure <> trans_incl thm
-R5611:5612 Coccinelle.closure <> Compose.R1 var
-R5595:5604 Coccinelle.closure <> trans_incl thm
-prf 5659:5673 <> trans_union_alt
-binder 5686:5686 <> a:42
-binder 5688:5688 <> b:43
-R5723:5730 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R5693:5702 Coccinelle.TransClosure <> trans_clos ind
-R5722:5722 Coccinelle.closure <> b:43 var
-R5720:5720 Coccinelle.closure <> a:42 var
-R5705:5709 Coq.Relations.Relation_Operators <> union def
-R5716:5717 Coccinelle.closure <> Compose.R2 var
-R5713:5714 Coccinelle.closure <> Compose.R1 var
-R5731:5735 Coq.Relations.Relation_Operators <> union def
-R5890:5890 Coccinelle.closure <> a:42 var
-R5892:5892 Coccinelle.closure <> b:43 var
-R5770:5780 Coccinelle.closure <> compose_rel ind
-R5869:5883 Coccinelle.TransClosure <> refl_trans_clos ind
-R5885:5886 Coccinelle.closure <> Compose.R1 var
-R5783:5792 Coccinelle.TransClosure <> trans_clos ind
-R5795:5805 Coccinelle.closure <> compose_rel ind
-R5828:5829 Coccinelle.closure <> Compose.R2 var
-R5808:5822 Coccinelle.TransClosure <> refl_trans_clos ind
-R5824:5825 Coccinelle.closure <> Compose.R1 var
-R5740:5749 Coccinelle.TransClosure <> trans_clos ind
-R5751:5752 Coccinelle.closure <> Compose.R1 var
-R5942:5966 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R5942:5966 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R5942:5966 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R6109:6112 Coccinelle.closure <> Comp constr
-R6109:6112 Coccinelle.closure <> Comp constr
-R6134:6137 Coccinelle.closure <> Comp constr
-R6134:6137 Coccinelle.closure <> Comp constr
-R6274:6298 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R6274:6298 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R6274:6298 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R6352:6355 Coccinelle.closure <> Comp constr
-R6352:6355 Coccinelle.closure <> Comp constr
-R6377:6380 Coccinelle.closure <> Comp constr
-R6377:6380 Coccinelle.closure <> Comp constr
-R6505:6508 Coccinelle.closure <> Comp constr
-R6505:6508 Coccinelle.closure <> Comp constr
-R6628:6646 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R6628:6646 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R6764:6767 Coccinelle.closure <> Comp constr
-R6764:6767 Coccinelle.closure <> Comp constr
-R6783:6801 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R6783:6801 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R6833:6836 Coccinelle.closure <> Comp constr
-R6833:6836 Coccinelle.closure <> Comp constr
-R6912:6913 Coccinelle.closure <> Compose.R1 var
-R6896:6905 Coccinelle.closure <> trans_incl thm
-R6912:6913 Coccinelle.closure <> Compose.R1 var
-R6896:6905 Coccinelle.closure <> trans_incl thm
-R7066:7083 Coccinelle.TransClosure <> trans_clos_is_clos thm
-R7066:7083 Coccinelle.TransClosure <> trans_clos_is_clos thm
-R7109:7119 Coccinelle.closure <> compose_rel ind
-R7142:7143 Coccinelle.closure <> Compose.R2 var
-R7122:7136 Coccinelle.TransClosure <> refl_trans_clos ind
-R7138:7139 Coccinelle.closure <> Compose.R1 var
-R7092:7101 Coccinelle.closure <> trans_incl thm
-R7109:7119 Coccinelle.closure <> compose_rel ind
-R7142:7143 Coccinelle.closure <> Compose.R2 var
-R7122:7136 Coccinelle.TransClosure <> refl_trans_clos ind
-R7138:7139 Coccinelle.closure <> Compose.R1 var
-R7092:7101 Coccinelle.closure <> trans_incl thm
-R7302:7307 Coccinelle.TransClosure <> t_step constr
-R7302:7307 Coccinelle.TransClosure <> t_step constr
-R7345:7363 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R7345:7363 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R7396:7397 Coccinelle.closure <> Compose.R1 var
-R7380:7389 Coccinelle.closure <> trans_incl thm
-R7396:7397 Coccinelle.closure <> Compose.R1 var
-R7380:7389 Coccinelle.closure <> trans_incl thm
-R7473:7491 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R7473:7491 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R7508:7525 Coccinelle.TransClosure <> trans_clos_is_clos thm
-R7508:7525 Coccinelle.TransClosure <> trans_clos_is_clos thm
-R7551:7561 Coccinelle.closure <> compose_rel ind
-R7584:7585 Coccinelle.closure <> Compose.R2 var
-R7564:7578 Coccinelle.TransClosure <> refl_trans_clos ind
-R7580:7581 Coccinelle.closure <> Compose.R1 var
-R7534:7543 Coccinelle.closure <> trans_incl thm
-R7551:7561 Coccinelle.closure <> compose_rel ind
-R7584:7585 Coccinelle.closure <> Compose.R2 var
-R7564:7578 Coccinelle.TransClosure <> refl_trans_clos ind
-R7580:7581 Coccinelle.closure <> Compose.R1 var
-R7534:7543 Coccinelle.closure <> trans_incl thm
-R7751:7756 Coccinelle.TransClosure <> t_step constr
-R7751:7756 Coccinelle.TransClosure <> t_step constr
-R7794:7812 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R7794:7812 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R7845:7846 Coccinelle.closure <> Compose.R1 var
-R7829:7838 Coccinelle.closure <> trans_incl thm
-R7845:7846 Coccinelle.closure <> Compose.R1 var
-R7829:7838 Coccinelle.closure <> trans_incl thm
-R7925:7926 Coccinelle.closure <> Compose.R1 var
-R7909:7918 Coccinelle.closure <> trans_incl thm
-R7925:7926 Coccinelle.closure <> Compose.R1 var
-R7909:7918 Coccinelle.closure <> trans_incl thm
-prf 7973:7981 <> acc_union
-R8002:8007 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7987:7998 Coq.Init.Wf <> well_founded def
-R8000:8001 Coccinelle.closure <> Compose.R1 var
-binder 8015:8015 <> a:44
-R8061:8065 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R8018:8020 Coq.Init.Wf <> Acc ind
-R8060:8060 Coccinelle.closure <> a:44 var
-R8023:8033 Coccinelle.closure <> compose_rel ind
-R8039:8053 Coccinelle.TransClosure <> refl_trans_clos ind
-R8055:8056 Coccinelle.closure <> Compose.R1 var
-R8035:8036 Coccinelle.closure <> Compose.R2 var
-R8066:8068 Coq.Init.Wf <> Acc ind
-R8086:8086 Coccinelle.closure <> a:44 var
-R8071:8075 Coq.Relations.Relation_Operators <> union def
-R8082:8083 Coccinelle.closure <> Compose.R2 var
-R8079:8080 Coccinelle.closure <> Compose.R1 var
-R8122:8129 Coccinelle.closure <> wf_trans thm
-R8122:8129 Coccinelle.closure <> wf_trans thm
-R8229:8231 Coq.Init.Wf <> Acc ind
-R8234:8244 Coccinelle.closure <> compose_rel ind
-R8250:8264 Coccinelle.TransClosure <> refl_trans_clos ind
-R8266:8267 Coccinelle.closure <> Compose.R1 var
-R8246:8247 Coccinelle.closure <> Compose.R2 var
-R8229:8231 Coq.Init.Wf <> Acc ind
-R8234:8244 Coccinelle.closure <> compose_rel ind
-R8250:8264 Coccinelle.TransClosure <> refl_trans_clos ind
-R8266:8267 Coccinelle.closure <> Compose.R1 var
-R8246:8247 Coccinelle.closure <> Compose.R2 var
-R8281:8289 Coq.Init.Wf <> Acc_intro constr
-R8281:8289 Coq.Init.Wf <> Acc_intro constr
-R8351:8366 Coq.Init.Wf <> well_founded_ind thm
-R8351:8366 Coq.Init.Wf <> well_founded_ind thm
-R8412:8420 Coq.Init.Wf <> Acc_intro constr
-R8412:8420 Coq.Init.Wf <> Acc_intro constr
-R8460:8465 Coccinelle.TransClosure <> t_step constr
-R8460:8465 Coccinelle.TransClosure <> t_step constr
-R8547:8550 Coccinelle.closure <> Comp constr
-R8547:8550 Coccinelle.closure <> Comp constr
-R8576:8599 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R8576:8599 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R8646:8654 Coq.Init.Wf <> Acc_intro constr
-R8646:8654 Coq.Init.Wf <> Acc_intro constr
-R8676:8682 Coq.Init.Wf <> Acc_inv thm
-R8676:8682 Coq.Init.Wf <> Acc_inv thm
-R8747:8750 Coccinelle.closure <> Comp constr
-R8747:8750 Coccinelle.closure <> Comp constr
-R8776:8799 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R8776:8799 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R8857:8860 Coccinelle.closure <> Comp constr
-R8857:8860 Coccinelle.closure <> Comp constr
-R8885:8890 Coccinelle.TransClosure <> r_step constr
-R8885:8890 Coccinelle.TransClosure <> r_step constr
-R8928:8937 Coccinelle.TransClosure <> trans_clos ind
-R8940:8944 Coq.Relations.Relation_Operators <> union def
-R8951:8952 Coccinelle.closure <> Compose.R2 var
-R8948:8949 Coccinelle.closure <> Compose.R1 var
-R8913:8920 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R8928:8937 Coccinelle.TransClosure <> trans_clos ind
-R8940:8944 Coq.Relations.Relation_Operators <> union def
-R8951:8952 Coccinelle.closure <> Compose.R2 var
-R8948:8949 Coccinelle.closure <> Compose.R1 var
-R8913:8920 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R9108:9114 Coccinelle.TransClosure <> t_trans constr
-R9108:9114 Coccinelle.TransClosure <> t_trans constr
-R9166:9167 Coccinelle.closure <> Compose.R1 var
-R9150:9159 Coccinelle.closure <> trans_incl thm
-R9166:9167 Coccinelle.closure <> Compose.R1 var
-R9150:9159 Coccinelle.closure <> trans_incl thm
-R9217:9225 Coccinelle.closure <> acc_trans thm
-R9217:9225 Coccinelle.closure <> acc_trans thm
-prf 9252:9265 <> acc_union_weak
-binder 9278:9278 <> a:45
-R9324:9342 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R9281:9283 Coq.Init.Wf <> Acc ind
-R9323:9323 Coccinelle.closure <> a:45 var
-R9286:9296 Coccinelle.closure <> compose_rel ind
-R9302:9316 Coccinelle.TransClosure <> refl_trans_clos ind
-R9318:9319 Coccinelle.closure <> Compose.R1 var
-R9298:9299 Coccinelle.closure <> Compose.R2 var
-R9343:9343 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R9423:9442 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 9351:9351 <> b:46
-R9411:9414 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R9354:9368 Coccinelle.TransClosure <> refl_trans_clos ind
-R9410:9410 Coccinelle.closure <> a:45 var
-R9408:9408 Coccinelle.closure <> b:46 var
-R9371:9381 Coccinelle.closure <> compose_rel ind
-R9387:9401 Coccinelle.TransClosure <> refl_trans_clos ind
-R9403:9404 Coccinelle.closure <> Compose.R1 var
-R9383:9384 Coccinelle.closure <> Compose.R2 var
-R9415:9417 Coq.Init.Wf <> Acc ind
-R9422:9422 Coccinelle.closure <> b:46 var
-R9419:9420 Coccinelle.closure <> Compose.R1 var
-R9443:9445 Coq.Init.Wf <> Acc ind
-R9463:9463 Coccinelle.closure <> a:45 var
-R9448:9452 Coq.Relations.Relation_Operators <> union def
-R9459:9460 Coccinelle.closure <> Compose.R2 var
-R9456:9457 Coccinelle.closure <> Compose.R1 var
-R9543:9545 Coq.Init.Wf <> Acc ind
-R9548:9558 Coccinelle.closure <> compose_rel ind
-R9564:9578 Coccinelle.TransClosure <> refl_trans_clos ind
-R9580:9581 Coccinelle.closure <> Compose.R1 var
-R9560:9561 Coccinelle.closure <> Compose.R2 var
-R9543:9545 Coq.Init.Wf <> Acc ind
-R9548:9558 Coccinelle.closure <> compose_rel ind
-R9564:9578 Coccinelle.TransClosure <> refl_trans_clos ind
-R9580:9581 Coccinelle.closure <> Compose.R1 var
-R9560:9561 Coccinelle.closure <> Compose.R2 var
-R9595:9603 Coq.Init.Wf <> Acc_intro constr
-R9595:9603 Coq.Init.Wf <> Acc_intro constr
-R9646:9648 Coq.Init.Wf <> Acc ind
-R9650:9651 Coccinelle.closure <> Compose.R1 var
-R9646:9648 Coq.Init.Wf <> Acc ind
-R9650:9651 Coccinelle.closure <> Compose.R1 var
-R9754:9762 Coq.Init.Wf <> Acc_intro constr
-R9754:9762 Coq.Init.Wf <> Acc_intro constr
-R9875:9878 Coccinelle.closure <> Comp constr
-R9875:9878 Coccinelle.closure <> Comp constr
-R9904:9927 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R9904:9927 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10052:10076 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R10052:10076 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R10052:10076 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R10166:10169 Coccinelle.closure <> Comp constr
-R10166:10169 Coccinelle.closure <> Comp constr
-R10195:10218 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10195:10218 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10297:10320 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10297:10320 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10354:10378 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R10354:10378 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R10354:10378 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R10412:10415 Coccinelle.closure <> Comp constr
-R10412:10415 Coccinelle.closure <> Comp constr
-R10441:10464 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10441:10464 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10512:10520 Coq.Init.Wf <> Acc_intro constr
-R10512:10520 Coq.Init.Wf <> Acc_intro constr
-R10541:10547 Coq.Init.Wf <> Acc_inv thm
-R10541:10547 Coq.Init.Wf <> Acc_inv thm
-R10601:10604 Coccinelle.closure <> Comp constr
-R10601:10604 Coccinelle.closure <> Comp constr
-R10630:10653 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10630:10653 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10713:10716 Coccinelle.closure <> Comp constr
-R10713:10716 Coccinelle.closure <> Comp constr
-R10774:10797 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10774:10797 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R10835:10838 Coccinelle.closure <> Comp constr
-R10835:10838 Coccinelle.closure <> Comp constr
-prf 10881:10893 <> acc_union_alt
-R10914:10919 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R10899:10910 Coq.Init.Wf <> well_founded def
-R10912:10913 Coccinelle.closure <> Compose.R1 var
-binder 10927:10927 <> a:47
-R10930:10930 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R11010:11015 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-binder 10938:10938 <> b:48
-R10963:10966 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R10941:10955 Coccinelle.TransClosure <> refl_trans_clos ind
-R10962:10962 Coccinelle.closure <> a:47 var
-R10960:10960 Coccinelle.closure <> b:48 var
-R10957:10958 Coccinelle.closure <> Compose.R1 var
-R10967:10969 Coq.Init.Wf <> Acc ind
-R11009:11009 Coccinelle.closure <> b:48 var
-R10972:10982 Coccinelle.closure <> compose_rel ind
-R11005:11006 Coccinelle.closure <> Compose.R2 var
-R10985:10999 Coccinelle.TransClosure <> refl_trans_clos ind
-R11001:11002 Coccinelle.closure <> Compose.R1 var
-R11016:11018 Coq.Init.Wf <> Acc ind
-R11036:11036 Coccinelle.closure <> a:47 var
-R11021:11025 Coq.Relations.Relation_Operators <> union def
-R11032:11033 Coccinelle.closure <> Compose.R2 var
-R11029:11030 Coccinelle.closure <> Compose.R1 var
-R11081:11094 Coccinelle.closure <> acc_union_weak thm
-R11081:11094 Coccinelle.closure <> acc_union_weak thm
-R11112:11120 Coq.Init.Wf <> Acc_intro constr
-R11112:11120 Coq.Init.Wf <> Acc_intro constr
-R11304:11312 Coq.Init.Wf <> Acc_intro constr
-R11304:11312 Coq.Init.Wf <> Acc_intro constr
-R11415:11418 Coccinelle.closure <> Comp constr
-R11415:11418 Coccinelle.closure <> Comp constr
-R11472:11475 Coccinelle.closure <> Comp constr
-R11472:11475 Coccinelle.closure <> Comp constr
-R11535:11544 Coccinelle.TransClosure <> trans_clos ind
-R11547:11551 Coq.Relations.Relation_Operators <> union def
-R11558:11559 Coccinelle.closure <> Compose.R2 var
-R11555:11556 Coccinelle.closure <> Compose.R1 var
-R11520:11527 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R11535:11544 Coccinelle.TransClosure <> trans_clos ind
-R11547:11551 Coq.Relations.Relation_Operators <> union def
-R11558:11559 Coccinelle.closure <> Compose.R2 var
-R11555:11556 Coccinelle.closure <> Compose.R1 var
-R11520:11527 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R11726:11744 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R11726:11744 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R11777:11778 Coccinelle.closure <> Compose.R1 var
-R11761:11770 Coccinelle.closure <> trans_incl thm
-R11777:11778 Coccinelle.closure <> Compose.R1 var
-R11761:11770 Coccinelle.closure <> trans_incl thm
-R11893:11901 Coccinelle.closure <> acc_trans thm
-R11893:11901 Coccinelle.closure <> acc_trans thm
-R11929:11935 Coq.Init.Wf <> Acc_inv thm
-R11929:11935 Coq.Init.Wf <> Acc_inv thm
-R11951:11959 Coccinelle.closure <> acc_trans thm
-R11951:11959 Coccinelle.closure <> acc_trans thm
-R11996:11997 Coccinelle.closure <> Compose.R1 var
-R11980:11989 Coccinelle.closure <> trans_incl thm
-R11996:11997 Coccinelle.closure <> Compose.R1 var
-R11980:11989 Coccinelle.closure <> trans_incl thm
-prf 12053:12070 <> acc_union_alt_weak
-binder 12083:12083 <> a:49
-R12086:12086 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R12166:12185 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 12094:12094 <> b:50
-R12154:12157 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R12097:12111 Coccinelle.TransClosure <> refl_trans_clos ind
-R12153:12153 Coccinelle.closure <> a:49 var
-R12151:12151 Coccinelle.closure <> b:50 var
-R12114:12124 Coccinelle.closure <> compose_rel ind
-R12130:12144 Coccinelle.TransClosure <> refl_trans_clos ind
-R12146:12147 Coccinelle.closure <> Compose.R1 var
-R12126:12127 Coccinelle.closure <> Compose.R2 var
-R12158:12160 Coq.Init.Wf <> Acc ind
-R12165:12165 Coccinelle.closure <> b:50 var
-R12162:12163 Coccinelle.closure <> Compose.R1 var
-R12186:12186 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R12266:12285 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 12194:12194 <> b:51
-R12219:12222 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R12197:12211 Coccinelle.TransClosure <> refl_trans_clos ind
-R12218:12218 Coccinelle.closure <> a:49 var
-R12216:12216 Coccinelle.closure <> b:51 var
-R12213:12214 Coccinelle.closure <> Compose.R1 var
-R12223:12225 Coq.Init.Wf <> Acc ind
-R12265:12265 Coccinelle.closure <> b:51 var
-R12228:12238 Coccinelle.closure <> compose_rel ind
-R12261:12262 Coccinelle.closure <> Compose.R2 var
-R12241:12255 Coccinelle.TransClosure <> refl_trans_clos ind
-R12257:12258 Coccinelle.closure <> Compose.R1 var
-R12286:12288 Coq.Init.Wf <> Acc ind
-R12306:12306 Coccinelle.closure <> a:49 var
-R12291:12295 Coq.Relations.Relation_Operators <> union def
-R12302:12303 Coccinelle.closure <> Compose.R2 var
-R12299:12300 Coccinelle.closure <> Compose.R1 var
-R12340:12353 Coccinelle.closure <> acc_union_weak thm
-R12340:12353 Coccinelle.closure <> acc_union_weak thm
-R12382:12390 Coq.Init.Wf <> Acc_intro constr
-R12382:12390 Coq.Init.Wf <> Acc_intro constr
-R12576:12584 Coq.Init.Wf <> Acc_intro constr
-R12576:12584 Coq.Init.Wf <> Acc_intro constr
-R12687:12690 Coccinelle.closure <> Comp constr
-R12687:12690 Coccinelle.closure <> Comp constr
-R12744:12747 Coccinelle.closure <> Comp constr
-R12744:12747 Coccinelle.closure <> Comp constr
-prf 12779:12790 <> wf_union_alt
-R12811:12817 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R12901:12901 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R12796:12807 Coq.Init.Wf <> well_founded def
-R12809:12810 Coccinelle.closure <> Compose.R1 var
-R12868:12872 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R12818:12829 Coq.Init.Wf <> well_founded def
-R12832:12842 Coccinelle.closure <> compose_rel ind
-R12865:12866 Coccinelle.closure <> Compose.R2 var
-R12845:12859 Coccinelle.TransClosure <> refl_trans_clos ind
-R12861:12862 Coccinelle.closure <> Compose.R1 var
-R12873:12884 Coq.Init.Wf <> well_founded def
-R12887:12891 Coq.Relations.Relation_Operators <> union def
-R12898:12899 Coccinelle.closure <> Compose.R2 var
-R12895:12896 Coccinelle.closure <> Compose.R1 var
-R12959:12967 Coccinelle.closure <> acc_union thm
-R12959:12967 Coccinelle.closure <> acc_union thm
-R12959:12967 Coccinelle.closure <> acc_union thm
-R12959:12967 Coccinelle.closure <> acc_union thm
-R12993:13000 Coccinelle.closure <> wf_trans thm
-R12993:13000 Coccinelle.closure <> wf_trans thm
-R13025:13033 Coq.Init.Wf <> Acc_intro constr
-R13025:13033 Coq.Init.Wf <> Acc_intro constr
-R13145:13160 Coq.Init.Wf <> well_founded_ind thm
-R13163:13170 Coccinelle.closure <> wf_trans thm
-R13145:13160 Coq.Init.Wf <> well_founded_ind thm
-R13163:13170 Coccinelle.closure <> wf_trans thm
-R13210:13218 Coq.Init.Wf <> Acc_intro constr
-R13210:13218 Coq.Init.Wf <> Acc_intro constr
-R13320:13323 Coccinelle.closure <> Comp constr
-R13320:13323 Coccinelle.closure <> Comp constr
-R13376:13385 Coccinelle.TransClosure <> trans_clos ind
-R13388:13392 Coq.Relations.Relation_Operators <> union def
-R13399:13400 Coccinelle.closure <> Compose.R2 var
-R13396:13397 Coccinelle.closure <> Compose.R1 var
-R13361:13368 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R13376:13385 Coccinelle.TransClosure <> trans_clos ind
-R13388:13392 Coq.Relations.Relation_Operators <> union def
-R13399:13400 Coccinelle.closure <> Compose.R2 var
-R13396:13397 Coccinelle.closure <> Compose.R1 var
-R13361:13368 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R13556:13574 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R13556:13574 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R13607:13608 Coccinelle.closure <> Compose.R1 var
-R13591:13600 Coccinelle.closure <> trans_incl thm
-R13607:13608 Coccinelle.closure <> Compose.R1 var
-R13591:13600 Coccinelle.closure <> trans_incl thm
-R13683:13691 Coccinelle.closure <> acc_trans thm
-R13683:13691 Coccinelle.closure <> acc_trans thm
-prf 13715:13727 <> acc_comp_incl
-binder 13740:13740 <> R:52
-R13743:13743 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R13786:13793 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 13751:13751 <> a:53
-R13761:13764 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R13754:13756 Coq.Init.Wf <> Acc ind
-R13760:13760 Coccinelle.closure <> a:53 var
-R13758:13758 Coccinelle.closure <> R:52 var
-R13765:13767 Coq.Init.Wf <> Acc ind
-R13785:13785 Coccinelle.closure <> a:53 var
-R13770:13774 Coq.Relations.Relation_Operators <> union def
-R13781:13782 Coccinelle.closure <> Compose.R2 var
-R13778:13779 Coccinelle.closure <> Compose.R1 var
-binder 13801:13801 <> a:54
-R13811:13814 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R13804:13806 Coq.Init.Wf <> Acc ind
-R13810:13810 Coccinelle.closure <> a:54 var
-R13808:13808 Coccinelle.closure <> R:52 var
-R13815:13817 Coq.Init.Wf <> Acc ind
-R13857:13857 Coccinelle.closure <> a:54 var
-R13820:13830 Coccinelle.closure <> compose_rel ind
-R13853:13854 Coccinelle.closure <> Compose.R2 var
-R13833:13847 Coccinelle.TransClosure <> refl_trans_clos ind
-R13849:13850 Coccinelle.closure <> Compose.R1 var
-R13908:13917 Coccinelle.TransClosure <> trans_clos ind
-R13920:13924 Coq.Relations.Relation_Operators <> union def
-R13931:13932 Coccinelle.closure <> Compose.R2 var
-R13928:13929 Coccinelle.closure <> Compose.R1 var
-R13893:13900 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R13908:13917 Coccinelle.TransClosure <> trans_clos ind
-R13920:13924 Coq.Relations.Relation_Operators <> union def
-R13931:13932 Coccinelle.closure <> Compose.R2 var
-R13928:13929 Coccinelle.closure <> Compose.R1 var
-R13893:13900 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R14090:14108 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R14090:14108 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R14141:14142 Coccinelle.closure <> Compose.R1 var
-R14125:14134 Coccinelle.closure <> trans_incl thm
-R14141:14142 Coccinelle.closure <> Compose.R1 var
-R14125:14134 Coccinelle.closure <> trans_incl thm
-R14224:14232 Coccinelle.closure <> acc_trans thm
-R14224:14232 Coccinelle.closure <> acc_trans thm
-R14266:14272 Coccinelle.closure Compose <> sec
-def 14287:14290 <> rest
-binder 14292:14292 <> A:55
-binder 14294:14294 <> P:56
-binder 14296:14296 <> R:57
-R14312:14312 Coccinelle.closure <> A:55 var
-binder 14306:14306 <> a:58
-binder 14308:14308 <> b:59
-R14323:14326 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R14318:14318 Coccinelle.closure <> R:57 var
-R14320:14320 Coccinelle.closure <> a:58 var
-R14322:14322 Coccinelle.closure <> b:59 var
-R14330:14333 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R14327:14327 Coccinelle.closure <> P:56 var
-R14329:14329 Coccinelle.closure <> a:58 var
-R14334:14334 Coccinelle.closure <> P:56 var
-R14336:14336 Coccinelle.closure <> b:59 var
-prf 14346:14355 <> rest_union
-binder 14366:14366 <> A:60
-binder 14368:14368 <> P:61
-R14379:14386 Coq.Relations.Relation_Definitions <> relation def
-R14388:14388 Coccinelle.closure <> A:60 var
-binder 14371:14372 <> R1:62
-binder 14374:14375 <> R2:63
-binder 14391:14391 <> a:64
-binder 14393:14393 <> b:65
-R14422:14426 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R14396:14399 Coccinelle.closure <> rest def
-R14421:14421 Coccinelle.closure <> b:65 var
-R14419:14419 Coccinelle.closure <> a:64 var
-R14404:14408 Coq.Relations.Relation_Operators <> union def
-R14415:14416 Coccinelle.closure <> R2:63 var
-R14412:14413 Coccinelle.closure <> R1:62 var
-R14401:14401 Coccinelle.closure <> P:61 var
-R14427:14431 Coq.Relations.Relation_Operators <> union def
-R14459:14459 Coccinelle.closure <> a:64 var
-R14461:14461 Coccinelle.closure <> b:65 var
-R14448:14451 Coccinelle.closure <> rest def
-R14455:14456 Coccinelle.closure <> R2:63 var
-R14453:14453 Coccinelle.closure <> P:61 var
-R14436:14439 Coccinelle.closure <> rest def
-R14443:14444 Coccinelle.closure <> R1:62 var
-R14441:14441 Coccinelle.closure <> P:61 var
-prf 14673:14682 <> rest_trans
-binder 14697:14697 <> A:66
-R14705:14708 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R14704:14704 Coccinelle.closure <> A:66 var
-binder 14700:14700 <> P:67
-R14720:14727 Coq.Relations.Relation_Definitions <> relation def
-R14729:14729 Coccinelle.closure <> A:66 var
-binder 14716:14716 <> R:68
-R14733:14733 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R14765:14771 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 14741:14741 <> a:69
-binder 14743:14743 <> b:70
-R14749:14752 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R14746:14746 Coccinelle.closure <> P:67 var
-R14748:14748 Coccinelle.closure <> a:69 var
-R14758:14761 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R14753:14753 Coccinelle.closure <> R:68 var
-R14755:14755 Coccinelle.closure <> b:70 var
-R14757:14757 Coccinelle.closure <> a:69 var
-R14762:14762 Coccinelle.closure <> P:67 var
-R14764:14764 Coccinelle.closure <> b:70 var
-binder 14779:14779 <> a:71
-R14785:14788 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R14782:14782 Coccinelle.closure <> P:67 var
-R14784:14784 Coccinelle.closure <> a:71 var
-binder 14796:14796 <> b:72
-R14824:14828 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R14799:14808 Coccinelle.TransClosure <> trans_clos ind
-R14823:14823 Coccinelle.closure <> a:71 var
-R14821:14821 Coccinelle.closure <> b:72 var
-R14811:14814 Coccinelle.closure <> rest def
-R14818:14818 Coccinelle.closure <> R:68 var
-R14816:14816 Coccinelle.closure <> P:67 var
-R14829:14838 Coccinelle.TransClosure <> trans_clos ind
-R14844:14844 Coccinelle.closure <> a:71 var
-R14842:14842 Coccinelle.closure <> b:72 var
-R14840:14840 Coccinelle.closure <> R:68 var
-R14892:14901 Coccinelle.closure <> trans_incl thm
-R14892:14901 Coccinelle.closure <> trans_incl thm
-R14951:14975 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R14991:15015 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R14951:14975 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R14951:14975 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R14991:15015 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-R14991:15015 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
-prf 15211:15218 <> acc_rest
-binder 15232:15232 <> A:73
-R15239:15246 Coq.Relations.Relation_Definitions <> relation def
-R15248:15248 Coccinelle.closure <> A:73 var
-binder 15235:15235 <> R:74
-R15257:15260 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15256:15256 Coccinelle.closure <> A:73 var
-binder 15252:15252 <> P:75
-R15270:15270 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15308:15316 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15364:15364 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15285:15285 Coccinelle.closure <> A:73 var
-binder 15279:15279 <> a:76
-binder 15281:15281 <> b:77
-R15292:15295 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15289:15289 Coccinelle.closure <> P:75 var
-R15291:15291 Coccinelle.closure <> a:76 var
-R15301:15304 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15296:15296 Coccinelle.closure <> R:74 var
-R15298:15298 Coccinelle.closure <> b:77 var
-R15300:15300 Coccinelle.closure <> a:76 var
-R15305:15305 Coccinelle.closure <> P:75 var
-R15307:15307 Coccinelle.closure <> b:77 var
-binder 15324:15324 <> a:78
-R15327:15327 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R15342:15347 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R15331:15334 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15328:15328 Coccinelle.closure <> P:75 var
-R15330:15330 Coccinelle.closure <> a:78 var
+R2754:2759 Coccinelle.TransClosure <> t_clos constr
+R2768:2773 Coccinelle.TransClosure <> t_step constr
+R2754:2759 Coccinelle.TransClosure <> t_clos constr
+R2768:2773 Coccinelle.TransClosure <> t_step constr
+R2794:2799 Coccinelle.TransClosure <> t_clos constr
+R2808:2814 Coccinelle.TransClosure <> t_trans constr
+R2794:2799 Coccinelle.TransClosure <> t_clos constr
+R2808:2814 Coccinelle.TransClosure <> t_trans constr
+R2881:2886 Coccinelle.TransClosure <> t_step constr
+R2901:2910 Coq.Init.Logic <> refl_equal abbrev
+R2881:2886 Coccinelle.TransClosure <> t_step constr
+R2901:2910 Coq.Init.Logic <> refl_equal abbrev
+R2921:2930 Coccinelle.closure <> trans_incl thm
+R2921:2930 Coccinelle.closure <> trans_incl thm
+prf 2978:2985 <> acc_star
+binder 3000:3000 <> A:25
+R3007:3014 Coq.Relations.Relation_Definitions <> relation def
+R3016:3016 Coccinelle.closure <> A:25 var
+binder 3003:3003 <> R:26
+binder 3019:3019 <> a:27
+R3029:3032 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3022:3024 Coq.Init.Wf <> Acc ind
+R3028:3028 Coccinelle.closure <> a:27 var
+R3026:3026 Coccinelle.closure <> R:26 var
+binder 3040:3040 <> b:28
+R3066:3069 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3044:3058 Coccinelle.TransClosure <> refl_trans_clos ind
+R3065:3065 Coccinelle.closure <> a:27 var
+R3063:3063 Coccinelle.closure <> b:28 var
+R3061:3061 Coccinelle.closure <> R:26 var
+R3070:3072 Coq.Init.Wf <> Acc ind
+R3076:3076 Coccinelle.closure <> b:28 var
+R3074:3074 Coccinelle.closure <> R:26 var
+R3171:3180 Coccinelle.TransClosure <> trans_clos ind
+R3156:3163 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R3171:3180 Coccinelle.TransClosure <> trans_clos ind
+R3156:3163 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R3209:3214 Coccinelle.TransClosure <> t_step constr
+R3209:3214 Coccinelle.TransClosure <> t_step constr
+R3235:3241 Coq.Init.Wf <> Acc_inv thm
+R3235:3241 Coq.Init.Wf <> Acc_inv thm
+R3267:3275 Coccinelle.closure <> acc_trans thm
+R3267:3275 Coccinelle.closure <> acc_trans thm
+ind 3303:3313 <> compose_rel
+constr 3356:3359 <> Comp
+binder 3315:3315 <> A:29
+R3326:3333 Coq.Relations.Relation_Definitions <> relation def
+R3335:3335 Coccinelle.closure <> A:29 var
+binder 3318:3319 <> R1:30
+binder 3321:3322 <> R2:31
+R3340:3347 Coq.Relations.Relation_Definitions <> relation def
+binder 3370:3371 <> a1:34
+binder 3373:3374 <> a2:35
+binder 3376:3377 <> a3:36
+R3388:3391 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3380:3381 Coccinelle.closure <> R1:30 var
+R3383:3384 Coccinelle.closure <> a1:34 var
+R3386:3387 Coccinelle.closure <> a2:35 var
+R3400:3403 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3392:3393 Coccinelle.closure <> R2:31 var
+R3395:3396 Coccinelle.closure <> a2:35 var
+R3398:3399 Coccinelle.closure <> a3:36 var
+R3404:3414 Coccinelle.closure <> compose_rel:32 ind
+R3425:3426 Coccinelle.closure <> a3:36 var
+R3422:3423 Coccinelle.closure <> a1:34 var
+R3419:3420 Coccinelle.closure <> R2:31 var
+R3416:3417 Coccinelle.closure <> R1:30 var
+sec 3438:3444 <> Compose
+var 3456:3456 Compose A
+var 3475:3476 Compose R1
+R3480:3487 Coq.Relations.Relation_Definitions <> relation def
+R3489:3489 Coccinelle.closure <> Compose.A var
+var 3501:3502 Compose R2
+R3506:3513 Coq.Relations.Relation_Definitions <> relation def
+R3515:3515 Coccinelle.closure <> Compose.A var
+prf 3525:3535 <> trans_union
+binder 3548:3548 <> a:40
+binder 3550:3550 <> b:41
+R3585:3592 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R3555:3564 Coccinelle.TransClosure <> trans_clos ind
+R3584:3584 Coccinelle.closure <> b:41 var
+R3582:3582 Coccinelle.closure <> a:40 var
+R3567:3571 Coq.Relations.Relation_Operators <> union def
+R3578:3579 Coccinelle.closure <> Compose.R2 var
+R3575:3576 Coccinelle.closure <> Compose.R1 var
+R3593:3597 Coq.Relations.Relation_Operators <> union def
+R3716:3716 Coccinelle.closure <> a:40 var
+R3718:3718 Coccinelle.closure <> b:41 var
+R3631:3641 Coccinelle.closure <> compose_rel ind
+R3665:3674 Coccinelle.TransClosure <> trans_clos ind
+R3677:3687 Coccinelle.closure <> compose_rel ind
+R3693:3707 Coccinelle.TransClosure <> refl_trans_clos ind
+R3709:3710 Coccinelle.closure <> Compose.R1 var
+R3689:3690 Coccinelle.closure <> Compose.R2 var
+R3644:3658 Coccinelle.TransClosure <> refl_trans_clos ind
+R3660:3661 Coccinelle.closure <> Compose.R1 var
+R3602:3611 Coccinelle.TransClosure <> trans_clos ind
+R3613:3614 Coccinelle.closure <> Compose.R1 var
+R3846:3851 Coccinelle.TransClosure <> t_step constr
+R3846:3851 Coccinelle.TransClosure <> t_step constr
+R3879:3882 Coccinelle.closure <> Comp constr
+R3879:3882 Coccinelle.closure <> Comp constr
+R3898:3903 Coccinelle.TransClosure <> r_step constr
+R3898:3903 Coccinelle.TransClosure <> r_step constr
+R3912:3917 Coccinelle.TransClosure <> t_step constr
+R3912:3917 Coccinelle.TransClosure <> t_step constr
+R3926:3929 Coccinelle.closure <> Comp constr
+R3926:3929 Coccinelle.closure <> Comp constr
+R3954:3959 Coccinelle.TransClosure <> r_step constr
+R3954:3959 Coccinelle.TransClosure <> r_step constr
+R4032:4038 Coccinelle.TransClosure <> t_trans constr
+R4032:4038 Coccinelle.TransClosure <> t_trans constr
+R4131:4134 Coccinelle.closure <> Comp constr
+R4131:4134 Coccinelle.closure <> Comp constr
+R4208:4213 Coccinelle.TransClosure <> t_clos constr
+R4222:4227 Coccinelle.TransClosure <> t_step constr
+R4208:4213 Coccinelle.TransClosure <> t_clos constr
+R4222:4227 Coccinelle.TransClosure <> t_step constr
+R4258:4263 Coccinelle.TransClosure <> t_clos constr
+R4272:4278 Coccinelle.TransClosure <> t_trans constr
+R4258:4263 Coccinelle.TransClosure <> t_clos constr
+R4272:4278 Coccinelle.TransClosure <> t_trans constr
+R4319:4322 Coccinelle.closure <> Comp constr
+R4319:4322 Coccinelle.closure <> Comp constr
+R4338:4343 Coccinelle.TransClosure <> r_step constr
+R4338:4343 Coccinelle.TransClosure <> r_step constr
+R4352:4357 Coccinelle.TransClosure <> t_step constr
+R4366:4369 Coccinelle.closure <> Comp constr
+R4352:4357 Coccinelle.TransClosure <> t_step constr
+R4366:4369 Coccinelle.closure <> Comp constr
+R4394:4399 Coccinelle.TransClosure <> t_clos constr
+R4394:4399 Coccinelle.TransClosure <> t_clos constr
+R4485:4488 Coccinelle.closure <> Comp constr
+R4485:4488 Coccinelle.closure <> Comp constr
+R4504:4509 Coccinelle.TransClosure <> r_step constr
+R4504:4509 Coccinelle.TransClosure <> r_step constr
+R4518:4524 Coccinelle.TransClosure <> t_trans constr
+R4518:4524 Coccinelle.TransClosure <> t_trans constr
+R4550:4553 Coccinelle.closure <> Comp constr
+R4550:4553 Coccinelle.closure <> Comp constr
+R4623:4624 Coccinelle.closure <> Compose.R1 var
+R4607:4616 Coccinelle.closure <> trans_incl thm
+R4623:4624 Coccinelle.closure <> Compose.R1 var
+R4607:4616 Coccinelle.closure <> trans_incl thm
+R4777:4794 Coccinelle.TransClosure <> trans_clos_is_clos thm
+R4777:4794 Coccinelle.TransClosure <> trans_clos_is_clos thm
+R4820:4830 Coccinelle.closure <> compose_rel ind
+R4836:4850 Coccinelle.TransClosure <> refl_trans_clos ind
+R4852:4853 Coccinelle.closure <> Compose.R1 var
+R4832:4833 Coccinelle.closure <> Compose.R2 var
+R4803:4812 Coccinelle.closure <> trans_incl thm
+R4820:4830 Coccinelle.closure <> compose_rel ind
+R4836:4850 Coccinelle.TransClosure <> refl_trans_clos ind
+R4852:4853 Coccinelle.closure <> Compose.R1 var
+R4832:4833 Coccinelle.closure <> Compose.R2 var
+R4803:4812 Coccinelle.closure <> trans_incl thm
+R5020:5025 Coccinelle.TransClosure <> t_step constr
+R5020:5025 Coccinelle.TransClosure <> t_step constr
+R5063:5069 Coccinelle.TransClosure <> t_trans constr
+R5063:5069 Coccinelle.TransClosure <> t_trans constr
+R5118:5119 Coccinelle.closure <> Compose.R1 var
+R5102:5111 Coccinelle.closure <> trans_incl thm
+R5118:5119 Coccinelle.closure <> Compose.R1 var
+R5102:5111 Coccinelle.closure <> trans_incl thm
+R5173:5191 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R5173:5191 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R5224:5225 Coccinelle.closure <> Compose.R1 var
+R5208:5217 Coccinelle.closure <> trans_incl thm
+R5224:5225 Coccinelle.closure <> Compose.R1 var
+R5208:5217 Coccinelle.closure <> trans_incl thm
+R5266:5283 Coccinelle.TransClosure <> trans_clos_is_clos thm
+R5266:5283 Coccinelle.TransClosure <> trans_clos_is_clos thm
+R5309:5319 Coccinelle.closure <> compose_rel ind
+R5325:5339 Coccinelle.TransClosure <> refl_trans_clos ind
+R5341:5342 Coccinelle.closure <> Compose.R1 var
+R5321:5322 Coccinelle.closure <> Compose.R2 var
+R5292:5301 Coccinelle.closure <> trans_incl thm
+R5309:5319 Coccinelle.closure <> compose_rel ind
+R5325:5339 Coccinelle.TransClosure <> refl_trans_clos ind
+R5341:5342 Coccinelle.closure <> Compose.R1 var
+R5321:5322 Coccinelle.closure <> Compose.R2 var
+R5292:5301 Coccinelle.closure <> trans_incl thm
+R5598:5599 Coccinelle.closure <> Compose.R1 var
+R5582:5591 Coccinelle.closure <> trans_incl thm
+R5598:5599 Coccinelle.closure <> Compose.R1 var
+R5582:5591 Coccinelle.closure <> trans_incl thm
+prf 5646:5660 <> trans_union_alt
+binder 5673:5673 <> a:42
+binder 5675:5675 <> b:43
+R5710:5717 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R5680:5689 Coccinelle.TransClosure <> trans_clos ind
+R5709:5709 Coccinelle.closure <> b:43 var
+R5707:5707 Coccinelle.closure <> a:42 var
+R5692:5696 Coq.Relations.Relation_Operators <> union def
+R5703:5704 Coccinelle.closure <> Compose.R2 var
+R5700:5701 Coccinelle.closure <> Compose.R1 var
+R5718:5722 Coq.Relations.Relation_Operators <> union def
+R5877:5877 Coccinelle.closure <> a:42 var
+R5879:5879 Coccinelle.closure <> b:43 var
+R5757:5767 Coccinelle.closure <> compose_rel ind
+R5856:5870 Coccinelle.TransClosure <> refl_trans_clos ind
+R5872:5873 Coccinelle.closure <> Compose.R1 var
+R5770:5779 Coccinelle.TransClosure <> trans_clos ind
+R5782:5792 Coccinelle.closure <> compose_rel ind
+R5815:5816 Coccinelle.closure <> Compose.R2 var
+R5795:5809 Coccinelle.TransClosure <> refl_trans_clos ind
+R5811:5812 Coccinelle.closure <> Compose.R1 var
+R5727:5736 Coccinelle.TransClosure <> trans_clos ind
+R5738:5739 Coccinelle.closure <> Compose.R1 var
+R5929:5953 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R5929:5953 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R5929:5953 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R6096:6099 Coccinelle.closure <> Comp constr
+R6096:6099 Coccinelle.closure <> Comp constr
+R6121:6124 Coccinelle.closure <> Comp constr
+R6121:6124 Coccinelle.closure <> Comp constr
+R6261:6285 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R6261:6285 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R6261:6285 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R6339:6342 Coccinelle.closure <> Comp constr
+R6339:6342 Coccinelle.closure <> Comp constr
+R6364:6367 Coccinelle.closure <> Comp constr
+R6364:6367 Coccinelle.closure <> Comp constr
+R6492:6495 Coccinelle.closure <> Comp constr
+R6492:6495 Coccinelle.closure <> Comp constr
+R6615:6633 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R6615:6633 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R6751:6754 Coccinelle.closure <> Comp constr
+R6751:6754 Coccinelle.closure <> Comp constr
+R6770:6788 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R6770:6788 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R6820:6823 Coccinelle.closure <> Comp constr
+R6820:6823 Coccinelle.closure <> Comp constr
+R6899:6900 Coccinelle.closure <> Compose.R1 var
+R6883:6892 Coccinelle.closure <> trans_incl thm
+R6899:6900 Coccinelle.closure <> Compose.R1 var
+R6883:6892 Coccinelle.closure <> trans_incl thm
+R7053:7070 Coccinelle.TransClosure <> trans_clos_is_clos thm
+R7053:7070 Coccinelle.TransClosure <> trans_clos_is_clos thm
+R7096:7106 Coccinelle.closure <> compose_rel ind
+R7129:7130 Coccinelle.closure <> Compose.R2 var
+R7109:7123 Coccinelle.TransClosure <> refl_trans_clos ind
+R7125:7126 Coccinelle.closure <> Compose.R1 var
+R7079:7088 Coccinelle.closure <> trans_incl thm
+R7096:7106 Coccinelle.closure <> compose_rel ind
+R7129:7130 Coccinelle.closure <> Compose.R2 var
+R7109:7123 Coccinelle.TransClosure <> refl_trans_clos ind
+R7125:7126 Coccinelle.closure <> Compose.R1 var
+R7079:7088 Coccinelle.closure <> trans_incl thm
+R7289:7294 Coccinelle.TransClosure <> t_step constr
+R7289:7294 Coccinelle.TransClosure <> t_step constr
+R7332:7350 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R7332:7350 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R7383:7384 Coccinelle.closure <> Compose.R1 var
+R7367:7376 Coccinelle.closure <> trans_incl thm
+R7383:7384 Coccinelle.closure <> Compose.R1 var
+R7367:7376 Coccinelle.closure <> trans_incl thm
+R7460:7478 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R7460:7478 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R7495:7512 Coccinelle.TransClosure <> trans_clos_is_clos thm
+R7495:7512 Coccinelle.TransClosure <> trans_clos_is_clos thm
+R7538:7548 Coccinelle.closure <> compose_rel ind
+R7571:7572 Coccinelle.closure <> Compose.R2 var
+R7551:7565 Coccinelle.TransClosure <> refl_trans_clos ind
+R7567:7568 Coccinelle.closure <> Compose.R1 var
+R7521:7530 Coccinelle.closure <> trans_incl thm
+R7538:7548 Coccinelle.closure <> compose_rel ind
+R7571:7572 Coccinelle.closure <> Compose.R2 var
+R7551:7565 Coccinelle.TransClosure <> refl_trans_clos ind
+R7567:7568 Coccinelle.closure <> Compose.R1 var
+R7521:7530 Coccinelle.closure <> trans_incl thm
+R7738:7743 Coccinelle.TransClosure <> t_step constr
+R7738:7743 Coccinelle.TransClosure <> t_step constr
+R7781:7799 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R7781:7799 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R7832:7833 Coccinelle.closure <> Compose.R1 var
+R7816:7825 Coccinelle.closure <> trans_incl thm
+R7832:7833 Coccinelle.closure <> Compose.R1 var
+R7816:7825 Coccinelle.closure <> trans_incl thm
+R7912:7913 Coccinelle.closure <> Compose.R1 var
+R7896:7905 Coccinelle.closure <> trans_incl thm
+R7912:7913 Coccinelle.closure <> Compose.R1 var
+R7896:7905 Coccinelle.closure <> trans_incl thm
+prf 7960:7968 <> acc_union
+R7989:7994 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7974:7985 Coq.Init.Wf <> well_founded def
+R7987:7988 Coccinelle.closure <> Compose.R1 var
+binder 8002:8002 <> a:44
+R8048:8052 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R8005:8007 Coq.Init.Wf <> Acc ind
+R8047:8047 Coccinelle.closure <> a:44 var
+R8010:8020 Coccinelle.closure <> compose_rel ind
+R8026:8040 Coccinelle.TransClosure <> refl_trans_clos ind
+R8042:8043 Coccinelle.closure <> Compose.R1 var
+R8022:8023 Coccinelle.closure <> Compose.R2 var
+R8053:8055 Coq.Init.Wf <> Acc ind
+R8073:8073 Coccinelle.closure <> a:44 var
+R8058:8062 Coq.Relations.Relation_Operators <> union def
+R8069:8070 Coccinelle.closure <> Compose.R2 var
+R8066:8067 Coccinelle.closure <> Compose.R1 var
+R8109:8116 Coccinelle.closure <> wf_trans thm
+R8109:8116 Coccinelle.closure <> wf_trans thm
+R8216:8218 Coq.Init.Wf <> Acc ind
+R8221:8231 Coccinelle.closure <> compose_rel ind
+R8237:8251 Coccinelle.TransClosure <> refl_trans_clos ind
+R8253:8254 Coccinelle.closure <> Compose.R1 var
+R8233:8234 Coccinelle.closure <> Compose.R2 var
+R8216:8218 Coq.Init.Wf <> Acc ind
+R8221:8231 Coccinelle.closure <> compose_rel ind
+R8237:8251 Coccinelle.TransClosure <> refl_trans_clos ind
+R8253:8254 Coccinelle.closure <> Compose.R1 var
+R8233:8234 Coccinelle.closure <> Compose.R2 var
+R8268:8276 Coq.Init.Wf <> Acc_intro constr
+R8268:8276 Coq.Init.Wf <> Acc_intro constr
+R8338:8353 Coq.Init.Wf <> well_founded_ind thm
+R8338:8353 Coq.Init.Wf <> well_founded_ind thm
+R8399:8407 Coq.Init.Wf <> Acc_intro constr
+R8399:8407 Coq.Init.Wf <> Acc_intro constr
+R8447:8452 Coccinelle.TransClosure <> t_step constr
+R8447:8452 Coccinelle.TransClosure <> t_step constr
+R8534:8537 Coccinelle.closure <> Comp constr
+R8534:8537 Coccinelle.closure <> Comp constr
+R8563:8586 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R8563:8586 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R8633:8641 Coq.Init.Wf <> Acc_intro constr
+R8633:8641 Coq.Init.Wf <> Acc_intro constr
+R8663:8669 Coq.Init.Wf <> Acc_inv thm
+R8663:8669 Coq.Init.Wf <> Acc_inv thm
+R8734:8737 Coccinelle.closure <> Comp constr
+R8734:8737 Coccinelle.closure <> Comp constr
+R8763:8786 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R8763:8786 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R8844:8847 Coccinelle.closure <> Comp constr
+R8844:8847 Coccinelle.closure <> Comp constr
+R8872:8877 Coccinelle.TransClosure <> r_step constr
+R8872:8877 Coccinelle.TransClosure <> r_step constr
+R8915:8924 Coccinelle.TransClosure <> trans_clos ind
+R8927:8931 Coq.Relations.Relation_Operators <> union def
+R8938:8939 Coccinelle.closure <> Compose.R2 var
+R8935:8936 Coccinelle.closure <> Compose.R1 var
+R8900:8907 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R8915:8924 Coccinelle.TransClosure <> trans_clos ind
+R8927:8931 Coq.Relations.Relation_Operators <> union def
+R8938:8939 Coccinelle.closure <> Compose.R2 var
+R8935:8936 Coccinelle.closure <> Compose.R1 var
+R8900:8907 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R9095:9101 Coccinelle.TransClosure <> t_trans constr
+R9095:9101 Coccinelle.TransClosure <> t_trans constr
+R9153:9154 Coccinelle.closure <> Compose.R1 var
+R9137:9146 Coccinelle.closure <> trans_incl thm
+R9153:9154 Coccinelle.closure <> Compose.R1 var
+R9137:9146 Coccinelle.closure <> trans_incl thm
+R9204:9212 Coccinelle.closure <> acc_trans thm
+R9204:9212 Coccinelle.closure <> acc_trans thm
+prf 9239:9252 <> acc_union_weak
+binder 9265:9265 <> a:45
+R9311:9329 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9268:9270 Coq.Init.Wf <> Acc ind
+R9310:9310 Coccinelle.closure <> a:45 var
+R9273:9283 Coccinelle.closure <> compose_rel ind
+R9289:9303 Coccinelle.TransClosure <> refl_trans_clos ind
+R9305:9306 Coccinelle.closure <> Compose.R1 var
+R9285:9286 Coccinelle.closure <> Compose.R2 var
+R9330:9330 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9410:9429 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 9338:9338 <> b:46
+R9398:9401 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9341:9355 Coccinelle.TransClosure <> refl_trans_clos ind
+R9397:9397 Coccinelle.closure <> a:45 var
+R9395:9395 Coccinelle.closure <> b:46 var
+R9358:9368 Coccinelle.closure <> compose_rel ind
+R9374:9388 Coccinelle.TransClosure <> refl_trans_clos ind
+R9390:9391 Coccinelle.closure <> Compose.R1 var
+R9370:9371 Coccinelle.closure <> Compose.R2 var
+R9402:9404 Coq.Init.Wf <> Acc ind
+R9409:9409 Coccinelle.closure <> b:46 var
+R9406:9407 Coccinelle.closure <> Compose.R1 var
+R9430:9432 Coq.Init.Wf <> Acc ind
+R9450:9450 Coccinelle.closure <> a:45 var
+R9435:9439 Coq.Relations.Relation_Operators <> union def
+R9446:9447 Coccinelle.closure <> Compose.R2 var
+R9443:9444 Coccinelle.closure <> Compose.R1 var
+R9530:9532 Coq.Init.Wf <> Acc ind
+R9535:9545 Coccinelle.closure <> compose_rel ind
+R9551:9565 Coccinelle.TransClosure <> refl_trans_clos ind
+R9567:9568 Coccinelle.closure <> Compose.R1 var
+R9547:9548 Coccinelle.closure <> Compose.R2 var
+R9530:9532 Coq.Init.Wf <> Acc ind
+R9535:9545 Coccinelle.closure <> compose_rel ind
+R9551:9565 Coccinelle.TransClosure <> refl_trans_clos ind
+R9567:9568 Coccinelle.closure <> Compose.R1 var
+R9547:9548 Coccinelle.closure <> Compose.R2 var
+R9582:9590 Coq.Init.Wf <> Acc_intro constr
+R9582:9590 Coq.Init.Wf <> Acc_intro constr
+R9633:9635 Coq.Init.Wf <> Acc ind
+R9637:9638 Coccinelle.closure <> Compose.R1 var
+R9633:9635 Coq.Init.Wf <> Acc ind
+R9637:9638 Coccinelle.closure <> Compose.R1 var
+R9741:9749 Coq.Init.Wf <> Acc_intro constr
+R9741:9749 Coq.Init.Wf <> Acc_intro constr
+R9862:9865 Coccinelle.closure <> Comp constr
+R9862:9865 Coccinelle.closure <> Comp constr
+R9891:9914 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R9891:9914 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10039:10063 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R10039:10063 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R10039:10063 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R10153:10156 Coccinelle.closure <> Comp constr
+R10153:10156 Coccinelle.closure <> Comp constr
+R10182:10205 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10182:10205 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10284:10307 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10284:10307 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10341:10365 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R10341:10365 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R10341:10365 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R10399:10402 Coccinelle.closure <> Comp constr
+R10399:10402 Coccinelle.closure <> Comp constr
+R10428:10451 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10428:10451 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10499:10507 Coq.Init.Wf <> Acc_intro constr
+R10499:10507 Coq.Init.Wf <> Acc_intro constr
+R10528:10534 Coq.Init.Wf <> Acc_inv thm
+R10528:10534 Coq.Init.Wf <> Acc_inv thm
+R10588:10591 Coccinelle.closure <> Comp constr
+R10588:10591 Coccinelle.closure <> Comp constr
+R10617:10640 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10617:10640 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10700:10703 Coccinelle.closure <> Comp constr
+R10700:10703 Coccinelle.closure <> Comp constr
+R10761:10784 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10761:10784 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R10822:10825 Coccinelle.closure <> Comp constr
+R10822:10825 Coccinelle.closure <> Comp constr
+prf 10868:10880 <> acc_union_alt
+R10901:10906 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10886:10897 Coq.Init.Wf <> well_founded def
+R10899:10900 Coccinelle.closure <> Compose.R1 var
+binder 10914:10914 <> a:47
+R10917:10917 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R10997:11002 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+binder 10925:10925 <> b:48
+R10950:10953 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10928:10942 Coccinelle.TransClosure <> refl_trans_clos ind
+R10949:10949 Coccinelle.closure <> a:47 var
+R10947:10947 Coccinelle.closure <> b:48 var
+R10944:10945 Coccinelle.closure <> Compose.R1 var
+R10954:10956 Coq.Init.Wf <> Acc ind
+R10996:10996 Coccinelle.closure <> b:48 var
+R10959:10969 Coccinelle.closure <> compose_rel ind
+R10992:10993 Coccinelle.closure <> Compose.R2 var
+R10972:10986 Coccinelle.TransClosure <> refl_trans_clos ind
+R10988:10989 Coccinelle.closure <> Compose.R1 var
+R11003:11005 Coq.Init.Wf <> Acc ind
+R11023:11023 Coccinelle.closure <> a:47 var
+R11008:11012 Coq.Relations.Relation_Operators <> union def
+R11019:11020 Coccinelle.closure <> Compose.R2 var
+R11016:11017 Coccinelle.closure <> Compose.R1 var
+R11068:11081 Coccinelle.closure <> acc_union_weak thm
+R11068:11081 Coccinelle.closure <> acc_union_weak thm
+R11099:11107 Coq.Init.Wf <> Acc_intro constr
+R11099:11107 Coq.Init.Wf <> Acc_intro constr
+R11291:11299 Coq.Init.Wf <> Acc_intro constr
+R11291:11299 Coq.Init.Wf <> Acc_intro constr
+R11402:11405 Coccinelle.closure <> Comp constr
+R11402:11405 Coccinelle.closure <> Comp constr
+R11459:11462 Coccinelle.closure <> Comp constr
+R11459:11462 Coccinelle.closure <> Comp constr
+R11522:11531 Coccinelle.TransClosure <> trans_clos ind
+R11534:11538 Coq.Relations.Relation_Operators <> union def
+R11545:11546 Coccinelle.closure <> Compose.R2 var
+R11542:11543 Coccinelle.closure <> Compose.R1 var
+R11507:11514 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R11522:11531 Coccinelle.TransClosure <> trans_clos ind
+R11534:11538 Coq.Relations.Relation_Operators <> union def
+R11545:11546 Coccinelle.closure <> Compose.R2 var
+R11542:11543 Coccinelle.closure <> Compose.R1 var
+R11507:11514 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R11713:11731 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R11713:11731 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R11764:11765 Coccinelle.closure <> Compose.R1 var
+R11748:11757 Coccinelle.closure <> trans_incl thm
+R11764:11765 Coccinelle.closure <> Compose.R1 var
+R11748:11757 Coccinelle.closure <> trans_incl thm
+R11880:11888 Coccinelle.closure <> acc_trans thm
+R11880:11888 Coccinelle.closure <> acc_trans thm
+R11916:11922 Coq.Init.Wf <> Acc_inv thm
+R11916:11922 Coq.Init.Wf <> Acc_inv thm
+R11938:11946 Coccinelle.closure <> acc_trans thm
+R11938:11946 Coccinelle.closure <> acc_trans thm
+R11983:11984 Coccinelle.closure <> Compose.R1 var
+R11967:11976 Coccinelle.closure <> trans_incl thm
+R11983:11984 Coccinelle.closure <> Compose.R1 var
+R11967:11976 Coccinelle.closure <> trans_incl thm
+prf 12040:12057 <> acc_union_alt_weak
+binder 12070:12070 <> a:49
+R12073:12073 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12153:12172 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 12081:12081 <> b:50
+R12141:12144 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12084:12098 Coccinelle.TransClosure <> refl_trans_clos ind
+R12140:12140 Coccinelle.closure <> a:49 var
+R12138:12138 Coccinelle.closure <> b:50 var
+R12101:12111 Coccinelle.closure <> compose_rel ind
+R12117:12131 Coccinelle.TransClosure <> refl_trans_clos ind
+R12133:12134 Coccinelle.closure <> Compose.R1 var
+R12113:12114 Coccinelle.closure <> Compose.R2 var
+R12145:12147 Coq.Init.Wf <> Acc ind
+R12152:12152 Coccinelle.closure <> b:50 var
+R12149:12150 Coccinelle.closure <> Compose.R1 var
+R12173:12173 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12253:12272 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 12181:12181 <> b:51
+R12206:12209 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12184:12198 Coccinelle.TransClosure <> refl_trans_clos ind
+R12205:12205 Coccinelle.closure <> a:49 var
+R12203:12203 Coccinelle.closure <> b:51 var
+R12200:12201 Coccinelle.closure <> Compose.R1 var
+R12210:12212 Coq.Init.Wf <> Acc ind
+R12252:12252 Coccinelle.closure <> b:51 var
+R12215:12225 Coccinelle.closure <> compose_rel ind
+R12248:12249 Coccinelle.closure <> Compose.R2 var
+R12228:12242 Coccinelle.TransClosure <> refl_trans_clos ind
+R12244:12245 Coccinelle.closure <> Compose.R1 var
+R12273:12275 Coq.Init.Wf <> Acc ind
+R12293:12293 Coccinelle.closure <> a:49 var
+R12278:12282 Coq.Relations.Relation_Operators <> union def
+R12289:12290 Coccinelle.closure <> Compose.R2 var
+R12286:12287 Coccinelle.closure <> Compose.R1 var
+R12327:12340 Coccinelle.closure <> acc_union_weak thm
+R12327:12340 Coccinelle.closure <> acc_union_weak thm
+R12369:12377 Coq.Init.Wf <> Acc_intro constr
+R12369:12377 Coq.Init.Wf <> Acc_intro constr
+R12563:12571 Coq.Init.Wf <> Acc_intro constr
+R12563:12571 Coq.Init.Wf <> Acc_intro constr
+R12674:12677 Coccinelle.closure <> Comp constr
+R12674:12677 Coccinelle.closure <> Comp constr
+R12731:12734 Coccinelle.closure <> Comp constr
+R12731:12734 Coccinelle.closure <> Comp constr
+prf 12766:12777 <> wf_union_alt
+R12798:12804 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12888:12888 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12783:12794 Coq.Init.Wf <> well_founded def
+R12796:12797 Coccinelle.closure <> Compose.R1 var
+R12855:12859 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R12805:12816 Coq.Init.Wf <> well_founded def
+R12819:12829 Coccinelle.closure <> compose_rel ind
+R12852:12853 Coccinelle.closure <> Compose.R2 var
+R12832:12846 Coccinelle.TransClosure <> refl_trans_clos ind
+R12848:12849 Coccinelle.closure <> Compose.R1 var
+R12860:12871 Coq.Init.Wf <> well_founded def
+R12874:12878 Coq.Relations.Relation_Operators <> union def
+R12885:12886 Coccinelle.closure <> Compose.R2 var
+R12882:12883 Coccinelle.closure <> Compose.R1 var
+R12946:12954 Coccinelle.closure <> acc_union thm
+R12946:12954 Coccinelle.closure <> acc_union thm
+R12946:12954 Coccinelle.closure <> acc_union thm
+R12946:12954 Coccinelle.closure <> acc_union thm
+R12980:12987 Coccinelle.closure <> wf_trans thm
+R12980:12987 Coccinelle.closure <> wf_trans thm
+R13012:13020 Coq.Init.Wf <> Acc_intro constr
+R13012:13020 Coq.Init.Wf <> Acc_intro constr
+R13132:13147 Coq.Init.Wf <> well_founded_ind thm
+R13150:13157 Coccinelle.closure <> wf_trans thm
+R13132:13147 Coq.Init.Wf <> well_founded_ind thm
+R13150:13157 Coccinelle.closure <> wf_trans thm
+R13197:13205 Coq.Init.Wf <> Acc_intro constr
+R13197:13205 Coq.Init.Wf <> Acc_intro constr
+R13307:13310 Coccinelle.closure <> Comp constr
+R13307:13310 Coccinelle.closure <> Comp constr
+R13363:13372 Coccinelle.TransClosure <> trans_clos ind
+R13375:13379 Coq.Relations.Relation_Operators <> union def
+R13386:13387 Coccinelle.closure <> Compose.R2 var
+R13383:13384 Coccinelle.closure <> Compose.R1 var
+R13348:13355 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R13363:13372 Coccinelle.TransClosure <> trans_clos ind
+R13375:13379 Coq.Relations.Relation_Operators <> union def
+R13386:13387 Coccinelle.closure <> Compose.R2 var
+R13383:13384 Coccinelle.closure <> Compose.R1 var
+R13348:13355 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R13543:13561 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R13543:13561 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R13594:13595 Coccinelle.closure <> Compose.R1 var
+R13578:13587 Coccinelle.closure <> trans_incl thm
+R13594:13595 Coccinelle.closure <> Compose.R1 var
+R13578:13587 Coccinelle.closure <> trans_incl thm
+R13670:13678 Coccinelle.closure <> acc_trans thm
+R13670:13678 Coccinelle.closure <> acc_trans thm
+prf 13702:13714 <> acc_comp_incl
+binder 13727:13727 <> R:52
+R13730:13730 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13773:13780 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 13738:13738 <> a:53
+R13748:13751 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13741:13743 Coq.Init.Wf <> Acc ind
+R13747:13747 Coccinelle.closure <> a:53 var
+R13745:13745 Coccinelle.closure <> R:52 var
+R13752:13754 Coq.Init.Wf <> Acc ind
+R13772:13772 Coccinelle.closure <> a:53 var
+R13757:13761 Coq.Relations.Relation_Operators <> union def
+R13768:13769 Coccinelle.closure <> Compose.R2 var
+R13765:13766 Coccinelle.closure <> Compose.R1 var
+binder 13788:13788 <> a:54
+R13798:13801 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13791:13793 Coq.Init.Wf <> Acc ind
+R13797:13797 Coccinelle.closure <> a:54 var
+R13795:13795 Coccinelle.closure <> R:52 var
+R13802:13804 Coq.Init.Wf <> Acc ind
+R13844:13844 Coccinelle.closure <> a:54 var
+R13807:13817 Coccinelle.closure <> compose_rel ind
+R13840:13841 Coccinelle.closure <> Compose.R2 var
+R13820:13834 Coccinelle.TransClosure <> refl_trans_clos ind
+R13836:13837 Coccinelle.closure <> Compose.R1 var
+R13895:13904 Coccinelle.TransClosure <> trans_clos ind
+R13907:13911 Coq.Relations.Relation_Operators <> union def
+R13918:13919 Coccinelle.closure <> Compose.R2 var
+R13915:13916 Coccinelle.closure <> Compose.R1 var
+R13880:13887 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R13895:13904 Coccinelle.TransClosure <> trans_clos ind
+R13907:13911 Coq.Relations.Relation_Operators <> union def
+R13918:13919 Coccinelle.closure <> Compose.R2 var
+R13915:13916 Coccinelle.closure <> Compose.R1 var
+R13880:13887 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R14077:14095 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R14077:14095 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R14128:14129 Coccinelle.closure <> Compose.R1 var
+R14112:14121 Coccinelle.closure <> trans_incl thm
+R14128:14129 Coccinelle.closure <> Compose.R1 var
+R14112:14121 Coccinelle.closure <> trans_incl thm
+R14211:14219 Coccinelle.closure <> acc_trans thm
+R14211:14219 Coccinelle.closure <> acc_trans thm
+R14253:14259 Coccinelle.closure Compose <> sec
+def 14274:14277 <> rest
+binder 14279:14279 <> A:55
+binder 14281:14281 <> P:56
+binder 14283:14283 <> R:57
+R14299:14299 Coccinelle.closure <> A:55 var
+binder 14293:14293 <> a:58
+binder 14295:14295 <> b:59
+R14310:14313 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R14305:14305 Coccinelle.closure <> R:57 var
+R14307:14307 Coccinelle.closure <> a:58 var
+R14309:14309 Coccinelle.closure <> b:59 var
+R14317:14320 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R14314:14314 Coccinelle.closure <> P:56 var
+R14316:14316 Coccinelle.closure <> a:58 var
+R14321:14321 Coccinelle.closure <> P:56 var
+R14323:14323 Coccinelle.closure <> b:59 var
+prf 14333:14342 <> rest_union
+binder 14353:14353 <> A:60
+binder 14355:14355 <> P:61
+R14366:14373 Coq.Relations.Relation_Definitions <> relation def
+R14375:14375 Coccinelle.closure <> A:60 var
+binder 14358:14359 <> R1:62
+binder 14361:14362 <> R2:63
+binder 14378:14378 <> a:64
+binder 14380:14380 <> b:65
+R14409:14413 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R14383:14386 Coccinelle.closure <> rest def
+R14408:14408 Coccinelle.closure <> b:65 var
+R14406:14406 Coccinelle.closure <> a:64 var
+R14391:14395 Coq.Relations.Relation_Operators <> union def
+R14402:14403 Coccinelle.closure <> R2:63 var
+R14399:14400 Coccinelle.closure <> R1:62 var
+R14388:14388 Coccinelle.closure <> P:61 var
+R14414:14418 Coq.Relations.Relation_Operators <> union def
+R14446:14446 Coccinelle.closure <> a:64 var
+R14448:14448 Coccinelle.closure <> b:65 var
+R14435:14438 Coccinelle.closure <> rest def
+R14442:14443 Coccinelle.closure <> R2:63 var
+R14440:14440 Coccinelle.closure <> P:61 var
+R14423:14426 Coccinelle.closure <> rest def
+R14430:14431 Coccinelle.closure <> R1:62 var
+R14428:14428 Coccinelle.closure <> P:61 var
+prf 14660:14669 <> rest_trans
+binder 14684:14684 <> A:66
+R14692:14695 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14691:14691 Coccinelle.closure <> A:66 var
+binder 14687:14687 <> P:67
+R14707:14714 Coq.Relations.Relation_Definitions <> relation def
+R14716:14716 Coccinelle.closure <> A:66 var
+binder 14703:14703 <> R:68
+R14720:14720 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14752:14758 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 14728:14728 <> a:69
+binder 14730:14730 <> b:70
+R14736:14739 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14733:14733 Coccinelle.closure <> P:67 var
+R14735:14735 Coccinelle.closure <> a:69 var
+R14745:14748 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14740:14740 Coccinelle.closure <> R:68 var
+R14742:14742 Coccinelle.closure <> b:70 var
+R14744:14744 Coccinelle.closure <> a:69 var
+R14749:14749 Coccinelle.closure <> P:67 var
+R14751:14751 Coccinelle.closure <> b:70 var
+binder 14766:14766 <> a:71
+R14772:14775 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14769:14769 Coccinelle.closure <> P:67 var
+R14771:14771 Coccinelle.closure <> a:71 var
+binder 14783:14783 <> b:72
+R14811:14815 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R14786:14795 Coccinelle.TransClosure <> trans_clos ind
+R14810:14810 Coccinelle.closure <> a:71 var
+R14808:14808 Coccinelle.closure <> b:72 var
+R14798:14801 Coccinelle.closure <> rest def
+R14805:14805 Coccinelle.closure <> R:68 var
+R14803:14803 Coccinelle.closure <> P:67 var
+R14816:14825 Coccinelle.TransClosure <> trans_clos ind
+R14831:14831 Coccinelle.closure <> a:71 var
+R14829:14829 Coccinelle.closure <> b:72 var
+R14827:14827 Coccinelle.closure <> R:68 var
+R14879:14888 Coccinelle.closure <> trans_incl thm
+R14879:14888 Coccinelle.closure <> trans_incl thm
+R14938:14962 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R14978:15002 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R14938:14962 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R14938:14962 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R14978:15002 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+R14978:15002 Coccinelle.TransClosure <> trans_clos_trans_clos_alt thm
+prf 15198:15205 <> acc_rest
+binder 15219:15219 <> A:73
+R15226:15233 Coq.Relations.Relation_Definitions <> relation def
+R15235:15235 Coccinelle.closure <> A:73 var
+binder 15222:15222 <> R:74
+R15244:15247 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15243:15243 Coccinelle.closure <> A:73 var
+binder 15239:15239 <> P:75
+R15257:15257 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15295:15303 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15351:15351 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15272:15272 Coccinelle.closure <> A:73 var
+binder 15266:15266 <> a:76
+binder 15268:15268 <> b:77
+R15279:15282 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15276:15276 Coccinelle.closure <> P:75 var
+R15278:15278 Coccinelle.closure <> a:76 var
+R15288:15291 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15283:15283 Coccinelle.closure <> R:74 var
+R15285:15285 Coccinelle.closure <> b:77 var
+R15287:15287 Coccinelle.closure <> a:76 var
+R15292:15292 Coccinelle.closure <> P:75 var
+R15294:15294 Coccinelle.closure <> b:77 var
+binder 15311:15311 <> a:78
+R15314:15314 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R15329:15334 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R15318:15321 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15315:15315 Coccinelle.closure <> P:75 var
+R15317:15317 Coccinelle.closure <> a:78 var
+R15322:15324 Coq.Init.Wf <> Acc ind
+R15328:15328 Coccinelle.closure <> a:78 var
+R15326:15326 Coccinelle.closure <> R:74 var
 R15335:15337 Coq.Init.Wf <> Acc ind
-R15341:15341 Coccinelle.closure <> a:78 var
-R15339:15339 Coccinelle.closure <> R:74 var
-R15348:15350 Coq.Init.Wf <> Acc ind
-R15363:15363 Coccinelle.closure <> a:78 var
-R15353:15356 Coccinelle.closure <> rest def
-R15360:15360 Coccinelle.closure <> R:74 var
-R15358:15358 Coccinelle.closure <> P:75 var
-R15416:15424 Coq.Init.Wf <> Acc_intro constr
-R15416:15424 Coq.Init.Wf <> Acc_intro constr
-R15455:15461 Coq.Init.Wf <> Acc_inv thm
-R15455:15461 Coq.Init.Wf <> Acc_inv thm
-R15486:15493 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R15486:15493 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R15649:15657 Coq.Init.Wf <> Acc_intro constr
-R15649:15657 Coq.Init.Wf <> Acc_intro constr
-prf 15777:15783 <> wf_rest
-binder 15797:15797 <> A:79
-R15804:15811 Coq.Relations.Relation_Definitions <> relation def
-R15813:15813 Coccinelle.closure <> A:79 var
-binder 15800:15800 <> R:80
-R15822:15825 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15821:15821 Coccinelle.closure <> A:79 var
-binder 15817:15817 <> P:81
-R15835:15835 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15873:15881 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15937:15937 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15850:15850 Coccinelle.closure <> A:79 var
-binder 15844:15844 <> a:82
-binder 15846:15846 <> b:83
-R15857:15860 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15854:15854 Coccinelle.closure <> P:81 var
-R15856:15856 Coccinelle.closure <> a:82 var
-R15866:15869 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15861:15861 Coccinelle.closure <> R:80 var
-R15863:15863 Coccinelle.closure <> b:83 var
-R15865:15865 Coccinelle.closure <> a:82 var
-R15870:15870 Coccinelle.closure <> P:81 var
-R15872:15872 Coccinelle.closure <> b:83 var
-R15882:15882 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R15907:15913 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-binder 15890:15890 <> a:84
-R15896:15899 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15893:15893 Coccinelle.closure <> P:81 var
-R15895:15895 Coccinelle.closure <> a:84 var
-R15900:15902 Coq.Init.Wf <> Acc ind
-R15906:15906 Coccinelle.closure <> a:84 var
-R15904:15904 Coccinelle.closure <> R:80 var
-R15914:15925 Coq.Init.Wf <> well_founded def
-R15928:15931 Coccinelle.closure <> rest def
-R15935:15935 Coccinelle.closure <> R:80 var
-R15933:15933 Coccinelle.closure <> P:81 var
-R15995:16002 Coccinelle.closure <> acc_rest thm
-R15995:16002 Coccinelle.closure <> acc_rest thm
-R15995:16002 Coccinelle.closure <> acc_rest thm
-R15995:16002 Coccinelle.closure <> acc_rest thm
-R16043:16050 Coccinelle.closure <> acc_rest thm
-R16043:16050 Coccinelle.closure <> acc_rest thm
-R16043:16050 Coccinelle.closure <> acc_rest thm
-R16043:16050 Coccinelle.closure <> acc_rest thm
-prf 16074:16087 <> acc_union_rest
-binder 16100:16100 <> A:85
-R16111:16118 Coq.Relations.Relation_Definitions <> relation def
-R16120:16120 Coccinelle.closure <> A:85 var
-binder 16103:16104 <> R1:86
-binder 16106:16107 <> R2:87
-R16129:16132 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16128:16128 Coccinelle.closure <> A:85 var
-binder 16124:16124 <> P:88
-R16142:16142 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16181:16188 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16157:16157 Coccinelle.closure <> A:85 var
-binder 16151:16151 <> a:89
-binder 16153:16153 <> b:90
-R16164:16167 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16161:16161 Coccinelle.closure <> P:88 var
-R16163:16163 Coccinelle.closure <> a:89 var
-R16174:16177 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16168:16169 Coccinelle.closure <> R1:86 var
-R16171:16171 Coccinelle.closure <> b:90 var
-R16173:16173 Coccinelle.closure <> a:89 var
-R16178:16178 Coccinelle.closure <> P:88 var
-R16180:16180 Coccinelle.closure <> b:90 var
-R16189:16189 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16228:16235 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16204:16204 Coccinelle.closure <> A:85 var
-binder 16198:16198 <> a:91
-binder 16200:16200 <> b:92
-R16211:16214 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16208:16208 Coccinelle.closure <> P:88 var
-R16210:16210 Coccinelle.closure <> a:91 var
-R16221:16224 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16215:16216 Coccinelle.closure <> R2:87 var
-R16218:16218 Coccinelle.closure <> b:92 var
-R16220:16220 Coccinelle.closure <> a:91 var
-R16225:16225 Coccinelle.closure <> P:88 var
-R16227:16227 Coccinelle.closure <> b:92 var
-R16236:16236 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16262:16268 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 16244:16244 <> a:93
-R16250:16253 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16247:16247 Coccinelle.closure <> P:88 var
-R16249:16249 Coccinelle.closure <> a:93 var
-R16254:16256 Coq.Init.Wf <> Acc ind
-R16261:16261 Coccinelle.closure <> a:93 var
-R16258:16259 Coccinelle.closure <> R1:86 var
-binder 16276:16276 <> a:94
-R16282:16285 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16279:16279 Coccinelle.closure <> P:88 var
-R16281:16281 Coccinelle.closure <> a:94 var
-R16329:16332 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16286:16288 Coq.Init.Wf <> Acc ind
-R16328:16328 Coccinelle.closure <> a:94 var
-R16291:16301 Coccinelle.closure <> compose_rel ind
-R16307:16321 Coccinelle.TransClosure <> refl_trans_clos ind
-R16323:16324 Coccinelle.closure <> R1:86 var
-R16303:16304 Coccinelle.closure <> R2:87 var
-R16333:16335 Coq.Init.Wf <> Acc ind
-R16353:16353 Coccinelle.closure <> a:94 var
-R16338:16342 Coq.Relations.Relation_Operators <> union def
-R16349:16350 Coccinelle.closure <> R2:87 var
-R16346:16347 Coccinelle.closure <> R1:86 var
-R16414:16420 Coccinelle.closure <> wf_rest thm
-R16414:16420 Coccinelle.closure <> wf_rest thm
-R16414:16420 Coccinelle.closure <> wf_rest thm
-R16414:16420 Coccinelle.closure <> wf_rest thm
-binder 16446:16446 <> a:95
-binder 16448:16448 <> b:96
-R16459:16462 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R16456:16456 Coccinelle.closure <> a:95 var
-R16458:16458 Coccinelle.closure <> b:96 var
-R16466:16469 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R16465:16465 Coccinelle.closure <> a:95 var
-R16472:16472 Coccinelle.closure <> b:96 var
-binder 16446:16446 <> a:97
-binder 16448:16448 <> b:98
-R16459:16462 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R16456:16456 Coccinelle.closure <> a:97 var
-R16458:16458 Coccinelle.closure <> b:98 var
-R16466:16469 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R16465:16465 Coccinelle.closure <> a:97 var
-R16472:16472 Coccinelle.closure <> b:98 var
-R16495:16502 Coccinelle.closure <> wf_trans thm
-R16495:16502 Coccinelle.closure <> wf_trans thm
-R16583:16585 Coq.Init.Wf <> Acc ind
-R16588:16598 Coccinelle.closure <> compose_rel ind
-R16604:16618 Coccinelle.TransClosure <> refl_trans_clos ind
-R16583:16585 Coq.Init.Wf <> Acc ind
-R16588:16598 Coccinelle.closure <> compose_rel ind
-R16604:16618 Coccinelle.TransClosure <> refl_trans_clos ind
-R16635:16643 Coq.Init.Wf <> Acc_intro constr
-R16635:16643 Coq.Init.Wf <> Acc_intro constr
-R16705:16720 Coq.Init.Wf <> well_founded_ind thm
-R16705:16720 Coq.Init.Wf <> well_founded_ind thm
-R16769:16777 Coq.Init.Wf <> Acc_intro constr
-R16769:16777 Coq.Init.Wf <> Acc_intro constr
-R16817:16822 Coccinelle.TransClosure <> t_step constr
-R16817:16822 Coccinelle.TransClosure <> t_step constr
-R16946:16949 Coccinelle.closure <> Comp constr
-R16946:16949 Coccinelle.closure <> Comp constr
-R16975:16998 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R16975:16998 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R17045:17053 Coq.Init.Wf <> Acc_intro constr
-R17045:17053 Coq.Init.Wf <> Acc_intro constr
-R17075:17081 Coq.Init.Wf <> Acc_inv thm
-R17075:17081 Coq.Init.Wf <> Acc_inv thm
-R17146:17149 Coccinelle.closure <> Comp constr
-R17146:17149 Coccinelle.closure <> Comp constr
-R17175:17198 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R17175:17198 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
-R17284:17287 Coccinelle.closure <> Comp constr
-R17284:17287 Coccinelle.closure <> Comp constr
-R17312:17317 Coccinelle.TransClosure <> r_step constr
-R17312:17317 Coccinelle.TransClosure <> r_step constr
-prf 17369:17386 <> acc_union_rest_alt
-binder 17399:17399 <> A:99
-R17410:17417 Coq.Relations.Relation_Definitions <> relation def
-R17419:17419 Coccinelle.closure <> A:99 var
-binder 17402:17403 <> R1:100
-binder 17405:17406 <> R2:101
-R17428:17431 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17427:17427 Coccinelle.closure <> A:99 var
-binder 17423:17423 <> P:102
-R17441:17441 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17480:17487 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17456:17456 Coccinelle.closure <> A:99 var
-binder 17450:17450 <> a:103
-binder 17452:17452 <> b:104
-R17463:17466 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17460:17460 Coccinelle.closure <> P:102 var
-R17462:17462 Coccinelle.closure <> a:103 var
-R17473:17476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17467:17468 Coccinelle.closure <> R1:100 var
-R17470:17470 Coccinelle.closure <> b:104 var
-R17472:17472 Coccinelle.closure <> a:103 var
-R17477:17477 Coccinelle.closure <> P:102 var
-R17479:17479 Coccinelle.closure <> b:104 var
-R17488:17488 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17527:17534 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17503:17503 Coccinelle.closure <> A:99 var
-binder 17497:17497 <> a:105
-binder 17499:17499 <> b:106
-R17510:17513 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17507:17507 Coccinelle.closure <> P:102 var
-R17509:17509 Coccinelle.closure <> a:105 var
-R17520:17523 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17514:17515 Coccinelle.closure <> R2:101 var
-R17517:17517 Coccinelle.closure <> b:106 var
-R17519:17519 Coccinelle.closure <> a:105 var
-R17524:17524 Coccinelle.closure <> P:102 var
-R17526:17526 Coccinelle.closure <> b:106 var
-R17535:17535 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17561:17568 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17692:17692 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 17543:17543 <> a:107
-R17549:17552 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17546:17546 Coccinelle.closure <> P:102 var
-R17548:17548 Coccinelle.closure <> a:107 var
-R17553:17555 Coq.Init.Wf <> Acc ind
-R17560:17560 Coccinelle.closure <> a:107 var
-R17557:17558 Coccinelle.closure <> R1:100 var
-binder 17576:17576 <> a:108
-R17579:17579 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17659:17663 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 17587:17587 <> b:109
-R17612:17615 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17590:17604 Coccinelle.TransClosure <> refl_trans_clos ind
-R17611:17611 Coccinelle.closure <> a:108 var
-R17609:17609 Coccinelle.closure <> b:109 var
-R17606:17607 Coccinelle.closure <> R1:100 var
-R17616:17618 Coq.Init.Wf <> Acc ind
-R17658:17658 Coccinelle.closure <> b:109 var
-R17621:17631 Coccinelle.closure <> compose_rel ind
-R17654:17655 Coccinelle.closure <> R2:101 var
-R17634:17648 Coccinelle.TransClosure <> refl_trans_clos ind
-R17650:17651 Coccinelle.closure <> R1:100 var
-R17667:17670 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17664:17664 Coccinelle.closure <> P:102 var
-R17666:17666 Coccinelle.closure <> a:108 var
-R17671:17673 Coq.Init.Wf <> Acc ind
-R17691:17691 Coccinelle.closure <> a:108 var
-R17676:17680 Coq.Relations.Relation_Operators <> union def
-R17687:17688 Coccinelle.closure <> R2:101 var
-R17684:17685 Coccinelle.closure <> R1:100 var
-R17753:17755 Coq.Init.Wf <> Acc ind
-R17758:17762 Coq.Relations.Relation_Operators <> union def
-R17779:17782 Coccinelle.closure <> rest def
-R17767:17770 Coccinelle.closure <> rest def
-R17753:17755 Coq.Init.Wf <> Acc ind
-R17758:17762 Coq.Relations.Relation_Operators <> union def
-R17779:17782 Coccinelle.closure <> rest def
-R17767:17770 Coccinelle.closure <> rest def
-R17806:17818 Coccinelle.closure <> acc_union_alt thm
-R17806:17818 Coccinelle.closure <> acc_union_alt thm
-R17806:17818 Coccinelle.closure <> acc_union_alt thm
-R17806:17818 Coccinelle.closure <> acc_union_alt thm
-R17854:17864 Coccinelle.closure <> compose_rel ind
-R17867:17881 Coccinelle.TransClosure <> refl_trans_clos ind
-R17839:17846 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R17854:17864 Coccinelle.closure <> compose_rel ind
-R17867:17881 Coccinelle.TransClosure <> refl_trans_clos ind
-R17839:17846 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R17964:17967 Coccinelle.closure <> Comp constr
-R17964:17967 Coccinelle.closure <> Comp constr
-R18027:18030 Coccinelle.closure <> rest def
-R18005:18019 Coccinelle.closure <> refl_trans_incl thm
-R18027:18030 Coccinelle.closure <> rest def
-R18005:18019 Coccinelle.closure <> refl_trans_incl thm
-R18137:18140 Coccinelle.closure <> rest def
-R18115:18129 Coccinelle.closure <> refl_trans_incl thm
-R18137:18140 Coccinelle.closure <> rest def
-R18115:18129 Coccinelle.closure <> refl_trans_incl thm
-R18218:18224 Coccinelle.closure <> wf_rest thm
-R18218:18224 Coccinelle.closure <> wf_rest thm
-R18218:18224 Coccinelle.closure <> wf_rest thm
-R18218:18224 Coccinelle.closure <> wf_rest thm
-R18311:18319 Coq.Init.Wf <> Acc_intro constr
-R18311:18319 Coq.Init.Wf <> Acc_intro constr
-prf 18548:18570 <> acc_union_rest_alt_weak
-binder 18583:18583 <> A:110
-R18594:18601 Coq.Relations.Relation_Definitions <> relation def
-R18603:18603 Coccinelle.closure <> A:110 var
-binder 18586:18587 <> R1:111
-binder 18589:18590 <> R2:112
-R18612:18615 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18611:18611 Coccinelle.closure <> A:110 var
-binder 18607:18607 <> P:113
-R18625:18625 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18664:18671 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18640:18640 Coccinelle.closure <> A:110 var
-binder 18634:18634 <> a:114
-binder 18636:18636 <> b:115
-R18647:18650 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18644:18644 Coccinelle.closure <> P:113 var
-R18646:18646 Coccinelle.closure <> a:114 var
-R18657:18660 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18651:18652 Coccinelle.closure <> R1:111 var
-R18654:18654 Coccinelle.closure <> b:115 var
-R18656:18656 Coccinelle.closure <> a:114 var
-R18661:18661 Coccinelle.closure <> P:113 var
-R18663:18663 Coccinelle.closure <> b:115 var
-R18672:18672 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18711:18718 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18687:18687 Coccinelle.closure <> A:110 var
-binder 18681:18681 <> a:116
-binder 18683:18683 <> b:117
-R18694:18697 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18691:18691 Coccinelle.closure <> P:113 var
-R18693:18693 Coccinelle.closure <> a:116 var
-R18704:18707 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18698:18699 Coccinelle.closure <> R2:112 var
-R18701:18701 Coccinelle.closure <> b:117 var
-R18703:18703 Coccinelle.closure <> a:116 var
-R18708:18708 Coccinelle.closure <> P:113 var
-R18710:18710 Coccinelle.closure <> b:117 var
-binder 18726:18726 <> a:118
-R18729:18729 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18809:18828 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 18737:18737 <> b:119
-R18797:18800 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18740:18754 Coccinelle.TransClosure <> refl_trans_clos ind
-R18796:18796 Coccinelle.closure <> a:118 var
-R18794:18794 Coccinelle.closure <> b:119 var
-R18757:18767 Coccinelle.closure <> compose_rel ind
-R18773:18787 Coccinelle.TransClosure <> refl_trans_clos ind
-R18789:18790 Coccinelle.closure <> R1:111 var
-R18769:18770 Coccinelle.closure <> R2:112 var
-R18801:18803 Coq.Init.Wf <> Acc ind
-R18808:18808 Coccinelle.closure <> b:119 var
-R18805:18806 Coccinelle.closure <> R1:111 var
-R18829:18829 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18909:18929 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 18837:18837 <> b:120
-R18862:18865 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18840:18854 Coccinelle.TransClosure <> refl_trans_clos ind
-R18861:18861 Coccinelle.closure <> a:118 var
-R18859:18859 Coccinelle.closure <> b:120 var
-R18856:18857 Coccinelle.closure <> R1:111 var
-R18866:18868 Coq.Init.Wf <> Acc ind
-R18908:18908 Coccinelle.closure <> b:120 var
-R18871:18881 Coccinelle.closure <> compose_rel ind
-R18904:18905 Coccinelle.closure <> R2:112 var
-R18884:18898 Coccinelle.TransClosure <> refl_trans_clos ind
-R18900:18901 Coccinelle.closure <> R1:111 var
-R18933:18936 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18930:18930 Coccinelle.closure <> P:113 var
-R18932:18932 Coccinelle.closure <> a:118 var
-R18937:18939 Coq.Init.Wf <> Acc ind
-R18957:18957 Coccinelle.closure <> a:118 var
-R18942:18946 Coq.Relations.Relation_Operators <> union def
-R18953:18954 Coccinelle.closure <> R2:112 var
-R18950:18951 Coccinelle.closure <> R1:111 var
-R19020:19022 Coq.Init.Wf <> Acc ind
-R19025:19029 Coq.Relations.Relation_Operators <> union def
-R19046:19049 Coccinelle.closure <> rest def
-R19034:19037 Coccinelle.closure <> rest def
-R19020:19022 Coq.Init.Wf <> Acc ind
-R19025:19029 Coq.Relations.Relation_Operators <> union def
-R19046:19049 Coccinelle.closure <> rest def
-R19034:19037 Coccinelle.closure <> rest def
-R19068:19085 Coccinelle.closure <> acc_union_alt_weak thm
-R19068:19085 Coccinelle.closure <> acc_union_alt_weak thm
-R19106:19113 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R19106:19113 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R19202:19212 Coccinelle.closure <> compose_rel ind
-R19227:19241 Coccinelle.TransClosure <> refl_trans_clos ind
-R19244:19247 Coccinelle.closure <> rest def
-R19215:19218 Coccinelle.closure <> rest def
-R19180:19194 Coccinelle.closure <> refl_trans_incl thm
-R19202:19212 Coccinelle.closure <> compose_rel ind
-R19227:19241 Coccinelle.TransClosure <> refl_trans_clos ind
-R19244:19247 Coccinelle.closure <> rest def
-R19215:19218 Coccinelle.closure <> rest def
-R19180:19194 Coccinelle.closure <> refl_trans_incl thm
-R19335:19338 Coccinelle.closure <> Comp constr
-R19335:19338 Coccinelle.closure <> Comp constr
-R19399:19402 Coccinelle.closure <> rest def
-R19377:19391 Coccinelle.closure <> refl_trans_incl thm
-R19399:19402 Coccinelle.closure <> rest def
-R19377:19391 Coccinelle.closure <> refl_trans_incl thm
-R19506:19516 Coccinelle.closure <> compose_rel ind
-R19519:19533 Coccinelle.TransClosure <> refl_trans_clos ind
-R19491:19498 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R19506:19516 Coccinelle.closure <> compose_rel ind
-R19519:19533 Coccinelle.TransClosure <> refl_trans_clos ind
-R19491:19498 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R19616:19619 Coccinelle.closure <> Comp constr
-R19616:19619 Coccinelle.closure <> Comp constr
-R19679:19682 Coccinelle.closure <> rest def
-R19657:19671 Coccinelle.closure <> refl_trans_incl thm
-R19679:19682 Coccinelle.closure <> rest def
-R19657:19671 Coccinelle.closure <> refl_trans_incl thm
-R19791:19794 Coccinelle.closure <> rest def
-R19769:19783 Coccinelle.closure <> refl_trans_incl thm
-R19791:19794 Coccinelle.closure <> rest def
-R19769:19783 Coccinelle.closure <> refl_trans_incl thm
-R19935:19943 Coq.Init.Wf <> Acc_intro constr
-R19935:19943 Coq.Init.Wf <> Acc_intro constr
-prf 20172:20176 <> accR2
-binder 20187:20187 <> A:121
-R20194:20201 Coq.Relations.Relation_Definitions <> relation def
-R20203:20203 Coccinelle.closure <> A:121 var
-binder 20190:20190 <> R:122
-binder 20206:20206 <> a:123
-R20216:20220 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R20209:20211 Coq.Init.Wf <> Acc ind
-R20215:20215 Coccinelle.closure <> a:123 var
-R20213:20213 Coccinelle.closure <> R:122 var
-R20221:20223 Coq.Init.Wf <> Acc ind
-R20243:20243 Coccinelle.closure <> a:123 var
-R20226:20236 Coccinelle.closure <> compose_rel ind
-R20240:20240 Coccinelle.closure <> R:122 var
-R20238:20238 Coccinelle.closure <> R:122 var
-R20308:20317 Coccinelle.TransClosure <> trans_clos ind
-R20293:20300 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R20308:20317 Coccinelle.TransClosure <> trans_clos ind
-R20293:20300 Coq.Wellfounded.Inclusion <> Acc_incl thm
-R20391:20397 Coccinelle.TransClosure <> t_trans constr
-R20391:20397 Coccinelle.TransClosure <> t_trans constr
-R20422:20427 Coccinelle.TransClosure <> t_step constr
-R20422:20427 Coccinelle.TransClosure <> t_step constr
-R20445:20453 Coccinelle.closure <> acc_trans thm
-R20445:20453 Coccinelle.closure <> acc_trans thm
-R20518:20526 Coq.Init.Wf <> Acc_intro constr
-R20547:20555 Coq.Init.Wf <> Acc_intro constr
-R20518:20526 Coq.Init.Wf <> Acc_intro constr
-R20547:20555 Coq.Init.Wf <> Acc_intro constr
-R20587:20590 Coccinelle.closure <> Comp constr
-R20587:20590 Coccinelle.closure <> Comp constr
-prf 20621:20630 <> acc_inv_im
-binder 20643:20643 <> A:124
-binder 20645:20645 <> B:125
-R20653:20660 Coq.Relations.Relation_Definitions <> relation def
-R20662:20662 Coccinelle.closure <> A:124 var
-binder 20648:20649 <> R1:126
-R20671:20678 Coq.Relations.Relation_Definitions <> relation def
+R15350:15350 Coccinelle.closure <> a:78 var
+R15340:15343 Coccinelle.closure <> rest def
+R15347:15347 Coccinelle.closure <> R:74 var
+R15345:15345 Coccinelle.closure <> P:75 var
+R15403:15411 Coq.Init.Wf <> Acc_intro constr
+R15403:15411 Coq.Init.Wf <> Acc_intro constr
+R15442:15448 Coq.Init.Wf <> Acc_inv thm
+R15442:15448 Coq.Init.Wf <> Acc_inv thm
+R15473:15480 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R15473:15480 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R15636:15644 Coq.Init.Wf <> Acc_intro constr
+R15636:15644 Coq.Init.Wf <> Acc_intro constr
+prf 15764:15770 <> wf_rest
+binder 15784:15784 <> A:79
+R15791:15798 Coq.Relations.Relation_Definitions <> relation def
+R15800:15800 Coccinelle.closure <> A:79 var
+binder 15787:15787 <> R:80
+R15809:15812 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15808:15808 Coccinelle.closure <> A:79 var
+binder 15804:15804 <> P:81
+R15822:15822 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15860:15868 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15924:15924 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15837:15837 Coccinelle.closure <> A:79 var
+binder 15831:15831 <> a:82
+binder 15833:15833 <> b:83
+R15844:15847 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15841:15841 Coccinelle.closure <> P:81 var
+R15843:15843 Coccinelle.closure <> a:82 var
+R15853:15856 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15848:15848 Coccinelle.closure <> R:80 var
+R15850:15850 Coccinelle.closure <> b:83 var
+R15852:15852 Coccinelle.closure <> a:82 var
+R15857:15857 Coccinelle.closure <> P:81 var
+R15859:15859 Coccinelle.closure <> b:83 var
+R15869:15869 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R15894:15900 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+binder 15877:15877 <> a:84
+R15883:15886 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15880:15880 Coccinelle.closure <> P:81 var
+R15882:15882 Coccinelle.closure <> a:84 var
+R15887:15889 Coq.Init.Wf <> Acc ind
+R15893:15893 Coccinelle.closure <> a:84 var
+R15891:15891 Coccinelle.closure <> R:80 var
+R15901:15912 Coq.Init.Wf <> well_founded def
+R15915:15918 Coccinelle.closure <> rest def
+R15922:15922 Coccinelle.closure <> R:80 var
+R15920:15920 Coccinelle.closure <> P:81 var
+R15982:15989 Coccinelle.closure <> acc_rest thm
+R15982:15989 Coccinelle.closure <> acc_rest thm
+R15982:15989 Coccinelle.closure <> acc_rest thm
+R15982:15989 Coccinelle.closure <> acc_rest thm
+R16030:16037 Coccinelle.closure <> acc_rest thm
+R16030:16037 Coccinelle.closure <> acc_rest thm
+R16030:16037 Coccinelle.closure <> acc_rest thm
+R16030:16037 Coccinelle.closure <> acc_rest thm
+prf 16061:16074 <> acc_union_rest
+binder 16087:16087 <> A:85
+R16098:16105 Coq.Relations.Relation_Definitions <> relation def
+R16107:16107 Coccinelle.closure <> A:85 var
+binder 16090:16091 <> R1:86
+binder 16093:16094 <> R2:87
+R16116:16119 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16115:16115 Coccinelle.closure <> A:85 var
+binder 16111:16111 <> P:88
+R16129:16129 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16168:16175 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16144:16144 Coccinelle.closure <> A:85 var
+binder 16138:16138 <> a:89
+binder 16140:16140 <> b:90
+R16151:16154 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16148:16148 Coccinelle.closure <> P:88 var
+R16150:16150 Coccinelle.closure <> a:89 var
+R16161:16164 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16155:16156 Coccinelle.closure <> R1:86 var
+R16158:16158 Coccinelle.closure <> b:90 var
+R16160:16160 Coccinelle.closure <> a:89 var
+R16165:16165 Coccinelle.closure <> P:88 var
+R16167:16167 Coccinelle.closure <> b:90 var
+R16176:16176 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16215:16222 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16191:16191 Coccinelle.closure <> A:85 var
+binder 16185:16185 <> a:91
+binder 16187:16187 <> b:92
+R16198:16201 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16195:16195 Coccinelle.closure <> P:88 var
+R16197:16197 Coccinelle.closure <> a:91 var
+R16208:16211 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16202:16203 Coccinelle.closure <> R2:87 var
+R16205:16205 Coccinelle.closure <> b:92 var
+R16207:16207 Coccinelle.closure <> a:91 var
+R16212:16212 Coccinelle.closure <> P:88 var
+R16214:16214 Coccinelle.closure <> b:92 var
+R16223:16223 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16249:16255 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 16231:16231 <> a:93
+R16237:16240 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16234:16234 Coccinelle.closure <> P:88 var
+R16236:16236 Coccinelle.closure <> a:93 var
+R16241:16243 Coq.Init.Wf <> Acc ind
+R16248:16248 Coccinelle.closure <> a:93 var
+R16245:16246 Coccinelle.closure <> R1:86 var
+binder 16263:16263 <> a:94
+R16269:16272 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16266:16266 Coccinelle.closure <> P:88 var
+R16268:16268 Coccinelle.closure <> a:94 var
+R16316:16319 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16273:16275 Coq.Init.Wf <> Acc ind
+R16315:16315 Coccinelle.closure <> a:94 var
+R16278:16288 Coccinelle.closure <> compose_rel ind
+R16294:16308 Coccinelle.TransClosure <> refl_trans_clos ind
+R16310:16311 Coccinelle.closure <> R1:86 var
+R16290:16291 Coccinelle.closure <> R2:87 var
+R16320:16322 Coq.Init.Wf <> Acc ind
+R16340:16340 Coccinelle.closure <> a:94 var
+R16325:16329 Coq.Relations.Relation_Operators <> union def
+R16336:16337 Coccinelle.closure <> R2:87 var
+R16333:16334 Coccinelle.closure <> R1:86 var
+R16401:16407 Coccinelle.closure <> wf_rest thm
+R16401:16407 Coccinelle.closure <> wf_rest thm
+R16401:16407 Coccinelle.closure <> wf_rest thm
+R16401:16407 Coccinelle.closure <> wf_rest thm
+binder 16433:16433 <> a:95
+binder 16435:16435 <> b:96
+R16446:16449 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R16443:16443 Coccinelle.closure <> a:95 var
+R16445:16445 Coccinelle.closure <> b:96 var
+R16453:16456 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R16452:16452 Coccinelle.closure <> a:95 var
+R16459:16459 Coccinelle.closure <> b:96 var
+binder 16433:16433 <> a:97
+binder 16435:16435 <> b:98
+R16446:16449 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R16443:16443 Coccinelle.closure <> a:97 var
+R16445:16445 Coccinelle.closure <> b:98 var
+R16453:16456 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R16452:16452 Coccinelle.closure <> a:97 var
+R16459:16459 Coccinelle.closure <> b:98 var
+R16482:16489 Coccinelle.closure <> wf_trans thm
+R16482:16489 Coccinelle.closure <> wf_trans thm
+R16570:16572 Coq.Init.Wf <> Acc ind
+R16575:16585 Coccinelle.closure <> compose_rel ind
+R16591:16605 Coccinelle.TransClosure <> refl_trans_clos ind
+R16570:16572 Coq.Init.Wf <> Acc ind
+R16575:16585 Coccinelle.closure <> compose_rel ind
+R16591:16605 Coccinelle.TransClosure <> refl_trans_clos ind
+R16622:16630 Coq.Init.Wf <> Acc_intro constr
+R16622:16630 Coq.Init.Wf <> Acc_intro constr
+R16692:16707 Coq.Init.Wf <> well_founded_ind thm
+R16692:16707 Coq.Init.Wf <> well_founded_ind thm
+R16756:16764 Coq.Init.Wf <> Acc_intro constr
+R16756:16764 Coq.Init.Wf <> Acc_intro constr
+R16804:16809 Coccinelle.TransClosure <> t_step constr
+R16804:16809 Coccinelle.TransClosure <> t_step constr
+R16933:16936 Coccinelle.closure <> Comp constr
+R16933:16936 Coccinelle.closure <> Comp constr
+R16962:16985 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R16962:16985 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R17032:17040 Coq.Init.Wf <> Acc_intro constr
+R17032:17040 Coq.Init.Wf <> Acc_intro constr
+R17062:17068 Coq.Init.Wf <> Acc_inv thm
+R17062:17068 Coq.Init.Wf <> Acc_inv thm
+R17133:17136 Coccinelle.closure <> Comp constr
+R17133:17136 Coccinelle.closure <> Comp constr
+R17162:17185 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R17162:17185 Coccinelle.TransClosure <> refl_trans_clos_is_trans thm
+R17271:17274 Coccinelle.closure <> Comp constr
+R17271:17274 Coccinelle.closure <> Comp constr
+R17299:17304 Coccinelle.TransClosure <> r_step constr
+R17299:17304 Coccinelle.TransClosure <> r_step constr
+prf 17356:17373 <> acc_union_rest_alt
+binder 17386:17386 <> A:99
+R17397:17404 Coq.Relations.Relation_Definitions <> relation def
+R17406:17406 Coccinelle.closure <> A:99 var
+binder 17389:17390 <> R1:100
+binder 17392:17393 <> R2:101
+R17415:17418 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17414:17414 Coccinelle.closure <> A:99 var
+binder 17410:17410 <> P:102
+R17428:17428 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17467:17474 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17443:17443 Coccinelle.closure <> A:99 var
+binder 17437:17437 <> a:103
+binder 17439:17439 <> b:104
+R17450:17453 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17447:17447 Coccinelle.closure <> P:102 var
+R17449:17449 Coccinelle.closure <> a:103 var
+R17460:17463 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17454:17455 Coccinelle.closure <> R1:100 var
+R17457:17457 Coccinelle.closure <> b:104 var
+R17459:17459 Coccinelle.closure <> a:103 var
+R17464:17464 Coccinelle.closure <> P:102 var
+R17466:17466 Coccinelle.closure <> b:104 var
+R17475:17475 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17514:17521 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17490:17490 Coccinelle.closure <> A:99 var
+binder 17484:17484 <> a:105
+binder 17486:17486 <> b:106
+R17497:17500 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17494:17494 Coccinelle.closure <> P:102 var
+R17496:17496 Coccinelle.closure <> a:105 var
+R17507:17510 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17501:17502 Coccinelle.closure <> R2:101 var
+R17504:17504 Coccinelle.closure <> b:106 var
+R17506:17506 Coccinelle.closure <> a:105 var
+R17511:17511 Coccinelle.closure <> P:102 var
+R17513:17513 Coccinelle.closure <> b:106 var
+R17522:17522 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17548:17555 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17679:17679 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 17530:17530 <> a:107
+R17536:17539 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17533:17533 Coccinelle.closure <> P:102 var
+R17535:17535 Coccinelle.closure <> a:107 var
+R17540:17542 Coq.Init.Wf <> Acc ind
+R17547:17547 Coccinelle.closure <> a:107 var
+R17544:17545 Coccinelle.closure <> R1:100 var
+binder 17563:17563 <> a:108
+R17566:17566 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17646:17650 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 17574:17574 <> b:109
+R17599:17602 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17577:17591 Coccinelle.TransClosure <> refl_trans_clos ind
+R17598:17598 Coccinelle.closure <> a:108 var
+R17596:17596 Coccinelle.closure <> b:109 var
+R17593:17594 Coccinelle.closure <> R1:100 var
+R17603:17605 Coq.Init.Wf <> Acc ind
+R17645:17645 Coccinelle.closure <> b:109 var
+R17608:17618 Coccinelle.closure <> compose_rel ind
+R17641:17642 Coccinelle.closure <> R2:101 var
+R17621:17635 Coccinelle.TransClosure <> refl_trans_clos ind
+R17637:17638 Coccinelle.closure <> R1:100 var
+R17654:17657 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17651:17651 Coccinelle.closure <> P:102 var
+R17653:17653 Coccinelle.closure <> a:108 var
+R17658:17660 Coq.Init.Wf <> Acc ind
+R17678:17678 Coccinelle.closure <> a:108 var
+R17663:17667 Coq.Relations.Relation_Operators <> union def
+R17674:17675 Coccinelle.closure <> R2:101 var
+R17671:17672 Coccinelle.closure <> R1:100 var
+R17740:17742 Coq.Init.Wf <> Acc ind
+R17745:17749 Coq.Relations.Relation_Operators <> union def
+R17766:17769 Coccinelle.closure <> rest def
+R17754:17757 Coccinelle.closure <> rest def
+R17740:17742 Coq.Init.Wf <> Acc ind
+R17745:17749 Coq.Relations.Relation_Operators <> union def
+R17766:17769 Coccinelle.closure <> rest def
+R17754:17757 Coccinelle.closure <> rest def
+R17793:17805 Coccinelle.closure <> acc_union_alt thm
+R17793:17805 Coccinelle.closure <> acc_union_alt thm
+R17793:17805 Coccinelle.closure <> acc_union_alt thm
+R17793:17805 Coccinelle.closure <> acc_union_alt thm
+R17841:17851 Coccinelle.closure <> compose_rel ind
+R17854:17868 Coccinelle.TransClosure <> refl_trans_clos ind
+R17826:17833 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R17841:17851 Coccinelle.closure <> compose_rel ind
+R17854:17868 Coccinelle.TransClosure <> refl_trans_clos ind
+R17826:17833 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R17951:17954 Coccinelle.closure <> Comp constr
+R17951:17954 Coccinelle.closure <> Comp constr
+R18014:18017 Coccinelle.closure <> rest def
+R17992:18006 Coccinelle.closure <> refl_trans_incl thm
+R18014:18017 Coccinelle.closure <> rest def
+R17992:18006 Coccinelle.closure <> refl_trans_incl thm
+R18124:18127 Coccinelle.closure <> rest def
+R18102:18116 Coccinelle.closure <> refl_trans_incl thm
+R18124:18127 Coccinelle.closure <> rest def
+R18102:18116 Coccinelle.closure <> refl_trans_incl thm
+R18205:18211 Coccinelle.closure <> wf_rest thm
+R18205:18211 Coccinelle.closure <> wf_rest thm
+R18205:18211 Coccinelle.closure <> wf_rest thm
+R18205:18211 Coccinelle.closure <> wf_rest thm
+R18298:18306 Coq.Init.Wf <> Acc_intro constr
+R18298:18306 Coq.Init.Wf <> Acc_intro constr
+prf 18535:18557 <> acc_union_rest_alt_weak
+binder 18570:18570 <> A:110
+R18581:18588 Coq.Relations.Relation_Definitions <> relation def
+R18590:18590 Coccinelle.closure <> A:110 var
+binder 18573:18574 <> R1:111
+binder 18576:18577 <> R2:112
+R18599:18602 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18598:18598 Coccinelle.closure <> A:110 var
+binder 18594:18594 <> P:113
+R18612:18612 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18651:18658 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18627:18627 Coccinelle.closure <> A:110 var
+binder 18621:18621 <> a:114
+binder 18623:18623 <> b:115
+R18634:18637 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18631:18631 Coccinelle.closure <> P:113 var
+R18633:18633 Coccinelle.closure <> a:114 var
+R18644:18647 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18638:18639 Coccinelle.closure <> R1:111 var
+R18641:18641 Coccinelle.closure <> b:115 var
+R18643:18643 Coccinelle.closure <> a:114 var
+R18648:18648 Coccinelle.closure <> P:113 var
+R18650:18650 Coccinelle.closure <> b:115 var
+R18659:18659 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18698:18705 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18674:18674 Coccinelle.closure <> A:110 var
+binder 18668:18668 <> a:116
+binder 18670:18670 <> b:117
+R18681:18684 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18678:18678 Coccinelle.closure <> P:113 var
+R18680:18680 Coccinelle.closure <> a:116 var
+R18691:18694 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18685:18686 Coccinelle.closure <> R2:112 var
+R18688:18688 Coccinelle.closure <> b:117 var
+R18690:18690 Coccinelle.closure <> a:116 var
+R18695:18695 Coccinelle.closure <> P:113 var
+R18697:18697 Coccinelle.closure <> b:117 var
+binder 18713:18713 <> a:118
+R18716:18716 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18796:18815 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 18724:18724 <> b:119
+R18784:18787 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18727:18741 Coccinelle.TransClosure <> refl_trans_clos ind
+R18783:18783 Coccinelle.closure <> a:118 var
+R18781:18781 Coccinelle.closure <> b:119 var
+R18744:18754 Coccinelle.closure <> compose_rel ind
+R18760:18774 Coccinelle.TransClosure <> refl_trans_clos ind
+R18776:18777 Coccinelle.closure <> R1:111 var
+R18756:18757 Coccinelle.closure <> R2:112 var
+R18788:18790 Coq.Init.Wf <> Acc ind
+R18795:18795 Coccinelle.closure <> b:119 var
+R18792:18793 Coccinelle.closure <> R1:111 var
+R18816:18816 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18896:18916 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 18824:18824 <> b:120
+R18849:18852 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18827:18841 Coccinelle.TransClosure <> refl_trans_clos ind
+R18848:18848 Coccinelle.closure <> a:118 var
+R18846:18846 Coccinelle.closure <> b:120 var
+R18843:18844 Coccinelle.closure <> R1:111 var
+R18853:18855 Coq.Init.Wf <> Acc ind
+R18895:18895 Coccinelle.closure <> b:120 var
+R18858:18868 Coccinelle.closure <> compose_rel ind
+R18891:18892 Coccinelle.closure <> R2:112 var
+R18871:18885 Coccinelle.TransClosure <> refl_trans_clos ind
+R18887:18888 Coccinelle.closure <> R1:111 var
+R18920:18923 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18917:18917 Coccinelle.closure <> P:113 var
+R18919:18919 Coccinelle.closure <> a:118 var
+R18924:18926 Coq.Init.Wf <> Acc ind
+R18944:18944 Coccinelle.closure <> a:118 var
+R18929:18933 Coq.Relations.Relation_Operators <> union def
+R18940:18941 Coccinelle.closure <> R2:112 var
+R18937:18938 Coccinelle.closure <> R1:111 var
+R19007:19009 Coq.Init.Wf <> Acc ind
+R19012:19016 Coq.Relations.Relation_Operators <> union def
+R19033:19036 Coccinelle.closure <> rest def
+R19021:19024 Coccinelle.closure <> rest def
+R19007:19009 Coq.Init.Wf <> Acc ind
+R19012:19016 Coq.Relations.Relation_Operators <> union def
+R19033:19036 Coccinelle.closure <> rest def
+R19021:19024 Coccinelle.closure <> rest def
+R19055:19072 Coccinelle.closure <> acc_union_alt_weak thm
+R19055:19072 Coccinelle.closure <> acc_union_alt_weak thm
+R19093:19100 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R19093:19100 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R19189:19199 Coccinelle.closure <> compose_rel ind
+R19214:19228 Coccinelle.TransClosure <> refl_trans_clos ind
+R19231:19234 Coccinelle.closure <> rest def
+R19202:19205 Coccinelle.closure <> rest def
+R19167:19181 Coccinelle.closure <> refl_trans_incl thm
+R19189:19199 Coccinelle.closure <> compose_rel ind
+R19214:19228 Coccinelle.TransClosure <> refl_trans_clos ind
+R19231:19234 Coccinelle.closure <> rest def
+R19202:19205 Coccinelle.closure <> rest def
+R19167:19181 Coccinelle.closure <> refl_trans_incl thm
+R19322:19325 Coccinelle.closure <> Comp constr
+R19322:19325 Coccinelle.closure <> Comp constr
+R19386:19389 Coccinelle.closure <> rest def
+R19364:19378 Coccinelle.closure <> refl_trans_incl thm
+R19386:19389 Coccinelle.closure <> rest def
+R19364:19378 Coccinelle.closure <> refl_trans_incl thm
+R19493:19503 Coccinelle.closure <> compose_rel ind
+R19506:19520 Coccinelle.TransClosure <> refl_trans_clos ind
+R19478:19485 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R19493:19503 Coccinelle.closure <> compose_rel ind
+R19506:19520 Coccinelle.TransClosure <> refl_trans_clos ind
+R19478:19485 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R19603:19606 Coccinelle.closure <> Comp constr
+R19603:19606 Coccinelle.closure <> Comp constr
+R19666:19669 Coccinelle.closure <> rest def
+R19644:19658 Coccinelle.closure <> refl_trans_incl thm
+R19666:19669 Coccinelle.closure <> rest def
+R19644:19658 Coccinelle.closure <> refl_trans_incl thm
+R19778:19781 Coccinelle.closure <> rest def
+R19756:19770 Coccinelle.closure <> refl_trans_incl thm
+R19778:19781 Coccinelle.closure <> rest def
+R19756:19770 Coccinelle.closure <> refl_trans_incl thm
+R19922:19930 Coq.Init.Wf <> Acc_intro constr
+R19922:19930 Coq.Init.Wf <> Acc_intro constr
+prf 20159:20163 <> accR2
+binder 20174:20174 <> A:121
+R20181:20188 Coq.Relations.Relation_Definitions <> relation def
+R20190:20190 Coccinelle.closure <> A:121 var
+binder 20177:20177 <> R:122
+binder 20193:20193 <> a:123
+R20203:20207 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R20196:20198 Coq.Init.Wf <> Acc ind
+R20202:20202 Coccinelle.closure <> a:123 var
+R20200:20200 Coccinelle.closure <> R:122 var
+R20208:20210 Coq.Init.Wf <> Acc ind
+R20230:20230 Coccinelle.closure <> a:123 var
+R20213:20223 Coccinelle.closure <> compose_rel ind
+R20227:20227 Coccinelle.closure <> R:122 var
+R20225:20225 Coccinelle.closure <> R:122 var
+R20295:20304 Coccinelle.TransClosure <> trans_clos ind
+R20280:20287 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R20295:20304 Coccinelle.TransClosure <> trans_clos ind
+R20280:20287 Coq.Wellfounded.Inclusion <> Acc_incl thm
+R20378:20384 Coccinelle.TransClosure <> t_trans constr
+R20378:20384 Coccinelle.TransClosure <> t_trans constr
+R20409:20414 Coccinelle.TransClosure <> t_step constr
+R20409:20414 Coccinelle.TransClosure <> t_step constr
+R20432:20440 Coccinelle.closure <> acc_trans thm
+R20432:20440 Coccinelle.closure <> acc_trans thm
+R20505:20513 Coq.Init.Wf <> Acc_intro constr
+R20534:20542 Coq.Init.Wf <> Acc_intro constr
+R20505:20513 Coq.Init.Wf <> Acc_intro constr
+R20534:20542 Coq.Init.Wf <> Acc_intro constr
+R20574:20577 Coccinelle.closure <> Comp constr
+R20574:20577 Coccinelle.closure <> Comp constr
+prf 20608:20617 <> acc_inv_im
+binder 20630:20630 <> A:124
+binder 20632:20632 <> B:125
+R20640:20647 Coq.Relations.Relation_Definitions <> relation def
+R20649:20649 Coccinelle.closure <> A:124 var
+binder 20635:20636 <> R1:126
+R20658:20665 Coq.Relations.Relation_Definitions <> relation def
+R20667:20667 Coccinelle.closure <> B:125 var
+binder 20653:20654 <> R2:127
+R20676:20679 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20675:20675 Coccinelle.closure <> A:124 var
 R20680:20680 Coccinelle.closure <> B:125 var
-binder 20666:20667 <> R2:127
-R20689:20692 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R20688:20688 Coccinelle.closure <> A:124 var
-R20693:20693 Coccinelle.closure <> B:125 var
-binder 20684:20684 <> f:128
-R20698:20698 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R20741:20746 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 20706:20707 <> a1:129
-binder 20709:20710 <> a2:130
-R20721:20724 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R20713:20714 Coccinelle.closure <> R1:126 var
-R20716:20717 Coccinelle.closure <> a1:129 var
-R20719:20720 Coccinelle.closure <> a2:130 var
-R20725:20726 Coccinelle.closure <> R2:127 var
-R20729:20729 Coccinelle.closure <> f:128 var
-R20731:20732 Coccinelle.closure <> a1:129 var
-R20736:20736 Coccinelle.closure <> f:128 var
-R20738:20739 Coccinelle.closure <> a2:130 var
-binder 20754:20754 <> a:131
-R20769:20772 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R20757:20759 Coq.Init.Wf <> Acc ind
-R20765:20765 Coccinelle.closure <> f:128 var
+binder 20671:20671 <> f:128
+R20685:20685 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20728:20733 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 20693:20694 <> a1:129
+binder 20696:20697 <> a2:130
+R20708:20711 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20700:20701 Coccinelle.closure <> R1:126 var
+R20703:20704 Coccinelle.closure <> a1:129 var
+R20706:20707 Coccinelle.closure <> a2:130 var
+R20712:20713 Coccinelle.closure <> R2:127 var
+R20716:20716 Coccinelle.closure <> f:128 var
+R20718:20719 Coccinelle.closure <> a1:129 var
+R20723:20723 Coccinelle.closure <> f:128 var
+R20725:20726 Coccinelle.closure <> a2:130 var
+binder 20741:20741 <> a:131
+R20756:20759 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20744:20746 Coq.Init.Wf <> Acc ind
+R20752:20752 Coccinelle.closure <> f:128 var
+R20754:20754 Coccinelle.closure <> a:131 var
+R20748:20749 Coccinelle.closure <> R2:127 var
+R20760:20762 Coq.Init.Wf <> Acc ind
 R20767:20767 Coccinelle.closure <> a:131 var
-R20761:20762 Coccinelle.closure <> R2:127 var
-R20773:20775 Coq.Init.Wf <> Acc ind
-R20780:20780 Coccinelle.closure <> a:131 var
-R20777:20778 Coccinelle.closure <> R1:126 var
-R20854:20863 Coq.Init.Logic <> refl_equal abbrev
-R20854:20863 Coq.Init.Logic <> refl_equal abbrev
-R20996:21004 Coq.Init.Wf <> Acc_intro constr
-R20996:21004 Coq.Init.Wf <> Acc_intro constr
-prf 21091:21101 <> acc_inv_im2
-binder 21115:21115 <> A:132
-binder 21117:21117 <> B:133
-R21125:21132 Coq.Relations.Relation_Definitions <> relation def
-R21134:21134 Coccinelle.closure <> A:132 var
-binder 21120:21121 <> R1:134
-R21143:21150 Coq.Relations.Relation_Definitions <> relation def
+R20764:20765 Coccinelle.closure <> R1:126 var
+R20841:20850 Coq.Init.Logic <> refl_equal abbrev
+R20841:20850 Coq.Init.Logic <> refl_equal abbrev
+R20983:20991 Coq.Init.Wf <> Acc_intro constr
+R20983:20991 Coq.Init.Wf <> Acc_intro constr
+prf 21078:21088 <> acc_inv_im2
+binder 21102:21102 <> A:132
+binder 21104:21104 <> B:133
+R21112:21119 Coq.Relations.Relation_Definitions <> relation def
+R21121:21121 Coccinelle.closure <> A:132 var
+binder 21107:21108 <> R1:134
+R21130:21137 Coq.Relations.Relation_Definitions <> relation def
+R21139:21139 Coccinelle.closure <> B:133 var
+binder 21125:21126 <> R2:135
+R21148:21151 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21147:21147 Coccinelle.closure <> A:132 var
 R21152:21152 Coccinelle.closure <> B:133 var
-binder 21138:21139 <> R2:135
-R21161:21164 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21160:21160 Coccinelle.closure <> A:132 var
-R21165:21165 Coccinelle.closure <> B:133 var
-binder 21156:21156 <> f:136
-binder 21178:21178 <> a:137
-R21181:21181 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21266:21272 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 21189:21190 <> a1:138
-binder 21192:21193 <> a2:139
-binder 21195:21196 <> a3:140
-R21207:21210 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21199:21200 Coccinelle.closure <> R1:134 var
-R21202:21203 Coccinelle.closure <> a3:140 var
-R21205:21206 Coccinelle.closure <> a2:139 var
-R21219:21222 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21211:21212 Coccinelle.closure <> R1:134 var
-R21214:21215 Coccinelle.closure <> a2:139 var
-R21217:21218 Coccinelle.closure <> a1:138 var
-R21246:21249 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21223:21237 Coccinelle.TransClosure <> refl_trans_clos ind
-R21245:21245 Coccinelle.closure <> a:137 var
-R21242:21243 Coccinelle.closure <> a1:138 var
-R21239:21240 Coccinelle.closure <> R1:134 var
-R21250:21251 Coccinelle.closure <> R2:135 var
-R21254:21254 Coccinelle.closure <> f:136 var
-R21256:21257 Coccinelle.closure <> a2:139 var
-R21261:21261 Coccinelle.closure <> f:136 var
-R21263:21264 Coccinelle.closure <> a1:138 var
-R21285:21288 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21273:21275 Coq.Init.Wf <> Acc ind
-R21281:21281 Coccinelle.closure <> f:136 var
+binder 21143:21143 <> f:136
+binder 21165:21165 <> a:137
+R21168:21168 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21253:21259 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 21176:21177 <> a1:138
+binder 21179:21180 <> a2:139
+binder 21182:21183 <> a3:140
+R21194:21197 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21186:21187 Coccinelle.closure <> R1:134 var
+R21189:21190 Coccinelle.closure <> a3:140 var
+R21192:21193 Coccinelle.closure <> a2:139 var
+R21206:21209 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21198:21199 Coccinelle.closure <> R1:134 var
+R21201:21202 Coccinelle.closure <> a2:139 var
+R21204:21205 Coccinelle.closure <> a1:138 var
+R21233:21236 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21210:21224 Coccinelle.TransClosure <> refl_trans_clos ind
+R21232:21232 Coccinelle.closure <> a:137 var
+R21229:21230 Coccinelle.closure <> a1:138 var
+R21226:21227 Coccinelle.closure <> R1:134 var
+R21237:21238 Coccinelle.closure <> R2:135 var
+R21241:21241 Coccinelle.closure <> f:136 var
+R21243:21244 Coccinelle.closure <> a2:139 var
+R21248:21248 Coccinelle.closure <> f:136 var
+R21250:21251 Coccinelle.closure <> a1:138 var
+R21272:21275 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21260:21262 Coq.Init.Wf <> Acc ind
+R21268:21268 Coccinelle.closure <> f:136 var
+R21270:21270 Coccinelle.closure <> a:137 var
+R21264:21265 Coccinelle.closure <> R2:135 var
+R21276:21278 Coq.Init.Wf <> Acc ind
 R21283:21283 Coccinelle.closure <> a:137 var
-R21277:21278 Coccinelle.closure <> R2:135 var
-R21289:21291 Coq.Init.Wf <> Acc ind
-R21296:21296 Coccinelle.closure <> a:137 var
-R21293:21294 Coccinelle.closure <> R1:134 var
-R21379:21388 Coq.Init.Logic <> refl_equal abbrev
-R21379:21388 Coq.Init.Logic <> refl_equal abbrev
-R21518:21526 Coq.Init.Wf <> Acc_intro constr
-R21518:21526 Coq.Init.Wf <> Acc_intro constr
-R21549:21557 Coq.Init.Wf <> Acc_intro constr
-R21549:21557 Coq.Init.Wf <> Acc_intro constr
-R21580:21586 Coq.Init.Wf <> Acc_inv thm
-R21580:21586 Coq.Init.Wf <> Acc_inv thm
-R21846:21864 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R21846:21864 Coccinelle.TransClosure <> trans_clos_is_trans thm
-prf 21914:21924 <> acc_inv_im3
-binder 21938:21938 <> A:141
-binder 21940:21940 <> B:142
-R21948:21955 Coq.Relations.Relation_Definitions <> relation def
-R21957:21957 Coccinelle.closure <> A:141 var
-binder 21943:21944 <> R1:143
-R21966:21973 Coq.Relations.Relation_Definitions <> relation def
+R21280:21281 Coccinelle.closure <> R1:134 var
+R21366:21375 Coq.Init.Logic <> refl_equal abbrev
+R21366:21375 Coq.Init.Logic <> refl_equal abbrev
+R21505:21513 Coq.Init.Wf <> Acc_intro constr
+R21505:21513 Coq.Init.Wf <> Acc_intro constr
+R21536:21544 Coq.Init.Wf <> Acc_intro constr
+R21536:21544 Coq.Init.Wf <> Acc_intro constr
+R21567:21573 Coq.Init.Wf <> Acc_inv thm
+R21567:21573 Coq.Init.Wf <> Acc_inv thm
+R21833:21851 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R21833:21851 Coccinelle.TransClosure <> trans_clos_is_trans thm
+prf 21901:21911 <> acc_inv_im3
+binder 21925:21925 <> A:141
+binder 21927:21927 <> B:142
+R21935:21942 Coq.Relations.Relation_Definitions <> relation def
+R21944:21944 Coccinelle.closure <> A:141 var
+binder 21930:21931 <> R1:143
+R21953:21960 Coq.Relations.Relation_Definitions <> relation def
+R21962:21962 Coccinelle.closure <> B:142 var
+binder 21948:21949 <> R2:144
+R21971:21974 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21970:21970 Coccinelle.closure <> A:141 var
 R21975:21975 Coccinelle.closure <> B:142 var
-binder 21961:21962 <> R2:144
-R21984:21987 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21983:21983 Coccinelle.closure <> A:141 var
-R21988:21988 Coccinelle.closure <> B:142 var
-binder 21979:21979 <> f:145
-binder 22001:22001 <> a:146
-R22004:22004 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R22074:22080 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 22012:22013 <> a1:147
-binder 22015:22016 <> a2:148
-R22027:22030 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R22019:22020 Coccinelle.closure <> R1:143 var
-R22022:22023 Coccinelle.closure <> a2:148 var
-R22025:22026 Coccinelle.closure <> a1:147 var
-R22054:22057 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R22031:22045 Coccinelle.TransClosure <> refl_trans_clos ind
-R22053:22053 Coccinelle.closure <> a:146 var
-R22050:22051 Coccinelle.closure <> a1:147 var
-R22047:22048 Coccinelle.closure <> R1:143 var
-R22058:22059 Coccinelle.closure <> R2:144 var
-R22062:22062 Coccinelle.closure <> f:145 var
-R22064:22065 Coccinelle.closure <> a2:148 var
-R22069:22069 Coccinelle.closure <> f:145 var
-R22071:22072 Coccinelle.closure <> a1:147 var
-R22093:22096 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R22081:22083 Coq.Init.Wf <> Acc ind
-R22089:22089 Coccinelle.closure <> f:145 var
+binder 21966:21966 <> f:145
+binder 21988:21988 <> a:146
+R21991:21991 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22061:22067 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 21999:22000 <> a1:147
+binder 22002:22003 <> a2:148
+R22014:22017 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22006:22007 Coccinelle.closure <> R1:143 var
+R22009:22010 Coccinelle.closure <> a2:148 var
+R22012:22013 Coccinelle.closure <> a1:147 var
+R22041:22044 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22018:22032 Coccinelle.TransClosure <> refl_trans_clos ind
+R22040:22040 Coccinelle.closure <> a:146 var
+R22037:22038 Coccinelle.closure <> a1:147 var
+R22034:22035 Coccinelle.closure <> R1:143 var
+R22045:22046 Coccinelle.closure <> R2:144 var
+R22049:22049 Coccinelle.closure <> f:145 var
+R22051:22052 Coccinelle.closure <> a2:148 var
+R22056:22056 Coccinelle.closure <> f:145 var
+R22058:22059 Coccinelle.closure <> a1:147 var
+R22080:22083 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22068:22070 Coq.Init.Wf <> Acc ind
+R22076:22076 Coccinelle.closure <> f:145 var
+R22078:22078 Coccinelle.closure <> a:146 var
+R22072:22073 Coccinelle.closure <> R2:144 var
+R22084:22086 Coq.Init.Wf <> Acc ind
 R22091:22091 Coccinelle.closure <> a:146 var
-R22085:22086 Coccinelle.closure <> R2:144 var
-R22097:22099 Coq.Init.Wf <> Acc ind
-R22104:22104 Coccinelle.closure <> a:146 var
-R22101:22102 Coccinelle.closure <> R1:143 var
-R22187:22196 Coq.Init.Logic <> refl_equal abbrev
-R22187:22196 Coq.Init.Logic <> refl_equal abbrev
-R22326:22334 Coq.Init.Wf <> Acc_intro constr
-R22326:22334 Coq.Init.Wf <> Acc_intro constr
-R22569:22587 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R22569:22587 Coccinelle.TransClosure <> trans_clos_is_trans thm
-prf 22637:22647 <> union_equiv
-binder 22659:22659 <> A:149
-binder 22661:22662 <> R1:150
-binder 22664:22665 <> R2:151
-binder 22667:22668 <> R3:152
-binder 22670:22671 <> R4:153
-binder 22694:22694 <> x:154
-binder 22696:22696 <> y:155
-R22705:22709 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R22699:22700 Coccinelle.closure <> R1:150 var
-R22702:22702 Coccinelle.closure <> x:154 var
-R22704:22704 Coccinelle.closure <> y:155 var
-R22710:22711 Coccinelle.closure <> R3:152 var
-R22713:22713 Coccinelle.closure <> x:154 var
-R22715:22715 Coccinelle.closure <> y:155 var
-binder 22674:22684 <> R1_equiv_R3:156
-binder 22739:22739 <> x:157
-binder 22741:22741 <> y:158
-R22750:22754 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R22744:22745 Coccinelle.closure <> R2:151 var
-R22747:22747 Coccinelle.closure <> x:157 var
-R22749:22749 Coccinelle.closure <> y:158 var
-R22755:22756 Coccinelle.closure <> R4:153 var
-R22758:22758 Coccinelle.closure <> x:157 var
-R22760:22760 Coccinelle.closure <> y:158 var
-binder 22719:22729 <> R2_equiv_R4:159
-binder 22763:22763 <> x:160
-binder 22765:22765 <> y:161
-R22786:22790 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R22769:22773 Coq.Relations.Relation_Operators <> union def
-R22783:22783 Coccinelle.closure <> x:160 var
-R22785:22785 Coccinelle.closure <> y:161 var
-R22780:22781 Coccinelle.closure <> R2:151 var
-R22777:22778 Coccinelle.closure <> R1:150 var
-R22775:22775 Coccinelle.closure <> A:149 var
-R22791:22795 Coq.Relations.Relation_Operators <> union def
-R22805:22805 Coccinelle.closure <> x:160 var
-R22807:22807 Coccinelle.closure <> y:161 var
-R22802:22803 Coccinelle.closure <> R4:153 var
-R22799:22800 Coccinelle.closure <> R3:152 var
-prf 23098:23106 <> union_sym
-binder 23117:23117 <> A:162
-binder 23119:23120 <> R1:163
-binder 23122:23123 <> R2:164
-binder 23125:23125 <> x:165
-binder 23127:23127 <> y:166
-R23147:23151 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R23130:23134 Coq.Relations.Relation_Operators <> union def
-R23144:23144 Coccinelle.closure <> x:165 var
-R23146:23146 Coccinelle.closure <> y:166 var
-R23141:23142 Coccinelle.closure <> R2:164 var
-R23138:23139 Coccinelle.closure <> R1:163 var
-R23136:23136 Coccinelle.closure <> A:162 var
-R23152:23156 Coq.Relations.Relation_Operators <> union def
-R23166:23166 Coccinelle.closure <> x:165 var
-R23168:23168 Coccinelle.closure <> y:166 var
-R23163:23164 Coccinelle.closure <> R1:163 var
-R23160:23161 Coccinelle.closure <> R2:164 var
-R23158:23158 Coccinelle.closure <> A:162 var
-prf 23268:23278 <> union_assoc
-binder 23292:23292 <> A:167
-binder 23294:23295 <> R1:168
-binder 23297:23298 <> R2:169
-binder 23300:23301 <> R3:170
-binder 23303:23303 <> x:171
-binder 23305:23305 <> y:172
-R23338:23342 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R23308:23312 Coq.Relations.Relation_Operators <> union def
-R23335:23335 Coccinelle.closure <> x:171 var
-R23337:23337 Coccinelle.closure <> y:172 var
-R23332:23333 Coccinelle.closure <> R3:170 var
-R23317:23321 Coq.Relations.Relation_Operators <> union def
-R23328:23329 Coccinelle.closure <> R2:169 var
-R23325:23326 Coccinelle.closure <> R1:168 var
-R23323:23323 Coccinelle.closure <> A:167 var
-R23314:23314 Coccinelle.closure <> A:167 var
-R23343:23347 Coq.Relations.Relation_Operators <> union def
-R23370:23370 Coccinelle.closure <> x:171 var
-R23372:23372 Coccinelle.closure <> y:172 var
-R23355:23359 Coq.Relations.Relation_Operators <> union def
-R23366:23367 Coccinelle.closure <> R3:170 var
-R23363:23364 Coccinelle.closure <> R2:169 var
-R23361:23361 Coccinelle.closure <> A:167 var
-R23351:23352 Coccinelle.closure <> R1:168 var
-R23349:23349 Coccinelle.closure <> A:167 var
-prf 23693:23702 <> union_idem
-binder 23713:23713 <> A:173
-binder 23715:23715 <> R:174
-binder 23717:23717 <> x:175
-binder 23719:23719 <> y:176
-R23737:23741 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R23722:23726 Coq.Relations.Relation_Operators <> union def
-R23734:23734 Coccinelle.closure <> x:175 var
-R23736:23736 Coccinelle.closure <> y:176 var
-R23732:23732 Coccinelle.closure <> R:174 var
-R23730:23730 Coccinelle.closure <> R:174 var
-R23728:23728 Coccinelle.closure <> A:173 var
-R23742:23742 Coccinelle.closure <> R:174 var
-R23744:23744 Coccinelle.closure <> x:175 var
-R23746:23746 Coccinelle.closure <> y:176 var
-prf 23854:23870 <> union_idem_strong
-binder 23881:23881 <> A:177
-R23891:23894 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R23890:23890 Coccinelle.closure <> A:177 var
-R23896:23899 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R23895:23895 Coccinelle.closure <> A:177 var
-binder 23884:23884 <> R:178
-binder 23886:23887 <> R':179
-binder 23916:23916 <> x:180
-binder 23918:23918 <> y:181
-R23926:23929 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R23921:23921 Coccinelle.closure <> R:178 var
-R23925:23925 Coccinelle.closure <> y:181 var
-R23923:23923 Coccinelle.closure <> x:180 var
-R23930:23931 Coccinelle.closure <> R':179 var
-R23935:23935 Coccinelle.closure <> y:181 var
-R23933:23933 Coccinelle.closure <> x:180 var
-binder 23907:23907 <> H:182
-binder 23938:23938 <> x:183
-binder 23940:23940 <> y:184
-R23960:23964 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R23944:23948 Coq.Relations.Relation_Operators <> union def
-R23957:23957 Coccinelle.closure <> x:183 var
-R23959:23959 Coccinelle.closure <> y:184 var
-R23954:23955 Coccinelle.closure <> R':179 var
-R23952:23952 Coccinelle.closure <> R:178 var
-R23950:23950 Coccinelle.closure <> A:177 var
-R23965:23966 Coccinelle.closure <> R':179 var
-R23970:23970 Coccinelle.closure <> y:184 var
-R23968:23968 Coccinelle.closure <> x:183 var
-sec 24112:24115 <> star
-var 24153:24153 star A
-var 24170:24170 star R
-R24175:24178 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24174:24174 Coccinelle.closure <> star.A var
-R24180:24183 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24179:24179 Coccinelle.closure <> star.A var
-ind 24200:24203 <> star
-constr 24229:24237 <> star_refl
-constr 24252:24260 <> star_step
-R24208:24208 Coccinelle.closure <> star.A var
-binder 24206:24206 <> x:187
-R24214:24217 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24213:24213 Coccinelle.closure <> star.A var
-R24241:24244 Coccinelle.closure <> star:188 ind
-R24248:24248 Coccinelle.closure <> x:187 var
-R24246:24246 Coccinelle.closure <> x:187 var
-binder 24271:24271 <> y:190
-R24282:24285 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24274:24277 Coccinelle.closure <> star:188 ind
-R24281:24281 Coccinelle.closure <> y:190 var
-R24279:24279 Coccinelle.closure <> x:187 var
-binder 24293:24293 <> z:191
-R24301:24304 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24296:24296 Coccinelle.closure <> star.R var
-R24298:24298 Coccinelle.closure <> y:190 var
-R24300:24300 Coccinelle.closure <> z:191 var
-R24305:24308 Coccinelle.closure <> star:188 ind
-R24312:24312 Coccinelle.closure <> z:191 var
-R24310:24310 Coccinelle.closure <> x:187 var
-prf 24324:24333 <> star_trans
-binder 24343:24343 <> x:192
-binder 24345:24345 <> y:193
-binder 24347:24347 <> z:194
-R24358:24361 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24350:24353 Coccinelle.closure <> star ind
-R24355:24355 Coccinelle.closure <> x:192 var
-R24357:24357 Coccinelle.closure <> y:193 var
-R24370:24373 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24362:24365 Coccinelle.closure <> star ind
-R24367:24367 Coccinelle.closure <> y:193 var
-R24369:24369 Coccinelle.closure <> z:194 var
-R24374:24377 Coccinelle.closure <> star ind
-R24379:24379 Coccinelle.closure <> x:192 var
-R24381:24381 Coccinelle.closure <> z:194 var
-prf 24494:24499 <> star_R
-binder 24510:24510 <> x:195
-binder 24512:24512 <> y:196
-R24520:24523 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24515:24515 Coccinelle.closure <> star.R var
-R24517:24517 Coccinelle.closure <> x:195 var
-R24519:24519 Coccinelle.closure <> y:196 var
-R24524:24527 Coccinelle.closure <> star ind
-R24529:24529 Coccinelle.closure <> x:195 var
-R24531:24531 Coccinelle.closure <> y:196 var
-prf 24613:24621 <> star_ind2
-binder 24633:24633 <> x:197
-R24639:24642 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24638:24638 Coccinelle.closure <> star.A var
-binder 24636:24636 <> P:198
-R24652:24652 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24656:24663 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24653:24653 Coccinelle.closure <> P:198 var
-R24655:24655 Coccinelle.closure <> x:197 var
-R24664:24664 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24704:24710 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 24672:24672 <> y:199
-R24678:24681 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24675:24675 Coccinelle.closure <> P:198 var
-R24677:24677 Coccinelle.closure <> y:199 var
-binder 24689:24689 <> z:200
-R24697:24700 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24692:24692 Coccinelle.closure <> star.R var
-R24694:24694 Coccinelle.closure <> y:199 var
-R24696:24696 Coccinelle.closure <> z:200 var
-R24701:24701 Coccinelle.closure <> P:198 var
-R24703:24703 Coccinelle.closure <> z:200 var
-binder 24718:24718 <> a:201
-R24729:24732 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24721:24724 Coccinelle.closure <> star ind
-R24726:24726 Coccinelle.closure <> x:197 var
-R24728:24728 Coccinelle.closure <> a:201 var
-R24733:24733 Coccinelle.closure <> P:198 var
-R24735:24735 Coccinelle.closure <> a:201 var
-R24841:24844 Coccinelle.closure star <> sec
-prf 24854:24863 <> star_equiv
-binder 24875:24875 <> A:202
-R24886:24889 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24885:24885 Coccinelle.closure <> A:202 var
-R24891:24894 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24890:24890 Coccinelle.closure <> A:202 var
-binder 24878:24879 <> R1:203
-binder 24881:24882 <> R2:204
-R24902:24902 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24932:24939 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 24910:24910 <> l:205
-binder 24912:24912 <> r:206
-R24921:24925 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R24915:24916 Coccinelle.closure <> R1:203 var
-R24920:24920 Coccinelle.closure <> l:205 var
-R24918:24918 Coccinelle.closure <> r:206 var
-R24926:24927 Coccinelle.closure <> R2:204 var
-R24931:24931 Coccinelle.closure <> l:205 var
-R24929:24929 Coccinelle.closure <> r:206 var
-binder 24947:24947 <> l:207
-binder 24949:24949 <> r:208
-R24965:24969 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R24952:24955 Coccinelle.closure <> star ind
-R24962:24962 Coccinelle.closure <> r:208 var
-R24964:24964 Coccinelle.closure <> l:207 var
-R24959:24960 Coccinelle.closure <> R1:203 var
-R24970:24973 Coccinelle.closure <> star ind
-R24980:24980 Coccinelle.closure <> r:208 var
-R24982:24982 Coccinelle.closure <> l:207 var
-R24977:24978 Coccinelle.closure <> R2:204 var
-ind 25204:25212 <> product_o
-constr 25282:25286 <> CaseA
-constr 25348:25352 <> CaseB
-binder 25214:25214 <> A:209
-binder 25216:25216 <> B:210
-R25224:25231 Coq.Relations.Relation_Definitions <> relation def
-R25233:25233 Coccinelle.closure <> A:209 var
-binder 25219:25220 <> R1:211
-R25242:25249 Coq.Relations.Relation_Definitions <> relation def
-R25251:25251 Coccinelle.closure <> B:210 var
-binder 25237:25238 <> R2:212
-R25256:25263 Coq.Relations.Relation_Definitions <> relation def
-R25267:25267 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
-binder 25297:25297 <> a:215
-binder 25299:25300 <> a':216
-binder 25302:25302 <> b:217
-R25312:25315 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R25305:25306 Coccinelle.closure <> R1:211 var
-R25308:25308 Coccinelle.closure <> a:215 var
-R25310:25311 Coccinelle.closure <> a':216 var
-R25316:25324 Coccinelle.closure <> product_o:213 ind
-R25338:25338 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25341:25341 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25343:25343 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25339:25340 Coccinelle.closure <> a':216 var
-R25342:25342 Coccinelle.closure <> b:217 var
-R25332:25332 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25334:25334 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25336:25336 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25333:25333 Coccinelle.closure <> a:215 var
-R25335:25335 Coccinelle.closure <> b:217 var
-R25329:25330 Coccinelle.closure <> R2:212 var
-R25326:25327 Coccinelle.closure <> R1:211 var
-binder 25363:25363 <> a:218
-binder 25365:25365 <> b:219
-binder 25367:25368 <> b':220
-R25378:25381 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R25371:25372 Coccinelle.closure <> R2:212 var
-R25374:25374 Coccinelle.closure <> b:219 var
-R25376:25377 Coccinelle.closure <> b':220 var
-R25382:25390 Coccinelle.closure <> product_o:213 ind
-R25404:25404 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25406:25406 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25409:25409 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25405:25405 Coccinelle.closure <> a:218 var
-R25407:25408 Coccinelle.closure <> b':220 var
-R25398:25398 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25400:25400 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25402:25402 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25399:25399 Coccinelle.closure <> a:218 var
-R25401:25401 Coccinelle.closure <> b:219 var
-R25395:25396 Coccinelle.closure <> R2:212 var
-R25392:25393 Coccinelle.closure <> R1:211 var
-prf 25419:25425 <> acc_and
-binder 25439:25439 <> A:221
-binder 25441:25441 <> B:222
-R25449:25456 Coq.Relations.Relation_Definitions <> relation def
-R25458:25458 Coccinelle.closure <> A:221 var
-binder 25444:25445 <> R1:223
-R25467:25474 Coq.Relations.Relation_Definitions <> relation def
-R25476:25476 Coccinelle.closure <> B:222 var
-binder 25462:25463 <> R2:224
-binder 25490:25490 <> a:225
-binder 25492:25492 <> b:226
-R25503:25506 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R25495:25497 Coq.Init.Wf <> Acc ind
-R25502:25502 Coccinelle.closure <> a:225 var
-R25499:25500 Coccinelle.closure <> R1:223 var
-R25515:25518 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R25507:25509 Coq.Init.Wf <> Acc ind
-R25514:25514 Coccinelle.closure <> b:226 var
-R25511:25512 Coccinelle.closure <> R2:224 var
-R25519:25521 Coq.Init.Wf <> Acc ind
-R25541:25541 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25543:25543 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25545:25545 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
-R25542:25542 Coccinelle.closure <> a:225 var
-R25544:25544 Coccinelle.closure <> b:226 var
-R25524:25532 Coccinelle.closure <> product_o ind
-R25537:25538 Coccinelle.closure <> R2:224 var
-R25534:25535 Coccinelle.closure <> R1:223 var
-R25761:25769 Coq.Init.Wf <> Acc_intro constr
-R25761:25769 Coq.Init.Wf <> Acc_intro constr
-R25845:25853 Coq.Init.Wf <> Acc_intro constr
-R25845:25853 Coq.Init.Wf <> Acc_intro constr
-def 25906:25907 <> nf
-binder 25909:25909 <> A:227
-R25916:25923 Coq.Relations.Relation_Definitions <> relation def
-R25925:25925 Coccinelle.closure <> A:227 var
-binder 25912:25912 <> R:228
-binder 25928:25928 <> t:229
-binder 25940:25940 <> s:230
-R25948:25951 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R25943:25943 Coccinelle.closure <> R:228 var
-R25945:25945 Coccinelle.closure <> s:230 var
-R25947:25947 Coccinelle.closure <> t:229 var
-R25952:25956 Coq.Init.Logic <> False ind
-prf 25966:25971 <> acc_nf
-binder 25982:25982 <> A:231
-R25989:25996 Coq.Relations.Relation_Definitions <> relation def
-R25998:25998 Coccinelle.closure <> A:231 var
-binder 25985:25985 <> R:232
-binder 26001:26002 <> FB:233
-R26005:26005 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R26039:26069 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 26013:26013 <> t:234
-binder 26015:26015 <> s:235
-R26029:26033 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R26018:26019 Coq.Lists.List <> In def
-R26024:26025 Coccinelle.closure <> FB:233 var
-R26027:26027 Coccinelle.closure <> t:234 var
-R26021:26021 Coccinelle.closure <> s:235 var
-R26034:26034 Coccinelle.closure <> R:232 var
-R26036:26036 Coccinelle.closure <> s:235 var
-R26038:26038 Coccinelle.closure <> t:234 var
-binder 26077:26077 <> t:236
-R26087:26090 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R26080:26082 Coq.Init.Wf <> Acc ind
-R26086:26086 Coccinelle.closure <> t:236 var
-R26084:26084 Coccinelle.closure <> R:232 var
-R26091:26092 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R26094:26096 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R26098:26100 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R26138:26138 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R26097:26097 Coccinelle.closure <> A:231 var
-binder 26093:26093 <> s:237
-R26107:26111 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R26137:26137 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R26101:26102 Coccinelle.closure <> nf def
-R26106:26106 Coccinelle.closure <> s:237 var
-R26104:26104 Coccinelle.closure <> R:232 var
-R26117:26120 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
-R26113:26115 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R26112:26112 Coccinelle.closure <> s:237 var
-R26116:26116 Coccinelle.closure <> t:236 var
-R26121:26130 Coccinelle.TransClosure <> trans_clos ind
-R26136:26136 Coccinelle.closure <> t:236 var
-R26134:26134 Coccinelle.closure <> s:237 var
-R26132:26132 Coccinelle.closure <> R:232 var
-R26510:26515 Coccinelle.TransClosure <> t_step constr
-R26510:26515 Coccinelle.TransClosure <> t_step constr
-R26577:26595 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R26577:26595 Coccinelle.TransClosure <> trans_clos_is_trans thm
-R26620:26625 Coccinelle.TransClosure <> t_step constr
-R26620:26625 Coccinelle.TransClosure <> t_step constr
-prf 26690:26695 <> dec_nf
-binder 26706:26706 <> A:238
-R26713:26720 Coq.Relations.Relation_Definitions <> relation def
-R26722:26722 Coccinelle.closure <> A:238 var
-binder 26709:26709 <> R:239
-binder 26725:26726 <> FB:240
-R26729:26729 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R26763:26793 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 26737:26737 <> t:241
-binder 26739:26739 <> s:242
-R26753:26757 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R26742:26743 Coq.Lists.List <> In def
-R26748:26749 Coccinelle.closure <> FB:240 var
-R26751:26751 Coccinelle.closure <> t:241 var
-R26745:26745 Coccinelle.closure <> s:242 var
-R26758:26758 Coccinelle.closure <> R:239 var
-R26760:26760 Coccinelle.closure <> s:242 var
-R26762:26762 Coccinelle.closure <> t:241 var
-binder 26801:26801 <> t:243
-R26804:26804 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R26811:26813 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R26821:26821 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R26805:26806 Coccinelle.closure <> nf def
-R26810:26810 Coccinelle.closure <> t:243 var
-R26808:26808 Coccinelle.closure <> R:239 var
-R26814:26814 Coq.Init.Logic <> ::type_scope:'~'_x not
-R26815:26816 Coccinelle.closure <> nf def
-R26820:26820 Coccinelle.closure <> t:243 var
-R26818:26818 Coccinelle.closure <> R:239 var
-R26894:26895 Coccinelle.closure <> nf def
-prf 27079:27091 <> cycle_not_acc
-binder 27102:27102 <> A:244
-R27109:27116 Coq.Relations.Relation_Definitions <> relation def
-R27118:27118 Coccinelle.closure <> A:244 var
-binder 27105:27105 <> R:245
-R27126:27126 Coccinelle.closure <> A:244 var
-binder 27122:27122 <> a:246
-R27135:27138 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R27130:27130 Coccinelle.closure <> R:245 var
-R27132:27132 Coccinelle.closure <> a:246 var
-R27134:27134 Coccinelle.closure <> a:246 var
-R27139:27139 Coq.Init.Logic <> ::type_scope:'~'_x not
-R27140:27142 Coq.Init.Wf <> Acc ind
-R27146:27146 Coccinelle.closure <> a:246 var
-R27144:27144 Coccinelle.closure <> R:245 var
+R22088:22089 Coccinelle.closure <> R1:143 var
+R22174:22183 Coq.Init.Logic <> refl_equal abbrev
+R22174:22183 Coq.Init.Logic <> refl_equal abbrev
+R22313:22321 Coq.Init.Wf <> Acc_intro constr
+R22313:22321 Coq.Init.Wf <> Acc_intro constr
+R22556:22574 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R22556:22574 Coccinelle.TransClosure <> trans_clos_is_trans thm
+prf 22624:22634 <> union_equiv
+binder 22646:22646 <> A:149
+binder 22648:22649 <> R1:150
+binder 22651:22652 <> R2:151
+binder 22654:22655 <> R3:152
+binder 22657:22658 <> R4:153
+binder 22681:22681 <> x:154
+binder 22683:22683 <> y:155
+R22692:22696 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R22686:22687 Coccinelle.closure <> R1:150 var
+R22689:22689 Coccinelle.closure <> x:154 var
+R22691:22691 Coccinelle.closure <> y:155 var
+R22697:22698 Coccinelle.closure <> R3:152 var
+R22700:22700 Coccinelle.closure <> x:154 var
+R22702:22702 Coccinelle.closure <> y:155 var
+binder 22661:22671 <> R1_equiv_R3:156
+binder 22726:22726 <> x:157
+binder 22728:22728 <> y:158
+R22737:22741 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R22731:22732 Coccinelle.closure <> R2:151 var
+R22734:22734 Coccinelle.closure <> x:157 var
+R22736:22736 Coccinelle.closure <> y:158 var
+R22742:22743 Coccinelle.closure <> R4:153 var
+R22745:22745 Coccinelle.closure <> x:157 var
+R22747:22747 Coccinelle.closure <> y:158 var
+binder 22706:22716 <> R2_equiv_R4:159
+binder 22750:22750 <> x:160
+binder 22752:22752 <> y:161
+R22773:22777 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R22756:22760 Coq.Relations.Relation_Operators <> union def
+R22770:22770 Coccinelle.closure <> x:160 var
+R22772:22772 Coccinelle.closure <> y:161 var
+R22767:22768 Coccinelle.closure <> R2:151 var
+R22764:22765 Coccinelle.closure <> R1:150 var
+R22762:22762 Coccinelle.closure <> A:149 var
+R22778:22782 Coq.Relations.Relation_Operators <> union def
+R22792:22792 Coccinelle.closure <> x:160 var
+R22794:22794 Coccinelle.closure <> y:161 var
+R22789:22790 Coccinelle.closure <> R4:153 var
+R22786:22787 Coccinelle.closure <> R3:152 var
+prf 23085:23093 <> union_sym
+binder 23104:23104 <> A:162
+binder 23106:23107 <> R1:163
+binder 23109:23110 <> R2:164
+binder 23112:23112 <> x:165
+binder 23114:23114 <> y:166
+R23134:23138 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R23117:23121 Coq.Relations.Relation_Operators <> union def
+R23131:23131 Coccinelle.closure <> x:165 var
+R23133:23133 Coccinelle.closure <> y:166 var
+R23128:23129 Coccinelle.closure <> R2:164 var
+R23125:23126 Coccinelle.closure <> R1:163 var
+R23123:23123 Coccinelle.closure <> A:162 var
+R23139:23143 Coq.Relations.Relation_Operators <> union def
+R23153:23153 Coccinelle.closure <> x:165 var
+R23155:23155 Coccinelle.closure <> y:166 var
+R23150:23151 Coccinelle.closure <> R1:163 var
+R23147:23148 Coccinelle.closure <> R2:164 var
+R23145:23145 Coccinelle.closure <> A:162 var
+prf 23255:23265 <> union_assoc
+binder 23279:23279 <> A:167
+binder 23281:23282 <> R1:168
+binder 23284:23285 <> R2:169
+binder 23287:23288 <> R3:170
+binder 23290:23290 <> x:171
+binder 23292:23292 <> y:172
+R23325:23329 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R23295:23299 Coq.Relations.Relation_Operators <> union def
+R23322:23322 Coccinelle.closure <> x:171 var
+R23324:23324 Coccinelle.closure <> y:172 var
+R23319:23320 Coccinelle.closure <> R3:170 var
+R23304:23308 Coq.Relations.Relation_Operators <> union def
+R23315:23316 Coccinelle.closure <> R2:169 var
+R23312:23313 Coccinelle.closure <> R1:168 var
+R23310:23310 Coccinelle.closure <> A:167 var
+R23301:23301 Coccinelle.closure <> A:167 var
+R23330:23334 Coq.Relations.Relation_Operators <> union def
+R23357:23357 Coccinelle.closure <> x:171 var
+R23359:23359 Coccinelle.closure <> y:172 var
+R23342:23346 Coq.Relations.Relation_Operators <> union def
+R23353:23354 Coccinelle.closure <> R3:170 var
+R23350:23351 Coccinelle.closure <> R2:169 var
+R23348:23348 Coccinelle.closure <> A:167 var
+R23338:23339 Coccinelle.closure <> R1:168 var
+R23336:23336 Coccinelle.closure <> A:167 var
+prf 23680:23689 <> union_idem
+binder 23700:23700 <> A:173
+binder 23702:23702 <> R:174
+binder 23704:23704 <> x:175
+binder 23706:23706 <> y:176
+R23724:23728 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R23709:23713 Coq.Relations.Relation_Operators <> union def
+R23721:23721 Coccinelle.closure <> x:175 var
+R23723:23723 Coccinelle.closure <> y:176 var
+R23719:23719 Coccinelle.closure <> R:174 var
+R23717:23717 Coccinelle.closure <> R:174 var
+R23715:23715 Coccinelle.closure <> A:173 var
+R23729:23729 Coccinelle.closure <> R:174 var
+R23731:23731 Coccinelle.closure <> x:175 var
+R23733:23733 Coccinelle.closure <> y:176 var
+prf 23841:23857 <> union_idem_strong
+binder 23868:23868 <> A:177
+R23878:23881 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23877:23877 Coccinelle.closure <> A:177 var
+R23883:23886 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23882:23882 Coccinelle.closure <> A:177 var
+binder 23871:23871 <> R:178
+binder 23873:23874 <> R':179
+binder 23903:23903 <> x:180
+binder 23905:23905 <> y:181
+R23913:23916 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23908:23908 Coccinelle.closure <> R:178 var
+R23912:23912 Coccinelle.closure <> y:181 var
+R23910:23910 Coccinelle.closure <> x:180 var
+R23917:23918 Coccinelle.closure <> R':179 var
+R23922:23922 Coccinelle.closure <> y:181 var
+R23920:23920 Coccinelle.closure <> x:180 var
+binder 23894:23894 <> H:182
+binder 23925:23925 <> x:183
+binder 23927:23927 <> y:184
+R23947:23951 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R23931:23935 Coq.Relations.Relation_Operators <> union def
+R23944:23944 Coccinelle.closure <> x:183 var
+R23946:23946 Coccinelle.closure <> y:184 var
+R23941:23942 Coccinelle.closure <> R':179 var
+R23939:23939 Coccinelle.closure <> R:178 var
+R23937:23937 Coccinelle.closure <> A:177 var
+R23952:23953 Coccinelle.closure <> R':179 var
+R23957:23957 Coccinelle.closure <> y:184 var
+R23955:23955 Coccinelle.closure <> x:183 var
+sec 24099:24102 <> star
+var 24140:24140 star A
+var 24157:24157 star R
+R24162:24165 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24161:24161 Coccinelle.closure <> star.A var
+R24167:24170 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24166:24166 Coccinelle.closure <> star.A var
+ind 24187:24190 <> star
+constr 24216:24224 <> star_refl
+constr 24239:24247 <> star_step
+R24195:24195 Coccinelle.closure <> star.A var
+binder 24193:24193 <> x:187
+R24201:24204 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24200:24200 Coccinelle.closure <> star.A var
+R24228:24231 Coccinelle.closure <> star:188 ind
+R24235:24235 Coccinelle.closure <> x:187 var
+R24233:24233 Coccinelle.closure <> x:187 var
+binder 24258:24258 <> y:190
+R24269:24272 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24261:24264 Coccinelle.closure <> star:188 ind
+R24268:24268 Coccinelle.closure <> y:190 var
+R24266:24266 Coccinelle.closure <> x:187 var
+binder 24280:24280 <> z:191
+R24288:24291 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24283:24283 Coccinelle.closure <> star.R var
+R24285:24285 Coccinelle.closure <> y:190 var
+R24287:24287 Coccinelle.closure <> z:191 var
+R24292:24295 Coccinelle.closure <> star:188 ind
+R24299:24299 Coccinelle.closure <> z:191 var
+R24297:24297 Coccinelle.closure <> x:187 var
+prf 24311:24320 <> star_trans
+binder 24330:24330 <> x:192
+binder 24332:24332 <> y:193
+binder 24334:24334 <> z:194
+R24345:24348 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24337:24340 Coccinelle.closure <> star ind
+R24342:24342 Coccinelle.closure <> x:192 var
+R24344:24344 Coccinelle.closure <> y:193 var
+R24357:24360 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24349:24352 Coccinelle.closure <> star ind
+R24354:24354 Coccinelle.closure <> y:193 var
+R24356:24356 Coccinelle.closure <> z:194 var
+R24361:24364 Coccinelle.closure <> star ind
+R24366:24366 Coccinelle.closure <> x:192 var
+R24368:24368 Coccinelle.closure <> z:194 var
+prf 24481:24486 <> star_R
+binder 24497:24497 <> x:195
+binder 24499:24499 <> y:196
+R24507:24510 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24502:24502 Coccinelle.closure <> star.R var
+R24504:24504 Coccinelle.closure <> x:195 var
+R24506:24506 Coccinelle.closure <> y:196 var
+R24511:24514 Coccinelle.closure <> star ind
+R24516:24516 Coccinelle.closure <> x:195 var
+R24518:24518 Coccinelle.closure <> y:196 var
+prf 24600:24608 <> star_ind2
+binder 24620:24620 <> x:197
+R24626:24629 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24625:24625 Coccinelle.closure <> star.A var
+binder 24623:24623 <> P:198
+R24639:24639 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24643:24650 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24640:24640 Coccinelle.closure <> P:198 var
+R24642:24642 Coccinelle.closure <> x:197 var
+R24651:24651 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24691:24697 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 24659:24659 <> y:199
+R24665:24668 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24662:24662 Coccinelle.closure <> P:198 var
+R24664:24664 Coccinelle.closure <> y:199 var
+binder 24676:24676 <> z:200
+R24684:24687 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24679:24679 Coccinelle.closure <> star.R var
+R24681:24681 Coccinelle.closure <> y:199 var
+R24683:24683 Coccinelle.closure <> z:200 var
+R24688:24688 Coccinelle.closure <> P:198 var
+R24690:24690 Coccinelle.closure <> z:200 var
+binder 24705:24705 <> a:201
+R24716:24719 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24708:24711 Coccinelle.closure <> star ind
+R24713:24713 Coccinelle.closure <> x:197 var
+R24715:24715 Coccinelle.closure <> a:201 var
+R24720:24720 Coccinelle.closure <> P:198 var
+R24722:24722 Coccinelle.closure <> a:201 var
+R24828:24831 Coccinelle.closure star <> sec
+prf 24841:24850 <> star_equiv
+binder 24862:24862 <> A:202
+R24873:24876 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24872:24872 Coccinelle.closure <> A:202 var
+R24878:24881 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24877:24877 Coccinelle.closure <> A:202 var
+binder 24865:24866 <> R1:203
+binder 24868:24869 <> R2:204
+R24889:24889 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24919:24926 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 24897:24897 <> l:205
+binder 24899:24899 <> r:206
+R24908:24912 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R24902:24903 Coccinelle.closure <> R1:203 var
+R24907:24907 Coccinelle.closure <> l:205 var
+R24905:24905 Coccinelle.closure <> r:206 var
+R24913:24914 Coccinelle.closure <> R2:204 var
+R24918:24918 Coccinelle.closure <> l:205 var
+R24916:24916 Coccinelle.closure <> r:206 var
+binder 24934:24934 <> l:207
+binder 24936:24936 <> r:208
+R24952:24956 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R24939:24942 Coccinelle.closure <> star ind
+R24949:24949 Coccinelle.closure <> r:208 var
+R24951:24951 Coccinelle.closure <> l:207 var
+R24946:24947 Coccinelle.closure <> R1:203 var
+R24957:24960 Coccinelle.closure <> star ind
+R24967:24967 Coccinelle.closure <> r:208 var
+R24969:24969 Coccinelle.closure <> l:207 var
+R24964:24965 Coccinelle.closure <> R2:204 var
+ind 25191:25199 <> product_o
+constr 25269:25273 <> CaseA
+constr 25335:25339 <> CaseB
+binder 25201:25201 <> A:209
+binder 25203:25203 <> B:210
+R25211:25218 Coq.Relations.Relation_Definitions <> relation def
+R25220:25220 Coccinelle.closure <> A:209 var
+binder 25206:25207 <> R1:211
+R25229:25236 Coq.Relations.Relation_Definitions <> relation def
+R25238:25238 Coccinelle.closure <> B:210 var
+binder 25224:25225 <> R2:212
+R25243:25250 Coq.Relations.Relation_Definitions <> relation def
+R25254:25254 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+binder 25284:25284 <> a:215
+binder 25286:25287 <> a':216
+binder 25289:25289 <> b:217
+R25299:25302 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R25292:25293 Coccinelle.closure <> R1:211 var
+R25295:25295 Coccinelle.closure <> a:215 var
+R25297:25298 Coccinelle.closure <> a':216 var
+R25303:25311 Coccinelle.closure <> product_o:213 ind
+R25325:25325 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25328:25328 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25330:25330 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25326:25327 Coccinelle.closure <> a':216 var
+R25329:25329 Coccinelle.closure <> b:217 var
+R25319:25319 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25321:25321 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25323:25323 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25320:25320 Coccinelle.closure <> a:215 var
+R25322:25322 Coccinelle.closure <> b:217 var
+R25316:25317 Coccinelle.closure <> R2:212 var
+R25313:25314 Coccinelle.closure <> R1:211 var
+binder 25350:25350 <> a:218
+binder 25352:25352 <> b:219
+binder 25354:25355 <> b':220
+R25365:25368 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R25358:25359 Coccinelle.closure <> R2:212 var
+R25361:25361 Coccinelle.closure <> b:219 var
+R25363:25364 Coccinelle.closure <> b':220 var
+R25369:25377 Coccinelle.closure <> product_o:213 ind
+R25391:25391 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25393:25393 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25396:25396 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25392:25392 Coccinelle.closure <> a:218 var
+R25394:25395 Coccinelle.closure <> b':220 var
+R25385:25385 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25387:25387 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25389:25389 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25386:25386 Coccinelle.closure <> a:218 var
+R25388:25388 Coccinelle.closure <> b:219 var
+R25382:25383 Coccinelle.closure <> R2:212 var
+R25379:25380 Coccinelle.closure <> R1:211 var
+prf 25406:25412 <> acc_and
+binder 25426:25426 <> A:221
+binder 25428:25428 <> B:222
+R25436:25443 Coq.Relations.Relation_Definitions <> relation def
+R25445:25445 Coccinelle.closure <> A:221 var
+binder 25431:25432 <> R1:223
+R25454:25461 Coq.Relations.Relation_Definitions <> relation def
+R25463:25463 Coccinelle.closure <> B:222 var
+binder 25449:25450 <> R2:224
+binder 25477:25477 <> a:225
+binder 25479:25479 <> b:226
+R25490:25493 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R25482:25484 Coq.Init.Wf <> Acc ind
+R25489:25489 Coccinelle.closure <> a:225 var
+R25486:25487 Coccinelle.closure <> R1:223 var
+R25502:25505 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R25494:25496 Coq.Init.Wf <> Acc ind
+R25501:25501 Coccinelle.closure <> b:226 var
+R25498:25499 Coccinelle.closure <> R2:224 var
+R25506:25508 Coq.Init.Wf <> Acc ind
+R25528:25528 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25530:25530 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25532:25532 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R25529:25529 Coccinelle.closure <> a:225 var
+R25531:25531 Coccinelle.closure <> b:226 var
+R25511:25519 Coccinelle.closure <> product_o ind
+R25524:25525 Coccinelle.closure <> R2:224 var
+R25521:25522 Coccinelle.closure <> R1:223 var
+R25748:25756 Coq.Init.Wf <> Acc_intro constr
+R25748:25756 Coq.Init.Wf <> Acc_intro constr
+R25832:25840 Coq.Init.Wf <> Acc_intro constr
+R25832:25840 Coq.Init.Wf <> Acc_intro constr
+def 25893:25894 <> nf
+binder 25896:25896 <> A:227
+R25903:25910 Coq.Relations.Relation_Definitions <> relation def
+R25912:25912 Coccinelle.closure <> A:227 var
+binder 25899:25899 <> R:228
+binder 25915:25915 <> t:229
+binder 25927:25927 <> s:230
+R25935:25938 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R25930:25930 Coccinelle.closure <> R:228 var
+R25932:25932 Coccinelle.closure <> s:230 var
+R25934:25934 Coccinelle.closure <> t:229 var
+R25939:25943 Coq.Init.Logic <> False ind
+prf 25953:25958 <> acc_nf
+binder 25969:25969 <> A:231
+R25976:25983 Coq.Relations.Relation_Definitions <> relation def
+R25985:25985 Coccinelle.closure <> A:231 var
+binder 25972:25972 <> R:232
+binder 25988:25989 <> FB:233
+R25992:25992 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R26026:26056 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 26000:26000 <> t:234
+binder 26002:26002 <> s:235
+R26016:26020 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R26005:26006 Coq.Lists.List <> In def
+R26011:26012 Coccinelle.closure <> FB:233 var
+R26014:26014 Coccinelle.closure <> t:234 var
+R26008:26008 Coccinelle.closure <> s:235 var
+R26021:26021 Coccinelle.closure <> R:232 var
+R26023:26023 Coccinelle.closure <> s:235 var
+R26025:26025 Coccinelle.closure <> t:234 var
+binder 26064:26064 <> t:236
+R26074:26077 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R26067:26069 Coq.Init.Wf <> Acc ind
+R26073:26073 Coccinelle.closure <> t:236 var
+R26071:26071 Coccinelle.closure <> R:232 var
+R26078:26079 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R26081:26083 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R26085:26087 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R26125:26125 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R26084:26084 Coccinelle.closure <> A:231 var
+binder 26080:26080 <> s:237
+R26094:26098 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R26124:26124 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R26088:26089 Coccinelle.closure <> nf def
+R26093:26093 Coccinelle.closure <> s:237 var
+R26091:26091 Coccinelle.closure <> R:232 var
+R26104:26107 Coq.Init.Logic <> ::type_scope:x_'\/'_x not
+R26100:26102 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R26099:26099 Coccinelle.closure <> s:237 var
+R26103:26103 Coccinelle.closure <> t:236 var
+R26108:26117 Coccinelle.TransClosure <> trans_clos ind
+R26123:26123 Coccinelle.closure <> t:236 var
+R26121:26121 Coccinelle.closure <> s:237 var
+R26119:26119 Coccinelle.closure <> R:232 var
+R26497:26502 Coccinelle.TransClosure <> t_step constr
+R26497:26502 Coccinelle.TransClosure <> t_step constr
+R26564:26582 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R26564:26582 Coccinelle.TransClosure <> trans_clos_is_trans thm
+R26607:26612 Coccinelle.TransClosure <> t_step constr
+R26607:26612 Coccinelle.TransClosure <> t_step constr
+prf 26677:26682 <> dec_nf
+binder 26693:26693 <> A:238
+R26700:26707 Coq.Relations.Relation_Definitions <> relation def
+R26709:26709 Coccinelle.closure <> A:238 var
+binder 26696:26696 <> R:239
+binder 26712:26713 <> FB:240
+R26716:26716 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R26750:26780 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 26724:26724 <> t:241
+binder 26726:26726 <> s:242
+R26740:26744 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R26729:26730 Coq.Lists.List <> In def
+R26735:26736 Coccinelle.closure <> FB:240 var
+R26738:26738 Coccinelle.closure <> t:241 var
+R26732:26732 Coccinelle.closure <> s:242 var
+R26745:26745 Coccinelle.closure <> R:239 var
+R26747:26747 Coccinelle.closure <> s:242 var
+R26749:26749 Coccinelle.closure <> t:241 var
+binder 26788:26788 <> t:243
+R26791:26791 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R26798:26800 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R26808:26808 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R26792:26793 Coccinelle.closure <> nf def
+R26797:26797 Coccinelle.closure <> t:243 var
+R26795:26795 Coccinelle.closure <> R:239 var
+R26801:26801 Coq.Init.Logic <> ::type_scope:'~'_x not
+R26802:26803 Coccinelle.closure <> nf def
+R26807:26807 Coccinelle.closure <> t:243 var
+R26805:26805 Coccinelle.closure <> R:239 var
+R26881:26882 Coccinelle.closure <> nf def
+prf 27066:27078 <> cycle_not_acc
+binder 27089:27089 <> A:244
+R27096:27103 Coq.Relations.Relation_Definitions <> relation def
+R27105:27105 Coccinelle.closure <> A:244 var
+binder 27092:27092 <> R:245
+R27113:27113 Coccinelle.closure <> A:244 var
+binder 27109:27109 <> a:246
+R27122:27125 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R27117:27117 Coccinelle.closure <> R:245 var
+R27119:27119 Coccinelle.closure <> a:246 var
+R27121:27121 Coccinelle.closure <> a:246 var
+R27126:27126 Coq.Init.Logic <> ::type_scope:'~'_x not
+R27127:27129 Coq.Init.Wf <> Acc ind
+R27133:27133 Coccinelle.closure <> a:246 var
+R27131:27131 Coccinelle.closure <> R:245 var

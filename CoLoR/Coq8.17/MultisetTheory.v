@@ -97,7 +97,7 @@ Module Multiset (MC : MultisetCore).
      (solve [try_solve_meq_ext] || 
       fail "Couldn't show multisets equality"). 
 
-  #[export] Hint Unfold member 
+#[export]  Hint Unfold member 
               insert
               pair
               remove : multisets.
@@ -118,9 +118,9 @@ Module Multiset (MC : MultisetCore).
 
   End meq_equivalence.
 
-  #[export] Hint Resolve meq_refl meq_trans meq_sym : multisets.
+#[export]   Hint Resolve meq_refl meq_trans meq_sym : multisets.
 
-   #[export] Instance meq_Equivalence : Equivalence meq.
+  #[export] Instance meq_Equivalence : Equivalence meq.
 
   Proof.
     split.
@@ -129,11 +129,11 @@ Module Multiset (MC : MultisetCore).
     intros x y z. apply meq_trans.
   Qed.
 
-   #[export] Instance union_morph : Proper (meq ==> meq ==> meq) union.
+  #[export] Instance union_morph : Proper (meq ==> meq ==> meq) union.
 
   Proof. intros a b ab c d cd. solve_meq. Qed.
 
- #[export]   Instance singleton_morph : Proper (eqA ==> meq) singleton.
+  #[export] Instance singleton_morph : Proper (eqA ==> meq) singleton.
 
   Proof.
     intros x y H. try_solve_meq_ext; case (eqA_dec x0 x); intros.
@@ -147,31 +147,31 @@ Module Multiset (MC : MultisetCore).
       solve [auto with multisets | congruence].
   Qed.
 
-   #[export] Instance pair_morph : Proper (eqA ==> eqA ==> meq) pair.
+  #[export] Instance pair_morph : Proper (eqA ==> eqA ==> meq) pair.
 
   Proof. intros a b ab c d cd. solve_meq_ext. Qed.
 
-   #[export] Instance mult_morph : Proper (eqA ==> meq ==> eq) mult.
+  #[export] Instance mult_morph : Proper (eqA ==> meq ==> eq) mult.
 
   Proof. intros a b ab c d cd. solve_meq_ext. Qed.
 
-   #[export] Instance diff_morph : Proper (meq ==> meq ==> meq) diff.
+  #[export] Instance diff_morph : Proper (meq ==> meq ==> meq) diff.
 
   Proof. intros a b ab c d cd. solve_meq_ext. Qed.
 
-   #[export] Instance insert_morph : Proper (eqA ==> meq ==> meq) insert.
+  #[export] Instance insert_morph : Proper (eqA ==> meq ==> meq) insert.
 
   Proof. intros a b ab c d cd. solve_meq_ext. Qed.
 
-   #[export] Instance member_morph : Proper (eqA ==> meq ==> iff) member.
+  #[export] Instance member_morph : Proper (eqA ==> meq ==> iff) member.
 
   Proof. mset_unfold; intros a a0 h m m0 H. rewrite h, H. intuition. Qed.
 
-   #[export] Instance remove_morph : Proper (eqA ==> meq ==> meq) remove.
+  #[export] Instance remove_morph : Proper (eqA ==> meq ==> meq) remove.
 
   Proof. intros a b ab c d cd. solve_meq_ext. Qed.
 
-   #[export] Instance intersection_morph : Proper (meq ==> meq ==> meq) intersection.
+  #[export] Instance intersection_morph : Proper (meq ==> meq ==> meq) intersection.
 
   Proof. intros a b ab c d cd. solve_meq. Qed.
 
@@ -669,7 +669,8 @@ Module Multiset (MC : MultisetCore).
 
   End MultisetLemmas.
 
-   #[export] Hint Immediate member_singleton
+#[export] 
+  Hint Immediate member_singleton
        member_member_union
        member_diff_member
        member_union
@@ -678,7 +679,8 @@ Module Multiset (MC : MultisetCore).
        intersection_comm
        union_assoc : multisets.
 
- #[export]   Hint Resolve union_empty
+#[export] 
+  Hint Resolve union_empty
        not_empty
        singleton_member
        meq_union_meq
@@ -713,11 +715,11 @@ Module Multiset (MC : MultisetCore).
       case (Compare_dec.le_lt_dec (x/L)%msets (x/U)%msets); intro l_u.
       (* u >= l *)
       assert ((x/R)%msets >= (x/D)%msets); [lia | idtac].
-      rewrite (Min.min_r (x/R)%msets (x/D)%msets); lia.
+      rewrite (Nat.min_r (x/R)%msets (x/D)%msets); lia.
       (* l > u *)
       assert ((x/R)%msets < (x/D)%msets); [lia | idtac].
-      rewrite Minus.not_le_minus_0.
-      rewrite (Min.min_l (x/R)%msets (x/D)%msets); lia.
+      rewrite Minus.not_le_minus_0_stt.
+      rewrite (Nat.min_l (x/R)%msets (x/D)%msets); lia.
       lia.
     Qed.
 
@@ -1232,7 +1234,7 @@ Module Multiset (MC : MultisetCore).
       rewrite multiset2list_empty; trivial.
     Qed.
 
-    Instance card_morph : Proper (meq ==> eq) card.
+    #[export] Instance card_morph : Proper (meq ==> eq) card.
   
     Proof.
       intros m m0; unfold card.
@@ -1304,7 +1306,8 @@ Module Multiset (MC : MultisetCore).
     Lemma pair_eq a b c d :
       {{a, b}} =mul= {{c, d}} -> (a =A= c /\ b =A= d) \/ (a =A= d /\ b =A= c).
     
-    Proof.     intros.
+    Proof.
+      intros.
       destruct (eqA_dec a c).
       destruct (eqA_dec b d).
       left; split; trivial.
@@ -1316,7 +1319,7 @@ Module Multiset (MC : MultisetCore).
       rewrite (@singleton_mult_notin b a); eauto with sets.
       rewrite (@singleton_mult_notin b c); eauto with sets.
       rewrite (@singleton_mult_notin b d); eauto with sets.
-      
+
       setoid_replace c with d; eauto with sets.
       apply meq_multeq; trivial.
       absurd (mult d {{a, b}} = mult d {{c, d}}).
@@ -1325,7 +1328,7 @@ Module Multiset (MC : MultisetCore).
       rewrite (@singleton_mult_notin d a); auto with sets.
       rewrite (@singleton_mult_notin d b); auto with sets.
       rewrite (@singleton_mult_in d d); auto with sets.
-      lia.      
+      lia.
       apply meq_multeq; trivial.
       destruct (eqA_dec a d).
       destruct (eqA_dec b c).
@@ -1346,7 +1349,7 @@ Module Multiset (MC : MultisetCore).
       rewrite (@singleton_mult_in a a); auto with sets.
 
       apply meq_multeq; trivial.
-Qed.
+    Qed.
 
     Lemma pair_decomp a b X Y : {{a, b}} =mul= X + Y ->
       (X =mul= {{a, b}} /\ Y =mul= empty) \/
@@ -1427,7 +1430,7 @@ Qed.
 
   End Pair.
 
-  #[export] Hint Immediate double_split : multisets.
+#[export] Hint Immediate double_split : multisets.
 
 (*COQ: At the moment I extended module Eqset to include the requirement of
 decidable equality. Hence to instantiate multisets to Eqset module decidability

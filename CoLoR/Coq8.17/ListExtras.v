@@ -13,6 +13,8 @@ From CoLoR Require Export ListUtil.
 From Coq Require Import Min Permutation Setoid.
 From CoLoR Require Import NatUtil LogicUtil.
 
+Set Firstorder Solver debug eauto with core.
+
 (***********************************************************************)
 (** initial segment of a list *)
 
@@ -42,7 +44,7 @@ Section InitialSeg.
   Qed.
 
   Lemma initialSeg_length : forall (l: list A) size, 
-    length (initialSeg l size) = min size (length l).
+    length (initialSeg l size) = Nat.min size (length l).
 
   Proof.
     induction l; intro size.
@@ -129,8 +131,8 @@ Section Seg.
     destruct i; destruct j; destruct x; trivial.
     intros i j x x_j.
     destruct i; simpl.
-    destruct j; destruct x; simpl; try solve [lia | trivial].
-    change x at 2 with (0 + x).
+    destruct j; destruct x; simpl. lia. lia. trivial. 
+    change x with (0 + x) at 2.
     assert (xj: x < j).
     auto with arith.
     rewrite <- (IHl 0 j x xj); trivial.
@@ -265,8 +267,8 @@ Section FinalSeg.
   Proof.
     intros.
     rewrite initialSeg_length, finalSeg_length.
-    destruct (Compare_dec.le_gt_dec k (length l)); 
-      solve [rewrite min_l; lia | rewrite min_r; lia].
+    destruct (Compare_dec.le_gt_dec k (length l)).  rewrite Nat.min_l; lia.
+      rewrite Nat.min_r; lia.
   Qed.
 
   Lemma initialSeg_finalSeg_full : forall l k,
@@ -365,7 +367,7 @@ Section Copy.
   Qed.
 
   Lemma initialSeg_copy : forall el n k,
-    initialSeg (copy n el) k = copy (min n k) el.
+    initialSeg (copy n el) k = copy (Nat.min n k) el.
 
   Proof.
     induction n; destruct k; intros; simpl; trivial.
@@ -910,7 +912,8 @@ inversion H; subst.
 simpl; lia.
 destruct (find_first l).
 inversion H; subst.
-simpl; apply lt_n_S; apply IHl; auto.
+
+simpl; apply -> Nat.succ_lt_mono; apply IHl; auto.
 discr.
 Qed.
 

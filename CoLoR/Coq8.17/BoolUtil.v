@@ -15,8 +15,11 @@ From Coq Require Setoid.
 
 From CoLoR Require Import LogicUtil.
 
+Ltac Tauto.intuition_solver ::= auto with *.
+
 Arguments orb_false_elim [b1 b2] _.
 Arguments orb_true_elim [b1 b2] _.
+
 
 #[export] Hint Rewrite negb_orb negb_andb negb_involutive eqb_negb1 eqb_negb2
   orb_true_r orb_true_l orb_false_r orb_false_l orb_negb_r orb_assoc
@@ -178,9 +181,9 @@ End bool_ok.
 (***********************************************************************)
 (** checking a property (P i) for all i<n *)
 
-Set Firstorder Solver debug auto with *. 
-
 Section bforall_lt.
+
+
 
   Variables (P : nat->Prop) (bP : nat->bool)
     (bP_ok : forall x, bP x = true <-> P x).

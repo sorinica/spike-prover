@@ -19,28 +19,27 @@ From CoLoR Require Import LogicUtil EqUtil BoolUtil RelUtil.
 (***********************************************************************)
 (** Declare implicit arguments. *)
 
-Arguments lt_S [n m] _.
-Arguments lt_S_n [n m] _.
-Arguments lt_n_S [n m] _.
+Arguments Nat.lt_lt_succ_r [n m] _.
+(* Arguments lt_S_n [n m] _. *)
+(* Arguments lt_n_S [n m] _. *)
 Arguments le_S [n m] _.
-Arguments gt_le_S [n m] _.
-Arguments le_lt_n_Sm [n m] _.
-Arguments lt_le_weak [n m] _.
-Arguments le_plus_minus [n m] _.
-Arguments le_plus_minus_r [n m] _.
-Arguments lt_n_0 [n] _.
-Arguments le_lt_trans [n m p] _ _.
-Arguments lt_le_trans [n m p] _ _.
-Arguments le_lt_or_eq [n m] _.
-Arguments lt_n_Sm_le [n m] _.
-Arguments lt_trans [n m p] _ _.
-Arguments le_trans [n m p] _ _.
-Arguments lt_le_weak [n m] _.
-Arguments lt_le_S [n m] _.
-Arguments lt_not_le [n m] _ _.
+(* Arguments gt_le_S [n m] _. *)
+(* Arguments le_lt_n_Sm [n m] _. *)
+Arguments Nat.lt_le_incl [n m] _.
+Arguments Nat.sub_add [n m] _.
+Arguments Nat.nlt_0_r [n] _.
+Arguments Nat.le_lt_trans [n m p] _ _.
+Arguments Nat.lt_le_trans [n m p] _ _.
+(* Arguments le_lt_or_eq [n m] _. *)
+(* Arguments lt_n_Sm_le [n m] _. *)
+Arguments Nat.lt_trans [n m p] _ _.
+Arguments Nat.le_trans [n m p] _ _.
+Arguments Nat.lt_le_incl [n m] _.
+(* Arguments lt_le_S [n m] _. *)
+(* Arguments lt_not_le [n m] _ _. *)
 Arguments le_lt_eq_dec [n m] _.
 Arguments le_S_n [n m] _.
-Arguments le_not_lt [n m] _ _.
+(* Arguments le_not_lt [n m] _ _. *)
 Arguments eq_add_S [n m] _.
 Arguments le_n_S [n m] _.
 
@@ -54,7 +53,7 @@ Tactic Notation "nia" := intros; nia.
 
 Ltac max :=
   match goal with
-    | |- context [max ?x ?y] => gen (le_max_l x y); gen (le_max_r x y)
+    | |- context [Nat.max ?x ?y] => gen (Nat.le_max_l x y); gen (Nat.le_max_r x y)
   end; lia.
 
 (***********************************************************************)
@@ -90,7 +89,7 @@ Lemma beq_nat_ok : forall x y, beq_nat x y = true <-> x = y.
 
 Proof.
   induction x; destruct y; simpl; split; intro; try (refl || discr).
-  f_equal. fo. fo.
+  f_equal. fo. rewrite IHx. auto.
 Qed.
 
 Ltac case_beq_nat := case_beq beq_nat beq_nat_ok.
@@ -192,115 +191,117 @@ Lemma lt_unique : forall n m (h1 h2 : n < m), h1 = h2.
 
 Proof. intros n m. unfold lt. intros. apply le_unique. Qed.
 
-Lemma lt_Sn_nS : forall m n (H : m < n), lt_S_n (lt_n_S H) = H.
+(* Lemma lt_Sn_nS : forall m n (H : m < n), lt_S_n (lt_n_S H) = H. *)
 
-Proof. intros. apply lt_unique. Qed.
+(* Print Nat.succ_lt_mono.  *)
+(* Print  Arith_prebase.lt_S_n_stt. *)
+(* Proof. intros. apply lt_unique. Qed. *)
 
-Lemma lt_nS_Sn : forall m n (H : S m < S n), lt_n_S (lt_S_n H) = H.
+(* Lemma lt_nS_Sn : forall m n (H : S m < S n), lt_n_S (lt_S_n H) = H. *)
 
-Proof. intros. apply lt_unique. Qed.
+(* Proof. intros. apply lt_unique. Qed. *)
 
 (***********************************************************************)
 (** Lemmas on the maximum of two numbers. *)
 
-Arguments max_r [n m] _.
-Arguments max_l [n m] _.
+Arguments Nat.max_r [n m] _.
+Arguments Nat.max_l [n m] _.
 
-From Coq Require Import Compare.
+Require Import Compare.
 
-Lemma max_assoc : forall a b c, max a (max b c) = max (max a b) c.
+Lemma max_assoc : forall a b c, Nat.max a (Nat.max b c) = Nat.max (Nat.max a b) c.
 
 Proof.
 intros.
 case (le_dec b c); intro H.
- rewrite (max_r H).
+ rewrite (Nat.max_r H).
  case (le_dec a b); intro H'.
-  rewrite (max_r (le_trans H' H)), (max_r H'), (max_r H). refl.
-  case (le_dec a c); intro H''; rewrite (max_l H'); refl.
-  rewrite (max_l H).
+  rewrite (Nat.max_r (Nat.le_trans H' H)), (Nat.max_r H'), (Nat.max_r H). refl.
+  case (le_dec a c); intro H''; rewrite (Nat.max_l H'); refl.
+  rewrite (Nat.max_l H).
   case (le_dec a b); intro H'.
-   rewrite (max_r H').
-   apply (sym_equal (max_l H)).
-   assert (H'' : c <= max a b). eapply le_trans. apply H. apply le_max_r.
-   apply (sym_equal (max_l H'')).
+   rewrite (Nat.max_r H').
+   apply (sym_equal (Nat.max_l H)).
+   assert (H'' : c <= Nat.max a b). eapply Nat.le_trans. apply H. apply Nat.le_max_r.
+   apply (sym_equal (Nat.max_l H'')).
 Qed.
 
-Lemma le_max_intro_l x y z : x <= y -> x <= max y z.
+Lemma le_max_intro_l x y z : x <= y -> x <= Nat.max y z.
 
 Proof. lia. Qed.
 
-Lemma lt_max_intro_l x y z : x < y -> x < max y z.
+Lemma lt_max_intro_l x y z : x < y -> x < Nat.max y z.
 
 Proof. lia. Qed.
 
-Lemma le_max_intro_r x y z : x <= z -> x <= max y z.
+Lemma le_max_intro_r x y z : x <= z -> x <= Nat.max y z.
 
 Proof. lia. Qed.
 
-Lemma lt_max_intro_r x y z : x < z -> x < max y z.
+Lemma lt_max_intro_r x y z : x < z -> x < Nat.max y z.
 
 Proof. lia. Qed.
 
-Lemma le_max_elim_l x y z : max x y <= z -> x <= z.
+Lemma le_max_elim_l x y z : Nat.max x y <= z -> x <= z.
 
 Proof. lia. Qed.
 
-Lemma le_max_elim_r x y z : max x y <= z -> y <= z.
+Lemma le_max_elim_r x y z : Nat.max x y <= z -> y <= z.
 
 Proof. lia. Qed.
 
-Lemma max_ge_compat x y x' y' : x >= x' -> y >= y' -> max x y >= max x' y'.
+Lemma max_ge_compat x y x' y' : x >= x' -> y >= y' -> Nat.max x y >= Nat.max x' y'.
 
 Proof. lia. Qed.
 
-Lemma max_gt_compat x y x' y' : x > x' -> y > y' -> max x y > max x' y'.
+Lemma max_gt_compat x y x' y' : x > x' -> y > y' -> Nat.max x y > Nat.max x' y'.
 
 Proof. lia. Qed.
 
-Lemma min_gt_compat x y x' y' : x > x' -> y > y' -> min x y > min x' y'.
+Lemma min_gt_compat x y x' y' : x > x' -> y > y' -> Nat.min x y > Nat.min x' y'.
 
 Proof. lia. Qed.
  
-Lemma max_lt x y z : max y z < x <-> y < x /\ z < x.
+Lemma max_lt x y z : Nat.max y z < x <-> y < x /\ z < x.
 
 Proof. lia. Qed.
 
-Lemma gt_max x y z : x > max y z <-> x > y /\ x > z.
+Lemma gt_max x y z : x > Nat.max y z <-> x > y /\ x > z.
 
 Proof. apply max_lt. Qed.
 
-Lemma max_0_r x : max x 0 = x.
+Lemma max_0_r x : Nat.max x 0 = x.
 
 Proof. destruct x; refl. Qed.
 
 (***********************************************************************)
 (** Lemmas on the minimum of two numbers. *)
 
-Lemma elim_min_l x y z : x <= z -> min x y <= z.
+Lemma elim_min_l x y z : x <= z -> Nat.min x y <= z.
 
 Proof. lia. Qed.
 
-Lemma elim_min_r : forall x y z, y <= z -> min x y <= z.
+Lemma elim_min_r : forall x y z, y <= z -> Nat.min x y <= z.
 
 Proof. lia. Qed.
 
-Lemma lt_min_intro_l x y z : x < z -> min x y < z.
+Lemma lt_min_intro_l x y z : x < z -> Nat.min x y < z.
 
 Proof. lia. Qed.
 
-Lemma lt_min_intro_r x y z : y < z -> min x y < z.
+Lemma lt_min_intro_r x y z : y < z -> Nat.min x y < z.
 
 Proof. lia. Qed.
 
-Lemma le_min_intro_l x y z : x <= z -> min x y <= z.
+Lemma le_min_intro_l x y z : x <= z -> Nat.min x y <= z.
 
 Proof. lia. Qed.
 
-Lemma le_min_intro_r x y z : y <= z -> min x y <= z.
+Lemma le_min_intro_r x y z : y <= z -> Nat.min x y <= z.
 
 Proof. lia. Qed.
 
-Lemma min_ge_compat x y x' y' : x >= x' -> y >= y' -> min x y >= min x' y'.
+Lemma min_ge_compat x y x' y' : x >= x' -> y >= y' -> Nat.min x y >= Nat.min x' y'.
 
 Proof. lia. Qed.
 
@@ -341,22 +342,22 @@ Proof.
 intros.
 assert ((q1-q2)*b=r2-r1). nia.
 assert ((q2-q1)*b=r1-r2). (*nia works but is slow*)
-rewrite mult_minus_distr_r. clear H2; lia.
+rewrite Nat.mul_sub_distr_r. clear H2; lia.
 (*nia works but is slow*)
 destruct (le_gt_dec r1 r2).
 (* r1 <= r2 *)
 destruct (eq_nat_dec r1 r2).
 (* r1 = r2 *)
-subst. rewrite minus_diag in *. nia.
+subst. rewrite Nat.sub_diag in *. nia.
 (* r1 < r2 *)
 assert (r2 - r1 < b). clear -H H0; lia.
-rewrite <- H2 in H4. rewrite <- (mult_1_l b) in H4 at -1.
+rewrite <- H2 in H4. rewrite <- (Nat.mul_1_l b) in H4 at -1.
 ded (mult_lt_r_elim H4).
 assert (q1=q2). clear H H0 H1 H3 H4; lia.
 subst q2; clear H2 H3 H4 H5. lia.
 (* r1 > r2 *)
 assert (r1 - r2 < b). clear -H H0; lia.
-rewrite <- H3 in H4. rewrite <- (mult_1_l b) in H4 at -1.
+rewrite <- H3 in H4. rewrite <- (Nat.mul_1_l b) in H4 at -1.
 ded (mult_lt_r_elim H4).
 assert (q1=q2). clear H H0 H1 H2 H4; lia.
 subst q2; clear H2 H3 H4 H5. lia.
@@ -508,7 +509,7 @@ Section Interval_list.
   Proof.
     intros i. induction i. exists 0. simpl. destruct (HFi 0); rewrite H. lia.
     destruct IHi as [k Hk]. assert (HSi : S i <= snd (F' k)). lia.
-    destruct (le_lt_or_eq HSi). exists k. intuition.
+    rewrite Nat.lt_eq_cases in HSi. destruct HSi.  exists k. intuition.
     exists (S k). simpl. rewrite H. split. lia.
     destruct (HFi (S k)). rewrite H0. lia.
   Qed.

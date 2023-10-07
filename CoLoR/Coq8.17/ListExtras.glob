@@ -1,4 +1,4 @@
-DIGEST 1269c15c410a16a7c2c7074e8bc1e609
+DIGEST f88f1e7fc9b1dbf557c751fcac5f38fa
 FCoLoR.ListExtras
 R215:222 CoLoR.ListUtil <> <> lib
 R249:251 Coq.Arith.Min <> <> lib
@@ -6,2095 +6,2092 @@ R253:263 Coq.Sorting.Permutation <> <> lib
 R265:270 Coq.Setoids.Setoid <> <> lib
 R299:305 CoLoR.NatUtil <> <> lib
 R307:315 CoLoR.LogicUtil <> <> lib
-sec 435:444 <> InitialSeg
-var 459:459 InitialSeg A
-def 481:490 <> initialSeg
-R496:499 Coq.Init.Datatypes <> list ind
-R501:501 CoLoR.ListExtras <> InitialSeg.A var
-binder 493:493 <> l:2
-R511:513 Coq.Init.Datatypes <> nat ind
-binder 505:508 <> size:3
-R532:535 Coq.Init.Datatypes <> list ind
-R537:537 CoLoR.ListExtras <> InitialSeg.A var
-R556:556 CoLoR.ListExtras <> l:2 var
-R550:553 CoLoR.ListExtras <> size:3 var
-R567:567 Coq.Init.Datatypes <> O constr
-R575:577 Coq.Init.Datatypes <> nil constr
-R586:588 Coq.Init.Datatypes <> nil constr
-R593:595 Coq.Init.Datatypes <> nil constr
-R601:601 Coq.Init.Datatypes <> S constr
-R608:609 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R606:607 Coq.Lists.List <> hd def
-R610:611 Coq.Lists.List <> tl def
-R618:621 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R622:631 CoLoR.ListExtras <> initialSeg:4 def
-prf 654:668 <> initialSeg_full
-binder 679:679 <> l:7
-binder 681:681 <> n:8
-R697:700 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R685:688 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R684:684 CoLoR.ListExtras <> n:8 var
-R689:694 Coq.Init.Datatypes <> length def
-R696:696 CoLoR.ListExtras <> l:7 var
-R715:717 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R701:710 CoLoR.ListExtras <> initialSeg def
-R714:714 CoLoR.ListExtras <> n:8 var
-R712:712 CoLoR.ListExtras <> l:7 var
-R718:718 CoLoR.ListExtras <> l:7 var
-prf 901:917 <> initialSeg_length
-R932:935 Coq.Init.Datatypes <> list ind
-R937:937 CoLoR.ListExtras <> InitialSeg.A var
-binder 929:929 <> l:9
-binder 940:943 <> size:10
-R977:979 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R951:956 Coq.Init.Datatypes <> length def
-R959:968 CoLoR.ListExtras <> initialSeg def
-R972:975 CoLoR.ListExtras <> size:10 var
-R970:970 CoLoR.ListExtras <> l:9 var
-R980:982 Coq.Arith.Min <> min abbrev
-R984:987 CoLoR.ListExtras <> size:10 var
-R990:995 Coq.Init.Datatypes <> length def
-R997:997 CoLoR.ListExtras <> l:9 var
-prf 1149:1162 <> initialSeg_nth
-R1177:1180 Coq.Init.Datatypes <> list ind
-R1182:1182 CoLoR.ListExtras <> InitialSeg.A var
-binder 1174:1174 <> l:11
-binder 1185:1188 <> size:12
-binder 1190:1190 <> x:13
-R1201:1208 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1194:1196 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
-R1193:1193 CoLoR.ListExtras <> x:13 var
-R1197:1200 CoLoR.ListExtras <> size:12 var
-R1240:1242 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1209:1217 Coq.Lists.List <> nth_error def
-R1239:1239 CoLoR.ListExtras <> x:13 var
-R1220:1229 CoLoR.ListExtras <> initialSeg def
-R1233:1236 CoLoR.ListExtras <> size:12 var
-R1231:1231 CoLoR.ListExtras <> l:11 var
-R1243:1251 Coq.Lists.List <> nth_error def
-R1255:1255 CoLoR.ListExtras <> x:13 var
-R1253:1253 CoLoR.ListExtras <> l:11 var
-prf 1458:1474 <> initialSeg_prefix
-R1489:1492 Coq.Init.Datatypes <> list ind
-R1494:1494 CoLoR.ListExtras <> InitialSeg.A var
-binder 1486:1486 <> l:14
-binder 1497:1497 <> x:15
-binder 1499:1499 <> p:16
-binder 1501:1502 <> el:17
-R1547:1550 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1537:1539 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1509:1517 Coq.Lists.List <> nth_error def
-R1536:1536 CoLoR.ListExtras <> p:16 var
-R1520:1529 CoLoR.ListExtras <> initialSeg def
-R1533:1533 CoLoR.ListExtras <> x:15 var
-R1531:1531 CoLoR.ListExtras <> l:14 var
-R1540:1543 Coq.Init.Datatypes <> Some constr
-R1545:1546 CoLoR.ListExtras <> el:17 var
-R1564:1566 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1551:1559 Coq.Lists.List <> nth_error def
-R1563:1563 CoLoR.ListExtras <> p:16 var
-R1561:1561 CoLoR.ListExtras <> l:14 var
-R1567:1570 Coq.Init.Datatypes <> Some constr
-R1572:1573 CoLoR.ListExtras <> el:17 var
-prf 1787:1800 <> initialSeg_app
-binder 1811:1811 <> l:18
-binder 1813:1814 <> l':19
-binder 1816:1816 <> n:20
-R1836:1839 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R1824:1827 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
-R1823:1823 CoLoR.ListExtras <> n:20 var
-R1828:1833 Coq.Init.Datatypes <> length def
-R1835:1835 CoLoR.ListExtras <> l:18 var
-R1862:1864 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R1840:1849 CoLoR.ListExtras <> initialSeg def
-R1861:1861 CoLoR.ListExtras <> n:20 var
-R1853:1856 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R1852:1852 CoLoR.ListExtras <> l:18 var
-R1857:1858 CoLoR.ListExtras <> l':19 var
-R1865:1874 CoLoR.ListExtras <> initialSeg def
-R1878:1878 CoLoR.ListExtras <> n:20 var
-R1876:1876 CoLoR.ListExtras <> l:18 var
-R2067:2076 CoLoR.ListExtras InitialSeg <> sec
-sec 2178:2180 <> Seg
-var 2195:2195 Seg A
-def 2217:2219 <> seg
-R2225:2228 Coq.Init.Datatypes <> list ind
-R2230:2230 CoLoR.ListExtras <> Seg.A var
-binder 2222:2222 <> l:22
-R2246:2248 Coq.Init.Datatypes <> nat ind
-binder 2234:2237 <> from:23
-binder 2239:2242 <> size:24
-R2267:2270 Coq.Init.Datatypes <> list ind
-R2272:2272 CoLoR.ListExtras <> Seg.A var
-R2292:2292 CoLoR.ListExtras <> l:22 var
-R2286:2289 CoLoR.ListExtras <> from:23 var
-R2311:2320 CoLoR.ListExtras <> initialSeg def
-R2324:2327 CoLoR.ListExtras <> size:24 var
-R2322:2322 CoLoR.ListExtras <> l:22 var
-R2336:2338 Coq.Init.Datatypes <> nil constr
-R2343:2345 Coq.Init.Datatypes <> nil constr
-R2351:2351 Coq.Init.Datatypes <> S constr
-R2358:2359 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R2356:2357 Coq.Lists.List <> hd def
-R2360:2361 Coq.Lists.List <> tl def
-R2366:2368 CoLoR.ListExtras <> seg:25 def
-R2375:2378 CoLoR.ListExtras <> size:24 var
-prf 2396:2406 <> seg_tillEnd
-binder 2417:2417 <> l:28
-binder 2419:2419 <> m:29
-binder 2421:2421 <> n:30
-R2445:2448 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2429:2432 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R2428:2428 CoLoR.ListExtras <> n:30 var
-R2441:2443 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R2433:2438 Coq.Init.Datatypes <> length def
-R2440:2440 CoLoR.ListExtras <> l:28 var
-R2444:2444 CoLoR.ListExtras <> m:29 var
-R2458:2460 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2449:2451 CoLoR.ListExtras <> seg def
-R2457:2457 CoLoR.ListExtras <> n:30 var
-R2455:2455 CoLoR.ListExtras <> m:29 var
-R2453:2453 CoLoR.ListExtras <> l:28 var
-R2461:2463 CoLoR.ListExtras <> seg def
-R2478:2480 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R2470:2475 Coq.Init.Datatypes <> length def
-R2477:2477 CoLoR.ListExtras <> l:28 var
-R2481:2481 CoLoR.ListExtras <> m:29 var
-R2467:2467 CoLoR.ListExtras <> m:29 var
-R2465:2465 CoLoR.ListExtras <> l:28 var
-R2645:2659 CoLoR.ListExtras <> initialSeg_full thm
-R2645:2659 CoLoR.ListExtras <> initialSeg_full thm
-R2645:2659 CoLoR.ListExtras <> initialSeg_full thm
-R2645:2659 CoLoR.ListExtras <> initialSeg_full thm
-R2645:2659 CoLoR.ListExtras <> initialSeg_full thm
-R2645:2659 CoLoR.ListExtras <> initialSeg_full thm
-R2645:2659 CoLoR.ListExtras <> initialSeg_full thm
-R2733:2733 Coq.Init.Datatypes <> S constr
-R2733:2733 Coq.Init.Datatypes <> S constr
-R2733:2733 Coq.Init.Datatypes <> S constr
-R2733:2733 Coq.Init.Datatypes <> S constr
-prf 2765:2771 <> seg_nth
-R2786:2789 Coq.Init.Datatypes <> list ind
-R2791:2791 CoLoR.ListExtras <> Seg.A var
-binder 2783:2783 <> l:31
-binder 2794:2794 <> i:32
-binder 2796:2796 <> j:33
-binder 2798:2798 <> x:34
-R2810:2813 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R2806:2808 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
-R2805:2805 CoLoR.ListExtras <> x:34 var
-R2809:2809 CoLoR.ListExtras <> j:33 var
-R2837:2839 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R2814:2822 Coq.Lists.List <> nth_error def
-R2836:2836 CoLoR.ListExtras <> x:34 var
-R2825:2827 CoLoR.ListExtras <> seg def
-R2833:2833 CoLoR.ListExtras <> j:33 var
-R2831:2831 CoLoR.ListExtras <> i:32 var
-R2829:2829 CoLoR.ListExtras <> l:31 var
-R2840:2848 Coq.Lists.List <> nth_error def
-R2854:2856 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R2853:2853 CoLoR.ListExtras <> i:32 var
-R2857:2857 CoLoR.ListExtras <> x:34 var
-R2850:2850 CoLoR.ListExtras <> l:31 var
-R3069:3071 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R3069:3071 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R3093:3095 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
-R3093:3095 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
-prf 3201:3212 <> seg_exceeded
-binder 3214:3214 <> l:35
-binder 3216:3216 <> k:36
-binder 3218:3218 <> n:37
-R3235:3238 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R3223:3226 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R3222:3222 CoLoR.ListExtras <> n:37 var
-R3227:3232 Coq.Init.Datatypes <> length def
-R3234:3234 CoLoR.ListExtras <> l:35 var
-R3248:3250 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3239:3241 CoLoR.ListExtras <> seg def
-R3247:3247 CoLoR.ListExtras <> n:37 var
-R3245:3245 CoLoR.ListExtras <> k:36 var
-R3243:3243 CoLoR.ListExtras <> l:35 var
-R3251:3253 CoLoR.ListExtras <> seg def
-R3260:3265 Coq.Init.Datatypes <> length def
-R3267:3267 CoLoR.ListExtras <> l:35 var
-R3257:3257 CoLoR.ListExtras <> k:36 var
-R3255:3255 CoLoR.ListExtras <> l:35 var
-R3300:3310 CoLoR.ListExtras <> seg_tillEnd thm
-R3315:3325 CoLoR.ListExtras <> seg_tillEnd thm
-R3332:3337 Coq.Init.Datatypes <> length def
-R3300:3310 CoLoR.ListExtras <> seg_tillEnd thm
-R3300:3310 CoLoR.ListExtras <> seg_tillEnd thm
-R3300:3310 CoLoR.ListExtras <> seg_tillEnd thm
-R3315:3325 CoLoR.ListExtras <> seg_tillEnd thm
-R3332:3337 Coq.Init.Datatypes <> length def
-R3315:3325 CoLoR.ListExtras <> seg_tillEnd thm
-R3332:3337 Coq.Init.Datatypes <> length def
-R3315:3325 CoLoR.ListExtras <> seg_tillEnd thm
-R3332:3337 Coq.Init.Datatypes <> length def
-R3370:3372 CoLoR.ListExtras Seg <> sec
-sec 3490:3497 <> FinalSeg
-var 3512:3512 FinalSeg A
-def 3535:3542 <> finalSeg
-R3548:3551 Coq.Init.Datatypes <> list ind
-R3553:3553 CoLoR.ListExtras <> FinalSeg.A var
-binder 3545:3545 <> l:39
-binder 3556:3562 <> fromPos:40
-R3571:3573 CoLoR.ListExtras <> seg def
-R3594:3596 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R3586:3591 Coq.Init.Datatypes <> length def
-R3593:3593 CoLoR.ListExtras <> l:39 var
-R3597:3603 CoLoR.ListExtras <> fromPos:40 var
-R3577:3583 CoLoR.ListExtras <> fromPos:40 var
-R3575:3575 CoLoR.ListExtras <> l:39 var
-prf 3616:3628 <> finalSeg_full
-binder 3630:3630 <> l:41
-R3646:3648 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3634:3641 CoLoR.ListExtras <> finalSeg def
-R3643:3643 CoLoR.ListExtras <> l:41 var
-R3649:3649 CoLoR.ListExtras <> l:41 var
-R3669:3676 CoLoR.ListExtras <> finalSeg def
-R3694:3708 CoLoR.ListExtras <> initialSeg_full thm
-R3694:3708 CoLoR.ListExtras <> initialSeg_full thm
-R3694:3708 CoLoR.ListExtras <> initialSeg_full thm
-R3694:3708 CoLoR.ListExtras <> initialSeg_full thm
-prf 3739:3752 <> finalSeg1_tail
-binder 3763:3763 <> l:42
-R3778:3780 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3766:3773 CoLoR.ListExtras <> finalSeg def
-R3775:3775 CoLoR.ListExtras <> l:42 var
-R3781:3784 Coq.Lists.List <> tail abbrev
-R3786:3786 CoLoR.ListExtras <> l:42 var
-R3822:3829 CoLoR.ListExtras <> finalSeg def
-R3860:3874 CoLoR.ListExtras <> initialSeg_full thm
-R3860:3874 CoLoR.ListExtras <> initialSeg_full thm
-R3860:3874 CoLoR.ListExtras <> initialSeg_full thm
-R3860:3874 CoLoR.ListExtras <> initialSeg_full thm
-prf 3911:3924 <> finalSeg_empty
-binder 3935:3935 <> l:43
-binder 3937:3937 <> k:44
-R3953:3956 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R3941:3944 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R3940:3940 CoLoR.ListExtras <> k:44 var
-R3945:3950 Coq.Init.Datatypes <> length def
-R3952:3952 CoLoR.ListExtras <> l:43 var
-R3969:3971 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R3957:3964 CoLoR.ListExtras <> finalSeg def
-R3968:3968 CoLoR.ListExtras <> k:44 var
-R3966:3966 CoLoR.ListExtras <> l:43 var
-R3972:3974 Coq.Init.Datatypes <> nil constr
-R4103:4110 CoLoR.ListExtras <> finalSeg def
-R4130:4137 CoLoR.ListExtras <> finalSeg def
-R4130:4137 CoLoR.ListExtras <> finalSeg def
-prf 4204:4216 <> finalSeg_cons
-binder 4227:4227 <> a:45
-binder 4229:4229 <> l:46
-R4249:4251 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R4232:4239 CoLoR.ListExtras <> finalSeg def
-R4243:4244 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R4242:4242 CoLoR.ListExtras <> a:45 var
-R4245:4245 CoLoR.ListExtras <> l:46 var
-R4252:4252 CoLoR.ListExtras <> l:46 var
-R4288:4295 CoLoR.ListExtras <> finalSeg def
-R4317:4331 CoLoR.ListExtras <> initialSeg_full thm
-R4317:4331 CoLoR.ListExtras <> initialSeg_full thm
-R4317:4331 CoLoR.ListExtras <> initialSeg_full thm
-R4317:4331 CoLoR.ListExtras <> initialSeg_full thm
-prf 4368:4383 <> nth_finalSeg_nth
-binder 4393:4393 <> l:47
-binder 4395:4395 <> k:48
-binder 4397:4397 <> p:49
-R4430:4432 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R4404:4412 Coq.Lists.List <> nth_error def
-R4429:4429 CoLoR.ListExtras <> p:49 var
-R4415:4422 CoLoR.ListExtras <> finalSeg def
-R4426:4426 CoLoR.ListExtras <> k:48 var
-R4424:4424 CoLoR.ListExtras <> l:47 var
-R4433:4441 Coq.Lists.List <> nth_error def
-R4447:4449 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R4446:4446 CoLoR.ListExtras <> k:48 var
-R4450:4450 CoLoR.ListExtras <> p:49 var
-R4443:4443 CoLoR.ListExtras <> l:47 var
-R4533:4545 CoLoR.ListExtras <> finalSeg_full thm
-R4533:4545 CoLoR.ListExtras <> finalSeg_full thm
-R4533:4545 CoLoR.ListExtras <> finalSeg_full thm
-prf 4643:4658 <> finalSeg_nth_nth
-binder 4669:4669 <> l:50
-binder 4671:4671 <> k:51
-binder 4673:4673 <> p:52
-R4682:4689 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R4677:4680 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R4676:4676 CoLoR.ListExtras <> p:52 var
-R4681:4681 CoLoR.ListExtras <> k:51 var
-R4703:4705 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R4690:4698 Coq.Lists.List <> nth_error def
-R4702:4702 CoLoR.ListExtras <> p:52 var
-R4700:4700 CoLoR.ListExtras <> l:50 var
-R4706:4714 Coq.Lists.List <> nth_error def
-R4733:4735 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R4732:4732 CoLoR.ListExtras <> p:52 var
-R4736:4736 CoLoR.ListExtras <> k:51 var
-R4717:4724 CoLoR.ListExtras <> finalSeg def
-R4728:4728 CoLoR.ListExtras <> k:51 var
-R4726:4726 CoLoR.ListExtras <> l:50 var
-R4774:4789 CoLoR.ListExtras <> nth_finalSeg_nth thm
-R4774:4789 CoLoR.ListExtras <> nth_finalSeg_nth thm
-R4774:4789 CoLoR.ListExtras <> nth_finalSeg_nth thm
-R4806:4809 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R4815:4815 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R4811:4813 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R4806:4809 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R4815:4815 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R4811:4813 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-prf 4860:4874 <> finalSeg_length
-binder 4885:4885 <> l:53
-binder 4887:4887 <> k:54
-R4911:4913 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R4890:4895 Coq.Init.Datatypes <> length def
-R4898:4905 CoLoR.ListExtras <> finalSeg def
-R4909:4909 CoLoR.ListExtras <> k:54 var
-R4907:4907 CoLoR.ListExtras <> l:53 var
-R4922:4924 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R4914:4919 Coq.Init.Datatypes <> length def
-R4921:4921 CoLoR.ListExtras <> l:53 var
-R4925:4925 CoLoR.ListExtras <> k:54 var
-R5028:5042 CoLoR.ListExtras <> initialSeg_full thm
-R5028:5042 CoLoR.ListExtras <> initialSeg_full thm
-R5028:5042 CoLoR.ListExtras <> initialSeg_full thm
-R5028:5042 CoLoR.ListExtras <> initialSeg_full thm
-R5074:5081 CoLoR.ListExtras <> finalSeg def
-R5101:5108 CoLoR.ListExtras <> finalSeg def
-R5101:5108 CoLoR.ListExtras <> finalSeg def
-prf 5147:5164 <> finalSeg_app_right
-R5179:5182 Coq.Init.Datatypes <> list ind
-R5184:5184 CoLoR.ListExtras <> FinalSeg.A var
-binder 5176:5176 <> l:55
-binder 5187:5187 <> k:56
-binder 5189:5189 <> n:57
-R5204:5211 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R5193:5195 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
-R5192:5192 CoLoR.ListExtras <> n:57 var
-R5196:5201 Coq.Init.Datatypes <> length def
-R5203:5203 CoLoR.ListExtras <> l:55 var
-R5231:5233 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R5212:5219 CoLoR.ListExtras <> finalSeg def
-R5230:5230 CoLoR.ListExtras <> n:57 var
-R5223:5226 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R5222:5222 CoLoR.ListExtras <> l:55 var
-R5227:5227 CoLoR.ListExtras <> k:56 var
-R5234:5241 CoLoR.ListExtras <> finalSeg def
-R5247:5249 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R5246:5246 CoLoR.ListExtras <> n:57 var
-R5250:5255 Coq.Init.Datatypes <> length def
-R5257:5257 CoLoR.ListExtras <> l:55 var
-R5243:5243 CoLoR.ListExtras <> k:56 var
-R5321:5323 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R5321:5323 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R5388:5395 CoLoR.ListExtras <> finalSeg def
-R5415:5422 CoLoR.ListExtras <> finalSeg def
-R5426:5429 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R5415:5422 CoLoR.ListExtras <> finalSeg def
-R5426:5429 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R5471:5478 CoLoR.ListExtras <> finalSeg def
-prf 5527:5542 <> finalSeg_nth_idx
-binder 5553:5553 <> l:58
-binder 5555:5555 <> i:59
-binder 5557:5557 <> j:60
-binder 5559:5559 <> a:61
-R5601:5604 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R5592:5594 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R5566:5574 Coq.Lists.List <> nth_error def
-R5591:5591 CoLoR.ListExtras <> j:60 var
-R5577:5584 CoLoR.ListExtras <> finalSeg def
-R5588:5588 CoLoR.ListExtras <> i:59 var
-R5586:5586 CoLoR.ListExtras <> l:58 var
-R5595:5598 Coq.Init.Datatypes <> Some constr
-R5600:5600 CoLoR.ListExtras <> a:61 var
-R5613:5615 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
-R5605:5610 Coq.Init.Datatypes <> length def
-R5612:5612 CoLoR.ListExtras <> l:58 var
-R5617:5619 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5616:5616 CoLoR.ListExtras <> i:59 var
-R5620:5620 CoLoR.ListExtras <> j:60 var
-R5657:5664 CoLoR.ListExtras <> finalSeg def
-R5788:5802 CoLoR.ListExtras <> initialSeg_full thm
-R5788:5802 CoLoR.ListExtras <> initialSeg_full thm
-R5788:5802 CoLoR.ListExtras <> initialSeg_full thm
-R5788:5802 CoLoR.ListExtras <> initialSeg_full thm
-R5841:5848 CoLoR.ListUtil <> nth_some thm
-R5841:5848 CoLoR.ListUtil <> nth_some thm
-R5900:5902 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
-R5892:5897 Coq.Init.Datatypes <> length def
-R5904:5906 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R5900:5902 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
-R5892:5897 Coq.Init.Datatypes <> length def
-R5904:5906 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-prf 5968:5989 <> initialFinalSeg_length
-binder 6000:6000 <> l:62
-binder 6002:6002 <> k:63
-R6056:6058 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R6032:6034 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R6009:6014 Coq.Init.Datatypes <> length def
-R6017:6026 CoLoR.ListExtras <> initialSeg def
-R6030:6030 CoLoR.ListExtras <> k:63 var
-R6028:6028 CoLoR.ListExtras <> l:62 var
-R6035:6040 Coq.Init.Datatypes <> length def
-R6043:6050 CoLoR.ListExtras <> finalSeg def
-R6054:6054 CoLoR.ListExtras <> k:63 var
-R6052:6052 CoLoR.ListExtras <> l:62 var
-R6059:6064 Coq.Init.Datatypes <> length def
-R6066:6066 CoLoR.ListExtras <> l:62 var
-R6103:6119 CoLoR.ListExtras <> initialSeg_length thm
-R6122:6136 CoLoR.ListExtras <> finalSeg_length thm
-R6103:6119 CoLoR.ListExtras <> initialSeg_length thm
-R6103:6119 CoLoR.ListExtras <> initialSeg_length thm
-R6122:6136 CoLoR.ListExtras <> finalSeg_length thm
-R6122:6136 CoLoR.ListExtras <> finalSeg_length thm
-R6153:6173 Coq.Arith.Compare_dec <> le_gt_dec def
-R6178:6183 Coq.Init.Datatypes <> length def
-R6212:6216 Coq.Arith.Min <> min_l abbrev
-R6233:6237 Coq.Arith.Min <> min_r abbrev
-R6153:6173 Coq.Arith.Compare_dec <> le_gt_dec def
-R6178:6183 Coq.Init.Datatypes <> length def
-R6212:6216 Coq.Arith.Min <> min_l abbrev
-R6212:6216 Coq.Arith.Min <> min_l abbrev
-R6212:6216 Coq.Arith.Min <> min_l abbrev
-R6212:6216 Coq.Arith.Min <> min_l abbrev
-R6212:6216 Coq.Arith.Min <> min_l abbrev
-R6212:6216 Coq.Arith.Min <> min_l abbrev
-R6233:6237 Coq.Arith.Min <> min_r abbrev
-R6233:6237 Coq.Arith.Min <> min_r abbrev
-R6233:6237 Coq.Arith.Min <> min_r abbrev
-prf 6262:6285 <> initialSeg_finalSeg_full
-binder 6296:6296 <> l:64
-binder 6298:6298 <> k:65
-R6335:6337 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R6319:6322 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R6305:6314 CoLoR.ListExtras <> initialSeg def
-R6318:6318 CoLoR.ListExtras <> k:65 var
-R6316:6316 CoLoR.ListExtras <> l:64 var
-R6323:6330 CoLoR.ListExtras <> finalSeg def
-R6334:6334 CoLoR.ListExtras <> k:65 var
-R6332:6332 CoLoR.ListExtras <> l:64 var
-R6338:6338 CoLoR.ListExtras <> l:64 var
-R6407:6419 CoLoR.ListExtras <> finalSeg_full thm
-R6407:6419 CoLoR.ListExtras <> finalSeg_full thm
-R6458:6465 CoLoR.ListExtras <> finalSeg def
-R6485:6492 CoLoR.ListExtras <> finalSeg def
-R6485:6492 CoLoR.ListExtras <> finalSeg def
-R6538:6545 CoLoR.ListExtras FinalSeg <> sec
-sec 6667:6670 <> Copy
-var 6685:6685 Copy A
-def 6707:6710 <> copy
-R6717:6719 Coq.Init.Datatypes <> nat ind
-binder 6713:6713 <> n:67
-R6728:6728 CoLoR.ListExtras <> Copy.A var
-binder 6723:6724 <> el:68
-R6733:6736 Coq.Init.Datatypes <> list ind
-R6738:6738 CoLoR.ListExtras <> Copy.A var
-R6752:6752 CoLoR.ListExtras <> n:67 var
-R6768:6770 Coq.Init.Datatypes <> nil constr
-R6776:6776 Coq.Init.Datatypes <> S constr
-R6785:6788 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R6783:6784 CoLoR.ListExtras <> el:68 var
-R6789:6792 CoLoR.ListExtras <> copy:69 def
-R6796:6797 CoLoR.ListExtras <> el:68 var
+sec 481:490 <> InitialSeg
+var 505:505 InitialSeg A
+def 527:536 <> initialSeg
+R542:545 Coq.Init.Datatypes <> list ind
+R547:547 CoLoR.ListExtras <> InitialSeg.A var
+binder 539:539 <> l:2
+R557:559 Coq.Init.Datatypes <> nat ind
+binder 551:554 <> size:3
+R578:581 Coq.Init.Datatypes <> list ind
+R583:583 CoLoR.ListExtras <> InitialSeg.A var
+R602:602 CoLoR.ListExtras <> l:2 var
+R596:599 CoLoR.ListExtras <> size:3 var
+R613:613 Coq.Init.Datatypes <> O constr
+R621:623 Coq.Init.Datatypes <> nil constr
+R632:634 Coq.Init.Datatypes <> nil constr
+R639:641 Coq.Init.Datatypes <> nil constr
+R647:647 Coq.Init.Datatypes <> S constr
+R654:655 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R652:653 Coq.Lists.List <> hd def
+R656:657 Coq.Lists.List <> tl def
+R664:667 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R668:677 CoLoR.ListExtras <> initialSeg:4 def
+prf 700:714 <> initialSeg_full
+binder 725:725 <> l:7
+binder 727:727 <> n:8
+R743:746 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R731:734 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R730:730 CoLoR.ListExtras <> n:8 var
+R735:740 Coq.Init.Datatypes <> length def
+R742:742 CoLoR.ListExtras <> l:7 var
+R761:763 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R747:756 CoLoR.ListExtras <> initialSeg def
+R760:760 CoLoR.ListExtras <> n:8 var
+R758:758 CoLoR.ListExtras <> l:7 var
+R764:764 CoLoR.ListExtras <> l:7 var
+prf 947:963 <> initialSeg_length
+R978:981 Coq.Init.Datatypes <> list ind
+R983:983 CoLoR.ListExtras <> InitialSeg.A var
+binder 975:975 <> l:9
+binder 986:989 <> size:10
+R1023:1025 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R997:1002 Coq.Init.Datatypes <> length def
+R1005:1014 CoLoR.ListExtras <> initialSeg def
+R1018:1021 CoLoR.ListExtras <> size:10 var
+R1016:1016 CoLoR.ListExtras <> l:9 var
+R1026:1032 Coq.Arith.PeanoNat Nat min def
+R1034:1037 CoLoR.ListExtras <> size:10 var
+R1040:1045 Coq.Init.Datatypes <> length def
+R1047:1047 CoLoR.ListExtras <> l:9 var
+prf 1199:1212 <> initialSeg_nth
+R1227:1230 Coq.Init.Datatypes <> list ind
+R1232:1232 CoLoR.ListExtras <> InitialSeg.A var
+binder 1224:1224 <> l:11
+binder 1235:1238 <> size:12
+binder 1240:1240 <> x:13
+R1251:1258 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1244:1246 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R1243:1243 CoLoR.ListExtras <> x:13 var
+R1247:1250 CoLoR.ListExtras <> size:12 var
+R1290:1292 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1259:1267 Coq.Lists.List <> nth_error def
+R1289:1289 CoLoR.ListExtras <> x:13 var
+R1270:1279 CoLoR.ListExtras <> initialSeg def
+R1283:1286 CoLoR.ListExtras <> size:12 var
+R1281:1281 CoLoR.ListExtras <> l:11 var
+R1293:1301 Coq.Lists.List <> nth_error def
+R1305:1305 CoLoR.ListExtras <> x:13 var
+R1303:1303 CoLoR.ListExtras <> l:11 var
+prf 1508:1524 <> initialSeg_prefix
+R1539:1542 Coq.Init.Datatypes <> list ind
+R1544:1544 CoLoR.ListExtras <> InitialSeg.A var
+binder 1536:1536 <> l:14
+binder 1547:1547 <> x:15
+binder 1549:1549 <> p:16
+binder 1551:1552 <> el:17
+R1597:1600 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1587:1589 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1559:1567 Coq.Lists.List <> nth_error def
+R1586:1586 CoLoR.ListExtras <> p:16 var
+R1570:1579 CoLoR.ListExtras <> initialSeg def
+R1583:1583 CoLoR.ListExtras <> x:15 var
+R1581:1581 CoLoR.ListExtras <> l:14 var
+R1590:1593 Coq.Init.Datatypes <> Some constr
+R1595:1596 CoLoR.ListExtras <> el:17 var
+R1614:1616 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1601:1609 Coq.Lists.List <> nth_error def
+R1613:1613 CoLoR.ListExtras <> p:16 var
+R1611:1611 CoLoR.ListExtras <> l:14 var
+R1617:1620 Coq.Init.Datatypes <> Some constr
+R1622:1623 CoLoR.ListExtras <> el:17 var
+prf 1837:1850 <> initialSeg_app
+binder 1861:1861 <> l:18
+binder 1863:1864 <> l':19
+binder 1866:1866 <> n:20
+R1886:1889 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1874:1877 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R1873:1873 CoLoR.ListExtras <> n:20 var
+R1878:1883 Coq.Init.Datatypes <> length def
+R1885:1885 CoLoR.ListExtras <> l:18 var
+R1912:1914 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1890:1899 CoLoR.ListExtras <> initialSeg def
+R1911:1911 CoLoR.ListExtras <> n:20 var
+R1903:1906 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R1902:1902 CoLoR.ListExtras <> l:18 var
+R1907:1908 CoLoR.ListExtras <> l':19 var
+R1915:1924 CoLoR.ListExtras <> initialSeg def
+R1928:1928 CoLoR.ListExtras <> n:20 var
+R1926:1926 CoLoR.ListExtras <> l:18 var
+R2117:2126 CoLoR.ListExtras InitialSeg <> sec
+sec 2228:2230 <> Seg
+var 2245:2245 Seg A
+def 2267:2269 <> seg
+R2275:2278 Coq.Init.Datatypes <> list ind
+R2280:2280 CoLoR.ListExtras <> Seg.A var
+binder 2272:2272 <> l:22
+R2296:2298 Coq.Init.Datatypes <> nat ind
+binder 2284:2287 <> from:23
+binder 2289:2292 <> size:24
+R2317:2320 Coq.Init.Datatypes <> list ind
+R2322:2322 CoLoR.ListExtras <> Seg.A var
+R2342:2342 CoLoR.ListExtras <> l:22 var
+R2336:2339 CoLoR.ListExtras <> from:23 var
+R2361:2370 CoLoR.ListExtras <> initialSeg def
+R2374:2377 CoLoR.ListExtras <> size:24 var
+R2372:2372 CoLoR.ListExtras <> l:22 var
+R2386:2388 Coq.Init.Datatypes <> nil constr
+R2393:2395 Coq.Init.Datatypes <> nil constr
+R2401:2401 Coq.Init.Datatypes <> S constr
+R2408:2409 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2406:2407 Coq.Lists.List <> hd def
+R2410:2411 Coq.Lists.List <> tl def
+R2416:2418 CoLoR.ListExtras <> seg:25 def
+R2425:2428 CoLoR.ListExtras <> size:24 var
+prf 2446:2456 <> seg_tillEnd
+binder 2467:2467 <> l:28
+binder 2469:2469 <> m:29
+binder 2471:2471 <> n:30
+R2495:2498 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2479:2482 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R2478:2478 CoLoR.ListExtras <> n:30 var
+R2491:2493 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R2483:2488 Coq.Init.Datatypes <> length def
+R2490:2490 CoLoR.ListExtras <> l:28 var
+R2494:2494 CoLoR.ListExtras <> m:29 var
+R2508:2510 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2499:2501 CoLoR.ListExtras <> seg def
+R2507:2507 CoLoR.ListExtras <> n:30 var
+R2505:2505 CoLoR.ListExtras <> m:29 var
+R2503:2503 CoLoR.ListExtras <> l:28 var
+R2511:2513 CoLoR.ListExtras <> seg def
+R2528:2530 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R2520:2525 Coq.Init.Datatypes <> length def
+R2527:2527 CoLoR.ListExtras <> l:28 var
+R2531:2531 CoLoR.ListExtras <> m:29 var
+R2517:2517 CoLoR.ListExtras <> m:29 var
+R2515:2515 CoLoR.ListExtras <> l:28 var
+R2695:2709 CoLoR.ListExtras <> initialSeg_full thm
+R2695:2709 CoLoR.ListExtras <> initialSeg_full thm
+R2695:2709 CoLoR.ListExtras <> initialSeg_full thm
+R2695:2709 CoLoR.ListExtras <> initialSeg_full thm
+R2695:2709 CoLoR.ListExtras <> initialSeg_full thm
+R2695:2709 CoLoR.ListExtras <> initialSeg_full thm
+R2695:2709 CoLoR.ListExtras <> initialSeg_full thm
+R2783:2783 Coq.Init.Datatypes <> S constr
+R2783:2783 Coq.Init.Datatypes <> S constr
+R2783:2783 Coq.Init.Datatypes <> S constr
+R2783:2783 Coq.Init.Datatypes <> S constr
+prf 2815:2821 <> seg_nth
+R2836:2839 Coq.Init.Datatypes <> list ind
+R2841:2841 CoLoR.ListExtras <> Seg.A var
+binder 2833:2833 <> l:31
+binder 2844:2844 <> i:32
+binder 2846:2846 <> j:33
+binder 2848:2848 <> x:34
+R2860:2863 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2856:2858 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R2855:2855 CoLoR.ListExtras <> x:34 var
+R2859:2859 CoLoR.ListExtras <> j:33 var
+R2887:2889 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2864:2872 Coq.Lists.List <> nth_error def
+R2886:2886 CoLoR.ListExtras <> x:34 var
+R2875:2877 CoLoR.ListExtras <> seg def
+R2883:2883 CoLoR.ListExtras <> j:33 var
+R2881:2881 CoLoR.ListExtras <> i:32 var
+R2879:2879 CoLoR.ListExtras <> l:31 var
+R2890:2898 Coq.Lists.List <> nth_error def
+R2904:2906 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R2903:2903 CoLoR.ListExtras <> i:32 var
+R2907:2907 CoLoR.ListExtras <> x:34 var
+R2900:2900 CoLoR.ListExtras <> l:31 var
+R3107:3109 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3107:3109 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R3136:3138 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R3136:3138 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+prf 3244:3255 <> seg_exceeded
+binder 3257:3257 <> l:35
+binder 3259:3259 <> k:36
+binder 3261:3261 <> n:37
+R3278:3281 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3266:3269 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R3265:3265 CoLoR.ListExtras <> n:37 var
+R3270:3275 Coq.Init.Datatypes <> length def
+R3277:3277 CoLoR.ListExtras <> l:35 var
+R3291:3293 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3282:3284 CoLoR.ListExtras <> seg def
+R3290:3290 CoLoR.ListExtras <> n:37 var
+R3288:3288 CoLoR.ListExtras <> k:36 var
+R3286:3286 CoLoR.ListExtras <> l:35 var
+R3294:3296 CoLoR.ListExtras <> seg def
+R3303:3308 Coq.Init.Datatypes <> length def
+R3310:3310 CoLoR.ListExtras <> l:35 var
+R3300:3300 CoLoR.ListExtras <> k:36 var
+R3298:3298 CoLoR.ListExtras <> l:35 var
+R3343:3353 CoLoR.ListExtras <> seg_tillEnd thm
+R3358:3368 CoLoR.ListExtras <> seg_tillEnd thm
+R3375:3380 Coq.Init.Datatypes <> length def
+R3343:3353 CoLoR.ListExtras <> seg_tillEnd thm
+R3343:3353 CoLoR.ListExtras <> seg_tillEnd thm
+R3343:3353 CoLoR.ListExtras <> seg_tillEnd thm
+R3358:3368 CoLoR.ListExtras <> seg_tillEnd thm
+R3375:3380 Coq.Init.Datatypes <> length def
+R3358:3368 CoLoR.ListExtras <> seg_tillEnd thm
+R3375:3380 Coq.Init.Datatypes <> length def
+R3358:3368 CoLoR.ListExtras <> seg_tillEnd thm
+R3375:3380 Coq.Init.Datatypes <> length def
+R3413:3415 CoLoR.ListExtras Seg <> sec
+sec 3533:3540 <> FinalSeg
+var 3555:3555 FinalSeg A
+def 3578:3585 <> finalSeg
+R3591:3594 Coq.Init.Datatypes <> list ind
+R3596:3596 CoLoR.ListExtras <> FinalSeg.A var
+binder 3588:3588 <> l:39
+binder 3599:3605 <> fromPos:40
+R3614:3616 CoLoR.ListExtras <> seg def
+R3637:3639 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R3629:3634 Coq.Init.Datatypes <> length def
+R3636:3636 CoLoR.ListExtras <> l:39 var
+R3640:3646 CoLoR.ListExtras <> fromPos:40 var
+R3620:3626 CoLoR.ListExtras <> fromPos:40 var
+R3618:3618 CoLoR.ListExtras <> l:39 var
+prf 3659:3671 <> finalSeg_full
+binder 3673:3673 <> l:41
+R3689:3691 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3677:3684 CoLoR.ListExtras <> finalSeg def
+R3686:3686 CoLoR.ListExtras <> l:41 var
+R3692:3692 CoLoR.ListExtras <> l:41 var
+R3712:3719 CoLoR.ListExtras <> finalSeg def
+R3737:3751 CoLoR.ListExtras <> initialSeg_full thm
+R3737:3751 CoLoR.ListExtras <> initialSeg_full thm
+R3737:3751 CoLoR.ListExtras <> initialSeg_full thm
+R3737:3751 CoLoR.ListExtras <> initialSeg_full thm
+prf 3782:3795 <> finalSeg1_tail
+binder 3806:3806 <> l:42
+R3821:3823 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3809:3816 CoLoR.ListExtras <> finalSeg def
+R3818:3818 CoLoR.ListExtras <> l:42 var
+R3824:3827 Coq.Lists.List <> tail abbrev
+R3829:3829 CoLoR.ListExtras <> l:42 var
+R3865:3872 CoLoR.ListExtras <> finalSeg def
+R3903:3917 CoLoR.ListExtras <> initialSeg_full thm
+R3903:3917 CoLoR.ListExtras <> initialSeg_full thm
+R3903:3917 CoLoR.ListExtras <> initialSeg_full thm
+R3903:3917 CoLoR.ListExtras <> initialSeg_full thm
+prf 3954:3967 <> finalSeg_empty
+binder 3978:3978 <> l:43
+binder 3980:3980 <> k:44
+R3996:3999 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3984:3987 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R3983:3983 CoLoR.ListExtras <> k:44 var
+R3988:3993 Coq.Init.Datatypes <> length def
+R3995:3995 CoLoR.ListExtras <> l:43 var
+R4012:4014 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4000:4007 CoLoR.ListExtras <> finalSeg def
+R4011:4011 CoLoR.ListExtras <> k:44 var
+R4009:4009 CoLoR.ListExtras <> l:43 var
+R4015:4017 Coq.Init.Datatypes <> nil constr
+R4146:4153 CoLoR.ListExtras <> finalSeg def
+R4173:4180 CoLoR.ListExtras <> finalSeg def
+R4173:4180 CoLoR.ListExtras <> finalSeg def
+prf 4247:4259 <> finalSeg_cons
+binder 4270:4270 <> a:45
+binder 4272:4272 <> l:46
+R4292:4294 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4275:4282 CoLoR.ListExtras <> finalSeg def
+R4286:4287 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4285:4285 CoLoR.ListExtras <> a:45 var
+R4288:4288 CoLoR.ListExtras <> l:46 var
+R4295:4295 CoLoR.ListExtras <> l:46 var
+R4331:4338 CoLoR.ListExtras <> finalSeg def
+R4360:4374 CoLoR.ListExtras <> initialSeg_full thm
+R4360:4374 CoLoR.ListExtras <> initialSeg_full thm
+R4360:4374 CoLoR.ListExtras <> initialSeg_full thm
+R4360:4374 CoLoR.ListExtras <> initialSeg_full thm
+prf 4411:4426 <> nth_finalSeg_nth
+binder 4436:4436 <> l:47
+binder 4438:4438 <> k:48
+binder 4440:4440 <> p:49
+R4473:4475 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4447:4455 Coq.Lists.List <> nth_error def
+R4472:4472 CoLoR.ListExtras <> p:49 var
+R4458:4465 CoLoR.ListExtras <> finalSeg def
+R4469:4469 CoLoR.ListExtras <> k:48 var
+R4467:4467 CoLoR.ListExtras <> l:47 var
+R4476:4484 Coq.Lists.List <> nth_error def
+R4490:4492 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4489:4489 CoLoR.ListExtras <> k:48 var
+R4493:4493 CoLoR.ListExtras <> p:49 var
+R4486:4486 CoLoR.ListExtras <> l:47 var
+R4576:4588 CoLoR.ListExtras <> finalSeg_full thm
+R4576:4588 CoLoR.ListExtras <> finalSeg_full thm
+R4576:4588 CoLoR.ListExtras <> finalSeg_full thm
+prf 4686:4701 <> finalSeg_nth_nth
+binder 4712:4712 <> l:50
+binder 4714:4714 <> k:51
+binder 4716:4716 <> p:52
+R4725:4732 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4720:4723 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R4719:4719 CoLoR.ListExtras <> p:52 var
+R4724:4724 CoLoR.ListExtras <> k:51 var
+R4746:4748 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4733:4741 Coq.Lists.List <> nth_error def
+R4745:4745 CoLoR.ListExtras <> p:52 var
+R4743:4743 CoLoR.ListExtras <> l:50 var
+R4749:4757 Coq.Lists.List <> nth_error def
+R4776:4778 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R4775:4775 CoLoR.ListExtras <> p:52 var
+R4779:4779 CoLoR.ListExtras <> k:51 var
+R4760:4767 CoLoR.ListExtras <> finalSeg def
+R4771:4771 CoLoR.ListExtras <> k:51 var
+R4769:4769 CoLoR.ListExtras <> l:50 var
+R4817:4832 CoLoR.ListExtras <> nth_finalSeg_nth thm
+R4817:4832 CoLoR.ListExtras <> nth_finalSeg_nth thm
+R4817:4832 CoLoR.ListExtras <> nth_finalSeg_nth thm
+R4849:4852 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4858:4858 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4854:4856 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R4849:4852 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4858:4858 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R4854:4856 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+prf 4903:4917 <> finalSeg_length
+binder 4928:4928 <> l:53
+binder 4930:4930 <> k:54
+R4954:4956 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R4933:4938 Coq.Init.Datatypes <> length def
+R4941:4948 CoLoR.ListExtras <> finalSeg def
+R4952:4952 CoLoR.ListExtras <> k:54 var
+R4950:4950 CoLoR.ListExtras <> l:53 var
+R4965:4967 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R4957:4962 Coq.Init.Datatypes <> length def
+R4964:4964 CoLoR.ListExtras <> l:53 var
+R4968:4968 CoLoR.ListExtras <> k:54 var
+R5071:5085 CoLoR.ListExtras <> initialSeg_full thm
+R5071:5085 CoLoR.ListExtras <> initialSeg_full thm
+R5071:5085 CoLoR.ListExtras <> initialSeg_full thm
+R5071:5085 CoLoR.ListExtras <> initialSeg_full thm
+R5117:5124 CoLoR.ListExtras <> finalSeg def
+R5144:5151 CoLoR.ListExtras <> finalSeg def
+R5144:5151 CoLoR.ListExtras <> finalSeg def
+prf 5190:5207 <> finalSeg_app_right
+R5222:5225 Coq.Init.Datatypes <> list ind
+R5227:5227 CoLoR.ListExtras <> FinalSeg.A var
+binder 5219:5219 <> l:55
+binder 5230:5230 <> k:56
+binder 5232:5232 <> n:57
+R5247:5254 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5236:5238 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R5235:5235 CoLoR.ListExtras <> n:57 var
+R5239:5244 Coq.Init.Datatypes <> length def
+R5246:5246 CoLoR.ListExtras <> l:55 var
+R5274:5276 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5255:5262 CoLoR.ListExtras <> finalSeg def
+R5273:5273 CoLoR.ListExtras <> n:57 var
+R5266:5269 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R5265:5265 CoLoR.ListExtras <> l:55 var
+R5270:5270 CoLoR.ListExtras <> k:56 var
+R5277:5284 CoLoR.ListExtras <> finalSeg def
+R5290:5292 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R5289:5289 CoLoR.ListExtras <> n:57 var
+R5293:5298 Coq.Init.Datatypes <> length def
+R5300:5300 CoLoR.ListExtras <> l:55 var
+R5286:5286 CoLoR.ListExtras <> k:56 var
+R5364:5366 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R5364:5366 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R5431:5438 CoLoR.ListExtras <> finalSeg def
+R5458:5465 CoLoR.ListExtras <> finalSeg def
+R5469:5472 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R5458:5465 CoLoR.ListExtras <> finalSeg def
+R5469:5472 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R5514:5521 CoLoR.ListExtras <> finalSeg def
+prf 5570:5585 <> finalSeg_nth_idx
+binder 5596:5596 <> l:58
+binder 5598:5598 <> i:59
+binder 5600:5600 <> j:60
+binder 5602:5602 <> a:61
+R5644:5647 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5635:5637 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5609:5617 Coq.Lists.List <> nth_error def
+R5634:5634 CoLoR.ListExtras <> j:60 var
+R5620:5627 CoLoR.ListExtras <> finalSeg def
+R5631:5631 CoLoR.ListExtras <> i:59 var
+R5629:5629 CoLoR.ListExtras <> l:58 var
+R5638:5641 Coq.Init.Datatypes <> Some constr
+R5643:5643 CoLoR.ListExtras <> a:61 var
+R5656:5658 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R5648:5653 Coq.Init.Datatypes <> length def
+R5655:5655 CoLoR.ListExtras <> l:58 var
+R5660:5662 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5659:5659 CoLoR.ListExtras <> i:59 var
+R5663:5663 CoLoR.ListExtras <> j:60 var
+R5700:5707 CoLoR.ListExtras <> finalSeg def
+R5831:5845 CoLoR.ListExtras <> initialSeg_full thm
+R5831:5845 CoLoR.ListExtras <> initialSeg_full thm
+R5831:5845 CoLoR.ListExtras <> initialSeg_full thm
+R5831:5845 CoLoR.ListExtras <> initialSeg_full thm
+R5884:5891 CoLoR.ListUtil <> nth_some thm
+R5884:5891 CoLoR.ListUtil <> nth_some thm
+R5943:5945 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R5935:5940 Coq.Init.Datatypes <> length def
+R5947:5949 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R5943:5945 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R5935:5940 Coq.Init.Datatypes <> length def
+R5947:5949 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+prf 6011:6032 <> initialFinalSeg_length
+binder 6043:6043 <> l:62
+binder 6045:6045 <> k:63
+R6099:6101 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6075:6077 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6052:6057 Coq.Init.Datatypes <> length def
+R6060:6069 CoLoR.ListExtras <> initialSeg def
+R6073:6073 CoLoR.ListExtras <> k:63 var
+R6071:6071 CoLoR.ListExtras <> l:62 var
+R6078:6083 Coq.Init.Datatypes <> length def
+R6086:6093 CoLoR.ListExtras <> finalSeg def
+R6097:6097 CoLoR.ListExtras <> k:63 var
+R6095:6095 CoLoR.ListExtras <> l:62 var
+R6102:6107 Coq.Init.Datatypes <> length def
+R6109:6109 CoLoR.ListExtras <> l:62 var
+R6146:6162 CoLoR.ListExtras <> initialSeg_length thm
+R6165:6179 CoLoR.ListExtras <> finalSeg_length thm
+R6146:6162 CoLoR.ListExtras <> initialSeg_length thm
+R6146:6162 CoLoR.ListExtras <> initialSeg_length thm
+R6165:6179 CoLoR.ListExtras <> finalSeg_length thm
+R6165:6179 CoLoR.ListExtras <> finalSeg_length thm
+R6196:6216 Coq.Arith.Compare_dec <> le_gt_dec def
+R6221:6226 Coq.Init.Datatypes <> length def
+R6196:6216 Coq.Arith.Compare_dec <> le_gt_dec def
+R6221:6226 Coq.Init.Datatypes <> length def
+R6242:6250 Coq.Arith.PeanoNat Nat min_l thm
+R6242:6250 Coq.Arith.PeanoNat Nat min_l thm
+R6242:6250 Coq.Arith.PeanoNat Nat min_l thm
+R6242:6250 Coq.Arith.PeanoNat Nat min_l thm
+R6272:6280 Coq.Arith.PeanoNat Nat min_r thm
+R6272:6280 Coq.Arith.PeanoNat Nat min_r thm
+R6272:6280 Coq.Arith.PeanoNat Nat min_r thm
+R6272:6280 Coq.Arith.PeanoNat Nat min_r thm
+prf 6304:6327 <> initialSeg_finalSeg_full
+binder 6338:6338 <> l:64
+binder 6340:6340 <> k:65
+R6377:6379 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6361:6364 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6347:6356 CoLoR.ListExtras <> initialSeg def
+R6360:6360 CoLoR.ListExtras <> k:65 var
+R6358:6358 CoLoR.ListExtras <> l:64 var
+R6365:6372 CoLoR.ListExtras <> finalSeg def
+R6376:6376 CoLoR.ListExtras <> k:65 var
+R6374:6374 CoLoR.ListExtras <> l:64 var
+R6380:6380 CoLoR.ListExtras <> l:64 var
+R6449:6461 CoLoR.ListExtras <> finalSeg_full thm
+R6449:6461 CoLoR.ListExtras <> finalSeg_full thm
+R6500:6507 CoLoR.ListExtras <> finalSeg def
+R6527:6534 CoLoR.ListExtras <> finalSeg def
+R6527:6534 CoLoR.ListExtras <> finalSeg def
+R6580:6587 CoLoR.ListExtras FinalSeg <> sec
+sec 6709:6712 <> Copy
+var 6727:6727 Copy A
+def 6749:6752 <> copy
+R6759:6761 Coq.Init.Datatypes <> nat ind
+binder 6755:6755 <> n:67
+R6770:6770 CoLoR.ListExtras <> Copy.A var
+binder 6765:6766 <> el:68
+R6775:6778 Coq.Init.Datatypes <> list ind
+R6780:6780 CoLoR.ListExtras <> Copy.A var
 R6794:6794 CoLoR.ListExtras <> n:67 var
-prf 6815:6824 <> copy_split
-binder 6835:6835 <> a:71
-binder 6837:6837 <> m:72
-binder 6839:6839 <> n:73
-R6856:6858 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R6842:6845 CoLoR.ListExtras <> copy def
-R6855:6855 CoLoR.ListExtras <> a:71 var
-R6849:6851 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
-R6848:6848 CoLoR.ListExtras <> m:72 var
-R6852:6852 CoLoR.ListExtras <> n:73 var
-R6867:6870 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R6859:6862 CoLoR.ListExtras <> copy def
-R6866:6866 CoLoR.ListExtras <> a:71 var
-R6864:6864 CoLoR.ListExtras <> m:72 var
-R6871:6874 CoLoR.ListExtras <> copy def
-R6878:6878 CoLoR.ListExtras <> a:71 var
-R6876:6876 CoLoR.ListExtras <> n:73 var
-prf 6987:6997 <> copy_length
-binder 7008:7008 <> n:74
-binder 7010:7011 <> el:75
-R7032:7034 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7014:7019 Coq.Init.Datatypes <> length def
-R7022:7025 CoLoR.ListExtras <> copy def
-R7029:7030 CoLoR.ListExtras <> el:75 var
-R7027:7027 CoLoR.ListExtras <> n:74 var
-R7035:7035 CoLoR.ListExtras <> n:74 var
-prf 7141:7147 <> copy_in
-binder 7158:7158 <> n:76
-binder 7160:7161 <> el:77
-binder 7163:7163 <> x:78
-R7182:7185 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7166:7167 Coq.Lists.List <> In def
-R7172:7175 CoLoR.ListExtras <> copy def
-R7179:7180 CoLoR.ListExtras <> el:77 var
-R7177:7177 CoLoR.ListExtras <> n:76 var
-R7169:7169 CoLoR.ListExtras <> x:78 var
-R7187:7189 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7186:7186 CoLoR.ListExtras <> x:78 var
-R7190:7191 CoLoR.ListExtras <> el:77 var
-prf 7298:7308 <> nth_copy_in
-binder 7319:7319 <> n:79
-binder 7321:7322 <> el:80
-binder 7324:7324 <> x:81
-R7336:7339 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R7332:7334 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
-R7331:7331 CoLoR.ListExtras <> x:81 var
-R7335:7335 CoLoR.ListExtras <> n:79 var
-R7363:7365 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7340:7348 Coq.Lists.List <> nth_error def
-R7362:7362 CoLoR.ListExtras <> x:81 var
-R7351:7354 CoLoR.ListExtras <> copy def
-R7358:7359 CoLoR.ListExtras <> el:80 var
-R7356:7356 CoLoR.ListExtras <> n:79 var
-R7366:7369 Coq.Init.Datatypes <> Some constr
-R7371:7372 CoLoR.ListExtras <> el:80 var
-R7423:7434 CoLoR.ListUtil <> nth_error_In thm
-R7437:7440 CoLoR.ListExtras <> copy def
-R7423:7434 CoLoR.ListUtil <> nth_error_In thm
-R7437:7440 CoLoR.ListExtras <> copy def
-R7496:7502 CoLoR.ListExtras <> copy_in thm
-R7496:7502 CoLoR.ListExtras <> copy_in thm
-R7496:7502 CoLoR.ListExtras <> copy_in thm
-R7496:7502 CoLoR.ListExtras <> copy_in thm
-R7535:7545 CoLoR.ListUtil <> nth_some_in thm
-R7535:7545 CoLoR.ListUtil <> nth_some_in thm
-R7568:7571 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R7572:7577 Coq.Init.Datatypes <> length def
-R7580:7583 CoLoR.ListExtras <> copy def
-R7568:7571 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R7572:7577 Coq.Init.Datatypes <> length def
-R7580:7583 CoLoR.ListExtras <> copy def
-R7604:7617 CoLoR.ListUtil <> nth_beyond_idx thm
-R7604:7617 CoLoR.ListUtil <> nth_beyond_idx thm
-R7641:7651 CoLoR.ListExtras <> copy_length thm
-R7641:7651 CoLoR.ListExtras <> copy_length thm
-R7641:7651 CoLoR.ListExtras <> copy_length thm
-R7672:7674 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
-R7672:7674 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
-prf 7713:7726 <> nth_after_copy
-binder 7737:7737 <> n:82
-binder 7739:7740 <> el:83
-binder 7742:7744 <> el':84
-R7786:7788 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7751:7759 Coq.Lists.List <> nth_error def
-R7785:7785 CoLoR.ListExtras <> n:82 var
-R7772:7775 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R7762:7765 CoLoR.ListExtras <> copy def
-R7769:7771 CoLoR.ListExtras <> el':84 var
-R7767:7767 CoLoR.ListExtras <> n:82 var
-R7778:7779 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R7776:7777 CoLoR.ListExtras <> el:83 var
-R7780:7782 Coq.Init.Datatypes <> nil constr
-R7789:7792 Coq.Init.Datatypes <> Some constr
-R7794:7795 CoLoR.ListExtras <> el:83 var
-R7832:7844 CoLoR.ListUtil <> nth_app_right thm
-R7847:7857 CoLoR.ListExtras <> copy_length thm
-R7832:7844 CoLoR.ListUtil <> nth_app_right thm
-R7832:7844 CoLoR.ListUtil <> nth_app_right thm
-R7832:7844 CoLoR.ListUtil <> nth_app_right thm
-R7847:7857 CoLoR.ListExtras <> copy_length thm
-R7847:7857 CoLoR.ListExtras <> copy_length thm
-R7874:7876 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R7874:7876 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R7917:7927 CoLoR.ListExtras <> copy_length thm
-R7917:7927 CoLoR.ListExtras <> copy_length thm
-R7917:7927 CoLoR.ListExtras <> copy_length thm
-prf 7967:7975 <> copy_cons
-binder 7986:7986 <> n:85
-binder 7988:7989 <> el:86
-R8007:8009 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R7994:7997 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R7992:7993 CoLoR.ListExtras <> el:86 var
-R7998:8001 CoLoR.ListExtras <> copy def
-R8005:8006 CoLoR.ListExtras <> el:86 var
-R8003:8003 CoLoR.ListExtras <> n:85 var
-R8010:8013 CoLoR.ListExtras <> copy def
-R8021:8022 CoLoR.ListExtras <> el:86 var
-R8016:8016 Coq.Init.Datatypes <> S constr
-R8018:8018 CoLoR.ListExtras <> n:85 var
-prf 8064:8071 <> copy_add
-binder 8082:8082 <> n:87
-binder 8084:8085 <> el:88
-binder 8087:8087 <> l:89
-R8110:8112 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R8092:8095 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R8090:8091 CoLoR.ListExtras <> el:88 var
-R8105:8108 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R8096:8099 CoLoR.ListExtras <> copy def
-R8103:8104 CoLoR.ListExtras <> el:88 var
-R8101:8101 CoLoR.ListExtras <> n:87 var
-R8109:8109 CoLoR.ListExtras <> l:89 var
-R8122:8125 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R8113:8116 CoLoR.ListExtras <> copy def
-R8120:8121 CoLoR.ListExtras <> el:88 var
-R8118:8118 CoLoR.ListExtras <> n:87 var
-R8128:8131 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R8126:8127 CoLoR.ListExtras <> el:88 var
-R8132:8132 CoLoR.ListExtras <> l:89 var
-prf 8241:8255 <> initialSeg_copy
-binder 8266:8267 <> el:90
-binder 8269:8269 <> n:91
-binder 8271:8271 <> k:92
-R8302:8304 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R8278:8287 CoLoR.ListExtras <> initialSeg def
-R8301:8301 CoLoR.ListExtras <> k:92 var
-R8290:8293 CoLoR.ListExtras <> copy def
-R8297:8298 CoLoR.ListExtras <> el:90 var
-R8295:8295 CoLoR.ListExtras <> n:91 var
-R8305:8308 CoLoR.ListExtras <> copy def
-R8320:8321 CoLoR.ListExtras <> el:90 var
-R8311:8313 Coq.Arith.Min <> min abbrev
-R8315:8315 CoLoR.ListExtras <> n:91 var
-R8317:8317 CoLoR.ListExtras <> k:92 var
-prf 8429:8441 <> finalSeg_copy
-binder 8452:8452 <> l:93
-binder 8454:8455 <> el:94
-binder 8457:8457 <> k:95
-binder 8459:8459 <> n:96
-R8468:8476 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R8463:8466 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
-R8462:8462 CoLoR.ListExtras <> k:95 var
-R8467:8467 CoLoR.ListExtras <> n:96 var
-R8504:8506 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R8477:8484 CoLoR.ListExtras <> finalSeg def
-R8503:8503 CoLoR.ListExtras <> k:95 var
-R8496:8499 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R8487:8490 CoLoR.ListExtras <> copy def
-R8494:8495 CoLoR.ListExtras <> el:94 var
-R8492:8492 CoLoR.ListExtras <> n:96 var
-R8500:8500 CoLoR.ListExtras <> l:93 var
-R8522:8525 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R8507:8510 CoLoR.ListExtras <> copy def
-R8520:8521 CoLoR.ListExtras <> el:94 var
-R8514:8516 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R6810:6812 Coq.Init.Datatypes <> nil constr
+R6818:6818 Coq.Init.Datatypes <> S constr
+R6827:6830 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6825:6826 CoLoR.ListExtras <> el:68 var
+R6831:6834 CoLoR.ListExtras <> copy:69 def
+R6838:6839 CoLoR.ListExtras <> el:68 var
+R6836:6836 CoLoR.ListExtras <> n:67 var
+prf 6857:6866 <> copy_split
+binder 6877:6877 <> a:71
+binder 6879:6879 <> m:72
+binder 6881:6881 <> n:73
+R6898:6900 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R6884:6887 CoLoR.ListExtras <> copy def
+R6897:6897 CoLoR.ListExtras <> a:71 var
+R6891:6893 Coq.Init.Peano <> ::nat_scope:x_'+'_x not
+R6890:6890 CoLoR.ListExtras <> m:72 var
+R6894:6894 CoLoR.ListExtras <> n:73 var
+R6909:6912 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6901:6904 CoLoR.ListExtras <> copy def
+R6908:6908 CoLoR.ListExtras <> a:71 var
+R6906:6906 CoLoR.ListExtras <> m:72 var
+R6913:6916 CoLoR.ListExtras <> copy def
+R6920:6920 CoLoR.ListExtras <> a:71 var
+R6918:6918 CoLoR.ListExtras <> n:73 var
+prf 7029:7039 <> copy_length
+binder 7050:7050 <> n:74
+binder 7052:7053 <> el:75
+R7074:7076 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7056:7061 Coq.Init.Datatypes <> length def
+R7064:7067 CoLoR.ListExtras <> copy def
+R7071:7072 CoLoR.ListExtras <> el:75 var
+R7069:7069 CoLoR.ListExtras <> n:74 var
+R7077:7077 CoLoR.ListExtras <> n:74 var
+prf 7183:7189 <> copy_in
+binder 7200:7200 <> n:76
+binder 7202:7203 <> el:77
+binder 7205:7205 <> x:78
+R7224:7227 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7208:7209 Coq.Lists.List <> In def
+R7214:7217 CoLoR.ListExtras <> copy def
+R7221:7222 CoLoR.ListExtras <> el:77 var
+R7219:7219 CoLoR.ListExtras <> n:76 var
+R7211:7211 CoLoR.ListExtras <> x:78 var
+R7229:7231 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7228:7228 CoLoR.ListExtras <> x:78 var
+R7232:7233 CoLoR.ListExtras <> el:77 var
+prf 7340:7350 <> nth_copy_in
+binder 7361:7361 <> n:79
+binder 7363:7364 <> el:80
+binder 7366:7366 <> x:81
+R7378:7381 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7374:7376 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R7373:7373 CoLoR.ListExtras <> x:81 var
+R7377:7377 CoLoR.ListExtras <> n:79 var
+R7405:7407 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7382:7390 Coq.Lists.List <> nth_error def
+R7404:7404 CoLoR.ListExtras <> x:81 var
+R7393:7396 CoLoR.ListExtras <> copy def
+R7400:7401 CoLoR.ListExtras <> el:80 var
+R7398:7398 CoLoR.ListExtras <> n:79 var
+R7408:7411 Coq.Init.Datatypes <> Some constr
+R7413:7414 CoLoR.ListExtras <> el:80 var
+R7465:7476 CoLoR.ListUtil <> nth_error_In thm
+R7479:7482 CoLoR.ListExtras <> copy def
+R7465:7476 CoLoR.ListUtil <> nth_error_In thm
+R7479:7482 CoLoR.ListExtras <> copy def
+R7538:7544 CoLoR.ListExtras <> copy_in thm
+R7538:7544 CoLoR.ListExtras <> copy_in thm
+R7538:7544 CoLoR.ListExtras <> copy_in thm
+R7538:7544 CoLoR.ListExtras <> copy_in thm
+R7577:7587 CoLoR.ListUtil <> nth_some_in thm
+R7577:7587 CoLoR.ListUtil <> nth_some_in thm
+R7610:7613 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R7614:7619 Coq.Init.Datatypes <> length def
+R7622:7625 CoLoR.ListExtras <> copy def
+R7610:7613 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R7614:7619 Coq.Init.Datatypes <> length def
+R7622:7625 CoLoR.ListExtras <> copy def
+R7646:7659 CoLoR.ListUtil <> nth_beyond_idx thm
+R7646:7659 CoLoR.ListUtil <> nth_beyond_idx thm
+R7683:7693 CoLoR.ListExtras <> copy_length thm
+R7683:7693 CoLoR.ListExtras <> copy_length thm
+R7683:7693 CoLoR.ListExtras <> copy_length thm
+R7714:7716 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R7714:7716 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+prf 7755:7768 <> nth_after_copy
+binder 7779:7779 <> n:82
+binder 7781:7782 <> el:83
+binder 7784:7786 <> el':84
+R7828:7830 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R7793:7801 Coq.Lists.List <> nth_error def
+R7827:7827 CoLoR.ListExtras <> n:82 var
+R7814:7817 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R7804:7807 CoLoR.ListExtras <> copy def
+R7811:7813 CoLoR.ListExtras <> el':84 var
+R7809:7809 CoLoR.ListExtras <> n:82 var
+R7820:7821 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R7818:7819 CoLoR.ListExtras <> el:83 var
+R7822:7824 Coq.Init.Datatypes <> nil constr
+R7831:7834 Coq.Init.Datatypes <> Some constr
+R7836:7837 CoLoR.ListExtras <> el:83 var
+R7874:7886 CoLoR.ListUtil <> nth_app_right thm
+R7889:7899 CoLoR.ListExtras <> copy_length thm
+R7874:7886 CoLoR.ListUtil <> nth_app_right thm
+R7874:7886 CoLoR.ListUtil <> nth_app_right thm
+R7874:7886 CoLoR.ListUtil <> nth_app_right thm
+R7889:7899 CoLoR.ListExtras <> copy_length thm
+R7889:7899 CoLoR.ListExtras <> copy_length thm
+R7916:7918 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R7916:7918 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R7959:7969 CoLoR.ListExtras <> copy_length thm
+R7959:7969 CoLoR.ListExtras <> copy_length thm
+R7959:7969 CoLoR.ListExtras <> copy_length thm
+prf 8009:8017 <> copy_cons
+binder 8028:8028 <> n:85
+binder 8030:8031 <> el:86
+R8049:8051 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8036:8039 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R8034:8035 CoLoR.ListExtras <> el:86 var
+R8040:8043 CoLoR.ListExtras <> copy def
+R8047:8048 CoLoR.ListExtras <> el:86 var
+R8045:8045 CoLoR.ListExtras <> n:85 var
+R8052:8055 CoLoR.ListExtras <> copy def
+R8063:8064 CoLoR.ListExtras <> el:86 var
+R8058:8058 Coq.Init.Datatypes <> S constr
+R8060:8060 CoLoR.ListExtras <> n:85 var
+prf 8106:8113 <> copy_add
+binder 8124:8124 <> n:87
+binder 8126:8127 <> el:88
+binder 8129:8129 <> l:89
+R8152:8154 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8134:8137 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R8132:8133 CoLoR.ListExtras <> el:88 var
+R8147:8150 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R8138:8141 CoLoR.ListExtras <> copy def
+R8145:8146 CoLoR.ListExtras <> el:88 var
+R8143:8143 CoLoR.ListExtras <> n:87 var
+R8151:8151 CoLoR.ListExtras <> l:89 var
+R8164:8167 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R8155:8158 CoLoR.ListExtras <> copy def
+R8162:8163 CoLoR.ListExtras <> el:88 var
+R8160:8160 CoLoR.ListExtras <> n:87 var
+R8170:8173 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R8168:8169 CoLoR.ListExtras <> el:88 var
+R8174:8174 CoLoR.ListExtras <> l:89 var
+prf 8283:8297 <> initialSeg_copy
+binder 8308:8309 <> el:90
+binder 8311:8311 <> n:91
+binder 8313:8313 <> k:92
+R8344:8346 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8320:8329 CoLoR.ListExtras <> initialSeg def
+R8343:8343 CoLoR.ListExtras <> k:92 var
+R8332:8335 CoLoR.ListExtras <> copy def
+R8339:8340 CoLoR.ListExtras <> el:90 var
+R8337:8337 CoLoR.ListExtras <> n:91 var
+R8347:8350 CoLoR.ListExtras <> copy def
+R8366:8367 CoLoR.ListExtras <> el:90 var
+R8353:8359 Coq.Arith.PeanoNat Nat min def
+R8361:8361 CoLoR.ListExtras <> n:91 var
+R8363:8363 CoLoR.ListExtras <> k:92 var
+prf 8475:8487 <> finalSeg_copy
+binder 8498:8498 <> l:93
+binder 8500:8501 <> el:94
+binder 8503:8503 <> k:95
+binder 8505:8505 <> n:96
+R8514:8522 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8509:8512 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R8508:8508 CoLoR.ListExtras <> k:95 var
 R8513:8513 CoLoR.ListExtras <> n:96 var
-R8517:8517 CoLoR.ListExtras <> k:95 var
-R8526:8526 CoLoR.ListExtras <> l:93 var
-R8576:8588 CoLoR.ListExtras <> finalSeg_full thm
-R8576:8588 CoLoR.ListExtras <> finalSeg_full thm
-R8576:8588 CoLoR.ListExtras <> finalSeg_full thm
-R8605:8607 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R8605:8607 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R8672:8679 CoLoR.ListExtras <> finalSeg def
-R8699:8706 CoLoR.ListExtras <> finalSeg def
-R8718:8721 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R8709:8712 CoLoR.ListExtras <> copy def
-R8699:8706 CoLoR.ListExtras <> finalSeg def
-R8718:8721 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R8709:8712 CoLoR.ListExtras <> copy def
-R8776:8779 CoLoR.ListExtras Copy <> sec
-sec 8891:8899 <> InsertNth
-var 8914:8914 InsertNth A
-def 8938:8947 <> insert_nth
-R8953:8956 Coq.Init.Datatypes <> list ind
-R8958:8958 CoLoR.ListExtras <> InsertNth.A var
-binder 8950:8950 <> l:98
-R8965:8967 Coq.Init.Datatypes <> nat ind
-binder 8962:8962 <> n:99
-R8975:8975 CoLoR.ListExtras <> InsertNth.A var
-binder 8971:8972 <> el:100
-R8980:8983 Coq.Init.Datatypes <> list ind
-R8985:8985 CoLoR.ListExtras <> InsertNth.A var
-R9008:9011 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R8994:9003 CoLoR.ListExtras <> initialSeg def
-R9007:9007 CoLoR.ListExtras <> n:99 var
-R9005:9005 CoLoR.ListExtras <> l:98 var
-R9014:9017 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R9012:9013 CoLoR.ListExtras <> el:100 var
-R9018:9025 CoLoR.ListExtras <> finalSeg def
-R9029:9029 CoLoR.ListExtras <> n:99 var
-R9027:9027 CoLoR.ListExtras <> l:98 var
-prf 9041:9055 <> insert_nth_step
-binder 9066:9066 <> a:101
-binder 9068:9068 <> l:102
-binder 9070:9070 <> n:103
-binder 9072:9073 <> el:104
-R9108:9110 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R9080:9089 CoLoR.ListExtras <> insert_nth def
-R9106:9107 CoLoR.ListExtras <> el:104 var
-R9101:9101 Coq.Init.Datatypes <> S constr
-R9103:9103 CoLoR.ListExtras <> n:103 var
-R9093:9096 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R9092:9092 CoLoR.ListExtras <> a:101 var
-R9097:9097 CoLoR.ListExtras <> l:102 var
-R9112:9115 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R9111:9111 CoLoR.ListExtras <> a:101 var
-R9116:9125 CoLoR.ListExtras <> insert_nth def
-R9131:9132 CoLoR.ListExtras <> el:104 var
-R9129:9129 CoLoR.ListExtras <> n:103 var
-R9127:9127 CoLoR.ListExtras <> l:102 var
-prf 9174:9187 <> nth_insert_nth
-binder 9198:9198 <> l:105
-binder 9200:9200 <> p:106
-binder 9202:9203 <> el:107
-R9223:9226 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R9218:9221 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R9210:9215 Coq.Init.Datatypes <> length def
-R9217:9217 CoLoR.ListExtras <> l:105 var
-R9222:9222 CoLoR.ListExtras <> p:106 var
-R9258:9260 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R9227:9235 Coq.Lists.List <> nth_error def
-R9257:9257 CoLoR.ListExtras <> p:106 var
-R9238:9247 CoLoR.ListExtras <> insert_nth def
-R9253:9254 CoLoR.ListExtras <> el:107 var
-R9251:9251 CoLoR.ListExtras <> p:106 var
-R9249:9249 CoLoR.ListExtras <> l:105 var
-R9261:9264 Coq.Init.Datatypes <> Some constr
-R9266:9267 CoLoR.ListExtras <> el:107 var
-R9393:9400 CoLoR.ListExtras <> finalSeg def
-R9420:9427 CoLoR.ListExtras <> finalSeg def
-R9441:9450 CoLoR.ListExtras <> insert_nth def
-R9420:9427 CoLoR.ListExtras <> finalSeg def
-R9441:9450 CoLoR.ListExtras <> insert_nth def
-R9497:9505 CoLoR.ListExtras InsertNth <> sec
-sec 9616:9622 <> DropNth
-var 9637:9637 DropNth A
-def 9661:9668 <> drop_nth
-R9674:9677 Coq.Init.Datatypes <> list ind
-R9679:9679 CoLoR.ListExtras <> DropNth.A var
-binder 9671:9671 <> l:109
-binder 9682:9682 <> n:110
-R9701:9704 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R9687:9696 CoLoR.ListExtras <> initialSeg def
-R9700:9700 CoLoR.ListExtras <> n:110 var
-R9698:9698 CoLoR.ListExtras <> l:109 var
-R9705:9712 CoLoR.ListExtras <> finalSeg def
-R9717:9717 Coq.Init.Datatypes <> S constr
-R9719:9719 CoLoR.ListExtras <> n:110 var
-R9714:9714 CoLoR.ListExtras <> l:109 var
-prf 9732:9749 <> drop_nth_in_length
-binder 9760:9760 <> p:111
-binder 9762:9762 <> l:112
-R9781:9784 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R9777:9779 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
-R9769:9774 Coq.Init.Datatypes <> length def
-R9776:9776 CoLoR.ListExtras <> l:112 var
-R9780:9780 CoLoR.ListExtras <> p:111 var
-R9806:9808 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R9785:9790 Coq.Init.Datatypes <> length def
-R9793:9800 CoLoR.ListExtras <> drop_nth def
-R9804:9804 CoLoR.ListExtras <> p:111 var
-R9802:9802 CoLoR.ListExtras <> l:112 var
-R9809:9812 Coq.Init.Peano <> pred abbrev
+R8550:8552 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8523:8530 CoLoR.ListExtras <> finalSeg def
+R8549:8549 CoLoR.ListExtras <> k:95 var
+R8542:8545 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R8533:8536 CoLoR.ListExtras <> copy def
+R8540:8541 CoLoR.ListExtras <> el:94 var
+R8538:8538 CoLoR.ListExtras <> n:96 var
+R8546:8546 CoLoR.ListExtras <> l:93 var
+R8568:8571 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R8553:8556 CoLoR.ListExtras <> copy def
+R8566:8567 CoLoR.ListExtras <> el:94 var
+R8560:8562 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R8559:8559 CoLoR.ListExtras <> n:96 var
+R8563:8563 CoLoR.ListExtras <> k:95 var
+R8572:8572 CoLoR.ListExtras <> l:93 var
+R8622:8634 CoLoR.ListExtras <> finalSeg_full thm
+R8622:8634 CoLoR.ListExtras <> finalSeg_full thm
+R8622:8634 CoLoR.ListExtras <> finalSeg_full thm
+R8651:8653 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R8651:8653 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R8718:8725 CoLoR.ListExtras <> finalSeg def
+R8745:8752 CoLoR.ListExtras <> finalSeg def
+R8764:8767 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R8755:8758 CoLoR.ListExtras <> copy def
+R8745:8752 CoLoR.ListExtras <> finalSeg def
+R8764:8767 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R8755:8758 CoLoR.ListExtras <> copy def
+R8822:8825 CoLoR.ListExtras Copy <> sec
+sec 8937:8945 <> InsertNth
+var 8960:8960 InsertNth A
+def 8984:8993 <> insert_nth
+R8999:9002 Coq.Init.Datatypes <> list ind
+R9004:9004 CoLoR.ListExtras <> InsertNth.A var
+binder 8996:8996 <> l:98
+R9011:9013 Coq.Init.Datatypes <> nat ind
+binder 9008:9008 <> n:99
+R9021:9021 CoLoR.ListExtras <> InsertNth.A var
+binder 9017:9018 <> el:100
+R9026:9029 Coq.Init.Datatypes <> list ind
+R9031:9031 CoLoR.ListExtras <> InsertNth.A var
+R9054:9057 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R9040:9049 CoLoR.ListExtras <> initialSeg def
+R9053:9053 CoLoR.ListExtras <> n:99 var
+R9051:9051 CoLoR.ListExtras <> l:98 var
+R9060:9063 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9058:9059 CoLoR.ListExtras <> el:100 var
+R9064:9071 CoLoR.ListExtras <> finalSeg def
+R9075:9075 CoLoR.ListExtras <> n:99 var
+R9073:9073 CoLoR.ListExtras <> l:98 var
+prf 9087:9101 <> insert_nth_step
+binder 9112:9112 <> a:101
+binder 9114:9114 <> l:102
+binder 9116:9116 <> n:103
+binder 9118:9119 <> el:104
+R9154:9156 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9126:9135 CoLoR.ListExtras <> insert_nth def
+R9152:9153 CoLoR.ListExtras <> el:104 var
+R9147:9147 Coq.Init.Datatypes <> S constr
+R9149:9149 CoLoR.ListExtras <> n:103 var
+R9139:9142 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9138:9138 CoLoR.ListExtras <> a:101 var
+R9143:9143 CoLoR.ListExtras <> l:102 var
+R9158:9161 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9157:9157 CoLoR.ListExtras <> a:101 var
+R9162:9171 CoLoR.ListExtras <> insert_nth def
+R9177:9178 CoLoR.ListExtras <> el:104 var
+R9175:9175 CoLoR.ListExtras <> n:103 var
+R9173:9173 CoLoR.ListExtras <> l:102 var
+prf 9220:9233 <> nth_insert_nth
+binder 9244:9244 <> l:105
+binder 9246:9246 <> p:106
+binder 9248:9249 <> el:107
+R9269:9272 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9264:9267 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R9256:9261 Coq.Init.Datatypes <> length def
+R9263:9263 CoLoR.ListExtras <> l:105 var
+R9268:9268 CoLoR.ListExtras <> p:106 var
+R9304:9306 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9273:9281 Coq.Lists.List <> nth_error def
+R9303:9303 CoLoR.ListExtras <> p:106 var
+R9284:9293 CoLoR.ListExtras <> insert_nth def
+R9299:9300 CoLoR.ListExtras <> el:107 var
+R9297:9297 CoLoR.ListExtras <> p:106 var
+R9295:9295 CoLoR.ListExtras <> l:105 var
+R9307:9310 Coq.Init.Datatypes <> Some constr
+R9312:9313 CoLoR.ListExtras <> el:107 var
+R9439:9446 CoLoR.ListExtras <> finalSeg def
+R9466:9473 CoLoR.ListExtras <> finalSeg def
+R9487:9496 CoLoR.ListExtras <> insert_nth def
+R9466:9473 CoLoR.ListExtras <> finalSeg def
+R9487:9496 CoLoR.ListExtras <> insert_nth def
+R9543:9551 CoLoR.ListExtras InsertNth <> sec
+sec 9662:9668 <> DropNth
+var 9683:9683 DropNth A
+def 9707:9714 <> drop_nth
+R9720:9723 Coq.Init.Datatypes <> list ind
+R9725:9725 CoLoR.ListExtras <> DropNth.A var
+binder 9717:9717 <> l:109
+binder 9728:9728 <> n:110
+R9747:9750 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R9733:9742 CoLoR.ListExtras <> initialSeg def
+R9746:9746 CoLoR.ListExtras <> n:110 var
+R9744:9744 CoLoR.ListExtras <> l:109 var
+R9751:9758 CoLoR.ListExtras <> finalSeg def
+R9763:9763 Coq.Init.Datatypes <> S constr
+R9765:9765 CoLoR.ListExtras <> n:110 var
+R9760:9760 CoLoR.ListExtras <> l:109 var
+prf 9778:9795 <> drop_nth_in_length
+binder 9806:9806 <> p:111
+binder 9808:9808 <> l:112
+R9827:9830 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R9823:9825 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
 R9815:9820 Coq.Init.Datatypes <> length def
 R9822:9822 CoLoR.ListExtras <> l:112 var
-R9890:9897 CoLoR.ListExtras <> drop_nth def
-R9919:9931 CoLoR.ListExtras <> finalSeg_cons thm
-R9919:9931 CoLoR.ListExtras <> finalSeg_cons thm
-R9919:9931 CoLoR.ListExtras <> finalSeg_cons thm
-R9955:9962 CoLoR.ListExtras <> drop_nth def
-R9974:9974 Coq.Init.Datatypes <> S constr
-R9966:9969 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R9987:9990 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R9991:9998 CoLoR.ListExtras <> drop_nth def
-R9955:9962 CoLoR.ListExtras <> drop_nth def
-R9974:9974 Coq.Init.Datatypes <> S constr
-R9966:9969 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R9987:9990 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R9991:9998 CoLoR.ListExtras <> drop_nth def
-prf 10106:10120 <> drop_nth_beyond
-binder 10131:10131 <> l:113
-binder 10133:10133 <> p:114
-R10149:10152 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R10144:10147 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
-R10136:10141 Coq.Init.Datatypes <> length def
-R10143:10143 CoLoR.ListExtras <> l:113 var
-R10148:10148 CoLoR.ListExtras <> p:114 var
-R10165:10167 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R10153:10160 CoLoR.ListExtras <> drop_nth def
-R10164:10164 CoLoR.ListExtras <> p:114 var
-R10162:10162 CoLoR.ListExtras <> l:113 var
-R10168:10168 CoLoR.ListExtras <> l:113 var
-R10280:10287 CoLoR.ListExtras <> drop_nth def
-R10297:10297 Coq.Init.Datatypes <> S constr
-R10291:10292 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R10310:10313 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R10314:10321 CoLoR.ListExtras <> drop_nth def
-R10280:10287 CoLoR.ListExtras <> drop_nth def
-R10297:10297 Coq.Init.Datatypes <> S constr
-R10291:10292 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R10310:10313 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R10314:10321 CoLoR.ListExtras <> drop_nth def
-prf 10392:10406 <> drop_nth_length
-binder 10417:10417 <> l:115
-binder 10419:10419 <> p:116
-R10447:10450 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R10426:10431 Coq.Init.Datatypes <> length def
-R10434:10441 CoLoR.ListExtras <> drop_nth def
-R10445:10445 CoLoR.ListExtras <> p:116 var
-R10443:10443 CoLoR.ListExtras <> l:115 var
-R10451:10454 Coq.Init.Peano <> pred abbrev
-R10457:10462 Coq.Init.Datatypes <> length def
-R10464:10464 CoLoR.ListExtras <> l:115 var
-R10505:10513 Coq.Arith.Compare_dec <> le_gt_dec def
-R10516:10521 Coq.Init.Datatypes <> length def
-R10505:10513 Coq.Arith.Compare_dec <> le_gt_dec def
-R10516:10521 Coq.Init.Datatypes <> length def
-R10542:10556 CoLoR.ListExtras <> drop_nth_beyond thm
-R10542:10556 CoLoR.ListExtras <> drop_nth_beyond thm
-R10542:10556 CoLoR.ListExtras <> drop_nth_beyond thm
-R10542:10556 CoLoR.ListExtras <> drop_nth_beyond thm
-R10589:10606 CoLoR.ListExtras <> drop_nth_in_length thm
-R10589:10606 CoLoR.ListExtras <> drop_nth_in_length thm
-R10589:10606 CoLoR.ListExtras <> drop_nth_in_length thm
-R10589:10606 CoLoR.ListExtras <> drop_nth_in_length thm
-prf 10631:10643 <> drop_nth_cons
-binder 10654:10654 <> a:117
-binder 10656:10656 <> l:118
-R10676:10678 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R10659:10666 CoLoR.ListExtras <> drop_nth def
-R10670:10671 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R10669:10669 CoLoR.ListExtras <> a:117 var
-R10672:10672 CoLoR.ListExtras <> l:118 var
-R10679:10679 CoLoR.ListExtras <> l:118 var
-R10715:10722 CoLoR.ListExtras <> drop_nth def
-R10744:10756 CoLoR.ListExtras <> finalSeg_cons thm
-R10744:10756 CoLoR.ListExtras <> finalSeg_cons thm
-R10744:10756 CoLoR.ListExtras <> finalSeg_cons thm
-prf 10784:10796 <> drop_nth_succ
-binder 10807:10807 <> a:119
-binder 10809:10809 <> l:120
-binder 10811:10811 <> p:121
-R10839:10841 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R10818:10825 CoLoR.ListExtras <> drop_nth def
-R10835:10835 Coq.Init.Datatypes <> S constr
-R10837:10837 CoLoR.ListExtras <> p:121 var
-R10829:10830 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R10828:10828 CoLoR.ListExtras <> a:119 var
-R10831:10831 CoLoR.ListExtras <> l:120 var
-R10843:10846 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R10842:10842 CoLoR.ListExtras <> a:119 var
-R10847:10854 CoLoR.ListExtras <> drop_nth def
-R10858:10858 CoLoR.ListExtras <> p:121 var
-R10856:10856 CoLoR.ListExtras <> l:120 var
-R10882:10889 CoLoR.ListExtras <> drop_nth def
-R10892:10899 CoLoR.ListExtras <> finalSeg def
-prf 10927:10945 <> drop_nth_insert_nth
-binder 10956:10956 <> l:122
-binder 10958:10958 <> p:123
-binder 10960:10961 <> el:124
-R10981:10984 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R10976:10979 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R10968:10973 Coq.Init.Datatypes <> length def
-R10975:10975 CoLoR.ListExtras <> l:122 var
-R10980:10980 CoLoR.ListExtras <> p:123 var
-R11015:11017 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R10985:10992 CoLoR.ListExtras <> drop_nth def
-R11014:11014 CoLoR.ListExtras <> p:123 var
-R10995:11004 CoLoR.ListExtras <> insert_nth def
-R11010:11011 CoLoR.ListExtras <> el:124 var
-R11008:11008 CoLoR.ListExtras <> p:123 var
-R11006:11006 CoLoR.ListExtras <> l:122 var
-R11018:11018 CoLoR.ListExtras <> l:122 var
-R11124:11133 CoLoR.ListExtras <> insert_nth def
-R11155:11167 CoLoR.ListExtras <> finalSeg_full thm
-R11155:11167 CoLoR.ListExtras <> finalSeg_full thm
-R11155:11167 CoLoR.ListExtras <> finalSeg_full thm
-R11181:11188 CoLoR.ListExtras <> drop_nth def
-R11210:11222 CoLoR.ListExtras <> finalSeg_cons thm
-R11210:11222 CoLoR.ListExtras <> finalSeg_cons thm
-R11210:11222 CoLoR.ListExtras <> finalSeg_cons thm
-R11250:11257 CoLoR.ListExtras <> drop_nth def
-R11289:11289 Coq.Init.Datatypes <> S constr
-R11260:11269 CoLoR.ListExtras <> insert_nth def
-R11279:11279 Coq.Init.Datatypes <> S constr
-R11273:11274 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R11308:11311 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R11312:11319 CoLoR.ListExtras <> drop_nth def
-R11322:11331 CoLoR.ListExtras <> insert_nth def
-R11250:11257 CoLoR.ListExtras <> drop_nth def
-R11289:11289 Coq.Init.Datatypes <> S constr
-R11260:11269 CoLoR.ListExtras <> insert_nth def
-R11279:11279 Coq.Init.Datatypes <> S constr
-R11273:11274 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R11308:11311 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R11312:11319 CoLoR.ListExtras <> drop_nth def
-R11322:11331 CoLoR.ListExtras <> insert_nth def
-prf 11396:11414 <> insert_nth_drop_nth
-binder 11425:11425 <> p:125
-binder 11427:11427 <> l:126
-binder 11429:11430 <> el:127
-R11456:11463 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R11446:11448 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R11433:11441 Coq.Lists.List <> nth_error def
-R11445:11445 CoLoR.ListExtras <> p:125 var
-R11443:11443 CoLoR.ListExtras <> l:126 var
-R11449:11452 Coq.Init.Datatypes <> Some constr
-R11454:11455 CoLoR.ListExtras <> el:127 var
-R11494:11496 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R11464:11473 CoLoR.ListExtras <> insert_nth def
-R11492:11493 CoLoR.ListExtras <> el:127 var
-R11490:11490 CoLoR.ListExtras <> p:125 var
-R11476:11483 CoLoR.ListExtras <> drop_nth def
-R11487:11487 CoLoR.ListExtras <> p:125 var
-R11485:11485 CoLoR.ListExtras <> l:126 var
-R11497:11497 CoLoR.ListExtras <> l:126 var
-R11579:11586 CoLoR.ListExtras <> drop_nth def
-R11589:11598 CoLoR.ListExtras <> insert_nth def
-R11620:11632 CoLoR.ListExtras <> finalSeg_cons thm
-R11635:11647 CoLoR.ListExtras <> finalSeg_full thm
-R11620:11632 CoLoR.ListExtras <> finalSeg_cons thm
-R11620:11632 CoLoR.ListExtras <> finalSeg_cons thm
-R11635:11647 CoLoR.ListExtras <> finalSeg_full thm
-R11635:11647 CoLoR.ListExtras <> finalSeg_full thm
-R11720:11727 CoLoR.ListExtras <> drop_nth def
-R11730:11739 CoLoR.ListExtras <> insert_nth def
-R11761:11768 CoLoR.ListExtras <> finalSeg def
-R11778:11778 Coq.Init.Datatypes <> S constr
-R11781:11781 Coq.Init.Datatypes <> S constr
-R11772:11773 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R11794:11801 CoLoR.ListExtras <> finalSeg def
-R11806:11806 Coq.Init.Datatypes <> S constr
-R11761:11768 CoLoR.ListExtras <> finalSeg def
-R11778:11778 Coq.Init.Datatypes <> S constr
-R11781:11781 Coq.Init.Datatypes <> S constr
-R11772:11773 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R11794:11801 CoLoR.ListExtras <> finalSeg def
-R11806:11806 Coq.Init.Datatypes <> S constr
-R11794:11801 CoLoR.ListExtras <> finalSeg def
-R11806:11806 Coq.Init.Datatypes <> S constr
-R11823:11830 CoLoR.ListExtras <> drop_nth def
-R11823:11830 CoLoR.ListExtras <> drop_nth def
-R11850:11857 CoLoR.ListExtras <> finalSeg def
-R11878:11878 Coq.Init.Datatypes <> S constr
-R11861:11862 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R11863:11870 CoLoR.ListExtras <> drop_nth def
-R11890:11897 CoLoR.ListExtras <> finalSeg def
-R11900:11907 CoLoR.ListExtras <> drop_nth def
-R11850:11857 CoLoR.ListExtras <> finalSeg def
-R11878:11878 Coq.Init.Datatypes <> S constr
-R11861:11862 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R11863:11870 CoLoR.ListExtras <> drop_nth def
-R11890:11897 CoLoR.ListExtras <> finalSeg def
-R11900:11907 CoLoR.ListExtras <> drop_nth def
-R11928:11937 CoLoR.ListExtras <> insert_nth def
-R11940:11947 CoLoR.ListExtras <> drop_nth def
-R11928:11937 CoLoR.ListExtras <> insert_nth def
-R11940:11947 CoLoR.ListExtras <> drop_nth def
-R11999:12005 CoLoR.ListExtras DropNth <> sec
-sec 12135:12141 <> CountIn
-var 12162:12162 CountIn A
-var 12173:12175 CountIn eqA
-var 12196:12202 CountIn eqA_dec
-var 12247:12261 CountIn eqA_Equivalence
-R12179:12186 Coq.Relations.Relation_Definitions <> relation def
-R12188:12188 CoLoR.ListExtras <> A:128 var
-binder 12213:12213 <> x:130
-binder 12215:12215 <> y:131
-R12218:12218 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R12226:12230 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R12239:12239 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R12219:12221 CoLoR.ListExtras <> eqA:129 var
-R12225:12225 CoLoR.ListExtras <> y:131 var
-R12223:12223 CoLoR.ListExtras <> x:130 var
-R12231:12231 Coq.Init.Logic <> ::type_scope:'~'_x not
-R12232:12234 CoLoR.ListExtras <> eqA:129 var
-R12238:12238 CoLoR.ListExtras <> y:131 var
-R12236:12236 CoLoR.ListExtras <> x:130 var
-R12265:12275 Coq.Classes.RelationClasses <> Equivalence class
-R12277:12279 CoLoR.ListExtras <> eqA:129 var
-def 12295:12301 <> countIn
-R12307:12307 CoLoR.ListExtras <> CountIn.A var
-binder 12304:12304 <> a:134
-R12314:12317 Coq.Init.Datatypes <> list ind
-R12319:12319 CoLoR.ListExtras <> CountIn.A var
-binder 12311:12311 <> l:135
-R12324:12326 Coq.Init.Datatypes <> nat ind
-R12341:12341 CoLoR.ListExtras <> l:135 var
-R12356:12358 Coq.Init.Datatypes <> nil constr
-R12374:12375 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R12390:12396 CoLoR.ListExtras <> CountIn.eqA_dec var
-R12398:12398 CoLoR.ListExtras <> a:134 var
-R12410:12413 Coq.Init.Specif <> left constr
-R12420:12420 Coq.Init.Datatypes <> S constr
-R12422:12428 CoLoR.ListExtras <> countIn:136 def
-R12430:12430 CoLoR.ListExtras <> a:134 var
-R12439:12443 Coq.Init.Specif <> right constr
-R12450:12456 CoLoR.ListExtras <> countIn:136 def
-R12458:12458 CoLoR.ListExtras <> a:134 var
-prf 12486:12495 <> in_countIn
-binder 12506:12506 <> a:138
-binder 12508:12509 <> a':139
-binder 12511:12511 <> l:140
-R12520:12523 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R12514:12515 Coq.Lists.List <> In def
-R12519:12519 CoLoR.ListExtras <> l:140 var
-R12517:12517 CoLoR.ListExtras <> a:138 var
-R12532:12535 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R12524:12526 CoLoR.ListExtras <> CountIn.eqA var
-R12530:12531 CoLoR.ListExtras <> a':139 var
-R12528:12528 CoLoR.ListExtras <> a:138 var
-R12548:12550 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
-R12536:12542 CoLoR.ListExtras <> countIn def
-R12547:12547 CoLoR.ListExtras <> l:140 var
-R12544:12545 CoLoR.ListExtras <> a':139 var
-R12634:12640 CoLoR.ListExtras <> CountIn.eqA_dec var
-R12634:12640 CoLoR.ListExtras <> CountIn.eqA_dec var
-R12670:12672 CoLoR.ListExtras <> CountIn.eqA var
-R12670:12672 CoLoR.ListExtras <> CountIn.eqA var
-R12706:12712 CoLoR.ListExtras <> CountIn.eqA_dec var
-R12706:12712 CoLoR.ListExtras <> CountIn.eqA_dec var
-prf 12771:12782 <> count_pos_in
-binder 12793:12793 <> a:141
-R12799:12802 Coq.Init.Datatypes <> list ind
-R12804:12804 CoLoR.ListExtras <> CountIn.A var
-binder 12796:12796 <> l:142
-R12827:12830 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R12823:12825 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
-R12812:12818 CoLoR.ListExtras <> countIn def
-R12822:12822 CoLoR.ListExtras <> l:142 var
-R12820:12820 CoLoR.ListExtras <> a:141 var
-R12831:12837 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R12840:12841 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 12838:12839 <> a':143
-R12850:12853 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R12842:12844 CoLoR.ListExtras <> CountIn.eqA var
-R12848:12849 CoLoR.ListExtras <> a':143 var
-R12846:12846 CoLoR.ListExtras <> a:141 var
-R12854:12855 Coq.Lists.List <> In def
-R12860:12860 CoLoR.ListExtras <> l:142 var
-R12857:12858 CoLoR.ListExtras <> a':143 var
-R12929:12935 CoLoR.ListExtras <> CountIn.eqA_dec var
-R12929:12935 CoLoR.ListExtras <> CountIn.eqA_dec var
-prf 13069:13079 <> countIn_nth
-binder 13090:13090 <> a:144
-R13096:13099 Coq.Init.Datatypes <> list ind
-R13101:13101 CoLoR.ListExtras <> CountIn.A var
-binder 13093:13093 <> l:145
-R13120:13127 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R13116:13118 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
-R13105:13111 CoLoR.ListExtras <> countIn def
-R13115:13115 CoLoR.ListExtras <> l:145 var
-R13113:13113 CoLoR.ListExtras <> a:144 var
-R13128:13134 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R13136:13137 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 13135:13135 <> p:146
-R13138:13144 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R13147:13148 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 13145:13146 <> a':147
-R13157:13160 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R13149:13151 CoLoR.ListExtras <> CountIn.eqA var
-R13155:13156 CoLoR.ListExtras <> a':147 var
-R13153:13153 CoLoR.ListExtras <> a:144 var
-R13174:13176 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R13161:13169 Coq.Lists.List <> nth_error def
-R13173:13173 CoLoR.ListExtras <> p:146 var
-R13171:13171 CoLoR.ListExtras <> l:145 var
-R13177:13180 Coq.Init.Datatypes <> Some constr
-R13182:13183 CoLoR.ListExtras <> a':147 var
-R13270:13276 CoLoR.ListExtras <> CountIn.eqA_dec var
-R13270:13276 CoLoR.ListExtras <> CountIn.eqA_dec var
-R13392:13392 Coq.Init.Datatypes <> S constr
-R13392:13392 Coq.Init.Datatypes <> S constr
-prf 13441:13458 <> countIn_dropNth_eq
-binder 13469:13469 <> l:148
-binder 13471:13471 <> p:149
-binder 13473:13474 <> el:150
-binder 13476:13478 <> el':151
-R13509:13512 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R13498:13500 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R13485:13493 Coq.Lists.List <> nth_error def
-R13497:13497 CoLoR.ListExtras <> p:149 var
-R13495:13495 CoLoR.ListExtras <> l:148 var
-R13501:13504 Coq.Init.Datatypes <> Some constr
-R13506:13508 CoLoR.ListExtras <> el':151 var
-R13523:13531 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R13513:13515 CoLoR.ListExtras <> CountIn.eqA var
-R13520:13522 CoLoR.ListExtras <> el':151 var
-R13517:13518 CoLoR.ListExtras <> el:150 var
-R13557:13559 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R13532:13538 CoLoR.ListExtras <> countIn def
-R13544:13551 CoLoR.ListExtras <> drop_nth def
-R13555:13555 CoLoR.ListExtras <> p:149 var
-R13553:13553 CoLoR.ListExtras <> l:148 var
-R13540:13541 CoLoR.ListExtras <> el:150 var
-R13572:13574 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
-R13560:13566 CoLoR.ListExtras <> countIn def
-R13571:13571 CoLoR.ListExtras <> l:148 var
-R13568:13569 CoLoR.ListExtras <> el:150 var
-R13673:13685 CoLoR.ListExtras <> drop_nth_cons thm
-R13698:13704 CoLoR.ListExtras <> CountIn.eqA_dec var
-R13673:13685 CoLoR.ListExtras <> drop_nth_cons thm
-R13673:13685 CoLoR.ListExtras <> drop_nth_cons thm
-R13698:13704 CoLoR.ListExtras <> CountIn.eqA_dec var
-R13734:13736 CoLoR.ListExtras <> CountIn.eqA var
-R13734:13736 CoLoR.ListExtras <> CountIn.eqA var
-R13809:13821 CoLoR.ListExtras <> drop_nth_succ thm
-R13809:13821 CoLoR.ListExtras <> drop_nth_succ thm
-R13809:13821 CoLoR.ListExtras <> drop_nth_succ thm
-R13885:13891 CoLoR.ListExtras <> CountIn.eqA_dec var
-R13885:13891 CoLoR.ListExtras <> CountIn.eqA_dec var
-R13926:13936 CoLoR.ListUtil <> nth_some_in thm
-R13926:13936 CoLoR.ListUtil <> nth_some_in thm
-R13965:13967 CoLoR.ListExtras <> CountIn.eqA var
-R13965:13967 CoLoR.ListExtras <> CountIn.eqA var
-R14007:14016 CoLoR.ListExtras <> in_countIn thm
-R14007:14016 CoLoR.ListExtras <> in_countIn thm
-prf 14058:14076 <> countIn_dropNth_neq
-binder 14087:14087 <> l:152
-binder 14089:14089 <> p:153
-binder 14091:14092 <> el:154
-binder 14094:14096 <> el':155
-R14127:14130 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R14116:14118 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R14103:14111 Coq.Lists.List <> nth_error def
-R14115:14115 CoLoR.ListExtras <> p:153 var
-R14113:14113 CoLoR.ListExtras <> l:152 var
-R14119:14122 Coq.Init.Datatypes <> Some constr
-R14124:14126 CoLoR.ListExtras <> el':155 var
-R14142:14149 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R14131:14131 Coq.Init.Logic <> ::type_scope:'~'_x not
-R14132:14134 CoLoR.ListExtras <> CountIn.eqA var
-R14139:14141 CoLoR.ListExtras <> el':155 var
-R14136:14137 CoLoR.ListExtras <> el:154 var
-R14175:14177 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R14150:14156 CoLoR.ListExtras <> countIn def
-R14162:14169 CoLoR.ListExtras <> drop_nth def
-R14173:14173 CoLoR.ListExtras <> p:153 var
-R14171:14171 CoLoR.ListExtras <> l:152 var
-R14158:14159 CoLoR.ListExtras <> el:154 var
-R14178:14184 CoLoR.ListExtras <> countIn def
-R14189:14189 CoLoR.ListExtras <> l:152 var
-R14186:14187 CoLoR.ListExtras <> el:154 var
-R14287:14299 CoLoR.ListExtras <> drop_nth_cons thm
-R14312:14318 CoLoR.ListExtras <> CountIn.eqA_dec var
-R14287:14299 CoLoR.ListExtras <> drop_nth_cons thm
-R14287:14299 CoLoR.ListExtras <> drop_nth_cons thm
-R14312:14318 CoLoR.ListExtras <> CountIn.eqA_dec var
-R14348:14350 CoLoR.ListExtras <> CountIn.eqA var
-R14348:14350 CoLoR.ListExtras <> CountIn.eqA var
-R14423:14435 CoLoR.ListExtras <> drop_nth_succ thm
-R14423:14435 CoLoR.ListExtras <> drop_nth_succ thm
-R14423:14435 CoLoR.ListExtras <> drop_nth_succ thm
-R14497:14503 CoLoR.ListExtras CountIn <> sec
-sec 14630:14637 <> DropLast
-var 14652:14652 DropLast A
-def 14674:14681 <> dropLast
-R14687:14690 Coq.Init.Datatypes <> list ind
-R14692:14692 CoLoR.ListExtras <> DropLast.A var
-binder 14684:14684 <> l:157
-R14697:14700 Coq.Init.Datatypes <> list ind
-R14702:14702 CoLoR.ListExtras <> DropLast.A var
-R14717:14717 CoLoR.ListExtras <> l:157 var
-R14730:14732 Coq.Init.Datatypes <> nil constr
-R14737:14739 Coq.Init.Datatypes <> nil constr
-R14748:14749 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R14750:14752 Coq.Init.Datatypes <> nil constr
-R14757:14759 Coq.Init.Datatypes <> nil constr
-R14768:14769 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R14778:14781 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R14782:14789 CoLoR.ListExtras <> dropLast:158 def
-prf 14812:14824 <> dropLast_last
-binder 14835:14835 <> a:160
-R14841:14844 Coq.Init.Datatypes <> list ind
-R14846:14846 CoLoR.ListExtras <> DropLast.A var
-binder 14838:14838 <> l:161
-R14862:14865 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R14855:14858 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R14854:14854 CoLoR.ListExtras <> l:161 var
-R14859:14861 Coq.Init.Datatypes <> nil constr
-R14888:14890 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R14866:14873 CoLoR.ListExtras <> dropLast def
-R14877:14880 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R14876:14876 CoLoR.ListExtras <> l:161 var
-R14882:14883 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R14881:14881 CoLoR.ListExtras <> a:160 var
-R14884:14886 Coq.Init.Datatypes <> nil constr
-R14891:14891 CoLoR.ListExtras <> l:161 var
-R14988:14988 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R14996:15000 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R14991:14994 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15002:15003 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15004:15006 Coq.Init.Datatypes <> nil constr
-R14988:14988 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R14996:15000 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R14991:14994 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15002:15003 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15004:15006 Coq.Init.Datatypes <> nil constr
-R15034:15036 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R15022:15029 CoLoR.ListExtras <> dropLast def
-R15031:15033 Coq.Init.Datatypes <> nil constr
-R15039:15042 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15034:15036 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R15022:15029 CoLoR.ListExtras <> dropLast def
-R15031:15033 Coq.Init.Datatypes <> nil constr
-R15039:15042 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-prf 15140:15150 <> dropLast_eq
-binder 15161:15162 <> l1:162
-binder 15164:15165 <> l2:163
-R15175:15178 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15170:15172 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R15168:15169 CoLoR.ListExtras <> l1:162 var
-R15173:15174 CoLoR.ListExtras <> l2:163 var
-R15190:15192 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R15179:15186 CoLoR.ListExtras <> dropLast def
-R15188:15189 CoLoR.ListExtras <> l1:162 var
-R15193:15200 CoLoR.ListExtras <> dropLast def
-R15202:15203 CoLoR.ListExtras <> l2:163 var
-prf 15258:15269 <> dropLast_app
-binder 15280:15280 <> a:164
-R15290:15293 Coq.Init.Datatypes <> list ind
-R15295:15295 CoLoR.ListExtras <> DropLast.A var
-binder 15283:15284 <> l1:165
-binder 15286:15287 <> l2:166
-R15327:15329 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R15303:15310 CoLoR.ListExtras <> dropLast def
-R15315:15318 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15313:15314 CoLoR.ListExtras <> l1:165 var
-R15320:15323 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15319:15319 CoLoR.ListExtras <> a:164 var
-R15324:15325 CoLoR.ListExtras <> l2:166 var
-R15332:15335 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15330:15331 CoLoR.ListExtras <> l1:165 var
-R15336:15343 CoLoR.ListExtras <> dropLast def
-R15347:15350 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15346:15346 CoLoR.ListExtras <> a:164 var
-R15351:15352 CoLoR.ListExtras <> l2:166 var
-R15417:15424 CoLoR.ListExtras <> dropLast def
-R15427:15427 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15436:15440 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15430:15433 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15442:15445 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15465:15468 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15469:15476 CoLoR.ListExtras <> dropLast def
-R15481:15484 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15486:15487 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15417:15424 CoLoR.ListExtras <> dropLast def
-R15427:15427 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15436:15440 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15430:15433 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15442:15445 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15465:15468 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15469:15476 CoLoR.ListExtras <> dropLast def
-R15481:15484 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15486:15487 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15559:15562 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R15548:15551 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15553:15556 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15563:15565 Coq.Init.Datatypes <> nil constr
-R15559:15562 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R15548:15551 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15553:15556 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15563:15565 Coq.Init.Datatypes <> nil constr
-R15585:15588 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15590:15593 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15585:15588 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R15590:15593 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15640:15647 CoLoR.ListExtras DropLast <> sec
-sec 15764:15767 <> Last
-var 15782:15782 Last A
-def 15804:15807 <> last
-R15813:15816 Coq.Init.Datatypes <> list ind
-R15818:15818 CoLoR.ListExtras <> Last.A var
-binder 15810:15810 <> l:168
-R15823:15828 Coq.Init.Datatypes <> option ind
-R15830:15830 CoLoR.ListExtras <> Last.A var
-R15845:15845 CoLoR.ListExtras <> l:168 var
-R15858:15860 Coq.Init.Datatypes <> nil constr
-R15865:15869 Coq.Init.Specif <> error def
-R15878:15879 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15880:15882 Coq.Init.Datatypes <> nil constr
-R15887:15891 Coq.Init.Specif <> value def
-R15902:15903 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R15911:15914 CoLoR.ListExtras <> last:169 def
-prf 15937:15943 <> last_eq
-R15962:15965 Coq.Init.Datatypes <> list ind
-R15967:15967 CoLoR.ListExtras <> Last.A var
-binder 15955:15956 <> l1:171
-binder 15958:15959 <> l2:172
-R15978:15981 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R15973:15975 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R15971:15972 CoLoR.ListExtras <> l1:171 var
-R15976:15977 CoLoR.ListExtras <> l2:172 var
-R15989:15991 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R15982:15985 CoLoR.ListExtras <> last def
-R15987:15988 CoLoR.ListExtras <> l1:171 var
-R15992:15995 CoLoR.ListExtras <> last def
-R15997:15998 CoLoR.ListExtras <> l2:172 var
-prf 16053:16060 <> last_app
-binder 16071:16071 <> a:173
-R16081:16084 Coq.Init.Datatypes <> list ind
-R16086:16086 CoLoR.ListExtras <> Last.A var
-binder 16074:16075 <> l1:174
-binder 16077:16078 <> l2:175
-R16114:16116 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R16094:16097 CoLoR.ListExtras <> last def
-R16102:16105 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16100:16101 CoLoR.ListExtras <> l1:174 var
-R16107:16110 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16106:16106 CoLoR.ListExtras <> a:173 var
-R16111:16112 CoLoR.ListExtras <> l2:175 var
-R16117:16120 CoLoR.ListExtras <> last def
-R16124:16127 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16123:16123 CoLoR.ListExtras <> a:173 var
-R16128:16129 CoLoR.ListExtras <> l2:175 var
-R16194:16197 CoLoR.ListExtras <> last def
-R16200:16200 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16209:16213 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16203:16206 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16215:16216 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16228:16231 CoLoR.ListExtras <> last def
-R16236:16239 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16241:16242 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16194:16197 CoLoR.ListExtras <> last def
-R16200:16200 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16209:16213 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16203:16206 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16215:16216 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16228:16231 CoLoR.ListExtras <> last def
-R16236:16239 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16241:16242 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16301:16304 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R16292:16295 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16297:16298 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16305:16307 Coq.Init.Datatypes <> nil constr
-R16301:16304 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R16292:16295 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16297:16298 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16305:16307 Coq.Init.Datatypes <> nil constr
-R16334:16337 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16339:16340 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16334:16337 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16339:16340 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-prf 16391:16408 <> dropLast_plus_last
-R16424:16427 Coq.Init.Datatypes <> list ind
-R16429:16429 CoLoR.ListExtras <> Last.A var
-binder 16420:16421 <> l1:176
-binder 16432:16432 <> a:177
-binder 16434:16434 <> b:178
-R16464:16467 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R16455:16457 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R16441:16444 CoLoR.ListExtras <> last def
-R16448:16451 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16447:16447 CoLoR.ListExtras <> a:177 var
-R16452:16453 CoLoR.ListExtras <> l1:176 var
-R16458:16461 Coq.Init.Datatypes <> Some constr
-R16463:16463 CoLoR.ListExtras <> b:178 var
-R16498:16500 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R16486:16489 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
-R16468:16475 CoLoR.ListExtras <> dropLast def
-R16479:16482 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16478:16478 CoLoR.ListExtras <> a:177 var
-R16483:16484 CoLoR.ListExtras <> l1:176 var
-R16491:16494 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16490:16490 CoLoR.ListExtras <> b:178 var
-R16495:16497 Coq.Init.Datatypes <> nil constr
-R16502:16505 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R16501:16501 CoLoR.ListExtras <> a:177 var
-R16506:16507 CoLoR.ListExtras <> l1:176 var
-R16654:16657 CoLoR.ListExtras Last <> sec
-sec 16793:16798 <> Remove
-var 16813:16813 Remove A
-var 16834:16836 Remove eqA
-R16840:16847 Coq.Relations.Relation_Definitions <> relation def
-R16849:16849 CoLoR.ListExtras <> Remove.A var
-var 16863:16869 Remove eqA_dec
-binder 16880:16880 <> x:181
-binder 16882:16882 <> y:182
-R16885:16885 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R16893:16897 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R16906:16906 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R16886:16888 CoLoR.ListExtras <> Remove.eqA var
-R16892:16892 CoLoR.ListExtras <> y:182 var
-R16890:16890 CoLoR.ListExtras <> x:181 var
-R16898:16898 Coq.Init.Logic <> ::type_scope:'~'_x not
-R16899:16901 CoLoR.ListExtras <> Remove.eqA var
-R16905:16905 CoLoR.ListExtras <> y:182 var
-R16903:16903 CoLoR.ListExtras <> x:181 var
-def 16921:16930 <> removeElem
-R16937:16937 CoLoR.ListExtras <> Remove.A var
-binder 16933:16934 <> el:184
-R16944:16947 Coq.Init.Datatypes <> list ind
-R16949:16949 CoLoR.ListExtras <> Remove.A var
-binder 16941:16941 <> l:185
-R16954:16957 Coq.Init.Datatypes <> list ind
-R16959:16959 CoLoR.ListExtras <> Remove.A var
-R16974:16974 CoLoR.ListExtras <> l:185 var
-R16987:16989 Coq.Init.Datatypes <> nil constr
-R16994:16996 Coq.Init.Datatypes <> nil constr
-R17006:17007 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R17004:17005 Coq.Lists.List <> hd def
-R17008:17009 Coq.Lists.List <> tl def
-R17026:17032 CoLoR.ListExtras <> Remove.eqA_dec var
-R17034:17035 CoLoR.ListExtras <> el:184 var
-R17053:17056 Coq.Init.Specif <> left constr
-R17074:17078 Coq.Init.Specif <> right constr
-R17087:17088 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R17089:17098 CoLoR.ListExtras <> removeElem:186 def
-R17100:17101 CoLoR.ListExtras <> el:184 var
-def 17137:17145 <> removeAll
-R17153:17156 Coq.Init.Datatypes <> list ind
-R17158:17158 CoLoR.ListExtras <> Remove.A var
-binder 17148:17148 <> l:188
-binder 17150:17150 <> m:189
-R17163:17166 Coq.Init.Datatypes <> list ind
-R17168:17168 CoLoR.ListExtras <> Remove.A var
-R17183:17183 CoLoR.ListExtras <> m:189 var
-R17196:17198 Coq.Init.Datatypes <> nil constr
-R17203:17203 CoLoR.ListExtras <> l:188 var
-R17213:17214 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R17211:17212 Coq.Lists.List <> hd def
-R17215:17216 Coq.Lists.List <> tl def
-R17221:17229 CoLoR.ListExtras <> removeAll:190 def
-R17232:17241 CoLoR.ListExtras <> removeElem def
-R17246:17246 CoLoR.ListExtras <> l:188 var
-prf 17270:17289 <> removeElem_length_in
-binder 17300:17300 <> a:192
-binder 17302:17302 <> l:193
-R17305:17305 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17336:17344 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17306:17312 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R17315:17316 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 17313:17314 <> a':194
-R17325:17328 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R17317:17319 CoLoR.ListExtras <> Remove.eqA var
-R17323:17324 CoLoR.ListExtras <> a':194 var
-R17321:17321 CoLoR.ListExtras <> a:192 var
-R17329:17330 Coq.Lists.List <> In def
-R17335:17335 CoLoR.ListExtras <> l:193 var
-R17332:17333 CoLoR.ListExtras <> a':194 var
-R17368:17370 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R17345:17350 Coq.Init.Datatypes <> length def
-R17353:17362 CoLoR.ListExtras <> removeElem def
-R17366:17366 CoLoR.ListExtras <> l:193 var
-R17364:17364 CoLoR.ListExtras <> a:192 var
-R17371:17374 Coq.Init.Peano <> pred abbrev
-R17377:17382 Coq.Init.Datatypes <> length def
-R17384:17384 CoLoR.ListExtras <> l:193 var
-R17485:17491 CoLoR.ListExtras <> Remove.eqA_dec var
-R17485:17491 CoLoR.ListExtras <> Remove.eqA_dec var
-R17521:17523 CoLoR.ListExtras <> Remove.eqA var
-R17521:17523 CoLoR.ListExtras <> Remove.eqA var
-R17586:17592 CoLoR.ListExtras <> Remove.eqA_dec var
-R17586:17592 CoLoR.ListExtras <> Remove.eqA_dec var
-R17718:17723 CoLoR.ListExtras Remove <> sec
-sec 17862:17865 <> Find
-var 17880:17880 Find A
-var 17901:17901 Find P
-R17906:17909 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R17905:17905 CoLoR.ListExtras <> Find.A var
-var 17927:17931 Find P_dec
-R17946:17946 CoLoR.ListExtras <> Find.A var
-binder 17942:17942 <> a:197
-R17949:17949 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R17953:17957 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R17962:17962 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R17950:17950 CoLoR.ListExtras <> Find.P var
-R17952:17952 CoLoR.ListExtras <> a:197 var
-R17958:17958 Coq.Init.Logic <> ::type_scope:'~'_x not
-R17959:17959 CoLoR.ListExtras <> Find.P var
-R17961:17961 CoLoR.ListExtras <> a:197 var
-prf 17972:17989 <> exists_in_list_dec
-binder 18000:18000 <> l:199
-R18005:18005 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R18029:18033 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R18058:18058 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R18006:18012 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R18014:18015 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 18013:18013 <> r:200
-R18019:18022 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R18016:18016 CoLoR.ListExtras <> Find.P var
-R18018:18018 CoLoR.ListExtras <> r:200 var
-R18023:18024 Coq.Lists.List <> In def
-R18028:18028 CoLoR.ListExtras <> l:199 var
-R18026:18026 CoLoR.ListExtras <> r:200 var
-R18034:18034 Coq.Init.Logic <> ::type_scope:'~'_x not
-R18035:18041 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R18043:18044 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 18042:18042 <> r:201
-R18048:18051 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R18045:18045 CoLoR.ListExtras <> Find.P var
-R18047:18047 CoLoR.ListExtras <> r:201 var
-R18052:18053 Coq.Lists.List <> In def
-R18057:18057 CoLoR.ListExtras <> l:199 var
-R18055:18055 CoLoR.ListExtras <> r:201 var
-R18145:18149 CoLoR.ListExtras <> Find.P_dec var
-R18145:18149 CoLoR.ListExtras <> Find.P_dec var
-def 18362:18371 <> find_first
-R18377:18380 Coq.Init.Datatypes <> list ind
-R18382:18382 CoLoR.ListExtras <> Find.A var
-binder 18374:18374 <> l:202
-R18387:18392 Coq.Init.Datatypes <> option ind
-R18394:18396 Coq.Init.Datatypes <> nat ind
-R18412:18412 CoLoR.ListExtras <> l:202 var
-R18425:18427 Coq.Init.Datatypes <> nil constr
-R18432:18435 Coq.Init.Datatypes <> None constr
-R18445:18446 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R18443:18444 Coq.Lists.List <> hd def
-R18447:18448 Coq.Lists.List <> tl def
-R18466:18470 CoLoR.ListExtras <> Find.P_dec var
-R18488:18491 Coq.Init.Specif <> left constr
-R18498:18501 Coq.Init.Datatypes <> Some constr
-R18513:18517 Coq.Init.Specif <> right constr
-R18532:18541 CoLoR.ListExtras <> find_first:203 def
-R18561:18564 Coq.Init.Datatypes <> None constr
-R18569:18572 Coq.Init.Datatypes <> None constr
-R18577:18580 Coq.Init.Datatypes <> Some constr
-R18587:18590 Coq.Init.Datatypes <> Some constr
-R18593:18593 Coq.Init.Datatypes <> S constr
-def 18634:18642 <> find_last
-R18648:18651 Coq.Init.Datatypes <> list ind
-R18653:18653 CoLoR.ListExtras <> Find.A var
-binder 18645:18645 <> l:205
-R18658:18663 Coq.Init.Datatypes <> option ind
-R18665:18667 Coq.Init.Datatypes <> nat ind
-R18683:18683 CoLoR.ListExtras <> l:205 var
-R18696:18698 Coq.Init.Datatypes <> nil constr
-R18703:18706 Coq.Init.Datatypes <> None constr
-R18716:18717 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
-R18714:18715 Coq.Lists.List <> hd def
-R18718:18719 Coq.Lists.List <> tl def
-R18737:18745 CoLoR.ListExtras <> find_last:206 def
-R18763:18766 Coq.Init.Datatypes <> Some constr
-R18773:18776 Coq.Init.Datatypes <> Some constr
-R18779:18779 Coq.Init.Datatypes <> S constr
-R18792:18795 Coq.Init.Datatypes <> None constr
-R18808:18812 CoLoR.ListExtras <> Find.P_dec var
-R18825:18828 Coq.Init.Specif <> left constr
-R18835:18838 Coq.Init.Datatypes <> Some constr
-R18845:18849 Coq.Init.Specif <> right constr
-R18856:18859 Coq.Init.Datatypes <> None constr
-prf 18894:18906 <> find_first_ok
-binder 18917:18917 <> l:208
-binder 18919:18919 <> p:209
-R18943:18950 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R18934:18936 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R18922:18931 CoLoR.ListExtras <> find_first def
-R18933:18933 CoLoR.ListExtras <> l:208 var
-R18937:18940 Coq.Init.Datatypes <> Some constr
-R18942:18942 CoLoR.ListExtras <> p:209 var
-R18951:18957 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R18960:18961 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 18958:18959 <> el:210
-R18985:18988 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R18975:18977 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R18962:18970 Coq.Lists.List <> nth_error def
-R18974:18974 CoLoR.ListExtras <> p:209 var
-R18972:18972 CoLoR.ListExtras <> l:208 var
-R18978:18981 Coq.Init.Datatypes <> Some constr
-R18983:18984 CoLoR.ListExtras <> el:210 var
-R18989:18989 CoLoR.ListExtras <> Find.P var
-R18991:18992 CoLoR.ListExtras <> el:210 var
-R19064:19068 CoLoR.ListExtras <> Find.P_dec var
-R19064:19068 CoLoR.ListExtras <> Find.P_dec var
-R19169:19178 CoLoR.ListExtras <> find_first def
-R19169:19178 CoLoR.ListExtras <> find_first def
-R19264:19273 CoLoR.ListExtras <> find_first def
-R19264:19273 CoLoR.ListExtras <> find_first def
-prf 19349:19360 <> find_last_ok
-binder 19371:19371 <> l:211
-binder 19373:19373 <> p:212
-R19396:19403 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R19387:19389 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R19376:19384 CoLoR.ListExtras <> find_last def
-R19386:19386 CoLoR.ListExtras <> l:211 var
-R19390:19393 Coq.Init.Datatypes <> Some constr
-R19395:19395 CoLoR.ListExtras <> p:212 var
-R19404:19410 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R19413:19414 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 19411:19412 <> el:213
-R19438:19441 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R19428:19430 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R19415:19423 Coq.Lists.List <> nth_error def
-R19427:19427 CoLoR.ListExtras <> p:212 var
-R19425:19425 CoLoR.ListExtras <> l:211 var
-R19431:19434 Coq.Init.Datatypes <> Some constr
-R19436:19437 CoLoR.ListExtras <> el:213 var
-R19442:19442 CoLoR.ListExtras <> Find.P var
-R19444:19445 CoLoR.ListExtras <> el:213 var
-R19517:19521 CoLoR.ListExtras <> Find.P_dec var
-R19517:19521 CoLoR.ListExtras <> Find.P_dec var
-R19643:19651 CoLoR.ListExtras <> find_last def
-R19643:19651 CoLoR.ListExtras <> find_last def
-R19758:19766 CoLoR.ListExtras <> find_last def
-R19758:19766 CoLoR.ListExtras <> find_last def
-R19832:19840 CoLoR.ListExtras <> find_last def
-R19832:19840 CoLoR.ListExtras <> find_last def
-prf 19916:19929 <> find_last_last
-binder 19939:19939 <> l:214
-binder 19941:19941 <> p:215
-binder 19943:19944 <> el:216
-R19970:19973 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R19960:19962 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R19947:19955 Coq.Lists.List <> nth_error def
-R19959:19959 CoLoR.ListExtras <> p:215 var
-R19957:19957 CoLoR.ListExtras <> l:214 var
-R19963:19966 Coq.Init.Datatypes <> Some constr
-R19968:19969 CoLoR.ListExtras <> el:216 var
-R19978:19985 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R19974:19974 CoLoR.ListExtras <> Find.P var
-R19976:19977 CoLoR.ListExtras <> el:216 var
-R19986:19992 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R19994:19995 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 19993:19993 <> q:217
-R20016:20019 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R20007:20009 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R19996:20004 CoLoR.ListExtras <> find_last def
-R20006:20006 CoLoR.ListExtras <> l:214 var
-R20010:20013 Coq.Init.Datatypes <> Some constr
-R20015:20015 CoLoR.ListExtras <> q:217 var
-R20021:20024 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
-R20020:20020 CoLoR.ListExtras <> q:217 var
-R20025:20025 CoLoR.ListExtras <> p:215 var
-R20146:20150 CoLoR.ListExtras <> Find.P_dec var
-R20146:20150 CoLoR.ListExtras <> Find.P_dec var
-R20171:20179 CoLoR.ListExtras <> find_last def
-R20171:20179 CoLoR.ListExtras <> find_last def
-R20197:20197 Coq.Init.Datatypes <> S constr
-R20197:20197 Coq.Init.Datatypes <> S constr
-R20277:20277 CoLoR.ListExtras <> Find.P var
-R20277:20277 CoLoR.ListExtras <> Find.P var
-R20354:20354 Coq.Init.Datatypes <> S constr
-R20354:20354 Coq.Init.Datatypes <> S constr
-prf 20422:20437 <> find_first_exist
-binder 20448:20448 <> x:218
-binder 20450:20450 <> l:219
-R20459:20462 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R20453:20454 Coq.Lists.List <> In def
-R20458:20458 CoLoR.ListExtras <> l:219 var
-R20456:20456 CoLoR.ListExtras <> x:218 var
-R20466:20469 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R20463:20463 CoLoR.ListExtras <> Find.P var
-R20465:20465 CoLoR.ListExtras <> x:218 var
-R20482:20485 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R20470:20479 CoLoR.ListExtras <> find_first def
-R20481:20481 CoLoR.ListExtras <> l:219 var
-R20486:20489 Coq.Init.Datatypes <> None constr
-R20587:20591 CoLoR.ListExtras <> Find.P_dec var
-R20587:20591 CoLoR.ListExtras <> Find.P_dec var
-R20627:20631 CoLoR.ListExtras <> Find.P_dec var
-R20627:20631 CoLoR.ListExtras <> Find.P_dec var
-R20667:20676 CoLoR.ListExtras <> find_first def
-R20667:20676 CoLoR.ListExtras <> find_first def
-prf 20709:20723 <> find_first_Some
-binder 20734:20734 <> l:220
-R20759:20762 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R20751:20754 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
-R20739:20748 CoLoR.ListExtras <> find_first def
-R20750:20750 CoLoR.ListExtras <> l:220 var
-R20755:20758 Coq.Init.Datatypes <> None constr
-R20763:20769 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R20771:20772 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 20770:20770 <> z:221
-R20779:20782 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R20773:20774 Coq.Lists.List <> In def
-R20778:20778 CoLoR.ListExtras <> l:220 var
-R20776:20776 CoLoR.ListExtras <> z:221 var
-R20783:20783 CoLoR.ListExtras <> Find.P var
-R20785:20785 CoLoR.ListExtras <> z:221 var
-R20858:20862 CoLoR.ListExtras <> Find.P_dec var
-R20858:20862 CoLoR.ListExtras <> Find.P_dec var
-R20909:20918 CoLoR.ListExtras <> find_first def
-R20909:20918 CoLoR.ListExtras <> find_first def
-R20943:20949 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R20955:20956 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R20954:20954 CoLoR.ListExtras <> Find.A var
-binder 20950:20950 <> z:222
-R20963:20966 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R20957:20958 Coq.Lists.List <> In def
-R20960:20960 CoLoR.ListExtras <> z:222 var
-R20967:20967 CoLoR.ListExtras <> Find.P var
-R20969:20969 CoLoR.ListExtras <> z:222 var
-R20943:20949 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R20955:20956 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R20954:20954 CoLoR.ListExtras <> Find.A var
-binder 20950:20950 <> z:223
-R20963:20966 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R20957:20958 Coq.Lists.List <> In def
-R20960:20960 CoLoR.ListExtras <> z:223 var
-R20967:20967 CoLoR.ListExtras <> Find.P var
-R20969:20969 CoLoR.ListExtras <> z:223 var
-prf 21047:21067 <> find_first_Some_bound
-binder 21078:21078 <> l:224
-binder 21080:21080 <> x:225
-R21106:21109 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21097:21099 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R21085:21094 CoLoR.ListExtras <> find_first def
-R21096:21096 CoLoR.ListExtras <> l:224 var
-R21100:21103 Coq.Init.Datatypes <> Some constr
-R21105:21105 CoLoR.ListExtras <> x:225 var
-R21111:21113 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
-R21110:21110 CoLoR.ListExtras <> x:225 var
-R21114:21119 Coq.Init.Datatypes <> length def
-R21121:21121 CoLoR.ListExtras <> l:224 var
-R21194:21198 CoLoR.ListExtras <> Find.P_dec var
-R21194:21198 CoLoR.ListExtras <> Find.P_dec var
-R21246:21255 CoLoR.ListExtras <> find_first def
-R21246:21255 CoLoR.ListExtras <> find_first def
-R21294:21299 Coq.Arith.Lt <> lt_n_S abbrev
-R21294:21299 Coq.Arith.Lt <> lt_n_S abbrev
-prf 21338:21351 <> In_find_first2
-binder 21362:21362 <> l:226
-binder 21364:21364 <> z:227
-R21390:21393 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21381:21383 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R21369:21378 CoLoR.ListExtras <> find_first def
-R21380:21380 CoLoR.ListExtras <> l:226 var
-R21384:21387 Coq.Init.Datatypes <> Some constr
-R21389:21389 CoLoR.ListExtras <> z:227 var
-R21394:21400 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R21402:21403 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 21401:21401 <> y:228
-R21417:21420 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R21408:21410 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R21405:21405 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
-R21407:21407 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
-R21404:21404 CoLoR.ListExtras <> l:226 var
-R21406:21406 CoLoR.ListExtras <> z:227 var
-R21411:21414 Coq.Init.Datatypes <> Some constr
-R21416:21416 CoLoR.ListExtras <> y:228 var
-R21421:21421 CoLoR.ListExtras <> Find.P var
-R21423:21423 CoLoR.ListExtras <> y:228 var
-R21491:21495 CoLoR.ListExtras <> Find.P_dec var
-R21491:21495 CoLoR.ListExtras <> Find.P_dec var
-R21561:21570 CoLoR.ListExtras <> find_first def
-R21561:21570 CoLoR.ListExtras <> find_first def
-R21624:21630 Coq.Init.Logic <> eq_refl constr
-R21633:21636 Coq.Init.Datatypes <> Some constr
-R21624:21630 Coq.Init.Logic <> eq_refl constr
-R21633:21636 Coq.Init.Datatypes <> Some constr
-prf 21693:21708 <> find_first_exact
-binder 21719:21719 <> l:229
-binder 21721:21721 <> i:230
-R21747:21750 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R21738:21740 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R21726:21735 CoLoR.ListExtras <> find_first def
-R21737:21737 CoLoR.ListExtras <> l:229 var
-R21741:21744 Coq.Init.Datatypes <> Some constr
-R21746:21746 CoLoR.ListExtras <> i:230 var
-R21751:21757 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R21759:21760 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 21758:21758 <> z:231
-R21774:21777 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R21765:21767 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R21762:21762 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
-R21764:21764 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
-R21761:21761 CoLoR.ListExtras <> l:229 var
-R21763:21763 CoLoR.ListExtras <> i:230 var
-R21768:21771 Coq.Init.Datatypes <> Some constr
-R21773:21773 CoLoR.ListExtras <> z:231 var
-R21778:21778 CoLoR.ListExtras <> Find.P var
-R21780:21780 CoLoR.ListExtras <> z:231 var
-R21853:21857 CoLoR.ListExtras <> Find.P_dec var
-R21853:21857 CoLoR.ListExtras <> Find.P_dec var
-R21917:21926 CoLoR.ListExtras <> find_first def
-R21917:21926 CoLoR.ListExtras <> find_first def
-R21997:22000 CoLoR.ListExtras Find <> sec
-R22014:22027 CoLoR.ListExtras <> In_find_first2 thm
-R22014:22027 CoLoR.ListExtras <> In_find_first2 thm
-sec 22057:22065 <> Find_more
-var 22078:22078 Find_more A
-var 22098:22098 Find_more P
-var 22100:22100 Find_more Q
-R22105:22108 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R22104:22104 CoLoR.ListExtras <> Find_more.A var
-var 22124:22128 Find_more P_dec
-R22143:22143 CoLoR.ListExtras <> Find_more.A var
-binder 22139:22139 <> a:235
-R22146:22146 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R22150:22154 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R22159:22159 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R22147:22147 CoLoR.ListExtras <> Find_more.P var
-R22149:22149 CoLoR.ListExtras <> a:235 var
-R22155:22155 Coq.Init.Logic <> ::type_scope:'~'_x not
-R22156:22156 CoLoR.ListExtras <> Find_more.P var
-R22158:22158 CoLoR.ListExtras <> a:235 var
-var 22171:22175 Find_more Q_dec
-R22190:22190 CoLoR.ListExtras <> Find_more.A var
-binder 22186:22186 <> a:237
-R22193:22193 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R22197:22201 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R9826:9826 CoLoR.ListExtras <> p:111 var
+R9852:9854 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R9831:9836 Coq.Init.Datatypes <> length def
+R9839:9846 CoLoR.ListExtras <> drop_nth def
+R9850:9850 CoLoR.ListExtras <> p:111 var
+R9848:9848 CoLoR.ListExtras <> l:112 var
+R9855:9858 Coq.Init.Peano <> pred abbrev
+R9861:9866 Coq.Init.Datatypes <> length def
+R9868:9868 CoLoR.ListExtras <> l:112 var
+R9936:9943 CoLoR.ListExtras <> drop_nth def
+R9965:9977 CoLoR.ListExtras <> finalSeg_cons thm
+R9965:9977 CoLoR.ListExtras <> finalSeg_cons thm
+R9965:9977 CoLoR.ListExtras <> finalSeg_cons thm
+R10001:10008 CoLoR.ListExtras <> drop_nth def
+R10020:10020 Coq.Init.Datatypes <> S constr
+R10012:10015 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10033:10036 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10037:10044 CoLoR.ListExtras <> drop_nth def
+R10001:10008 CoLoR.ListExtras <> drop_nth def
+R10020:10020 Coq.Init.Datatypes <> S constr
+R10012:10015 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10033:10036 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10037:10044 CoLoR.ListExtras <> drop_nth def
+prf 10152:10166 <> drop_nth_beyond
+binder 10177:10177 <> l:113
+binder 10179:10179 <> p:114
+R10195:10198 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R10190:10193 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R10182:10187 Coq.Init.Datatypes <> length def
+R10189:10189 CoLoR.ListExtras <> l:113 var
+R10194:10194 CoLoR.ListExtras <> p:114 var
+R10211:10213 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R10199:10206 CoLoR.ListExtras <> drop_nth def
+R10210:10210 CoLoR.ListExtras <> p:114 var
+R10208:10208 CoLoR.ListExtras <> l:113 var
+R10214:10214 CoLoR.ListExtras <> l:113 var
+R10326:10333 CoLoR.ListExtras <> drop_nth def
+R10343:10343 Coq.Init.Datatypes <> S constr
+R10337:10338 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10356:10359 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10360:10367 CoLoR.ListExtras <> drop_nth def
+R10326:10333 CoLoR.ListExtras <> drop_nth def
+R10343:10343 Coq.Init.Datatypes <> S constr
+R10337:10338 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10356:10359 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10360:10367 CoLoR.ListExtras <> drop_nth def
+prf 10438:10452 <> drop_nth_length
+binder 10463:10463 <> l:115
+binder 10465:10465 <> p:116
+R10493:10496 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R10472:10477 Coq.Init.Datatypes <> length def
+R10480:10487 CoLoR.ListExtras <> drop_nth def
+R10491:10491 CoLoR.ListExtras <> p:116 var
+R10489:10489 CoLoR.ListExtras <> l:115 var
+R10497:10500 Coq.Init.Peano <> pred abbrev
+R10503:10508 Coq.Init.Datatypes <> length def
+R10510:10510 CoLoR.ListExtras <> l:115 var
+R10551:10559 Coq.Arith.Compare_dec <> le_gt_dec def
+R10562:10567 Coq.Init.Datatypes <> length def
+R10551:10559 Coq.Arith.Compare_dec <> le_gt_dec def
+R10562:10567 Coq.Init.Datatypes <> length def
+R10588:10602 CoLoR.ListExtras <> drop_nth_beyond thm
+R10588:10602 CoLoR.ListExtras <> drop_nth_beyond thm
+R10588:10602 CoLoR.ListExtras <> drop_nth_beyond thm
+R10588:10602 CoLoR.ListExtras <> drop_nth_beyond thm
+R10635:10652 CoLoR.ListExtras <> drop_nth_in_length thm
+R10635:10652 CoLoR.ListExtras <> drop_nth_in_length thm
+R10635:10652 CoLoR.ListExtras <> drop_nth_in_length thm
+R10635:10652 CoLoR.ListExtras <> drop_nth_in_length thm
+prf 10677:10689 <> drop_nth_cons
+binder 10700:10700 <> a:117
+binder 10702:10702 <> l:118
+R10722:10724 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R10705:10712 CoLoR.ListExtras <> drop_nth def
+R10716:10717 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10715:10715 CoLoR.ListExtras <> a:117 var
+R10718:10718 CoLoR.ListExtras <> l:118 var
+R10725:10725 CoLoR.ListExtras <> l:118 var
+R10761:10768 CoLoR.ListExtras <> drop_nth def
+R10790:10802 CoLoR.ListExtras <> finalSeg_cons thm
+R10790:10802 CoLoR.ListExtras <> finalSeg_cons thm
+R10790:10802 CoLoR.ListExtras <> finalSeg_cons thm
+prf 10830:10842 <> drop_nth_succ
+binder 10853:10853 <> a:119
+binder 10855:10855 <> l:120
+binder 10857:10857 <> p:121
+R10885:10887 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R10864:10871 CoLoR.ListExtras <> drop_nth def
+R10881:10881 Coq.Init.Datatypes <> S constr
+R10883:10883 CoLoR.ListExtras <> p:121 var
+R10875:10876 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10874:10874 CoLoR.ListExtras <> a:119 var
+R10877:10877 CoLoR.ListExtras <> l:120 var
+R10889:10892 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R10888:10888 CoLoR.ListExtras <> a:119 var
+R10893:10900 CoLoR.ListExtras <> drop_nth def
+R10904:10904 CoLoR.ListExtras <> p:121 var
+R10902:10902 CoLoR.ListExtras <> l:120 var
+R10928:10935 CoLoR.ListExtras <> drop_nth def
+R10938:10945 CoLoR.ListExtras <> finalSeg def
+prf 10973:10991 <> drop_nth_insert_nth
+binder 11002:11002 <> l:122
+binder 11004:11004 <> p:123
+binder 11006:11007 <> el:124
+R11027:11030 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11022:11025 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R11014:11019 Coq.Init.Datatypes <> length def
+R11021:11021 CoLoR.ListExtras <> l:122 var
+R11026:11026 CoLoR.ListExtras <> p:123 var
+R11061:11063 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11031:11038 CoLoR.ListExtras <> drop_nth def
+R11060:11060 CoLoR.ListExtras <> p:123 var
+R11041:11050 CoLoR.ListExtras <> insert_nth def
+R11056:11057 CoLoR.ListExtras <> el:124 var
+R11054:11054 CoLoR.ListExtras <> p:123 var
+R11052:11052 CoLoR.ListExtras <> l:122 var
+R11064:11064 CoLoR.ListExtras <> l:122 var
+R11170:11179 CoLoR.ListExtras <> insert_nth def
+R11201:11213 CoLoR.ListExtras <> finalSeg_full thm
+R11201:11213 CoLoR.ListExtras <> finalSeg_full thm
+R11201:11213 CoLoR.ListExtras <> finalSeg_full thm
+R11227:11234 CoLoR.ListExtras <> drop_nth def
+R11256:11268 CoLoR.ListExtras <> finalSeg_cons thm
+R11256:11268 CoLoR.ListExtras <> finalSeg_cons thm
+R11256:11268 CoLoR.ListExtras <> finalSeg_cons thm
+R11296:11303 CoLoR.ListExtras <> drop_nth def
+R11335:11335 Coq.Init.Datatypes <> S constr
+R11306:11315 CoLoR.ListExtras <> insert_nth def
+R11325:11325 Coq.Init.Datatypes <> S constr
+R11319:11320 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11354:11357 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11358:11365 CoLoR.ListExtras <> drop_nth def
+R11368:11377 CoLoR.ListExtras <> insert_nth def
+R11296:11303 CoLoR.ListExtras <> drop_nth def
+R11335:11335 Coq.Init.Datatypes <> S constr
+R11306:11315 CoLoR.ListExtras <> insert_nth def
+R11325:11325 Coq.Init.Datatypes <> S constr
+R11319:11320 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11354:11357 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11358:11365 CoLoR.ListExtras <> drop_nth def
+R11368:11377 CoLoR.ListExtras <> insert_nth def
+prf 11442:11460 <> insert_nth_drop_nth
+binder 11471:11471 <> p:125
+binder 11473:11473 <> l:126
+binder 11475:11476 <> el:127
+R11502:11509 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R11492:11494 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11479:11487 Coq.Lists.List <> nth_error def
+R11491:11491 CoLoR.ListExtras <> p:125 var
+R11489:11489 CoLoR.ListExtras <> l:126 var
+R11495:11498 Coq.Init.Datatypes <> Some constr
+R11500:11501 CoLoR.ListExtras <> el:127 var
+R11540:11542 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R11510:11519 CoLoR.ListExtras <> insert_nth def
+R11538:11539 CoLoR.ListExtras <> el:127 var
+R11536:11536 CoLoR.ListExtras <> p:125 var
+R11522:11529 CoLoR.ListExtras <> drop_nth def
+R11533:11533 CoLoR.ListExtras <> p:125 var
+R11531:11531 CoLoR.ListExtras <> l:126 var
+R11543:11543 CoLoR.ListExtras <> l:126 var
+R11625:11632 CoLoR.ListExtras <> drop_nth def
+R11635:11644 CoLoR.ListExtras <> insert_nth def
+R11666:11678 CoLoR.ListExtras <> finalSeg_cons thm
+R11681:11693 CoLoR.ListExtras <> finalSeg_full thm
+R11666:11678 CoLoR.ListExtras <> finalSeg_cons thm
+R11666:11678 CoLoR.ListExtras <> finalSeg_cons thm
+R11681:11693 CoLoR.ListExtras <> finalSeg_full thm
+R11681:11693 CoLoR.ListExtras <> finalSeg_full thm
+R11766:11773 CoLoR.ListExtras <> drop_nth def
+R11776:11785 CoLoR.ListExtras <> insert_nth def
+R11807:11814 CoLoR.ListExtras <> finalSeg def
+R11824:11824 Coq.Init.Datatypes <> S constr
+R11827:11827 Coq.Init.Datatypes <> S constr
+R11818:11819 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11840:11847 CoLoR.ListExtras <> finalSeg def
+R11852:11852 Coq.Init.Datatypes <> S constr
+R11807:11814 CoLoR.ListExtras <> finalSeg def
+R11824:11824 Coq.Init.Datatypes <> S constr
+R11827:11827 Coq.Init.Datatypes <> S constr
+R11818:11819 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11840:11847 CoLoR.ListExtras <> finalSeg def
+R11852:11852 Coq.Init.Datatypes <> S constr
+R11840:11847 CoLoR.ListExtras <> finalSeg def
+R11852:11852 Coq.Init.Datatypes <> S constr
+R11869:11876 CoLoR.ListExtras <> drop_nth def
+R11869:11876 CoLoR.ListExtras <> drop_nth def
+R11896:11903 CoLoR.ListExtras <> finalSeg def
+R11924:11924 Coq.Init.Datatypes <> S constr
+R11907:11908 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11909:11916 CoLoR.ListExtras <> drop_nth def
+R11936:11943 CoLoR.ListExtras <> finalSeg def
+R11946:11953 CoLoR.ListExtras <> drop_nth def
+R11896:11903 CoLoR.ListExtras <> finalSeg def
+R11924:11924 Coq.Init.Datatypes <> S constr
+R11907:11908 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R11909:11916 CoLoR.ListExtras <> drop_nth def
+R11936:11943 CoLoR.ListExtras <> finalSeg def
+R11946:11953 CoLoR.ListExtras <> drop_nth def
+R11974:11983 CoLoR.ListExtras <> insert_nth def
+R11986:11993 CoLoR.ListExtras <> drop_nth def
+R11974:11983 CoLoR.ListExtras <> insert_nth def
+R11986:11993 CoLoR.ListExtras <> drop_nth def
+R12045:12051 CoLoR.ListExtras DropNth <> sec
+sec 12181:12187 <> CountIn
+var 12208:12208 CountIn A
+var 12219:12221 CountIn eqA
+var 12242:12248 CountIn eqA_dec
+var 12293:12307 CountIn eqA_Equivalence
+R12225:12232 Coq.Relations.Relation_Definitions <> relation def
+R12234:12234 CoLoR.ListExtras <> A:128 var
+binder 12259:12259 <> x:130
+binder 12261:12261 <> y:131
+R12264:12264 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R12272:12276 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R12285:12285 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R12265:12267 CoLoR.ListExtras <> eqA:129 var
+R12271:12271 CoLoR.ListExtras <> y:131 var
+R12269:12269 CoLoR.ListExtras <> x:130 var
+R12277:12277 Coq.Init.Logic <> ::type_scope:'~'_x not
+R12278:12280 CoLoR.ListExtras <> eqA:129 var
+R12284:12284 CoLoR.ListExtras <> y:131 var
+R12282:12282 CoLoR.ListExtras <> x:130 var
+R12311:12321 Coq.Classes.RelationClasses <> Equivalence class
+R12323:12325 CoLoR.ListExtras <> eqA:129 var
+def 12341:12347 <> countIn
+R12353:12353 CoLoR.ListExtras <> CountIn.A var
+binder 12350:12350 <> a:134
+R12360:12363 Coq.Init.Datatypes <> list ind
+R12365:12365 CoLoR.ListExtras <> CountIn.A var
+binder 12357:12357 <> l:135
+R12370:12372 Coq.Init.Datatypes <> nat ind
+R12387:12387 CoLoR.ListExtras <> l:135 var
+R12402:12404 Coq.Init.Datatypes <> nil constr
+R12420:12421 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R12436:12442 CoLoR.ListExtras <> CountIn.eqA_dec var
+R12444:12444 CoLoR.ListExtras <> a:134 var
+R12456:12459 Coq.Init.Specif <> left constr
+R12466:12466 Coq.Init.Datatypes <> S constr
+R12468:12474 CoLoR.ListExtras <> countIn:136 def
+R12476:12476 CoLoR.ListExtras <> a:134 var
+R12485:12489 Coq.Init.Specif <> right constr
+R12496:12502 CoLoR.ListExtras <> countIn:136 def
+R12504:12504 CoLoR.ListExtras <> a:134 var
+prf 12532:12541 <> in_countIn
+binder 12552:12552 <> a:138
+binder 12554:12555 <> a':139
+binder 12557:12557 <> l:140
+R12566:12569 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12560:12561 Coq.Lists.List <> In def
+R12565:12565 CoLoR.ListExtras <> l:140 var
+R12563:12563 CoLoR.ListExtras <> a:138 var
+R12578:12581 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12570:12572 CoLoR.ListExtras <> CountIn.eqA var
+R12576:12577 CoLoR.ListExtras <> a':139 var
+R12574:12574 CoLoR.ListExtras <> a:138 var
+R12594:12596 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R12582:12588 CoLoR.ListExtras <> countIn def
+R12593:12593 CoLoR.ListExtras <> l:140 var
+R12590:12591 CoLoR.ListExtras <> a':139 var
+R12680:12686 CoLoR.ListExtras <> CountIn.eqA_dec var
+R12680:12686 CoLoR.ListExtras <> CountIn.eqA_dec var
+R12716:12718 CoLoR.ListExtras <> CountIn.eqA var
+R12716:12718 CoLoR.ListExtras <> CountIn.eqA var
+R12752:12758 CoLoR.ListExtras <> CountIn.eqA_dec var
+R12752:12758 CoLoR.ListExtras <> CountIn.eqA_dec var
+prf 12817:12828 <> count_pos_in
+binder 12839:12839 <> a:141
+R12845:12848 Coq.Init.Datatypes <> list ind
+R12850:12850 CoLoR.ListExtras <> CountIn.A var
+binder 12842:12842 <> l:142
+R12873:12876 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R12869:12871 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R12858:12864 CoLoR.ListExtras <> countIn def
+R12868:12868 CoLoR.ListExtras <> l:142 var
+R12866:12866 CoLoR.ListExtras <> a:141 var
+R12877:12883 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R12886:12887 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 12884:12885 <> a':143
+R12896:12899 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R12888:12890 CoLoR.ListExtras <> CountIn.eqA var
+R12894:12895 CoLoR.ListExtras <> a':143 var
+R12892:12892 CoLoR.ListExtras <> a:141 var
+R12900:12901 Coq.Lists.List <> In def
+R12906:12906 CoLoR.ListExtras <> l:142 var
+R12903:12904 CoLoR.ListExtras <> a':143 var
+R12975:12981 CoLoR.ListExtras <> CountIn.eqA_dec var
+R12975:12981 CoLoR.ListExtras <> CountIn.eqA_dec var
+prf 13115:13125 <> countIn_nth
+binder 13136:13136 <> a:144
+R13142:13145 Coq.Init.Datatypes <> list ind
+R13147:13147 CoLoR.ListExtras <> CountIn.A var
+binder 13139:13139 <> l:145
+R13166:13173 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13162:13164 Coq.Init.Peano <> ::nat_scope:x_'>'_x not
+R13151:13157 CoLoR.ListExtras <> countIn def
+R13161:13161 CoLoR.ListExtras <> l:145 var
+R13159:13159 CoLoR.ListExtras <> a:144 var
+R13174:13180 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R13182:13183 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 13181:13181 <> p:146
+R13184:13190 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R13193:13194 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 13191:13192 <> a':147
+R13203:13206 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R13195:13197 CoLoR.ListExtras <> CountIn.eqA var
+R13201:13202 CoLoR.ListExtras <> a':147 var
+R13199:13199 CoLoR.ListExtras <> a:144 var
+R13220:13222 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R13207:13215 Coq.Lists.List <> nth_error def
+R13219:13219 CoLoR.ListExtras <> p:146 var
+R13217:13217 CoLoR.ListExtras <> l:145 var
+R13223:13226 Coq.Init.Datatypes <> Some constr
+R13228:13229 CoLoR.ListExtras <> a':147 var
+R13316:13322 CoLoR.ListExtras <> CountIn.eqA_dec var
+R13316:13322 CoLoR.ListExtras <> CountIn.eqA_dec var
+R13438:13438 Coq.Init.Datatypes <> S constr
+R13438:13438 Coq.Init.Datatypes <> S constr
+prf 13487:13504 <> countIn_dropNth_eq
+binder 13515:13515 <> l:148
+binder 13517:13517 <> p:149
+binder 13519:13520 <> el:150
+binder 13522:13524 <> el':151
+R13555:13558 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13544:13546 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R13531:13539 Coq.Lists.List <> nth_error def
+R13543:13543 CoLoR.ListExtras <> p:149 var
+R13541:13541 CoLoR.ListExtras <> l:148 var
+R13547:13550 Coq.Init.Datatypes <> Some constr
+R13552:13554 CoLoR.ListExtras <> el':151 var
+R13569:13577 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R13559:13561 CoLoR.ListExtras <> CountIn.eqA var
+R13566:13568 CoLoR.ListExtras <> el':151 var
+R13563:13564 CoLoR.ListExtras <> el:150 var
+R13603:13605 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R13578:13584 CoLoR.ListExtras <> countIn def
+R13590:13597 CoLoR.ListExtras <> drop_nth def
+R13601:13601 CoLoR.ListExtras <> p:149 var
+R13599:13599 CoLoR.ListExtras <> l:148 var
+R13586:13587 CoLoR.ListExtras <> el:150 var
+R13618:13620 Coq.Init.Peano <> ::nat_scope:x_'-'_x not
+R13606:13612 CoLoR.ListExtras <> countIn def
+R13617:13617 CoLoR.ListExtras <> l:148 var
+R13614:13615 CoLoR.ListExtras <> el:150 var
+R13719:13731 CoLoR.ListExtras <> drop_nth_cons thm
+R13744:13750 CoLoR.ListExtras <> CountIn.eqA_dec var
+R13719:13731 CoLoR.ListExtras <> drop_nth_cons thm
+R13719:13731 CoLoR.ListExtras <> drop_nth_cons thm
+R13744:13750 CoLoR.ListExtras <> CountIn.eqA_dec var
+R13780:13782 CoLoR.ListExtras <> CountIn.eqA var
+R13780:13782 CoLoR.ListExtras <> CountIn.eqA var
+R13855:13867 CoLoR.ListExtras <> drop_nth_succ thm
+R13855:13867 CoLoR.ListExtras <> drop_nth_succ thm
+R13855:13867 CoLoR.ListExtras <> drop_nth_succ thm
+R13931:13937 CoLoR.ListExtras <> CountIn.eqA_dec var
+R13931:13937 CoLoR.ListExtras <> CountIn.eqA_dec var
+R13972:13982 CoLoR.ListUtil <> nth_some_in thm
+R13972:13982 CoLoR.ListUtil <> nth_some_in thm
+R14011:14013 CoLoR.ListExtras <> CountIn.eqA var
+R14011:14013 CoLoR.ListExtras <> CountIn.eqA var
+R14053:14062 CoLoR.ListExtras <> in_countIn thm
+R14053:14062 CoLoR.ListExtras <> in_countIn thm
+prf 14104:14122 <> countIn_dropNth_neq
+binder 14133:14133 <> l:152
+binder 14135:14135 <> p:153
+binder 14137:14138 <> el:154
+binder 14140:14142 <> el':155
+R14173:14176 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14162:14164 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14149:14157 Coq.Lists.List <> nth_error def
+R14161:14161 CoLoR.ListExtras <> p:153 var
+R14159:14159 CoLoR.ListExtras <> l:152 var
+R14165:14168 Coq.Init.Datatypes <> Some constr
+R14170:14172 CoLoR.ListExtras <> el':155 var
+R14188:14195 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14177:14177 Coq.Init.Logic <> ::type_scope:'~'_x not
+R14178:14180 CoLoR.ListExtras <> CountIn.eqA var
+R14185:14187 CoLoR.ListExtras <> el':155 var
+R14182:14183 CoLoR.ListExtras <> el:154 var
+R14221:14223 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14196:14202 CoLoR.ListExtras <> countIn def
+R14208:14215 CoLoR.ListExtras <> drop_nth def
+R14219:14219 CoLoR.ListExtras <> p:153 var
+R14217:14217 CoLoR.ListExtras <> l:152 var
+R14204:14205 CoLoR.ListExtras <> el:154 var
+R14224:14230 CoLoR.ListExtras <> countIn def
+R14235:14235 CoLoR.ListExtras <> l:152 var
+R14232:14233 CoLoR.ListExtras <> el:154 var
+R14333:14345 CoLoR.ListExtras <> drop_nth_cons thm
+R14358:14364 CoLoR.ListExtras <> CountIn.eqA_dec var
+R14333:14345 CoLoR.ListExtras <> drop_nth_cons thm
+R14333:14345 CoLoR.ListExtras <> drop_nth_cons thm
+R14358:14364 CoLoR.ListExtras <> CountIn.eqA_dec var
+R14394:14396 CoLoR.ListExtras <> CountIn.eqA var
+R14394:14396 CoLoR.ListExtras <> CountIn.eqA var
+R14469:14481 CoLoR.ListExtras <> drop_nth_succ thm
+R14469:14481 CoLoR.ListExtras <> drop_nth_succ thm
+R14469:14481 CoLoR.ListExtras <> drop_nth_succ thm
+R14543:14549 CoLoR.ListExtras CountIn <> sec
+sec 14676:14683 <> DropLast
+var 14698:14698 DropLast A
+def 14720:14727 <> dropLast
+R14733:14736 Coq.Init.Datatypes <> list ind
+R14738:14738 CoLoR.ListExtras <> DropLast.A var
+binder 14730:14730 <> l:157
+R14743:14746 Coq.Init.Datatypes <> list ind
+R14748:14748 CoLoR.ListExtras <> DropLast.A var
+R14763:14763 CoLoR.ListExtras <> l:157 var
+R14776:14778 Coq.Init.Datatypes <> nil constr
+R14783:14785 Coq.Init.Datatypes <> nil constr
+R14794:14795 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R14796:14798 Coq.Init.Datatypes <> nil constr
+R14803:14805 Coq.Init.Datatypes <> nil constr
+R14814:14815 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R14824:14827 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R14828:14835 CoLoR.ListExtras <> dropLast:158 def
+prf 14858:14870 <> dropLast_last
+binder 14881:14881 <> a:160
+R14887:14890 Coq.Init.Datatypes <> list ind
+R14892:14892 CoLoR.ListExtras <> DropLast.A var
+binder 14884:14884 <> l:161
+R14908:14911 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R14901:14904 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R14900:14900 CoLoR.ListExtras <> l:161 var
+R14905:14907 Coq.Init.Datatypes <> nil constr
+R14934:14936 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R14912:14919 CoLoR.ListExtras <> dropLast def
+R14923:14926 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R14922:14922 CoLoR.ListExtras <> l:161 var
+R14928:14929 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R14927:14927 CoLoR.ListExtras <> a:160 var
+R14930:14932 Coq.Init.Datatypes <> nil constr
+R14937:14937 CoLoR.ListExtras <> l:161 var
+R15034:15034 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15042:15046 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15037:15040 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15048:15049 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15050:15052 Coq.Init.Datatypes <> nil constr
+R15034:15034 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15042:15046 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15037:15040 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15048:15049 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15050:15052 Coq.Init.Datatypes <> nil constr
+R15080:15082 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15068:15075 CoLoR.ListExtras <> dropLast def
+R15077:15079 Coq.Init.Datatypes <> nil constr
+R15085:15088 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15080:15082 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15068:15075 CoLoR.ListExtras <> dropLast def
+R15077:15079 Coq.Init.Datatypes <> nil constr
+R15085:15088 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+prf 15186:15196 <> dropLast_eq
+binder 15207:15208 <> l1:162
+binder 15210:15211 <> l2:163
+R15221:15224 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R15216:15218 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15214:15215 CoLoR.ListExtras <> l1:162 var
+R15219:15220 CoLoR.ListExtras <> l2:163 var
+R15236:15238 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15225:15232 CoLoR.ListExtras <> dropLast def
+R15234:15235 CoLoR.ListExtras <> l1:162 var
+R15239:15246 CoLoR.ListExtras <> dropLast def
+R15248:15249 CoLoR.ListExtras <> l2:163 var
+prf 15304:15315 <> dropLast_app
+binder 15326:15326 <> a:164
+R15336:15339 Coq.Init.Datatypes <> list ind
+R15341:15341 CoLoR.ListExtras <> DropLast.A var
+binder 15329:15330 <> l1:165
+binder 15332:15333 <> l2:166
+R15373:15375 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R15349:15356 CoLoR.ListExtras <> dropLast def
+R15361:15364 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15359:15360 CoLoR.ListExtras <> l1:165 var
+R15366:15369 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15365:15365 CoLoR.ListExtras <> a:164 var
+R15370:15371 CoLoR.ListExtras <> l2:166 var
+R15378:15381 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15376:15377 CoLoR.ListExtras <> l1:165 var
+R15382:15389 CoLoR.ListExtras <> dropLast def
+R15393:15396 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15392:15392 CoLoR.ListExtras <> a:164 var
+R15397:15398 CoLoR.ListExtras <> l2:166 var
+R15463:15470 CoLoR.ListExtras <> dropLast def
+R15473:15473 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15482:15486 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15476:15479 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15488:15491 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15511:15514 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15515:15522 CoLoR.ListExtras <> dropLast def
+R15527:15530 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15532:15533 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15463:15470 CoLoR.ListExtras <> dropLast def
+R15473:15473 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15482:15486 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15476:15479 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15488:15491 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15511:15514 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15515:15522 CoLoR.ListExtras <> dropLast def
+R15527:15530 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15532:15533 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15605:15608 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R15594:15597 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15599:15602 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15609:15611 Coq.Init.Datatypes <> nil constr
+R15605:15608 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R15594:15597 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15599:15602 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15609:15611 Coq.Init.Datatypes <> nil constr
+R15631:15634 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15636:15639 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15631:15634 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R15636:15639 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15686:15693 CoLoR.ListExtras DropLast <> sec
+sec 15810:15813 <> Last
+var 15828:15828 Last A
+def 15850:15853 <> last
+R15859:15862 Coq.Init.Datatypes <> list ind
+R15864:15864 CoLoR.ListExtras <> Last.A var
+binder 15856:15856 <> l:168
+R15869:15874 Coq.Init.Datatypes <> option ind
+R15876:15876 CoLoR.ListExtras <> Last.A var
+R15891:15891 CoLoR.ListExtras <> l:168 var
+R15904:15906 Coq.Init.Datatypes <> nil constr
+R15911:15915 Coq.Init.Specif <> error def
+R15924:15925 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15926:15928 Coq.Init.Datatypes <> nil constr
+R15933:15937 Coq.Init.Specif <> value def
+R15948:15949 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15957:15960 CoLoR.ListExtras <> last:169 def
+prf 15983:15989 <> last_eq
+R16008:16011 Coq.Init.Datatypes <> list ind
+R16013:16013 CoLoR.ListExtras <> Last.A var
+binder 16001:16002 <> l1:171
+binder 16004:16005 <> l2:172
+R16024:16027 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16019:16021 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R16017:16018 CoLoR.ListExtras <> l1:171 var
+R16022:16023 CoLoR.ListExtras <> l2:172 var
+R16035:16037 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R16028:16031 CoLoR.ListExtras <> last def
+R16033:16034 CoLoR.ListExtras <> l1:171 var
+R16038:16041 CoLoR.ListExtras <> last def
+R16043:16044 CoLoR.ListExtras <> l2:172 var
+prf 16099:16106 <> last_app
+binder 16117:16117 <> a:173
+R16127:16130 Coq.Init.Datatypes <> list ind
+R16132:16132 CoLoR.ListExtras <> Last.A var
+binder 16120:16121 <> l1:174
+binder 16123:16124 <> l2:175
+R16160:16162 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R16140:16143 CoLoR.ListExtras <> last def
+R16148:16151 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16146:16147 CoLoR.ListExtras <> l1:174 var
+R16153:16156 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16152:16152 CoLoR.ListExtras <> a:173 var
+R16157:16158 CoLoR.ListExtras <> l2:175 var
+R16163:16166 CoLoR.ListExtras <> last def
+R16170:16173 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16169:16169 CoLoR.ListExtras <> a:173 var
+R16174:16175 CoLoR.ListExtras <> l2:175 var
+R16240:16243 CoLoR.ListExtras <> last def
+R16246:16246 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16255:16259 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16249:16252 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16261:16262 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16274:16277 CoLoR.ListExtras <> last def
+R16282:16285 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16287:16288 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16240:16243 CoLoR.ListExtras <> last def
+R16246:16246 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16255:16259 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16249:16252 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16261:16262 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16274:16277 CoLoR.ListExtras <> last def
+R16282:16285 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16287:16288 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16347:16350 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R16338:16341 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16343:16344 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16351:16353 Coq.Init.Datatypes <> nil constr
+R16347:16350 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R16338:16341 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16343:16344 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16351:16353 Coq.Init.Datatypes <> nil constr
+R16380:16383 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16385:16386 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16380:16383 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16385:16386 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+prf 16437:16454 <> dropLast_plus_last
+R16470:16473 Coq.Init.Datatypes <> list ind
+R16475:16475 CoLoR.ListExtras <> Last.A var
+binder 16466:16467 <> l1:176
+binder 16478:16478 <> a:177
+binder 16480:16480 <> b:178
+R16510:16513 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R16501:16503 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R16487:16490 CoLoR.ListExtras <> last def
+R16494:16497 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16493:16493 CoLoR.ListExtras <> a:177 var
+R16498:16499 CoLoR.ListExtras <> l1:176 var
+R16504:16507 Coq.Init.Datatypes <> Some constr
+R16509:16509 CoLoR.ListExtras <> b:178 var
+R16544:16546 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R16532:16535 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R16514:16521 CoLoR.ListExtras <> dropLast def
+R16525:16528 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16524:16524 CoLoR.ListExtras <> a:177 var
+R16529:16530 CoLoR.ListExtras <> l1:176 var
+R16537:16540 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16536:16536 CoLoR.ListExtras <> b:178 var
+R16541:16543 Coq.Init.Datatypes <> nil constr
+R16548:16551 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R16547:16547 CoLoR.ListExtras <> a:177 var
+R16552:16553 CoLoR.ListExtras <> l1:176 var
+R16700:16703 CoLoR.ListExtras Last <> sec
+sec 16839:16844 <> Remove
+var 16859:16859 Remove A
+var 16880:16882 Remove eqA
+R16886:16893 Coq.Relations.Relation_Definitions <> relation def
+R16895:16895 CoLoR.ListExtras <> Remove.A var
+var 16909:16915 Remove eqA_dec
+binder 16926:16926 <> x:181
+binder 16928:16928 <> y:182
+R16931:16931 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R16939:16943 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R16952:16952 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R16932:16934 CoLoR.ListExtras <> Remove.eqA var
+R16938:16938 CoLoR.ListExtras <> y:182 var
+R16936:16936 CoLoR.ListExtras <> x:181 var
+R16944:16944 Coq.Init.Logic <> ::type_scope:'~'_x not
+R16945:16947 CoLoR.ListExtras <> Remove.eqA var
+R16951:16951 CoLoR.ListExtras <> y:182 var
+R16949:16949 CoLoR.ListExtras <> x:181 var
+def 16967:16976 <> removeElem
+R16983:16983 CoLoR.ListExtras <> Remove.A var
+binder 16979:16980 <> el:184
+R16990:16993 Coq.Init.Datatypes <> list ind
+R16995:16995 CoLoR.ListExtras <> Remove.A var
+binder 16987:16987 <> l:185
+R17000:17003 Coq.Init.Datatypes <> list ind
+R17005:17005 CoLoR.ListExtras <> Remove.A var
+R17020:17020 CoLoR.ListExtras <> l:185 var
+R17033:17035 Coq.Init.Datatypes <> nil constr
+R17040:17042 Coq.Init.Datatypes <> nil constr
+R17052:17053 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R17050:17051 Coq.Lists.List <> hd def
+R17054:17055 Coq.Lists.List <> tl def
+R17072:17078 CoLoR.ListExtras <> Remove.eqA_dec var
+R17080:17081 CoLoR.ListExtras <> el:184 var
+R17099:17102 Coq.Init.Specif <> left constr
+R17120:17124 Coq.Init.Specif <> right constr
+R17133:17134 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R17135:17144 CoLoR.ListExtras <> removeElem:186 def
+R17146:17147 CoLoR.ListExtras <> el:184 var
+def 17183:17191 <> removeAll
+R17199:17202 Coq.Init.Datatypes <> list ind
+R17204:17204 CoLoR.ListExtras <> Remove.A var
+binder 17194:17194 <> l:188
+binder 17196:17196 <> m:189
+R17209:17212 Coq.Init.Datatypes <> list ind
+R17214:17214 CoLoR.ListExtras <> Remove.A var
+R17229:17229 CoLoR.ListExtras <> m:189 var
+R17242:17244 Coq.Init.Datatypes <> nil constr
+R17249:17249 CoLoR.ListExtras <> l:188 var
+R17259:17260 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R17257:17258 Coq.Lists.List <> hd def
+R17261:17262 Coq.Lists.List <> tl def
+R17267:17275 CoLoR.ListExtras <> removeAll:190 def
+R17278:17287 CoLoR.ListExtras <> removeElem def
+R17292:17292 CoLoR.ListExtras <> l:188 var
+prf 17316:17335 <> removeElem_length_in
+binder 17346:17346 <> a:192
+binder 17348:17348 <> l:193
+R17351:17351 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17382:17390 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17352:17358 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R17361:17362 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 17359:17360 <> a':194
+R17371:17374 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R17363:17365 CoLoR.ListExtras <> Remove.eqA var
+R17369:17370 CoLoR.ListExtras <> a':194 var
+R17367:17367 CoLoR.ListExtras <> a:192 var
+R17375:17376 Coq.Lists.List <> In def
+R17381:17381 CoLoR.ListExtras <> l:193 var
+R17378:17379 CoLoR.ListExtras <> a':194 var
+R17414:17416 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R17391:17396 Coq.Init.Datatypes <> length def
+R17399:17408 CoLoR.ListExtras <> removeElem def
+R17412:17412 CoLoR.ListExtras <> l:193 var
+R17410:17410 CoLoR.ListExtras <> a:192 var
+R17417:17420 Coq.Init.Peano <> pred abbrev
+R17423:17428 Coq.Init.Datatypes <> length def
+R17430:17430 CoLoR.ListExtras <> l:193 var
+R17531:17537 CoLoR.ListExtras <> Remove.eqA_dec var
+R17531:17537 CoLoR.ListExtras <> Remove.eqA_dec var
+R17567:17569 CoLoR.ListExtras <> Remove.eqA var
+R17567:17569 CoLoR.ListExtras <> Remove.eqA var
+R17632:17638 CoLoR.ListExtras <> Remove.eqA_dec var
+R17632:17638 CoLoR.ListExtras <> Remove.eqA_dec var
+R17764:17769 CoLoR.ListExtras Remove <> sec
+sec 17908:17911 <> Find
+var 17926:17926 Find A
+var 17947:17947 Find P
+R17952:17955 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R17951:17951 CoLoR.ListExtras <> Find.A var
+var 17973:17977 Find P_dec
+R17992:17992 CoLoR.ListExtras <> Find.A var
+binder 17988:17988 <> a:197
+R17995:17995 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R17999:18003 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R18008:18008 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R17996:17996 CoLoR.ListExtras <> Find.P var
+R17998:17998 CoLoR.ListExtras <> a:197 var
+R18004:18004 Coq.Init.Logic <> ::type_scope:'~'_x not
+R18005:18005 CoLoR.ListExtras <> Find.P var
+R18007:18007 CoLoR.ListExtras <> a:197 var
+prf 18018:18035 <> exists_in_list_dec
+binder 18046:18046 <> l:199
+R18051:18051 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R18075:18079 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R18104:18104 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R18052:18058 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R18060:18061 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 18059:18059 <> r:200
+R18065:18068 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R18062:18062 CoLoR.ListExtras <> Find.P var
+R18064:18064 CoLoR.ListExtras <> r:200 var
+R18069:18070 Coq.Lists.List <> In def
+R18074:18074 CoLoR.ListExtras <> l:199 var
+R18072:18072 CoLoR.ListExtras <> r:200 var
+R18080:18080 Coq.Init.Logic <> ::type_scope:'~'_x not
+R18081:18087 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R18089:18090 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 18088:18088 <> r:201
+R18094:18097 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R18091:18091 CoLoR.ListExtras <> Find.P var
+R18093:18093 CoLoR.ListExtras <> r:201 var
+R18098:18099 Coq.Lists.List <> In def
+R18103:18103 CoLoR.ListExtras <> l:199 var
+R18101:18101 CoLoR.ListExtras <> r:201 var
+R18191:18195 CoLoR.ListExtras <> Find.P_dec var
+R18191:18195 CoLoR.ListExtras <> Find.P_dec var
+def 18408:18417 <> find_first
+R18423:18426 Coq.Init.Datatypes <> list ind
+R18428:18428 CoLoR.ListExtras <> Find.A var
+binder 18420:18420 <> l:202
+R18433:18438 Coq.Init.Datatypes <> option ind
+R18440:18442 Coq.Init.Datatypes <> nat ind
+R18458:18458 CoLoR.ListExtras <> l:202 var
+R18471:18473 Coq.Init.Datatypes <> nil constr
+R18478:18481 Coq.Init.Datatypes <> None constr
+R18491:18492 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R18489:18490 Coq.Lists.List <> hd def
+R18493:18494 Coq.Lists.List <> tl def
+R18512:18516 CoLoR.ListExtras <> Find.P_dec var
+R18534:18537 Coq.Init.Specif <> left constr
+R18544:18547 Coq.Init.Datatypes <> Some constr
+R18559:18563 Coq.Init.Specif <> right constr
+R18578:18587 CoLoR.ListExtras <> find_first:203 def
+R18607:18610 Coq.Init.Datatypes <> None constr
+R18615:18618 Coq.Init.Datatypes <> None constr
+R18623:18626 Coq.Init.Datatypes <> Some constr
+R18633:18636 Coq.Init.Datatypes <> Some constr
+R18639:18639 Coq.Init.Datatypes <> S constr
+def 18680:18688 <> find_last
+R18694:18697 Coq.Init.Datatypes <> list ind
+R18699:18699 CoLoR.ListExtras <> Find.A var
+binder 18691:18691 <> l:205
+R18704:18709 Coq.Init.Datatypes <> option ind
+R18711:18713 Coq.Init.Datatypes <> nat ind
+R18729:18729 CoLoR.ListExtras <> l:205 var
+R18742:18744 Coq.Init.Datatypes <> nil constr
+R18749:18752 Coq.Init.Datatypes <> None constr
+R18762:18763 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R18760:18761 Coq.Lists.List <> hd def
+R18764:18765 Coq.Lists.List <> tl def
+R18783:18791 CoLoR.ListExtras <> find_last:206 def
+R18809:18812 Coq.Init.Datatypes <> Some constr
+R18819:18822 Coq.Init.Datatypes <> Some constr
+R18825:18825 Coq.Init.Datatypes <> S constr
+R18838:18841 Coq.Init.Datatypes <> None constr
+R18854:18858 CoLoR.ListExtras <> Find.P_dec var
+R18871:18874 Coq.Init.Specif <> left constr
+R18881:18884 Coq.Init.Datatypes <> Some constr
+R18891:18895 Coq.Init.Specif <> right constr
+R18902:18905 Coq.Init.Datatypes <> None constr
+prf 18940:18952 <> find_first_ok
+binder 18963:18963 <> l:208
+binder 18965:18965 <> p:209
+R18989:18996 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R18980:18982 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R18968:18977 CoLoR.ListExtras <> find_first def
+R18979:18979 CoLoR.ListExtras <> l:208 var
+R18983:18986 Coq.Init.Datatypes <> Some constr
+R18988:18988 CoLoR.ListExtras <> p:209 var
+R18997:19003 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R19006:19007 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 19004:19005 <> el:210
+R19031:19034 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R19021:19023 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19008:19016 Coq.Lists.List <> nth_error def
+R19020:19020 CoLoR.ListExtras <> p:209 var
+R19018:19018 CoLoR.ListExtras <> l:208 var
+R19024:19027 Coq.Init.Datatypes <> Some constr
+R19029:19030 CoLoR.ListExtras <> el:210 var
+R19035:19035 CoLoR.ListExtras <> Find.P var
+R19037:19038 CoLoR.ListExtras <> el:210 var
+R19110:19114 CoLoR.ListExtras <> Find.P_dec var
+R19110:19114 CoLoR.ListExtras <> Find.P_dec var
+R19215:19224 CoLoR.ListExtras <> find_first def
+R19215:19224 CoLoR.ListExtras <> find_first def
+R19310:19319 CoLoR.ListExtras <> find_first def
+R19310:19319 CoLoR.ListExtras <> find_first def
+prf 19395:19406 <> find_last_ok
+binder 19417:19417 <> l:211
+binder 19419:19419 <> p:212
+R19442:19449 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R19433:19435 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19422:19430 CoLoR.ListExtras <> find_last def
+R19432:19432 CoLoR.ListExtras <> l:211 var
+R19436:19439 Coq.Init.Datatypes <> Some constr
+R19441:19441 CoLoR.ListExtras <> p:212 var
+R19450:19456 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R19459:19460 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 19457:19458 <> el:213
+R19484:19487 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R19474:19476 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19461:19469 Coq.Lists.List <> nth_error def
+R19473:19473 CoLoR.ListExtras <> p:212 var
+R19471:19471 CoLoR.ListExtras <> l:211 var
+R19477:19480 Coq.Init.Datatypes <> Some constr
+R19482:19483 CoLoR.ListExtras <> el:213 var
+R19488:19488 CoLoR.ListExtras <> Find.P var
+R19490:19491 CoLoR.ListExtras <> el:213 var
+R19563:19567 CoLoR.ListExtras <> Find.P_dec var
+R19563:19567 CoLoR.ListExtras <> Find.P_dec var
+R19689:19697 CoLoR.ListExtras <> find_last def
+R19689:19697 CoLoR.ListExtras <> find_last def
+R19804:19812 CoLoR.ListExtras <> find_last def
+R19804:19812 CoLoR.ListExtras <> find_last def
+R19878:19886 CoLoR.ListExtras <> find_last def
+R19878:19886 CoLoR.ListExtras <> find_last def
+prf 19962:19975 <> find_last_last
+binder 19985:19985 <> l:214
+binder 19987:19987 <> p:215
+binder 19989:19990 <> el:216
+R20016:20019 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20006:20008 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R19993:20001 Coq.Lists.List <> nth_error def
+R20005:20005 CoLoR.ListExtras <> p:215 var
+R20003:20003 CoLoR.ListExtras <> l:214 var
+R20009:20012 Coq.Init.Datatypes <> Some constr
+R20014:20015 CoLoR.ListExtras <> el:216 var
+R20024:20031 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20020:20020 CoLoR.ListExtras <> Find.P var
+R20022:20023 CoLoR.ListExtras <> el:216 var
+R20032:20038 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R20040:20041 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 20039:20039 <> q:217
+R20062:20065 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R20053:20055 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R20042:20050 CoLoR.ListExtras <> find_last def
+R20052:20052 CoLoR.ListExtras <> l:214 var
+R20056:20059 Coq.Init.Datatypes <> Some constr
+R20061:20061 CoLoR.ListExtras <> q:217 var
+R20067:20070 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R20066:20066 CoLoR.ListExtras <> q:217 var
+R20071:20071 CoLoR.ListExtras <> p:215 var
+R20192:20196 CoLoR.ListExtras <> Find.P_dec var
+R20192:20196 CoLoR.ListExtras <> Find.P_dec var
+R20217:20225 CoLoR.ListExtras <> find_last def
+R20217:20225 CoLoR.ListExtras <> find_last def
+R20243:20243 Coq.Init.Datatypes <> S constr
+R20243:20243 Coq.Init.Datatypes <> S constr
+R20323:20323 CoLoR.ListExtras <> Find.P var
+R20323:20323 CoLoR.ListExtras <> Find.P var
+R20400:20400 Coq.Init.Datatypes <> S constr
+R20400:20400 Coq.Init.Datatypes <> S constr
+prf 20468:20483 <> find_first_exist
+binder 20494:20494 <> x:218
+binder 20496:20496 <> l:219
+R20505:20508 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20499:20500 Coq.Lists.List <> In def
+R20504:20504 CoLoR.ListExtras <> l:219 var
+R20502:20502 CoLoR.ListExtras <> x:218 var
+R20512:20515 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20509:20509 CoLoR.ListExtras <> Find.P var
+R20511:20511 CoLoR.ListExtras <> x:218 var
+R20528:20531 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R20516:20525 CoLoR.ListExtras <> find_first def
+R20527:20527 CoLoR.ListExtras <> l:219 var
+R20532:20535 Coq.Init.Datatypes <> None constr
+R20633:20637 CoLoR.ListExtras <> Find.P_dec var
+R20633:20637 CoLoR.ListExtras <> Find.P_dec var
+R20673:20677 CoLoR.ListExtras <> Find.P_dec var
+R20673:20677 CoLoR.ListExtras <> Find.P_dec var
+R20713:20722 CoLoR.ListExtras <> find_first def
+R20713:20722 CoLoR.ListExtras <> find_first def
+prf 20755:20769 <> find_first_Some
+binder 20780:20780 <> l:220
+R20805:20808 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R20797:20800 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R20785:20794 CoLoR.ListExtras <> find_first def
+R20796:20796 CoLoR.ListExtras <> l:220 var
+R20801:20804 Coq.Init.Datatypes <> None constr
+R20809:20815 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R20817:20818 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 20816:20816 <> z:221
+R20825:20828 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R20819:20820 Coq.Lists.List <> In def
+R20824:20824 CoLoR.ListExtras <> l:220 var
+R20822:20822 CoLoR.ListExtras <> z:221 var
+R20829:20829 CoLoR.ListExtras <> Find.P var
+R20831:20831 CoLoR.ListExtras <> z:221 var
+R20904:20908 CoLoR.ListExtras <> Find.P_dec var
+R20904:20908 CoLoR.ListExtras <> Find.P_dec var
+R20955:20964 CoLoR.ListExtras <> find_first def
+R20955:20964 CoLoR.ListExtras <> find_first def
+R20989:20995 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R21001:21002 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R21000:21000 CoLoR.ListExtras <> Find.A var
+binder 20996:20996 <> z:222
+R21009:21012 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R21003:21004 Coq.Lists.List <> In def
+R21006:21006 CoLoR.ListExtras <> z:222 var
+R21013:21013 CoLoR.ListExtras <> Find.P var
+R21015:21015 CoLoR.ListExtras <> z:222 var
+R20989:20995 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R21001:21002 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R21000:21000 CoLoR.ListExtras <> Find.A var
+binder 20996:20996 <> z:223
+R21009:21012 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R21003:21004 Coq.Lists.List <> In def
+R21006:21006 CoLoR.ListExtras <> z:223 var
+R21013:21013 CoLoR.ListExtras <> Find.P var
+R21015:21015 CoLoR.ListExtras <> z:223 var
+prf 21093:21113 <> find_first_Some_bound
+binder 21124:21124 <> l:224
+binder 21126:21126 <> x:225
+R21152:21155 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21143:21145 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R21131:21140 CoLoR.ListExtras <> find_first def
+R21142:21142 CoLoR.ListExtras <> l:224 var
+R21146:21149 Coq.Init.Datatypes <> Some constr
+R21151:21151 CoLoR.ListExtras <> x:225 var
+R21157:21159 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R21156:21156 CoLoR.ListExtras <> x:225 var
+R21160:21165 Coq.Init.Datatypes <> length def
+R21167:21167 CoLoR.ListExtras <> l:224 var
+R21240:21244 CoLoR.ListExtras <> Find.P_dec var
+R21240:21244 CoLoR.ListExtras <> Find.P_dec var
+R21292:21301 CoLoR.ListExtras <> find_first def
+R21292:21301 CoLoR.ListExtras <> find_first def
+R21344:21359 Coq.Arith.PeanoNat Nat succ_lt_mono thm
+R21344:21359 Coq.Arith.PeanoNat Nat succ_lt_mono thm
+prf 21398:21411 <> In_find_first2
+binder 21422:21422 <> l:226
+binder 21424:21424 <> z:227
+R21450:21453 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21441:21443 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R21429:21438 CoLoR.ListExtras <> find_first def
+R21440:21440 CoLoR.ListExtras <> l:226 var
+R21444:21447 Coq.Init.Datatypes <> Some constr
+R21449:21449 CoLoR.ListExtras <> z:227 var
+R21454:21460 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R21462:21463 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 21461:21461 <> y:228
+R21477:21480 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R21468:21470 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R21465:21465 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R21467:21467 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R21464:21464 CoLoR.ListExtras <> l:226 var
+R21466:21466 CoLoR.ListExtras <> z:227 var
+R21471:21474 Coq.Init.Datatypes <> Some constr
+R21476:21476 CoLoR.ListExtras <> y:228 var
+R21481:21481 CoLoR.ListExtras <> Find.P var
+R21483:21483 CoLoR.ListExtras <> y:228 var
+R21551:21555 CoLoR.ListExtras <> Find.P_dec var
+R21551:21555 CoLoR.ListExtras <> Find.P_dec var
+R21621:21630 CoLoR.ListExtras <> find_first def
+R21621:21630 CoLoR.ListExtras <> find_first def
+R21684:21690 Coq.Init.Logic <> eq_refl constr
+R21693:21696 Coq.Init.Datatypes <> Some constr
+R21684:21690 Coq.Init.Logic <> eq_refl constr
+R21693:21696 Coq.Init.Datatypes <> Some constr
+prf 21753:21768 <> find_first_exact
+binder 21779:21779 <> l:229
+binder 21781:21781 <> i:230
+R21807:21810 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R21798:21800 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R21786:21795 CoLoR.ListExtras <> find_first def
+R21797:21797 CoLoR.ListExtras <> l:229 var
+R21801:21804 Coq.Init.Datatypes <> Some constr
+R21806:21806 CoLoR.ListExtras <> i:230 var
+R21811:21817 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R21819:21820 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 21818:21818 <> z:231
+R21834:21837 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R21825:21827 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R21822:21822 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R21824:21824 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R21821:21821 CoLoR.ListExtras <> l:229 var
+R21823:21823 CoLoR.ListExtras <> i:230 var
+R21828:21831 Coq.Init.Datatypes <> Some constr
+R21833:21833 CoLoR.ListExtras <> z:231 var
+R21838:21838 CoLoR.ListExtras <> Find.P var
+R21840:21840 CoLoR.ListExtras <> z:231 var
+R21913:21917 CoLoR.ListExtras <> Find.P_dec var
+R21913:21917 CoLoR.ListExtras <> Find.P_dec var
+R21977:21986 CoLoR.ListExtras <> find_first def
+R21977:21986 CoLoR.ListExtras <> find_first def
+R22057:22060 CoLoR.ListExtras Find <> sec
+R22074:22087 CoLoR.ListExtras <> In_find_first2 thm
+R22074:22087 CoLoR.ListExtras <> In_find_first2 thm
+sec 22117:22125 <> Find_more
+var 22138:22138 Find_more A
+var 22158:22158 Find_more P
+var 22160:22160 Find_more Q
+R22165:22168 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22164:22164 CoLoR.ListExtras <> Find_more.A var
+var 22184:22188 Find_more P_dec
+R22203:22203 CoLoR.ListExtras <> Find_more.A var
+binder 22199:22199 <> a:235
 R22206:22206 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R22194:22194 CoLoR.ListExtras <> Find_more.Q var
-R22196:22196 CoLoR.ListExtras <> a:237 var
-R22202:22202 Coq.Init.Logic <> ::type_scope:'~'_x not
-R22203:22203 CoLoR.ListExtras <> Find_more.Q var
-R22205:22205 CoLoR.ListExtras <> a:237 var
-prf 22216:22231 <> find_first_indep
-R22235:22235 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R22257:22263 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 22243:22243 <> x:239
-R22249:22253 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
-R22246:22246 CoLoR.ListExtras <> Find_more.P var
-R22248:22248 CoLoR.ListExtras <> x:239 var
+R22210:22214 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R22219:22219 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R22207:22207 CoLoR.ListExtras <> Find_more.P var
+R22209:22209 CoLoR.ListExtras <> a:235 var
+R22215:22215 Coq.Init.Logic <> ::type_scope:'~'_x not
+R22216:22216 CoLoR.ListExtras <> Find_more.P var
+R22218:22218 CoLoR.ListExtras <> a:235 var
+var 22231:22235 Find_more Q_dec
+R22250:22250 CoLoR.ListExtras <> Find_more.A var
+binder 22246:22246 <> a:237
+R22253:22253 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R22257:22261 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R22266:22266 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
 R22254:22254 CoLoR.ListExtras <> Find_more.Q var
-R22256:22256 CoLoR.ListExtras <> x:239 var
-binder 22271:22271 <> l:240
-R22294:22296 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R22274:22283 CoLoR.ListExtras <> find_first def
-R22293:22293 CoLoR.ListExtras <> l:240 var
-R22287:22291 CoLoR.ListExtras <> Find_more.P_dec var
-R22285:22285 CoLoR.ListExtras <> Find_more.P var
-R22297:22306 CoLoR.ListExtras <> find_first def
-R22316:22316 CoLoR.ListExtras <> l:240 var
-R22310:22314 CoLoR.ListExtras <> Find_more.Q_dec var
-R22308:22308 CoLoR.ListExtras <> Find_more.Q var
-R22363:22367 CoLoR.ListExtras <> Find_more.P_dec var
-R22383:22387 CoLoR.ListExtras <> Find_more.Q_dec var
-R22363:22367 CoLoR.ListExtras <> Find_more.P_dec var
-R22383:22387 CoLoR.ListExtras <> Find_more.Q_dec var
-R22383:22387 CoLoR.ListExtras <> Find_more.Q_dec var
-var 22458:22463 Find_more eq_dec
-R22480:22480 CoLoR.ListExtras <> Find_more.A var
-binder 22474:22474 <> x:241
-binder 22476:22476 <> y:242
-R22483:22483 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R22487:22490 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R22495:22495 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R22485:22485 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R22484:22484 CoLoR.ListExtras <> x:241 var
-R22486:22486 CoLoR.ListExtras <> y:242 var
-R22491:22491 Coq.Init.Logic <> ::type_scope:'~'_x not
-R22493:22493 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R22492:22492 CoLoR.ListExtras <> x:241 var
-R22494:22494 CoLoR.ListExtras <> y:242 var
-prf 22505:22520 <> eq_In_find_first
-binder 22531:22531 <> x:244
-binder 22533:22533 <> l:245
-R22542:22547 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R22536:22537 Coq.Lists.List <> In def
-R22541:22541 CoLoR.ListExtras <> l:245 var
-R22539:22539 CoLoR.ListExtras <> x:244 var
-R22548:22554 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R22556:22557 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 22555:22555 <> z:246
-R22597:22600 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R22588:22590 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R22558:22567 CoLoR.ListExtras <> find_first def
-R22587:22587 CoLoR.ListExtras <> l:245 var
-R22577:22582 CoLoR.ListExtras <> Find_more.eq_dec var
-R22584:22584 CoLoR.ListExtras <> x:244 var
-R22570:22571 Coq.Init.Logic <> eq ind
-R22573:22573 CoLoR.ListExtras <> x:244 var
-R22591:22594 Coq.Init.Datatypes <> Some constr
-R22596:22596 CoLoR.ListExtras <> z:246 var
-R22605:22607 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R22602:22602 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
-R22604:22604 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R22256:22256 CoLoR.ListExtras <> a:237 var
+R22262:22262 Coq.Init.Logic <> ::type_scope:'~'_x not
+R22263:22263 CoLoR.ListExtras <> Find_more.Q var
+R22265:22265 CoLoR.ListExtras <> a:237 var
+prf 22276:22291 <> find_first_indep
+R22295:22295 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22317:22323 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 22303:22303 <> x:239
+R22309:22313 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R22306:22306 CoLoR.ListExtras <> Find_more.P var
+R22308:22308 CoLoR.ListExtras <> x:239 var
+R22314:22314 CoLoR.ListExtras <> Find_more.Q var
+R22316:22316 CoLoR.ListExtras <> x:239 var
+binder 22331:22331 <> l:240
+R22354:22356 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R22334:22343 CoLoR.ListExtras <> find_first def
+R22353:22353 CoLoR.ListExtras <> l:240 var
+R22347:22351 CoLoR.ListExtras <> Find_more.P_dec var
+R22345:22345 CoLoR.ListExtras <> Find_more.P var
+R22357:22366 CoLoR.ListExtras <> find_first def
+R22376:22376 CoLoR.ListExtras <> l:240 var
+R22370:22374 CoLoR.ListExtras <> Find_more.Q_dec var
+R22368:22368 CoLoR.ListExtras <> Find_more.Q var
+R22423:22427 CoLoR.ListExtras <> Find_more.P_dec var
+R22443:22447 CoLoR.ListExtras <> Find_more.Q_dec var
+R22423:22427 CoLoR.ListExtras <> Find_more.P_dec var
+R22443:22447 CoLoR.ListExtras <> Find_more.Q_dec var
+R22443:22447 CoLoR.ListExtras <> Find_more.Q_dec var
+var 22518:22523 Find_more eq_dec
+R22540:22540 CoLoR.ListExtras <> Find_more.A var
+binder 22534:22534 <> x:241
+binder 22536:22536 <> y:242
+R22543:22543 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R22547:22550 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R22555:22555 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R22545:22545 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R22544:22544 CoLoR.ListExtras <> x:241 var
+R22546:22546 CoLoR.ListExtras <> y:242 var
+R22551:22551 Coq.Init.Logic <> ::type_scope:'~'_x not
+R22553:22553 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R22552:22552 CoLoR.ListExtras <> x:241 var
+R22554:22554 CoLoR.ListExtras <> y:242 var
+prf 22565:22580 <> eq_In_find_first
+binder 22591:22591 <> x:244
+binder 22593:22593 <> l:245
+R22602:22607 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R22596:22597 Coq.Lists.List <> In def
 R22601:22601 CoLoR.ListExtras <> l:245 var
-R22603:22603 CoLoR.ListExtras <> z:246 var
-R22608:22611 Coq.Init.Datatypes <> Some constr
-R22613:22613 CoLoR.ListExtras <> x:244 var
-R22652:22653 Coq.Lists.List <> In def
-R22690:22695 CoLoR.ListExtras <> Find_more.eq_dec var
-R22690:22695 CoLoR.ListExtras <> Find_more.eq_dec var
-R22757:22762 CoLoR.ListExtras <> Find_more.eq_dec var
-R22757:22762 CoLoR.ListExtras <> Find_more.eq_dec var
-R22874:22874 Coq.Init.Datatypes <> S constr
-R22874:22874 Coq.Init.Datatypes <> S constr
-R22917:22922 CoLoR.ListExtras <> Find_more.eq_dec var
-R22917:22922 CoLoR.ListExtras <> Find_more.eq_dec var
-R22958:22967 CoLoR.ListExtras <> find_first def
+R22599:22599 CoLoR.ListExtras <> x:244 var
+R22608:22614 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R22616:22617 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 22615:22615 <> z:246
+R22657:22660 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R22648:22650 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R22618:22627 CoLoR.ListExtras <> find_first def
+R22647:22647 CoLoR.ListExtras <> l:245 var
+R22637:22642 CoLoR.ListExtras <> Find_more.eq_dec var
+R22644:22644 CoLoR.ListExtras <> x:244 var
+R22630:22631 Coq.Init.Logic <> eq ind
+R22633:22633 CoLoR.ListExtras <> x:244 var
+R22651:22654 Coq.Init.Datatypes <> Some constr
+R22656:22656 CoLoR.ListExtras <> z:246 var
+R22665:22667 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R22662:22662 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R22664:22664 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R22661:22661 CoLoR.ListExtras <> l:245 var
+R22663:22663 CoLoR.ListExtras <> z:246 var
+R22668:22671 Coq.Init.Datatypes <> Some constr
+R22673:22673 CoLoR.ListExtras <> x:244 var
+R22712:22713 Coq.Lists.List <> In def
+R22750:22755 CoLoR.ListExtras <> Find_more.eq_dec var
+R22750:22755 CoLoR.ListExtras <> Find_more.eq_dec var
+R22817:22822 CoLoR.ListExtras <> Find_more.eq_dec var
+R22817:22822 CoLoR.ListExtras <> Find_more.eq_dec var
+R22934:22934 Coq.Init.Datatypes <> S constr
+R22934:22934 Coq.Init.Datatypes <> S constr
 R22977:22982 CoLoR.ListExtras <> Find_more.eq_dec var
-R22970:22971 Coq.Init.Logic <> eq ind
-R22958:22967 CoLoR.ListExtras <> find_first def
 R22977:22982 CoLoR.ListExtras <> Find_more.eq_dec var
-R22970:22971 Coq.Init.Logic <> eq ind
-prf 23048:23066 <> eq_find_first_exact
-binder 23077:23077 <> l:247
-binder 23079:23079 <> x:248
-binder 23081:23081 <> z:249
-R23125:23128 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R23116:23118 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R23086:23095 CoLoR.ListExtras <> find_first def
-R23115:23115 CoLoR.ListExtras <> l:247 var
-R23105:23110 CoLoR.ListExtras <> Find_more.eq_dec var
-R23112:23112 CoLoR.ListExtras <> x:248 var
-R23098:23099 Coq.Init.Logic <> eq ind
-R23101:23101 CoLoR.ListExtras <> x:248 var
-R23119:23122 Coq.Init.Datatypes <> Some constr
-R23124:23124 CoLoR.ListExtras <> z:249 var
-R23133:23135 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R23130:23130 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
-R23132:23132 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
-R23129:23129 CoLoR.ListExtras <> l:247 var
-R23131:23131 CoLoR.ListExtras <> z:249 var
-R23136:23139 Coq.Init.Datatypes <> Some constr
-R23141:23141 CoLoR.ListExtras <> x:248 var
-R23216:23221 CoLoR.ListExtras <> Find_more.eq_dec var
-R23216:23221 CoLoR.ListExtras <> Find_more.eq_dec var
-R23277:23283 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R23285:23286 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 23284:23284 <> i:250
-R23317:23319 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R23287:23296 CoLoR.ListExtras <> find_first def
-R23306:23311 CoLoR.ListExtras <> Find_more.eq_dec var
-R23299:23300 Coq.Init.Logic <> eq ind
-R23320:23323 Coq.Init.Datatypes <> Some constr
-R23325:23325 CoLoR.ListExtras <> i:250 var
-R23277:23283 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R23285:23286 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 23284:23284 <> i:251
-R23317:23319 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R23287:23296 CoLoR.ListExtras <> find_first def
-R23306:23311 CoLoR.ListExtras <> Find_more.eq_dec var
-R23299:23300 Coq.Init.Logic <> eq ind
-R23320:23323 Coq.Init.Datatypes <> Some constr
-R23325:23325 CoLoR.ListExtras <> i:251 var
-R23339:23348 CoLoR.ListExtras <> find_first def
-R23358:23363 CoLoR.ListExtras <> Find_more.eq_dec var
-R23351:23352 Coq.Init.Logic <> eq ind
-R23339:23348 CoLoR.ListExtras <> find_first def
-R23358:23363 CoLoR.ListExtras <> Find_more.eq_dec var
-R23351:23352 Coq.Init.Logic <> eq ind
-prf 23502:23525 <> element_at_find_first_eq
-binder 23536:23536 <> l:252
-binder 23538:23538 <> x:253
-binder 23540:23540 <> i:254
-R23558:23561 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R23549:23551 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R23546:23546 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
-R23548:23548 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
-R23545:23545 CoLoR.ListExtras <> l:252 var
-R23547:23547 CoLoR.ListExtras <> i:254 var
-R23552:23555 Coq.Init.Datatypes <> Some constr
-R23557:23557 CoLoR.ListExtras <> x:253 var
-R23562:23568 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R23570:23571 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 23569:23569 <> j:255
-R23578:23581 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R23573:23576 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
-R23572:23572 CoLoR.ListExtras <> j:255 var
-R23577:23577 CoLoR.ListExtras <> i:254 var
-R23612:23614 Coq.Init.Logic <> ::type_scope:x_'='_x not
-R23582:23591 CoLoR.ListExtras <> find_first def
-R23611:23611 CoLoR.ListExtras <> l:252 var
-R23601:23606 CoLoR.ListExtras <> Find_more.eq_dec var
-R23608:23608 CoLoR.ListExtras <> x:253 var
-R23594:23595 Coq.Init.Logic <> eq ind
-R23597:23597 CoLoR.ListExtras <> x:253 var
-R23615:23618 Coq.Init.Datatypes <> Some constr
-R23620:23620 CoLoR.ListExtras <> j:255 var
-R23706:23711 CoLoR.ListExtras <> Find_more.eq_dec var
-R23706:23711 CoLoR.ListExtras <> Find_more.eq_dec var
-R23754:23759 CoLoR.ListExtras <> Find_more.eq_dec var
-R23754:23759 CoLoR.ListExtras <> Find_more.eq_dec var
-R23850:23850 Coq.Init.Datatypes <> S constr
-R23850:23850 Coq.Init.Datatypes <> S constr
-R23878:23886 CoLoR.ListExtras Find_more <> sec
-R23900:23915 CoLoR.ListExtras <> eq_In_find_first thm
-R23900:23915 CoLoR.ListExtras <> eq_In_find_first thm
-R23942:23960 CoLoR.ListExtras <> eq_find_first_exact thm
-R23942:23960 CoLoR.ListExtras <> eq_find_first_exact thm
-R23992:24015 CoLoR.ListExtras <> element_at_find_first_eq thm
-R23992:24015 CoLoR.ListExtras <> element_at_find_first_eq thm
-sec 24185:24196 <> List_Rel_Dec
-var 24211:24211 List_Rel_Dec A
-var 24232:24232 List_Rel_Dec B
-var 24253:24253 List_Rel_Dec P
-R24258:24261 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24257:24257 CoLoR.ListExtras <> List_Rel_Dec.A var
-var 24279:24279 List_Rel_Dec R
-R24284:24287 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24283:24283 CoLoR.ListExtras <> List_Rel_Dec.A var
-R24289:24292 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24288:24288 CoLoR.ListExtras <> List_Rel_Dec.B var
-prf 24308:24319 <> many_one_dec
-R24335:24338 Coq.Init.Datatypes <> list ind
-R24340:24340 CoLoR.ListExtras <> List_Rel_Dec.A var
-binder 24331:24331 <> l:260
-binder 24343:24343 <> r:261
-R24350:24350 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24389:24397 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 24358:24358 <> x:262
-R24367:24370 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24361:24362 Coq.Lists.List <> In def
-R24366:24366 CoLoR.ListExtras <> l:260 var
-R24364:24364 CoLoR.ListExtras <> x:262 var
-R24371:24371 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R24377:24381 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R24388:24388 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R24372:24372 CoLoR.ListExtras <> List_Rel_Dec.R var
-R24376:24376 CoLoR.ListExtras <> r:261 var
-R24374:24374 CoLoR.ListExtras <> x:262 var
-R24382:24382 Coq.Init.Logic <> ::type_scope:'~'_x not
-R24383:24383 CoLoR.ListExtras <> List_Rel_Dec.R var
-R24387:24387 CoLoR.ListExtras <> r:261 var
-R24385:24385 CoLoR.ListExtras <> x:262 var
-R24423:24426 Coq.Init.Specif <> ::type_scope:x_'+'_'{'_x_'}' not
-R24453:24453 Coq.Init.Specif <> ::type_scope:x_'+'_'{'_x_'}' not
-R24398:24398 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R24400:24402 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R24404:24406 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R24422:24422 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
-R24403:24403 CoLoR.ListExtras <> List_Rel_Dec.A var
-binder 24399:24399 <> x:263
-R24413:24416 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R24407:24408 Coq.Lists.List <> In def
-R24412:24412 CoLoR.ListExtras <> l:260 var
-R24410:24410 CoLoR.ListExtras <> x:263 var
-R24417:24417 CoLoR.ListExtras <> List_Rel_Dec.R var
-R24421:24421 CoLoR.ListExtras <> r:261 var
-R24419:24419 CoLoR.ListExtras <> x:263 var
-binder 24434:24434 <> x:264
-R24443:24446 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24437:24438 Coq.Lists.List <> In def
-R24442:24442 CoLoR.ListExtras <> l:260 var
-R24440:24440 CoLoR.ListExtras <> x:264 var
-R24447:24447 Coq.Init.Logic <> ::type_scope:'~'_x not
-R24448:24448 CoLoR.ListExtras <> List_Rel_Dec.R var
-R24452:24452 CoLoR.ListExtras <> r:261 var
-R24450:24450 CoLoR.ListExtras <> x:264 var
-prf 24863:24874 <> list_dec_all
-R24890:24893 Coq.Init.Datatypes <> list ind
-R24895:24895 CoLoR.ListExtras <> List_Rel_Dec.A var
-binder 24886:24886 <> l:265
-R24903:24903 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24938:24946 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-binder 24911:24911 <> x:266
-R24920:24923 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24914:24915 Coq.Lists.List <> In def
-R24919:24919 CoLoR.ListExtras <> l:265 var
-R24917:24917 CoLoR.ListExtras <> x:266 var
-R24924:24924 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R24928:24932 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R24937:24937 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R24925:24925 CoLoR.ListExtras <> List_Rel_Dec.P var
-R24927:24927 CoLoR.ListExtras <> x:266 var
-R24933:24933 Coq.Init.Logic <> ::type_scope:'~'_x not
-R24934:24934 CoLoR.ListExtras <> List_Rel_Dec.P var
-R24936:24936 CoLoR.ListExtras <> x:266 var
-R24947:24947 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R24971:24975 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-R25000:25000 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
-binder 24955:24955 <> x:267
-R24964:24967 Coq.Init.Logic <> ::type_scope:x_'->'_x not
-R24958:24959 Coq.Lists.List <> In def
-R24963:24963 CoLoR.ListExtras <> l:265 var
-R24961:24961 CoLoR.ListExtras <> x:267 var
-R24968:24968 CoLoR.ListExtras <> List_Rel_Dec.P var
-R24970:24970 CoLoR.ListExtras <> x:267 var
-R24976:24982 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-R24984:24985 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
-binder 24983:24983 <> x:268
-R24992:24995 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
-R24986:24987 Coq.Lists.List <> In def
-R24991:24991 CoLoR.ListExtras <> l:265 var
-R24989:24989 CoLoR.ListExtras <> x:268 var
-R24996:24996 Coq.Init.Logic <> ::type_scope:'~'_x not
-R24997:24997 CoLoR.ListExtras <> List_Rel_Dec.P var
-R24999:24999 CoLoR.ListExtras <> x:268 var
-R25412:25423 CoLoR.ListExtras List_Rel_Dec <> sec
-R25538:25552 CoLoR.ListExtras <> initialSeg_full thm
-R25554:25567 CoLoR.ListExtras <> initialSeg_nth thm
-R25569:25575 CoLoR.ListExtras <> seg_nth thm
-R25577:25587 CoLoR.ListExtras <> seg_tillEnd thm
-R25589:25600 CoLoR.ListExtras <> seg_exceeded thm
-R25604:25617 CoLoR.ListExtras <> finalSeg_empty thm
-R25619:25634 CoLoR.ListExtras <> nth_finalSeg_nth thm
-R25636:25646 CoLoR.ListExtras <> nth_copy_in thm
-R25648:25659 CoLoR.ListUtil <> nth_app_left thm
-R25661:25673 CoLoR.ListUtil <> nth_app_right thm
-R25739:25755 CoLoR.ListExtras <> initialSeg_length thm
-R25757:25769 CoLoR.ListExtras <> finalSeg_full thm
-R25771:25783 CoLoR.ListExtras <> finalSeg_cons thm
-R25785:25799 CoLoR.ListExtras <> finalSeg_length thm
-R25803:25824 CoLoR.ListExtras <> initialFinalSeg_length thm
-R25826:25835 CoLoR.ListExtras <> copy_split thm
-R25837:25847 CoLoR.ListExtras <> copy_length thm
+R23018:23027 CoLoR.ListExtras <> find_first def
+R23037:23042 CoLoR.ListExtras <> Find_more.eq_dec var
+R23030:23031 Coq.Init.Logic <> eq ind
+R23018:23027 CoLoR.ListExtras <> find_first def
+R23037:23042 CoLoR.ListExtras <> Find_more.eq_dec var
+R23030:23031 Coq.Init.Logic <> eq ind
+prf 23108:23126 <> eq_find_first_exact
+binder 23137:23137 <> l:247
+binder 23139:23139 <> x:248
+binder 23141:23141 <> z:249
+R23185:23188 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23176:23178 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R23146:23155 CoLoR.ListExtras <> find_first def
+R23175:23175 CoLoR.ListExtras <> l:247 var
+R23165:23170 CoLoR.ListExtras <> Find_more.eq_dec var
+R23172:23172 CoLoR.ListExtras <> x:248 var
+R23158:23159 Coq.Init.Logic <> eq ind
+R23161:23161 CoLoR.ListExtras <> x:248 var
+R23179:23182 Coq.Init.Datatypes <> Some constr
+R23184:23184 CoLoR.ListExtras <> z:249 var
+R23193:23195 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R23190:23190 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R23192:23192 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R23189:23189 CoLoR.ListExtras <> l:247 var
+R23191:23191 CoLoR.ListExtras <> z:249 var
+R23196:23199 Coq.Init.Datatypes <> Some constr
+R23201:23201 CoLoR.ListExtras <> x:248 var
+R23276:23281 CoLoR.ListExtras <> Find_more.eq_dec var
+R23276:23281 CoLoR.ListExtras <> Find_more.eq_dec var
+R23337:23343 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R23345:23346 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 23344:23344 <> i:250
+R23377:23379 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R23347:23356 CoLoR.ListExtras <> find_first def
+R23366:23371 CoLoR.ListExtras <> Find_more.eq_dec var
+R23359:23360 Coq.Init.Logic <> eq ind
+R23380:23383 Coq.Init.Datatypes <> Some constr
+R23385:23385 CoLoR.ListExtras <> i:250 var
+R23337:23343 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R23345:23346 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 23344:23344 <> i:251
+R23377:23379 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R23347:23356 CoLoR.ListExtras <> find_first def
+R23366:23371 CoLoR.ListExtras <> Find_more.eq_dec var
+R23359:23360 Coq.Init.Logic <> eq ind
+R23380:23383 Coq.Init.Datatypes <> Some constr
+R23385:23385 CoLoR.ListExtras <> i:251 var
+R23399:23408 CoLoR.ListExtras <> find_first def
+R23418:23423 CoLoR.ListExtras <> Find_more.eq_dec var
+R23411:23412 Coq.Init.Logic <> eq ind
+R23399:23408 CoLoR.ListExtras <> find_first def
+R23418:23423 CoLoR.ListExtras <> Find_more.eq_dec var
+R23411:23412 Coq.Init.Logic <> eq ind
+prf 23562:23585 <> element_at_find_first_eq
+binder 23596:23596 <> l:252
+binder 23598:23598 <> x:253
+binder 23600:23600 <> i:254
+R23618:23621 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R23609:23611 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R23606:23606 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R23608:23608 CoLoR.ListUtil <> ::list_scope:x_'['_x_']' not
+R23605:23605 CoLoR.ListExtras <> l:252 var
+R23607:23607 CoLoR.ListExtras <> i:254 var
+R23612:23615 Coq.Init.Datatypes <> Some constr
+R23617:23617 CoLoR.ListExtras <> x:253 var
+R23622:23628 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R23630:23631 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 23629:23629 <> j:255
+R23638:23641 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R23633:23636 Coq.Init.Peano <> ::nat_scope:x_'<='_x not
+R23632:23632 CoLoR.ListExtras <> j:255 var
+R23637:23637 CoLoR.ListExtras <> i:254 var
+R23672:23674 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R23642:23651 CoLoR.ListExtras <> find_first def
+R23671:23671 CoLoR.ListExtras <> l:252 var
+R23661:23666 CoLoR.ListExtras <> Find_more.eq_dec var
+R23668:23668 CoLoR.ListExtras <> x:253 var
+R23654:23655 Coq.Init.Logic <> eq ind
+R23657:23657 CoLoR.ListExtras <> x:253 var
+R23675:23678 Coq.Init.Datatypes <> Some constr
+R23680:23680 CoLoR.ListExtras <> j:255 var
+R23766:23771 CoLoR.ListExtras <> Find_more.eq_dec var
+R23766:23771 CoLoR.ListExtras <> Find_more.eq_dec var
+R23814:23819 CoLoR.ListExtras <> Find_more.eq_dec var
+R23814:23819 CoLoR.ListExtras <> Find_more.eq_dec var
+R23910:23910 Coq.Init.Datatypes <> S constr
+R23910:23910 Coq.Init.Datatypes <> S constr
+R23938:23946 CoLoR.ListExtras Find_more <> sec
+R23960:23975 CoLoR.ListExtras <> eq_In_find_first thm
+R23960:23975 CoLoR.ListExtras <> eq_In_find_first thm
+R24002:24020 CoLoR.ListExtras <> eq_find_first_exact thm
+R24002:24020 CoLoR.ListExtras <> eq_find_first_exact thm
+R24052:24075 CoLoR.ListExtras <> element_at_find_first_eq thm
+R24052:24075 CoLoR.ListExtras <> element_at_find_first_eq thm
+sec 24245:24256 <> List_Rel_Dec
+var 24271:24271 List_Rel_Dec A
+var 24292:24292 List_Rel_Dec B
+var 24313:24313 List_Rel_Dec P
+R24318:24321 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24317:24317 CoLoR.ListExtras <> List_Rel_Dec.A var
+var 24339:24339 List_Rel_Dec R
+R24344:24347 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24343:24343 CoLoR.ListExtras <> List_Rel_Dec.A var
+R24349:24352 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24348:24348 CoLoR.ListExtras <> List_Rel_Dec.B var
+prf 24368:24379 <> many_one_dec
+R24395:24398 Coq.Init.Datatypes <> list ind
+R24400:24400 CoLoR.ListExtras <> List_Rel_Dec.A var
+binder 24391:24391 <> l:260
+binder 24403:24403 <> r:261
+R24410:24410 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24449:24457 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 24418:24418 <> x:262
+R24427:24430 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24421:24422 Coq.Lists.List <> In def
+R24426:24426 CoLoR.ListExtras <> l:260 var
+R24424:24424 CoLoR.ListExtras <> x:262 var
+R24431:24431 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R24437:24441 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R24448:24448 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R24432:24432 CoLoR.ListExtras <> List_Rel_Dec.R var
+R24436:24436 CoLoR.ListExtras <> r:261 var
+R24434:24434 CoLoR.ListExtras <> x:262 var
+R24442:24442 Coq.Init.Logic <> ::type_scope:'~'_x not
+R24443:24443 CoLoR.ListExtras <> List_Rel_Dec.R var
+R24447:24447 CoLoR.ListExtras <> r:261 var
+R24445:24445 CoLoR.ListExtras <> x:262 var
+R24483:24486 Coq.Init.Specif <> ::type_scope:x_'+'_'{'_x_'}' not
+R24513:24513 Coq.Init.Specif <> ::type_scope:x_'+'_'{'_x_'}' not
+R24458:24458 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R24460:24462 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R24464:24466 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R24482:24482 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R24463:24463 CoLoR.ListExtras <> List_Rel_Dec.A var
+binder 24459:24459 <> x:263
+R24473:24476 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R24467:24468 Coq.Lists.List <> In def
+R24472:24472 CoLoR.ListExtras <> l:260 var
+R24470:24470 CoLoR.ListExtras <> x:263 var
+R24477:24477 CoLoR.ListExtras <> List_Rel_Dec.R var
+R24481:24481 CoLoR.ListExtras <> r:261 var
+R24479:24479 CoLoR.ListExtras <> x:263 var
+binder 24494:24494 <> x:264
+R24503:24506 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24497:24498 Coq.Lists.List <> In def
+R24502:24502 CoLoR.ListExtras <> l:260 var
+R24500:24500 CoLoR.ListExtras <> x:264 var
+R24507:24507 Coq.Init.Logic <> ::type_scope:'~'_x not
+R24508:24508 CoLoR.ListExtras <> List_Rel_Dec.R var
+R24512:24512 CoLoR.ListExtras <> r:261 var
+R24510:24510 CoLoR.ListExtras <> x:264 var
+prf 24923:24934 <> list_dec_all
+R24950:24953 Coq.Init.Datatypes <> list ind
+R24955:24955 CoLoR.ListExtras <> List_Rel_Dec.A var
+binder 24946:24946 <> l:265
+R24963:24963 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24998:25006 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 24971:24971 <> x:266
+R24980:24983 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R24974:24975 Coq.Lists.List <> In def
+R24979:24979 CoLoR.ListExtras <> l:265 var
+R24977:24977 CoLoR.ListExtras <> x:266 var
+R24984:24984 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R24988:24992 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R24997:24997 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R24985:24985 CoLoR.ListExtras <> List_Rel_Dec.P var
+R24987:24987 CoLoR.ListExtras <> x:266 var
+R24993:24993 Coq.Init.Logic <> ::type_scope:'~'_x not
+R24994:24994 CoLoR.ListExtras <> List_Rel_Dec.P var
+R24996:24996 CoLoR.ListExtras <> x:266 var
+R25007:25007 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R25031:25035 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R25060:25060 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+binder 25015:25015 <> x:267
+R25024:25027 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R25018:25019 Coq.Lists.List <> In def
+R25023:25023 CoLoR.ListExtras <> l:265 var
+R25021:25021 CoLoR.ListExtras <> x:267 var
+R25028:25028 CoLoR.ListExtras <> List_Rel_Dec.P var
+R25030:25030 CoLoR.ListExtras <> x:267 var
+R25036:25042 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R25044:25045 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 25043:25043 <> x:268
+R25052:25055 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R25046:25047 Coq.Lists.List <> In def
+R25051:25051 CoLoR.ListExtras <> l:265 var
+R25049:25049 CoLoR.ListExtras <> x:268 var
+R25056:25056 Coq.Init.Logic <> ::type_scope:'~'_x not
+R25057:25057 CoLoR.ListExtras <> List_Rel_Dec.P var
+R25059:25059 CoLoR.ListExtras <> x:268 var
+R25472:25483 CoLoR.ListExtras List_Rel_Dec <> sec
+R25598:25612 CoLoR.ListExtras <> initialSeg_full thm
+R25614:25627 CoLoR.ListExtras <> initialSeg_nth thm
+R25629:25635 CoLoR.ListExtras <> seg_nth thm
+R25637:25647 CoLoR.ListExtras <> seg_tillEnd thm
+R25649:25660 CoLoR.ListExtras <> seg_exceeded thm
+R25664:25677 CoLoR.ListExtras <> finalSeg_empty thm
+R25679:25694 CoLoR.ListExtras <> nth_finalSeg_nth thm
+R25696:25706 CoLoR.ListExtras <> nth_copy_in thm
+R25708:25719 CoLoR.ListUtil <> nth_app_left thm
+R25721:25733 CoLoR.ListUtil <> nth_app_right thm
+R25799:25815 CoLoR.ListExtras <> initialSeg_length thm
+R25817:25829 CoLoR.ListExtras <> finalSeg_full thm
+R25831:25843 CoLoR.ListExtras <> finalSeg_cons thm
+R25845:25859 CoLoR.ListExtras <> finalSeg_length thm
+R25863:25884 CoLoR.ListExtras <> initialFinalSeg_length thm
+R25886:25895 CoLoR.ListExtras <> copy_split thm
+R25897:25907 CoLoR.ListExtras <> copy_length thm

@@ -252,7 +252,7 @@ Lemma length_add :
   forall (A : Set) (l1 l2 : list A) a, length (l1 ++ a :: l2) = S (length (l1 ++ l2)).
 Proof.
 intros A l1 l2 a; rewrite app_length; simpl;
-rewrite plus_comm; simpl; rewrite plus_comm;
+rewrite Nat.add_comm; simpl; rewrite Nat.add_comm;
 rewrite app_length; trivial.
 Qed.
 
@@ -268,7 +268,7 @@ Lemma list_size_tl_compat :
   forall (A : Set) (size : A -> nat) a b l, size a < size b -> 
     list_size size (a :: l) < list_size size (b :: l).
 Proof.
-intros A size a b l H; simpl; apply plus_lt_compat_r; trivial.
+intros A size a b l H; simpl; apply Nat.add_lt_mono_r; trivial.
 Qed.
 
 Lemma list_size_app:
@@ -360,8 +360,8 @@ generalize (IHk k' m);
 destruct (le_lt_dec (length k) m) as [k_le_m | k_gt_m];
 destruct (le_lt_dec (S (length k)) (S m)) as [k_le_m' | k_gt_m'].
 simpl; trivial.
-absurd (S m <= m); auto with arith; apply le_trans with (length k); auto with arith.
-absurd (S m <= m); auto with arith; apply le_trans with (length k); auto with arith.
+absurd (S m <= m); auto with arith; apply Nat.le_trans with (length k); auto with arith.
+absurd (S m <= m); auto with arith; apply Nat.le_trans with (length k); auto with arith.
 simpl; trivial.
 Qed.
 
@@ -371,7 +371,7 @@ Proof.
 fix nth_error_none 2.
 intros A n [ | a l]; case n; clear n; simpl.
 intros _; apply le_n.
-intros; apply le_O_n.
+intros; apply Nat.le_0_l.
 intros; discriminate.
 intros; apply le_n_S.
 apply nth_error_none.
@@ -1031,7 +1031,7 @@ intros B a l; case l; clear l; simpl.
 intros b Abs; discriminate.
 intros p l b; case p; clear p; simpl.
 intros a1 b1; case (eq_bool a a1).
-intros _; apply le_n_S; apply le_O_n.
+intros _; apply le_n_S; apply Nat.le_0_l.
 apply some_nb_occ_Sn.
 Qed.
 
@@ -1043,7 +1043,7 @@ intro eq_proof.
 fix reduce_assoc_list 2.
 intros B l; case l; clear l; simpl.
 exists (nil : list (A * B)); simpl; split.
-intros _; apply le_O_n.
+intros _; apply Nat.le_0_l.
 intros _; reflexivity.
 intros p l; case p; clear p; simpl.
 case (reduce_assoc_list _ l).
@@ -1059,7 +1059,7 @@ exists (k1 ++ (a',b) :: k2); split.
 intro a''; generalize (H1 a''); do 2 rewrite nb_occ_app; simpl; intro H; exact H.
 intro a''; rewrite H2; generalize (H1 a''); rewrite nb_occ_app; simpl.
 case_eq (eq_bool a'' a').
-intro a''_eq_a'; rewrite plus_comm; simpl; rewrite plus_comm; intro L.
+intro a''_eq_a'; rewrite Nat.add_comm; simpl; rewrite Nat.add_comm; intro L.
 assert (L' := le_S_n _ _ L).
 inversion L' as [L'' | ]; clear L L'.
 assert (L1 : nb_occ a'' k1 = 0).
@@ -1308,7 +1308,7 @@ intros A f l; induction l as [ | a l]; simpl.
 split; [intros; discriminate | intros [a [Abs _]]; contradiction].
 assert (H: forall a', a' = a -> f a' = f a).
 intros; subst; trivial.
-destruct (f a) as [fa | not_fa]; simpl; 
+destruct (f a) as [|]; simpl; 
 generalize (H _ (refl_equal _)); clear H; intro H;
 split; intro H'.
 exists a; split; trivial; left; trivial.

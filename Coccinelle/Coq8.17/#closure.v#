@@ -90,7 +90,7 @@ Qed.
 Lemma acc_star : 
    forall A (R : relation A) a, Acc R a -> forall b,  refl_trans_clos  R b a -> Acc R b.
 Proof.
-intros A R a Acc_a b H; destruct H as [a1 | a1 a2].
+``intros A R a Acc_a b H; destruct H as [a1 | a1 a2].
 assumption.
 apply Acc_incl with (trans_clos R).
 intros b1 b2 H'; apply t_step; assumption.

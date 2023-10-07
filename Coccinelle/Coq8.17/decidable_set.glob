@@ -1,4 +1,4 @@
-DIGEST 91d3a296eb80d82e8aa341a2d63f3aa0
+DIGEST cdf8f17ba41d3775780b4edcdd3ff1fc
 FCoccinelle.decidable_set
 R824:843 Coq.Relations.Relation_Definitions <> <> lib
 R861:866 Coq.Setoids.Setoid <> <> lib
@@ -135,7 +135,7 @@ R2205:2211 Coccinelle.decidable_set Convert <> mod
 prf 2221:2230 <> beq_nat_ok
 binder 2241:2242 <> n1:13
 binder 2244:2245 <> n2:14
-R2251:2257 Coq.Arith.EqNat <> beq_nat abbrev
+R2251:2257 Coq.Arith.PeanoNat Nat eqb def
 R2259:2260 Coccinelle.decidable_set <> n1:13 var
 R2262:2263 Coccinelle.decidable_set <> n2:14 var
 R2285:2288 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
@@ -144,5 +144,5 @@ R2289:2290 Coccinelle.decidable_set <> n2:14 var
 R2272:2274 Coq.Init.Logic <> ::type_scope:x_'='_x not
 R2270:2271 Coccinelle.decidable_set <> n1:13 var
 R2275:2276 Coccinelle.decidable_set <> n2:14 var
-R2421:2427 Coq.Arith.EqNat <> beq_nat abbrev
-R2421:2427 Coq.Arith.EqNat <> beq_nat abbrev
+R2421:2427 Coq.Arith.PeanoNat Nat eqb def
+R2421:2427 Coq.Arith.PeanoNat Nat eqb def

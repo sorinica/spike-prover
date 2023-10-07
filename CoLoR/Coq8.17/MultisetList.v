@@ -36,6 +36,7 @@ Section Operations.
 
 End Operations.
 
+Declare Scope msets_scope.
   Infix "=mul=" := meq (at level 70) : msets_scope.
   Notation "X <>mul Y" := (~meq X Y) (at level 50) : msets_scope.
   Notation "{{ x }}" := (singleton x) (at level 5) : msets_scope.
@@ -301,14 +302,14 @@ Section SpecConformation.
  
 End SpecConformation.
 
-  #[export] Hint Unfold meq 
+#[export]  Hint Unfold meq 
 	      empty
               singleton
               mult
               union
               diff : multisets.
 
-  #[export] Hint Resolve mult_eqA_compat 
+#[export]  Hint Resolve mult_eqA_compat 
                meq_multeq
                multeq_meq
                empty_mult
@@ -318,7 +319,7 @@ End SpecConformation.
                singleton_mult_in
                singleton_mult_notin : multisets.
 
-  #[export] Hint Rewrite empty_mult
+#[export]  Hint Rewrite empty_mult
                union_mult
 	       diff_mult
 	       intersection_mult using trivial : multisets.

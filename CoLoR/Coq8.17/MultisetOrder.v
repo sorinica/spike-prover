@@ -17,6 +17,8 @@ From Coq Require Import Transitive_Closure Compare_dec Relations Permutation
 From CoLoR Require Import RelExtras MultisetTheory ListPermutation MultisetCore
      ListExtras AccUtil LogicUtil.
 
+Ltac Tauto.intuition_solver ::= auto.
+
 Module MultisetOrder (MC: MultisetCore).
 
   Module Import MSet := MultisetTheory.Multiset MC.
@@ -85,6 +87,7 @@ Section OrderDefinition.
      Notations
    ------------------------------------------------------------------ *)
 
+Declare Scope mord_scope.
   Notation "X >mul Y" := (MultisetGt X Y) (at level 70) : mord_scope.
   Notation "X >MUL Y" := (MultisetGT X Y) (at level 70) : mord_scope.
   Notation "X <mul Y" := (MultisetLt X Y) (at level 70) : mord_scope.
@@ -189,9 +192,9 @@ Section OrderDefinition.
   Variable gtA_eqA_compat : Proper (eqA ==> eqA ==> impl) gtA.
   Existing Instance gtA_eqA_compat.
 
-  Hint Resolve (gtA_transitive) : sets.
-  Hint Resolve (gtA_irreflexive) : sets.
-  Hint Resolve (so_not_symmetric
+ Hint Resolve (gtA_transitive) : sets.
+ Hint Resolve (gtA_irreflexive) : sets.
+ Hint Resolve (so_not_symmetric
     (Build_strict_order gtA_transitive gtA_irreflexive)) : sets.
 
   Lemma gtA_eqA_compat' :
@@ -683,7 +686,7 @@ Section MultisetOrder_Wf.
     intros a M0 H1 H2 H3; constructor; intros N N_lt.
     case (red_insert N_lt); intros; repeat destruct H; fold AccM_1; rewrite H.
     apply H3; trivial.
-    clear H N_lt H3; induction x as [_|M a0] using mset_ind.
+    clear H N_lt H3; induction x as [|M a0] using mset_ind.
     setoid_replace (M0 + empty) with M0; auto with multisets.
     setoid_replace (M0 + (M + {{a0}})) with ((M0 + M) + {{a0}}).
     auto with multisets.

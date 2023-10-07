@@ -11,9 +11,6 @@
 
 (** * Term algebra defined as functor from a Module Signature and a Module Variable.*)
 
-Add LoadPath "basis" as b. 
-Add LoadPath "list_extensions" as le. 
-
 Require Import Recdef.
 Require Import List.
 Require Import closure.
@@ -105,7 +102,7 @@ end.
 Proof.
 intros _ l t l' y H1 H2;  simpl; auto with arith.
 intros _ l t l' f ll H1 H2; simpl; auto with arith.
-intros _ l t l' f ll H1 H2; simpl; apply lt_le_trans with (size (Term f ll)).
+intros _ l t l' f ll H1 H2; simpl; apply Nat.lt_le_trans with (size (Term f ll)).
 rewrite size_unfold; simpl; auto with arith.
 simpl; auto with arith.
 Defined.
@@ -295,8 +292,8 @@ Fixpoint well_formed_bool (t:term) : bool :=
        end) in
        andb (well_formed_list l)
      (match arity f with
-     | Free n => beq_nat (length l) n 
-     | _ => beq_nat (length l) 2
+     | Free n => Nat.eqb (length l) n 
+     | _ => Nat.eqb (length l) 2
      end)
   end.
 

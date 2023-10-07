@@ -12,6 +12,7 @@ Set Implicit Arguments.
 
 From CoLoR Require RelExtras.
 From Coq Require Import Min Relations.
+From Coq Require Import Psatz.
 
 Module Type MultisetCore.
 
@@ -33,6 +34,7 @@ Module Type MultisetCore.
 
   Parameter diff : Multiset -> Multiset -> Multiset.
 
+Declare Scope msets_scope.
   Notation "X =mul= Y" := (meq X Y) (at level 70) : msets_scope.
   Notation "X <>mul Y" := (~meq X Y) (at level 50) : msets_scope.
   Notation "{{ x }}" := (singleton x) (at level 5) : msets_scope.
@@ -62,7 +64,7 @@ Module Type MultisetCore.
 
     Parameter diff_mult: x/(M-N) = (x/M - x/N)%nat.
 
-    Parameter intersection_mult: x/(M#N) = min (x/M) (x/N).
+    Parameter intersection_mult: x/(M#N) = Nat.min (x/M) (x/N).
 
     Parameter singleton_mult_in: x =A= y -> x/{{y}} = 1.
 
@@ -73,7 +75,7 @@ Module Type MultisetCore.
 
   End Specification.
 
-  #[export] Hint Resolve mult_eqA_compat 
+ #[export]  Hint Resolve mult_eqA_compat 
                meq_multeq
                multeq_meq
                empty_mult
@@ -101,11 +103,11 @@ Section Multiset_IntersectionAsDifference.
   Definition inter_as_diff x y := diff x (diff x y).
 
   Lemma inter_as_diff_ok : forall M N x,
-    mult x (inter_as_diff M N) = Min.min (mult x M) (mult x N).
+    mult x (inter_as_diff M N) = Nat.min (mult x M) (mult x N).
 
   Proof.
     intros M N x. unfold inter_as_diff. rewrite !diff_mult.
-    From Coq Require Import Psatz. lia.
+     lia.
   Qed.
 
 End Multiset_IntersectionAsDifference.
