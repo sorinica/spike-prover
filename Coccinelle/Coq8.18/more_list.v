@@ -209,7 +209,7 @@ Lemma flat_map_app :
 intros A B f; fix flat_map_app 1.
 intros l1; case l1; clear l1.
 intros l2; apply refl_equal.
-intros a1 l1 l2; simpl; rewrite (flat_map_app l1 l2); rewrite ass_app; apply refl_equal.
+intros a1 l1 l2; simpl; rewrite (flat_map_app l1 l2); rewrite app_assoc; apply refl_equal.
 Qed.
 
 (** ** Iterators. *) 
@@ -235,7 +235,7 @@ Proof.
   split; auto with *.
   intros acc1 acc2; rewrite <- IHl.
   unfold g.
-  rewrite ass_app. 
+  rewrite app_assoc. 
   reflexivity.
 Qed.
 

@@ -151,7 +151,7 @@ Lemma var_list_list_app : forall l1 l2, var_list_list (l1 ++ l2) = (var_list_lis
 Proof.
 fix var_list_list_app 1; intros l1 l2; case l1; clear l1.
 reflexivity.
-intros t1 l1; simpl; rewrite <- ass_app; rewrite var_list_list_app; reflexivity.
+intros t1 l1; simpl; rewrite <- app_assoc; rewrite var_list_list_app; reflexivity.
 Qed.
 
 Lemma in_var_list_list : forall l v, In v (var_list_list l) -> exists t, In t l /\ In v (var_list t).
@@ -177,7 +177,7 @@ Qed.
 Lemma var_in_term_list_is_sound : forall x l, var_in_term_list x l = true <-> In x (var_list_list l).
 Proof.
 intros x l; functional induction (var_in_term_list x l) as [ | x' y l H1 IH | x' f ll l H1 IHll IHl].
-simpl; intuition.
+simpl; intuition auto. discriminate H.
 simpl; rewrite <- IH.
 generalize (X.eq_bool_ok x y); case (eq_var_bool x y); simpl.
 intro x_eq_y; split.
@@ -283,7 +283,7 @@ Lemma symb_list_list_app : forall l1 l2, symb_list_list (l1 ++ l2) = (symb_list_
 Proof.
 fix symb_list_list_app 1; intros l1 l2; case l1; clear l1.
 reflexivity.
-intros t1 l1; simpl; rewrite <- ass_app; rewrite symb_list_list_app; reflexivity.
+intros t1 l1; simpl; rewrite <- app_assoc; rewrite symb_list_list_app; reflexivity.
 Qed.
 
 Lemma in_symb_list_list : forall l f, In f (symb_list_list l) -> exists t, In t l /\ In f (symb_list t).
@@ -1562,7 +1562,7 @@ case_eq (eq_var_bool y x); [intro y_eq_x | intro y_diff_x].
 destruct (in_app_or _ _ _ H4) as [H5 | H5];
 destruct (In_split _ _ H5) as [tau1 [tau2 H6]]; subst.
 absurd (y = x). 
-apply (H3 y x val'' val' tau1 tau2 sigma2); rewrite <- ass_app; trivial.
+apply (H3 y x val'' val' tau1 tau2 sigma2); rewrite <- app_assoc; trivial.
 generalize (X.eq_bool_ok y x); rewrite y_eq_x; intro y_eq_x'; exact y_eq_x'.
 absurd (x = y). 
 apply (H3 x y val' val'' sigma1 tau1 tau2); trivial.
@@ -1582,7 +1582,7 @@ rewrite H0; apply in_or_app; right; left; trivial.
 destruct (in_app_or _ _ _ yvaly_in_sigma12) as [yvaly_in_sigma1 | yvaly_in_sigma2].
 destruct (In_split _ _ yvaly_in_sigma1) as [tau1 [tau2 H']].
 intro x1_eq_y; apply (H3 y x1 valy val' tau1 tau2 sigma2); subst; trivial.
-rewrite <- ass_app; trivial.
+rewrite <- app_assoc; trivial.
 destruct (In_split _ _ yvaly_in_sigma2) as [tau1 [tau2 H']].
 apply (H3 x1 y val' valy sigma1 tau1 tau2); subst; trivial.
 destruct (insert_2 _ _ _ _ _ (z,val') _ _ H0) as [tau1 [tau2 [tau3 H4]]].
