@@ -13,7 +13,7 @@ From Coq Require Import Arith Lia.
 From Coq Require Export Bool.
 From Coq Require Setoid.
 
-From CoLoR Require Import LogicUtil.
+Require Import LogicUtil.
 
 Ltac Tauto.intuition_solver ::= auto with *.
 

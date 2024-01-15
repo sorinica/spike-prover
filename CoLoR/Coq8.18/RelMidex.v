@@ -9,7 +9,7 @@ excluded middle and decidability for relations.
 
 From Coq Require Import Relations.
 
-From CoLoR Require Import LogicUtil.
+Require Import LogicUtil.
 
 Set Implicit Arguments.
 

@@ -11,10 +11,10 @@ in this file.
 
 Set Implicit Arguments.
 
-From CoLoR Require RelUtil.
+Require RelUtil.
 From Coq Require Import Transitive_Closure Compare_dec Relations Permutation
      Setoid Morphisms Basics Lia.
-From CoLoR Require Import RelExtras MultisetTheory ListPermutation MultisetCore
+Require Import RelExtras MultisetTheory ListPermutation MultisetCore
      ListExtras AccUtil LogicUtil.
 
 Ltac Tauto.intuition_solver ::= auto.
@@ -38,6 +38,18 @@ Section OrderDefinition.
   Notation "X <=A Y" := (leA X Y) (at level 50). 
   Notation "X >=A Y" := (geA X Y) (at level 50). 
   Notation "X >*A Y" := (gtA_trans X Y) (at level 50).
+
+  Variable gtA_transitive : Transitive gtA.
+  Existing Instance gtA_transitive.
+  Variable gtA_irreflexive : RelUtil.irreflexive gtA.
+  Variable gtA_eqA_compat : Proper (eqA ==> eqA ==> impl) gtA.
+  Existing Instance gtA_eqA_compat.
+
+ Hint Resolve gtA_transitive : sets.
+ Hint Resolve gtA_irreflexive : sets.
+ Definition const8 := (so_not_symmetric
+    (Build_strict_order gtA_transitive gtA_irreflexive)).
+ Hint Resolve const8 : sets.
 
 (* ------------------------------------------------------------------
           Definition of multiset order
@@ -186,16 +198,6 @@ Declare Scope mord_scope.
      Some additional properties needed for some lemmas
    ----------------------------------------------------------------- *)
 
-  Variable gtA_transitive : Transitive gtA.
-  Existing Instance gtA_transitive.
-  Variable gtA_irreflexive : RelUtil.irreflexive gtA.
-  Variable gtA_eqA_compat : Proper (eqA ==> eqA ==> impl) gtA.
-  Existing Instance gtA_eqA_compat.
-
- Hint Resolve (gtA_transitive) : sets.
- Hint Resolve (gtA_irreflexive) : sets.
- Hint Resolve (so_not_symmetric
-    (Build_strict_order gtA_transitive gtA_irreflexive)) : sets.
 
   Lemma gtA_eqA_compat' :
     forall a b, eqA a b -> forall c d, eqA c d -> gtA a c -> gtA b d.

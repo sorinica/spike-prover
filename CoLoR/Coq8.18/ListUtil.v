@@ -13,7 +13,7 @@ Extension of the Coq library on lists.
 
 Set Implicit Arguments.
 
-From CoLoR Require Import LogicUtil EqUtil RelUtil BoolUtil NatUtil.
+Require Import LogicUtil EqUtil RelUtil BoolUtil NatUtil.
 
 From Coq Require Import Setoid SetoidList FunInd.
 From Coq Require Export List.
@@ -932,7 +932,7 @@ Section flat_map.
   Lemma flat_map_app : forall l m,
     flat_map f (l ++ m) = flat_map f l ++ flat_map f m.
 
-  Proof. induction l; simpl; intros. refl. rewrite IHl, app_ass. refl. Qed.
+  Proof. induction l; simpl; intros. refl. rewrite IHl, app_assoc. refl. Qed.
 
 End flat_map.
 
@@ -1236,7 +1236,7 @@ Section reverse_tail_recursive.
 
   Lemma rev_append_rev : forall l l', rev_append l' l = rev l ++ l'.
 
-  Proof. induction l; simpl; auto; intros. rewrite <- ass_app; fo. Qed.
+  Proof. induction l; simpl; auto; intros. rewrite <- app_assoc; fo. Qed.
 
   Lemma rev_append_app : forall l l' acc : list A,
     rev_append acc (l ++ l') = rev_append (rev_append acc l) l'.
@@ -1246,12 +1246,12 @@ Section reverse_tail_recursive.
   Lemma rev'_app : forall l l' : list A, rev' (l ++ l') = rev' l' ++ rev' l.
 
   Proof.
-    intros. rewrite rev_append_app, !rev_append_rev, <- !app_nil_end. refl.
+    intros. rewrite rev_append_app, !rev_append_rev,  !app_nil_r. refl.
   Qed.
 
   Lemma rev'_rev : forall l : list A, rev' l = rev l.
 
-  Proof. intro. rewrite rev_append_rev, <- app_nil_end. refl. Qed.
+  Proof. intro. rewrite rev_append_rev, app_nil_r. refl. Qed.
 
   Lemma rev'_rev' : forall l : list A, rev' (rev' l) = l.
 
@@ -1289,7 +1289,7 @@ Section split.
   Proof.
     induction l; destruct n; simpl; intros. inversion H. refl. discr.
     inversion H. refl. ded (IHl _ _ _ _ H). rewrite rev'_cons in H0.
-    rewrite app_ass in H0. hyp.
+    rewrite <- app_assoc in H0. hyp.
   Qed.
 
   Arguments split_aux_correct [l n l1 l2] _ _.
@@ -1838,8 +1838,8 @@ Section fold_left_list.
 
   Proof.
     induction bs; simpl; intro. refl.
-    rewrite IHbs, hyp, flat_map_app, app_ass. simpl.
-    rewrite <- app_nil_end. refl.
+    rewrite IHbs, hyp, flat_map_app, app_assoc. simpl.
+    rewrite app_nil_r. refl.
   Qed.
 
   Lemma In_fold_left : forall a bs l,

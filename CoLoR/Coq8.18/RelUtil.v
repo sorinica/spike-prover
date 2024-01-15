@@ -15,8 +15,8 @@ From Coq Require Import Setoid Basics Morphisms List.
 From Coq Require Export Relations.
 From Coq Require Import Lia.
 
-From CoLoR Require Import LogicUtil.
-From CoLoR Require Export RelMidex.
+Require Import LogicUtil.
+Require Export RelMidex.
 
 Ltac Tauto.intuition_solver ::= auto with *.
 
@@ -40,6 +40,7 @@ Arguments symprod [A B] _ _ _ _.
 Notation rel := relation.
 
 Notation incl := inclusion.
+Declare Scope relation_scope.
 Infix "<<" := incl (at level 50) : relation_scope.
 
 Notation same := same_relation.
@@ -807,7 +808,7 @@ Proof. intros R S [RS SR]. split; apply rtc_incl; hyp. Qed.
 
 Lemma incl_rtc A (R : rel A) : R << R#.
 
-Proof. unfold inclusion. intros. Print clos_refl_trans. apply rt_step. trivial. Qed.
+Proof. unfold inclusion. intros. apply rt_step. trivial. Qed.
 
 Lemma tc_incl_rtc A (R : rel A) : R! << R#.
 

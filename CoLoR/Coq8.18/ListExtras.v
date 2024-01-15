@@ -9,11 +9,11 @@ Some additional functions on lists.
 
 Set Implicit Arguments.
 
-From CoLoR Require Export ListUtil.
+Require Export ListUtil.
 From Coq Require Import Min Permutation Setoid.
-From CoLoR Require Import NatUtil LogicUtil.
+Require Import NatUtil LogicUtil.
 
-Set Firstorder Solver debug eauto with core.
+#[export] Set Firstorder Solver debug eauto with core.
 
 (***********************************************************************)
 (** initial segment of a list *)

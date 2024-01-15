@@ -63,10 +63,13 @@ Module Type Eqset.
   Notation "X =A= Y" := (eqA X Y) (at level 70).
 
    #[export] Declare Instance eqA_Equivalence : Equivalence eqA.
-
-   #[export] Hint Resolve (Seq_refl  A eqA eqA_Equivalence) : sets.
-   #[export] Hint Resolve (Seq_trans A eqA eqA_Equivalence) : sets.
-   #[export] Hint Resolve (Seq_sym   A eqA eqA_Equivalence) : sets.
+   
+   Definition const1 := (Seq_refl  A eqA eqA_Equivalence).
+   #[export] Hint Resolve const1 : sets.
+   Definition const2 := (Seq_trans A eqA eqA_Equivalence).
+   #[export] Hint Resolve const2 : sets.
+   Definition const3 := (Seq_sym   A eqA eqA_Equivalence).
+   #[export] Hint Resolve const3 : sets.
 
 End Eqset.
 
@@ -88,9 +91,13 @@ Module Eqset_def (A : SetA) <: Eqset.
 
   Proof. unfold eqA. class. Qed.
 
-  #[export] Hint Resolve (Seq_refl  A eqA eqA_Equivalence) : sets.
-  #[export] Hint Resolve (Seq_trans A eqA eqA_Equivalence) : sets.
-  #[export] Hint Resolve (Seq_sym   A eqA eqA_Equivalence) : sets.
+    Definition const1 := (Seq_refl  A eqA eqA_Equivalence).
+   #[export] Hint Resolve const1 : sets.
+   Definition const2 := (Seq_trans A eqA eqA_Equivalence).
+   #[export] Hint Resolve const2 : sets.
+   Definition const3 := (Seq_sym   A eqA eqA_Equivalence).
+   #[export] Hint Resolve const3 : sets.
+
 
 End Eqset_def.
 
@@ -167,14 +174,18 @@ Module Type Poset.
 
   Parameter gtA_so : strict_order gtA.
 
-   #[export] Hint Resolve (sord_trans gtA_so): sets.
-   #[export] Hint Resolve (sord_irrefl gtA_so) : sets.
-   #[export] Hint Resolve (so_not_symmetric gtA_so) : sets.
-   #[export] Hint Resolve (so_strict gtA_so gtA_eqA_compat eqA_Equivalence) : sets.
+  Definition const4 := (sord_trans gtA_so).
+  #[export] Hint Resolve const4: sets. 
+  Definition const5 := (sord_irrefl gtA_so).
+  #[export] Hint Resolve const5: sets. 
+  Definition const6 := (so_not_symmetric gtA_so).
+  #[export] Hint Resolve const6: sets.
+  Definition const7 := (so_strict gtA_so gtA_eqA_compat eqA_Equivalence).
+  #[export] Hint Resolve const7 : sets.
 
 End Poset.
 
-Set Firstorder Solver debug auto with *. 
+#[export] Set Firstorder Solver debug auto with *. 
 
 Module nat_ord <: Ord.
 
