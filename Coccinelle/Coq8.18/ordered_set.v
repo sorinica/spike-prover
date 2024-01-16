@@ -20,8 +20,7 @@ Inductive comp : Set :=
   | Uncomparable : comp.
 
 Module Type S.
-
-Variable A : Set.
+Parameter A : Set.
 Parameter eq_bool : A -> A -> bool.
 Parameter eq_bool_ok : forall a1 a2, match eq_bool a1 a2 with true => a1 = a2 | false => ~ a1 = a2 end.
 
@@ -30,7 +29,6 @@ Parameter o_bool : A -> A -> bool.
 Parameter o_bool_ok : forall a1 a2, match o_bool a1 a2 with true => o a1 a2 | false => ~ o a1 a2 end.
 Parameter o_proof : order A o.
 Parameter o_total : forall e1 e2 : A, {o e1 e2} + {o e2 e1}.
-
 End S.
 
 Module Type ES.
@@ -74,7 +72,7 @@ right; intro; apply not_e1_le_e2; subst; trivial.
 Qed.
 *)
 
-Module Nat <: S with Definition A:=nat.
+Module Nat <: S with Definition A := nat.
 
 Definition A := nat.
 Definition o : relation A := le.
