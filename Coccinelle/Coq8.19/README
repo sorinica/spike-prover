@@ -1,0 +1,3 @@
+to regenerate Makefile, run the command
+
+coq_makefile -f _CoqProject > Makefile
