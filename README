@@ -32,6 +32,7 @@ The "specs" directory contains :
         - the "rm" subdirectory. Launch 'prove.sh' to generate the proofs using reasoning modules for linear arithmetic and congruence closure
         - the "no_rm" subdirectory. Launch 'prove.sh' to generate the proofs without using reasoning modules
         - the "certified" subdirectory. Launch "validate.sh" to generate proofs and the Coq scripts from the proofs.
+- the "preambule_coq" subdirectory with Coq files required during the validation process
 
 The proof from the "certified" subdirectory can be certified using Coq and the Coccinelle and CoLoR libraries. Coq should be installed. The  CoLoR and Coccinelle libraries, available for different versions of Coq (> 8.3), are installed in the "theories" subdirectory.
 
