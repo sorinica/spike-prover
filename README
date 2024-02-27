@@ -1,70 +1,42 @@
-(* Sorin Stratulat - January 2023 *)
+(* Sorin Stratulat - February 2024 *)
 
-Updated for Coq 8.16.
+To compile Spike, go to the "sources" directory and follow the instructions from the README file
 
-(* Sorin Stratulat - February 2022 *)
+The "specs" directory contains :
+ - the  "basic" subdirectory for proving some simple examples. It contains:
+     - the "examples" subdirectory with the examples
+     - the "dracula" subdirectory. Launch 'prove.sh' to generate the proofs using the Dracula strategy and described in
+       @inproceedings{Stratulat:2012uq,
+	address = {Manchester},
+	author = {S. Stratulat},
+	booktitle = {Turing-100 (The Alan Turing Centenary Conference)},
+	editor = {A. Voronkov},
+	pages = {326-352},
+	publisher = {EasyChair},
+	series = {EPiC Series},
+	title = {A Unified View of Induction Reasoning for First-Order Logic},
+	volume = {10},
+	year = {2012}}
+     - the "certified" subdirectory. Launch "validate.sh" to generate the proofs to be checked by Coq.
+ - the "ABR" subdirectoy for examples about the certification of a telecommunications protocol, described in
+        @article{Rusinowitch:2003ak,
+	author = {M. Rusinowitch and S. Stratulat and F. Klay},
+	journal = {Journal of Automated Reasoning},
+	number = {2},
+	pages = {153-177},
+	title = {Mechanical Verification of an Ideal Incremental {ABR} Conformance Algorithm},
+	volume = {30},
+	year = {2003}}
+        It contains:
+        - the "dracula" subdirectory. Launch 'prove.sh' to generate the proofs using the Dracula strategy.
+        - the "rm" subdirectory. Launch 'prove.sh' to generate the proofs using reasoning modules for linear arithmetic and congruence closure
+        - the "no_rm" subdirectory. Launch 'prove.sh' to generate the proofs without using reasoning modules
+        - the "certified" subdirectory. Launch "validate.sh" to generate proofs and the Coq scripts from the proofs.
 
-Updated for Coq 8.14 and 8.15.
+The proof from the "certified" subdirectory can be certified using Coq and the Coccinelle and CoLoR libraries. Coq should be installed. The  CoLoR and Coccinelle libraries, available for different versions of Coq (> 8.3), are installed in the "theories" subdirectory.
 
-(* Sorin Stratulat - February 2021 *)
+- run 'config.sh <Coq version>' to set the Coq version.
+- run 'make' to validate the Coq scripts.
 
-Updated for Coq 8.13.
 
-(* Sorin Stratulat - January 2020 *)
-
-Updated for Coq 8.12.
-
-(* Sorin Stratulat - January 2019 *)
-
-Updated for Coq 8.9.
-
-(* Sorin Stratulat - October 2018 *)
-
-Updated for Coq 8.8.
-
-(* Sorin Stratulat - April 2016 *)
-
-We provide compatibility with Coq, for the 8.4, 8.5 and 8.6 versions. Compile the sources of Coccinelle and CoLoR for the Coq version of your choice (see the new structure of Coccinelle et CoLoR directories).
-
-The file .coqrc should be adapted. For example, if you use Coq 8.6, its content must include
-
--------
-Add Rec LoadPath "<path_to_spike_prover>/CoLoR/Coq8.6/" as CoLoR.
-
-Add Rec LoadPath "<path_to_spike_prover>/Coccinelle/Coq8.6/" as Coccinelle.
--------
-
-where <path_to_spike_prover> is the _absolute_ path to the "spike-prover" directory (thanks to Paul Iannetta for the remark on the absolute path)
-
-(* Sorin Stratulat - April 2013 *)
-
-The `trunk' directory contains the following information:
-
-- README - this file
-- sources directory - the SPIKE sources. To create `spike_bc', run `make' in the directory (you need ocaml installed).
-- specs directory - the SPIKE specification files. The files related to the ABR proof are in the 'abr' subdirectory. Simpler examples are in the 'basic' subdirectory.
-
-We have added two subdirectories to the `abr' directory: 1) the `rm' subdirectory has ABR conjectures that can be proved using a reasoning module combining a semi-decision procedure for linear arithmetic and a congruence closure procedure, and 2)  the `no_rm' subdirectory has ABR conjectures that can be proved without the reasoning module. The proof for a spec file <file.spike> can be launched with '../../../sources/spike_bc <file.spike>'.
-
-- Coccinelle directory - It allows to certify the implicit induction proofs issued by SPIKE with Coq (see below). However, the `dracula'- and the `reasoning module'-based proofs cannot be certified in this version.
- 
-The proofs using the DRaCuLa strategy can be automatically launched with the shell script prove.sh from the `dracula' subdirectories. The output is stored in the .tmp files.
-
-Similarly, examples of certified proofs are given in the `certify' directories. They contain a shell script, validate.sh, that automatizes the certification process for you. Before running the script, you should:
-
-1. compile Coccinelle  (you need COQ installed. Any version 8.4 should work.). This is an adapted version from http://raweb.inria.fr/rapportsactivite/RA2010/proval/uid44.html
-2. enter the `sources' directory and compile with the command "make" to generate spike_bc (you need Ocaml installed).  
-3. to automatically run and test the specifications of the SPIKE files, run `validate.sh -spec'.
-4. to automatically run and test the proofs of the SPIKE files, run afterwards `validate.sh' without parameters. (step 4 is compulsory).
-
-To setup the path to Coccinelle, here is an example of the file .coqrc from your home directory
-
--------
-Add LoadPath "<path_to_spike_prover>/Coccinelle/basis".
-Add LoadPath "<path_to_spike_prover>/Coccinelle/list_extensions". 
-Add LoadPath "<path_to_spike_prover>/Coccinelle/term_algebra". 
-Add LoadPath "<path_to_spike_prover>/Coccinelle/term_orderings". 
--------
 In case of problems, please contact Sorin (sorin.stratulat@univ-lorraine.fr).
-
-
