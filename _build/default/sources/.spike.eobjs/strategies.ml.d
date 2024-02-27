@@ -1,1 +1,0 @@
-sources/strategies.ml: Auto_simplification Case_rewriting Clauses Complement Contextual_rewriting Decomposition_set Delete_set Dicos Diverse Dummies Eliminate_set Format Generate_eq Induction Induction_obs Io List Literals Normalize Order Queue Smt Symbols Sys Terms Test_sets Values

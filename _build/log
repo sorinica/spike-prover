@@ -1,4 +1,0 @@
-# dune exec sources/spike.exe
-# OCAMLPARAM: unset
-$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/z2/tsnrfwtd6xq1y5s0lspyl5vh0000gp/T/dune9edc18.output 2> /dev/null
-$ /Users/sorin/.opam/default/bin/ocamlc.opt -config > /var/folders/z2/tsnrfwtd6xq1y5s0lspyl5vh0000gp/T/duneb7659f.output
