@@ -7,7 +7,7 @@ for i in cons_insat progat_insat1 cons_listat progat_insin_t erl_cons progat_tim
 do
 j=`expr $j + 1`
 echo "file $j: $i.spike"
-    ../../../sources/spike_bc $i.spike > $i.tmp
+    ../../../sources/_build/default/spike.exe $i.spike > $i.tmp
     echo "result written in $i.tmp\n" 
 done
 echo "***************   End computation  **********************"

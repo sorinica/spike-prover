@@ -7,7 +7,7 @@ for i in firstat_timeat firstat_progat sorted_sorted sorted_e_two member_t_insin
 do
 j=`expr $j + 1`
 echo "file $j: $i.spike"
-    ../../../sources/spike_bc -dracula ../no_rm/$i.spike > $i.tmp
+../../../sources/_build/default/spike.exe -dracula ../no_rm/$i.spike > $i.tmp
     echo "result written in $i.tmp" 
 done
 echo "***************   End computation  **********************"
