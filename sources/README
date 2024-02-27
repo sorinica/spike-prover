@@ -1,7 +1,16 @@
-do `make'
+do `dune build'
 
 you need to previously install
 
 - ocaml (http://ocaml.org/)
 - ocamlbuild
 - ocamlfind
+- merlin
+- dune
+
+- to execute spike: dune exec ./spike.exe <filename> 
+
+- to list the options: dune exec ./spike.exe 
+
+
+
