@@ -9,7 +9,7 @@ $| O => (Term id_0 nil)
 $| (S x) => let x' := model_nat x in   (Term id_S (x'::nil))
 $ end.
 $
-$Fixpoint model_bool (v: bool): term :=
+$Definition model_bool (v: bool): term :=
 $match v with
 $|true => (Term id_true nil)
 $|false => (Term id_false nil)
