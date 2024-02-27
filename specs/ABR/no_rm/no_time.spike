@@ -179,8 +179,8 @@ $  | false => Cons (C t e) (Cons o pg)
 $  end
 $end.
 $
-$Hint Unfold er. 
-$Hint Unfold time.
+$Hint Unfold er:core. 
+$Hint Unfold time:core.
 $
 $Fixpoint progAt (p:PLAN) (t:nat) : nat :=
 $match p with
