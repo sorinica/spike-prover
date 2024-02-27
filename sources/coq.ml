@@ -222,7 +222,7 @@ let print_coq_proof f =
   let lemmas = List.fold_right (fun lem s -> 
     let lvars = List.map (fun (i, s, _) ->  (i, s)) lem#variables in
     (* let args_str = let () = j:= 0 in List.fold_right (fun (i, s) str -> "(" ^ (if i == 0 then let () = j:= !j + 1 in "_u" ^ (string_of_int !j) else ("u" ^ (string_of_int i))) ^ ": " ^ (dico_sort_string#find s) ^ ")" ^ (if compare str "" == 0 then "" else " ") ^  str) lvars "" in *)
-    let title = "\n\nHypothesis true_" ^ (string_of_int lem#number) ^ ": " ^ (* (if compare args_str "" == 0 then "" else "forall ") ^ args_str ^ (if compare args_str "" == 0 then "" else ", ") ^ *) lem#compute_string_coq_with_quantifiers true ^ ".\n" in
+    let title = "\n\nLocal Parameter true_" ^ (string_of_int lem#number) ^ ": " ^ (* (if compare args_str "" == 0 then "" else "forall ") ^ args_str ^ (if compare args_str "" == 0 then "" else ", ") ^ *) lem#compute_string_coq_with_quantifiers true ^ ".\n" in
     let () =  coq_all_lemmas := (lem#number, (title, lvars)):: !coq_all_lemmas in
     title ^ s) (* lemmas_system#content *) !coq_spec_lemmas "" in
   (* let () = List.iter (fun (n,_) -> buffered_output ("\nFound lemma " ^ (string_of_int n))) !coq_all_lemmas in *)
