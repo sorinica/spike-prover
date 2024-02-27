@@ -1,4 +1,4 @@
-B /Users/sorin/.opam/default/lib/ocaml
-B ../_build/default/sources/.spike.eobjs
-S /Users/sorin/.opam/default/lib/ocaml
 S .
+B ./_build/default/.spike.eobjs/byte
+FLG -open Dune__exe -annot
+
