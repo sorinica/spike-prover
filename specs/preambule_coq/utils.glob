@@ -1,0 +1,506 @@
+DIGEST b2058c5dfd0d22a5a4fb7cdf9a5fff4b
+Ftheories.preambule_coq.utils
+R15:19 Coq.Arith.Arith <> <> lib
+R37:45 Coq.Relations.Relations <> <> lib
+R63:68 Coq.Arith.Wf_nat <> <> lib
+R86:89 Coq.Lists.List <> <> lib
+R125:128 Coq.Init.Datatypes <> cons constr
+R136:139 Coq.Init.Datatypes <> cons constr
+R143:145 Coq.Init.Datatypes <> nil constr
+not 103:103 <> :::'['_x_','_'..'_','_x_']'
+def 267:273 <> beq_nat
+R280:282 Coq.Init.Datatypes <> nat ind
+binder 276:276 <> x:1
+binder 278:278 <> y:2
+R287:290 Coq.Init.Datatypes <> bool ind
+R303:303 theories.preambule_coq.utils <> y:2 var
+R301:301 theories.preambule_coq.utils <> x:1 var
+R319:322 Coq.Init.Datatypes <> true constr
+R326:326 Coq.Init.Datatypes <> S constr
+R332:332 Coq.Init.Datatypes <> S constr
+R340:346 theories.preambule_coq.utils <> beq_nat:3 def
+R364:368 Coq.Init.Datatypes <> false constr
+prf 382:393 <> beq_nat_true
+binder 403:403 <> m:6
+binder 405:405 <> n:7
+R426:429 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R419:421 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R408:414 theories.preambule_coq.utils <> beq_nat def
+R416:416 theories.preambule_coq.utils <> m:6 var
+R418:418 theories.preambule_coq.utils <> n:7 var
+R422:425 Coq.Init.Datatypes <> true constr
+R431:433 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R430:430 theories.preambule_coq.utils <> m:6 var
+R434:434 theories.preambule_coq.utils <> n:7 var
+R493:499 theories.preambule_coq.utils <> beq_nat def
+R530:536 theories.preambule_coq.utils <> beq_nat def
+R573:575 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R573:575 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R599:605 theories.preambule_coq.utils <> beq_nat def
+prf 661:673 <> beq_nat_false
+binder 683:683 <> m:8
+binder 685:685 <> n:9
+R707:710 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R699:701 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R688:694 theories.preambule_coq.utils <> beq_nat def
+R696:696 theories.preambule_coq.utils <> m:8 var
+R698:698 theories.preambule_coq.utils <> n:9 var
+R702:706 Coq.Init.Datatypes <> false constr
+R712:715 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R711:711 theories.preambule_coq.utils <> m:8 var
+R716:716 theories.preambule_coq.utils <> n:9 var
+R767:773 theories.preambule_coq.utils <> beq_nat def
+prf 914:923 <> beq_nat_ok
+binder 933:933 <> m:10
+binder 935:935 <> n:11
+R941:947 theories.preambule_coq.utils <> beq_nat def
+R949:949 theories.preambule_coq.utils <> m:10 var
+R951:951 theories.preambule_coq.utils <> n:11 var
+R970:973 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R969:969 theories.preambule_coq.utils <> m:10 var
+R974:974 theories.preambule_coq.utils <> n:11 var
+R959:961 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R958:958 theories.preambule_coq.utils <> m:10 var
+R962:962 theories.preambule_coq.utils <> n:11 var
+R1005:1011 theories.preambule_coq.utils <> beq_nat def
+R1005:1011 theories.preambule_coq.utils <> beq_nat def
+R1025:1036 theories.preambule_coq.utils <> beq_nat_true thm
+R1025:1036 theories.preambule_coq.utils <> beq_nat_true thm
+R1045:1057 theories.preambule_coq.utils <> beq_nat_false thm
+R1045:1057 theories.preambule_coq.utils <> beq_nat_false thm
+prf 1078:1083 <> beq_eq
+binder 1093:1093 <> x:12
+binder 1095:1095 <> y:13
+R1116:1120 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1109:1111 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1098:1104 theories.preambule_coq.utils <> beq_nat def
+R1106:1106 theories.preambule_coq.utils <> x:12 var
+R1108:1108 theories.preambule_coq.utils <> y:13 var
+R1112:1115 Coq.Init.Datatypes <> true constr
+R1122:1122 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1121:1121 theories.preambule_coq.utils <> x:12 var
+R1123:1123 theories.preambule_coq.utils <> y:13 var
+R1158:1169 theories.preambule_coq.utils <> beq_nat_true thm
+R1158:1169 theories.preambule_coq.utils <> beq_nat_true thm
+def 1263:1269 <> blt_nat
+R1276:1278 Coq.Init.Datatypes <> nat ind
+binder 1272:1272 <> x:14
+binder 1274:1274 <> y:15
+R1283:1286 Coq.Init.Datatypes <> bool ind
+R1299:1299 theories.preambule_coq.utils <> y:15 var
+R1297:1297 theories.preambule_coq.utils <> x:14 var
+R1315:1319 Coq.Init.Datatypes <> false constr
+R1325:1325 Coq.Init.Datatypes <> S constr
+R1332:1335 Coq.Init.Datatypes <> true constr
+R1339:1339 Coq.Init.Datatypes <> S constr
+R1345:1345 Coq.Init.Datatypes <> S constr
+R1353:1359 theories.preambule_coq.utils <> blt_nat:16 def
+prf 1381:1386 <> blt_lt
+binder 1396:1396 <> x:19
+binder 1398:1398 <> y:20
+R1419:1423 Coq.Init.Logic <> ::type_scope:x_'<->'_x not
+R1412:1414 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1401:1407 theories.preambule_coq.utils <> blt_nat def
+R1409:1409 theories.preambule_coq.utils <> x:19 var
+R1411:1411 theories.preambule_coq.utils <> y:20 var
+R1415:1418 Coq.Init.Datatypes <> true constr
+R1425:1427 Coq.Init.Peano <> ::nat_scope:x_'<'_x not
+R1424:1424 theories.preambule_coq.utils <> x:19 var
+R1428:1428 theories.preambule_coq.utils <> y:20 var
+R1478:1484 theories.preambule_coq.utils <> blt_nat def
+R1590:1596 theories.preambule_coq.utils <> blt_nat def
+R1657:1672 Coq.Arith.PeanoNat Nat succ_lt_mono thm
+R1657:1672 Coq.Arith.PeanoNat Nat succ_lt_mono thm
+R1657:1672 Coq.Arith.PeanoNat Nat succ_lt_mono thm
+R1693:1699 theories.preambule_coq.utils <> blt_nat def
+R1722:1737 Coq.Arith.PeanoNat Nat succ_lt_mono thm
+R1722:1737 Coq.Arith.PeanoNat Nat succ_lt_mono thm
+R1769:1775 theories.preambule_coq.utils <> blt_nat def
+prf 1802:1815 <> blt_nat_irrefl
+binder 1826:1826 <> x:21
+R1829:1830 Coq.Init.Logic <> ::type_scope:'~'_x not
+R1842:1844 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1831:1837 theories.preambule_coq.utils <> blt_nat def
+R1839:1839 theories.preambule_coq.utils <> x:21 var
+R1841:1841 theories.preambule_coq.utils <> x:21 var
+R1845:1848 Coq.Init.Datatypes <> true constr
+R1876:1888 Coq.Arith.PeanoNat Nat lt_irrefl thm
+R1907:1912 theories.preambule_coq.utils <> blt_lt thm
+R1876:1888 Coq.Arith.PeanoNat Nat lt_irrefl thm
+R1907:1912 theories.preambule_coq.utils <> blt_lt thm
+prf 1938:1950 <> blt_nat_trans
+binder 1961:1961 <> x:22
+binder 1963:1963 <> y:23
+binder 1965:1965 <> z:24
+R1988:1991 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R1981:1983 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1970:1976 theories.preambule_coq.utils <> blt_nat def
+R1978:1978 theories.preambule_coq.utils <> x:22 var
+R1980:1980 theories.preambule_coq.utils <> y:23 var
+R1984:1987 Coq.Init.Datatypes <> true constr
+R2010:2013 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2003:2005 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1992:1998 theories.preambule_coq.utils <> blt_nat def
+R2000:2000 theories.preambule_coq.utils <> y:23 var
+R2002:2002 theories.preambule_coq.utils <> z:24 var
+R2006:2009 Coq.Init.Datatypes <> true constr
+R2025:2027 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2014:2020 theories.preambule_coq.utils <> blt_nat def
+R2022:2022 theories.preambule_coq.utils <> x:22 var
+R2024:2024 theories.preambule_coq.utils <> z:24 var
+R2028:2031 Coq.Init.Datatypes <> true constr
+R2072:2077 theories.preambule_coq.utils <> blt_lt thm
+R2086:2097 Coq.Arith.PeanoNat Nat lt_trans thm
+R2116:2121 theories.preambule_coq.utils <> blt_lt thm
+R2072:2077 theories.preambule_coq.utils <> blt_lt thm
+R2086:2097 Coq.Arith.PeanoNat Nat lt_trans thm
+R2116:2121 theories.preambule_coq.utils <> blt_lt thm
+R2116:2121 theories.preambule_coq.utils <> blt_lt thm
+sec 2229:2237 <> wf_subset
+var 2252:2252 wf_subset T
+var 2273:2273 wf_subset R
+R2278:2281 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2277:2277 theories.preambule_coq.utils <> wf_subset.T var
+R2283:2286 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2282:2282 theories.preambule_coq.utils <> wf_subset.T var
+var 2306:2309 wf_subset wf_R
+R2312:2323 Coq.Init.Wf <> well_founded def
+R2325:2325 theories.preambule_coq.utils <> wf_subset.R var
+var 2339:2339 wf_subset S
+R2344:2347 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2343:2343 theories.preambule_coq.utils <> wf_subset.T var
+var 2395:2395 wf_subset P
+R2400:2403 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2399:2399 theories.preambule_coq.utils <> wf_subset.T var
+var 2462:2466 wf_subset S_acc
+binder 2477:2477 <> x:30
+R2483:2486 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2480:2480 theories.preambule_coq.utils <> wf_subset.S var
+R2482:2482 theories.preambule_coq.utils <> x:30 var
+R2487:2487 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2517:2521 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 2495:2495 <> y:31
+R2501:2504 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2498:2498 theories.preambule_coq.utils <> wf_subset.S var
+R2500:2500 theories.preambule_coq.utils <> y:31 var
+R2510:2513 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2505:2505 theories.preambule_coq.utils <> wf_subset.R var
+R2507:2507 theories.preambule_coq.utils <> y:31 var
+R2509:2509 theories.preambule_coq.utils <> x:30 var
+R2514:2514 theories.preambule_coq.utils <> wf_subset.P var
+R2516:2516 theories.preambule_coq.utils <> y:31 var
+R2522:2522 theories.preambule_coq.utils <> wf_subset.P var
+R2524:2524 theories.preambule_coq.utils <> x:30 var
+prf 2538:2546 <> wf_subset
+binder 2557:2557 <> x:33
+R2563:2566 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2560:2560 theories.preambule_coq.utils <> wf_subset.S var
+R2562:2562 theories.preambule_coq.utils <> x:33 var
+R2567:2567 theories.preambule_coq.utils <> wf_subset.P var
+R2569:2569 theories.preambule_coq.utils <> x:33 var
+R2598:2601 theories.preambule_coq.utils <> wf_subset.wf_R var
+R2598:2601 theories.preambule_coq.utils <> wf_subset.wf_R var
+R2639:2643 theories.preambule_coq.utils <> wf_subset.S_acc var
+R2639:2643 theories.preambule_coq.utils <> wf_subset.S_acc var
+R2707:2715 theories.preambule_coq.utils wf_subset <> sec
+sec 2781:2789 <> init_symb
+var 2804:2804 init_symb A
+var 2826:2836 init_symb symb_eq_dec
+R2850:2850 theories.preambule_coq.utils <> init_symb.A var
+binder 2846:2846 <> x:35
+binder 2848:2848 <> y:36
+R2853:2853 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R2857:2859 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R2864:2864 Coq.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R2855:2855 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R2854:2854 theories.preambule_coq.utils <> x:35 var
+R2856:2856 theories.preambule_coq.utils <> y:36 var
+R2861:2862 Coq.Init.Logic <> ::type_scope:x_'<>'_x not
+R2860:2860 theories.preambule_coq.utils <> x:35 var
+R2863:2863 theories.preambule_coq.utils <> y:36 var
+def 2881:2887 <> eq_bool
+R2894:2894 theories.preambule_coq.utils <> init_symb.A var
+binder 2890:2890 <> x:38
+binder 2892:2892 <> y:39
+R2899:2902 Coq.Init.Datatypes <> bool ind
+R2916:2926 theories.preambule_coq.utils <> init_symb.symb_eq_dec var
+R2928:2928 theories.preambule_coq.utils <> x:38 var
+R2930:2930 theories.preambule_coq.utils <> y:39 var
+R2947:2951 Coq.Init.Datatypes <> false constr
+R2937:2940 Coq.Init.Datatypes <> true constr
+prf 2965:2974 <> eq_bool_ok
+binder 2985:2985 <> x:40
+binder 2987:2987 <> y:41
+R2999:3005 theories.preambule_coq.utils <> eq_bool def
+R3007:3007 theories.preambule_coq.utils <> x:40 var
+R3009:3009 theories.preambule_coq.utils <> y:41 var
+R3033:3034 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3036:3038 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3035:3035 theories.preambule_coq.utils <> x:40 var
+R3039:3039 theories.preambule_coq.utils <> y:41 var
+R3017:3019 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3016:3016 theories.preambule_coq.utils <> x:40 var
+R3020:3020 theories.preambule_coq.utils <> y:41 var
+R3060:3066 theories.preambule_coq.utils <> eq_bool def
+R3089:3099 theories.preambule_coq.utils <> init_symb.symb_eq_dec var
+R3089:3099 theories.preambule_coq.utils <> init_symb.symb_eq_dec var
+R3132:3140 theories.preambule_coq.utils init_symb <> sec
+sec 3205:3213 <> init_prec
+var 3228:3228 init_prec A
+var 3248:3252 init_prec index
+R3256:3259 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3255:3255 theories.preambule_coq.utils <> init_prec.A var
+R3260:3262 Coq.Init.Datatypes <> nat ind
+def 3281:3289 <> prec_bool
+R3296:3296 theories.preambule_coq.utils <> init_prec.A var
+binder 3292:3292 <> x:44
+binder 3294:3294 <> y:45
+R3301:3304 Coq.Init.Datatypes <> bool ind
+R3313:3319 theories.preambule_coq.utils <> blt_nat def
+R3322:3326 theories.preambule_coq.utils <> init_prec.index var
+R3328:3328 theories.preambule_coq.utils <> x:44 var
+R3332:3336 theories.preambule_coq.utils <> init_prec.index var
+R3338:3338 theories.preambule_coq.utils <> y:45 var
+def 3355:3358 <> prec
+R3365:3365 theories.preambule_coq.utils <> init_prec.A var
+binder 3361:3361 <> x:46
+binder 3363:3363 <> y:47
+R3384:3386 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3371:3379 theories.preambule_coq.utils <> prec_bool def
+R3381:3381 theories.preambule_coq.utils <> x:46 var
+R3383:3383 theories.preambule_coq.utils <> y:47 var
+R3387:3390 Coq.Init.Datatypes <> true constr
+prf 3404:3415 <> prec_bool_ok
+binder 3417:3417 <> x:48
+binder 3419:3419 <> y:49
+R3426:3434 theories.preambule_coq.utils <> prec_bool def
+R3436:3436 theories.preambule_coq.utils <> x:48 var
+R3438:3438 theories.preambule_coq.utils <> y:49 var
+R3459:3459 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3460:3463 theories.preambule_coq.utils <> prec def
+R3465:3465 theories.preambule_coq.utils <> x:48 var
+R3467:3467 theories.preambule_coq.utils <> y:49 var
+R3445:3448 theories.preambule_coq.utils <> prec def
+R3450:3450 theories.preambule_coq.utils <> x:48 var
+R3452:3452 theories.preambule_coq.utils <> y:49 var
+R3490:3498 theories.preambule_coq.utils <> prec_bool def
+R3490:3498 theories.preambule_coq.utils <> prec_bool def
+prf 3585:3596 <> prec_antisym
+binder 3607:3607 <> x:50
+R3610:3611 Coq.Init.Logic <> ::type_scope:'~'_x not
+R3612:3615 theories.preambule_coq.utils <> prec def
+R3617:3617 theories.preambule_coq.utils <> x:50 var
+R3619:3619 theories.preambule_coq.utils <> x:50 var
+R3648:3661 theories.preambule_coq.utils <> blt_nat_irrefl thm
+R3648:3661 theories.preambule_coq.utils <> blt_nat_irrefl thm
+prf 3682:3696 <> prec_transitive
+R3700:3709 Coq.Relations.Relation_Definitions <> transitive def
+R3713:3716 theories.preambule_coq.utils <> prec def
+R3711:3711 theories.preambule_coq.utils <> init_prec.A var
+R3750:3762 theories.preambule_coq.utils <> blt_nat_trans thm
+R3750:3762 theories.preambule_coq.utils <> blt_nat_trans thm
+def 3787:3793 <> prec_eq
+R3800:3800 theories.preambule_coq.utils <> init_prec.A var
+binder 3796:3796 <> x:51
+binder 3798:3798 <> y:52
+R3820:3822 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R3813:3817 theories.preambule_coq.utils <> init_prec.index var
+R3819:3819 theories.preambule_coq.utils <> x:51 var
+R3823:3827 theories.preambule_coq.utils <> init_prec.index var
+R3829:3829 theories.preambule_coq.utils <> y:52 var
+def 3845:3856 <> prec_eq_bool
+R3863:3863 theories.preambule_coq.utils <> init_prec.A var
+binder 3859:3859 <> x:53
+binder 3861:3861 <> y:54
+R3868:3871 Coq.Init.Datatypes <> bool ind
+R3876:3882 theories.preambule_coq.utils <> beq_nat def
+R3885:3889 theories.preambule_coq.utils <> init_prec.index var
+R3891:3891 theories.preambule_coq.utils <> x:53 var
+R3895:3899 theories.preambule_coq.utils <> init_prec.index var
+R3901:3901 theories.preambule_coq.utils <> y:54 var
+prf 3914:3928 <> prec_eq_bool_ok
+binder 3938:3939 <> a1:55
+binder 3941:3942 <> a2:56
+R3951:3962 theories.preambule_coq.utils <> prec_eq_bool def
+R3964:3965 theories.preambule_coq.utils <> a1:55 var
+R3967:3968 theories.preambule_coq.utils <> a2:56 var
+R3975:3978 Coq.Init.Datatypes <> true constr
+R3983:3989 theories.preambule_coq.utils <> prec_eq def
+R3991:3992 theories.preambule_coq.utils <> a1:55 var
+R3994:3995 theories.preambule_coq.utils <> a2:56 var
+R3999:4003 Coq.Init.Datatypes <> false constr
+R4008:4008 Coq.Init.Logic <> ::type_scope:'~'_x not
+R4009:4015 theories.preambule_coq.utils <> prec_eq def
+R4017:4018 theories.preambule_coq.utils <> a1:55 var
+R4020:4021 theories.preambule_coq.utils <> a2:56 var
+R4059:4068 theories.preambule_coq.utils <> beq_nat_ok thm
+R4059:4068 theories.preambule_coq.utils <> beq_nat_ok thm
+prf 4087:4104 <> prec_eq_transitive
+R4107:4116 Coq.Relations.Relation_Definitions <> transitive def
+R4120:4126 theories.preambule_coq.utils <> prec_eq def
+R4118:4118 theories.preambule_coq.utils <> init_prec.A var
+R4161:4167 theories.preambule_coq.utils <> prec_eq def
+R4176:4183 Coq.Init.Logic <> trans_eq abbrev
+R4176:4183 Coq.Init.Logic <> trans_eq abbrev
+prf 4202:4212 <> prec_eq_sym
+binder 4223:4223 <> s:57
+binder 4225:4225 <> t:58
+R4239:4242 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4228:4234 theories.preambule_coq.utils <> prec_eq def
+R4236:4236 theories.preambule_coq.utils <> s:57 var
+R4238:4238 theories.preambule_coq.utils <> t:58 var
+R4243:4249 theories.preambule_coq.utils <> prec_eq def
+R4251:4251 theories.preambule_coq.utils <> t:58 var
+R4253:4253 theories.preambule_coq.utils <> s:57 var
+R4286:4292 theories.preambule_coq.utils <> prec_eq def
+R4301:4306 Coq.Init.Logic <> sym_eq abbrev
+R4301:4306 Coq.Init.Logic <> sym_eq abbrev
+prf 4325:4336 <> prec_eq_refl
+binder 4347:4347 <> s:59
+R4350:4356 theories.preambule_coq.utils <> prec_eq def
+R4358:4358 theories.preambule_coq.utils <> s:59 var
+R4360:4360 theories.preambule_coq.utils <> s:59 var
+R4391:4397 theories.preambule_coq.utils <> prec_eq def
+R4406:4415 Coq.Init.Logic <> refl_equal abbrev
+R4406:4415 Coq.Init.Logic <> refl_equal abbrev
+prf 4434:4446 <> prec_eq_prec1
+binder 4456:4457 <> a1:60
+binder 4459:4460 <> a2:61
+binder 4462:4463 <> a3:62
+R4476:4479 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4466:4469 theories.preambule_coq.utils <> prec def
+R4471:4472 theories.preambule_coq.utils <> a1:60 var
+R4474:4475 theories.preambule_coq.utils <> a2:61 var
+R4493:4496 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4480:4486 theories.preambule_coq.utils <> prec_eq def
+R4488:4489 theories.preambule_coq.utils <> a2:61 var
+R4491:4492 theories.preambule_coq.utils <> a3:62 var
+R4497:4500 theories.preambule_coq.utils <> prec def
+R4502:4503 theories.preambule_coq.utils <> a1:60 var
+R4505:4506 theories.preambule_coq.utils <> a3:62 var
+R4551:4554 theories.preambule_coq.utils <> prec def
+R4557:4565 theories.preambule_coq.utils <> prec_bool def
+prf 4607:4619 <> prec_eq_prec2
+binder 4629:4630 <> a1:63
+binder 4632:4633 <> a2:64
+binder 4635:4636 <> a3:65
+R4649:4652 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4639:4642 theories.preambule_coq.utils <> prec def
+R4644:4645 theories.preambule_coq.utils <> a1:63 var
+R4647:4648 theories.preambule_coq.utils <> a2:64 var
+R4666:4669 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4653:4659 theories.preambule_coq.utils <> prec_eq def
+R4661:4662 theories.preambule_coq.utils <> a1:63 var
+R4664:4665 theories.preambule_coq.utils <> a3:65 var
+R4670:4673 theories.preambule_coq.utils <> prec def
+R4675:4676 theories.preambule_coq.utils <> a3:65 var
+R4678:4679 theories.preambule_coq.utils <> a2:64 var
+R4724:4727 theories.preambule_coq.utils <> prec def
+R4730:4738 theories.preambule_coq.utils <> prec_bool def
+prf 4782:4797 <> prec_not_prec_eq
+binder 4807:4807 <> f:66
+binder 4809:4809 <> g:67
+R4820:4823 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4812:4815 theories.preambule_coq.utils <> prec def
+R4817:4817 theories.preambule_coq.utils <> f:66 var
+R4819:4819 theories.preambule_coq.utils <> g:67 var
+R4835:4838 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4824:4830 theories.preambule_coq.utils <> prec_eq def
+R4832:4832 theories.preambule_coq.utils <> f:66 var
+R4834:4834 theories.preambule_coq.utils <> g:67 var
+R4839:4843 Coq.Init.Logic <> False ind
+R4904:4908 theories.preambule_coq.utils <> init_prec.index var
+R4883:4896 theories.preambule_coq.utils <> blt_nat_irrefl thm
+R4904:4908 theories.preambule_coq.utils <> init_prec.index var
+R4883:4896 theories.preambule_coq.utils <> blt_nat_irrefl thm
+R4925:4929 theories.preambule_coq.utils <> init_prec.index var
+R4925:4929 theories.preambule_coq.utils <> init_prec.index var
+prf 4980:4986 <> prec_wf
+R4989:5000 Coq.Init.Wf <> well_founded def
+R5002:5005 theories.preambule_coq.utils <> prec def
+R5064:5068 theories.preambule_coq.utils <> init_prec.index var
+R5025:5053 Coq.Arith.Wf_nat <> well_founded_lt_compat thm
+R5064:5068 theories.preambule_coq.utils <> init_prec.index var
+R5025:5053 Coq.Arith.Wf_nat <> well_founded_lt_compat thm
+R5095:5100 theories.preambule_coq.utils <> blt_lt thm
+R5095:5100 theories.preambule_coq.utils <> blt_lt thm
+R5115:5123 theories.preambule_coq.utils init_prec <> sec
+prf 5155:5160 <> nth_In
+binder 5170:5170 <> T:68
+binder 5172:5172 <> n:69
+binder 5174:5174 <> l:70
+R5186:5186 theories.preambule_coq.utils <> T:68 var
+binder 5184:5184 <> x:71
+R5212:5215 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R5202:5204 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R5189:5197 Coq.Lists.List <> nth_error def
+R5201:5201 theories.preambule_coq.utils <> n:69 var
+R5199:5199 theories.preambule_coq.utils <> l:70 var
+R5205:5209 Coq.Init.Specif <> value def
+R5211:5211 theories.preambule_coq.utils <> x:71 var
+R5216:5217 Coq.Lists.List <> In def
+R5221:5221 theories.preambule_coq.utils <> l:70 var
+R5219:5219 theories.preambule_coq.utils <> x:71 var
+R5509:5510 Coq.Lists.List <> In def
+R5509:5510 Coq.Lists.List <> In def
+R5529:5534 theories.preambule_coq.utils <> nth_In thm
+R5563:5571 Coq.Lists.List <> nth_error def
+R5723:5724 Coq.Lists.List <> In def
+R5723:5724 Coq.Lists.List <> In def
+R5837:5838 Coq.Lists.List <> In def
+R5837:5838 Coq.Lists.List <> In def
+R6038:6038 Coq.Init.Datatypes <> S constr
+R6038:6038 Coq.Init.Datatypes <> S constr
+sec 6122:6133 <> flatten_list
+var 6148:6148 flatten_list A
+var 6168:6168 flatten_list P
+R6172:6175 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6171:6171 theories.preambule_coq.utils <> flatten_list.A var
+def 6194:6200 <> flatten
+R6207:6210 Coq.Init.Datatypes <> list ind
+R6213:6216 Coq.Init.Datatypes <> list ind
+R6218:6218 theories.preambule_coq.utils <> flatten_list.A var
+binder 6203:6204 <> ll:74
+R6224:6227 Coq.Init.Datatypes <> list ind
+R6229:6229 theories.preambule_coq.utils <> flatten_list.A var
+R6242:6243 theories.preambule_coq.utils <> ll:74 var
+R6254:6256 Coq.Init.Datatypes <> nil constr
+R6261:6263 Coq.Init.Datatypes <> nil constr
+R6270:6271 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6280:6284 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6296:6296 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6285:6291 theories.preambule_coq.utils <> flatten:75 def
+prf 6314:6320 <> combine
+R6334:6337 Coq.Init.Datatypes <> list ind
+R6340:6343 Coq.Init.Datatypes <> list ind
+R6345:6345 theories.preambule_coq.utils <> flatten_list.A var
+binder 6331:6332 <> ll:77
+R6354:6354 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6399:6409 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 6362:6362 <> l:78
+R6372:6375 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6365:6366 Coq.Lists.List <> In def
+R6370:6371 theories.preambule_coq.utils <> ll:77 var
+R6368:6368 theories.preambule_coq.utils <> l:78 var
+binder 6383:6383 <> x:79
+R6392:6395 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6386:6387 Coq.Lists.List <> In def
+R6391:6391 theories.preambule_coq.utils <> l:78 var
+R6389:6389 theories.preambule_coq.utils <> x:79 var
+R6396:6396 theories.preambule_coq.utils <> flatten_list.P var
+R6398:6398 theories.preambule_coq.utils <> x:79 var
+binder 6417:6417 <> x:80
+R6437:6440 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6420:6421 Coq.Lists.List <> In def
+R6426:6432 theories.preambule_coq.utils <> flatten def
+R6434:6435 theories.preambule_coq.utils <> ll:77 var
+R6423:6423 theories.preambule_coq.utils <> x:80 var
+R6441:6441 theories.preambule_coq.utils <> flatten_list.P var
+R6443:6443 theories.preambule_coq.utils <> x:80 var
+R6548:6556 Coq.Lists.List <> in_app_or thm
+R6548:6556 Coq.Lists.List <> in_app_or thm
+R6670:6681 theories.preambule_coq.utils flatten_list <> sec
+R6695:6701 theories.preambule_coq.utils <> flatten def
+R6695:6701 theories.preambule_coq.utils <> flatten def
+R6720:6726 theories.preambule_coq.utils <> combine thm
+R6720:6726 theories.preambule_coq.utils <> combine thm
