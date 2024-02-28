@@ -10,7 +10,7 @@ Some results concerning permutations of lists.
 Set Implicit Arguments.
 
 From Coq Require Import Setoid Morphisms Basics.
-From CoLoR Require Import ListExtras NatUtil LogicUtil.
+Require Import ListExtras NatUtil LogicUtil.
 From Coq Require Export Permutation PermutSetoid Multiset.
 
 Arguments list_contents [A eqA] _ _.

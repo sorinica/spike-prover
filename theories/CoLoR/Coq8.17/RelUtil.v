@@ -15,8 +15,8 @@ From Coq Require Import Setoid Basics Morphisms List.
 From Coq Require Export Relations.
 From Coq Require Import Lia.
 
-From CoLoR Require Import LogicUtil.
-From CoLoR Require Export RelMidex.
+Require Import LogicUtil.
+Require Export RelMidex.
 
 Ltac Tauto.intuition_solver ::= auto with *.
 

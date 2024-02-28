@@ -178,7 +178,7 @@ let hyps_symbols = List.fold_right (fun f l ->
 let hint_rewrite =
   let hyps_sort s = List.fold_right (fun f l ->  let str = if s == (List.hd (dico_const_profile#find f)) then ("model_" ^ (sprint_sort s) ^ "_" ^ (dico_const_string#find f) ^ " ") else ""  in str ^ l) constr_symbols "" in
   let res = ref "" in
-  let () = dico_sort_string#iter (fun s _ -> res := (!res ^ "Hint Rewrite " ^ hyps_sort s ^ ": model_" ^ (sprint_sort s) ^".\n") ) in
+  let () = dico_sort_string#iter (fun s _ -> res := (!res ^ "#[export] Hint Rewrite " ^ hyps_sort s ^ ": model_" ^ (sprint_sort s) ^".\n") ) in
     !res
 in
 
@@ -190,7 +190,7 @@ in
 (*   let hint_rewrite =  *)
 (*     let hyps_sort s = List.fold_right (fun f l ->  let str = if s == (List.hd (dico_const_profile#find f)) then ("model_" ^ (sprint_sort s) ^ "_" ^ (dico_const_string#find f) ^ " ") else ""  in str ^ l) all_symb "" in  *)
 (*     let res = ref "" in *)
-(*     let () = dico_sort_string#iter (fun s _ -> res := (!res ^ "Hint Rewrite " ^ hyps_sort s ^ ": model_" ^ (sprint_sort s) ^".\n\n") ) in *)
+(*     let () = dico_sort_string#iter (fun s _ -> res := (!res ^ "#[export] Hint Rewrite " ^ hyps_sort s ^ ": model_" ^ (sprint_sort s) ^".\n\n") ) in *)
 (*     !res *)
 (*   in *)
   let ltac_model =

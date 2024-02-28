@@ -11,7 +11,7 @@ representation.
 Set Implicit Arguments.
 
 From Coq Require Import Permutation PermutSetoid Lia Multiset.
-From CoLoR Require Import LogicUtil RelExtras MultisetCore ListExtras.
+Require Import LogicUtil RelExtras MultisetCore ListExtras.
 
 Module MultisetList (ES : Eqset_dec) <: MultisetCore with Module Sid := ES.
 
