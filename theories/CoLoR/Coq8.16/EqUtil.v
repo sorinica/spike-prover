@@ -13,7 +13,7 @@ From Coq Require Import Structures.Equalities.
 From Coq Require Export EqdepFacts Eqdep_dec.
 From Coq Require Setoid.
 
-From CoLoR Require Import LogicUtil RelUtil BoolUtil.
+Require Import LogicUtil RelUtil BoolUtil.
 
 (***********************************************************************)
 (** Functor providing properties the basic properties of Leibniz

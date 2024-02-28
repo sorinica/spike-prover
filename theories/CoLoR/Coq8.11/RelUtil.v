@@ -14,8 +14,8 @@ Set Implicit Arguments.
 From Coq Require Import Setoid Basics Morphisms List Omega.
 From Coq Require Export Relations.
 
-From CoLoR Require Import LogicUtil.
-From CoLoR Require Export RelMidex.
+Require Import LogicUtil.
+Require Export RelMidex.
 
 Arguments inclusion {A} R1 R2.
 Arguments same_relation {A} R1 R2.

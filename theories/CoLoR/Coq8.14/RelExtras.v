@@ -14,7 +14,7 @@ Set Implicit Arguments.
 From Coq Require Export Relations.
 From Coq Require Import Max Arith Setoid Morphisms Basics.
 
-From CoLoR Require Import LogicUtil RelUtil.
+Require Import LogicUtil RelUtil.
 (***********************************************************************)
 (** strict order *)
 

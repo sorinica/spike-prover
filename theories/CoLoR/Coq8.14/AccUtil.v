@@ -12,7 +12,7 @@ Set Implicit Arguments.
 
 From Coq Require Import Morphisms Basics.
 From Coq Require Export Wellfounded.
-From CoLoR Require Import LogicUtil RelUtil.
+Require Import LogicUtil RelUtil.
 
 Arguments wf_incl [A R1 R2] _ _ _.
 

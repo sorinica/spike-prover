@@ -10,7 +10,7 @@ with specification of operations on multisets.
 
 Set Implicit Arguments.
 
-From CoLoR Require RelExtras.
+Require RelExtras.
 From Coq Require Import Min Relations.
 
 Module Type MultisetCore.

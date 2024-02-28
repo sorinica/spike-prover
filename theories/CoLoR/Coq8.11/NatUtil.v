@@ -14,7 +14,7 @@ Set Implicit Arguments.
 From Coq Require Import Min Max Morphisms Psatz Compare Euclid.
 From Coq Require Export Arith Omega.
 
-From CoLoR Require Import LogicUtil EqUtil BoolUtil RelUtil.
+Require Import LogicUtil EqUtil BoolUtil RelUtil.
 
 (***********************************************************************)
 (** Declare implicit arguments. *)

@@ -9,9 +9,9 @@ multisets, along with some properties of this order.
 *)
 
 From Coq Require Import List Permutation Arith Morphisms Basics.
-From CoLoR Require Import MultisetOrder RelExtras MultisetCore MultisetList
+Require Import MultisetOrder RelExtras MultisetCore MultisetList
   MultisetTheory AccUtil RelUtil LogicUtil.
-From CoLoR Require Import AccUtil ListUtil.
+Require Import AccUtil ListUtil.
 
 Module MultisetListOrder (ES : Eqset_dec).
 

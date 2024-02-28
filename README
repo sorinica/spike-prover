@@ -34,7 +34,7 @@ The "specs" directory contains :
         - the "certified" subdirectory. Launch "validate.sh" to generate proofs and the Coq scripts from the proofs.
 - the "preambule_coq" subdirectory with Coq files required during the validation process
 
-The proof from the "certified" subdirectory can be certified using Coq and the Coccinelle and CoLoR libraries. Coq should be installed. The  CoLoR and Coccinelle libraries, available for different versions of Coq (> 8.3), are installed in the "theories" subdirectory.
+The proof from the "certified" subdirectory can be certified using Coq and the Coccinelle and CoLoR libraries. Coq should be installed. The  CoLoR and Coccinelle libraries, available for different versions of Coq (> 8.13), are installed in the "theories" subdirectory. The obsolete versions are put in the "archive" subdirectories.
 
 - run 'config.sh <Coq version>' to set the Coq version.
 - run 'make' to validate the Coq scripts.
