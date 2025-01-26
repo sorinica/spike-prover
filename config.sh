@@ -1,66 +1,36 @@
 #! /bin/sh
 
 if [ "$#" -ne 1 ]; then
-    echo "Give as argument the Coq version, one value from (8.4 to 8.19, except 8.7)"
+    echo "Give as argument either Coq$number, with $number  a value from 8.14 to 8.20, or Rocq$number with $number equal to 9.0)"
     exit 2
 fi
 
-version=""
-case  $1  in
-               8.19)
-     		    version="8.19"
+case $1  in
+               Rocq9.0)
                     ;;
-               8.18)
-     		    version="8.18"
+               Coq8.20)
+                    ;;
+               Coq8.19)
+                    ;;
+               Coq8.18)
                     ;;
                8.17)
-     		    version="8.17"
                     ;;
                8.16)
-     		    version="8.16"
                     ;;
                8.15)
-     		    version="8.15"
                     ;;
                8.14)
-     		    version="8.14"
                     ;;
-               8.13)
-     		    version="8.13"
-                    ;;
-               8.12)
-     		    version="8.12"
-                    ;;
-               8.11)
-     		    version="8.11"
-                    ;;
-               8.10)
-     		    version="8.10"
-                    ;;
-               8.9)
-     		    version="8.9"
-                    ;;
-               8.8)
-     		    version="8.8"
-                    ;;
-               8.6)
-     		    version="8.6"
-                    ;;
-               8.5)
-     		    version="8.5"
-                    ;;
-               8.4)
-     		    version="8.4"
-                    ;;
-                *)
-                    echo "not a valid version. It should be a value from (8.4 to 8.19, except 8.7)"
+               *)
+                    echo "not a valid version. It should be a value from (Coq8.14 to Coq8.19, or Rocq9.0)"
                     exit 2
           esac 
 
-CoqVersion="Coq"$version
-rm theories/Coccinelle/Current
-ln -s $CoqVersion theories/Coccinelle/Current
-rm theories/CoLoR/Current
-ln -s $CoqVersion theories/CoLoR/Current
 
-echo "The Coccinelle and CoLoR libraries have been set for "$CoqVersion
+rm theories/Coccinelle/Current
+ln -s $1 theories/Coccinelle/Current
+rm theories/CoLoR/Current
+ln -s $1 theories/CoLoR/Current
+
+echo "The Coccinelle and CoLoR libraries have been set for "$1
